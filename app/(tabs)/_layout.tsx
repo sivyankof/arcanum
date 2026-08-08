@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Tabs } from 'expo-router';
+import { Tabs, usePathname } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColorValue } from 'react-native';
@@ -17,23 +17,25 @@ import { useTheme } from '../../src/theme/useTheme';
 
 type IconName = React.ComponentProps<typeof Ionicons>['name'];
 
-/** Иконка таба: при активации подпрыгивает 1 → 1.25 → 1 (пункт 14 motion-spec). */
-function TabIcon({ name, color, focused }: { name: IconName; color: ColorValue; focused: boolean }) {
+/** Иконка таба: при активации подпрыгивает 1 → 1.25 → 1 (пункт 14 motion-spec).
+ *  На проп `focused` ориентироваться нельзя: bottom-tabs держит по два экземпляра иконки
+ *  (всегда активный и всегда неактивный) и перекрёстно гасит их прозрачностью — у каждого
+ *  экземпляра `focused` неизменен. Поэтому прыжок вешаем на смену текущего маршрута. */
+function TabIcon({ name, color, focused, path }: { name: IconName; color: ColorValue; focused: boolean; path: string }) {
+  const active = usePathname() === path;
   const scale = useSharedValue(1);
-  const mounted = React.useRef(false);
+  const wasActive = React.useRef(active);
 
   React.useEffect(() => {
-    // на первом рендере таб уже активен — прыгать не с чего
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
+    // прыгаем только на переходе «стал активным», не при запуске приложения
+    if (active && !wasActive.current) {
+      scale.value = withSequence(
+        withTiming(1.25, { duration: 110, easing: Easing.out(Easing.quad), reduceMotion: ReduceMotion.System }),
+        withSpring(1, { damping: 11, stiffness: 320, reduceMotion: ReduceMotion.System }),
+      );
     }
-    if (!focused) return;
-    scale.value = withSequence(
-      withTiming(1.25, { duration: 110, easing: Easing.out(Easing.quad), reduceMotion: ReduceMotion.System }),
-      withSpring(1, { damping: 11, stiffness: 320, reduceMotion: ReduceMotion.System }),
-    );
-  }, [focused, scale]);
+    wasActive.current = active;
+  }, [active, scale]);
 
   const anim = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
 
@@ -44,9 +46,9 @@ function TabIcon({ name, color, focused }: { name: IconName; color: ColorValue; 
   );
 }
 
-function icon(name: IconName) {
+function icon(name: IconName, path: string) {
   return ({ color, focused }: { color: ColorValue; focused: boolean; size: number }) => (
-    <TabIcon name={name} color={color} focused={focused} />
+    <TabIcon name={name} color={color} focused={focused} path={path} />
   );
 }
 
@@ -70,11 +72,11 @@ export default function TabLayout() {
         sceneStyle: { backgroundColor: t.bg },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: tr('tabs.today'), tabBarIcon: icon('sunny-outline') }} />
-      <Tabs.Screen name="course" options={{ title: tr('tabs.course'), tabBarIcon: icon('school-outline') }} />
-      <Tabs.Screen name="cards" options={{ title: tr('tabs.cards'), tabBarIcon: icon('albums-outline') }} />
-      <Tabs.Screen name="spreads" options={{ title: tr('tabs.spreads'), tabBarIcon: icon('moon-outline') }} />
-      <Tabs.Screen name="profile" options={{ title: tr('tabs.profile'), tabBarIcon: icon('person-outline') }} />
+      <Tabs.Screen name="index" options={{ title: tr('tabs.today'), tabBarIcon: icon('sunny-outline', '/') }} />
+      <Tabs.Screen name="course" options={{ title: tr('tabs.course'), tabBarIcon: icon('school-outline', '/course') }} />
+      <Tabs.Screen name="cards" options={{ title: tr('tabs.cards'), tabBarIcon: icon('albums-outline', '/cards') }} />
+      <Tabs.Screen name="spreads" options={{ title: tr('tabs.spreads'), tabBarIcon: icon('moon-outline', '/spreads') }} />
+      <Tabs.Screen name="profile" options={{ title: tr('tabs.profile'), tabBarIcon: icon('person-outline', '/profile') }} />
     </Tabs>
   );
 }
