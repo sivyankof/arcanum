@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { Skeleton } from '../../src/components/Skeleton';
 import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
@@ -27,6 +28,7 @@ const FILTERS: Filter[] = ['all', 'major', 'wands', 'cups', 'swords', 'pentacles
 function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
   const t = useTheme();
   const imRef = React.useRef<View>(null);
+  const [loaded, setLoaded] = React.useState(false);
 
   return (
     <PressableScale
@@ -39,7 +41,15 @@ function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
       style={st.cell}
     >
       <View ref={imRef} style={[st.imWrap, { borderColor: t.line }]}>
-        <Image source={cardImages[item.id]} style={st.im} contentFit="cover" transition={180} cachePolicy="memory-disk" />
+        <Image
+          source={cardImages[item.id]}
+          style={st.im}
+          contentFit="cover"
+          transition={180}
+          cachePolicy="memory-disk"
+          onLoad={() => setLoaded(true)}
+        />
+        {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
       </View>
       <Text numberOfLines={1} style={[st.name, { color: t.muted }]}>
         {item.name[lang]}
