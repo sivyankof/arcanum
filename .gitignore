@@ -36,6 +36,9 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# артефакты браузерных проверок
+.playwright-mcp/
+
 # generated native folders
 /ios
 /android
