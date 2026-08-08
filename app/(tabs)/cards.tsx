@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -19,6 +20,32 @@ const CELL_W = (W - spacing.xl * 2 - GAP * (COLS - 1)) / COLS;
 
 type Filter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
 const FILTERS: Filter[] = ['all', 'major', 'wands', 'cups', 'swords', 'pentacles'];
+
+/** Ячейка сетки. Позицию картинки меряем на нажатии — с неё начнётся перелёт
+ *  на страницу карты (пункт 6 motion-spec). */
+function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
+  const t = useTheme();
+  const imRef = React.useRef<View>(null);
+
+  return (
+    <PressableScale
+      onPressIn={() =>
+        imRef.current?.measureInWindow((x, y, w, h) => {
+          if (w) setCardOrigin(item.id, { x, y, w, h });
+        })
+      }
+      onPress={() => router.push(`/card/${item.id}`)}
+      style={st.cell}
+    >
+      <View ref={imRef} style={[st.imWrap, { borderColor: t.line }]}>
+        <Image source={cardImages[item.id]} style={st.im} contentFit="cover" transition={180} cachePolicy="memory-disk" />
+      </View>
+      <Text numberOfLines={1} style={[st.name, { color: t.muted }]}>
+        {item.name[lang]}
+      </Text>
+    </PressableScale>
+  );
+}
 
 export default function CardsScreen() {
   const t = useTheme();
@@ -36,16 +63,7 @@ export default function CardsScreen() {
   const label = (f: Filter) =>
     f === 'all' ? (lang === 'ru' ? 'Все' : 'All') : tr(`cards.${f === 'major' ? 'major' : f}`);
 
-  const renderCard = ({ item }: { item: TarotCard }) => (
-    <PressableScale onPress={() => router.push(`/card/${item.id}`)} style={st.cell}>
-      <View style={[st.imWrap, { borderColor: t.line }]}>
-        <Image source={cardImages[item.id]} style={st.im} contentFit="cover" transition={180} cachePolicy="memory-disk" />
-      </View>
-      <Text numberOfLines={1} style={[st.name, { color: t.muted }]}>
-        {item.name[lang]}
-      </Text>
-    </PressableScale>
-  );
+  const renderCard = ({ item }: { item: TarotCard }) => <Cell item={item} lang={lang} />;
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>

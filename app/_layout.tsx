@@ -51,7 +51,13 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="card/[id]"
-          options={{ title: '', headerTransparent: true, headerTintColor: t.accent }}
+          options={{
+            title: '',
+            headerTransparent: true,
+            headerTintColor: t.accent,
+            // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
+            animation: 'fade',
+          }}
         />
       </Stack>
     </>
