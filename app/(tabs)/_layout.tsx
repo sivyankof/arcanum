@@ -3,14 +3,50 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColorValue } from 'react-native';
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { hapticTap } from '../../src/lib/haptics';
 import { useTheme } from '../../src/theme/useTheme';
 
 type IconName = React.ComponentProps<typeof Ionicons>['name'];
 
+/** Иконка таба: при активации подпрыгивает 1 → 1.25 → 1 (пункт 14 motion-spec). */
+function TabIcon({ name, color, focused }: { name: IconName; color: ColorValue; focused: boolean }) {
+  const scale = useSharedValue(1);
+  const mounted = React.useRef(false);
+
+  React.useEffect(() => {
+    // на первом рендере таб уже активен — прыгать не с чего
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    if (!focused) return;
+    scale.value = withSequence(
+      withTiming(1.25, { duration: 110, easing: Easing.out(Easing.quad), reduceMotion: ReduceMotion.System }),
+      withSpring(1, { damping: 11, stiffness: 320, reduceMotion: ReduceMotion.System }),
+    );
+  }, [focused, scale]);
+
+  const anim = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
+
+  return (
+    <Animated.View style={anim}>
+      <Ionicons name={name} size={22} color={color as string} style={{ opacity: focused ? 1 : 0.85 }} />
+    </Animated.View>
+  );
+}
+
 function icon(name: IconName) {
   return ({ color, focused }: { color: ColorValue; focused: boolean; size: number }) => (
-    <Ionicons name={name} size={22} color={color as string} style={{ opacity: focused ? 1 : 0.85 }} />
+    <TabIcon name={name} color={color} focused={focused} />
   );
 }
 
