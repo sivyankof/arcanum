@@ -20,3 +20,7 @@ export const hapticReveal = () => fire(() => Haptics.impactAsync(Haptics.ImpactF
 /** Успех: завершённый урок, 7-й день серии. */
 export const hapticSuccess = () =>
   fire(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success));
+
+/** Отказ: тап по заблокированному уроку. */
+export const hapticWarning = () =>
+  fire(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning));

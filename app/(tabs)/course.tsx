@@ -2,12 +2,62 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
+import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { course } from '../../src/lib/content';
+import { hapticWarning } from '../../src/lib/haptics';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+
+// качание замка: ±8°, три раза, суммарно ~350 мс (пункт 13 motion-spec)
+const SHAKE_STEP_MS = 58;
+
+/** Строка урока. Закрытый урок на тап качает замком и отвечает предупреждающей вибрацией —
+ *  отказ, который приятно трогать. Открытый пока не нажимается: движка уроков нет (этап 3 плана). */
+function LessonRow({ title, locked }: { title: string; locked: boolean }) {
+  const t = useTheme();
+  const shake = useSharedValue(0);
+
+  const onLockedPress = () => {
+    hapticWarning();
+    const step = (to: number) =>
+      withTiming(to, { duration: SHAKE_STEP_MS, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System });
+    shake.value = withSequence(step(1), step(-1), step(1), step(-1), step(1), step(0));
+  };
+
+  const lockStyle = useAnimatedStyle(() => ({ transform: [{ rotate: `${shake.value * 8}deg` }] }));
+
+  const body = (
+    <>
+      <Text style={{ color: t.text, fontSize: 13, flex: 1 }}>{title}</Text>
+      <Animated.View style={locked ? lockStyle : undefined}>
+        <Ionicons name={locked ? 'lock-closed' : 'play'} size={13} color={locked ? t.muted : t.accent} />
+      </Animated.View>
+    </>
+  );
+
+  const style = [
+    st.lesson,
+    { backgroundColor: t.panel, borderColor: locked ? t.line : t.frame, opacity: locked ? 0.55 : 1 },
+  ];
+
+  if (!locked) return <View style={style}>{body}</View>;
+  return (
+    <PressableScale onPress={onLockedPress} style={style}>
+      {body}
+    </PressableScale>
+  );
+}
 
 /** Экран курса — v0: модули и уроки списком.
  *  Этап 3 плана: «путь» как в Duolingo, движок уроков, XP, тесты. */
@@ -43,26 +93,10 @@ export default function CourseScreen() {
               </Text>
               {!m.free && <Ionicons name="lock-closed" size={13} color={t.muted} />}
             </View>
-            {m.lessons.map((l: any, li: number) => {
-              const locked = !m.free || li > (mi === 0 ? 0 : -1);
-              const first = mi === 0 && li === 0;
-              return (
-                <View
-                  key={l.id}
-                  style={[
-                    st.lesson,
-                    { backgroundColor: t.panel, borderColor: first ? t.frame : t.line, opacity: locked && !first ? 0.55 : 1 },
-                  ]}
-                >
-                  <Text style={{ color: t.text, fontSize: 13, flex: 1 }}>{l.title[lang]}</Text>
-                  <Ionicons
-                    name={first ? 'play' : 'lock-closed'}
-                    size={13}
-                    color={first ? t.accent : t.muted}
-                  />
-                </View>
-              );
-            })}
+            {m.lessons.map((l: any, li: number) => (
+              // пока открыт только первый урок первого модуля
+              <LessonRow key={l.id} title={l.title[lang]} locked={!(mi === 0 && li === 0)} />
+            ))}
           </FadeUp>
         ))}
       </ScrollView>
