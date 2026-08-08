@@ -1,0 +1,5140 @@
+{
+  "version": 1,
+  "deck": "rider-waite-smith-1909",
+  "cards": [
+    {
+      "id": "fool",
+      "arcana": "major",
+      "suit": null,
+      "number": 0,
+      "name": {
+        "ru": "Дурак",
+        "en": "The Fool"
+      },
+      "keywords": {
+        "ru": [
+          "новое начало",
+          "спонтанность",
+          "вера в жизнь",
+          "свобода"
+        ],
+        "en": [
+          "new beginnings",
+          "spontaneity",
+          "leap of faith",
+          "freedom"
+        ]
+      },
+      "image": "fool.jpg",
+      "source": {
+        "waite_upright": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+        "waite_reversed": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
+        "waite_description": "With light step, as if earth and its trammels had little power to restrain him, a young man in gorgeous vestments pauses at the brink of a precipice among the great heights of the world; he surveys the blue distance before him-its expanse of sky rather than the prospect below. His act of eager walking is still indicated, though he is stationary at the given moment; his dog is still bounding. The edge which opens on the depth has no terror; it is as if angels were waiting to uphold him, if it came about that he leaped from the height. His countenance is full of intelligence and expectant dream. He has a rose in one hand and in the other a costly wand, from which depends over his right shoulder a wallet curiously embroidered. He is a prince of the other world on his travels through this one-all amidst the morning glory, in the keen air. The sun, which shines behind him, knows whence he came, whither he is going, and how he will return by another path after many days. He is the spirit in search of experience. Many symbols of the Instituted Mysteries are summarized in this card, which reverses, under high warrants, all the confusions that have preceded it. In his Manual of Cartomancy, Grand Orient has a curious suggestion of the office of Mystic Fool, as apart of his process in higher divination; but it might call for more than ordinary gifts to put it into operation. We shall see how the card fares according to the common arts of fortune-telling, and it will be an example, to those who can discern, of the fact, otherwise so evident, that the Trumps Major had no place originally in the arts of psychic gambling, when cards are used as the counters and pretexts. Of the circumstances under which this art arose we know, however, very little. The conventional explanations say that the Fool signifies the flesh, the sensitive life, and by a peculiar satire its subsidiary name was at one time the alchemist, as depicting folly at the most insensate stage.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "Дурак — карта начала пути. Она говорит о новом этапе, который требует доверия к жизни: вы стоите на краю неизвестного, и именно готовность шагнуть делает вас свободным. Это энергия чистого потенциала — без гарантий, но с огромными возможностями. Карта советует действовать с открытым сердцем, но не забывать смотреть под ноги.",
+          "en": "The Fool is the card of beginnings. It speaks of a new chapter that asks you to trust life: you stand at the edge of the unknown, and the willingness to take the step is what sets you free. This is pure potential — no guarantees, but endless possibility. The card advises an open heart, while still minding where you step.",
+          "status": "draft"
+        },
+        "reversed": {
+          "ru": "В перевёрнутом положении Дурак предупреждает о безрассудстве или, наоборот, о страхе сделать шаг. Возможно, вы действуете наивно, не оценив риски, — или так боитесь ошибиться, что упускаете шанс. Проверьте: это смелость или бегство?",
+          "en": "Reversed, the Fool warns of recklessness — or of being too afraid to leap. You may be acting naively without weighing the risks, or so worried about mistakes that the chance is slipping by. Ask yourself: is this courage or escape?",
+          "status": "draft"
+        },
+        "love": {
+          "ru": "В любви Дурак — новое знакомство, лёгкость и влюблённость без расчёта. Для пары — приглашение вернуть игру и спонтанность. Но карта напоминает: не давайте обещаний, к которым не готовы.",
+          "en": "In love, the Fool is a new meeting, lightness, falling for someone without calculation. For couples — an invitation to bring back play and spontaneity. But it reminds you: don't make promises you're not ready for.",
+          "status": "draft"
+        },
+        "career": {
+          "ru": "В работе — новый проект, смена сферы, первый шаг в деле, которого вы раньше не пробовали. Хорошее время для стартов и обучения. Минус — нехватка опыта: заручитесь поддержкой тех, кто уже прошёл этот путь.",
+          "en": "In career — a new project, a change of field, a first step into something untried. A good time for launches and learning. The catch is inexperience: find support from those who've walked this road.",
+          "status": "draft"
+        },
+        "finances": {
+          "ru": "В финансах Дурак советует осторожность: энтузиазм без плана может обернуться потерями. Новые источники дохода возможны, но не вкладывайте всё сразу и избегайте импульсивных трат.",
+          "en": "Financially, the Fool counsels caution: enthusiasm without a plan can mean losses. New income sources are possible, but don't stake everything at once and avoid impulsive spending.",
+          "status": "draft"
+        },
+        "health": {
+          "ru": "Для здоровья — прилив энергии и лёгкости. Хорошо начинать новые привычки: прогулки, движение, режим. Следите лишь за невнимательностью — карта иногда указывает на травмы из-за спешки.",
+          "en": "For health — a surge of energy and lightness. A good time to start new habits: walking, movement, routine. Just watch for carelessness — the card can point to haste-related injuries.",
+          "status": "draft"
+        },
+        "day_card": {
+          "ru": "Сегодня разрешите себе начать. День благоприятен для первого шага в том, что вы давно откладывали: письмо, разговор, заявка, тренировка. Не ждите идеальных условий — их не будет. Доверьтесь дороге.",
+          "en": "Today, give yourself permission to begin. The day favours a first step toward what you've been postponing: a message, a talk, an application, a workout. Don't wait for perfect conditions — there are none. Trust the road.",
+          "status": "draft"
+        },
+        "symbolism": {
+          "ru": "Юноша у края обрыва — душа перед воплощением, доверие к неизвестному. Белая роза в руке — чистота намерений. Узелок на посохе — опыт прошлого, который мы несём с собой. Белый пёс — инстинкт и верный спутник, предупреждающий об опасности. Горы вдали — испытания, которые ещё впереди. Солнце за спиной — благословение начала.",
+          "en": "The youth at the cliff's edge — the soul before its journey, trusting the unknown. The white rose — purity of intention. The bundle on the staff — past experience carried along. The white dog — instinct, a loyal companion warning of danger. The distant mountains — trials yet to come. The sun behind — the blessing of beginnings.",
+          "status": "draft"
+        }
+      }
+    },
+    {
+      "id": "magician",
+      "arcana": "major",
+      "suit": null,
+      "number": 1,
+      "name": {
+        "ru": "Маг",
+        "en": "The Magician"
+      },
+      "keywords": {
+        "ru": [
+          "воля",
+          "мастерство",
+          "проявление",
+          "ресурсы"
+        ],
+        "en": [
+          "willpower",
+          "skill",
+          "manifestation",
+          "resources"
+        ]
+      },
+      "image": "magician.jpg",
+      "source": {
+        "waite_upright": "Skill, diplomacy, address, subtlety; sickness, pain, loss, disaster, snares of enemies; self-confidence, will; the Querent, if male.",
+        "waite_reversed": "Physician, Magus, mental disease, disgrace, disquiet.",
+        "waite_description": "A youthful figure in the robe of a magician, having the countenance of divine Apollo, with smile of confidence and shining eyes. Above his head is the mysterious sign of the Holy Spirit, the sign of life, like an endless cord, forming the figure 8 in a horizontal position . About his waist is a serpent-cincture, the serpent appearing to devour its own tail. This is familiar to most as a conventional symbol of eternity, but here it indicates more especially the eternity of attainment in the spirit. In the Magician's right hand is a wand raised towards heaven, while the left hand is pointing to the earth. This dual sign is known in very high grades of the Instituted Mysteries; it shews the descent of grace, virtue and light, drawn from things above and derived to things below. The suggestion throughout is therefore the possession and communication of the Powers and Gifts of the Spirit. On the table in front of the Magician are the symbols of the four Tarot suits, signifying the elements of natural life, which lie like counters before the adept, and he adapts them as he wills. Beneath are roses and lilies, the flos campi and lilium convallium, changed into garden flowers, to shew the culture of aspiration. This card signifies the divine motive in man, reflecting God, the will in the liberation of its union with that which is above. It is also the unity of individual being on all planes, and in a very high sense it is thought, in the fixation thereof. With further reference to what I have called the sign of life and its connexion with the number 8, it may be remembered that Christian Gnosticism speaks of rebirth in Christ as a change \"unto the Ogdoad.\" The mystic number is termed Jerusalem above, the Land flowing with Milk and Honey, the Holy Spirit and the Land of the Lord. According to Martinism, 8 is the number of Christ.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "Маг — карта воли и мастерства. Всё необходимое уже у вас на столе: идеи, навыки, ресурсы, связи. Вопрос лишь в том, решитесь ли вы направить их к цели. Маг соединяет небо и землю — замысел и действие. Это карта осознанного творения своей реальности.",
+          "en": "The Magician is the card of will and mastery. Everything you need is already on your table: ideas, skills, resources, connections. The only question is whether you'll direct them toward a goal. The Magician links heaven and earth — vision and action. It is the card of consciously creating your reality.",
+          "status": "draft"
+        },
+        "reversed": {
+          "ru": "Перевёрнутый Маг — талант без применения или ловкость, обращённая в манипуляцию. Возможно, вы распыляетесь, сомневаетесь в себе — или кто-то рядом использует слова и обаяние вам во вред. Верните честность: сначала с собой.",
+          "en": "Reversed, the Magician is talent unused — or skill turned to manipulation. You may be scattered, doubting yourself, or someone nearby is using charm and words against you. Restore honesty — starting with yourself.",
+          "status": "draft"
+        },
+        "love": {
+          "ru": "В любви — время проявить инициативу: первый шаг, честный разговор, ясное намерение. В паре — период, когда вы можете осознанно строить отношения такими, какими хотите их видеть. Остерегайтесь лишь красивых слов без дел.",
+          "en": "In love — time to take initiative: the first move, an honest talk, a clear intention. In a couple — a period when you can consciously shape the relationship you want. Beware only of fine words without deeds.",
+          "status": "draft"
+        },
+        "career": {
+          "ru": "В работе Маг — сильная карта: у вас есть всё, чтобы реализовать проект, получить повышение, запустить своё дело. Действуйте из позиции мастера: планируйте, презентуйте, договаривайтесь.",
+          "en": "In career the Magician is a strong card: you have all it takes to deliver the project, win the promotion, launch the venture. Act as the master: plan, present, negotiate.",
+          "status": "draft"
+        },
+        "finances": {
+          "ru": "В финансах — умение приумножать: новые источники дохода через навыки, переговоры о цене вашего труда. Считайте и планируйте — деньги подчиняются тому, кто ими управляет.",
+          "en": "Financially — the ability to multiply: new income through skills, negotiating your worth. Count and plan — money obeys the one who manages it.",
+          "status": "draft"
+        },
+        "health": {
+          "ru": "Для здоровья — ресурс и восстановление через осознанность: вы способны влиять на своё состояние режимом, движением, вниманием к телу. Хорошая карта для начала оздоровительных практик.",
+          "en": "For health — resourcefulness and recovery through awareness: your routine, movement and attention to the body genuinely shape how you feel. A good card for starting wellness practices.",
+          "status": "draft"
+        },
+        "day_card": {
+          "ru": "Сегодня ваш день действия. Сформулируйте одно намерение утром — и сделайте к нему три конкретных шага. Слова имеют силу: озвучьте желаемое вслух или запишите. Вечером заметите: получилось больше, чем обычно.",
+          "en": "Today is your day of action. Set one intention in the morning — and take three concrete steps toward it. Words carry power: say your aim aloud or write it down. By evening you'll notice more got done than usual.",
+          "status": "draft"
+        },
+        "symbolism": {
+          "ru": "Жест Мага — одна рука к небу, другая к земле: «что наверху, то и внизу», проведение замысла в материю. Знак бесконечности над головой — безграничность духа. Змея, кусающая свой хвост, на поясе — вечный цикл. На столе четыре символа мастей — все стихии и инструменты в его распоряжении. Розы и лилии в саду — союз страсти и чистоты мысли.",
+          "en": "The Magician's gesture — one hand to heaven, one to earth: 'as above, so below', drawing vision into matter. The lemniscate overhead — the spirit's endlessness. The serpent-belt biting its tail — the eternal cycle. On the table, the four suit emblems — every element and tool at his command. Roses and lilies in the garden — passion united with purity of thought.",
+          "status": "draft"
+        }
+      }
+    },
+    {
+      "id": "high-priestess",
+      "arcana": "major",
+      "suit": null,
+      "number": 2,
+      "name": {
+        "ru": "Верховная Жрица",
+        "en": "The High Priestess"
+      },
+      "keywords": {
+        "ru": [
+          "интуиция",
+          "тайна",
+          "внутреннее знание",
+          "пауза"
+        ],
+        "en": [
+          "intuition",
+          "mystery",
+          "inner knowing",
+          "stillness"
+        ]
+      },
+      "image": "high-priestess.jpg",
+      "source": {
+        "waite_upright": "Secrets, mystery, the future as yet unrevealed; the woman who interests the Querent, if male; the Querent herself, if female; silence, tenacity; mystery, wisdom, science.",
+        "waite_reversed": "Passion, moral or physical ardour, conceit, surface knowledge.",
+        "waite_description": "She has the lunar crescent at her feet, a horned diadem on her head, with a globe in the middle place, and a large solar cross on her breast. The scroll in her hands is inscribed with the word Tora, signifying the Greater Law, the Secret Law and the second sense of the Word. It is partly covered by her mantle, to shew that some things are implied and some spoken. She is seated between the white and black pillars--J. and B.--of the mystic Temple, and the veil of the Temple is behind her: it is embroidered with palms and pomegranates. The vestments are flowing and gauzy, and the mantle suggests light--a shimmering radiance. She has been called occult Science on the threshold of the Sanctuary of Isis, but she is really the Secret Church, the House which is of God and man. She represents also the Second Marriage of the Prince who is no longer of this world; she is the spiritual Bride and Mother, the daughter of the stars and the Higher Garden of Eden. She is, in fine, the Queen of the borrowed light, but this is the light of all. She is the Moon nourished by the milk of the Supernal Mother. In a manner, she is also the Supernal Mother herself--that is to say, she is the bright reflection. It is in this sense of reflection that her truest and highest name in bolism is Shekinah--the co-habiting glory. According to Kabalism, there is a Shekinah both above and below. In the superior world it is called Binah, the Supernal Understanding which reflects to the emanations that are beneath. In the lower world it is MaIkuth--that world being, for this purpose, understood as a blessed Kingdom that with which it is made blessed being the Indwelling Glory. Mystically speaking, the Shekinah is the Spiritual Bride of the just man, and when he reads the Law she gives the Divine meaning. There are some respects in which this card is the highest and holiest of the Greater Arcana.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "Верховная Жрица — карта интуиции и внутреннего знания. Ответ, который вы ищете, уже внутри вас — но услышать его можно только в тишине. Это время наблюдать, а не действовать; чувствовать, а не анализировать. Не всё должно быть понято умом и не всё стоит рассказывать другим.",
+          "en": "The High Priestess is the card of intuition and inner knowing. The answer you seek is already within — but it can only be heard in stillness. This is a time to observe rather than act, to feel rather than analyse. Not everything must be understood by the mind, and not everything should be shared.",
+          "status": "draft"
+        },
+        "reversed": {
+          "ru": "Перевёрнутая Жрица — заглушённая интуиция: вы слышите внутренний голос, но не доверяете ему, полагаясь на чужие мнения. Иногда — раскрытые секреты или поверхностность там, где нужна глубина. Вернитесь к себе: что вы на самом деле чувствуете?",
+          "en": "Reversed, the Priestess is intuition silenced: you hear the inner voice but trust others' opinions instead. Sometimes — secrets revealed, or shallowness where depth is needed. Come back to yourself: what do you actually feel?",
+          "status": "draft"
+        },
+        "love": {
+          "ru": "В любви — недосказанность и притяжение тайны. Возможно, чувства пока не названы вслух, и это нормально: дайте им созреть. Одиноким карта советует не торопить события — важная встреча требует внутренней готовности.",
+          "en": "In love — things left unsaid, and the pull of mystery. Feelings may not yet be spoken aloud, and that's all right: let them ripen. For singles, don't rush — a meaningful meeting requires inner readiness.",
+          "status": "draft"
+        },
+        "career": {
+          "ru": "В работе — время слушать больше, чем говорить. Не раскрывайте планы раньше времени, наблюдайте за процессами и людьми. Хороша для исследований, аналитики, обучения — всего, что требует глубины.",
+          "en": "At work — a time to listen more than speak. Don't reveal plans early; watch processes and people. Favours research, analysis, study — anything requiring depth.",
+          "status": "draft"
+        },
+        "finances": {
+          "ru": "В финансах — не всё очевидно: возможна скрытая информация. Отложите крупные решения, перепроверьте условия договоров. Доверьтесь ощущению «что-то тут не так», если оно возникло.",
+          "en": "Financially — not everything is visible: hidden information is possible. Postpone big decisions, re-check contract terms. If something feels off, trust that feeling.",
+          "status": "draft"
+        },
+        "health": {
+          "ru": "Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. При неясных симптомах — обследование вместо догадок.",
+          "en": "For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. With unclear symptoms, choose examination over guessing.",
+          "status": "draft"
+        },
+        "day_card": {
+          "ru": "Сегодня — день тишины и наблюдения. Не спешите отвечать, обещать и решать. Обратите внимание на сны, случайные фразы, повторяющиеся знаки — через них сегодня говорит ваша интуиция.",
+          "en": "Today is a day of quiet and observation. Don't rush to answer, promise or decide. Notice dreams, stray phrases, repeating signs — that is how your intuition speaks today.",
+          "status": "draft"
+        },
+        "symbolism": {
+          "ru": "Жрица сидит между чёрной и белой колоннами (Боаз и Яхин храма Соломона) — между тьмой и светом, зная обе стороны. Завеса с гранатами за спиной скрывает вход в тайное знание. Свиток «Тора» в руках — закон и память, раскрытые лишь частично. Полумесяц у ног — власть над миром чувств и подсознания. Крест на груди — равновесие.",
+          "en": "The Priestess sits between the black and white pillars (Boaz and Jachin of Solomon's Temple) — between dark and light, knowing both. The pomegranate veil behind her conceals the entrance to hidden knowledge. The 'Tora' scroll — law and memory, only partly revealed. The crescent at her feet — command of feeling and the subconscious. The cross on her breast — equilibrium.",
+          "status": "draft"
+        }
+      }
+    },
+    {
+      "id": "empress",
+      "arcana": "major",
+      "suit": null,
+      "number": 3,
+      "name": {
+        "ru": "Императрица",
+        "en": "The Empress"
+      },
+      "keywords": {
+        "ru": [
+          "изобилие",
+          "забота",
+          "творчество",
+          "природа"
+        ],
+        "en": [
+          "abundance",
+          "nurturing",
+          "creativity",
+          "nature"
+        ]
+      },
+      "image": "empress.jpg",
+      "source": {
+        "waite_upright": "Fruitfulness, action, initiative, length of days; the unknown, clandestine; also difficulty, doubt, ignorance.",
+        "waite_reversed": "Light, truth, the unravelling of involved matters, public rejoicings; according to another reading, vacillation.",
+        "waite_description": "A stately figure, seated, having rich vestments and royal aspect, as of a daughter of heaven and earth. Her diadem is of twelve stars, gathered in a cluster. The symbol of Venus is on the shield which rests near her. A field of corn is ripening in front of her, and beyond there is a fall of water. The sceptre which she bears is surmounted by the globe of this world. She is the inferior Garden of Eden, the Earthly Paradise, all that is symbolized by the visible house of man. She is not Regina coeli, but she is still refugium peccatorum, the fruitful mother of thousands. There are also certain aspects in which she has been correctly described as desire and the wings thereof, as the woman clothed with the sun, as Gloria Mundi and the veil of the Sanctum Sanctorum; but she is not, I may add, the soul that has attained wings, unless all the symbolism is counted up another and unusual way. She is above all things universal fecundity and the outer sense of the Word. This is obvious, because there is no direct message which has been given to man like that which is borne by woman; but she does not herself carry its interpretation. In another order of ideas, the card of the Empress signifies the door or gate by which an entrance is obtained into this life, as into the Garden of Venus; and then the way which leads out therefrom, into that which is beyond, is the secret known to the High Priestess: it is communicated by her to the elect. Most old attributions of this card are completely wrong on the symbolism--as, for example, its identification with the Word, Divine Nature, the Triad, and so forth.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "emperor",
+      "arcana": "major",
+      "suit": null,
+      "number": 4,
+      "name": {
+        "ru": "Император",
+        "en": "The Emperor"
+      },
+      "keywords": {
+        "ru": [
+          "порядок",
+          "власть",
+          "стабильность",
+          "границы"
+        ],
+        "en": [
+          "structure",
+          "authority",
+          "stability",
+          "boundaries"
+        ]
+      },
+      "image": "emperor.jpg",
+      "source": {
+        "waite_upright": "Stability, power, protection, realization; a great person; aid, reason, conviction; also authority and will.",
+        "waite_reversed": "Benevolence, compassion, credit; also confusion to enemies, obstruction, immaturity.",
+        "waite_description": "He has a form of the Crux ansata for his sceptre and a globe in his left hand. He is a crowned monarch--commanding, stately, seated on a throne, the arms of which axe fronted by rams' heads. He is executive and realization, the power of this world, here clothed with the highest of its natural attributes. He is occasionally represented as seated on a cubic stone, which, however, confuses some of the issues. He is the virile power, to which the Empress responds, and in this sense is he who seeks to remove the Veil of Isis; yet she remains virgo intacta. It should be understood that this card and that of the Empress do not precisely represent the condition of married life, though this state is implied. On the surface, as I have indicated, they stand for mundane royalty, uplifted on the seats of the mighty; but above this there is the suggestion of another presence. They signify also--and the male figure especially--the higher kingship, occupying the intellectual throne. Hereof is the lordship of thought rather than of the animal world. Both personalities, after their own manner, are \"full of strange experience,\" but theirs is not consciously the wisdom which draws from a higher world. The Emperor has been described as (a) will in its embodied form, but this is only one of its applications, and (b) as an expression of virtualities contained in the Absolute Being--but this is fantasy.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "hierophant",
+      "arcana": "major",
+      "suit": null,
+      "number": 5,
+      "name": {
+        "ru": "Иерофант",
+        "en": "The Hierophant"
+      },
+      "keywords": {
+        "ru": [
+          "традиция",
+          "обучение",
+          "наставник",
+          "правила"
+        ],
+        "en": [
+          "tradition",
+          "learning",
+          "mentorship",
+          "convention"
+        ]
+      },
+      "image": "hierophant.jpg",
+      "source": {
+        "waite_upright": "Marriage, alliance, captivity, servitude; by another account, mercy and goodness; inspiration; the man to whom the Querent has recourse.",
+        "waite_reversed": "Society, good understanding, concord, overkindness, weakness.",
+        "waite_description": "He wears the triple crown and is seated between two pillars, but they are not those of the Temple which is guarded by the High Priestess. In his left hand he holds a sceptre terminating in the triple cross, and with his right hand he gives the well-known ecclesiastical sign which is called that of esotericism, distinguishing between the manifest and concealed part of doctrine. It is noticeable in this connexion that the High Priestess makes no sign. At his feet are the crossed keys, and two priestly ministers in albs kneel before him. He has been usually called the Pope, which is a particular application of the more general office that he symbolizes. He is the ruling power of external religion, as the High Priestess is the prevailing genius of the esoteric, withdrawn power. The proper meanings of this card have suffered woeful admixture from nearly all hands. Grand Orient says truly that the Hierophant is the power of the keys, exoteric orthodox doctrine, and the outer side of the life which leads to the doctrine; but he is certainly not the prince of occult doctrine, as another commentator has suggested. He is rather the summa totius theologiæ, when it has passed into the utmost rigidity of expression; but he symbolizes also all things that are righteous and sacred on the manifest side. As such, he is the channel of grace belonging to the world of institution as distinct from that of Nature, and he is the leader of salvation for the human race at large. He is the order and the head of the recognized hierarchy, which is the reflection of another and greater hierarchic order; but it may so happen that the pontiff forgets the significance of this his symbolic state and acts as if he contained within his proper measures all that his sign signifies or his symbol seeks to shew forth. He is not, as it has been thought, philosophy-except on the theological side; he is not inspiration; and he is not religion, although he is a mode of its expression.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "lovers",
+      "arcana": "major",
+      "suit": null,
+      "number": 6,
+      "name": {
+        "ru": "Влюблённые",
+        "en": "The Lovers"
+      },
+      "keywords": {
+        "ru": [
+          "выбор",
+          "союз",
+          "ценности",
+          "гармония"
+        ],
+        "en": [
+          "choice",
+          "union",
+          "values",
+          "harmony"
+        ]
+      },
+      "image": "lovers.jpg",
+      "source": {
+        "waite_upright": "Attraction, love, beauty, trials overcome.",
+        "waite_reversed": "Failure, foolish designs. Another account speaks of marriage frustrated and contrarieties of all kinds.",
+        "waite_description": "The sun shines in the zenith, and beneath is a great winged figure with arms extended, pouring down influences. In the foreground are two human figures, male and female, unveiled before each other, as if Adam and Eve when they first occupied the paradise of the earthly body. Behind the man is the Tree of Life, bearing twelve fruits, and the Tree of the Knowledge of Good and Evil is behind the woman; the serpent is twining round it. The figures suggest youth, virginity, innocence and love before it is contaminated by gross material desire. This is in all simplicity the card of human love, here exhibited as part of the way, the truth and the life. It replaces, by recourse to first principles, the old card of marriage, which I have described previously, and the later follies which depicted man between vice and virtue. In a very high sense, the card is a mystery of the Covenant and Sabbath. The suggestion in respect of the woman is that she signifies that attraction towards the sensitive life which carries within it the idea of the Fall of Man, but she is rather the working of a Secret Law of Providence than a willing and conscious temptress. It is through her imputed lapse that man shall arise ultimately, and only by her can he complete himself. The card is therefore in its way another intimation concerning the great mystery of womanhood. The old meanings fall to pieces of necessity with the old pictures, but even as interpretations of the latter, some of them were of the order of commonplace and others were false in symbolism.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "chariot",
+      "arcana": "major",
+      "suit": null,
+      "number": 7,
+      "name": {
+        "ru": "Колесница",
+        "en": "The Chariot"
+      },
+      "keywords": {
+        "ru": [
+          "победа",
+          "контроль",
+          "движение",
+          "решимость"
+        ],
+        "en": [
+          "victory",
+          "control",
+          "momentum",
+          "determination"
+        ]
+      },
+      "image": "chariot.jpg",
+      "source": {
+        "waite_upright": "Succour, providence also war, triumph, presumption, vengeance, trouble.",
+        "waite_reversed": "Riot, quarrel, dispute, litigation, defeat.",
+        "waite_description": "An erect and princely figure carrying a drawn sword and corresponding, broadly speaking, to the traditional description which I have given in the first part. On the shoulders of the victorious hero are supposed to be the Urim and Thummim. He has led captivity captive; he is conquest on all planes--in the mind, in science, in progress, in certain trials of initiation. He has thus replied to the sphinx, and it is on this account that I have accepted the variation of Éliphas Lévi; two sphinxes thus draw his chariot. He is above all things triumph in the mind. It is to be understood for this reason (a) that the question of the sphinx is concerned with a Mystery of Nature and not of the world of Grace, to which the charioteer could offer no answer; (b) that the planes of his conquest are manifest or external and not within himself; (c) that the liberation which he effects may leave himself in the bondage of the logical understanding; (d) that the tests of initiation through which he has passed in triumph are to be understood physically or rationally; and (e) that if he came to the pillars of that Temple between which the High Priestess is seated, he could not open the scroll called Tora, nor if she questioned him could he answer. He is not hereditary royalty and he is not priesthood.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "strength",
+      "arcana": "major",
+      "suit": null,
+      "number": 8,
+      "name": {
+        "ru": "Сила",
+        "en": "Fortitude"
+      },
+      "keywords": {
+        "ru": [
+          "внутренняя сила",
+          "мягкость",
+          "терпение",
+          "смелость"
+        ],
+        "en": [
+          "inner strength",
+          "gentleness",
+          "patience",
+          "courage"
+        ]
+      },
+      "image": "strength.jpg",
+      "source": {
+        "waite_upright": "Power, energy, action, courage, magnanimity; also complete success and honours.",
+        "waite_reversed": "Despotism, abuse if power, weakness, discord, sometimes even disgrace.",
+        "waite_description": "A woman, over whose head there broods the same symbol of life which we have seen in the card of the Magician, is closing the jaws of a lion. The only point in which this design differs from the conventional presentations is that her beneficent fortitude has already subdued the lion, which is being led by a chain of flowers. For reasons which satisfy myself, this card has been interchanged with that of justice, which is usually numbered eight. As the variation carries nothing with it which will signify to the reader, there is no cause for explanation. Fortitude, in one of its most exalted aspects, is connected with the Divine Mystery of Union; the virtue, of course, operates in all planes, and hence draws on all in its symbolism. It connects also with innocentia inviolata, and with the strength which resides in contemplation. These higher meanings are, however, matters of inference, and I do not suggest that they are transparent on the surface of the card. They are intimated in a concealed manner by the chain of flowers, which signifies, among many other things, the sweet yoke and the light burden of Divine Law, when it has been taken into the heart of hearts. The card has nothing to do with self-confidence in the ordinary sense, though this has been suggested--but it concerns the confidence of those whose strength is God, who have found their refuge in Him. There is one aspect in which the lion signifies the passions, and she who is called Strength is the higher nature in its liberation. It has walked upon the asp and the basilisk and has trodden down the lion and the dragon.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "hermit",
+      "arcana": "major",
+      "suit": null,
+      "number": 9,
+      "name": {
+        "ru": "Отшельник",
+        "en": "The Hermit"
+      },
+      "keywords": {
+        "ru": [
+          "поиск себя",
+          "уединение",
+          "мудрость",
+          "внутренний свет"
+        ],
+        "en": [
+          "soul-searching",
+          "solitude",
+          "wisdom",
+          "inner guidance"
+        ]
+      },
+      "image": "hermit.jpg",
+      "source": {
+        "waite_upright": "Prudence, circumspection; also and especially treason, dissimulation, roguery, corruption.",
+        "waite_reversed": "Concealment, disguise, policy, fear, unreasoned caution.",
+        "waite_description": "The variation from the conventional models in this card is only that the lamp is not enveloped partially in the mantle of its bearer, who blends the idea of the Ancient of Days with the Light of the World It is a star which shines in the lantern. I have said that this is a card of attainment, and to extend this conception the figure is seen holding up his beacon on an eminence. Therefore the Hermit is not, as Court de Gebelin explained, a wise man in search of truth and justice; nor is he, as a later explanation proposes, an especial example of experience. His beacon intimates that \"where I am, you also may be.\" It is further a card which is understood quite incorrectly when it is connected with the idea of occult isolation, as the protection of personal magnetism against admixture. This is one of the frivolous renderings which we owe to Éliphas Lévi. It has been adopted by the French Order of Martinism and some of us have heard a great deal of the Silent and Unknown Philosophy enveloped by his mantle from the knowledge of the profane. In true Martinism, the significance of the term Philosophe inconnu was of another order. It did not refer to the intended concealment of the Instituted Mysteries, much less of their substitutes, but--like the card itself--to the truth that the Divine Mysteries secure their own protection from those who are unprepared.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "wheel-of-fortune",
+      "arcana": "major",
+      "suit": null,
+      "number": 10,
+      "name": {
+        "ru": "Колесо Фортуны",
+        "en": "Wheel Of Fortune"
+      },
+      "keywords": {
+        "ru": [
+          "перемены",
+          "циклы",
+          "судьба",
+          "поворот"
+        ],
+        "en": [
+          "change",
+          "cycles",
+          "destiny",
+          "turning point"
+        ]
+      },
+      "image": "wheel-of-fortune.jpg",
+      "source": {
+        "waite_upright": "Destiny, fortune, success, elevation, luck, felicity.",
+        "waite_reversed": "Increase, abundance, superfluity.",
+        "waite_description": "In this symbol I have again followed the reconstruction of Éliphas Lévi, who has furnished several variants. It is legitimate--as I have intimated--to use Egyptian symbolism when this serves our purpose, provided that no theory of origin is implied therein. I have, however, presented Typhon in his serpent form. The symbolism is, of course, not exclusively Egyptian, as the four Living Creatures of Ezekiel occupy the angles of the card, and the wheel itself follows other indications of Lévi in respect of Ezekiel's vision, as illustrative of the particular Tarot Key. With the French occultist, and in the design itself, the symbolic picture stands for the perpetual motion of a fluidic universe and for the flux of human life. The Sphinx is the equilibrium therein. The transliteration of Taro as Rota is inscribed on the wheel, counterchanged with the letters of the Divine Name--to shew that Providence is imphed through all. But this is the Divine intention within, and the similar intention without is exemplified by the four Living Creatures. Sometimes the sphinx is represented couchant on a pedestal above, which defrauds the symbolism by stultifying the essential idea of stability amidst movement. Behind the general notion expressed in the symbol there lies the denial of chance and the fatality which is implied therein. It may be added that, from the days of Lévi onward, the occult explanations of this card are--even for occultism itself--of a singularly fatuous kind. It has been said to mean principle, fecundity, virile honour, ruling authority, etc. The findings of common fortune-telling are better than this on their own plane.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "justice",
+      "arcana": "major",
+      "suit": null,
+      "number": 11,
+      "name": {
+        "ru": "Справедливость",
+        "en": "Justice"
+      },
+      "keywords": {
+        "ru": [
+          "справедливость",
+          "правда",
+          "причина и следствие",
+          "баланс"
+        ],
+        "en": [
+          "justice",
+          "truth",
+          "cause and effect",
+          "balance"
+        ]
+      },
+      "image": "justice.jpg",
+      "source": {
+        "waite_upright": "Equity, rightness, probity, executive; triumph of the deserving side in law.",
+        "waite_reversed": "Law in all its departments, legal complications, bigotry, bias, excessive severity.",
+        "waite_description": "As this card follows the traditional symbolism and carries above all its obvious meanings, there is little to say regarding it outside the few considerations collected in the first part, to which the reader is referred. It will be seen, however, that the figure is seated between pillars, like the High Priestess, and on this account it seems desirable to indicate that the moral principle which deals unto every man according to his works--while, of course, it is in strict analogy with higher things;--differs in its essence from the spiritual justice which is involved in the idea of election. The latter belongs to a mysterious order of Providence, in virtue of which it is possible for certain men to conceive the idea of dedication to the highest things. The operation of this is like the breathing of the Spirit where it wills, and we have no canon of criticism or ground of explanation concerning it. It is analogous to the possession of the fairy gifts and the high gifts and the gracious gifts of the poet: we have them or have not, and their presence is as much a mystery as their absence. The law of Justice is not however involved by either alternative. In conclusion, the pillars of Justice open into one world and the pillars of the High Priestess into another.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "hanged-man",
+      "arcana": "major",
+      "suit": null,
+      "number": 12,
+      "name": {
+        "ru": "Повешенный",
+        "en": "The Hanged Man"
+      },
+      "keywords": {
+        "ru": [
+          "пауза",
+          "новый взгляд",
+          "жертва",
+          "отпускание"
+        ],
+        "en": [
+          "pause",
+          "new perspective",
+          "surrender",
+          "letting go"
+        ]
+      },
+      "image": "hanged-man.jpg",
+      "source": {
+        "waite_upright": "Wisdom, circumspection, discernment, trials, sacrifice, intuition, divination, prophecy.",
+        "waite_reversed": "Selfishness, the crowd, body politic.",
+        "waite_description": "The gallows from which he is suspended forms a Tau cross, while the figure--from the position of the legs--forms a fylfot cross. There is a nimbus about the head of the seeming martyr. It should be noted (1) that the tree of sacrifice is living wood, with leaves thereon; (2) that the face expresses deep entrancement, not suffering; (3) that the figure, as a whole, suggests life in suspension, but life and not death. It is a card of profound significance, but all the significance is veiled. One of his editors suggests that Éliphas Lévi did not know the meaning, which is unquestionable nor did the editor himself. It has been called falsely a card of martyrdom, a card a of prudence, a card of the Great Work, a card of duty; but we may exhaust all published interpretations and find only vanity. I will say very simply on my own part that it expresses the relation, in one of its aspects, between the Divine and the Universe. He who can understand that the story of his higher nature is imbedded in this symbolism will receive intimations concerning a great awakening that is possible, and will know that after the sacred Mystery of Death there is a glorious Mystery of Resurrection.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "death",
+      "arcana": "major",
+      "suit": null,
+      "number": 13,
+      "name": {
+        "ru": "Смерть",
+        "en": "Death"
+      },
+      "keywords": {
+        "ru": [
+          "завершение",
+          "трансформация",
+          "переход",
+          "обновление"
+        ],
+        "en": [
+          "endings",
+          "transformation",
+          "transition",
+          "renewal"
+        ]
+      },
+      "image": "death.jpg",
+      "source": {
+        "waite_upright": "End, mortality, destruction, corruption also, for a man, the loss of a benefactor for a woman, many contrarieties; for a maid, failure of marriage projects.",
+        "waite_reversed": "Inertia, sleep, lethargy, petrifaction, somnambulism; hope destroyed.",
+        "waite_description": "The veil or mask of life is perpetuated in change, transformation and passage from lower to higher, and this is more fitly represented in the rectified Tarot by one of the apocalyptic visions than by the crude notion of the reaping skeleton. Behind it lies the whole world of ascent in the spirit. The mysterious horseman moves slowly, bearing a black banner emblazoned with the Mystic Rose, which signifies life. Between two pillars on the verge of the horizon there shines the sun of immortality. The horseman carries no visible weapon, but king and child and maiden fall before him, while a prelate with clasped hands awaits his end. There should be no need to point out that the suggestion of death which I have made in connection with the previous card is, of course, to be understood mystically, but this is not the case in the present instance. The natural transit of man to the next stage of his being either is or may be one form of his progress, but the exotic and almost unknown entrance, while still in this life, into the state of mystical death is a change in the form of consciousness and the passage into a state to which ordinary death is neither the path nor gate. The existing occult explanations of the 13th card are, on the whole, better than usual, rebirth, creation, destination, renewal, and the rest.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "temperance",
+      "arcana": "major",
+      "suit": null,
+      "number": 14,
+      "name": {
+        "ru": "Умеренность",
+        "en": "Temperance"
+      },
+      "keywords": {
+        "ru": [
+          "умеренность",
+          "баланс",
+          "терпение",
+          "синтез"
+        ],
+        "en": [
+          "moderation",
+          "balance",
+          "patience",
+          "blending"
+        ]
+      },
+      "image": "temperance.jpg",
+      "source": {
+        "waite_upright": "Economy, moderation, frugality, management, accommodation.",
+        "waite_reversed": "Things connected with churches, religions, sects, the priesthood, sometimes even the priest who will marry the Querent; also disunion, unfortunate combinations, competing interests.",
+        "waite_description": "A winged angel, with the sign of the sun upon his forehead and on his breast the square and triangle of the septenary. I speak of him in the masculine sense, but the figure is neither male nor female. It is held to be pouring the essences of life from chalice to chalice. It has one foot upon the earth and one upon waters, thus illustrating the nature of the essences. A direct path goes up to certain heights on the verge of the horizon, and above there is a great light, through which a crown is seen vaguely. Hereof is some part of the Secret of Eternal Life, as it is possible to man in his incarnation. All the conventional emblems are renounced herein. So also are the conventional meanings, which refer to changes in the seasons, perpetual movement of life and even the combination of ideas. It is, moreover, untrue to say that the figure symbolizes the genius of the sun, though it is the analogy of solar light, realized in the third part of our human triplicity. It is called Temperance fantastically, because, when the rule of it obtains in our consciousness, it tempers, combines and harmonises the psychic and material natures. Under that rule we know in our rational part something of whence we came and whither we are going.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "devil",
+      "arcana": "major",
+      "suit": null,
+      "number": 15,
+      "name": {
+        "ru": "Дьявол",
+        "en": "The Devil"
+      },
+      "keywords": {
+        "ru": [
+          "зависимость",
+          "привязанность",
+          "теневая сторона",
+          "искушение"
+        ],
+        "en": [
+          "attachment",
+          "addiction",
+          "shadow self",
+          "temptation"
+        ]
+      },
+      "image": "devil.jpg",
+      "source": {
+        "waite_upright": "Ravage, violence, vehemence, extraordinary efforts, force, fatality; that which is predestined but is not for this reason evil.",
+        "waite_reversed": "Evil fatality, weakness, pettiness, blindness.",
+        "waite_description": "The design is an accommodation, mean or harmony, between several motives mentioned in the first part. The Horned Goat of Mendes, with wings like those of a bat, is standing on an altar. At the pit of the stomach there is the sign of Mercury. The right hand is upraised and extended, being the reverse of that benediction which is given by the Hierophant in the fifth card. In the left hand there is a great flaming torch, inverted towards the earth. A reversed pentagram is on the forehead. There is a ring in front of the altar, from which two chains are carried to the necks of two figures, male and female. These are analogous with those of the fifth card, as if Adam and Eve after the Fall. Hereof is the chain and fatality of the material life. The figures are tailed, to signify the animal nature, but there is human intelligence in the faces, and he who is exalted above them is not to be their master for ever. Even now, he is also a bondsman, sustained by the evil that is in him and blind to the liberty of service. With more than his usual derision for the arts which he pretended to respect and interpret as a master therein, Éliphas Lévi affirms that the Baphometic figure is occult science and magic. Another commentator says that in the Divine world it signifies predestination, but there is no correspondence in that world with the things which below are of the brute. What it does signify is the Dweller on the Threshold without the Mystical Garden when those are driven forth therefrom who have eaten the forbidden fruit.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "tower",
+      "arcana": "major",
+      "suit": null,
+      "number": 16,
+      "name": {
+        "ru": "Башня",
+        "en": "The Tower"
+      },
+      "keywords": {
+        "ru": [
+          "внезапные перемены",
+          "разрушение",
+          "откровение",
+          "освобождение"
+        ],
+        "en": [
+          "sudden change",
+          "upheaval",
+          "revelation",
+          "liberation"
+        ]
+      },
+      "image": "tower.jpg",
+      "source": {
+        "waite_upright": "Misery, distress, indigence, adversity, calamity, disgrace, deception, ruin. It is a card in particular of unforeseen catastrophe.",
+        "waite_reversed": "According to one account, the same in a lesser degree also oppression, imprisonment, tyranny.",
+        "waite_description": "Occult explanations attached to this card are meagre and mostly disconcerting. It is idle to indicate that it depicts min in all its aspects, because it bears this evidence on the surface. It is said further that it contains the first allusion to a material building, but I do not conceive that the Tower is more or less material than the pillars which we have met with in three previous cases. I see nothing to warrant Papus in supposing that it is literally the fall of Adam, but there is more in favour of his alternative--that it signifies the materialization of the spiritual word. The bibliographer Christian imagines that it is the downfall of the mind, seeking to penetrate the mystery of God. I agree rather with Grand Orient that it is the ruin of the House of We, when evil has prevailed therein, and above all that it is the rending of a House of Doctrine. I understand that the reference is, however, to a House of Falsehood. It illustrates also in the most comprehensive way the old truth that \"except the Lord build the house, they labour in vain that build it.\" There is a sense in which the catastrophe is a reflection from the previous card, but not on the side of the symbolism which I have tried to indicate therein. It is more correctly a question of analogy; one is concerned with the fall into the material and animal state, while the other signifies destruction on the intellectual side. The Tower has been spoken of as the chastisement of pride and the intellect overwhelmed in the attempt to penetrate the Mystery of God; but in neither case do these explanations account for the two persons who are the living sufferers. The one is the literal word made void and the other its false interpretation. In yet a deeper sense, it may signify also the end of a dispensation, but there is no possibility here for the consideration of this involved question.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "star",
+      "arcana": "major",
+      "suit": null,
+      "number": 17,
+      "name": {
+        "ru": "Звезда",
+        "en": "The Star"
+      },
+      "keywords": {
+        "ru": [
+          "надежда",
+          "вдохновение",
+          "исцеление",
+          "вера"
+        ],
+        "en": [
+          "hope",
+          "inspiration",
+          "healing",
+          "faith"
+        ]
+      },
+      "image": "star.jpg",
+      "source": {
+        "waite_upright": "Loss, theft, privation, abandonment; another reading says-hope and bright prospects,",
+        "waite_reversed": "Arrogance, haughtiness, impotence.",
+        "waite_description": "A great, radiant star of eight rays, surrounded by seven lesser stars--also of eight rays. The female figure in the foreground is entirely naked. Her left knee is on the land and her right foot upon the water. She pours Water of Life from two great ewers, irrigating sea and land. Behind her is rising ground and on the right a shrub or tree, whereon a bird alights. The figure expresses eternal youth and beauty. The star is l'étoile flamboyante, which appears in Masonic symbolism, but has been confused therein. That which the figure communicates to the living scene is the substance of the heavens and the elements. It has been said truly that the mottoes of this card are \"Waters of Life freely\" and \"Gifts of the Spirit.\" The summary of several tawdry explanations says that it is a card of hope. On other planes it has been certified as immortality and interior light. For the majority of prepared minds, the figure will appear as the type of Truth unveiled, glorious in undying beauty, pouring on the waters of the soul some part and measure of her priceless possession. But she is in reality the Great Mother in the Kabalistic Sephira Binah, which is supernal Understanding, who communicates to the Sephiroth that are below in the measure that they can receive her influx.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "moon",
+      "arcana": "major",
+      "suit": null,
+      "number": 18,
+      "name": {
+        "ru": "Луна",
+        "en": "The Moon"
+      },
+      "keywords": {
+        "ru": [
+          "иллюзии",
+          "страхи",
+          "подсознание",
+          "неясность"
+        ],
+        "en": [
+          "illusion",
+          "fear",
+          "subconscious",
+          "uncertainty"
+        ]
+      },
+      "image": "moon.jpg",
+      "source": {
+        "waite_upright": "Hidden enemies, danger, calumny, darkness, terror, deception, occult forces, error.",
+        "waite_reversed": "Instability, inconstancy, silence, lesser degrees of deception and error.",
+        "waite_description": "The distinction between this card and some of the conventional types is that the moon is increasing on what is called the side of mercy, to the right of the observer. It has sixteen chief and sixteen secondary rays. The card represents life of the imagination apart from life of the spirit. The path between the towers is the issue into the unknown. The dog and wolf are the fears of the natural mind in the presence of that place of exit, when there is only reflected light to guide it. The last reference is a key to another form of symbolism. The intellectual light is a reflection and beyond it is the unknown mystery which it cannot shew forth. It illuminates our animal nature, types of which are represented below--the dog, the wolf and that which comes up out of the deeps, the nameless and hideous tendency which is lower than the savage beast. It strives to attain manifestation, symbolized by crawling from the abyss of water to the land, but as a rule it sinks back whence it came. The face of the mind directs a calm gaze upon the unrest below; the dew of thought falls; the message is: Peace, be still; and it may be that there shall come a calm upon the animal nature, while the abyss beneath shall cease from giving up a form.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "sun",
+      "arcana": "major",
+      "suit": null,
+      "number": 19,
+      "name": {
+        "ru": "Солнце",
+        "en": "The Sun"
+      },
+      "keywords": {
+        "ru": [
+          "радость",
+          "успех",
+          "ясность",
+          "жизненная сила"
+        ],
+        "en": [
+          "joy",
+          "success",
+          "clarity",
+          "vitality"
+        ]
+      },
+      "image": "sun.jpg",
+      "source": {
+        "waite_upright": "Material happiness, fortunate marriage, contentment.",
+        "waite_reversed": "The same in a lesser sense.",
+        "waite_description": "The naked child mounted on a white horse and displaying a red standard has been mentioned already as the better symbolism connected with this card. It is the destiny of the Supernatural East and the great and holy light which goes before the endless procession of humanity, coming out from the walled garden of the sensitive life and passing on the journey home. The card signifies, therefore, the transit from the manifest light of this world, represented by the glorious sun of earth, to the light of the world to come, which goes before aspiration and is typified by the heart of a child. But the last allusion is again the key to a different form or aspect of the symbolism. The sun is that of consciousness in the spirit - the direct as the antithesis of the reflected light. The characteristic type of humanity has become a little child therein--a child in the sense of simplicity and innocence in the sense of wisdom. In that simplicity, he bears the seal of Nature and of Art; in that innocence, he signifies the restored world. When the self-knowing spirit has dawned in the consciousness above the natural mind, that mind in its renewal leads forth the animal nature in a state of perfect conformity.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "judgement",
+      "arcana": "major",
+      "suit": null,
+      "number": 20,
+      "name": {
+        "ru": "Суд",
+        "en": "The Last Judgment"
+      },
+      "keywords": {
+        "ru": [
+          "пробуждение",
+          "переоценка",
+          "призвание",
+          "второй шанс"
+        ],
+        "en": [
+          "awakening",
+          "reckoning",
+          "calling",
+          "second chance"
+        ]
+      },
+      "image": "judgement.jpg",
+      "source": {
+        "waite_upright": "Change of position, renewal, outcome. Another account specifies total loss though lawsuit.",
+        "waite_reversed": "Weakness, pusillanimity, simplicity; also deliberation, decision, sentence.",
+        "waite_description": "I have said that this symbol is essentially invariable in all Tarot sets, or at least the variations do not alter its character. The great angel is here encompassed by clouds, but he blows his bannered trumpet, and the cross as usual is displayed on the banner. The dead are rising from their tombs--a woman on the right, a man on the left hand, and between them their child, whose back is turned. But in this card there are more than three who are restored, and it has been thought worth while to make this variation as illustrating the insufficiency of current explanations. It should be noted that all the figures are as one in the wonder, adoration and ecstacy expressed by their attitudes. It is the card which registers the accomplishment of the great work of transformation in answer to the summons of the Supernal--which summons is heard and answered from within. Herein is the intimation of a significance which cannot well be carried further in the present place. What is that within us which does sound a trumpet and all that is lower in our nature rises in response--almost in a moment, almost in the twinkling of an eye? Let the card continue to depict, for those who can see no further, the Last judgment and the resurrection in the natural body; but let those who have inward eyes look and discover therewith. They will understand that it has been called truly in the past a card of eternal life, and for this reason it may be compared with that which passes under the name of Temperance.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "world",
+      "arcana": "major",
+      "suit": null,
+      "number": 21,
+      "name": {
+        "ru": "Мир",
+        "en": "The World"
+      },
+      "keywords": {
+        "ru": [
+          "завершение цикла",
+          "целостность",
+          "достижение",
+          "путешествие"
+        ],
+        "en": [
+          "completion",
+          "wholeness",
+          "achievement",
+          "travel"
+        ]
+      },
+      "image": "world.jpg",
+      "source": {
+        "waite_upright": "Assured success, recompense, voyage, route, emigration, flight, change of place.",
+        "waite_reversed": "Inertia, fixity, stagnation, permanence.",
+        "waite_description": "As this final message of the Major Trumps is unchanged--and indeed unchangeable--in respect of its design, it has been partly described already regarding its deeper sense. It represents also the perfection and end of the Cosmos, the secret which is within it, the rapture of the universe when it understands itself in God. It is further the state of the soul in the consciousness of Divine Vision, reflected from the self-knowing spirit. But these meanings are without prejudice to that which I have said concerning it on the material side. It has more than one message on the macrocosmic side and is, for example, the state of the restored world when the law of manifestation shall have been carried to the highest degree of natural perfection. But it is perhaps more especially a story of the past, referring to that day when all was declared to be good, when the morning stars sang together and all the Sons of God shouted for joy. One of the worst explanations concerning it is that the figure symbolizes the Magus when he has reached the highest degree of initiation; another account says that it represents the absolute, which is ridiculous. The figure has been said to stand for Truth, which is, however, more properly allocated to the seventeenth card. Lastly, it has been called the Crown of the Magi.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w01",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 1,
+      "name": {
+        "ru": "Туз Жезлов",
+        "en": "Ace of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w01.jpg",
+      "source": {
+        "waite_upright": "Creation, invention, enterprise, the powers which result in these; principle, beginning, source; birth, family, origin, and in a sense the virility which is behind them; the starting point of enterprises; according to another account, money, fortune, inheritance.",
+        "waite_reversed": "Fall, decadence, ruin, perdition, to perish also a certain clouded joy.",
+        "waite_description": "A hand issuing from a cloud grasps a stout wand or club.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w02",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 2,
+      "name": {
+        "ru": "Двойка Жезлов",
+        "en": "Two of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w02.jpg",
+      "source": {
+        "waite_upright": "Between the alternative readings there is no marriage possible; on the one hand, riches, fortune, magnificence; on the other, physical suffering, disease, chagrin, sadness, mortification. The design gives one suggestion; here is a lord overlooking his dominion and alternately contemplating a globe; it looks like the malady, the mortification, the sadness of Alexander amidst the grandeur of this world's wealth.",
+        "waite_reversed": "Surprise, wonder, enchantment, emotion, trouble, fear.",
+        "waite_description": "A tall man looks from a battlemented roof over sea and shore; he holds a globe in his right hand, while a staff in his left rests on the battlement; another is fixed in a ring. The Rose and Cross and Lily should be noticed on the left side.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w03",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 3,
+      "name": {
+        "ru": "Тройка Жезлов",
+        "en": "Three of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w03.jpg",
+      "source": {
+        "waite_upright": "He symbolizes established strength, enterprise, effort, trade, commerce, discovery; those are his ships, bearing his merchandise, which are sailing over the sea. The card also signifies able co-operation in business, as if the successful merchant prince were looking from his side towards yours with a view to help you.",
+        "waite_reversed": "The end of troubles, suspension or cessation of adversity, toil and disappointment.",
+        "waite_description": "A calm, stately personage, with his back turned, looking from a cliff's edge at ships passing over the sea. Three staves are planted in the ground, and he leans slightly on one of them.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w04",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 4,
+      "name": {
+        "ru": "Четвёрка Жезлов",
+        "en": "Four of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w04.jpg",
+      "source": {
+        "waite_upright": "They are for once almost on the surface--country life, haven of refuge, a species of domestic harvest-home, repose, concord, harmony, prosperity, peace, and the perfected work of these.",
+        "waite_reversed": "The meaning remains unaltered; it is prosperity, increase, felicity, beauty, embellishment.",
+        "waite_description": "From the four great staves planted in the foreground there is a great garland suspended; two female figures uplift nosegays; at their side is a bridge over a moat, leading to an old manorial house.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w05",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 5,
+      "name": {
+        "ru": "Пятёрка Жезлов",
+        "en": "Five of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w05.jpg",
+      "source": {
+        "waite_upright": "Imitation, as, for example, sham fight, but also the strenuous competition and struggle of the search after riches and fortune. In this sense it connects with the battle of life. Hence some attributions say that it is a card of gold, gain, opulence.",
+        "waite_reversed": "Litigation, disputes, trickery, contradiction.",
+        "waite_description": "A posse of youths, who are brandishing staves, as if in sport or strife. It is mimic warfare, and hereto correspond the",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w06",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 6,
+      "name": {
+        "ru": "Шестёрка Жезлов",
+        "en": "Six of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w06.jpg",
+      "source": {
+        "waite_upright": "The card has been so designed that it can cover several significations; on the surface, it is a victor triumphing, but it is also great news, such as might be carried in state by the King's courier; it is expectation crowned with its own desire, the crown of hope, and so forth.",
+        "waite_reversed": "Apprehension, fear, as of a victorious enemy at the gate; treachery, disloyalty, as of gates being opened to the enemy; also indefinite delay.",
+        "waite_description": "A laurelled horseman bears one staff adorned with a laurel crown; footmen with staves are at his side.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w07",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 7,
+      "name": {
+        "ru": "Семёрка Жезлов",
+        "en": "Seven of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w07.jpg",
+      "source": {
+        "waite_upright": "It is a card of valour, for, on the surface, six are attacking one, who has, however, the vantage position. On the intellectual plane, it signifies discussion, wordy strife; in business--negotiations, war of trade, barter, competition. It is further a card of success, for the combatant is on the top and his enemies may be unable to reach him.",
+        "waite_reversed": "Perplexity, embarrassments, anxiety. It is also a caution against indecision.",
+        "waite_description": "A young man on a craggy eminence brandishing a staff; six other staves are raised towards him from below.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w08",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 8,
+      "name": {
+        "ru": "Восьмёрка Жезлов",
+        "en": "Eight of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w08.jpg",
+      "source": {
+        "waite_upright": "Activity in undertakings, the path of such activity, swiftness, as that of an express messenger; great haste, great hope, speed towards an end which promises assured felicity; generally, that which is on the move; also the arrows of love.",
+        "waite_reversed": "Arrows of jealousy, internal dispute, stingings of conscience, quarrels; and domestic disputes for persons who are married.",
+        "waite_description": "The card represents motion through the immovable-a flight of wands through an open country; but they draw to the term of their course. That which they signify is at hand; it may be even on the threshold.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w09",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 9,
+      "name": {
+        "ru": "Девятка Жезлов",
+        "en": "Nine of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w09.jpg",
+      "source": {
+        "waite_upright": "The card signifies strength in opposition. If attacked, the person will meet an onslaught boldly; and his build shews, that he may prove a formidable antagonist. With this main significance there are all its possible adjuncts--delay, suspension, adjournment.",
+        "waite_reversed": "Obstacles, adversity, calamity.",
+        "waite_description": "The figure leans upon his staff and has an expectant look, as if awaiting an enemy. Behind are eight other staves--erect, in orderly disposition, like a palisade.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w10",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 10,
+      "name": {
+        "ru": "Десятка Жезлов",
+        "en": "Ten of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w10.jpg",
+      "source": {
+        "waite_upright": "A card of many significances, and some of the readings cannot be harmonized. I set aside that which connects it with honour and good faith. The chief meaning is oppression simply, but it is also fortune, gain, any kind of success, and then it is the oppression of these things. It is also a card of false-seeming, disguise, perfidy. The place which the figure is approaching may suffer from the rods that he carries. Success is stultified if the Nine of Swords follows, and if it is a question of a lawsuit, there will be certain loss.",
+        "waite_reversed": "Contrarieties, difficulties, intrigues, and their analogies.",
+        "waite_description": "A man oppressed by the weight of the ten staves which he is carrying.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w11",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 11,
+      "name": {
+        "ru": "Паж Жезлов",
+        "en": "Page of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w11.jpg",
+      "source": {
+        "waite_upright": "Dark young man, faithful, a lover, an envoy, a postman. Beside a man, he will bear favourable testimony concerning him. A dangerous rival, if followed by the Page of Cups. Has the chief qualities of his suit. He may signify family intelligence.",
+        "waite_reversed": "Anecdotes, announcements, evil news. Also indecision and the instability which accompanies it.",
+        "waite_description": "In a scene similar to the former, a young man stands in the act of proclamation. He is unknown but faithful, and his tidings are strange.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w12",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 12,
+      "name": {
+        "ru": "Рыцарь Жезлов",
+        "en": "Knight of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w12.jpg",
+      "source": {
+        "waite_upright": "Departure, absence, flight, emigration. A dark young man, friendly. Change of residence.",
+        "waite_reversed": "Rupture, division, interruption, discord.",
+        "waite_description": "He is shewn as if upon a journey, armed with a short wand, and although mailed is not on a warlike errand. He is passing mounds or pyramids. The motion of the horse is a key to the character of its rider, and suggests the precipitate mood, or things connected therewith.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w13",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 13,
+      "name": {
+        "ru": "Королева Жезлов",
+        "en": "Queen of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w13.jpg",
+      "source": {
+        "waite_upright": "A dark woman, countrywoman, friendly, chaste, loving, honourable. If the card beside her signifies a man, she is well disposed towards him; if a woman, she is interested in the Querent. Also, love of money, or a certain success in business.",
+        "waite_reversed": "Good, economical, obliging, serviceable. Signifies also--but in certain positions and in the neighbourhood of other cards tending in such directions--opposition, jealousy, even deceit and infidelity.",
+        "waite_description": "The Wands throughout this suit are always in leaf, as it is a suit of life and animation. Emotionally and otherwise, the Queen's personality corresponds to that of the King, but is more magnetic.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "w14",
+      "arcana": "minor",
+      "suit": "wands",
+      "number": 14,
+      "name": {
+        "ru": "Король Жезлов",
+        "en": "King of Wands"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "w14.jpg",
+      "source": {
+        "waite_upright": "Dark man, friendly, countryman, generally married, honest and conscientious. The card always signifies honesty, and may mean news concerning an unexpected heritage to fall in before very long.",
+        "waite_reversed": "Good, but severe; austere, yet tolerant.",
+        "waite_description": "The physical and emotional nature to which this card is attributed is dark, ardent, lithe, animated, impassioned, noble. The King uplifts a flowering wand, and wears, like his three correspondences in the remaining suits, what is called a cap of maintenance beneath his crown. He connects with the symbol of the lion, which is emblazoned on the back of his throne.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c01",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 1,
+      "name": {
+        "ru": "Туз Кубков",
+        "en": "Ace of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c01.jpg",
+      "source": {
+        "waite_upright": "House of the true heart, joy, content, abode, nourishment, abundance, fertility; Holy Table, felicity hereof.",
+        "waite_reversed": "House of the false heart, mutation, instability, revolution.",
+        "waite_description": "The waters are beneath, and thereon are water-lilies; the hand issues from the cloud, holding in its palm the cup, from which four streams are pouring; a dove, bearing in its bill a cross-marked Host, descends to place the Wafer in the Cup; the dew of water is falling on all sides. It is an intimation of that which may lie behind the Lesser Arcana.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c02",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 2,
+      "name": {
+        "ru": "Двойка Кубков",
+        "en": "Two of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c02.jpg",
+      "source": {
+        "waite_upright": "Love, passion, friendship, affinity, union, concord, sympathy, the interrelation of the sexes, and--as a suggestion apart from all offices of divination--that desire which is not in Nature, but by which Nature is sanctified.",
+        "waite_reversed": "Lust, cupidity, jealousy, wish, desire, but the card may also give, says W., \"that desire which is not in nature, but by which nature is sanctified.\"",
+        "waite_description": "A youth and maiden are pledging one another, and above their cups rises the Caduceus of Hermes, between the great wings of which there appears a lion's head. It is a variant of a sign which is found in a few old examples of this card. Some curious emblematical meanings are attached to it, but they do not concern us in this place.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c03",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 3,
+      "name": {
+        "ru": "Тройка Кубков",
+        "en": "Three of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c03.jpg",
+      "source": {
+        "waite_upright": "The conclusion of any matter in plenty, perfection and merriment; happy issue, victory, fulfilment, solace, healing,",
+        "waite_reversed": "Expedition, dispatch, achievement, end. It signifies also the side of excess in physical enjoyment, and the pleasures of the senses.",
+        "waite_description": "Maidens in a garden-ground with cups uplifted, as if pledging one another.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c04",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 4,
+      "name": {
+        "ru": "Четвёрка Кубков",
+        "en": "Four of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c04.jpg",
+      "source": {
+        "waite_upright": "Weariness, disgust, aversion, imaginary vexations, as if the wine of this world had caused satiety only; another wine, as if a fairy gift, is now offered the wastrel, but he sees no consolation therein. This is also a card of blended pleasure.",
+        "waite_reversed": "Novelty, presage, new instruction, new relations.",
+        "waite_description": "A young man is seated under a tree and contemplates three cups set on the grass before him; an arm issuing from a cloud offers him another cup. His expression notwithstanding is one of discontent with his environment.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c05",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 5,
+      "name": {
+        "ru": "Пятёрка Кубков",
+        "en": "Five of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c05.jpg",
+      "source": {
+        "waite_upright": "A dark, cloaked figure, looking sideways at three prone cups two others stand upright behind him; a bridge is in the background, leading to a small keep or holding. Divanatory Meanings: It is a card of loss, but something remains over; three have been taken, but two are left; it is a card of inheritance, patrimony, transmission, but not corresponding to expectations; with some interpreters it is a card of marriage, but not without bitterness or frustration.",
+        "waite_reversed": "News, alliances, affinity, consanguinity, ancestry, return, false projects.",
+        "waite_description": "A dark, cloaked figure, looking sideways at three prone cups two others stand upright behind him; a bridge is in the background, leading to a small keep or holding. Divanatory Meanings: It is a card of loss, but something remains over; three have been taken, but two are left; it is a card of inheritance, patrimony, transmission, but not corresponding to expectations; with some interpreters it is a card of marriage, but not without bitterness or frustration. Reversed: News, alliances, affinity, consanguinity, ancestry, return, false projects",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c06",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 6,
+      "name": {
+        "ru": "Шестёрка Кубков",
+        "en": "Six of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c06.jpg",
+      "source": {
+        "waite_upright": "A card of the past and of memories, looking back, as--for example--on childhood; happiness, enjoyment, but coming rather from the past; things that have vanished. Another reading reverses this, giving new relations, new knowledge, new environment, and then the children are disporting in an unfamiliar precinct.",
+        "waite_reversed": "The future, renewal, that which will come to pass presently.",
+        "waite_description": "Children in an old garden, their cups filled with flowers.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c07",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 7,
+      "name": {
+        "ru": "Семёрка Кубков",
+        "en": "Seven of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c07.jpg",
+      "source": {
+        "waite_upright": "Fairy favours, images of reflection, sentiment, imagination, things seen in the glass of contemplation; some attainment in these degrees, but nothing permanent or substantial is suggested.",
+        "waite_reversed": "Desire, will, determination, project.",
+        "waite_description": "Strange chalices of vision, but the images are more especially those of the fantastic spirit.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c08",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 8,
+      "name": {
+        "ru": "Восьмёрка Кубков",
+        "en": "Eight of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c08.jpg",
+      "source": {
+        "waite_upright": "The card speaks for itself on the surface, but other readings are entirely antithetical--giving joy, mildness, timidity, honour, modesty. In practice, it is usually found that the card shews the decline of a matter, or that a matter which has been thought to be important is really of slight consequence--either for good or evil.",
+        "waite_reversed": "Great joy, happiness, feasting.",
+        "waite_description": "A man of dejected aspect is deserting the cups of his felicity, enterprise, undertaking or previous concern.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c09",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 9,
+      "name": {
+        "ru": "Девятка Кубков",
+        "en": "Nine of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c09.jpg",
+      "source": {
+        "waite_upright": "Concord, contentment, physical bien-être; also victory, success, advantage; satisfaction for the Querent or person for whom the consultation is made.",
+        "waite_reversed": "Truth, loyalty, liberty; but the readings vary and include mistakes, imperfections, etc.",
+        "waite_description": "A goodly personage has feasted to his heart's content, and abundant refreshment of wine is on the arched counter behind him, seeming to indicate that the future is also assured. The picture offers the material side only, but there are other aspects.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c10",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 10,
+      "name": {
+        "ru": "Десятка Кубков",
+        "en": "Ten of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c10.jpg",
+      "source": {
+        "waite_upright": "Contentment, repose of the entire heart; the perfection of that state; also perfection of human love and friendship; if with several picture-cards, a person who is taking charge of the Querent's interests; also the town, village or country inhabited by the Querent.",
+        "waite_reversed": "Repose of the false heart, indignation, violence.",
+        "waite_description": "Appearance of Cups in a rainbow; it is contemplated in wonder and ecstacy by a man and woman below, evidently husband and wife. His right arm is about her; his left is raised upward; she raises her right arm. The two children dancing near them have not observed the prodigy but are happy after their own manner. There is a home-scene beyond.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c11",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 11,
+      "name": {
+        "ru": "Паж Кубков",
+        "en": "Page of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c11.jpg",
+      "source": {
+        "waite_upright": "Fair young man, one impelled to render service and with whom the Querent will be connected; a studious youth; news, message; application, reflection, meditation; also these things directed to business.",
+        "waite_reversed": "Taste, inclination, attachment, seduction, deception, artifice.",
+        "waite_description": "A fair, pleasing, somewhat effeminate page, of studious and intent aspect, contemplates a fish rising from a cup to look at him. It is the pictures of the mind taking form.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c12",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 12,
+      "name": {
+        "ru": "Рыцарь Кубков",
+        "en": "Knight of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c12.jpg",
+      "source": {
+        "waite_upright": "Arrival, approach--sometimes that of a messenger; advances, proposition, demeanour, invitation, incitement.",
+        "waite_reversed": "Trickery, artifice, subtlety, swindling, duplicity, fraud.",
+        "waite_description": "Graceful, but not warlike; riding quietly, wearing a winged helmet, referring to those higher graces of the imagination which sometimes characterize this card. He too is a dreamer, but the images of the side of sense haunt him in his vision.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c13",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 13,
+      "name": {
+        "ru": "Королева Кубков",
+        "en": "Queen of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c13.jpg",
+      "source": {
+        "waite_upright": "Good, fair woman; honest, devoted woman, who will do service to the Querent; loving intelligence, and hence the gift of vision; success, happiness, pleasure; also wisdom, virtue; a perfect spouse and a good mother.",
+        "waite_reversed": "The accounts vary; good woman; otherwise, distinguished woman but one not to be trusted; perverse woman; vice, dishonour, depravity.",
+        "waite_description": "Beautiful, fair, dreamy--as one who sees visions in a cup. This is, however, only one of her aspects; she sees, but she also acts, and her activity feeds her dream.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "c14",
+      "arcana": "minor",
+      "suit": "cups",
+      "number": 14,
+      "name": {
+        "ru": "Король Кубков",
+        "en": "King of Cups"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "c14.jpg",
+      "source": {
+        "waite_upright": "Fair man, man of business, law, or divinity; responsible, disposed to oblige the Querent; also equity, art and science, including those who profess science, law and art; creative intelligence.",
+        "waite_reversed": "Dishonest, double-dealing man; roguery, exaction, injustice, vice, scandal, pillage, considerable loss.",
+        "waite_description": "He holds a short sceptre in his left hand and a great cup in his right; his throne is set upon the sea; on one side a ship is riding and on the other a dolphin is leaping. The implicit is that the Sign of the Cup naturally refers to water, which appears in all the court cards.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s01",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 1,
+      "name": {
+        "ru": "Туз Мечей",
+        "en": "Ace of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s01.jpg",
+      "source": {
+        "waite_upright": "Triumph, the excessive degree in everything, conquest, triumph of force. It is a card of great force, in love as well as in hatred. The crown may carry a much higher significance than comes usually within the sphere of fortune-telling.",
+        "waite_reversed": "The same, but the results are disastrous; another account says--conception, childbirth, augmentation, multiplicity.",
+        "waite_description": "A hand issues from a cloud, grasping as word, the point of which is encircled by a crown.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s02",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 2,
+      "name": {
+        "ru": "Двойка Мечей",
+        "en": "Two of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s02.jpg",
+      "source": {
+        "waite_upright": "Conformity and the equipoise which it suggests, courage, friendship, concord in a state of arms; another reading gives tenderness, affection, intimacy. The suggestion of harmony and other favourable readings must be considered in a qualified manner, as Swords generally are not symbolical of beneficent forces in human affairs.",
+        "waite_reversed": "Imposture, falsehood, duplicity, disloyalty.",
+        "waite_description": "A hoodwinked female figure balances two swords upon her shoulders.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s03",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 3,
+      "name": {
+        "ru": "Тройка Мечей",
+        "en": "Three of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s03.jpg",
+      "source": {
+        "waite_upright": "Removal, absence, delay, division, rupture, dispersion, and all that the design signifies naturally, being too simple and obvious to call for specific enumeration.",
+        "waite_reversed": "Mental alienation, error, loss, distraction, disorder, confusion.",
+        "waite_description": "Three swords piercing a heart; cloud and rain behind.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s04",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 4,
+      "name": {
+        "ru": "Четвёрка Мечей",
+        "en": "Four of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s04.jpg",
+      "source": {
+        "waite_upright": "Vigilance, retreat, solitude, hermit's repose, exile, tomb and coffin. It is these last that have suggested the design.",
+        "waite_reversed": "Wise administration, circumspection, economy, avarice, precaution, testament.",
+        "waite_description": "The effigy of a knight in the attitude of prayer, at full length upon his tomb.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s05",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 5,
+      "name": {
+        "ru": "Пятёрка Мечей",
+        "en": "Five of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s05.jpg",
+      "source": {
+        "waite_upright": "Degradation, destruction, revocation, infamy, dishonour, loss, with the variants and analogues of these.",
+        "waite_reversed": "The same; burial and obsequies.",
+        "waite_description": "A disdainful man looks after two retreating and dejected figures. Their swords lie upon the ground. He carries two others on his left shoulder, and a third sword is in his right hand, point to earth. He is the master in possession of the field.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s06",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 6,
+      "name": {
+        "ru": "Шестёрка Мечей",
+        "en": "Six of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s06.jpg",
+      "source": {
+        "waite_upright": "Journey by water, route, way, envoy, commissionary, expedient.",
+        "waite_reversed": "Declaration, confession, publicity; one account says that it is a proposal of love.",
+        "waite_description": "A ferryman carrying passengers in his punt to the further shore. The course is smooth, and seeing that the freight is light, it may be noted that the work is not beyond his strength.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s07",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 7,
+      "name": {
+        "ru": "Семёрка Мечей",
+        "en": "Seven of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s07.jpg",
+      "source": {
+        "waite_upright": "Design, attempt, wish, hope, confidence; also quarrelling, a plan that may fail, annoyance. The design is uncertain in its import, because the significations are widely at variance with each other.",
+        "waite_reversed": "Good advice, counsel, instruction, slander, babbling.",
+        "waite_description": "A man in the act of carrying away five swords rapidly; the two others of the card remain stuck in the ground. A camp is close at hand.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s08",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 8,
+      "name": {
+        "ru": "Восьмёрка Мечей",
+        "en": "Eight of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s08.jpg",
+      "source": {
+        "waite_upright": "Bad news, violent chagrin, crisis, censure, power in trammels, conflict, calumny; also sickness.",
+        "waite_reversed": "Disquiet, difficulty, opposition, accident, treachery; what is unforeseen; fatality.",
+        "waite_description": "A woman, bound and hoodwinked, with the swords of the card about her. Yet it is rather a card of temporary durance than of irretrievable bondage.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s09",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 9,
+      "name": {
+        "ru": "Девятка Мечей",
+        "en": "Nine of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s09.jpg",
+      "source": {
+        "waite_upright": "Death, failure, miscarriage, delay, deception, disappointment, despair.",
+        "waite_reversed": "Imprisonment, suspicion, doubt, reasonable fear, shame.",
+        "waite_description": "One seated on her couch in lamentation, with the swords over her. She is as one who knows no sorrow which is like unto hers. It is a card of utter desolation.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s10",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 10,
+      "name": {
+        "ru": "Десятка Мечей",
+        "en": "Ten of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s10.jpg",
+      "source": {
+        "waite_upright": "Whatsoever is intimated by the design; also pain, affliction, tears, sadness, desolation. It is not especially a card of violent death.",
+        "waite_reversed": "Advantage, profit, success, favour, but none of these are permanent; also power and authority.",
+        "waite_description": "A prostrate figure, pierced by all the swords belonging to the card.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s11",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 11,
+      "name": {
+        "ru": "Паж Мечей",
+        "en": "Page of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s11.jpg",
+      "source": {
+        "waite_upright": "Authority, overseeing, secret service, vigilance, spying, examination, and the qualities thereto belonging.",
+        "waite_reversed": "More evil side of these qualities; what is unforeseen, unprepared state; sickness is also intimated.",
+        "waite_description": "A lithe, active figure holds a sword upright in both hands, while in the act of swift walking. He is passing over rugged land, and about his way the clouds are collocated wildly. He is alert and lithe, looking this way and that, as if an expected enemy might appear at any moment.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s12",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 12,
+      "name": {
+        "ru": "Рыцарь Мечей",
+        "en": "Knight of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s12.jpg",
+      "source": {
+        "waite_upright": "Skill, bravery, capacity, defence, address, enmity, wrath, war, destruction, opposition, resistance, ruin. There is therefore a sense in which the card signifies death, but it carries this meaning only in its proximity to other cards of fatality.",
+        "waite_reversed": "Imprudence, incapacity, extravagance.",
+        "waite_description": "He is riding in full course, as if scattering his enemies. In the design he is really a prototypical hero of romantic chivalry. He might almost be Galahad, whose sword is swift and sure because he is clean of heart.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s13",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 13,
+      "name": {
+        "ru": "Королева Мечей",
+        "en": "Queen of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s13.jpg",
+      "source": {
+        "waite_upright": "Widowhood, female sadness and embarrassment, absence, sterility, mourning, privation, separation.",
+        "waite_reversed": "Malice, bigotry, artifice, prudery, bale, deceit.",
+        "waite_description": "Her right hand raises the weapon vertically and the hilt rests on an arm of her royal chair the left hand is extended, the arm raised her countenance is severe but chastened; it suggests familiarity with sorrow. It does not represent mercy, and, her sword notwithstanding, she is scarcely a symbol of power.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "s14",
+      "arcana": "minor",
+      "suit": "swords",
+      "number": 14,
+      "name": {
+        "ru": "Король Мечей",
+        "en": "King of Swords"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "s14.jpg",
+      "source": {
+        "waite_upright": "Whatsoever arises out of the idea of judgment and all its connexions-power, command, authority, militant intelligence, law, offices of the crown, and so forth.",
+        "waite_reversed": "Cruelty, perversity, barbarity, perfidy, evil intention.",
+        "waite_description": "He sits in judgment, holding the unsheathed sign of his suit. He recalls, of course, the conventional Symbol of justice in the Trumps Major, and he may represent this virtue, but he is rather the power of life and death, in virtue of his office.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p01",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 1,
+      "name": {
+        "ru": "Туз Пентаклей",
+        "en": "Ace of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p01.jpg",
+      "source": {
+        "waite_upright": "Perfect contentment, felicity, ecstasy; also speedy intelligence; gold.",
+        "waite_reversed": "The evil side of wealth, bad intelligence; also great riches. In any case it shews prosperity, comfortable material conditions, but whether these are of advantage to the possessor will depend on whether the card is reversed or not.",
+        "waite_description": "A hand--issuing, as usual, from a cloud--holds up a pentacle.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p02",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 2,
+      "name": {
+        "ru": "Двойка Пентаклей",
+        "en": "Two of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p02.jpg",
+      "source": {
+        "waite_upright": "On the one hand it is represented as a card of gaiety, recreation and its connexions, which is the subject of the design; but it is read also as news and messages in writing, as obstacles, agitation, trouble, embroilment.",
+        "waite_reversed": "Enforced gaiety, simulated enjoyment, literal sense, handwriting, composition, letters of exchange.",
+        "waite_description": "A young man, in the act of dancing, has a pentacle in either hand, and they are joined by that endless cord which is like the number 8 reversed.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p03",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 3,
+      "name": {
+        "ru": "Тройка Пентаклей",
+        "en": "Three of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p03.jpg",
+      "source": {
+        "waite_upright": "Métier, trade, skilled labour; usually, however, regarded as a card of nobility, aristocracy, renown, glory.",
+        "waite_reversed": "Mediocrity, in work and otherwise, puerility, pettiness, weakness.",
+        "waite_description": "A sculptor at his work in a monastery. Compare the design which illustrates the Eight of Pentacles. The apprentice or amateur therein has received his reward and is now at work in earnest.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p04",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 4,
+      "name": {
+        "ru": "Четвёрка Пентаклей",
+        "en": "Four of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p04.jpg",
+      "source": {
+        "waite_upright": "The surety of possessions, cleaving to that which one has, gift, legacy, inheritance.",
+        "waite_reversed": "Suspense, delay, opposition.",
+        "waite_description": "A crowned figure, having a pentacle over his crown, clasps another with hands and arms; two pentacles are under his feet. He holds to that which he has.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p05",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 5,
+      "name": {
+        "ru": "Пятёрка Пентаклей",
+        "en": "Five of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p05.jpg",
+      "source": {
+        "waite_upright": "The card foretells material trouble above all, whether in the form illustrated--that is, destitution--or otherwise. For some cartomancists, it is a card of love and lovers-wife, husband, friend, mistress; also concordance, affinities. These alternatives cannot be harmonized.",
+        "waite_reversed": "Disorder, chaos, ruin, discord, profligacy.",
+        "waite_description": "Two mendicants in a snow-storm pass a lighted casement.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p06",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 6,
+      "name": {
+        "ru": "Шестёрка Пентаклей",
+        "en": "Six of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p06.jpg",
+      "source": {
+        "waite_upright": "Presents, gifts, gratification another account says attention, vigilance now is the accepted time, present prosperity, etc.",
+        "waite_reversed": "Desire, cupidity, envy, jealousy, illusion.",
+        "waite_description": "A person in the guise of a merchant weighs money in a pair of scales and distributes it to the needy and distressed. It is a testimony to his own success in life, as well as to his goodness of heart.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p07",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 7,
+      "name": {
+        "ru": "Семёрка Пентаклей",
+        "en": "Seven of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p07.jpg",
+      "source": {
+        "waite_upright": "These are exceedingly contradictory; in the main, it is a card of money, business, barter; but one reading gives altercation, quarrels--and another innocence, ingenuity, purgation.",
+        "waite_reversed": "Cause for anxiety regarding money which it may be proposed to lend.",
+        "waite_description": "A young man, leaning on his staff, looks intently at seven pentacles attached to a clump of greenery on his right; one would say that these were his treasures and that his heart was there.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p08",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 8,
+      "name": {
+        "ru": "Восьмёрка Пентаклей",
+        "en": "Eight of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p08.jpg",
+      "source": {
+        "waite_upright": "Work, employment, commission, craftsmanship, skill in craft and business, perhaps in the preparatory stage.",
+        "waite_reversed": "Voided ambition, vanity, cupidity, exaction, usury. It may also signify the possession of skill, in the sense of the ingenious mind turned to cunning and intrigue.",
+        "waite_description": "An artist in stone at his work, which he exhibits in the form of trophies.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p09",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 9,
+      "name": {
+        "ru": "Девятка Пентаклей",
+        "en": "Nine of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p09.jpg",
+      "source": {
+        "waite_upright": "Prudence, safety, success, accomplishment, certitude, discernment.",
+        "waite_reversed": "Roguery, deception, voided project, bad faith.",
+        "waite_description": "A woman, with a bird upon her wrist, stands amidst a great abundance of grapevines in the garden of a manorial house. It is a wide domain, suggesting plenty in all things. Possibly it is her own possession and testifies to material well-being.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p10",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 10,
+      "name": {
+        "ru": "Десятка Пентаклей",
+        "en": "Ten of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p10.jpg",
+      "source": {
+        "waite_upright": "Gain, riches; family matters, archives, extraction, the abode of a family.",
+        "waite_reversed": "Chance, fatality, loss, robbery, games of hazard; sometimes gift, dowry, pension.",
+        "waite_description": "A man and woman beneath an archway which gives entrance to a house and domain. They are accompanied by a child, who looks curiously at two dogs accosting an ancient personage seated in the foreground. The child's hand is on one of them.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p11",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 11,
+      "name": {
+        "ru": "Паж Пентаклей",
+        "en": "Page of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p11.jpg",
+      "source": {
+        "waite_upright": "Application, study, scholarship, reflection another reading says news, messages and the bringer thereof; also rule, management.",
+        "waite_reversed": "Prodigality, dissipation, liberality, luxury; unfavourable news.",
+        "waite_description": "A youthful figure, looking intently at the pentacle which hovers over his raised hands. He moves slowly, insensible of that which is about him.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p12",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 12,
+      "name": {
+        "ru": "Рыцарь Пентаклей",
+        "en": "Knight of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p12.jpg",
+      "source": {
+        "waite_upright": "Utility, serviceableness, interest, responsibility, rectitude-all on the normal and external plane.",
+        "waite_reversed": "inertia, idleness, repose of that kind, stagnation; also placidity, discouragement, carelessness.",
+        "waite_description": "He rides a slow, enduring, heavy horse, to which his own aspect corresponds. He exhibits his symbol, but does not look therein.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p13",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 13,
+      "name": {
+        "ru": "Королева Пентаклей",
+        "en": "Queen of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p13.jpg",
+      "source": {
+        "waite_upright": "Opulence, generosity, magnificence, security, liberty.",
+        "waite_reversed": "Evil, suspicion, suspense, fear, mistrust.",
+        "waite_description": "The face suggests that of a dark woman, whose qualities might be summed up in the idea of greatness of soul; she has also the serious cast of intelligence; she contemplates her symbol and may see worlds therein.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    },
+    {
+      "id": "p14",
+      "arcana": "minor",
+      "suit": "pentacles",
+      "number": 14,
+      "name": {
+        "ru": "Король Пентаклей",
+        "en": "King of Pentacles"
+      },
+      "keywords": {
+        "ru": [],
+        "en": []
+      },
+      "image": "p14.jpg",
+      "source": {
+        "waite_upright": "Valour, realizing intelligence, business and normal intellectual aptitude, sometimes mathematical gifts and attainments of this kind; success in these paths.",
+        "waite_reversed": "Vice, weakness, ugliness, perversity, corruption, peril.",
+        "waite_description": "The figure calls for no special description the face is rather dark, suggesting also courage, but somewhat lethargic in tendency. The bull's head should be noted as a recurrent symbol on the throne. The sign of this suit is represented throughout as engraved or blazoned with the pentagram, typifying the correspondence of the four elements in human nature and that by which they may be governed. In many old Tarot packs this suit stood for current coin, money, deniers. I have not invented the substitution of pentacles and I have no special cause to sustain in respect of the alternative. But the consensus of divinatory meanings is on the side of some change, because the cards do not happen to deal especially with questions of money.",
+        "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)"
+      },
+      "content": {
+        "general": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "reversed": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "love": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "career": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "finances": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "health": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "day_card": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        },
+        "symbolism": {
+          "ru": "",
+          "en": "",
+          "status": "todo"
+        }
+      }
+    }
+  ]
+}

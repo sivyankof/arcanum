@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "spreads": [
+    {
+      "id": "card-of-day",
+      "free": true,
+      "cards": 1,
+      "name": { "ru": "Карта дня", "en": "Card of the Day" },
+      "description": {
+        "ru": "Одна карта — энергия и урок сегодняшнего дня. Лучший способ учиться: одна карта в день.",
+        "en": "One card revealing the energy and lesson of your day. The best way to learn: one card a day."
+      },
+      "positions": [
+        { "ru": "Энергия дня", "en": "Energy of the day" }
+      ]
+    },
+    {
+      "id": "three-card",
+      "free": true,
+      "cards": 3,
+      "name": { "ru": "Три карты", "en": "Three Cards" },
+      "description": {
+        "ru": "Классика для любого вопроса: как ситуация развивалась, где она сейчас и куда движется.",
+        "en": "A classic for any question: how the situation arose, where it stands, and where it is heading."
+      },
+      "positions": [
+        { "ru": "Прошлое", "en": "Past" },
+        { "ru": "Настоящее", "en": "Present" },
+        { "ru": "Будущее", "en": "Future" }
+      ]
+    },
+    {
+      "id": "situation-action-outcome",
+      "free": false,
+      "cards": 3,
+      "name": { "ru": "Ситуация — Действие — Итог", "en": "Situation — Action — Outcome" },
+      "description": {
+        "ru": "Практичный расклад, когда нужно решить, как поступить.",
+        "en": "A practical spread for deciding what to do next."
+      },
+      "positions": [
+        { "ru": "Суть ситуации", "en": "The situation" },
+        { "ru": "Что делать", "en": "Recommended action" },
+        { "ru": "К чему приведёт", "en": "Likely outcome" }
+      ]
+    },
+    {
+      "id": "relationship",
+      "free": false,
+      "cards": 5,
+      "name": { "ru": "На отношения", "en": "Relationship Spread" },
+      "description": {
+        "ru": "Взгляд на отношения с двух сторон: чувства, ожидания и общее направление.",
+        "en": "A look at a relationship from both sides: feelings, expectations, and shared direction."
+      },
+      "positions": [
+        { "ru": "Вы в этих отношениях", "en": "You in the relationship" },
+        { "ru": "Партнёр в этих отношениях", "en": "Your partner in the relationship" },
+        { "ru": "Что вас соединяет", "en": "What unites you" },
+        { "ru": "Что мешает", "en": "What challenges you" },
+        { "ru": "Куда движутся отношения", "en": "Where it is heading" }
+      ]
+    },
+    {
+      "id": "choice",
+      "free": false,
+      "cards": 5,
+      "name": { "ru": "Выбор из двух", "en": "Crossroads (Two Paths)" },
+      "description": {
+        "ru": "Когда стоите перед выбором между двумя вариантами.",
+        "en": "For when you stand before two options."
+      },
+      "positions": [
+        { "ru": "Вы и суть выбора", "en": "You and the choice" },
+        { "ru": "Путь A: что даст", "en": "Path A: what it brings" },
+        { "ru": "Путь A: цена", "en": "Path A: the cost" },
+        { "ru": "Путь B: что даст", "en": "Path B: what it brings" },
+        { "ru": "Путь B: цена", "en": "Path B: the cost" }
+      ]
+    },
+    {
+      "id": "horseshoe",
+      "free": false,
+      "cards": 7,
+      "name": { "ru": "Подкова", "en": "Horseshoe" },
+      "description": {
+        "ru": "Развёрнутый взгляд на ситуацию: от предыстории до совета и итога.",
+        "en": "A fuller view of a situation: from background to advice and outcome."
+      },
+      "positions": [
+        { "ru": "Прошлое", "en": "Past" },
+        { "ru": "Настоящее", "en": "Present" },
+        { "ru": "Скрытые влияния", "en": "Hidden influences" },
+        { "ru": "Препятствия", "en": "Obstacles" },
+        { "ru": "Окружение", "en": "External influences" },
+        { "ru": "Совет", "en": "Advice" },
+        { "ru": "Вероятный итог", "en": "Likely outcome" }
+      ]
+    },
+    {
+      "id": "month-ahead",
+      "free": false,
+      "cards": 4,
+      "name": { "ru": "На месяц", "en": "Month Ahead" },
+      "description": {
+        "ru": "Четыре недели вперёд: по одной карте на каждую.",
+        "en": "Four weeks ahead: one card for each."
+      },
+      "positions": [
+        { "ru": "Неделя 1", "en": "Week 1" },
+        { "ru": "Неделя 2", "en": "Week 2" },
+        { "ru": "Неделя 3", "en": "Week 3" },
+        { "ru": "Неделя 4", "en": "Week 4" }
+      ]
+    },
+    {
+      "id": "celtic-cross",
+      "free": false,
+      "cards": 10,
+      "name": { "ru": "Кельтский крест", "en": "Celtic Cross" },
+      "description": {
+        "ru": "Самый известный большой расклад — глубокий разбор одной ситуации. Описан А. Э. Уэйтом в 1911 году.",
+        "en": "The most famous full spread — a deep dive into one situation. Described by A. E. Waite in 1911."
+      },
+      "positions": [
+        { "ru": "Суть ситуации", "en": "The heart of the matter" },
+        { "ru": "Что пересекает (мешает или помогает)", "en": "What crosses you" },
+        { "ru": "Основание (корни ситуации)", "en": "The foundation" },
+        { "ru": "Недавнее прошлое", "en": "Recent past" },
+        { "ru": "Возможное лучшее", "en": "What crowns you (potential)" },
+        { "ru": "Ближайшее будущее", "en": "Near future" },
+        { "ru": "Вы сами", "en": "You yourself" },
+        { "ru": "Окружение", "en": "Your environment" },
+        { "ru": "Надежды и страхи", "en": "Hopes and fears" },
+        { "ru": "Итог", "en": "Final outcome" }
+      ]
+    }
+  ]
+}

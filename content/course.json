@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "note": "Структура курса v1. Каждый урок: theory (2-3 мин чтения) + cards (разбор) + quiz (5-7 вопросов). Контент уроков пишется на этапе 3 и проверяется методистом.",
+  "modules": [
+    {
+      "id": "m1",
+      "free": true,
+      "title": { "ru": "Знакомство с таро", "en": "Meet the Tarot" },
+      "lessons": [
+        { "id": "m1l1", "title": { "ru": "Что такое таро и как оно работает", "en": "What tarot is and how it works" }, "cards": [] },
+        { "id": "m1l2", "title": { "ru": "Устройство колоды: 78 карт", "en": "Anatomy of the deck: 78 cards" }, "cards": [] },
+        { "id": "m1l3", "title": { "ru": "Ритуал карты дня", "en": "The card-of-the-day ritual" }, "cards": [] },
+        { "id": "m1l4", "title": { "ru": "Этика и границы чтения", "en": "Ethics and boundaries of reading" }, "cards": [] }
+      ]
+    },
+    {
+      "id": "m2",
+      "free": true,
+      "title": { "ru": "Старшие арканы I: путь начинается", "en": "Major Arcana I: the journey begins" },
+      "lessons": [
+        { "id": "m2l1", "title": { "ru": "Дурак и Маг", "en": "The Fool and The Magician" }, "cards": ["fool", "magician"] },
+        { "id": "m2l2", "title": { "ru": "Жрица и Императрица", "en": "The High Priestess and The Empress" }, "cards": ["high-priestess", "empress"] },
+        { "id": "m2l3", "title": { "ru": "Император и Иерофант", "en": "The Emperor and The Hierophant" }, "cards": ["emperor", "hierophant"] },
+        { "id": "m2l4", "title": { "ru": "Влюблённые и Колесница", "en": "The Lovers and The Chariot" }, "cards": ["lovers", "chariot"] },
+        { "id": "m2l5", "title": { "ru": "Повторение: Дурак — Колесница", "en": "Review: Fool through Chariot" }, "cards": ["fool", "magician", "high-priestess", "empress", "emperor", "hierophant", "lovers", "chariot"] },
+        { "id": "m2l6", "title": { "ru": "Практика: первые сочетания", "en": "Practice: first combinations" }, "cards": [] }
+      ]
+    },
+    {
+      "id": "m3",
+      "free": false,
+      "title": { "ru": "Старшие арканы II: испытания и свет", "en": "Major Arcana II: trials and light" },
+      "lessons": [
+        { "id": "m3l1", "title": { "ru": "Сила и Отшельник", "en": "Strength and The Hermit" }, "cards": ["strength", "hermit"] },
+        { "id": "m3l2", "title": { "ru": "Колесо Фортуны и Справедливость", "en": "Wheel of Fortune and Justice" }, "cards": ["wheel-of-fortune", "justice"] },
+        { "id": "m3l3", "title": { "ru": "Повешенный, Смерть, Умеренность", "en": "The Hanged Man, Death, Temperance" }, "cards": ["hanged-man", "death", "temperance"] },
+        { "id": "m3l4", "title": { "ru": "Дьявол и Башня", "en": "The Devil and The Tower" }, "cards": ["devil", "tower"] },
+        { "id": "m3l5", "title": { "ru": "Звезда, Луна, Солнце", "en": "The Star, The Moon, The Sun" }, "cards": ["star", "moon", "sun"] },
+        { "id": "m3l6", "title": { "ru": "Суд и Мир. Путь Дурака целиком", "en": "Judgement and The World. The Fool's journey" }, "cards": ["judgement", "world"] }
+      ]
+    },
+    {
+      "id": "m4",
+      "free": false,
+      "title": { "ru": "Младшие арканы: четыре стихии", "en": "Minor Arcana: the four elements" },
+      "lessons": [
+        { "id": "m4l1", "title": { "ru": "Жезлы: огонь и действие (Туз–5)", "en": "Wands: fire and action (Ace–5)" }, "cards": ["w01", "w02", "w03", "w04", "w05"] },
+        { "id": "m4l2", "title": { "ru": "Жезлы: от борьбы к триумфу (6–10)", "en": "Wands: from struggle to triumph (6–10)" }, "cards": ["w06", "w07", "w08", "w09", "w10"] },
+        { "id": "m4l3", "title": { "ru": "Кубки: вода и чувства (Туз–5)", "en": "Cups: water and feelings (Ace–5)" }, "cards": ["c01", "c02", "c03", "c04", "c05"] },
+        { "id": "m4l4", "title": { "ru": "Кубки: от ностальгии к счастью (6–10)", "en": "Cups: from nostalgia to joy (6–10)" }, "cards": ["c06", "c07", "c08", "c09", "c10"] },
+        { "id": "m4l5", "title": { "ru": "Мечи: воздух и разум (Туз–5)", "en": "Swords: air and mind (Ace–5)" }, "cards": ["s01", "s02", "s03", "s04", "s05"] },
+        { "id": "m4l6", "title": { "ru": "Мечи: тьма перед рассветом (6–10)", "en": "Swords: darkest before dawn (6–10)" }, "cards": ["s06", "s07", "s08", "s09", "s10"] },
+        { "id": "m4l7", "title": { "ru": "Пентакли: земля и материя (Туз–5)", "en": "Pentacles: earth and matter (Ace–5)" }, "cards": ["p01", "p02", "p03", "p04", "p05"] },
+        { "id": "m4l8", "title": { "ru": "Пентакли: труд и наследие (6–10)", "en": "Pentacles: work and legacy (6–10)" }, "cards": ["p06", "p07", "p08", "p09", "p10"] }
+      ]
+    },
+    {
+      "id": "m5",
+      "free": false,
+      "title": { "ru": "Придворные карты: 16 характеров", "en": "Court cards: 16 personalities" },
+      "lessons": [
+        { "id": "m5l1", "title": { "ru": "Пажи: ученики стихий", "en": "Pages: students of the elements" }, "cards": ["w11", "c11", "s11", "p11"] },
+        { "id": "m5l2", "title": { "ru": "Рыцари: энергия в движении", "en": "Knights: energy in motion" }, "cards": ["w12", "c12", "s12", "p12"] },
+        { "id": "m5l3", "title": { "ru": "Королевы: зрелость чувства", "en": "Queens: inner mastery" }, "cards": ["w13", "c13", "s13", "p13"] },
+        { "id": "m5l4", "title": { "ru": "Короли: зрелость действия", "en": "Kings: outer mastery" }, "cards": ["w14", "c14", "s14", "p14"] }
+      ]
+    },
+    {
+      "id": "m6",
+      "free": false,
+      "title": { "ru": "Практика чтения", "en": "Reading practice" },
+      "lessons": [
+        { "id": "m6l1", "title": { "ru": "Перевёрнутые карты", "en": "Reversed cards" }, "cards": [] },
+        { "id": "m6l2", "title": { "ru": "Связки карт: как читать пары", "en": "Card combinations: reading pairs" }, "cards": [] },
+        { "id": "m6l3", "title": { "ru": "Ваш первый расклад из трёх карт", "en": "Your first three-card spread" }, "cards": [] },
+        { "id": "m6l4", "title": { "ru": "Разбор реальных примеров", "en": "Walkthrough of real readings" }, "cards": [] }
+      ]
+    }
+  ]
+}
