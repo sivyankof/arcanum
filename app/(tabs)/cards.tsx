@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
@@ -65,11 +66,13 @@ export default function CardsScreen() {
         renderItem={renderCard}
         ListHeaderComponent={
           <View style={{ marginBottom: spacing.m }}>
-            <Text style={[st.sub, { color: t.muted }]}>
-              {lang === 'ru' ? 'СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909' : 'REFERENCE · RIDER–WAITE 1909'}
-            </Text>
-            <Text style={[st.title, { color: t.head }]}>{tr('cards.title')}</Text>
-            <View style={st.segRow}>
+            <FadeUp index={0}>
+              <Text style={[st.sub, { color: t.muted }]}>
+                {lang === 'ru' ? 'СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909' : 'REFERENCE · RIDER–WAITE 1909'}
+              </Text>
+              <Text style={[st.title, { color: t.head }]}>{tr('cards.title')}</Text>
+            </FadeUp>
+            <FadeUp index={1} style={st.segRow}>
               {FILTERS.map((f) => (
                 <Pressable
                   key={f}
@@ -84,7 +87,7 @@ export default function CardsScreen() {
                   </Text>
                 </Pressable>
               ))}
-            </View>
+            </FadeUp>
           </View>
         }
       />

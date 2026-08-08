@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { spreads } from '../../src/lib/content';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -25,11 +26,13 @@ export default function SpreadsScreen() {
         }}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={[st.sub, { color: t.muted }]}>{lang === 'ru' ? 'ПРАКТИКА' : 'PRACTICE'}</Text>
-        <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Расклады' : 'Spreads'}</Text>
+        <FadeUp index={0}>
+          <Text style={[st.sub, { color: t.muted }]}>{lang === 'ru' ? 'ПРАКТИКА' : 'PRACTICE'}</Text>
+          <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Расклады' : 'Spreads'}</Text>
+        </FadeUp>
 
-        {spreads.map((s: any) => (
-          <View key={s.id} style={[st.item, { backgroundColor: t.panel, borderColor: t.line }]}>
+        {spreads.map((s: any, si: number) => (
+          <FadeUp key={s.id} index={1 + si} style={[st.item, { backgroundColor: t.panel, borderColor: t.line }]}>
             <View style={{ flex: 1 }}>
               <Text style={[st.name, { color: t.head }]}>{s.name[lang]}</Text>
               <Text style={[st.desc, { color: t.muted }]}>
@@ -41,7 +44,7 @@ export default function SpreadsScreen() {
                 <Text style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.2, fontWeight: '700' }}>PREMIUM</Text>
               </View>
             )}
-          </View>
+          </FadeUp>
         ))}
       </ScrollView>
     </View>

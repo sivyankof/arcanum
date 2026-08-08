@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -55,9 +56,11 @@ export default function ProfileScreen() {
           paddingBottom: 120,
         }}
       >
-        <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Профиль' : 'Profile'}</Text>
+        <FadeUp index={0}>
+          <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Профиль' : 'Profile'}</Text>
+        </FadeUp>
 
-        <View style={st.stats}>
+        <FadeUp index={1} style={st.stats}>
           <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
             <Text style={[st.statNum, { color: t.head }]}>{streak}</Text>
             <Text style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'СЕРИЯ' : 'STREAK'}</Text>
@@ -66,27 +69,33 @@ export default function ProfileScreen() {
             <Text style={[st.statNum, { color: t.head }]}>{history.length}</Text>
             <Text style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'КАРТ ДНЯ' : 'DAILY CARDS'}</Text>
           </View>
-        </View>
+        </FadeUp>
 
-        <Row
-          icon={themeMode === 'dark' ? 'moon' : 'sunny'}
-          label={lang === 'ru' ? 'Тема' : 'Theme'}
-          value={themeMode === 'dark' ? (lang === 'ru' ? 'Тёмная' : 'Dark') : lang === 'ru' ? 'Светлая' : 'Light'}
-          onPress={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}
-        />
-        <Row
-          icon="language"
-          label={lang === 'ru' ? 'Язык' : 'Language'}
-          value={lang === 'ru' ? 'Русский' : 'English'}
-          onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-        />
-        {__DEV__ && (
+        <FadeUp index={2}>
           <Row
-            icon="refresh"
-            label={lang === 'ru' ? 'Сбросить карту дня' : 'Reset daily card'}
-            value="DEV"
-            onPress={resetToday}
+            icon={themeMode === 'dark' ? 'moon' : 'sunny'}
+            label={lang === 'ru' ? 'Тема' : 'Theme'}
+            value={themeMode === 'dark' ? (lang === 'ru' ? 'Тёмная' : 'Dark') : lang === 'ru' ? 'Светлая' : 'Light'}
+            onPress={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}
           />
+        </FadeUp>
+        <FadeUp index={3}>
+          <Row
+            icon="language"
+            label={lang === 'ru' ? 'Язык' : 'Language'}
+            value={lang === 'ru' ? 'Русский' : 'English'}
+            onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+          />
+        </FadeUp>
+        {__DEV__ && (
+          <FadeUp index={4}>
+            <Row
+              icon="refresh"
+              label={lang === 'ru' ? 'Сбросить карту дня' : 'Reset daily card'}
+              value="DEV"
+              onPress={resetToday}
+            />
+          </FadeUp>
         )}
       </ScrollView>
     </View>

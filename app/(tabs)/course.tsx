@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { course } from '../../src/lib/content';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -27,13 +28,15 @@ export default function CourseScreen() {
         }}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={[st.sub, { color: t.muted }]}>
-          {lang === 'ru' ? '6 МОДУЛЕЙ · 32 УРОКА' : '6 MODULES · 32 LESSONS'}
-        </Text>
-        <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Курс' : 'Course'}</Text>
+        <FadeUp index={0}>
+          <Text style={[st.sub, { color: t.muted }]}>
+            {lang === 'ru' ? '6 МОДУЛЕЙ · 32 УРОКА' : '6 MODULES · 32 LESSONS'}
+          </Text>
+          <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Курс' : 'Course'}</Text>
+        </FadeUp>
 
         {course.map((m: any, mi: number) => (
-          <View key={m.id} style={{ marginTop: spacing.xl }}>
+          <FadeUp key={m.id} index={1 + mi} style={{ marginTop: spacing.xl }}>
             <View style={st.modHead}>
               <Text style={[st.modTitle, { color: t.head }]}>
                 {mi + 1}. {m.title[lang]}
@@ -60,7 +63,7 @@ export default function CourseScreen() {
                 </View>
               );
             })}
-          </View>
+          </FadeUp>
         ))}
       </ScrollView>
     </View>

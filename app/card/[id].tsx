@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { cardById } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
@@ -40,7 +41,7 @@ export default function CardDetail() {
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View style={st.hero}>
+        <FadeUp index={0} style={st.hero}>
           <View style={[st.imWrap, { borderColor: t.frame, shadowColor: t.accent }]}>
             <Image source={cardImages[card.id]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
           </View>
@@ -55,14 +56,14 @@ export default function CardDetail() {
               ))}
             </View>
           </View>
-        </View>
+        </FadeUp>
 
-        {BLOCKS.map((b) => {
+        {BLOCKS.map((b, bi) => {
           const block = card.content[b];
           if (!block) return null;
           const text = block.status === 'todo' ? tr('card.soon') : block[lang];
           return (
-            <View key={b} style={[st.block, { backgroundColor: t.panel, borderColor: t.line }]}>
+            <FadeUp key={b} index={1 + bi} style={[st.block, { backgroundColor: t.panel, borderColor: t.line }]}>
               <Text style={[st.blockTitle, { color: t.accent }]}>{tr(`card.${b}`).toUpperCase()}</Text>
               <Text
                 style={[
@@ -73,7 +74,7 @@ export default function CardDetail() {
               >
                 {text}
               </Text>
-            </View>
+            </FadeUp>
           );
         })}
       </ScrollView>

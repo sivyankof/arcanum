@@ -17,6 +17,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
 import { useApp } from '../../src/store/useApp';
@@ -169,18 +170,23 @@ export default function TodayScreen() {
         contentContainerStyle={{ paddingTop: insets.top + spacing.xl, paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={[st.date, { color: t.muted }]}>{dateStr.toUpperCase()}</Text>
-        <Text style={[st.title, { color: t.head }]}>{tr('today.title')}</Text>
+        <FadeUp index={0}>
+          <Text style={[st.date, { color: t.muted }]}>{dateStr.toUpperCase()}</Text>
+          <Text style={[st.title, { color: t.head }]}>{tr('today.title')}</Text>
+        </FadeUp>
 
-        <View style={[st.pill, { backgroundColor: t.panel, borderColor: t.line }]}>
-          <Ionicons name="flame" size={16} color={t.accent} />
-          <Text style={{ color: t.head, fontWeight: '700', fontSize: 13 }}>
-            {streak} {lang === 'ru' ? 'дн.' : 'days'}
-          </Text>
-          <Text style={{ color: t.muted, fontSize: 11 }}>{lang === 'ru' ? 'серия' : 'streak'}</Text>
-        </View>
+        <FadeUp index={1}>
+          <View style={[st.pill, { backgroundColor: t.panel, borderColor: t.line }]}>
+            <Ionicons name="flame" size={16} color={t.accent} />
+            <Text style={{ color: t.head, fontWeight: '700', fontSize: 13 }}>
+              {streak} {lang === 'ru' ? 'дн.' : 'days'}
+            </Text>
+            <Text style={{ color: t.muted, fontSize: 11 }}>{lang === 'ru' ? 'серия' : 'streak'}</Text>
+          </View>
+        </FadeUp>
 
         {/* сцена с картой */}
+        <FadeUp index={2}>
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
           <View style={{ width: CARD_W, height: CARD_H }}>
             {/* кольца позади карты */}
@@ -206,6 +212,7 @@ export default function TodayScreen() {
             </Animated.View>
           </View>
         </Pressable>
+        </FadeUp>
 
         {drawn && (
           <>
