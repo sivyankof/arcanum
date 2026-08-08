@@ -20,6 +20,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { StreakPill } from '../../src/components/StreakPill';
 import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { useApp } from '../../src/store/useApp';
@@ -120,6 +121,7 @@ export default function TodayScreen() {
   const card = drawn ? cardById.get(drawn.cardId)! : cardOfDay(todayISO);
 
   // --- анимации ---
+  const [burst, setBurst] = React.useState(0); // счётчик салютов у огонька серии
   const flip = useSharedValue(drawn ? 1 : 0);
   const bob = useSharedValue(0);
   const glare = useSharedValue(0);
@@ -161,6 +163,7 @@ export default function TodayScreen() {
 
   const onDraw = () => {
     if (drawn) return;
+    const prevStreak = streak;
     hapticReveal();
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
     glare.value = 0;
@@ -173,10 +176,11 @@ export default function TodayScreen() {
       }),
     );
     drawToday(card.id, false);
+    const newStreak = useApp.getState().streak;
+    // серия выросла — салют у огонька, но только вместе с открытием карты
+    if (newStreak > prevStreak) setTimeout(() => setBurst((b) => b + 1), FLIP_MS * 0.7);
     // Success бережём для настоящих побед: 7-й день серии (и позже — завершённый урок)
-    if (useApp.getState().streak === STREAK_MILESTONE) {
-      setTimeout(hapticSuccess, FLIP_MS);
-    }
+    if (newStreak === STREAK_MILESTONE) setTimeout(hapticSuccess, FLIP_MS);
   };
 
   const dayText = card.content.day_card?.[lang];
@@ -200,13 +204,7 @@ export default function TodayScreen() {
         </FadeUp>
 
         <FadeUp index={1}>
-          <View style={[st.pill, { backgroundColor: t.panel, borderColor: t.line }]}>
-            <Ionicons name="flame" size={16} color={t.accent} />
-            <Text style={{ color: t.head, fontWeight: '700', fontSize: 13 }}>
-              {streak} {lang === 'ru' ? 'дн.' : 'days'}
-            </Text>
-            <Text style={{ color: t.muted, fontSize: 11 }}>{lang === 'ru' ? 'серия' : 'streak'}</Text>
-          </View>
+          <StreakPill streak={streak} burst={burst} />
         </FadeUp>
 
         {/* сцена с картой */}
@@ -284,17 +282,6 @@ export default function TodayScreen() {
 const st = StyleSheet.create({
   date: { fontSize: 10, letterSpacing: 3, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    alignSelf: 'center',
-    marginTop: spacing.l,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    borderWidth: 1,
-  },
   face: {
     position: 'absolute',
     top: 0,
