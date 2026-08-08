@@ -99,7 +99,7 @@ def clean(s: str) -> str:
     return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", s or "")).strip()
 
 def main():
-    data = json.loads(SRC.read_text())
+    data = json.loads(SRC.read_text(encoding="utf-8"))
     cards_src = data["cards"] if isinstance(data, dict) else data
     out = []
     for c in cards_src:
@@ -136,7 +136,7 @@ def main():
                             0 if x["arcana"] == "major" else 1, x["number"]))
     dst = ROOT / "content" / "cards.json"
     dst.write_text(json.dumps({"version": 1, "deck": "rider-waite-smith-1909",
-                               "cards": out}, ensure_ascii=False, indent=2))
+                               "cards": out}, ensure_ascii=False, indent=2), encoding="utf-8")
     majors = sum(1 for x in out if x["arcana"] == "major")
     print(f"OK: {len(out)} карт ({majors} старших, {len(out)-majors} младших) -> {dst}")
 

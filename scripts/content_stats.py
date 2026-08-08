@@ -5,7 +5,7 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-d = json.load(open(ROOT / "content/cards.json"))
+d = json.load(open(ROOT / "content/cards.json", encoding="utf-8"))
 
 st = Counter()
 per_card = []
