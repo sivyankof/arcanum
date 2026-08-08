@@ -15,6 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
+import { Glow } from '../../src/components/Glow';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardById } from '../../src/lib/content';
@@ -26,6 +27,7 @@ const ROMAN = ['0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X',
 const BLOCKS = ['general', 'reversed', 'love', 'career', 'finances', 'health', 'day_card', 'symbolism'] as const;
 
 const FLY_MS = 350;
+const GLOW_SIZE = 250; // картинка 128 шириной, свечение выходит за неё мягким ореолом
 
 /** Изображение в шапке. Если экран открыт из сетки карт, картинка «перелетает»
  *  от своей ячейки на место (пункт 6 motion-spec); иначе появляется как обычно. */
@@ -112,13 +114,17 @@ export default function CardDetail() {
         showsVerticalScrollIndicator={false}
       >
         <View style={st.hero}>
-          {origin ? (
-            <HeroImage cardId={card.id} origin={origin} />
-          ) : (
-            <FadeUp index={0}>
-              <HeroImage cardId={card.id} origin={null} />
-            </FadeUp>
-          )}
+          <View>
+            {/* виньетка: тёплое свечение позади карты */}
+            <Glow size={GLOW_SIZE} />
+            {origin ? (
+              <HeroImage cardId={card.id} origin={origin} />
+            ) : (
+              <FadeUp index={0}>
+                <HeroImage cardId={card.id} origin={null} />
+              </FadeUp>
+            )}
+          </View>
           <FadeUp index={0} style={{ flex: 1 }}>
             <Text style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Text>
             <Text style={[st.name, { color: t.head }]}>{card.name[lang]}</Text>
