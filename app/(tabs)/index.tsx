@@ -214,33 +214,37 @@ export default function TodayScreen() {
             {/* кольца позади карты */}
             <Ring size={RING_A} duration={70000} opacity={0.55} star="✦" starSize={8} />
             <Ring size={RING_B} duration={100000} reverse opacity={0.3} star="✧" starSize={6} />
-            {/* рубашка */}
-            <Animated.View style={[st.face, backStyle, { borderColor: t.frame, shadowColor: t.accent }]}>
-              <LinearGradient colors={t.mode === 'dark' ? ['#1d2752', '#0c1130'] : ['#f4ead0', '#e4d6b0']} style={StyleSheet.absoluteFill} />
-              <View style={[st.inframe, { borderColor: t.frame }]} />
-              <View style={st.embWrap}>
-                <Ionicons name="sparkles" size={44} color={t.accent} />
-                <Text style={[st.embWord, { color: t.accent }]}>ARCANUM</Text>
-                {!drawn && (
-                  <Text style={[st.tapHint, { color: t.muted }]}>
-                    {lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'}
-                  </Text>
-                )}
+            {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
+            <Animated.View style={[st.face, backStyle, { shadowColor: t.accent, backgroundColor: t.bg }]}>
+              <View style={[st.faceClip, { borderColor: t.frame }]}>
+                <LinearGradient colors={t.mode === 'dark' ? ['#1d2752', '#0c1130'] : ['#f4ead0', '#e4d6b0']} style={StyleSheet.absoluteFill} />
+                <View style={[st.inframe, { borderColor: t.frame }]} />
+                <View style={st.embWrap}>
+                  <Ionicons name="sparkles" size={44} color={t.accent} />
+                  <Text style={[st.embWord, { color: t.accent }]}>ARCANUM</Text>
+                  {!drawn && (
+                    <Text style={[st.tapHint, { color: t.muted }]}>
+                      {lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'}
+                    </Text>
+                  )}
+                </View>
               </View>
             </Animated.View>
             {/* лицо */}
-            <Animated.View style={[st.face, frontStyle, { borderColor: t.frame, shadowColor: t.accent }]}>
-              <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
-              {/* блик: проходит по лицу карты сразу после переворота */}
-              <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, glareStyle]}>
-                <LinearGradient
-                  colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']}
-                  locations={[0, 0.32, 0.48, 0.6, 1]}
-                  start={GLARE_ANGLE.start}
-                  end={GLARE_ANGLE.end}
-                  style={StyleSheet.absoluteFill}
-                />
-              </Animated.View>
+            <Animated.View style={[st.face, frontStyle, { shadowColor: t.accent, backgroundColor: t.bg }]}>
+              <View style={[st.faceClip, { borderColor: t.frame }]}>
+                <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
+                {/* блик: проходит по лицу карты сразу после переворота */}
+                <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, glareStyle]}>
+                  <LinearGradient
+                    colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']}
+                    locations={[0, 0.32, 0.48, 0.6, 1]}
+                    start={GLARE_ANGLE.start}
+                    end={GLARE_ANGLE.end}
+                    style={StyleSheet.absoluteFill}
+                  />
+                </Animated.View>
+              </View>
             </Animated.View>
           </View>
         </Pressable>
@@ -282,6 +286,8 @@ export default function TodayScreen() {
 const st = StyleSheet.create({
   date: { fontSize: 10, letterSpacing: 3, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
+  // тёплое свечение вокруг карты дня — из эталона: box-shadow 0 30px 66px var(--glow)
+  // (CSS-размытие переводим в shadowRadius делением пополам)
   face: {
     position: 'absolute',
     top: 0,
@@ -289,12 +295,16 @@ const st = StyleSheet.create({
     right: 0,
     bottom: 0,
     borderRadius: radius.card,
+    shadowOpacity: 0.35,
+    shadowRadius: 33,
+    shadowOffset: { width: 0, height: 30 },
+    elevation: 16,
+  },
+  faceClip: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: radius.card,
     borderWidth: 1,
     overflow: 'hidden',
-    shadowOpacity: 0.45,
-    shadowRadius: 24,
-    shadowOffset: { width: 0, height: 14 },
-    elevation: 12,
   },
   inframe: { position: 'absolute', top: 9, left: 9, right: 9, bottom: 9, borderWidth: 1, borderRadius: 10, opacity: 0.8 },
   embWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },

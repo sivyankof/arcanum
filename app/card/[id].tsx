@@ -15,7 +15,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
-import { Glow } from '../../src/components/Glow';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardById } from '../../src/lib/content';
@@ -27,7 +26,6 @@ const ROMAN = ['0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X',
 const BLOCKS = ['general', 'reversed', 'love', 'career', 'finances', 'health', 'day_card', 'symbolism'] as const;
 
 const FLY_MS = 350;
-const GLOW_SIZE = 250; // картинка 128 шириной, свечение выходит за неё мягким ореолом
 
 /** Изображение в шапке. Если экран открыт из сетки карт, картинка «перелетает»
  *  от своей ячейки на место (пункт 6 motion-spec); иначе появляется как обычно. */
@@ -74,12 +72,15 @@ function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) 
   });
 
   return (
+    // тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень
     <Animated.View
       ref={ref}
       onLayout={onLayout}
-      style={[st.imWrap, { borderColor: t.frame, shadowColor: t.accent }, fly]}
+      style={[st.imShadow, { shadowColor: t.accent, backgroundColor: t.bg }, fly]}
     >
-      <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
+      <View style={[st.imClip, { borderColor: t.frame }]}>
+        <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
+      </View>
     </Animated.View>
   );
 }
@@ -114,17 +115,13 @@ export default function CardDetail() {
         showsVerticalScrollIndicator={false}
       >
         <View style={st.hero}>
-          <View>
-            {/* виньетка: тёплое свечение позади карты */}
-            <Glow size={GLOW_SIZE} />
-            {origin ? (
-              <HeroImage cardId={card.id} origin={origin} />
-            ) : (
-              <FadeUp index={0}>
-                <HeroImage cardId={card.id} origin={null} />
-              </FadeUp>
-            )}
-          </View>
+          {origin ? (
+            <HeroImage cardId={card.id} origin={origin} />
+          ) : (
+            <FadeUp index={0}>
+              <HeroImage cardId={card.id} origin={null} />
+            </FadeUp>
+          )}
           <FadeUp index={0} style={{ flex: 1 }}>
             <Text style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Text>
             <Text style={[st.name, { color: t.head }]}>{card.name[lang]}</Text>
@@ -164,16 +161,22 @@ export default function CardDetail() {
 
 const st = StyleSheet.create({
   hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start' },
-  imWrap: {
+  // виньетка = тёплое свечение вокруг карты; в эталоне это box-shadow 0 18px 40px var(--glow)
+  // (CSS-размытие переводим в shadowRadius делением пополам)
+  imShadow: {
     width: 128,
     aspectRatio: 0.58,
     borderRadius: radius.m,
+    shadowOpacity: 0.35,
+    shadowRadius: 20,
+    shadowOffset: { width: 0, height: 18 },
+    elevation: 10,
+  },
+  imClip: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: radius.m,
     borderWidth: 1,
     overflow: 'hidden',
-    shadowOpacity: 0.4,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 10 },
-    elevation: 10,
   },
   im: { width: '100%', height: '100%' },
   num: { fontSize: 9.5, letterSpacing: 2.5 },
