@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScreenBg } from '../../src/components/ScreenBg';
 import { course } from '../../src/lib/content';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -17,6 +18,7 @@ export default function CourseScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
+      <ScreenBg />
       <ScrollView
         contentContainerStyle={{
           paddingTop: insets.top + spacing.xl,

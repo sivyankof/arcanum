@@ -7,7 +7,9 @@ export type ThemeMode = 'dark' | 'light';
 export interface Theme {
   mode: ThemeMode;
   bg: string;
-  bgTop: string;       // верх радиального градиента фона
+  bgTop: string;       // верх градиента фона
+  bgBottom: string;    // низ градиента фона
+  ring: string;        // пунктирные кольца вокруг карты дня
   text: string;
   head: string;        // заголовки (тёплый пергамент)
   muted: string;
@@ -25,18 +27,20 @@ export interface Theme {
 
 export const darkTheme: Theme = {
   mode: 'dark',
-  bg: '#0a0c1d',
-  bgTop: '#1b2140',
+  bg: '#0e1129',
+  bgTop: '#1c2244',
+  bgBottom: '#070917',
+  ring: '#39426f',
   text: '#e2e6f4',
   head: '#f5eacb',
   muted: '#7e86ab',
   line: '#262e56',
-  panel: 'rgba(24,30,62,0.62)',
+  panel: 'rgba(24,30,62,0.55)',
   accent: '#e2bd72',
   accent2: '#f0d9a4',
   glow: 'rgba(226,189,114,0.35)',
   frame: '#8f7439',
-  navBg: 'rgba(7,9,23,0.82)',
+  navBg: 'rgba(7,9,23,0.66)',
   chipBg: 'rgba(226,189,114,0.10)',
   danger: '#e07a6a',
   success: '#5aa07e',
@@ -44,26 +48,29 @@ export const darkTheme: Theme = {
 
 export const lightTheme: Theme = {
   mode: 'light',
-  bg: '#f2ecda',
+  bg: '#f5eeda',
   bgTop: '#fcf8ee',
+  bgBottom: '#efe8d2',
+  ring: '#d8c89e',
   text: '#3d3d55',
   head: '#4a3a16',
   muted: '#a29878',
   line: '#e3d8ba',
-  panel: 'rgba(255,255,255,0.72)',
+  panel: 'rgba(255,255,255,0.66)',
   accent: '#a8802e',
   accent2: '#8a6a24',
   glow: 'rgba(168,128,46,0.25)',
   frame: '#c4a259',
-  navBg: 'rgba(252,248,238,0.86)',
+  navBg: 'rgba(252,248,238,0.7)',
   chipBg: 'rgba(168,128,46,0.10)',
   danger: '#c05a4a',
   success: '#4d9370',
 };
 
 export const fonts = {
-  /** Заголовки — благородная антиква (Cormorant Garamond подключим файлом позже; пока системная serif) */
-  display: 'serif',
+  /** Заголовки — Cormorant Garamond (кириллица есть; грузится в app/_layout.tsx) */
+  display: 'CormorantGaramond_500Medium',
+  displaySemi: 'CormorantGaramond_600SemiBold',
   sans: undefined as string | undefined, // системный sans
 };
 

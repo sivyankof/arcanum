@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScreenBg } from '../../src/components/ScreenBg';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -49,6 +50,7 @@ export default function CardsScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
+      <ScreenBg />
       <FlatList
         data={data}
         keyExtractor={(c) => c.id}

@@ -16,6 +16,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScreenBg } from '../../src/components/ScreenBg';
 import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -25,6 +26,72 @@ const { width: W } = Dimensions.get('window');
 const CARD_W = Math.min(W * 0.56, 230);
 const CARD_H = CARD_W * 1.72;
 const FLIP_MS = 850;
+
+// пропорции колец из эталона: карта 216 → кольца 330 и 378
+const RING_A = CARD_W * 1.53;
+const RING_B = CARD_W * 1.75;
+
+/** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
+function Ring({
+  size,
+  duration,
+  reverse,
+  opacity,
+  star,
+  starSize,
+}: {
+  size: number;
+  duration: number;
+  reverse?: boolean;
+  opacity: number;
+  star: string;
+  starSize: number;
+}) {
+  const t = useTheme();
+  const angle = useSharedValue(0);
+
+  React.useEffect(() => {
+    angle.value = withRepeat(withTiming(360, { duration, easing: Easing.linear }), -1);
+  }, [angle, duration]);
+
+  const spin = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${reverse ? -angle.value : angle.value}deg` }],
+  }));
+
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        {
+          position: 'absolute',
+          left: (CARD_W - size) / 2,
+          top: (CARD_H - size) / 2,
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          borderWidth: 1,
+          borderStyle: 'dashed',
+          borderColor: t.ring,
+          opacity,
+        },
+        spin,
+      ]}
+    >
+      <Text
+        style={{
+          position: 'absolute',
+          top: -starSize / 2,
+          left: '50%',
+          marginLeft: -starSize / 2,
+          fontSize: starSize,
+          color: t.accent,
+        }}
+      >
+        {star}
+      </Text>
+    </Animated.View>
+  );
+}
 
 export default function TodayScreen() {
   const t = useTheme();
@@ -93,12 +160,7 @@ export default function TodayScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <LinearGradient
-        colors={[t.bgTop, t.bg]}
-        style={StyleSheet.absoluteFill}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 0.6 }}
-      />
+      <ScreenBg />
       <ScrollView
         contentContainerStyle={{ paddingTop: insets.top + spacing.xl, paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
@@ -117,6 +179,9 @@ export default function TodayScreen() {
         {/* сцена с картой */}
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
           <View style={{ width: CARD_W, height: CARD_H }}>
+            {/* кольца позади карты */}
+            <Ring size={RING_A} duration={70000} opacity={0.55} star="✦" starSize={8} />
+            <Ring size={RING_B} duration={100000} reverse opacity={0.3} star="✧" starSize={6} />
             {/* рубашка */}
             <Animated.View style={[st.face, backStyle, { borderColor: t.frame, shadowColor: t.accent }]}>
               <LinearGradient colors={t.mode === 'dark' ? ['#1d2752', '#0c1130'] : ['#f4ead0', '#e4d6b0']} style={StyleSheet.absoluteFill} />

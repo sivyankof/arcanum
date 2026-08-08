@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ScreenBg } from '../../src/components/ScreenBg';
 import { cardById } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -30,6 +31,7 @@ export default function CardDetail() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
+      <ScreenBg />
       <ScrollView
         contentContainerStyle={{
           paddingTop: insets.top + 56,
