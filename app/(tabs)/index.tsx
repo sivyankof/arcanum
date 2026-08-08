@@ -12,6 +12,7 @@ import Animated, {
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withRepeat,
   withSequence,
   withTiming,
@@ -33,6 +34,11 @@ const FLIP_MS = 850;
 // пропорции колец из эталона: карта 216 → кольца 330 и 378
 const RING_A = CARD_W * 1.53;
 const RING_B = CARD_W * 1.75;
+
+// блик по лицу карты (.glare из эталона): диагональ 112°, ход ±140% ширины, задержка 500 мс, 1100 мс
+const GLARE_DELAY = 500;
+const GLARE_MS = 1100;
+const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
 
 /** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
 function Ring({
@@ -115,6 +121,7 @@ export default function TodayScreen() {
   // --- анимации ---
   const flip = useSharedValue(drawn ? 1 : 0);
   const bob = useSharedValue(0);
+  const glare = useSharedValue(0);
 
   // после сброса карты дня (или смены даты) возвращаем рубашку
   React.useEffect(() => {
@@ -147,11 +154,23 @@ export default function TodayScreen() {
     ],
     backfaceVisibility: 'hidden' as const,
   }));
+  const glareStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: interpolate(glare.value, [0, 1], [-CARD_W * 1.4, CARD_W * 1.4]) }],
+  }));
 
   const onDraw = () => {
     if (drawn) return;
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
+    glare.value = 0;
+    glare.value = withDelay(
+      GLARE_DELAY,
+      withTiming(1, {
+        duration: GLARE_MS,
+        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+        reduceMotion: ReduceMotion.System,
+      }),
+    );
     drawToday(card.id, false);
     setTimeout(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success), FLIP_MS * 0.6);
   };
@@ -210,6 +229,16 @@ export default function TodayScreen() {
             {/* лицо */}
             <Animated.View style={[st.face, frontStyle, { borderColor: t.frame, shadowColor: t.accent }]}>
               <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
+              {/* блик: проходит по лицу карты сразу после переворота */}
+              <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, glareStyle]}>
+                <LinearGradient
+                  colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']}
+                  locations={[0, 0.32, 0.48, 0.6, 1]}
+                  start={GLARE_ANGLE.start}
+                  end={GLARE_ANGLE.end}
+                  style={StyleSheet.absoluteFill}
+                />
+              </Animated.View>
             </Animated.View>
           </View>
         </Pressable>
