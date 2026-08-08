@@ -1,13 +1,36 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
+import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+
+/** Строка настройки: иконка · подпись · текущее значение. */
+function Row({
+  icon,
+  label,
+  value,
+  onPress,
+}: {
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  label: string;
+  value: string;
+  onPress?: () => void;
+}) {
+  const t = useTheme();
+  return (
+    <PressableScale onPress={onPress} style={[st.row, { backgroundColor: t.panel, borderColor: t.line }]}>
+      <Ionicons name={icon} size={18} color={t.accent} />
+      <Text style={{ color: t.text, fontSize: 14, flex: 1 }}>{label}</Text>
+      <Text style={{ color: t.muted, fontSize: 13, fontWeight: '600' }}>{value}</Text>
+    </PressableScale>
+  );
+}
 
 export default function ProfileScreen() {
   const t = useTheme();
@@ -21,30 +44,6 @@ export default function ProfileScreen() {
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
   const resetToday = useApp((s) => s.resetToday);
-
-  const Row = ({
-    icon,
-    label,
-    value,
-    onPress,
-  }: {
-    icon: React.ComponentProps<typeof Ionicons>['name'];
-    label: string;
-    value: string;
-    onPress?: () => void;
-  }) => (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [
-        st.row,
-        { backgroundColor: t.panel, borderColor: t.line, opacity: pressed && onPress ? 0.7 : 1 },
-      ]}
-    >
-      <Ionicons name={icon} size={18} color={t.accent} />
-      <Text style={{ color: t.text, fontSize: 14, flex: 1 }}>{label}</Text>
-      <Text style={{ color: t.muted, fontSize: 13, fontWeight: '600' }}>{value}</Text>
-    </Pressable>
-  );
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>

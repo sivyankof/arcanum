@@ -2,9 +2,10 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
+import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
@@ -36,17 +37,14 @@ export default function CardsScreen() {
     f === 'all' ? (lang === 'ru' ? 'Все' : 'All') : tr(`cards.${f === 'major' ? 'major' : f}`);
 
   const renderCard = ({ item }: { item: TarotCard }) => (
-    <Pressable
-      onPress={() => router.push(`/card/${item.id}`)}
-      style={({ pressed }) => [st.cell, { opacity: pressed ? 0.75 : 1 }]}
-    >
+    <PressableScale onPress={() => router.push(`/card/${item.id}`)} style={st.cell}>
       <View style={[st.imWrap, { borderColor: t.line }]}>
         <Image source={cardImages[item.id]} style={st.im} contentFit="cover" transition={180} cachePolicy="memory-disk" />
       </View>
       <Text numberOfLines={1} style={[st.name, { color: t.muted }]}>
         {item.name[lang]}
       </Text>
-    </Pressable>
+    </PressableScale>
   );
 
   return (
@@ -74,7 +72,7 @@ export default function CardsScreen() {
             </FadeUp>
             <FadeUp index={1} style={st.segRow}>
               {FILTERS.map((f) => (
-                <Pressable
+                <PressableScale
                   key={f}
                   onPress={() => setFilter(f)}
                   style={[
@@ -85,7 +83,7 @@ export default function CardsScreen() {
                   <Text style={{ color: filter === f ? t.accent : t.muted, fontSize: 11, fontWeight: '700' }}>
                     {label(f)}
                   </Text>
-                </Pressable>
+                </PressableScale>
               ))}
             </FadeUp>
           </View>

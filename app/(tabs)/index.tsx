@@ -18,6 +18,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
+import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
 import { useApp } from '../../src/store/useApp';
@@ -230,10 +231,7 @@ export default function TodayScreen() {
                 {hasText ? dayText : tr('card.soon')}
               </Text>
             </View>
-            <Pressable
-              onPress={() => router.push(`/card/${card.id}`)}
-              style={({ pressed }) => [st.cta, { transform: [{ scale: pressed ? 0.97 : 1 }] }]}
-            >
+            <PressableScale onPress={() => router.push(`/card/${card.id}`)} style={st.cta}>
               <LinearGradient
                 colors={['#caa45a', '#efd9a2', '#caa45a']}
                 start={{ x: 0, y: 0 }}
@@ -242,7 +240,7 @@ export default function TodayScreen() {
               >
                 <Text style={st.ctaTxt}>{lang === 'ru' ? 'ИЗУЧИТЬ КАРТУ →' : 'STUDY THIS CARD →'}</Text>
               </LinearGradient>
-            </Pressable>
+            </PressableScale>
           </>
         )}
       </ScrollView>
