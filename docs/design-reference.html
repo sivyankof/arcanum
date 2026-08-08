@@ -240,12 +240,67 @@ text-shadow:0 0 9px var(--glow)}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
 .hint2{margin-top:26px;color:#8f8677;font-size:12.5px;max-width:520px;text-align:center;line-height:1.7}
 .hint2 b{color:#d9c185}
+
+/* ===== демо-переключатель и новые экраны ===== */
+.demobar{display:flex;gap:8px;margin-bottom:18px}
+.demobar button{border:1px solid #3a3428;background:none;color:#8f8677;border-radius:18px;
+padding:8px 18px;font-size:12px;cursor:pointer;font-family:var(--sans);letter-spacing:.5px}
+.demobar button.on{background:linear-gradient(120deg,#caa45a,#e6c87e);color:#241c0d;font-weight:700;border-color:#caa45a}
+/* онбординг */
+.ob{position:absolute;inset:0;padding:80px 26px 40px;z-index:4;display:none;flex-direction:column}
+.ob.on{display:flex}
+.ob .step{flex:1;display:none;flex-direction:column;align-items:center;text-align:center}
+.ob .step.on{display:flex}
+.ob h2{font-family:var(--serif);font-size:30px;font-weight:500;color:var(--head);line-height:1.2}
+.ob .lead{color:var(--muted);font-size:13.5px;line-height:1.7;margin-top:12px;max-width:250px}
+.ob .emb2{width:120px;height:120px;margin:40px 0 30px;display:flex;align-items:center;justify-content:center}
+.ob .emb2 svg{width:110px;height:110px;stroke:var(--accent);fill:none;stroke-width:.9;
+filter:drop-shadow(0 0 16px var(--glow));animation:rot 40s linear infinite}
+.ob .field{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+padding:14px 16px;margin-top:12px;text-align:left;backdrop-filter:blur(8px)}
+.ob .field small{font-size:9px;letter-spacing:2px;color:var(--accent)}
+.ob .field div{color:var(--head);font-size:16px;font-family:var(--serif);margin-top:3px}
+.ob .reveal{width:150px;border-radius:12px;border:1px solid var(--frame);overflow:hidden;
+margin:26px 0 16px;box-shadow:0 20px 50px var(--glow);animation:hov 4s ease-in-out infinite}
+.ob .reveal img{width:100%;display:block}
+.ob .btn{width:100%;padding:15px;border:none;border-radius:16px;cursor:pointer;margin-top:auto;
+background:linear-gradient(120deg,#caa45a,#efd9a2 50%,#caa45a);color:#241c0d;font-weight:800;
+font-size:13px;letter-spacing:1.5px;font-family:var(--sans);box-shadow:0 12px 30px var(--glow)}
+.ob .dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+.ob .dots i{width:6px;height:6px;border-radius:3px;background:var(--line)}
+.ob .dots i.on{background:var(--accent);width:18px}
+/* урок */
+#v-lesson .prog{display:flex;align-items:center;gap:10px;margin-top:6px}
+#v-lesson .prog .bar{flex:1;height:7px;border-radius:4px;background:var(--line);overflow:hidden}
+#v-lesson .prog .bar i{display:block;height:100%;width:35%;border-radius:4px;
+background:linear-gradient(90deg,var(--accent),var(--accent2))}
+#v-lesson .prog b{color:var(--accent);font-size:11px}
+.theory{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;
+margin-top:16px;backdrop-filter:blur(10px)}
+.theory p{font-family:var(--serif);font-size:15px;line-height:1.65;color:var(--text)}
+.quiz{margin-top:16px}
+.quiz .q{font-family:var(--serif);font-size:17px;color:var(--head);text-align:center}
+.opt{background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:13px 16px;
+margin-top:9px;cursor:pointer;color:var(--text);font-size:13px;transition:.2s;backdrop-filter:blur(8px)}
+.opt:hover{border-color:var(--frame)}
+.opt.ok{border-color:#5aa07e;background:rgba(90,160,126,.12)}
+.opt.no{border-color:#c96a5a;opacity:.6}
+.xpchip{display:none;align-self:center;margin-top:14px;background:var(--chipbg);border:1px solid var(--frame);
+border-radius:16px;padding:6px 16px;color:var(--accent);font-weight:800;font-size:12px;letter-spacing:1px;
+animation:fu .5s ease}
+.xpchip.on{display:block}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
 <h1>Arcanum</h1>
 <p class="sub">Все пять экранов в одном телефоне — ходите по <b>нижней навигации</b>. Вытяните карту дня · откройте <b>путь курса</b> · в справочнике тапните <b>Дурака</b> — откроется страница карты с вкладками по сферам · загляните в расклады. Кнопка ☾/☀ справа сверху переключает тёмную и светлую тему.</p>
 
+<div class="demobar">
+<button class="on" onclick="demo('app',this)">Приложение</button>
+<button onclick="demo('ob',this)">Онбординг</button>
+<button onclick="demo('lesson',this)">Урок</button>
+</div>
 <div class="phone"><div class="sc" data-mode="dark" id="sc">
   <div class="aur"></div><div class="noise"></div>
   <div class="stars">
@@ -334,6 +389,49 @@ text-shadow:0 0 9px var(--glow)}
     <div class="h2 fadeup d1">Расклады</div>
     <div class="rule fadeup d2"><span>✦</span></div>
     <div id="sps" class="fadeup d3"></div>
+  </div>
+
+
+  <!-- ===== ОНБОРДИНГ ===== -->
+  <div class="ob" id="v-ob">
+    <div class="step on" id="ob1">
+      <div class="emb2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="33"/><circle cx="50" cy="50" r="41" stroke-dasharray="2 5"/><path d="M50 23 L57 43 L77 50 L57 57 L50 77 L43 57 L23 50 L43 43 Z"/><circle cx="50" cy="50" r="7"/></svg></div>
+      <h2>Arcanum</h2>
+      <p class="lead">Научитесь читать таро — по 5 минут в день. Без магии из кино, с уважением к традиции.</p>
+      <button class="btn" onclick="obStep(2)">НАЧАТЬ ПУТЬ</button>
+      <div class="dots"><i class="on"></i><i></i><i></i></div>
+    </div>
+    <div class="step" id="ob2">
+      <h2 style="font-size:24px;margin-top:30px">Немного о вас</h2>
+      <p class="lead">Дата рождения откроет ваш личный аркан — карту-спутницу вашей жизни.</p>
+      <div class="field"><small>ИМЯ</small><div>Анна</div></div>
+      <div class="field"><small>ДАТА РОЖДЕНИЯ</small><div>15 марта 1994</div></div>
+      <button class="btn" onclick="obStep(3)">ОТКРЫТЬ МОЙ АРКАН</button>
+      <div class="dots"><i></i><i class="on"></i><i></i></div>
+    </div>
+    <div class="step" id="ob3">
+      <p class="lead" style="margin-top:8px;letter-spacing:2px;font-size:10px;color:var(--accent)">ВАШ АРКАН РОЖДЕНИЯ</p>
+      <div class="reveal"><img src="" id="obimg" alt=""></div>
+      <h2 style="font-size:26px">Сила</h2>
+      <p class="lead" style="margin-top:8px">Ваш путь — мягкая смелость: вы приручаете бури терпением там, где другие ломают двери.</p>
+      <button class="btn" onclick="demo('app',document.querySelector('.demobar button'))">УЗНАТЬ БОЛЬШЕ ОБО МНЕ</button>
+      <div class="dots"><i></i><i></i><i class="on"></i></div>
+    </div>
+  </div>
+
+  <!-- ===== УРОК ===== -->
+  <div class="view" id="v-lesson">
+    <div class="date fadeup d1">МОДУЛЬ 1 · УРОК 1</div>
+    <div class="h2 fadeup d1" style="font-size:22px">Что такое таро на самом деле</div>
+    <div class="prog fadeup d2"><div class="bar"><i></i></div><b>2/6</b></div>
+    <div class="theory fadeup d3"><p>Забудьте всё, что вы видели в кино: таро — это не предсказание судьбы и не «магический шар». Это колода из 78 картинок, которая помогает разговаривать с самой собой честнее, чем обычно.</p></div>
+    <div class="quiz fadeup d4">
+      <div class="q">Сколько карт в колоде таро?</div>
+      <div class="opt" onclick="answer(this,false)">52 карты</div>
+      <div class="opt" onclick="answer(this,true)">78 карт</div>
+      <div class="opt" onclick="answer(this,false)">100 карт</div>
+      <div class="xpchip" id="xp">+10 XP ✦</div>
+    </div>
   </div>
 
   <div class="nav" id="nav">
@@ -442,5 +540,32 @@ document.getElementById('sps').innerHTML = SPS.map(s=>`
  <div class="sp"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
  <div class="tx"><b>${s.n}</b><small>${s.c} карт · ${s.d}</small></div>
  ${s.free?'':'<span class="lk">PREMIUM</span>'}</div>`).join('');
+
+/* демо-переключатель */
+function demo(mode, btn){
+  document.querySelectorAll('.demobar button').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  document.getElementById('v-ob').classList.remove('on');
+  if(mode==='ob'){
+    sc.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.getElementById('v-ob').classList.add('on');
+    obStep(1);
+  } else if(mode==='lesson'){
+    show('v-lesson');
+  } else {
+    show('v-today');
+  }
+}
+function obStep(n){
+  [1,2,3].forEach(i=>document.getElementById('ob'+i).classList.toggle('on', i===n));
+  if(n===3) document.getElementById('obimg').src = 'data:image/jpeg;base64,' + THUMBS['strength'];
+}
+function answer(el, ok){
+  if(document.querySelector('.opt.ok')) return;
+  el.classList.add(ok ? 'ok' : 'no');
+  if(!ok){ setTimeout(()=>document.querySelectorAll('.opt')[1].classList.add('ok'), 400); }
+  document.getElementById('xp').classList.add('on');
+}
+
 </script>
 </body></html>
