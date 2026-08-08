@@ -10,6 +10,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
+import { hapticTap } from '../../src/lib/haptics';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -92,7 +93,10 @@ export default function CardsScreen() {
               {FILTERS.map((f) => (
                 <PressableScale
                   key={f}
-                  onPress={() => setFilter(f)}
+                  onPress={() => {
+                    hapticTap();
+                    setFilter(f);
+                  }}
                   style={[
                     st.seg,
                     { borderColor: filter === f ? t.frame : t.line, backgroundColor: filter === f ? t.chipBg : 'transparent' },

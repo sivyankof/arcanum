@@ -1,5 +1,4 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React from 'react';
@@ -22,6 +21,7 @@ import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
+import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -30,6 +30,7 @@ const { width: W } = Dimensions.get('window');
 const CARD_W = Math.min(W * 0.56, 230);
 const CARD_H = CARD_W * 1.72;
 const FLIP_MS = 850;
+const STREAK_MILESTONE = 7; // 7-й день серии — единственная «победа» на этом экране
 
 // пропорции колец из эталона: карта 216 → кольца 330 и 378
 const RING_A = CARD_W * 1.53;
@@ -160,7 +161,7 @@ export default function TodayScreen() {
 
   const onDraw = () => {
     if (drawn) return;
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    hapticReveal();
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
     glare.value = 0;
     glare.value = withDelay(
@@ -172,7 +173,10 @@ export default function TodayScreen() {
       }),
     );
     drawToday(card.id, false);
-    setTimeout(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success), FLIP_MS * 0.6);
+    // Success бережём для настоящих побед: 7-й день серии (и позже — завершённый урок)
+    if (useApp.getState().streak === STREAK_MILESTONE) {
+      setTimeout(hapticSuccess, FLIP_MS);
+    }
   };
 
   const dayText = card.content.day_card?.[lang];

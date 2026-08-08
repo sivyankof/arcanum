@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { hapticTap } from '../../src/lib/haptics';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -24,7 +25,16 @@ function Row({
 }) {
   const t = useTheme();
   return (
-    <PressableScale onPress={onPress} style={[st.row, { backgroundColor: t.panel, borderColor: t.line }]}>
+    <PressableScale
+      onPress={
+        onPress &&
+        (() => {
+          hapticTap(); // строки профиля — переключатели, отклик как у фильтров
+          onPress();
+        })
+      }
+      style={[st.row, { backgroundColor: t.panel, borderColor: t.line }]}
+    >
       <Ionicons name={icon} size={18} color={t.accent} />
       <Text style={{ color: t.text, fontSize: 14, flex: 1 }}>{label}</Text>
       <Text style={{ color: t.muted, fontSize: 13, fontWeight: '600' }}>{value}</Text>

@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ColorValue } from 'react-native';
+import { hapticTap } from '../../src/lib/haptics';
 import { useTheme } from '../../src/theme/useTheme';
 
 type IconName = React.ComponentProps<typeof Ionicons>['name'];
@@ -19,6 +20,7 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      screenListeners={{ tabPress: () => hapticTap() }}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: t.accent,
