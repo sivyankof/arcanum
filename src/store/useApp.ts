@@ -24,6 +24,7 @@ interface AppState {
   setLang: (l: Lang) => void;
   drawToday: (cardId: string, reversed: boolean) => void;
   todayDraw: () => DailyDraw | undefined;
+  resetToday: () => void;
 }
 
 const todayStr = () => new Date().toISOString().slice(0, 10);
@@ -54,6 +55,20 @@ export const useApp = create<AppState>()(
       },
 
       todayDraw: () => get().history.find((h) => h.date === todayStr()),
+
+      // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
+      // Серия уменьшается на 1 (точное прежнее значение не хранится).
+      resetToday: () => {
+        const t = todayStr();
+        const { history, streak } = get();
+        if (!history.some((h) => h.date === t)) return;
+        const rest = history.filter((h) => h.date !== t);
+        set({
+          history: rest,
+          lastDrawDate: rest[0]?.date ?? null,
+          streak: Math.max(0, streak - 1),
+        });
+      },
     }),
     { name: 'arcanum-app', storage: createJSONStorage(() => AsyncStorage) },
   ),

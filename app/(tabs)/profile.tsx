@@ -18,6 +18,7 @@ export default function ProfileScreen() {
   const setLang = useApp((s) => s.setLang);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const resetToday = useApp((s) => s.resetToday);
 
   const Row = ({
     icon,
@@ -77,6 +78,14 @@ export default function ProfileScreen() {
           value={lang === 'ru' ? 'Русский' : 'English'}
           onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
         />
+        {__DEV__ && (
+          <Row
+            icon="refresh"
+            label={lang === 'ru' ? 'Сбросить карту дня' : 'Reset daily card'}
+            value="DEV"
+            onPress={resetToday}
+          />
+        )}
       </ScrollView>
     </View>
   );

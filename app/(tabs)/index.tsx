@@ -43,6 +43,11 @@ export default function TodayScreen() {
   const flip = useSharedValue(drawn ? 1 : 0);
   const bob = useSharedValue(0);
 
+  // после сброса карты дня (или смены даты) возвращаем рубашку
+  React.useEffect(() => {
+    if (!drawn) flip.value = 0;
+  }, [drawn, flip]);
+
   React.useEffect(() => {
     bob.value = withRepeat(
       withSequence(
