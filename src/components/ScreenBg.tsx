@@ -1,17 +1,75 @@
 /** Общий градиентный фон всех экранов — эталон «Небесное золото».
- *  В эталоне фон радиальный; здесь вертикальный градиент с теми же стопами. */
+ *  В эталоне фон радиальный; здесь вертикальный градиент с теми же стопами.
+ *  Поверх — мерцающие звёзды (пункт 2 motion-spec); в светлой теме скрыты. */
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+  Easing,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTheme } from '../theme/useTheme';
+
+// позиции из эталона: звёзды только в верхней части экрана
+const STARS = [
+  { left: '8%', top: '6%', size: 10, delay: 0, symbol: '✦' },
+  { left: '26%', top: '11%', size: 7, delay: 900, symbol: '✧' },
+  { left: '55%', top: '5%', size: 6, delay: 1600, symbol: '✦' },
+  { left: '78%', top: '9%', size: 9, delay: 400, symbol: '✧' },
+  { left: '90%', top: '15%', size: 7, delay: 2200, symbol: '✦' },
+] as const;
+
+function Star({ left, top, size, delay, symbol }: (typeof STARS)[number]) {
+  const t = useTheme();
+  const v = useSharedValue(0);
+
+  React.useEffect(() => {
+    v.value = withDelay(
+      delay,
+      withRepeat(
+        withSequence(
+          withTiming(1, { duration: 2000, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
+          withTiming(0, { duration: 2000, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
+        ),
+        -1,
+      ),
+    );
+  }, [v, delay]);
+
+  const twinkle = useAnimatedStyle(() => ({
+    opacity: 0.15 + v.value * 0.5,
+    transform: [{ scale: 0.8 + v.value * 0.3 }],
+  }));
+
+  return (
+    <Animated.Text style={[{ position: 'absolute', left, top, fontSize: size, color: t.accent }, twinkle]}>
+      {symbol}
+    </Animated.Text>
+  );
+}
 
 export function ScreenBg() {
   const t = useTheme();
   return (
-    <LinearGradient
-      colors={[t.bgTop, t.bg, t.bgBottom]}
-      locations={[0, 0.48, 1]}
-      style={StyleSheet.absoluteFill}
-    />
+    <>
+      <LinearGradient
+        colors={[t.bgTop, t.bg, t.bgBottom]}
+        locations={[0, 0.48, 1]}
+        style={StyleSheet.absoluteFill}
+      />
+      {t.mode === 'dark' && (
+        <View style={StyleSheet.absoluteFill} pointerEvents="none">
+          {STARS.map((s) => (
+            <Star key={`${s.left}-${s.top}`} {...s} />
+          ))}
+        </View>
+      )}
+    </>
   );
 }

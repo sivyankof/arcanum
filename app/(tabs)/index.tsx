@@ -9,6 +9,7 @@ import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react
 import Animated, {
   Easing,
   interpolate,
+  ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
@@ -51,7 +52,10 @@ function Ring({
   const angle = useSharedValue(0);
 
   React.useEffect(() => {
-    angle.value = withRepeat(withTiming(360, { duration, easing: Easing.linear }), -1);
+    angle.value = withRepeat(
+      withTiming(360, { duration, easing: Easing.linear, reduceMotion: ReduceMotion.System }),
+      -1,
+    );
   }, [angle, duration]);
 
   const spin = useAnimatedStyle(() => ({
