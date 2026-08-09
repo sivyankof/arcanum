@@ -334,6 +334,23 @@ justify-content:center;color:var(--accent);font-size:20px}
 .s3col small{display:block;font-size:8.5px;letter-spacing:1.5px;color:var(--muted);margin-top:7px}
 .s3col small b{color:var(--head)}
 
+
+.lvlcard{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px 15px;
+margin-top:14px;backdrop-filter:blur(10px)}
+.lvlcard .lt{display:flex;justify-content:space-between;align-items:baseline}
+.lvlcard .lt b{font-family:var(--serif);font-size:16px;color:var(--head);font-weight:600}
+.lvlcard .lt small{font-size:10px;color:var(--muted);font-weight:700}
+.lvlbar{height:7px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:8px}
+.lvlbar i{display:block;height:100%;width:0;border-radius:4px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));animation:fill2 1.4s .4s cubic-bezier(.25,1.2,.4,1) forwards}
+@keyframes fill2{to{width:68%}}
+.mcard{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);
+border-radius:15px;padding:12px 14px;margin-top:10px;backdrop-filter:blur(10px)}
+.mcard img{width:38px;border-radius:5px;border:1px solid var(--frame)}
+.mcard .mt small{font-size:8.5px;letter-spacing:2px;color:var(--accent)}
+.mcard .mt b{display:block;font-family:var(--serif);font-size:15px;color:var(--head);font-weight:600}
+.mcard .mt span{font-size:10.5px;color:var(--muted)}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -496,18 +513,32 @@ justify-content:center;color:var(--accent);font-size:20px}
     <div class="date fadeup d1">ВАШ ПУТЬ</div>
     <div class="h2 fadeup d1">Анна</div>
     <div class="rule fadeup d2"><span>✦</span></div>
+
+    <div class="lvlcard fadeup d2">
+      <div class="lt"><b>Уровень 3 · Читающая</b><small>340 / 500 XP</small></div>
+      <div class="lvlbar"><i></i></div>
+    </div>
+
     <div class="statrow fadeup d3">
       <div class="statbox"><b>12</b><small>СЕРИЯ 🔥</small></div>
       <div class="statbox"><b>34</b><small>КАРТ ДНЯ</small></div>
-      <div class="statbox"><b>7</b><small>УРОКОВ</small></div>
+      <div class="statbox"><b>1</b><small>ЗАМОРОЗКА ❄</small></div>
     </div>
-    <div class="barc fadeup d3" onclick="openCardSafe('strength')">
+
+    <div class="barc fadeup d3">
       <img id="barcimg" src="" alt="">
       <div class="bt"><small>АРКАН РОЖДЕНИЯ</small><b>VIII · Сила</b></div>
     </div>
-    <div class="date fadeup d4" style="text-align:left;margin-top:20px">ДНЕВНИК · АВГУСТ</div>
+
+    <div class="date fadeup d4" style="text-align:left;margin-top:22px">ДНЕВНИК · АВГУСТ</div>
+    <div class="mcard fadeup d4">
+      <img id="mcardimg" src="" alt="">
+      <div class="mt"><small>КАРТА МЕСЯЦА</small><b>Верховная Жрица · 4 раза</b>
+      <span>Отозвалось 12 из 18 дней</span></div>
+    </div>
     <div class="fadeup d4" id="journal"></div>
-    <div class="fadeup d5">
+
+    <div class="fadeup d5" style="margin-top:18px">
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
         <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
@@ -672,6 +703,7 @@ function answer(el, ok){
 
 /* профиль: аркан рождения + дневник */
 document.getElementById('barcimg').src = 'data:image/jpeg;base64,' + THUMBS['strength'];
+document.getElementById('mcardimg').src = 'data:image/jpeg;base64,' + THUMBS['high-priestess'];
 function openCardSafe(id){ if(id==='fool'){show('v-detail');} }
 const JOURNAL = [
   {d:'8 АВГУСТА', id:'star', o:'✓', n:'День и правда сложился — созвон прошёл легко'},
