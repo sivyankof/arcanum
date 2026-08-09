@@ -371,6 +371,18 @@ color:var(--muted);font-size:11.5px;cursor:text;transition:.2s}
 @keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
 .node.lock .nc.wob{animation:wob .35s ease 2}
 
+
+.qfield{background:var(--panel);border:1px dashed var(--line);border-radius:13px;padding:11px 14px;
+margin-top:12px;color:var(--muted);font-size:12px;cursor:text;transition:.2s}
+.qfield:hover{border-color:var(--frame)}
+.posmean{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:11px 13px;
+margin-top:9px;backdrop-filter:blur(8px);opacity:0;transform:translateY(8px);transition:.45s}
+.posmean.show{opacity:1;transform:none}
+.posmean h6{font-size:8.5px;letter-spacing:2px;color:var(--accent)}
+.posmean p{font-size:12px;line-height:1.55;color:var(--text);margin-top:4px;font-family:var(--serif);font-size:13.5px}
+.aiteaser{display:flex;align-items:center;justify-content:center;gap:7px;border:1px dashed var(--line);
+border-radius:13px;padding:11px;margin-top:10px;color:var(--muted);font-size:11px;letter-spacing:.5px}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -593,14 +605,19 @@ color:var(--muted);font-size:11.5px;cursor:text;transition:.2s}
     <div class="rule fadeup d2"><span>✦</span></div>
     <p class="fadeup d3" style="text-align:center;color:var(--muted);font-size:12px;margin-top:6px">
       Подумайте о своём вопросе и откройте карты по одной</p>
+    <div class="qfield fadeup d3" onclick="this.textContent='Стоит ли мне менять работу этой осенью?';this.style.color='var(--text)';this.style.borderStyle='solid'">+ Ваш вопрос (необязательно)…</div>
     <div class="s3row fadeup d3" id="s3row"></div>
-    <div class="mean" id="s3mean" style="margin-top:24px">
-      <div class="lbl">НИТЬ ИСТОРИИ</div>
-      <p style="font-size:14px">Опыт Отшельника привёл вас к повороту Колеса — впереди выбор сердцем.
-      Прошлое дало мудрость, настоящее меняет декорации, будущее просит честного «да» или «нет».</p>
-      <button class="cta" id="s3save" onclick="this.textContent='СОХРАНЕНО В ДНЕВНИК ✓';this.style.opacity=.75">СОХРАНИТЬ В ДНЕВНИК</button>
+    <div id="s3means"></div>
+    <div class="posmean" id="s3comp" style="border-color:var(--frame)">
+      <h6>СОСТАВ РАСКЛАДА</h6>
+      <p>Все три карты — Старшие арканы: расклад о значимых поворотах, а не о повседневных мелочах.
+      Спросите себя: какой из этих поворотов уже начался?</p>
     </div>
-  </div>
+    <div class="mean" id="s3mean" style="margin-top:14px">
+      <div class="lbl">ЗАМЕТКА</div>
+      <div class="rnote" onclick="this.textContent='Колесо в настоящем — и правда всё закрутилось…';this.style.color='var(--text)';this.style.borderStyle='solid'">+ Что откликнулось…</div>
+      <button class="cta" id="s3save" onclick="this.textContent='СОХРАНЕНО В ДНЕВНИК ✓';this.style.opacity=.75">СОХРАНИТЬ В ДНЕВНИК</button>
+    </div></div>
 
   <div class="nav" id="nav">
     <div class="on" data-v="v-today"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg><small>Сегодня</small></div>
@@ -769,6 +786,7 @@ const S3 = [
   {pos:'НАСТОЯЩЕЕ', id:'wheel-of-fortune', name:'Колесо'},
   {pos:'БУДУЩЕЕ', id:'lovers', name:'Влюблённые'},
 ];
+const S3MEAN = ["Отшельник — карта осознанного уединения. Наступило время отойти от шума, чужих мнений и обязательной активности, чтобы услышать себя.", "Колесо Фортуны — карта поворота. Жизнь приходит в движение: обстоятельства меняются сами, без вашего участия, и чаще всего — к лучшему.", "Влюблённые — карта союза и выбора. Она говорит о глубокой связи — с человеком, делом или собственными ценностями — и о решении, которое нельзя принять наполовину."];
 let s3open = 0;
 document.getElementById('s3row').innerHTML = S3.map((c,i)=>
   `<div class="s3col"><div class="s3card" id="s3c${i}" onclick="s3flip(${i})">`+
@@ -779,7 +797,12 @@ function s3flip(i){
   if(el.classList.contains('open')) return;
   el.classList.add('open');
   document.getElementById('s3n'+i).textContent = S3[i].name;
-  if(++s3open===3) document.getElementById('s3mean').classList.add('show');
+  const box=document.getElementById('s3means');
+  const div=document.createElement('div'); div.className='posmean';
+  div.innerHTML=`<h6>${S3[i].pos} · ${S3[i].name.toUpperCase()}</h6><p>${S3MEAN[i]}</p>`;
+  box.appendChild(div); requestAnimationFrame(()=>div.classList.add('show'));
+  if(++s3open===3){ document.getElementById('s3mean').classList.add('show');
+    document.getElementById('s3comp').classList.add('show'); }
 }
 
 
