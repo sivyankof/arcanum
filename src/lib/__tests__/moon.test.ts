@@ -37,19 +37,44 @@ describe('moonPhase', () => {
 });
 
 describe('границы фаз', () => {
-  it('порог 1.85: до него новолуние, после — растущая', () => {
-    expect(moonPhase(at(1.84))).toBe('new');
-    expect(moonPhase(at(1.86))).toBe('waxing');
+  // симметричные окна вокруг новолуния (0) и полнолуния (~14.7653), полуширина 0.92 (hf-01/H1)
+  it('окно новолуния: до 0.92 суток — новолуние, дальше — растущая', () => {
+    expect(moonPhase(at(0.91))).toBe('new');
+    expect(moonPhase(at(0.93))).toBe('waxing');
   });
 
-  it('порог 14.77: до него растущая, после — полнолуние', () => {
-    expect(moonPhase(at(14.76))).toBe('waxing');
-    expect(moonPhase(at(14.78))).toBe('full');
+  it('окно полнолуния: нижняя граница ~13.8453 — растущая сменяется полнолунием', () => {
+    expect(moonPhase(at(13.84))).toBe('waxing');
+    expect(moonPhase(at(13.85))).toBe('full');
   });
 
-  it('порог 16.61: до него полнолуние, после — убывающая', () => {
-    expect(moonPhase(at(16.6))).toBe('full');
-    expect(moonPhase(at(16.62))).toBe('waning');
+  it('окно полнолуния: верхняя граница ~15.6853 — полнолуние сменяется убывающей', () => {
+    expect(moonPhase(at(15.68))).toBe('full');
+    expect(moonPhase(at(15.69))).toBe('waning');
+  });
+
+  it('окно новолуния следующего цикла: граница ~28.6106', () => {
+    expect(moonPhase(at(28.6))).toBe('waning');
+    expect(moonPhase(at(28.62))).toBe('new');
+  });
+});
+
+describe('реальные даты (logic-spec §6)', () => {
+  // возрасты посчитаны от MOON_EPOCH, сверены с логикой аудита
+  it('23.08.2025 06:06 UTC — новолуние', () => {
+    expect(moonPhase(new Date(Date.UTC(2025, 7, 23, 6, 6)))).toBe('new');
+  });
+
+  it('09.08.2025 08:00 UTC — полнолуние', () => {
+    expect(moonPhase(new Date(Date.UTC(2025, 7, 9, 8, 0)))).toBe('full');
+  });
+
+  it('28.08.2025 00:00 UTC — растущая', () => {
+    expect(moonPhase(new Date(Date.UTC(2025, 7, 28, 0, 0)))).toBe('waxing');
+  });
+
+  it('15.08.2025 00:00 UTC — убывающая', () => {
+    expect(moonPhase(new Date(Date.UTC(2025, 7, 15, 0, 0)))).toBe('waning');
   });
 });
 

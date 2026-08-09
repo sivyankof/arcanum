@@ -16,8 +16,22 @@ export const SYNODIC_MONTH = 29.53059;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-/** Пороги фаз в сутках от новолуния (logic-spec §6). */
-export const PHASE_BOUNDS = { new: 1.85, waxing: 14.77, full: 16.61 } as const;
+/** Полуширина окна главных фаз (новолуние/полнолуние) вокруг точного момента, в сутках
+ *  (аудит 09.08, logic-spec §6): старые границы лежали целиком ПОСЛЕ точных моментов, поэтому
+ *  в реальное новолуние/полнолуние фаза уже показывала следующую. Симметричные окна это чинят. */
+export const HALF_WINDOW = 0.92;
+
+/** Точный момент полнолуния — середина синодического месяца. */
+const FULL_MOMENT = SYNODIC_MONTH / 2;
+
+/** Границы фаз в сутках от новолуния, построенные вокруг точек new (0) и full (FULL_MOMENT)
+ *  с полушириной HALF_WINDOW в каждую сторону. */
+export const PHASE_BOUNDS = {
+  waxingStart: HALF_WINDOW,               // ≈0.92
+  fullStart: FULL_MOMENT - HALF_WINDOW,   // ≈13.8453
+  waningStart: FULL_MOMENT + HALF_WINDOW, // ≈15.6853
+  newStart: SYNODIC_MONTH - HALF_WINDOW,  // ≈28.6106
+} as const;
 
 export type MoonPhase = 'new' | 'waxing' | 'full' | 'waning';
 
@@ -28,12 +42,12 @@ export function moonAge(date: Date): number {
   return ((days % SYNODIC_MONTH) + SYNODIC_MONTH) % SYNODIC_MONTH;
 }
 
-/** Фаза по возрасту луны. Границы включаются в младшую фазу («<1.85 — новолуние»). */
+/** Фаза по возрасту луны. Окна new/full симметричны вокруг точных моментов (±HALF_WINDOW). */
 export function moonPhase(date: Date): MoonPhase {
   const age = moonAge(date);
-  if (age < PHASE_BOUNDS.new) return 'new';
-  if (age < PHASE_BOUNDS.waxing) return 'waxing';
-  if (age < PHASE_BOUNDS.full) return 'full';
+  if (age < PHASE_BOUNDS.waxingStart || age >= PHASE_BOUNDS.newStart) return 'new';
+  if (age < PHASE_BOUNDS.fullStart) return 'waxing';
+  if (age < PHASE_BOUNDS.waningStart) return 'full';
   return 'waning';
 }
 
