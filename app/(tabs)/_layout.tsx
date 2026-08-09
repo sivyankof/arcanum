@@ -14,6 +14,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { TabIcon as TabGlyph, type TabIconName } from '../../src/components/TabIcons';
+import { glowShadow } from '../../src/theme/glow';
 import { hapticTap } from '../../src/lib/haptics';
 import { fonts } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -54,14 +55,14 @@ function TabIcon({ name, color, focused, path }: { name: TabIconName; color: Col
 
   return (
     // свечение активной иконки — эталон `.nav>div.on svg`: filter:drop-shadow(0 0 7px var(--glow)).
-    // Раньше рисовали через shadow*-пропы и держали только на iOS (на Android elevation дал бы
-    // прямоугольную тень под иконкой); boxShadow рисует именно контур свечения и работает
-    // на обеих платформах и в вебе, поэтому платформенное ограничение снято
+    // Это свечение по КОНТУРУ иконки (альфа-маска), а не по прямоугольнику — boxShadow тут
+    // не подходит (дал бы квадратную тень вокруг прозрачного фона иконки), поэтому используем
+    // платформенный хелпер glowShadow: drop-shadow-фильтр на Android/вебе, shadow*-пропы на iOS
     <Animated.View
       style={[
         anim,
         { opacity: focused ? 1 : 0.85 },
-        active && { boxShadow: `0px 0px 7px ${t.glow}` },
+        active && glowShadow(t.glow, t.accent, 7, 0.9),
       ]}
     >
       <TabGlyph name={name} color={color as string} />

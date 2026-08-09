@@ -9,6 +9,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg, { Circle, Defs, Path, RadialGradient, Rect, Stop } from 'react-native-svg';
+import { glowShadow } from '../theme/glow';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { Txt } from './Txt';
@@ -43,10 +44,11 @@ export function CardBack({ hint }: { hint?: string }) {
       <View style={[st.inframe, { borderColor: t.frame }]} />
 
       <View style={st.emb}>
-        {/* свечение эмблемы — эталон `.emb svg`: filter:drop-shadow(0 0 12px var(--glow)).
-            Висит на отдельной обёртке: рядом с overflow:'hidden' тень срезает,
-            поэтому обрезка — только на faceClip */}
-        <View style={{ boxShadow: `0px 0px 12px ${t.glow}` }}>
+        {/* свечение эмблемы — эталон `.emb svg`: filter:drop-shadow(0 0 12px var(--glow)),
+            то есть по контуру символа, а не по прямоугольнику; boxShadow дал бы квадратную
+            тень вокруг прозрачного фона. Висит на отдельной обёртке: рядом с overflow:'hidden'
+            тень срезает, поэтому обрезка — только на faceClip */}
+        <View style={glowShadow(t.glow, t.accent, 12, 0.35)}>
           <Svg
             width={EMB_SIZE}
             height={EMB_SIZE}

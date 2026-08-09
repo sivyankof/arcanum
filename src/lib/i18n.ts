@@ -21,7 +21,7 @@ const resources = {
       card: {
         general: "Общее значение", reversed: "Перевёрнутая", love: "Любовь", career: "Работа",
         finances: "Финансы", health: "Здоровье", day_card: "Как карта дня", symbolism: "Символика",
-        keywords: "Ключевые слова", soon: "Текст готовится", backAll: "Все карты", backToday: "Сегодня", todayHighlight: "Ваша карта сегодня",
+        keywords: "Ключевые слова", soon: "Текст готовится", backAll: "Карты", backToday: "Сегодня", todayHighlight: "Ваша карта сегодня",
         tabGeneral: "Общее", sphereLove: "В любви", sphereCareer: "В работе", sphereFinances: "В финансах", sphereHealth: "Для здоровья",
       },
     },
@@ -43,7 +43,7 @@ const resources = {
       card: {
         general: "General meaning", reversed: "Reversed", love: "Love", career: "Career",
         finances: "Finances", health: "Health", day_card: "As card of the day", symbolism: "Symbolism",
-        keywords: "Keywords", soon: "Text in progress", backAll: "All cards", backToday: "Today", todayHighlight: "Your card today",
+        keywords: "Keywords", soon: "Text in progress", backAll: "Cards", backToday: "Today", todayHighlight: "Your card today",
         tabGeneral: "General", sphereLove: "In love", sphereCareer: "At work", sphereFinances: "In finances", sphereHealth: "For health",
       },
     },

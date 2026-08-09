@@ -64,8 +64,16 @@ export default function RootLayout() {
         <Stack.Screen
           name="card/[id]"
           options={{
-            // системной шапки нет: кнопка «назад» живёт в контенте экрана, как в эталоне (.backbtn)
-            headerShown: false,
+            // шапка системная (нативная кнопка «назад»), но прозрачная: своего заголовка не нужно —
+            // название карты уже есть в теле экрана. Подпись кнопки задаётся на самом экране
+            // (зависит от источника перехода, см. Stack.Screen внутри card/[id].tsx)
+            title: '',
+            headerTransparent: true,
+            // без явного сброса фон наследуется из screenOptions.headerStyle.backgroundColor выше
+            // и рисует непрозрачную полосу поверх контента — это уже случалось
+            headerStyle: { backgroundColor: 'transparent' },
+            headerShadowVisible: false,
+            headerTintColor: t.accent,
             // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
             animation: 'fade',
           }}

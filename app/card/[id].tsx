@@ -1,7 +1,6 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useNavigation } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -137,6 +136,10 @@ export default function CardDetail() {
   // уведомит компонент об обновлении при вытягивании новой карты дня
   const todayCardId = useApp((s) => s.todayDraw()?.cardId);
   const fadeStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
+  // вибрация при возврате: кнопка «назад» теперь системная (нативная), на неё нельзя повесить
+  // onPress, поэтому ловим сам уход с экрана — это покрывает и тап по кнопке, и свайп-жест назад
+  const navigation = useNavigation();
+  React.useEffect(() => navigation.addListener('beforeRemove', () => { hapticTap(); }), [navigation]);
 
   const card = cardById.get(id ?? '');
   if (!card) return null;
@@ -179,47 +182,36 @@ export default function CardDetail() {
   const symbolism = blockOf('symbolism');
 
   // индексы каскада FadeUp: контекстный блок «как карта дня» встаёт перед вкладками
-  // и сдвигает всё, что идёт следом, на один шаг; символика всегда последняя (6)
-  const idxTabs = isTodayCard ? 3 : 2;
-  const idxSphere = isTodayCard ? 4 : 3;
-  const idxReversed = isTodayCard ? 5 : 4;
+  // и сдвигает всё, что идёт следом, на один шаг; символика всегда последняя (5)
+  const idxTabs = isTodayCard ? 2 : 1;
+  const idxSphere = isTodayCard ? 3 : 2;
+  const idxReversed = isTodayCard ? 4 : 3;
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
+      {/* подпись нативной кнопки «назад» зависит от источника перехода (параметр from):
+          с «Сегодня» — «Сегодня» и возврат туда, иначе (сетка справочника или прямая ссылка) — «Карты» */}
+      <Stack.Screen options={{ headerBackTitle: from === 'today' ? tr('card.backToday') : tr('card.backAll') }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          paddingTop: insets.top + spacing.xl,
+          // insets.top + высота системной шапки (64) — со значением поменьше контент уедет под неё,
+          // такая ошибка уже была
+          paddingTop: insets.top + 64,
           paddingHorizontal: spacing.xl,
           paddingBottom: 60,
         }}
         showsVerticalScrollIndicator={false}
       >
-        {/* кнопка «назад» в контенте экрана, как в эталоне (.backbtn) — без системной шапки.
-            Подпись и действие зависят от того, откуда открыли карту (параметр from): с «Сегодня» —
-            «Сегодня» и возврат туда, иначе (сетка справочника или прямая ссылка) — «Все карты».
-            Если истории для router.back() нет (прямая ссылка), уводим в справочник вместо корня */}
-        <FadeUp index={0}>
-          <PressableScale
-            onPress={() => (router.canGoBack() ? router.back() : router.replace('/cards'))}
-            style={st.backbtn}
-          >
-            <Ionicons name="chevron-back" size={14} color={t.accent} />
-            <Txt style={[st.backbtnLabel, { color: t.accent }]}>
-              {(from === 'today' ? tr('card.backToday') : tr('card.backAll')).toUpperCase()}
-            </Txt>
-          </PressableScale>
-        </FadeUp>
-
         <View style={st.hero}>
           {origin ? (
             <HeroImage cardId={card.id} origin={origin} />
           ) : (
-            <FadeUp index={1}>
+            <FadeUp index={0}>
               <HeroImage cardId={card.id} origin={null} />
             </FadeUp>
           )}
-          <FadeUp index={1} style={{ flex: 1 }}>
+          <FadeUp index={0} style={{ flex: 1 }}>
             <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
             <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
             <View style={st.kws}>
@@ -235,7 +227,7 @@ export default function CardDetail() {
         {/* контекстный блок «ваша карта сегодня» (product-spec §3): выше вкладок,
             золотая рамка вместо обычной + звёздочка перед заголовком */}
         {isTodayCard && (
-          <FadeUp index={2}>
+          <FadeUp index={1}>
             <Block
               title={tr('card.todayHighlight').toUpperCase()}
               text={dayCard.text}
@@ -282,11 +274,11 @@ export default function CardDetail() {
           <Block title={tr('card.reversed')} text={reversed.text} todo={reversed.todo} />
         </FadeUp>
         {!isTodayCard && (
-          <FadeUp index={5}>
+          <FadeUp index={4}>
             <Block title={tr('card.day_card')} text={dayCard.text} todo={dayCard.todo} />
           </FadeUp>
         )}
-        <FadeUp index={6}>
+        <FadeUp index={5}>
           <Block title={tr('card.symbolism')} text={symbolism.text} todo={symbolism.todo} />
         </FadeUp>
       </ScrollView>
@@ -295,10 +287,7 @@ export default function CardDetail() {
 }
 
 const st = StyleSheet.create({
-  // кнопка «назад» (.backbtn эталона) — область нажатия не растягивается на всю ширину
-  backbtn: { flexDirection: 'row', alignItems: 'center', gap: 7, alignSelf: 'flex-start', marginBottom: 6 },
-  backbtnLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1.2 },
-  hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start', marginTop: 8 },
+  hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start' },
   // виньетка = тёплое свечение вокруг карты; в эталоне `.hero .im`: box-shadow 0 18px 40px var(--glow).
   // Значение берём напрямую из CSS макета — boxShadow принимает ту же синтаксическую форму
   imShadow: {
