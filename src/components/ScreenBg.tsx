@@ -8,13 +8,16 @@ import Animated, { useAnimatedStyle, useSharedValue, withDelay } from 'react-nat
 import { pingPong } from '../lib/loops';
 import { useTheme } from '../theme/useTheme';
 
-// позиции из эталона: звёзды только в верхней части экрана
+// Позиции, размеры и задержки — из блока .stars эталона (звёзды только в верхней части экрана).
+// Двум крупным звёздам в макете размер не задан, то есть они наследуют дефолт браузера — 16 px;
+// именно этот контраст 6 → 16 и делает небо живым, не сглаживать его.
 const STARS = [
-  { left: '8%', top: '6%', size: 10, delay: 0, symbol: '✦' },
-  { left: '26%', top: '11%', size: 7, delay: 900, symbol: '✧' },
-  { left: '55%', top: '5%', size: 6, delay: 1600, symbol: '✦' },
-  { left: '78%', top: '9%', size: 9, delay: 400, symbol: '✧' },
-  { left: '90%', top: '15%', size: 7, delay: 2200, symbol: '✦' },
+  { left: '8%', top: '7%', size: 16, delay: 0, symbol: '✦' },
+  { left: '26%', top: '12%', size: 7, delay: 900, symbol: '✧' },
+  { left: '55%', top: '6%', size: 6, delay: 1600, symbol: '✦' },
+  { left: '78%', top: '10%', size: 16, delay: 400, symbol: '✧' },
+  { left: '90%', top: '16%', size: 7, delay: 2200, symbol: '✦' },
+  { left: '14%', top: '20%', size: 6, delay: 1200, symbol: '✧' },
 ] as const;
 
 function Star({ left, top, size, delay, symbol }: (typeof STARS)[number]) {
