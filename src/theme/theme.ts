@@ -67,11 +67,17 @@ export const lightTheme: Theme = {
   success: '#4d9370',
 };
 
+/** Шрифты эталона: Cormorant Garamond для «голоса таро», Manrope для интерфейса.
+ *  Оба грузятся в app/_layout.tsx. Начертания не синтезируются, поэтому у каждого веса
+ *  своё семейство — интерфейсный текст ставить через компонент `Txt`, он сам подберёт. */
 export const fonts = {
-  /** Заголовки — Cormorant Garamond (кириллица есть; грузится в app/_layout.tsx) */
   display: 'CormorantGaramond_500Medium',
   displaySemi: 'CormorantGaramond_600SemiBold',
-  sans: undefined as string | undefined, // системный sans
+  sans: 'Manrope_400Regular',
+  sansMedium: 'Manrope_500Medium',
+  sansSemi: 'Manrope_600SemiBold',
+  sansBold: 'Manrope_700Bold',
+  sansExtra: 'Manrope_800ExtraBold',
 };
 
 export const spacing = { xs: 4, s: 8, m: 12, l: 16, xl: 24, xxl: 32 } as const;

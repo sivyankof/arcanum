@@ -31,5 +31,14 @@ export function cardOfDay(dateISO: string, userSeed = 0): TarotCard {
   return cards[h % cards.length];
 }
 
+const ROMAN = ["0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+  "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI"];
+
+/** Номер карты для подписи под названием, как в эталоне («XVII · СТАРШИЙ АРКАН»):
+ *  старшие арканы — римскими цифрами, младшие — арабскими. */
+export function cardNumeral(card: TarotCard): string {
+  return card.arcana === "major" ? ROMAN[card.number] : String(card.number);
+}
+
 /** Изображения карт: expo требует статических require — карта генерируется скриптом. */
 export { cardImages } from "./cardImages";

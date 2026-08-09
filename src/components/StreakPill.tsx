@@ -3,12 +3,13 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { pingPong } from '../lib/loops';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { Sparks } from './Sparks';
+import { Txt } from './Txt';
 
 const BREATH_MS = 650; // полный цикл 1.3 с
 
@@ -36,10 +37,10 @@ export function StreakPill({ streak, burst = 0 }: { streak: number; burst?: numb
         </Animated.View>
         <Sparks burst={burst} />
       </View>
-      <Text style={{ color: t.head, fontWeight: '700', fontSize: 13 }}>
+      <Txt style={{ color: t.head, fontWeight: '700', fontSize: 13 }}>
         {streak} {lang === 'ru' ? 'дн.' : 'days'}
-      </Text>
-      <Text style={{ color: t.muted, fontSize: 11 }}>{lang === 'ru' ? 'серия' : 'streak'}</Text>
+      </Txt>
+      <Txt style={{ color: t.muted, fontSize: 11 }}>{lang === 'ru' ? 'серия' : 'streak'}</Txt>
     </View>
   );
 }

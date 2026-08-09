@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
@@ -10,6 +10,7 @@ import { hapticTap } from '../../src/lib/haptics';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { Txt } from '../../src/components/Txt';
 
 /** Строка настройки: иконка · подпись · текущее значение. */
 function Row({
@@ -36,8 +37,8 @@ function Row({
       style={[st.row, { backgroundColor: t.panel, borderColor: t.line }]}
     >
       <Ionicons name={icon} size={18} color={t.accent} />
-      <Text style={{ color: t.text, fontSize: 14, flex: 1 }}>{label}</Text>
-      <Text style={{ color: t.muted, fontSize: 13, fontWeight: '600' }}>{value}</Text>
+      <Txt style={{ color: t.text, fontSize: 14, flex: 1 }}>{label}</Txt>
+      <Txt style={{ color: t.muted, fontSize: 13, fontWeight: '600' }}>{value}</Txt>
     </PressableScale>
   );
 }
@@ -66,17 +67,17 @@ export default function ProfileScreen() {
         }}
       >
         <FadeUp index={0}>
-          <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Профиль' : 'Profile'}</Text>
+          <Txt style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Профиль' : 'Profile'}</Txt>
         </FadeUp>
 
         <FadeUp index={1} style={st.stats}>
           <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
-            <Text style={[st.statNum, { color: t.head }]}>{streak}</Text>
-            <Text style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'СЕРИЯ' : 'STREAK'}</Text>
+            <Txt style={[st.statNum, { color: t.head }]}>{streak}</Txt>
+            <Txt style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'СЕРИЯ' : 'STREAK'}</Txt>
           </View>
           <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
-            <Text style={[st.statNum, { color: t.head }]}>{history.length}</Text>
-            <Text style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'КАРТ ДНЯ' : 'DAILY CARDS'}</Text>
+            <Txt style={[st.statNum, { color: t.head }]}>{history.length}</Txt>
+            <Txt style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'КАРТ ДНЯ' : 'DAILY CARDS'}</Txt>
           </View>
         </FadeUp>
 

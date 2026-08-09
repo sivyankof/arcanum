@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   ReduceMotion,
@@ -18,6 +18,7 @@ import { course } from '../../src/lib/content';
 import { hapticWarning } from '../../src/lib/haptics';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { Txt } from '../../src/components/Txt';
 
 // качание замка: ±8°, три раза, суммарно ~350 мс (пункт 13 motion-spec)
 const SHAKE_STEP_MS = 58;
@@ -39,7 +40,7 @@ function LessonRow({ title, locked }: { title: string; locked: boolean }) {
 
   const body = (
     <>
-      <Text style={{ color: t.text, fontSize: 13, flex: 1 }}>{title}</Text>
+      <Txt style={{ color: t.text, fontSize: 13, flex: 1 }}>{title}</Txt>
       <Animated.View style={locked ? lockStyle : undefined}>
         <Ionicons name={locked ? 'lock-closed' : 'play'} size={13} color={locked ? t.muted : t.accent} />
       </Animated.View>
@@ -79,18 +80,18 @@ export default function CourseScreen() {
         showsVerticalScrollIndicator={false}
       >
         <FadeUp index={0}>
-          <Text style={[st.sub, { color: t.muted }]}>
+          <Txt style={[st.sub, { color: t.muted }]}>
             {lang === 'ru' ? '6 МОДУЛЕЙ · 32 УРОКА' : '6 MODULES · 32 LESSONS'}
-          </Text>
-          <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Курс' : 'Course'}</Text>
+          </Txt>
+          <Txt style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Курс' : 'Course'}</Txt>
         </FadeUp>
 
         {course.map((m: any, mi: number) => (
           <FadeUp key={m.id} index={1 + mi} style={{ marginTop: spacing.xl }}>
             <View style={st.modHead}>
-              <Text style={[st.modTitle, { color: t.head }]}>
+              <Txt style={[st.modTitle, { color: t.head }]}>
                 {mi + 1}. {m.title[lang]}
-              </Text>
+              </Txt>
               {!m.free && <Ionicons name="lock-closed" size={13} color={t.muted} />}
             </View>
             {m.lessons.map((l: any, li: number) => (

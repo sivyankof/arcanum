@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { spreads } from '../../src/lib/content';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { Txt } from '../../src/components/Txt';
 
 /** Каталог раскладов — v0: список. Этап 5 плана: режим «разложить» с сохранением в дневник. */
 export default function SpreadsScreen() {
@@ -27,21 +28,21 @@ export default function SpreadsScreen() {
         showsVerticalScrollIndicator={false}
       >
         <FadeUp index={0}>
-          <Text style={[st.sub, { color: t.muted }]}>{lang === 'ru' ? 'ПРАКТИКА' : 'PRACTICE'}</Text>
-          <Text style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Расклады' : 'Spreads'}</Text>
+          <Txt style={[st.sub, { color: t.muted }]}>{lang === 'ru' ? 'ПРАКТИКА' : 'PRACTICE'}</Txt>
+          <Txt style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Расклады' : 'Spreads'}</Txt>
         </FadeUp>
 
         {spreads.map((s: any, si: number) => (
           <FadeUp key={s.id} index={1 + si} style={[st.item, { backgroundColor: t.panel, borderColor: t.line }]}>
             <View style={{ flex: 1 }}>
-              <Text style={[st.name, { color: t.head }]}>{s.name[lang]}</Text>
-              <Text style={[st.desc, { color: t.muted }]}>
+              <Txt style={[st.name, { color: t.head }]}>{s.name[lang]}</Txt>
+              <Txt style={[st.desc, { color: t.muted }]}>
                 {s.cards} {lang === 'ru' ? 'карт' : 'cards'} · {s.description[lang]}
-              </Text>
+              </Txt>
             </View>
             {!s.free && (
               <View style={[st.badge, { borderColor: t.frame, backgroundColor: t.chipBg }]}>
-                <Text style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.2, fontWeight: '700' }}>PREMIUM</Text>
+                <Txt style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.2, fontWeight: '700' }}>PREMIUM</Txt>
               </View>
             )}
           </FadeUp>

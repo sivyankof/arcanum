@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   measure,
@@ -17,12 +17,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
-import { cardById } from '../../src/lib/content';
+import { cardById, cardNumeral } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { Txt } from '../../src/components/Txt';
 
-const ROMAN = ['0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
 const BLOCKS = ['general', 'reversed', 'love', 'career', 'finances', 'health', 'day_card', 'symbolism'] as const;
 
 const FLY_MS = 350;
@@ -97,7 +97,7 @@ export default function CardDetail() {
   const card = cardById.get(id ?? '');
   if (!card) return null;
 
-  const num = card.arcana === 'major' ? ROMAN[card.number] : String(card.number);
+  const num = cardNumeral(card);
   const arcanaLabel =
     card.arcana === 'major'
       ? lang === 'ru' ? 'СТАРШИЙ АРКАН' : 'MAJOR ARCANA'
@@ -123,12 +123,12 @@ export default function CardDetail() {
             </FadeUp>
           )}
           <FadeUp index={0} style={{ flex: 1 }}>
-            <Text style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Text>
-            <Text style={[st.name, { color: t.head }]}>{card.name[lang]}</Text>
+            <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
+            <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
             <View style={st.kws}>
               {card.keywords[lang].map((k) => (
                 <View key={k} style={[st.kw, { backgroundColor: t.chipBg, borderColor: t.line }]}>
-                  <Text style={{ color: t.accent, fontSize: 10, fontWeight: '600' }}>{k}</Text>
+                  <Txt style={{ color: t.accent, fontSize: 10, fontWeight: '600' }}>{k}</Txt>
                 </View>
               ))}
             </View>
@@ -141,8 +141,8 @@ export default function CardDetail() {
           const text = block.status === 'todo' ? tr('card.soon') : block[lang];
           return (
             <FadeUp key={b} index={1 + bi} style={[st.block, { backgroundColor: t.panel, borderColor: t.line }]}>
-              <Text style={[st.blockTitle, { color: t.accent }]}>{tr(`card.${b}`).toUpperCase()}</Text>
-              <Text
+              <Txt style={[st.blockTitle, { color: t.accent }]}>{tr(`card.${b}`).toUpperCase()}</Txt>
+              <Txt
                 style={[
                   st.blockText,
                   { color: block.status === 'todo' ? t.muted : t.text },
@@ -150,7 +150,7 @@ export default function CardDetail() {
                 ]}
               >
                 {text}
-              </Text>
+              </Txt>
             </FadeUp>
           );
         })}

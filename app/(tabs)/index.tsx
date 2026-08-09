@@ -17,14 +17,16 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
+import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { StreakPill } from '../../src/components/StreakPill';
-import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
+import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { pingPong, startSpin } from '../../src/lib/loops';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { Txt } from '../../src/components/Txt';
 
 const { width: W } = Dimensions.get('window');
 const CARD_W = Math.min(W * 0.56, 230);
@@ -177,10 +179,13 @@ export default function TodayScreen() {
   const dayText = card.content.day_card?.[lang];
   const hasText = dayText && card.content.day_card.status !== 'todo';
 
-  const dateStr = new Date().toLocaleDateString(lang === 'ru' ? 'ru-RU' : 'en-US', {
+  // дата как в эталоне: «Пятница · 1 августа» (в стиле .date стоит верхний регистр)
+  const locale = lang === 'ru' ? 'ru-RU' : 'en-US';
+  const now = new Date();
+  const dateStr = `${now.toLocaleDateString(locale, { weekday: 'long' })} · ${now.toLocaleDateString(locale, {
     day: 'numeric',
     month: 'long',
-  });
+  })}`;
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -190,8 +195,9 @@ export default function TodayScreen() {
         showsVerticalScrollIndicator={false}
       >
         <FadeUp index={0}>
-          <Text style={[st.date, { color: t.muted }]}>{dateStr.toUpperCase()}</Text>
-          <Text style={[st.title, { color: t.head }]}>{tr('today.title')}</Text>
+          <Txt style={[st.date, { color: t.muted }]}>{dateStr.toUpperCase()}</Txt>
+          <Txt style={[st.title, { color: t.head }]}>{tr('today.title')}</Txt>
+          <Rule />
         </FadeUp>
 
         <FadeUp index={1}>
@@ -212,11 +218,11 @@ export default function TodayScreen() {
                 <View style={[st.inframe, { borderColor: t.frame }]} />
                 <View style={st.embWrap}>
                   <Ionicons name="sparkles" size={44} color={t.accent} />
-                  <Text style={[st.embWord, { color: t.accent }]}>ARCANUM</Text>
+                  <Txt style={[st.embWord, { color: t.accent }]}>ARCANUM</Txt>
                   {!drawn && (
-                    <Text style={[st.tapHint, { color: t.muted }]}>
+                    <Txt style={[st.tapHint, { color: t.muted }]}>
                       {lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'}
-                    </Text>
+                    </Txt>
                   )}
                 </View>
               </View>
@@ -243,30 +249,40 @@ export default function TodayScreen() {
 
         {drawn && (
           <>
-            <Text style={[st.cardName, { color: t.head }]}>{card.name[lang].toUpperCase()}</Text>
-            <Text style={[st.cardSub, { color: t.muted }]}>
+            <Txt style={[st.cardName, { color: t.head }]}>{card.name[lang].toUpperCase()}</Txt>
+            <Txt style={[st.cardSub, { color: t.muted }]}>
+              {cardNumeral(card)} ·{' '}
               {card.arcana === 'major'
                 ? lang === 'ru' ? 'СТАРШИЙ АРКАН' : 'MAJOR ARCANA'
                 : lang === 'ru' ? 'МЛАДШИЙ АРКАН' : 'MINOR ARCANA'}
-            </Text>
+            </Txt>
+            {/* кнопка живёт внутри блока значения — как .cta внутри .mean в эталоне */}
             <View style={[st.meanBox, { backgroundColor: t.panel, borderColor: t.line }]}>
-              <Text style={[st.meanLbl, { color: t.accent }]}>
+              <Txt style={[st.meanLbl, { color: t.accent }]}>
                 {lang === 'ru' ? 'ЗНАЧЕНИЕ ДНЯ' : "TODAY'S MEANING"}
-              </Text>
-              <Text style={[st.meanTxt, { color: t.text }]}>
+              </Txt>
+              <Txt style={[st.meanTxt, { color: t.text }]}>
                 {hasText ? dayText : tr('card.soon')}
-              </Text>
-            </View>
-            <PressableScale onPress={() => router.push(`/card/${card.id}`)} style={st.cta}>
-              <LinearGradient
-                colors={['#caa45a', '#efd9a2', '#caa45a']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={st.ctaGrad}
+              </Txt>
+              {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
+              <PressableScale
+                onPress={() => router.push(`/card/${card.id}`)}
+                style={[st.cta, { shadowColor: t.accent }]}
               >
-                <Text style={st.ctaTxt}>{lang === 'ru' ? 'ИЗУЧИТЬ КАРТУ →' : 'STUDY THIS CARD →'}</Text>
-              </LinearGradient>
-            </PressableScale>
+                <View style={st.ctaClip}>
+                  <LinearGradient
+                    colors={['#caa45a', '#efd9a2', '#caa45a']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={st.ctaGrad}
+                  >
+                    {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
+                    <View style={st.ctaGloss} />
+                    <Txt style={st.ctaTxt}>{lang === 'ru' ? 'ИЗУЧИТЬ КАРТУ →' : 'STUDY THIS CARD →'}</Txt>
+                  </LinearGradient>
+                </View>
+              </PressableScale>
+            </View>
           </>
         )}
       </ScrollView>
@@ -275,7 +291,7 @@ export default function TodayScreen() {
 }
 
 const st = StyleSheet.create({
-  date: { fontSize: 10, letterSpacing: 3, textAlign: 'center' },
+  date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
   // тёплое свечение вокруг карты дня — из эталона: box-shadow 0 30px 66px var(--glow)
   // (CSS-размытие переводим в shadowRadius делением пополам)
@@ -304,9 +320,21 @@ const st = StyleSheet.create({
   cardName: { fontFamily: fonts.display, fontSize: 22, letterSpacing: 3, textAlign: 'center', marginTop: spacing.xl },
   cardSub: { fontSize: 9.5, letterSpacing: 2.5, textAlign: 'center', marginTop: 3 },
   meanBox: { borderRadius: radius.l, borderWidth: 1, padding: spacing.l, marginTop: spacing.l },
-  meanLbl: { fontSize: 9, letterSpacing: 3 },
+  meanLbl: { fontSize: 9.5, letterSpacing: 3 }, // Overline из дизайн-системы: 9.5–10
   meanTxt: { fontFamily: fonts.display, fontSize: 17, lineHeight: 25, marginTop: 8 },
-  cta: { marginTop: spacing.l, borderRadius: radius.l, overflow: 'hidden' },
+  // тень кнопки из эталона: box-shadow 0 12px 30px var(--glow) (CSS-размытие делим пополам).
+  // overflow тут ставить нельзя — срежет тень; обрезка живёт в ctaClip
+  cta: {
+    marginTop: 14,
+    borderRadius: radius.l,
+    backgroundColor: '#caa45a', // подложка формы: iOS считает тень по непрозрачности слоя
+    shadowOpacity: 0.35,
+    shadowRadius: 15,
+    shadowOffset: { width: 0, height: 12 },
+    elevation: 8,
+  },
+  ctaClip: { borderRadius: radius.l, overflow: 'hidden' },
   ctaGrad: { paddingVertical: 15, alignItems: 'center' },
+  ctaGloss: { position: 'absolute', top: 0, left: 0, right: 0, height: 1, backgroundColor: 'rgba(255,255,255,0.5)' },
   ctaTxt: { color: '#241c0d', fontWeight: '800', fontSize: 13, letterSpacing: 1.5 },
 });

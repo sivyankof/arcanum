@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
@@ -14,6 +14,7 @@ import { cardImages } from '../../src/lib/cardImages';
 import { hapticTap } from '../../src/lib/haptics';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { Txt } from '../../src/components/Txt';
 
 const { width: W } = Dimensions.get('window');
 const COLS = 3;
@@ -51,9 +52,9 @@ function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
         />
         {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
       </View>
-      <Text numberOfLines={1} style={[st.name, { color: t.muted }]}>
+      <Txt numberOfLines={1} style={[st.name, { color: t.muted }]}>
         {item.name[lang]}
-      </Text>
+      </Txt>
     </PressableScale>
   );
 }
@@ -94,10 +95,10 @@ export default function CardsScreen() {
         ListHeaderComponent={
           <View style={{ marginBottom: spacing.m }}>
             <FadeUp index={0}>
-              <Text style={[st.sub, { color: t.muted }]}>
+              <Txt style={[st.sub, { color: t.muted }]}>
                 {lang === 'ru' ? 'СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909' : 'REFERENCE · RIDER–WAITE 1909'}
-              </Text>
-              <Text style={[st.title, { color: t.head }]}>{tr('cards.title')}</Text>
+              </Txt>
+              <Txt style={[st.title, { color: t.head }]}>{tr('cards.title')}</Txt>
             </FadeUp>
             <FadeUp index={1} style={st.segRow}>
               {FILTERS.map((f) => (
@@ -112,9 +113,9 @@ export default function CardsScreen() {
                     { borderColor: filter === f ? t.frame : t.line, backgroundColor: filter === f ? t.chipBg : 'transparent' },
                   ]}
                 >
-                  <Text style={{ color: filter === f ? t.accent : t.muted, fontSize: 11, fontWeight: '700' }}>
+                  <Txt style={{ color: filter === f ? t.accent : t.muted, fontSize: 11, fontWeight: '700' }}>
                     {label(f)}
-                  </Text>
+                  </Txt>
                 </PressableScale>
               ))}
             </FadeUp>
