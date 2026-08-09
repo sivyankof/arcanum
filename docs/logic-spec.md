@@ -103,6 +103,7 @@ streak, lastDrawDate, freezes, xp, history: DailyDraw[365], lessonsProgress: {le
 spreadsHistory: SpreadDraw[100], settings: {pushMorning: '09:00', pushEvening: '21:00', pushesOn} }`
 `DailyDraw = {date, cardId, reversed: false, outcome?, note?}`.
 **Миграции:** schemaVersion обязателен; при повышении версии — функция migrate в store (без потери history).
+**Уточнение:** `schemaVersion` из этой схемы хранится не отдельным полем состояния, а как поле `version` в опциях zustand persist.
 **Лимиты:** history 365 записей, spreadsHistory 100 (старые отрезаются). Экспорт (backlog: бэкап) — JSON-файл
 через Share, импорт с валидацией схемы.
 

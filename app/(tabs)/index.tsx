@@ -23,7 +23,7 @@ import { Sparks } from '../../src/components/Sparks';
 import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
-import { localDateISO } from '../../src/lib/dates';
+import { daysAgoISO, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
@@ -142,9 +142,15 @@ export default function TodayScreen() {
   const streak = useApp((s) => s.streak);
   const drawToday = useApp((s) => s.drawToday);
   const drawn = useApp((s) => s.todayDraw());
+  const installSeed = useApp((s) => s.installSeed);
+  const history = useApp((s) => s.history);
 
   const todayISO = localDateISO();
-  const card = drawn ? cardById.get(drawn.cardId)! : cardOfDay(todayISO);
+  // анти-повтор карты дня: карты, выпадавшие за последние 7 дней (не считая сегодня)
+  const recent = history
+    .filter((h) => h.date >= daysAgoISO(7) && h.date !== todayISO)
+    .map((h) => h.cardId);
+  const card = drawn ? cardById.get(drawn.cardId)! : cardOfDay(todayISO, installSeed, recent);
 
   // --- анимации ---
   const [burst, setBurst] = React.useState(0); // счётчик салютов у огонька серии

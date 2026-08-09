@@ -18,6 +18,8 @@ interface DailyDraw {
 interface AppState {
   themeMode: ThemeMode;
   lang: Lang;
+  /** Личный сид для карты дня (0 — ещё не назначен, назначается один раз после первой гидрации). */
+  installSeed: number;
   streak: number;
   lastDrawDate: string | null;
   history: DailyDraw[];
@@ -33,6 +35,7 @@ export const useApp = create<AppState>()(
     (set, get) => ({
       themeMode: 'dark',
       lang: 'ru',
+      installSeed: 0,
       streak: 0,
       lastDrawDate: null,
       history: [],
@@ -69,6 +72,21 @@ export const useApp = create<AppState>()(
         });
       },
     }),
-    { name: 'arcanum-app', storage: createJSONStorage(() => AsyncStorage) },
+    {
+      name: 'arcanum-app',
+      storage: createJSONStorage(() => AsyncStorage),
+      // schemaVersion из logic-spec §7 хранится тут же, отдельного поля в состоянии нет.
+      // Схема записей не менялась — миграция ничего не преобразует.
+      version: 1,
+      migrate: (persistedState) => persistedState as AppState,
+      // После гидрации назначаем личный сид карты дня, если он ещё не назначен (installSeed === 0):
+      // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.
+      // Уже открытая сегодня карта не изменится — она читается из history, а не пересчитывается.
+      onRehydrateStorage: () => (state) => {
+        if (state && state.installSeed === 0) {
+          useApp.setState({ installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)) });
+        }
+      },
+    },
   ),
 );

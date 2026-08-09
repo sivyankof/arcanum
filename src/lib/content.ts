@@ -24,11 +24,26 @@ export const course = (courseJson as any).modules as any[];
 
 export const cardById = new Map(cards.map((c) => [c.id, c]));
 
-/** Детерминированная карта дня: одна и та же на весь день для пользователя. */
-export function cardOfDay(dateISO: string, userSeed = 0): TarotCard {
-  let h = userSeed;
-  for (const ch of dateISO) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  return cards[h % cards.length];
+/** FNV-1a, 32-bit — быстрый некриптографический хеш строки в целое число [0, 2^32). */
+export function fnv1a32(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+
+/** Детерминированная карта дня: (дата, личный сид) всегда дают одну и ту же карту (logic-spec §1).
+ *  Анти-повтор: если естественно выпавшая карта уже была в последние 7 дней (recentCardIds),
+ *  индекс пересчитывается другой солью — до 10 попыток подряд, после чего отдаём как есть
+ *  (лучше редкий повтор, чем зависание на 78 картах в recentCardIds). */
+export function cardOfDay(dateISO: string, seed: number, recentCardIds: string[] = []): TarotCard {
+  let index = fnv1a32(`${dateISO}:${seed}`) % cards.length;
+  for (let n = 1; n <= 10 && recentCardIds.includes(cards[index].id); n++) {
+    index = fnv1a32(`${index}:retry:${n}`) % cards.length;
+  }
+  return cards[index];
 }
 
 const ROMAN = ["0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
