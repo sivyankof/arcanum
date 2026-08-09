@@ -66,6 +66,10 @@ export default function RootLayout() {
           options={{
             title: '',
             headerTransparent: true,
+            // без явного сброса фон наследуется из общих screenOptions (headerStyle.backgroundColor = t.bg)
+            // и рисует непрозрачную полосу поверх контента, хотя headerTransparent включён
+            headerStyle: { backgroundColor: 'transparent' },
+            headerShadowVisible: false,
             headerTintColor: t.accent,
             // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
             animation: 'fade',

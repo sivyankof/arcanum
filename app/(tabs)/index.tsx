@@ -28,7 +28,7 @@ import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
 import { useApp } from '../../src/store/useApp';
-import { fonts, radius, spacing } from '../../src/theme/theme';
+import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { Txt } from '../../src/components/Txt';
 
@@ -346,7 +346,7 @@ export default function TodayScreen() {
                 >
                   <View style={st.ctaClip}>
                     <LinearGradient
-                      colors={['#caa45a', '#efd9a2', '#caa45a']}
+                      colors={gold.gradient}
                       start={{ x: 0, y: 0 }}
                       end={{ x: 1, y: 0 }}
                       style={st.ctaGrad}
@@ -405,7 +405,7 @@ const st = StyleSheet.create({
   cta: {
     marginTop: 14,
     borderRadius: radius.l,
-    backgroundColor: '#caa45a', // подложка формы: iOS считает тень по непрозрачности слоя
+    backgroundColor: gold.gradient[0], // подложка формы: iOS считает тень по непрозрачности слоя
     shadowOpacity: 0.35,
     shadowRadius: 15,
     shadowOffset: { width: 0, height: 12 },
@@ -414,5 +414,5 @@ const st = StyleSheet.create({
   ctaClip: { borderRadius: radius.l, overflow: 'hidden' },
   ctaGrad: { paddingVertical: 15, alignItems: 'center' },
   ctaGloss: { position: 'absolute', top: 0, left: 0, right: 0, height: 1, backgroundColor: 'rgba(255,255,255,0.5)' },
-  ctaTxt: { color: '#241c0d', fontWeight: '800', fontSize: 13, letterSpacing: 1.5 },
+  ctaTxt: { color: gold.text, fontWeight: '800', fontSize: 13, letterSpacing: 1.5 },
 });
