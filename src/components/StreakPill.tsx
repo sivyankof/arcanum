@@ -4,15 +4,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { pingPong } from '../lib/loops';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { Sparks } from './Sparks';
@@ -27,13 +20,7 @@ export function StreakPill({ streak, burst = 0 }: { streak: number; burst?: numb
   const breath = useSharedValue(0);
 
   React.useEffect(() => {
-    breath.value = withRepeat(
-      withSequence(
-        withTiming(1, { duration: BREATH_MS, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
-        withTiming(0, { duration: BREATH_MS, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
-      ),
-      -1,
-    );
+    breath.value = pingPong(1, BREATH_MS);
   }, [breath]);
 
   const flame = useAnimatedStyle(() => ({

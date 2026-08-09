@@ -4,16 +4,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withRepeat,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withDelay } from 'react-native-reanimated';
+import { pingPong } from '../lib/loops';
 import { useTheme } from '../theme/useTheme';
 
 // позиции из эталона: звёзды только в верхней части экрана
@@ -30,16 +22,7 @@ function Star({ left, top, size, delay, symbol }: (typeof STARS)[number]) {
   const v = useSharedValue(0);
 
   React.useEffect(() => {
-    v.value = withDelay(
-      delay,
-      withRepeat(
-        withSequence(
-          withTiming(1, { duration: 2000, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
-          withTiming(0, { duration: 2000, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
-        ),
-        -1,
-      ),
-    );
+    v.value = withDelay(delay, pingPong(1, 2000));
   }, [v, delay]);
 
   const twinkle = useAnimatedStyle(() => ({

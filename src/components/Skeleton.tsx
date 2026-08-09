@@ -2,14 +2,8 @@
  *  Показывается только до появления контента — постоянных пульсаций в списках быть не должно. */
 import React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { pingPong } from '../lib/loops';
 import { useTheme } from '../theme/useTheme';
 
 const PULSE_MS = 900;
@@ -19,11 +13,7 @@ export function Skeleton({ style }: { style?: StyleProp<ViewStyle> }) {
   const p = useSharedValue(0.4);
 
   React.useEffect(() => {
-    p.value = withRepeat(
-      withTiming(0.7, { duration: PULSE_MS, easing: Easing.inOut(Easing.quad), reduceMotion: ReduceMotion.System }),
-      -1,
-      true, // туда-обратно
-    );
+    p.value = pingPong(0.7, PULSE_MS);
   }, [p]);
 
   const anim = useAnimatedStyle(() => ({ opacity: p.value }));

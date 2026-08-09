@@ -12,8 +12,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withDelay,
-  withRepeat,
-  withSequence,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -23,6 +21,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { StreakPill } from '../../src/components/StreakPill';
 import { cardById, cardImages, cardOfDay } from '../../src/lib/content';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
+import { pingPong, startSpin } from '../../src/lib/loops';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -62,10 +61,7 @@ function Ring({
   const angle = useSharedValue(0);
 
   React.useEffect(() => {
-    angle.value = withRepeat(
-      withTiming(360, { duration, easing: Easing.linear, reduceMotion: ReduceMotion.System }),
-      -1,
-    );
+    startSpin(angle, duration);
   }, [angle, duration]);
 
   const spin = useAnimatedStyle(() => ({
@@ -131,14 +127,9 @@ export default function TodayScreen() {
     if (!drawn) flip.value = 0;
   }, [drawn, flip]);
 
+  // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона)
   React.useEffect(() => {
-    bob.value = withRepeat(
-      withSequence(
-        withTiming(-6, { duration: 2100, easing: Easing.inOut(Easing.quad) }),
-        withTiming(0, { duration: 2100, easing: Easing.inOut(Easing.quad) }),
-      ),
-      -1,
-    );
+    bob.value = pingPong(-6, 2100);
   }, [bob]);
 
   const backStyle = useAnimatedStyle(() => ({
