@@ -20,9 +20,11 @@ import { PressableScale } from '../../src/components/PressableScale';
 import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { StreakPill } from '../../src/components/StreakPill';
+import { XpPill } from '../../src/components/XpPill';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { pingPong, startSpin } from '../../src/lib/loops';
+import { moonInfo } from '../../src/lib/moon';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -33,6 +35,10 @@ const CARD_W = Math.min(W * 0.56, 230);
 const CARD_H = CARD_W * 1.72;
 const FLIP_MS = 850;
 const STREAK_MILESTONE = 7; // 7-й день серии — единственная «победа» на этом экране
+
+// мок уровня до задачи 08 (реальные XP считаются там): первый уровень, полоса пустая
+const MOCK_LEVEL = 1;
+const MOCK_PROGRESS = 0;
 
 // пропорции колец из эталона: карта 216 → кольца 330 и 378
 const RING_A = CARD_W * 1.53;
@@ -187,6 +193,9 @@ export default function TodayScreen() {
     month: 'long',
   })}`;
 
+  // фаза луны считается локально от текущего момента (logic-spec §6)
+  const moon = moonInfo(now);
+
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
@@ -200,12 +209,24 @@ export default function TodayScreen() {
           <Rule />
         </FadeUp>
 
+        {/* строка луны (.moonrow эталона). Символ ☽ рисуем системным шрифтом:
+            в Manrope его нет, поэтому обёртка — обычный Text без fontFamily */}
         <FadeUp index={1}>
-          <StreakPill streak={streak} burst={burst} />
+          <Text style={[st.moon, { color: t.muted }]}>
+            <Text>☽ </Text>
+            <Txt style={{ color: t.head, fontWeight: '600' }}>{tr(`moon.${moon.phase}`)}</Txt>
+            <Txt style={{ color: t.muted }}>{` · ${tr('moon.day', { n: moon.day })}`}</Txt>
+          </Text>
+        </FadeUp>
+
+        {/* ряд пилюль (.pills эталона): серия слева, уровень справа и чуть шире */}
+        <FadeUp index={2} style={st.pills}>
+          <StreakPill streak={streak} burst={burst} style={st.pillStreak} />
+          <XpPill level={MOCK_LEVEL} progress={MOCK_PROGRESS} style={st.pillXp} />
         </FadeUp>
 
         {/* сцена с картой */}
-        <FadeUp index={2}>
+        <FadeUp index={3}>
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
           <View style={{ width: CARD_W, height: CARD_H }}>
             {/* кольца позади карты */}
@@ -293,6 +314,10 @@ export default function TodayScreen() {
 const st = StyleSheet.create({
   date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
+  moon: { fontSize: 13, textAlign: 'center', marginTop: 12 },
+  pills: { flexDirection: 'row', gap: 10, marginTop: 14 },
+  pillStreak: { flex: 1 },
+  pillXp: { flex: 1.5 },
   // тёплое свечение вокруг карты дня — из эталона: box-shadow 0 30px 66px var(--glow)
   // (CSS-размытие переводим в shadowRadius делением пополам)
   face: {

@@ -3,17 +3,25 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { pingPong } from '../lib/loops';
-import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { Pill } from './Pill';
 import { Sparks } from './Sparks';
 import { Txt } from './Txt';
 
 const BREATH_MS = 650; // полный цикл 1.3 с
 
-export function StreakPill({ streak, burst = 0 }: { streak: number; burst?: number }) {
+export function StreakPill({
+  streak,
+  burst = 0,
+  style,
+}: {
+  streak: number;
+  burst?: number;
+  style?: StyleProp<ViewStyle>;
+}) {
   const t = useTheme();
   const { i18n } = useTranslation();
   const lang = i18n.language.startsWith('ru') ? 'ru' : 'en';
@@ -29,7 +37,7 @@ export function StreakPill({ streak, burst = 0 }: { streak: number; burst?: numb
   }));
 
   return (
-    <View style={[st.pill, { backgroundColor: t.panel, borderColor: t.line }]}>
+    <Pill style={style}>
       {/* салют привязан к огоньку, поэтому лежит в его обёртке */}
       <View>
         <Animated.View style={[{ transformOrigin: 'bottom' }, flame]}>
@@ -37,24 +45,20 @@ export function StreakPill({ streak, burst = 0 }: { streak: number; burst?: numb
         </Animated.View>
         <Sparks burst={burst} />
       </View>
-      <Txt style={{ color: t.head, fontWeight: '700', fontSize: 13 }}>
-        {streak} {lang === 'ru' ? 'дн.' : 'days'}
-      </Txt>
-      <Txt style={{ color: t.muted, fontSize: 11 }}>{lang === 'ru' ? 'серия' : 'streak'}</Txt>
-    </View>
+      {/* счёт и подпись стоят друг под другом (.pill .tx эталона: b — блочный):
+          в ряду из двух пилюль на строку они уже не помещаются */}
+      <View style={st.tx}>
+        <Txt style={[st.count, { color: t.head }]}>
+          {streak} {lang === 'ru' ? 'дн.' : 'days'}
+        </Txt>
+        <Txt style={[st.label, { color: t.muted }]}>{lang === 'ru' ? 'СЕРИЯ' : 'STREAK'}</Txt>
+      </View>
+    </Pill>
   );
 }
 
 const st = StyleSheet.create({
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    alignSelf: 'center',
-    marginTop: spacing.l,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: radius.xl,
-    borderWidth: 1,
-  },
+  tx: { flex: 1 },
+  count: { fontSize: 13, fontWeight: '700' },
+  label: { fontSize: 9, letterSpacing: 0.6 },
 });
