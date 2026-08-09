@@ -23,6 +23,7 @@ import { Sparks } from '../../src/components/Sparks';
 import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
+import { localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
@@ -142,7 +143,7 @@ export default function TodayScreen() {
   const drawToday = useApp((s) => s.drawToday);
   const drawn = useApp((s) => s.todayDraw());
 
-  const todayISO = new Date().toISOString().slice(0, 10);
+  const todayISO = localDateISO();
   const card = drawn ? cardById.get(drawn.cardId)! : cardOfDay(todayISO);
 
   // --- анимации ---

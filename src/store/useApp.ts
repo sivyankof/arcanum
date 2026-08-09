@@ -2,6 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { daysAgoISO, localDateISO } from '../lib/dates';
 import type { ThemeMode } from '../theme/theme';
 
 export type Lang = 'ru' | 'en';
@@ -27,8 +28,6 @@ interface AppState {
   resetToday: () => void;
 }
 
-const todayStr = () => new Date().toISOString().slice(0, 10);
-
 export const useApp = create<AppState>()(
   persist(
     (set, get) => ({
@@ -42,10 +41,10 @@ export const useApp = create<AppState>()(
       setLang: (lang) => set({ lang }),
 
       drawToday: (cardId, reversed) => {
-        const t = todayStr();
+        const t = localDateISO();
         const { lastDrawDate, streak, history } = get();
         if (lastDrawDate === t) return; // уже тянули сегодня
-        const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+        const yesterday = daysAgoISO(1);
         const newStreak = lastDrawDate === yesterday ? streak + 1 : 1;
         set({
           lastDrawDate: t,
@@ -54,12 +53,12 @@ export const useApp = create<AppState>()(
         });
       },
 
-      todayDraw: () => get().history.find((h) => h.date === todayStr()),
+      todayDraw: () => get().history.find((h) => h.date === localDateISO()),
 
       // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
       // Серия уменьшается на 1 (точное прежнее значение не хранится).
       resetToday: () => {
-        const t = todayStr();
+        const t = localDateISO();
         const { history, streak } = get();
         if (!history.some((h) => h.date === t)) return;
         const rest = history.filter((h) => h.date !== t);
