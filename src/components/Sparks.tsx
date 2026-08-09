@@ -1,8 +1,12 @@
-/** Разлетающиеся звёздочки — короткий салют по событию (пункт 10 motion-spec).
+/** Разлетающиеся звёздочки — короткий салют по событию (пункт 10 motion-spec, `.spark` эталона).
  *  Рисуются вокруг центра родителя, поэтому родителю нужен position: relative.
- *  Запуск: увеличить `burst` (0 — ничего не показываем, анимации нет). */
+ *  Запуск: увеличить `burst` (0 — ничего не показываем, анимации нет).
+ *
+ *  Разброс (угол, длина, кегль) берём из хеша индекса, а не из Math.random: случайное число
+ *  в теле компонента пересчитывалось бы на каждой перерисовке, и искры меняли бы траекторию
+ *  прямо в полёте. Хеш даёт ту же «неровность», но стабильную. */
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -15,14 +19,46 @@ import { useTheme } from '../theme/useTheme';
 
 const BURST_MS = 900;
 const GLYPHS = ['✦', '✧', '✦', '✧'];
+const SPIN = 260; // rotate(260deg) из @keyframes fly
 
-function Spark({ index, count, distance, burst }: { index: number; count: number; distance: number; burst: number }) {
+/** Диапазон значений: одно число — фиксированное, пара — [минимум, максимум]. */
+type Range = number | [number, number];
+
+/** Псевдослучайное 0..1, детерминированное от пары чисел (соль разводит разные величины). */
+function noise(i: number, salt: number) {
+  const x = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+function Spark({
+  index,
+  count,
+  distance,
+  size,
+  glyphs,
+  duration,
+  angleJitter,
+  burst,
+}: {
+  index: number;
+  count: number;
+  distance: Range;
+  size: Range;
+  glyphs: string[];
+  duration: number;
+  angleJitter: number;
+  burst: number;
+}) {
   const t = useTheme();
   const p = useSharedValue(0);
 
-  // угол раскладываем равномерно по кругу, длину чередуем — так «салют» не выглядит машинным
-  const angle = (Math.PI * 2 * index) / count - Math.PI / 2;
-  const len = distance * (index % 2 ? 0.72 : 1);
+  // угол раскладываем равномерно по кругу и слегка «сбиваем», чтобы салют не выглядел машинным;
+  // длина без заданного разброса просто чередуется — так было до появления пропсов
+  const angle = (Math.PI * 2 * index) / count - Math.PI / 2 + noise(index, 0) * angleJitter;
+  const len = Array.isArray(distance)
+    ? distance[0] + noise(index, 1) * (distance[1] - distance[0])
+    : distance * (index % 2 ? 0.72 : 1);
+  const fontSize = Array.isArray(size) ? size[0] + noise(index, 2) * (size[1] - size[0]) : size;
   const dx = Math.cos(angle) * len;
   const dy = Math.sin(angle) * len;
 
@@ -30,37 +66,81 @@ function Spark({ index, count, distance, burst }: { index: number; count: number
     if (!burst) return;
     p.value = 0;
     p.value = withTiming(1, {
-      duration: BURST_MS,
+      duration,
       easing: Easing.out(Easing.quad),
       reduceMotion: ReduceMotion.System,
     });
-  }, [burst, p]);
+  }, [burst, p, duration]);
 
   const anim = useAnimatedStyle(() => ({
     opacity: interpolate(p.value, [0, 0.15, 1], [0, 1, 0]),
     transform: [
       { translateX: dx * p.value },
       { translateY: dy * p.value },
-      { rotate: `${260 * p.value}deg` },
+      { rotate: `${SPIN * p.value}deg` },
       { scale: interpolate(p.value, [0, 0.3, 1], [0.5, 1, 0.5]) },
     ],
   }));
 
   return (
-    <Animated.Text style={[{ position: 'absolute', color: t.accent, fontSize: 10 }, anim]}>
-      {GLYPHS[index % GLYPHS.length]}
+    <Animated.Text
+      style={[
+        {
+          position: 'absolute',
+          color: t.accent,
+          fontSize,
+          // text-shadow 0 0 9px var(--glow) из .spark; на вебе не отрисовывается — это норма
+          textShadowColor: t.glow,
+          textShadowOffset: { width: 0, height: 0 },
+          textShadowRadius: 4.5,
+        },
+        anim,
+      ]}
+    >
+      {glyphs[index % glyphs.length]}
     </Animated.Text>
   );
 }
 
-export function Sparks({ burst, count = 4, distance = 30 }: { burst: number; count?: number; distance?: number }) {
+export function Sparks({
+  burst,
+  count = 4,
+  distance = 30,
+  size = 10,
+  glyphs = GLYPHS,
+  duration = BURST_MS,
+  angleJitter = 0,
+  style,
+}: {
+  burst: number;
+  count?: number;
+  /** Дальность разлёта: число — как раньше (чередование длин), пара — случайно из диапазона. */
+  distance?: Range;
+  /** Кегль глифа: число — общий, пара — случайно из диапазона. */
+  size?: Range;
+  glyphs?: string[];
+  duration?: number;
+  /** Максимальный «сбив» угла в радианах (0 — строго равномерный круг). */
+  angleJitter?: number;
+  style?: StyleProp<ViewStyle>;
+}) {
   return (
     <Animated.View
       pointerEvents="none"
-      style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }]}
+      style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }, style]}
     >
       {Array.from({ length: count }, (_, i) => (
-        <Spark key={i} index={i} count={count} distance={distance} burst={burst} />
+        <Spark
+          key={i}
+          index={i}
+          count={count}
+          distance={distance}
+          size={size}
+          glyphs={glyphs}
+          duration={duration}
+          angleJitter={angleJitter}
+          burst={burst}
+        />
       ))}
     </Animated.View>
   );

@@ -1,4 +1,3 @@
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React from 'react';
@@ -15,15 +14,17 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CardBack } from '../../src/components/CardBack';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { Sparks } from '../../src/components/Sparks';
 import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
-import { pingPong, startSpin } from '../../src/lib/loops';
+import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -44,10 +45,30 @@ const MOCK_PROGRESS = 0;
 const RING_A = CARD_W * 1.53;
 const RING_B = CARD_W * 1.75;
 
-// блик по лицу карты (.glare из эталона): диагональ 112°, ход ±140% ширины, задержка 500 мс, 1100 мс
+// блик по лицу карты (.glare из эталона): диагональ 112°, ход ±140% ширины, задержка 500 мс, 1100 мс.
+// Сверх эталона (motion-spec п.7): пока карта открыта, проход повторяется каждые ~7 с
 const GLARE_DELAY = 500;
 const GLARE_MS = 1100;
+const GLARE_PAUSE = 7000;
 const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
+
+// салют при перевороте (.spark эталона + stage.onclick): 18 искр, кегль 8–17, разлёт 85–180 px
+const SPARK_COUNT = 18;
+const SPARK_GLYPHS = ['✦', '✧', '·'];
+const SPARK_MS = 1050;
+const SPARK_SIZE: [number, number] = [8, 17];
+const SPARK_DISTANCE: [number, number] = [85, 180];
+const SPARK_JITTER = 0.5; // Math.random()*.5 рад в эталоне
+
+// всплывание текста после переворота (.plate/.mean эталона): 600 мс, задержки 500 и 600 мс
+const REVEAL_MS = 600;
+const PLATE_DELAY = 500;
+const PLATE_SHIFT = 8;
+const MEAN_DELAY = 600;
+const MEAN_SHIFT = 12;
+
+// кривая CSS-дефолта `ease` — им в эталоне идут и блик, и всплывание текста
+const EASE = Easing.bezier(0.25, 0.1, 0.25, 1);
 
 /** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
 function Ring({
@@ -126,14 +147,31 @@ export default function TodayScreen() {
 
   // --- анимации ---
   const [burst, setBurst] = React.useState(0); // счётчик салютов у огонька серии
+  const [cardBurst, setCardBurst] = React.useState(0); // салют вокруг карты при перевороте
   const flip = useSharedValue(drawn ? 1 : 0);
   const bob = useSharedValue(0);
   const glare = useSharedValue(0);
+  // видимость текста под картой. При входе на таб с уже открытой картой стартуем сразу с 1 —
+  // всплывание положено только переходу «рубашка → лицо», за вход отвечает каскад FadeUp
+  const plateIn = useSharedValue(drawn ? 1 : 0);
+  const meanIn = useSharedValue(drawn ? 1 : 0);
 
-  // после сброса карты дня (или смены даты) возвращаем рубашку
+  // после сброса карты дня (или смены даты) возвращаем рубашку и прячем текст
   React.useEffect(() => {
-    if (!drawn) flip.value = 0;
-  }, [drawn, flip]);
+    if (!drawn) {
+      flip.value = 0;
+      plateIn.value = 0;
+      meanIn.value = 0;
+    }
+  }, [drawn, flip, plateIn, meanIn]);
+
+  // блик живёт, пока карта открыта: первый проход через 500 мс, дальше цикл с паузой.
+  // Держим его в эффекте, а не в onDraw, — иначе при возврате на таб блик бы не запускался
+  React.useEffect(() => {
+    glare.value = 0;
+    if (!drawn) return;
+    glare.value = withDelay(GLARE_DELAY, sweepLoop(GLARE_MS, GLARE_PAUSE, EASE));
+  }, [drawn, glare]);
 
   // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона)
   React.useEffect(() => {
@@ -159,21 +197,26 @@ export default function TodayScreen() {
   const glareStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: interpolate(glare.value, [0, 1], [-CARD_W * 1.4, CARD_W * 1.4]) }],
   }));
+  const plateStyle = useAnimatedStyle(() => ({
+    opacity: plateIn.value,
+    transform: [{ translateY: (1 - plateIn.value) * PLATE_SHIFT }],
+  }));
+  const meanStyle = useAnimatedStyle(() => ({
+    opacity: meanIn.value,
+    transform: [{ translateY: (1 - meanIn.value) * MEAN_SHIFT }],
+  }));
+
+  const reveal = (delay: number) =>
+    withDelay(delay, withTiming(1, { duration: REVEAL_MS, easing: EASE, reduceMotion: ReduceMotion.System }));
 
   const onDraw = () => {
     if (drawn) return;
     const prevStreak = streak;
     hapticReveal();
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
-    glare.value = 0;
-    glare.value = withDelay(
-      GLARE_DELAY,
-      withTiming(1, {
-        duration: GLARE_MS,
-        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-        reduceMotion: ReduceMotion.System,
-      }),
-    );
+    plateIn.value = reveal(PLATE_DELAY);
+    meanIn.value = reveal(MEAN_DELAY);
+    setCardBurst((b) => b + 1); // искры — в момент нажатия, вместе с хаптикой
     drawToday(card.id, false);
     const newStreak = useApp.getState().streak;
     // серия выросла — салют у огонька, но только вместе с открытием карты
@@ -235,17 +278,7 @@ export default function TodayScreen() {
             {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
             <Animated.View style={[st.face, backStyle, { shadowColor: t.accent, backgroundColor: t.bg }]}>
               <View style={[st.faceClip, { borderColor: t.frame }]}>
-                <LinearGradient colors={t.mode === 'dark' ? ['#1d2752', '#0c1130'] : ['#f4ead0', '#e4d6b0']} style={StyleSheet.absoluteFill} />
-                <View style={[st.inframe, { borderColor: t.frame }]} />
-                <View style={st.embWrap}>
-                  <Ionicons name="sparkles" size={44} color={t.accent} />
-                  <Txt style={[st.embWord, { color: t.accent }]}>ARCANUM</Txt>
-                  {!drawn && (
-                    <Txt style={[st.tapHint, { color: t.muted }]}>
-                      {lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'}
-                    </Txt>
-                  )}
-                </View>
+                <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
               </View>
             </Animated.View>
             {/* лицо */}
@@ -265,45 +298,60 @@ export default function TodayScreen() {
               </View>
             </Animated.View>
           </View>
+          {/* салют поверх сцены; внутри Sparks стоит pointerEvents none, нажатию не мешает */}
+          <Sparks
+            burst={cardBurst}
+            count={SPARK_COUNT}
+            glyphs={SPARK_GLYPHS}
+            size={SPARK_SIZE}
+            distance={SPARK_DISTANCE}
+            duration={SPARK_MS}
+            angleJitter={SPARK_JITTER}
+            style={st.sparkLayer}
+          />
         </Pressable>
         </FadeUp>
 
         {drawn && (
           <>
-            <Txt style={[st.cardName, { color: t.head }]}>{card.name[lang].toUpperCase()}</Txt>
-            <Txt style={[st.cardSub, { color: t.muted }]}>
-              {cardNumeral(card)} ·{' '}
-              {card.arcana === 'major'
-                ? lang === 'ru' ? 'СТАРШИЙ АРКАН' : 'MAJOR ARCANA'
-                : lang === 'ru' ? 'МЛАДШИЙ АРКАН' : 'MINOR ARCANA'}
-            </Txt>
+            <Animated.View style={plateStyle}>
+              <Txt style={[st.cardName, { color: t.head }]}>{card.name[lang].toUpperCase()}</Txt>
+              <Txt style={[st.cardSub, { color: t.muted }]}>
+                {cardNumeral(card)} ·{' '}
+                {card.arcana === 'major'
+                  ? lang === 'ru' ? 'СТАРШИЙ АРКАН' : 'MAJOR ARCANA'
+                  : lang === 'ru' ? 'МЛАДШИЙ АРКАН' : 'MINOR ARCANA'}
+              </Txt>
+            </Animated.View>
             {/* кнопка живёт внутри блока значения — как .cta внутри .mean в эталоне */}
-            <View style={[st.meanBox, { backgroundColor: t.panel, borderColor: t.line }]}>
-              <Txt style={[st.meanLbl, { color: t.accent }]}>
-                {lang === 'ru' ? 'ЗНАЧЕНИЕ ДНЯ' : "TODAY'S MEANING"}
-              </Txt>
-              <Txt style={[st.meanTxt, { color: t.text }]}>
-                {hasText ? dayText : tr('card.soon')}
-              </Txt>
-              {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
-              <PressableScale
-                onPress={() => router.push(`/card/${card.id}`)}
-                style={[st.cta, { shadowColor: t.accent }]}
-              >
-                <View style={st.ctaClip}>
-                  <LinearGradient
-                    colors={['#caa45a', '#efd9a2', '#caa45a']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={st.ctaGrad}
-                  >
-                    {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
-                    <View style={st.ctaGloss} />
-                    <Txt style={st.ctaTxt}>{lang === 'ru' ? 'ПРОДОЛЖИТЬ ПУТЬ →' : 'CONTINUE YOUR PATH →'}</Txt>
-                  </LinearGradient>
-                </View>
-              </PressableScale>
-            </View>
+            <Animated.View style={meanStyle}>
+              <View style={[st.meanBox, { backgroundColor: t.panel, borderColor: t.line }]}>
+                <Txt style={[st.meanLbl, { color: t.accent }]}>
+                  {lang === 'ru' ? 'ЗНАЧЕНИЕ ДНЯ' : "TODAY'S MEANING"}
+                </Txt>
+                <Txt style={[st.meanTxt, { color: t.text }]}>
+                  {hasText ? dayText : tr('card.soon')}
+                </Txt>
+                {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
+                <PressableScale
+                  onPress={() => router.push(`/card/${card.id}`)}
+                  style={[st.cta, { shadowColor: t.accent }]}
+                >
+                  <View style={st.ctaClip}>
+                    <LinearGradient
+                      colors={['#caa45a', '#efd9a2', '#caa45a']}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 0 }}
+                      style={st.ctaGrad}
+                    >
+                      {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
+                      <View style={st.ctaGloss} />
+                      <Txt style={st.ctaTxt}>{lang === 'ru' ? 'ПРОДОЛЖИТЬ ПУТЬ →' : 'CONTINUE YOUR PATH →'}</Txt>
+                    </LinearGradient>
+                  </View>
+                </PressableScale>
+              </View>
+            </Animated.View>
           </>
         )}
       </ScrollView>
@@ -338,10 +386,8 @@ const st = StyleSheet.create({
     borderWidth: 1,
     overflow: 'hidden',
   },
-  inframe: { position: 'absolute', top: 9, left: 9, right: 9, bottom: 9, borderWidth: 1, borderRadius: 10, opacity: 0.8 },
-  embWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
-  embWord: { fontFamily: fonts.display, fontSize: 13, letterSpacing: 6 },
-  tapHint: { position: 'absolute', bottom: 18, fontSize: 8.5, letterSpacing: 2 },
+  // искры уводим над картой: на Android грани карты подняты elevation, иначе салют уйдёт под них
+  sparkLayer: { zIndex: 2, elevation: 20 },
   cardName: { fontFamily: fonts.display, fontSize: 22, letterSpacing: 3, textAlign: 'center', marginTop: spacing.xl },
   cardSub: { fontSize: 9.5, letterSpacing: 2.5, textAlign: 'center', marginTop: 3 },
   meanBox: { borderRadius: radius.l, borderWidth: 1, padding: spacing.l, marginTop: spacing.l },

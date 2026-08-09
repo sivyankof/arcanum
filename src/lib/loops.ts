@@ -12,9 +12,12 @@
 import {
   Easing,
   ReduceMotion,
+  withDelay,
   withRepeat,
+  withSequence,
   withTiming,
   type EasingFunction,
+  type EasingFunctionFactory,
   type SharedValue,
 } from 'react-native-reanimated';
 
@@ -26,6 +29,28 @@ export function pingPong(to: number, duration: number, easing: EasingFunction = 
     withTiming(to, { duration, easing, reduceMotion: ReduceMotion.System }),
     -1,
     true,
+  );
+}
+
+/** Проход с паузой: значение идёт 0 → 1 за `duration`, держится `pause` и цикл начинается заново.
+ *  Годится для «пролетающих» слоёв (блик по карте дня): в крайних точках элемент уведён за края,
+ *  поэтому мгновенный возврат 1 → 0 в конце паузы не виден.
+ *
+ *  Ловушка `withRepeat` из шапки файла тут не срабатывает: последовательность заканчивается нулём —
+ *  ровно тем значением, с которого её запускают (перед вызовом shared value обнулить).
+ *  Пауза сделана задержкой, а не «таймингом на месте»: так она не зависит от того, как
+ *  reanimated поведёт себя с анимацией в уже достигнутую точку. */
+export function sweepLoop(
+  duration: number,
+  pause: number,
+  easing: EasingFunction | EasingFunctionFactory,
+) {
+  return withRepeat(
+    withSequence(
+      withTiming(1, { duration, easing, reduceMotion: ReduceMotion.System }),
+      withDelay(pause, withTiming(0, { duration: 0, reduceMotion: ReduceMotion.System })),
+    ),
+    -1,
   );
 }
 
