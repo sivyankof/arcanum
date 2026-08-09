@@ -1,0 +1,153 @@
+{
+ "_comment": "Пул вариативных формулировок системных текстов (правило вариативности: смысл один — формулировки разные). Выбор варианта: hash(дата + ключ) % N, БЕЗ Math.random. Редактируются как контент.",
+ "greeting": {
+  "morning": [
+   {
+    "ru": "Доброе утро, {name}",
+    "en": "Good morning, {name}"
+   },
+   {
+    "ru": "С новым днём, {name}",
+    "en": "A new day, {name}"
+   },
+   {
+    "ru": "Утро доброе, {name} ✦",
+    "en": "Morning, {name} ✦"
+   }
+  ],
+  "day": [
+   {
+    "ru": "Добрый день, {name}",
+    "en": "Good afternoon, {name}"
+   },
+   {
+    "ru": "Рада видеть вас, {name}",
+    "en": "Good to see you, {name}"
+   }
+  ],
+  "evening": [
+   {
+    "ru": "Добрый вечер, {name}",
+    "en": "Good evening, {name}"
+   },
+   {
+    "ru": "Тихого вечера, {name}",
+    "en": "A quiet evening to you, {name}"
+   },
+   {
+    "ru": "Вечер — время вспомнить день, {name}",
+    "en": "Evening — time to look back on the day, {name}"
+   }
+  ]
+ },
+ "push": {
+  "morning_card": [
+   {
+    "ru": "Ваша карта уже ждёт ✦",
+    "en": "Your card is waiting ✦"
+   },
+   {
+    "ru": "Новый день — новая карта",
+    "en": "A new day, a new card"
+   },
+   {
+    "ru": "Какая карта выпала вам сегодня?",
+    "en": "Which card came to you today?"
+   },
+   {
+    "ru": "Колода перетасована. Ваш ход",
+    "en": "The deck is shuffled. Your move"
+   }
+  ],
+  "evening_reflect": [
+   {
+    "ru": "Как прошёл день с картой {card}?",
+    "en": "How did your day go with {card}?"
+   },
+   {
+    "ru": "{card} была с вами весь день. Отозвалась?",
+    "en": "{card} was with you all day. Did it resonate?"
+   },
+   {
+    "ru": "Минутка перед сном: сбылась ли {card}?",
+    "en": "A moment before sleep: did {card} ring true?"
+   }
+  ],
+  "streak_save": [
+   {
+    "ru": "Серия {n} дней — ещё можно сохранить",
+    "en": "Your {n}-day streak can still be saved"
+   },
+   {
+    "ru": "Осталось немного до полуночи — серия ждёт",
+    "en": "A little time before midnight — your streak awaits"
+   }
+  ],
+  "winback": [
+   {
+    "ru": "Луна скучала. Ваша карта ждёт",
+    "en": "The moon missed you. Your card is waiting"
+   },
+   {
+    "ru": "Колода на месте, никуда не ушла ✦",
+    "en": "The deck is right where you left it ✦"
+   }
+  ]
+ },
+ "lesson_done": [
+  {
+   "ru": "Урок пройден. Знание уложилось на своё место",
+   "en": "Lesson complete. The knowledge has found its place"
+  },
+  {
+   "ru": "Ещё один шаг по пути — и он ваш",
+   "en": "One more step on the path — and it is yours"
+  },
+  {
+   "ru": "Готово! Карты становятся всё более знакомыми",
+   "en": "Done! The cards grow more familiar"
+  }
+ ],
+ "streak_milestone": [
+  {
+   "ru": "{n} дней подряд — привычка становится ритуалом",
+   "en": "{n} days in a row — a habit becomes a ritual"
+  },
+  {
+   "ru": "Серия {n}! Постоянство — тоже магия",
+   "en": "A {n}-day streak! Consistency is its own kind of magic"
+  }
+ ],
+ "empty": {
+  "journal": [
+   {
+    "ru": "Дневник пока пуст — первая запись появится после карты дня",
+    "en": "The journal is empty for now — your first entry will appear after the card of the day"
+   },
+   {
+    "ru": "Здесь будут жить ваши дни с картами. Начните с сегодняшнего",
+    "en": "Your days with the cards will live here. Start with today"
+   }
+  ],
+  "filter": [
+   {
+    "ru": "В этом месяце таких записей нет",
+    "en": "No such entries this month"
+   },
+   {
+    "ru": "Под этот фильтр ничего не попало — попробуйте другой",
+    "en": "Nothing matches this filter — try another"
+   }
+  ]
+ },
+ "error_soft": [
+  {
+   "ru": "Карты перемешались. Попробуйте ещё раз",
+   "en": "The cards got shuffled. Please try again"
+  },
+  {
+   "ru": "Что-то сбилось — сейчас поправим. Повторите, пожалуйста",
+   "en": "Something slipped — let's set it right. Please try again"
+  }
+ ]
+}

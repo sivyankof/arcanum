@@ -565,6 +565,9 @@ display:flex;align-items:center;justify-content:center;color:var(--accent);font-
   <div class="view" id="v-profile">
     <div class="date fadeup d1">ВАШ ПУТЬ</div>
     <div class="h2 fadeup d1">Анна</div>
+    <div style="position:absolute;top:64px;right:22px;z-index:5;width:34px;height:34px;border:1px solid var(--line);border-radius:17px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;background:var(--panel)" onclick="show('v-settings')">
+      <svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7"/></svg>
+    </div>
     <div class="rule fadeup d2"><span>✦</span></div>
 
     <div class="lvlcard fadeup d2">
@@ -594,7 +597,15 @@ display:flex;align-items:center;justify-content:center;color:var(--accent);font-
     </div>
     <div class="fadeup d4" id="journal"></div>
 
-    <div class="fadeup d5" style="margin-top:18px">
+    </div>
+
+
+  <!-- ===== НАСТРОЙКИ (из профиля, за шестерёнкой) ===== -->
+  <div class="view" id="v-settings">
+    <div class="backbtn fadeup d1" onclick="show('v-profile')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>ПРОФИЛЬ</div>
+    <div class="date fadeup d2">НАСТРОЙКИ</div>
+    <div class="h2 fadeup d2" style="font-size:24px">Приложение</div>
+    <div class="fadeup d3" style="margin-top:14px">
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
         <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
@@ -632,7 +643,10 @@ display:flex;align-items:center;justify-content:center;color:var(--accent);font-
     <div class="mean" id="s3mean" style="margin-top:14px">
       <div class="lbl">ЗАМЕТКА</div>
       <div class="rnote" onclick="this.textContent='Колесо в настоящем — и правда всё закрутилось…';this.style.color='var(--text)';this.style.borderStyle='solid'">+ Что откликнулось…</div>
-      <button class="cta" id="s3save" onclick="this.textContent='СОХРАНЕНО В ДНЕВНИК ✓';this.style.opacity=.75">СОХРАНИТЬ В ДНЕВНИК</button>
+      <button class="cta" id="s3save" onclick="s3saved(this)">СОХРАНИТЬ В ДНЕВНИК</button>
+      <div id="s3again" style="display:none;text-align:center;margin-top:10px">
+        <span style="color:var(--accent);font-size:11.5px;letter-spacing:1px;cursor:pointer;border-bottom:1px dashed var(--frame)" onclick="s3reset()">↺ РАЗЛОЖИТЬ ЗАНОВО</span>
+      </div>
     </div></div>
 
 
@@ -871,6 +885,33 @@ function ccOpen(row, pos){
   row.querySelector('.ccn').textContent = name;
   row.onclick = null;
   document.querySelectorAll('#ccmap i:not(.op)')[0]?.classList.add('op');
+}
+
+
+function s3saved(btn){
+  btn.textContent='СОХРАНЕНО В ДНЕВНИК ✓'; btn.style.opacity=.75;
+  document.getElementById('s3again').style.display='block';
+  /* запись появляется в дневнике профиля */
+  const j = document.getElementById('journal');
+  const row = document.createElement('div'); row.className='jrow';
+  row.innerHTML = `<div style="width:30px;height:48px;border:1px solid var(--frame);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:13px">🃏</div>`+
+    `<div class="jt"><div class="jd">9 АВГУСТА · РАСКЛАД</div><div class="jn">Три карты · «Стоит ли менять работу этой осенью?»</div></div><div class="jo">✦</div>`;
+  j.prepend(row);
+}
+function s3reset(){
+  s3open = 0; ccReset3();
+}
+function ccReset3(){
+  document.querySelectorAll('#s3row .s3card').forEach((el,i)=>{el.classList.remove('open');document.getElementById('s3n'+i).textContent='';});
+  document.getElementById('s3means').innerHTML='';
+  document.getElementById('s3comp').classList.remove('show');
+  const m = document.getElementById('s3mean'); m.classList.remove('show');
+  const btn = document.getElementById('s3save'); btn.textContent='СОХРАНИТЬ В ДНЕВНИК'; btn.style.opacity=1;
+  document.getElementById('s3again').style.display='none';
+  /* «новое тасование»: сдвигаем демо-карты */
+  S3.push(S3.shift()); const t = S3MEAN.shift(); S3MEAN.push(t);
+  document.querySelectorAll('#s3row .s3col small').forEach((s,i)=>{ s.innerHTML = `${['ПРОШЛОЕ','НАСТОЯЩЕЕ','БУДУЩЕЕ'][i]}<br><b id="s3n${i}"></b>`; });
+  document.querySelectorAll('#s3row .s3card img').forEach((img,i)=>{ img.src='data:image/jpeg;base64,'+THUMBS[S3[i].id]; });
 }
 
 </script>
