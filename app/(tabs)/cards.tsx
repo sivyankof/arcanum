@@ -38,7 +38,7 @@ function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
           if (w) setCardOrigin(item.id, { x, y, w, h });
         })
       }
-      onPress={() => router.push(`/card/${item.id}`)}
+      onPress={() => router.push(`/card/${item.id}?from=cards`)}
       style={st.cell}
     >
       <View ref={imRef} style={[st.imWrap, { borderColor: t.line }]}>

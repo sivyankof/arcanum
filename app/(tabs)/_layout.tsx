@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Tabs, usePathname } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet, useWindowDimensions, View, type ColorValue } from 'react-native';
+import { StyleSheet, useWindowDimensions, View, type ColorValue } from 'react-native';
 import Animated, {
   Easing,
   ReduceMotion,
@@ -53,13 +53,15 @@ function TabIcon({ name, color, focused, path }: { name: TabIconName; color: Col
   const anim = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
 
   return (
-    // свечение активной иконки — filter: drop-shadow(0 0 7px var(--glow)) из эталона.
-    // На Android elevation дало бы прямоугольную тень под иконкой, поэтому только iOS.
+    // свечение активной иконки — эталон `.nav>div.on svg`: filter:drop-shadow(0 0 7px var(--glow)).
+    // Раньше рисовали через shadow*-пропы и держали только на iOS (на Android elevation дал бы
+    // прямоугольную тень под иконкой); boxShadow рисует именно контур свечения и работает
+    // на обеих платформах и в вебе, поэтому платформенное ограничение снято
     <Animated.View
       style={[
         anim,
         { opacity: focused ? 1 : 0.85 },
-        active && Platform.OS === 'ios' && { shadowColor: t.accent, shadowOpacity: 0.9, shadowRadius: 3.5, shadowOffset: { width: 0, height: 0 } },
+        active && { boxShadow: `0px 0px 7px ${t.glow}` },
       ]}
     >
       <TabGlyph name={name} color={color as string} />

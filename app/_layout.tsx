@@ -64,13 +64,8 @@ export default function RootLayout() {
         <Stack.Screen
           name="card/[id]"
           options={{
-            title: '',
-            headerTransparent: true,
-            // без явного сброса фон наследуется из общих screenOptions (headerStyle.backgroundColor = t.bg)
-            // и рисует непрозрачную полосу поверх контента, хотя headerTransparent включён
-            headerStyle: { backgroundColor: 'transparent' },
-            headerShadowVisible: false,
-            headerTintColor: t.accent,
+            // системной шапки нет: кнопка «назад» живёт в контенте экрана, как в эталоне (.backbtn)
+            headerShown: false,
             // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
             animation: 'fade',
           }}

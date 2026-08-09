@@ -43,9 +43,10 @@ export function CardBack({ hint }: { hint?: string }) {
       <View style={[st.inframe, { borderColor: t.frame }]} />
 
       <View style={st.emb}>
-        {/* свечение эмблемы (drop-shadow 0 0 12px glow в эталоне) висит на отдельной обёртке:
-            рядом с overflow:'hidden' iOS тень срезает, поэтому обрезка — только на faceClip */}
-        <View style={[st.embGlow, { shadowColor: t.accent }]}>
+        {/* свечение эмблемы — эталон `.emb svg`: filter:drop-shadow(0 0 12px var(--glow)).
+            Висит на отдельной обёртке: рядом с overflow:'hidden' тень срезает,
+            поэтому обрезка — только на faceClip */}
+        <View style={{ boxShadow: `0px 0px 12px ${t.glow}` }}>
           <Svg
             width={EMB_SIZE}
             height={EMB_SIZE}
@@ -74,8 +75,6 @@ const st = StyleSheet.create({
   inframe: { position: 'absolute', top: 9, left: 9, right: 9, bottom: 9, borderWidth: 1, borderRadius: 10, opacity: 0.8 },
   // gap 15 — из .emb эталона
   emb: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 15 },
-  // CSS-размытие переводим в shadowRadius делением пополам (общее правило проекта)
-  embGlow: { shadowOpacity: 0.35, shadowRadius: 6, shadowOffset: { width: 0, height: 0 } },
   word: { fontFamily: fonts.display, fontSize: 12, letterSpacing: 7 },
   hint: { fontSize: 8.5, letterSpacing: 2 },
 });

@@ -71,6 +71,11 @@ const MEAN_SHIFT = 12;
 // кривая CSS-дефолта `ease` — им в эталоне идут и блик, и всплывание текста
 const EASE = Easing.bezier(0.25, 0.1, 0.25, 1);
 
+// тень карты дня (.face эталона): box-shadow 0 30px 66px var(--glow), 0 6px 18px rgba(0,0,0,.4) —
+// две тени (тёплое золотое свечение + мягкая тёмная), значения переносятся из CSS один в один.
+// Нужна на рубашке и на лице карты, поэтому вынесена, чтобы не дублировать строку дважды
+const FACE_SHADOW = (glow: string) => `0px 30px 66px ${glow}, 0px 6px 18px rgba(0,0,0,0.4)`;
+
 /** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
 function Ring({
   size,
@@ -283,13 +288,13 @@ export default function TodayScreen() {
             <Ring size={RING_A} duration={70000} opacity={0.55} star="✦" starSize={8} />
             <Ring size={RING_B} duration={100000} reverse opacity={0.3} star="✧" starSize={6} />
             {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
-            <Animated.View style={[st.face, backStyle, { shadowColor: t.accent, backgroundColor: t.bg }]}>
+            <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
               <View style={[st.faceClip, { borderColor: t.frame }]}>
                 <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
               </View>
             </Animated.View>
             {/* лицо */}
-            <Animated.View style={[st.face, frontStyle, { shadowColor: t.accent, backgroundColor: t.bg }]}>
+            <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
               <View style={[st.faceClip, { borderColor: t.frame }]}>
                 <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
                 {/* блик: проходит по лицу карты сразу после переворота */}
@@ -341,14 +346,14 @@ export default function TodayScreen() {
                 </Txt>
                 {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
                 <PressableScale
-                  onPress={() => router.push(`/card/${card.id}`)}
-                  style={[st.cta, { shadowColor: t.accent }]}
+                  onPress={() => router.push(`/card/${card.id}?from=today`)}
+                  style={[st.cta, { boxShadow: `0px 12px 30px ${t.glow}` }]}
                 >
                   <View style={st.ctaClip}>
                     <LinearGradient
                       colors={gold.gradient}
                       start={{ x: 0, y: 0 }}
-                      end={{ x: 1, y: 0 }}
+                      end={{ x: 1, y: 0.6 }}
                       style={st.ctaGrad}
                     >
                       {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
@@ -373,8 +378,8 @@ const st = StyleSheet.create({
   pills: { flexDirection: 'row', gap: 10, marginTop: 14 },
   pillStreak: { flex: 1 },
   pillXp: { flex: 1.5 },
-  // тёплое свечение вокруг карты дня — из эталона: box-shadow 0 30px 66px var(--glow)
-  // (CSS-размытие переводим в shadowRadius делением пополам)
+  // тёплое свечение вокруг карты дня — значение в FACE_SHADOW (см. константу выше),
+  // задаётся инлайн через boxShadow, т.к. зависит от темы
   face: {
     position: 'absolute',
     top: 0,
@@ -382,10 +387,6 @@ const st = StyleSheet.create({
     right: 0,
     bottom: 0,
     borderRadius: radius.card,
-    shadowOpacity: 0.35,
-    shadowRadius: 33,
-    shadowOffset: { width: 0, height: 30 },
-    elevation: 16,
   },
   faceClip: {
     ...StyleSheet.absoluteFillObject,
@@ -400,16 +401,12 @@ const st = StyleSheet.create({
   meanBox: { borderRadius: radius.l, borderWidth: 1, padding: spacing.l, marginTop: spacing.l },
   meanLbl: { fontSize: 9.5, letterSpacing: 3 }, // Overline из дизайн-системы: 9.5–10
   meanTxt: { fontFamily: fonts.display, fontSize: 17, lineHeight: 25, marginTop: 8 },
-  // тень кнопки из эталона: box-shadow 0 12px 30px var(--glow) (CSS-размытие делим пополам).
-  // overflow тут ставить нельзя — срежет тень; обрезка живёт в ctaClip
+  // тень кнопки из эталона `.btn`: box-shadow 0 12px 30px var(--glow) — задаётся инлайн
+  // (boxShadow зависит от темы, см. JSX выше). overflow тут ставить нельзя — срежет тень;
+  // обрезка живёт в ctaClip. Подложка под форму (нужна была старым shadow*-пропам) — не нужна
   cta: {
     marginTop: 14,
     borderRadius: radius.l,
-    backgroundColor: gold.gradient[0], // подложка формы: iOS считает тень по непрозрачности слоя
-    shadowOpacity: 0.35,
-    shadowRadius: 15,
-    shadowOffset: { width: 0, height: 12 },
-    elevation: 8,
   },
   ctaClip: { borderRadius: radius.l, overflow: 'hidden' },
   ctaGrad: { paddingVertical: 15, alignItems: 'center' },

@@ -84,8 +84,12 @@ export const spacing = { xs: 4, s: 8, m: 12, l: 16, xl: 24, xxl: 32 } as const;
 export const radius = { s: 8, m: 12, l: 16, xl: 20, card: 16 } as const;
 
 /** Шампанское золото — одинаково в обеих темах (не зависит от dark/light).
- *  Используется для CTA-кнопок и активных элементов (вкладки, индикаторы). */
+ *  Используется для CTA-кнопок и активных элементов (вкладки, индикаторы).
+ *  В эталоне (design-reference.html) это ДВА разных градиента: `.btn` (CTA) — три стопа
+ *  с более светлой серединой, `.tabs button.on` (активная вкладка) — плоский переход
+ *  из двух стопов. Раньше оба места ошибочно красились одним `gradient`. */
 export const gold = {
   gradient: ['#caa45a', '#efd9a2', '#caa45a'] as readonly [string, string, string],
+  tabGradient: ['#caa45a', '#e9d095'] as readonly [string, string],
   text: '#241c0d', // цвет текста поверх золотой заливки
 };

@@ -1,6 +1,7 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -28,6 +29,7 @@ import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardImages } from '../../src/lib/cardImages';
 import { cardById, cardNumeral } from '../../src/lib/content';
 import { hapticTap } from '../../src/lib/haptics';
+import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -110,7 +112,7 @@ function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) 
     <Animated.View
       ref={ref}
       onLayout={onLayout}
-      style={[st.imShadow, { shadowColor: t.accent, backgroundColor: t.bg }, fly]}
+      style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
     >
       <View style={[st.imClip, { borderColor: t.frame }]}>
         <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
@@ -120,7 +122,7 @@ function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) 
 }
 
 export default function CardDetail() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, from } = useLocalSearchParams<{ id: string; from?: string }>();
   const t = useTheme();
   const { t: tr, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
@@ -130,11 +132,18 @@ export default function CardDetail() {
   // активная вкладка сферы значения — не персистится, при каждом открытии страницы сброс на «Общее»
   const [sphere, setSphere] = React.useState<SphereKey>('general');
   const fade = useSharedValue(1);
-  // Хуки должны вызываться до условного return, иначе нарушится их порядок между рендерами
+  // Хуки должны вызываться до условного return, иначе нарушится их порядок между рендерами.
+  // Селектор возвращает примитив (id карты, а не саму функцию todayDraw), иначе стор не
+  // уведомит компонент об обновлении при вытягивании новой карты дня
+  const todayCardId = useApp((s) => s.todayDraw()?.cardId);
   const fadeStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
 
   const card = cardById.get(id ?? '');
   if (!card) return null;
+
+  // контекстный блок «ваша карта сегодня» (product-spec §3): поднимается над вкладками,
+  // получает золотую рамку и звёздочку в заголовке; на обычном месте блок не дублируется
+  const isTodayCard = todayCardId === card.id;
 
   const num = cardNumeral(card);
   const arcanaLabel =
@@ -169,27 +178,48 @@ export default function CardDetail() {
   const dayCard = blockOf('day_card');
   const symbolism = blockOf('symbolism');
 
+  // индексы каскада FadeUp: контекстный блок «как карта дня» встаёт перед вкладками
+  // и сдвигает всё, что идёт следом, на один шаг; символика всегда последняя (6)
+  const idxTabs = isTodayCard ? 3 : 2;
+  const idxSphere = isTodayCard ? 4 : 3;
+  const idxReversed = isTodayCard ? 5 : 4;
+
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          // 64 = высота прозрачной шапки (кнопка «назад»), иначе герой при парении вверх уходит под неё
-          paddingTop: insets.top + 64,
+          paddingTop: insets.top + spacing.xl,
           paddingHorizontal: spacing.xl,
           paddingBottom: 60,
         }}
         showsVerticalScrollIndicator={false}
       >
+        {/* кнопка «назад» в контенте экрана, как в эталоне (.backbtn) — без системной шапки.
+            Подпись и действие зависят от того, откуда открыли карту (параметр from): с «Сегодня» —
+            «Сегодня» и возврат туда, иначе (сетка справочника или прямая ссылка) — «Все карты».
+            Если истории для router.back() нет (прямая ссылка), уводим в справочник вместо корня */}
+        <FadeUp index={0}>
+          <PressableScale
+            onPress={() => (router.canGoBack() ? router.back() : router.replace('/cards'))}
+            style={st.backbtn}
+          >
+            <Ionicons name="chevron-back" size={14} color={t.accent} />
+            <Txt style={[st.backbtnLabel, { color: t.accent }]}>
+              {(from === 'today' ? tr('card.backToday') : tr('card.backAll')).toUpperCase()}
+            </Txt>
+          </PressableScale>
+        </FadeUp>
+
         <View style={st.hero}>
           {origin ? (
             <HeroImage cardId={card.id} origin={origin} />
           ) : (
-            <FadeUp index={0}>
+            <FadeUp index={1}>
               <HeroImage cardId={card.id} origin={null} />
             </FadeUp>
           )}
-          <FadeUp index={0} style={{ flex: 1 }}>
+          <FadeUp index={1} style={{ flex: 1 }}>
             <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
             <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
             <View style={st.kws}>
@@ -202,22 +232,36 @@ export default function CardDetail() {
           </FadeUp>
         </View>
 
+        {/* контекстный блок «ваша карта сегодня» (product-spec §3): выше вкладок,
+            золотая рамка вместо обычной + звёздочка перед заголовком */}
+        {isTodayCard && (
+          <FadeUp index={2}>
+            <Block
+              title={tr('card.todayHighlight').toUpperCase()}
+              text={dayCard.text}
+              todo={dayCard.todo}
+              accentBorder
+              star
+            />
+          </FadeUp>
+        )}
+
         {/* вкладки сфер значения (.tabs эталона) */}
-        <FadeUp index={1} style={[st.tabs, { backgroundColor: t.panel, borderColor: t.line }]}>
+        <FadeUp index={idxTabs} style={[st.tabs, { backgroundColor: t.panel, borderColor: t.line }]}>
           {SPHERES.map((s) => {
             const active = s.key === sphere;
             return (
               <PressableScale
                 key={s.key}
                 onPress={() => onTabPress(s.key)}
-                style={[st.tab, active && st.tabActive, active && { shadowColor: t.accent }]}
+                style={[st.tab, active && { boxShadow: `0px 4px 12px ${t.glow}` }]}
               >
                 {active && (
                   <View style={st.tabFill}>
                     <LinearGradient
-                      colors={gold.gradient}
+                      colors={gold.tabGradient}
                       start={{ x: 0, y: 0 }}
-                      end={{ x: 1, y: 0 }}
+                      end={{ x: 1, y: 0.6 }}
                       style={StyleSheet.absoluteFill}
                     />
                   </View>
@@ -229,18 +273,20 @@ export default function CardDetail() {
         </FadeUp>
 
         {/* блок активной сферы: заголовок и текст гаснут/проявляются при смене вкладки */}
-        <FadeUp index={2}>
+        <FadeUp index={idxSphere}>
           <Block title={tr(activeSphere.blockKey)} text={sphereBlock.text} todo={sphereBlock.todo} contentStyle={fadeStyle} />
         </FadeUp>
 
         {/* постоянные блоки — всегда видны, порядок по product-spec §3 */}
-        <FadeUp index={3}>
+        <FadeUp index={idxReversed}>
           <Block title={tr('card.reversed')} text={reversed.text} todo={reversed.todo} />
         </FadeUp>
-        <FadeUp index={4}>
-          <Block title={tr('card.day_card')} text={dayCard.text} todo={dayCard.todo} />
-        </FadeUp>
-        <FadeUp index={5}>
+        {!isTodayCard && (
+          <FadeUp index={5}>
+            <Block title={tr('card.day_card')} text={dayCard.text} todo={dayCard.todo} />
+          </FadeUp>
+        )}
+        <FadeUp index={6}>
           <Block title={tr('card.symbolism')} text={symbolism.text} todo={symbolism.todo} />
         </FadeUp>
       </ScrollView>
@@ -249,17 +295,16 @@ export default function CardDetail() {
 }
 
 const st = StyleSheet.create({
-  hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start' },
-  // виньетка = тёплое свечение вокруг карты; в эталоне это box-shadow 0 18px 40px var(--glow)
-  // (CSS-размытие переводим в shadowRadius делением пополам)
+  // кнопка «назад» (.backbtn эталона) — область нажатия не растягивается на всю ширину
+  backbtn: { flexDirection: 'row', alignItems: 'center', gap: 7, alignSelf: 'flex-start', marginBottom: 6 },
+  backbtnLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1.2 },
+  hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start', marginTop: 8 },
+  // виньетка = тёплое свечение вокруг карты; в эталоне `.hero .im`: box-shadow 0 18px 40px var(--glow).
+  // Значение берём напрямую из CSS макета — boxShadow принимает ту же синтаксическую форму
   imShadow: {
     width: 128,
     aspectRatio: 0.58,
     borderRadius: radius.m,
-    shadowOpacity: 0.35,
-    shadowRadius: 20,
-    shadowOffset: { width: 0, height: 18 },
-    elevation: 10,
   },
   imClip: {
     ...StyleSheet.absoluteFillObject,
@@ -275,15 +320,9 @@ const st = StyleSheet.create({
   // пилюля вкладок (.tabs эталона)
   tabs: { flexDirection: 'row', gap: 5, marginTop: 18, borderWidth: 1, borderRadius: 14, padding: 4 },
   tab: { flex: 1, borderRadius: 11, alignItems: 'center', justifyContent: 'center', paddingVertical: 8 },
-  // тень активной вкладки из эталона: 0 4px 12px var(--glow) (CSS-размытие делим пополам).
-  // overflow тут ставить нельзя — срежет тень; заливка градиентом живёт в tabFill
-  tabActive: {
-    shadowOpacity: 0.35,
-    shadowRadius: 6,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 4,
-    backgroundColor: gold.gradient[0], // подложка формы: iOS считает тень по непрозрачности слоя
-  },
+  // тень активной вкладки из эталона `.tabs button.on`: 0 4px 12px var(--glow) — задаётся
+  // инлайн (boxShadow зависит от темы, см. JSX выше); заливка градиентом живёт в tabFill.
+  // Подложка-фон под тень (как раньше требовали старые shadow*-пропы) больше не нужна
   tabFill: { ...StyleSheet.absoluteFillObject, borderRadius: 11, overflow: 'hidden' },
   tabLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 0.4, textAlign: 'center' },
 });
