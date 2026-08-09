@@ -278,7 +278,7 @@ export default function TodayScreen() {
                   >
                     {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
                     <View style={st.ctaGloss} />
-                    <Txt style={st.ctaTxt}>{lang === 'ru' ? 'ИЗУЧИТЬ КАРТУ →' : 'STUDY THIS CARD →'}</Txt>
+                    <Txt style={st.ctaTxt}>{lang === 'ru' ? 'ПРОДОЛЖИТЬ ПУТЬ →' : 'CONTINUE YOUR PATH →'}</Txt>
                   </LinearGradient>
                 </View>
               </PressableScale>
