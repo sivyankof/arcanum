@@ -17,7 +17,7 @@ Read the exact versioned docs at https://docs.expo.dev/versions/v54.0.0/ before 
 
 ## Архитектура
 
-**Роутинг** — expo-router v6, file-based. `app/_layout.tsx` (корневой Stack) → `app/(tabs)/` с пятью вкладками (`index` = «Сегодня», `course`, `cards`, `spreads`, `profile`) + экран карты `app/card/[id].tsx` поверх табов. Typed routes включены.
+**Роутинг** — expo-router v6, file-based: дерево `app/` и есть маршруты.
 
 **Контент** — статические JSON в `content/` (`cards.json`, `spreads.json`, `course.json`), доступ ТОЛЬКО через `src/lib/content.ts` (типизированные экспорты `cards`, `spreads`, `course`, `cardById`, `cardOfDay`). Каждая карта: 8 контент-блоков (general, reversed, love, career, finances, health, day_card, symbolism), каждый блок `{ru, en, status}` со статусным workflow `todo → draft → reviewed → final`. Расклады и модули курса имеют флаг `free` (freemium).
 
