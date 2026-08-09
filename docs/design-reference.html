@@ -290,6 +290,50 @@ border-radius:16px;padding:6px 16px;color:var(--accent);font-weight:800;font-siz
 animation:fu .5s ease}
 .xpchip.on{display:block}
 
+
+/* профиль */
+.prow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
+border-radius:15px;padding:13px 15px;margin-top:9px;backdrop-filter:blur(10px)}
+.prow svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round}
+.prow .pl{flex:1;color:var(--text);font-size:13px}
+.prow .pv{color:var(--muted);font-size:12px;font-weight:700}
+.statrow{display:flex;gap:10px;margin-top:14px}
+.statbox{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:15px;
+padding:13px;text-align:center;backdrop-filter:blur(10px)}
+.statbox b{font-family:var(--serif);font-size:24px;color:var(--head);font-weight:500;display:block}
+.statbox small{font-size:8.5px;letter-spacing:2px;color:var(--muted)}
+.jrow{display:flex;gap:11px;align-items:center;background:var(--panel);border:1px solid var(--line);
+border-radius:13px;padding:9px 12px;margin-top:8px;backdrop-filter:blur(8px)}
+.jrow img{width:30px;border-radius:4px;border:1px solid var(--frame)}
+.jrow .jt{flex:1}
+.jrow .jd{font-size:9px;letter-spacing:1.5px;color:var(--muted)}
+.jrow .jn{font-size:12px;color:var(--text);margin-top:1px}
+.jrow .jo{font-size:13px}
+.barc{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--frame);
+border-radius:15px;padding:12px 14px;margin-top:14px;backdrop-filter:blur(10px)}
+.barc img{width:44px;border-radius:6px;border:1px solid var(--frame);box-shadow:0 6px 18px var(--glow)}
+.barc .bt small{font-size:8.5px;letter-spacing:2px;color:var(--accent)}
+.barc .bt b{display:block;font-family:var(--serif);font-size:17px;color:var(--head);font-weight:500}
+/* рефлексия */
+.reflect .rbtns{display:flex;gap:7px;margin-top:10px}
+.reflect .rb{flex:1;border:1px solid var(--line);border-radius:12px;padding:9px 4px;text-align:center;
+color:var(--text);font-size:11px;cursor:pointer;transition:.2s}
+.reflect .rb:hover{border-color:var(--frame)}
+.reflect .done2{color:var(--accent);font-size:12.5px;text-align:center;padding:6px 0 2px;font-weight:700;
+letter-spacing:.5px;display:none}
+/* экран расклада */
+.s3row{display:flex;gap:10px;justify-content:center;margin-top:22px}
+.s3col{width:88px;text-align:center}
+.s3card{width:88px;height:150px;border-radius:10px;border:1px solid var(--frame);overflow:hidden;
+cursor:pointer;position:relative;box-shadow:0 10px 26px var(--glow);transition:transform .2s}
+.s3card:hover{transform:translateY(-4px)}
+.s3card .bp{position:absolute;inset:0;background:var(--cardbackbg);display:flex;align-items:center;
+justify-content:center;color:var(--accent);font-size:20px}
+.s3card img{width:100%;height:100%;object-fit:cover;display:none}
+.s3card.open .bp{display:none}.s3card.open img{display:block;animation:fu .5s ease}
+.s3col small{display:block;font-size:8.5px;letter-spacing:1.5px;color:var(--muted);margin-top:7px}
+.s3col small b{color:var(--head)}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -341,6 +385,18 @@ animation:fu .5s ease}
       <p>День надежды и тихой веры. То, о чём вы просили, уже движется к вам — не торопите рассвет.</p>
       <button class="cta">ПРОДОЛЖИТЬ ПУТЬ →</button>
     </div>
+
+    <div class="mean reflect" id="reflect">
+      <div class="lbl">ВЕЧЕРОМ · 21:00</div>
+      <p style="font-size:14.5px">Как прошёл день со Звездой?</p>
+      <div class="rbtns" id="rbtns">
+        <div class="rb" onclick="reflectDone('Сбылось ✓')">Сбылось</div>
+        <div class="rb" onclick="reflectDone('Отчасти ≈')">Отчасти</div>
+        <div class="rb" onclick="reflectDone('Мимо ✗')">Мимо</div>
+      </div>
+      <div class="done2" id="rdone"></div>
+    </div>
+
   </div>
 
   <!-- ===== КУРС ===== -->
@@ -434,11 +490,56 @@ animation:fu .5s ease}
     </div>
   </div>
 
+
+  <!-- ===== ПРОФИЛЬ ===== -->
+  <div class="view" id="v-profile">
+    <div class="date fadeup d1">ВАШ ПУТЬ</div>
+    <div class="h2 fadeup d1">Анна</div>
+    <div class="rule fadeup d2"><span>✦</span></div>
+    <div class="statrow fadeup d3">
+      <div class="statbox"><b>12</b><small>СЕРИЯ 🔥</small></div>
+      <div class="statbox"><b>34</b><small>КАРТ ДНЯ</small></div>
+      <div class="statbox"><b>7</b><small>УРОКОВ</small></div>
+    </div>
+    <div class="barc fadeup d3" onclick="openCardSafe('strength')">
+      <img id="barcimg" src="" alt="">
+      <div class="bt"><small>АРКАН РОЖДЕНИЯ</small><b>VIII · Сила</b></div>
+    </div>
+    <div class="date fadeup d4" style="text-align:left;margin-top:20px">ДНЕВНИК · АВГУСТ</div>
+    <div class="fadeup d4" id="journal"></div>
+    <div class="fadeup d5">
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
+        <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
+        <span class="pl">Язык</span><span class="pv">Русский</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
+        <span class="pl">Напоминания</span><span class="pv">9:00 · 21:00</span></div>
+    </div>
+  </div>
+
+  <!-- ===== РАСКЛАД: ТРИ КАРТЫ ===== -->
+  <div class="view" id="v-spread3">
+    <div class="backbtn fadeup d1" onclick="show('v-spreads')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>РАСКЛАДЫ</div>
+    <div class="date fadeup d2">РАСКЛАД</div>
+    <div class="h2 fadeup d2">Три карты</div>
+    <div class="rule fadeup d2"><span>✦</span></div>
+    <p class="fadeup d3" style="text-align:center;color:var(--muted);font-size:12px;margin-top:6px">
+      Подумайте о своём вопросе и откройте карты по одной</p>
+    <div class="s3row fadeup d3" id="s3row"></div>
+    <div class="mean" id="s3mean" style="margin-top:24px">
+      <div class="lbl">НИТЬ ИСТОРИИ</div>
+      <p style="font-size:14px">Опыт Отшельника привёл вас к повороту Колеса — впереди выбор сердцем.
+      Прошлое дало мудрость, настоящее меняет декорации, будущее просит честного «да» или «нет».</p>
+      <button class="cta" id="s3save" onclick="this.textContent='СОХРАНЕНО В ДНЕВНИК ✓';this.style.opacity=.75">СОХРАНИТЬ В ДНЕВНИК</button>
+    </div>
+  </div>
+
   <div class="nav" id="nav">
     <div class="on" data-v="v-today"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg><small>Сегодня</small></div>
     <div data-v="v-course"><svg viewBox="0 0 24 24"><path d="M12 4 2.8 8.4 12 12.8l9.2-4.4L12 4z"/><path d="M6 10.6v5.2c0 1.4 2.7 2.9 6 2.9s6-1.5 6-2.9v-5.2"/></svg><small>Курс</small></div>
     <div data-v="v-cards"><svg viewBox="0 0 24 24"><rect x="3.4" y="4.6" width="10.4" height="15.6" rx="1.8" transform="rotate(-8 8.6 12.4)"/><rect x="10.4" y="4.2" width="10.4" height="15.6" rx="1.8" transform="rotate(7 15.6 12)"/></svg><small>Карты</small></div>
     <div data-v="v-spreads"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg><small>Расклады</small></div>
+     <div data-v="v-profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg><small>Профиль</small></div>
   </div>
 </div></div>
 
@@ -475,6 +576,7 @@ stage.onclick=()=>{
   const on = stage.classList.toggle('done');
   document.getElementById('plate').classList.toggle('show',on);
   document.getElementById('mean').classList.toggle('show',on);
+  document.getElementById('reflect').classList.toggle('show',on);
   if(on){
     const r=stage.getBoundingClientRect(), pr=sc.getBoundingClientRect();
     for(let i=0;i<18;i++){
@@ -537,7 +639,7 @@ const SPS=[
  {n:'Подкова',c:7,d:'Развёрнутый взгляд: от предыстории до совета',pos:[[0,0],[6,20],[16,32],[28,36],[40,32],[50,20],[56,0]]},
  {n:'Кельтский крест',c:10,d:'Классика Уэйта 1911 года — глубокий разбор ситуации',pos:[[14,16],[20,16],[14,0],[14,34],[0,16],[28,16],[44,0],[44,12],[44,24],[44,36]]}];
 document.getElementById('sps').innerHTML = SPS.map(s=>`
- <div class="sp"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
+ <div class="sp" onclick="${s.free ? "show('v-spread3')" : ''}"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
  <div class="tx"><b>${s.n}</b><small>${s.c} карт · ${s.d}</small></div>
  ${s.free?'':'<span class="lk">PREMIUM</span>'}</div>`).join('');
 
@@ -565,6 +667,45 @@ function answer(el, ok){
   el.classList.add(ok ? 'ok' : 'no');
   if(!ok){ setTimeout(()=>document.querySelectorAll('.opt')[1].classList.add('ok'), 400); }
   document.getElementById('xp').classList.add('on');
+}
+
+
+/* профиль: аркан рождения + дневник */
+document.getElementById('barcimg').src = 'data:image/jpeg;base64,' + THUMBS['strength'];
+function openCardSafe(id){ if(id==='fool'){show('v-detail');} }
+const JOURNAL = [
+  {d:'8 АВГУСТА', id:'star', o:'✓', n:'День и правда сложился — созвон прошёл легко'},
+  {d:'7 АВГУСТА', id:'hermit', o:'≈', n:'Побыла одна, но тишины не хватило'},
+  {d:'6 АВГУСТА', id:'lovers', o:'✓', n:''},
+];
+document.getElementById('journal').innerHTML = JOURNAL.map(j=>
+  `<div class="jrow"><img src="data:image/jpeg;base64,${THUMBS[j.id]}">`+
+  `<div class="jt"><div class="jd">${j.d}</div><div class="jn">${j.n||'Без заметки'}</div></div>`+
+  `<div class="jo">${j.o}</div></div>`).join('');
+
+/* рефлексия */
+function reflectDone(t){
+  document.getElementById('rbtns').style.display='none';
+  const d=document.getElementById('rdone'); d.textContent='Записано в дневник · '+t; d.style.display='block';
+}
+
+/* расклад три карты */
+const S3 = [
+  {pos:'ПРОШЛОЕ', id:'hermit', name:'Отшельник'},
+  {pos:'НАСТОЯЩЕЕ', id:'wheel-of-fortune', name:'Колесо'},
+  {pos:'БУДУЩЕЕ', id:'lovers', name:'Влюблённые'},
+];
+let s3open = 0;
+document.getElementById('s3row').innerHTML = S3.map((c,i)=>
+  `<div class="s3col"><div class="s3card" id="s3c${i}" onclick="s3flip(${i})">`+
+  `<div class="bp">✶</div><img src="data:image/jpeg;base64,${THUMBS[c.id]}"></div>`+
+  `<small>${c.pos}<br><b id="s3n${i}"></b></small></div>`).join('');
+function s3flip(i){
+  const el=document.getElementById('s3c'+i);
+  if(el.classList.contains('open')) return;
+  el.classList.add('open');
+  document.getElementById('s3n'+i).textContent = S3[i].name;
+  if(++s3open===3) document.getElementById('s3mean').classList.add('show');
 }
 
 </script>
