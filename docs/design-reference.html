@@ -383,6 +383,22 @@ margin-top:9px;backdrop-filter:blur(8px);opacity:0;transform:translateY(8px);tra
 .aiteaser{display:flex;align-items:center;justify-content:center;gap:7px;border:1px dashed var(--line);
 border-radius:13px;padding:11px;margin-top:10px;color:var(--muted);font-size:11px;letter-spacing:.5px}
 
+
+.ccmap{display:flex;gap:4px;justify-content:center;margin-top:14px;flex-wrap:wrap;max-width:200px;margin-left:auto;margin-right:auto}
+.ccmap i{width:13px;height:20px;border:1px solid var(--line);border-radius:3px;background:transparent;transition:.3s}
+.ccmap i.op{background:var(--chipbg);border-color:var(--frame)}
+.ccrow{display:flex;gap:11px;align-items:center;background:var(--panel);border:1px solid var(--line);
+border-radius:13px;padding:10px 12px;margin-top:8px;backdrop-filter:blur(8px);cursor:pointer;transition:.25s}
+.ccrow .ccimg{width:34px;height:56px;border-radius:5px;border:1px solid var(--frame);flex:none;overflow:hidden;
+display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:13px;background:var(--cardbackbg)}
+.ccrow img{width:100%;height:100%;object-fit:cover}
+.ccrow img.rev{transform:rotate(180deg)}
+.ccrow .cct{flex:1}
+.ccrow .ccp{font-size:8.5px;letter-spacing:1.8px;color:var(--accent)}
+.ccrow .ccn{font-family:var(--serif);font-size:15px;color:var(--head);margin-top:1px}
+.ccrow .cck{font-size:10.5px;color:var(--muted);margin-top:2px}
+.ccrow.closed .ccn{color:var(--muted);font-size:12px;font-family:var(--sans)}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -619,6 +635,38 @@ border-radius:13px;padding:11px;margin-top:10px;color:var(--muted);font-size:11p
       <button class="cta" id="s3save" onclick="this.textContent='СОХРАНЕНО В ДНЕВНИК ✓';this.style.opacity=.75">СОХРАНИТЬ В ДНЕВНИК</button>
     </div></div>
 
+
+  <!-- ===== РАСКЛАД: КЕЛЬТСКИЙ КРЕСТ (лента для 7–10 карт) ===== -->
+  <div class="view" id="v-spread10">
+    <div class="backbtn fadeup d1" onclick="show('v-spreads')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>РАСКЛАДЫ</div>
+    <div class="date fadeup d2">РАСКЛАД · 10 КАРТ</div>
+    <div class="h2 fadeup d2">Кельтский крест</div>
+    <div class="ccmap fadeup d3" id="ccmap"><i class="op"></i><i class="op"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div>
+    <p class="fadeup d3" style="text-align:center;color:var(--muted);font-size:10.5px;margin-top:8px">Открыто 2 из 10 · открывайте в своём темпе</p>
+    <div class="fadeup d4"><div class="ccrow"><div class="ccimg"><img src="data:image/jpeg;base64,${THUMBS['empress']}" class=""></div>
+        <div class="cct"><div class="ccp">1 · СУТЬ СИТУАЦИИ</div><div class="ccn">Императрица</div>
+        <div class="cck">изобилие · забота · творчество</div></div></div>
+<div class="ccrow"><div class="ccimg"><img src="data:image/jpeg;base64,${THUMBS['justice']}" class="rev"></div>
+        <div class="cct"><div class="ccp">2 · ЧТО ПЕРЕСЕКАЕТ (МЕШАЕТ ИЛИ ПОМОГАЕТ)</div><div class="ccn">Справедливость (перевёрнутая)</div>
+        <div class="cck">справедливость · правда · причина и следствие</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,2)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">3 · ОСНОВАНИЕ (КОРНИ СИТУАЦИИ)</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,3)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">4 · НЕДАВНЕЕ ПРОШЛОЕ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,4)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">5 · ВОЗМОЖНОЕ ЛУЧШЕЕ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,5)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">6 · БЛИЖАЙШЕЕ БУДУЩЕЕ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,6)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">7 · ВЫ САМИ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,7)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">8 · ОКРУЖЕНИЕ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,8)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">9 · НАДЕЖДЫ И СТРАХИ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div>
+<div class="ccrow closed" onclick="ccOpen(this,9)"><div class="ccimg">✶</div>
+        <div class="cct"><div class="ccp">10 · ИТОГ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div></div>
+  </div>
+
   <div class="nav" id="nav">
     <div class="on" data-v="v-today"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></svg><small>Сегодня</small></div>
     <div data-v="v-course"><svg viewBox="0 0 24 24"><path d="M12 4 2.8 8.4 12 12.8l9.2-4.4L12 4z"/><path d="M6 10.6v5.2c0 1.4 2.7 2.9 6 2.9s6-1.5 6-2.9v-5.2"/></svg><small>Курс</small></div>
@@ -729,7 +777,7 @@ const SPS=[
  {n:'Подкова',c:7,d:'Развёрнутый взгляд: от предыстории до совета',pos:[[0,0],[6,20],[16,32],[28,36],[40,32],[50,20],[56,0]]},
  {n:'Кельтский крест',c:10,d:'Классика Уэйта 1911 года — глубокий разбор ситуации',pos:[[14,16],[20,16],[14,0],[14,34],[0,16],[28,16],[44,0],[44,12],[44,24],[44,36]]}];
 document.getElementById('sps').innerHTML = SPS.map(s=>`
- <div class="sp" onclick="${s.n==='Три карты' ? "show('v-spread3')" : ''}"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
+ <div class="sp" onclick="${s.n==='Три карты' ? "show('v-spread3')" : (s.n==='Кельтский крест' ? "show('v-spread10')" : '')}"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
  <div class="tx"><b>${s.n}</b><small>${s.c} карт · ${s.d}</small></div>
  ${s.free?'':'<span class="lk">PREMIUM</span>'}</div>`).join('');
 
@@ -809,6 +857,21 @@ function s3flip(i){
 document.querySelectorAll('.node.lock').forEach(n=>n.onclick=()=>{
   const c=n.querySelector('.nc'); c.classList.remove('wob'); void c.offsetWidth; c.classList.add('wob');
 });
+
+
+const CC_LEFT = [['temperance','Умеренность','symbolism'],['sun','Солнце',''],['star','Звезда',''],
+  ['moon','Луна',''],['fool','Дурак',''],['death','Смерть',''],['tower','Башня',''],['world','Мир','']];
+let ccIdx = 0;
+function ccOpen(row, pos){
+  const pick = CC_LEFT[ccIdx % CC_LEFT.length]; ccIdx++;
+  const [cid, name] = pick;
+  const img = THUMBS[cid] ? `<img src="data:image/jpeg;base64,${THUMBS[cid]}">` : '✶';
+  row.classList.remove('closed');
+  row.querySelector('.ccimg').innerHTML = img;
+  row.querySelector('.ccn').textContent = name;
+  row.onclick = null;
+  document.querySelectorAll('#ccmap i:not(.op)')[0]?.classList.add('op');
+}
 
 </script>
 </body></html>
