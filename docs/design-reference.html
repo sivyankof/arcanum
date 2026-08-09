@@ -362,6 +362,15 @@ align-items:center;justify-content:center;color:var(--accent);cursor:pointer;fon
 font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
 .jfilters span.on{background:var(--chipbg);border-color:var(--frame);color:var(--accent)}
 
+
+.rnote{margin-top:9px;border:1px dashed var(--line);border-radius:11px;padding:10px 13px;
+color:var(--muted);font-size:11.5px;cursor:text;transition:.2s}
+.rnote:hover{border-color:var(--frame)}
+
+
+@keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.node.lock .nc.wob{animation:wob .35s ease 2}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -386,13 +395,13 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
 
   <!-- ===== СЕГОДНЯ ===== -->
   <div class="view on" id="v-today">
-    <div class="date fadeup d1">Пятница · 1 августа</div>
+    <div class="date fadeup d1">Суббота · 9 августа</div>
     <div class="h2 fadeup d1">Карта дня</div>
     <div class="rule fadeup d2"><span>✦</span></div>
     <div class="moonrow fadeup d2">☽ <b>Растущая луна</b> · 8-й лунный день</div>
     <div class="pills fadeup d3">
       <div class="pill"><span class="ic">🔥</span><span class="tx"><b>12 дней</b><small>СЕРИЯ</small></span></div>
-      <div class="pill" style="flex:1.5"><span class="tx" style="flex:1"><b style="font-size:11px">Уровень 3 · Ученица</b>
+      <div class="pill" style="flex:1.5"><span class="tx" style="flex:1"><b style="font-size:11px">Уровень 3 · Читающая</b>
         <span class="xline"><i></i></span></span></div>
     </div>
     <div class="ringwrap fadeup d4">
@@ -411,7 +420,7 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
     <div class="mean" id="mean">
       <div class="lbl">Значение дня</div>
       <p>День надежды и тихой веры. То, о чём вы просили, уже движется к вам — не торопите рассвет.</p>
-      <button class="cta">ПРОДОЛЖИТЬ ПУТЬ →</button>
+      <button class="cta">ИЗУЧИТЬ КАРТУ →</button>
     </div>
 
     <div class="mean reflect" id="reflect">
@@ -422,6 +431,7 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
         <div class="rb" onclick="reflectDone('Отчасти ≈')">Отчасти</div>
         <div class="rb" onclick="reflectDone('Мимо ✗')">Мимо</div>
       </div>
+      <div class="rnote" id="rnote" onclick="this.textContent='Созвон и правда прошёл легко — как будто знала ✍';this.style.color='var(--text)';this.style.borderStyle='solid'">+ Добавить заметку о дне…</div>
       <div class="done2" id="rdone"></div>
     </div>
 
@@ -464,6 +474,10 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
       <button data-k="career">Работа</button><button data-k="finances">Финансы</button><button data-k="health">Здоровье</button>
     </div>
     <div class="block fadeup d4"><h5 id="btitle">Общее значение</h5><p id="btext">Дурак — карта начала пути. Она говорит о новом этапе, который требует доверия к жизни: вы стоите на краю неизвестного, и именно готовность шагнуть делает вас свободным. Это энергия чистого потенциала — без гарантий, но с огромными возможностями. Карта советует действовать с открытым сердцем, но не забывать смотреть под ноги.</p></div>
+    <div class="block fadeup d5"><h5>Перевёрнутая</h5><p>В перевёрнутом положении Дурак предупреждает о безрассудстве или, наоборот, о страхе сделать шаг. Возможно, вы действуете наивно, не оценив риски, — или так боитесь ошибиться, что упускаете шанс. Проверьте: это смелость или бегство?</p></div>
+    <div class="block fadeup d5"><h5>Как карта дня</h5><p>Сегодня разрешите себе начать. День благоприятен для первого шага в том, что вы давно откладывали: письмо, разговор, заявка, тренировка. Не ждите идеальных условий — их не будет. Доверьтесь дороге.</p></div>
+    <div class="block fadeup d5" style="border-color:var(--frame)"><h5>Ваша история с картой</h5>
+      <p style="font-size:12px">Выпадала 4 раза · отзывалась 3 · последняя заметка: «Решилась написать первой — и не зря»</p></div>
     <div class="block fadeup d5"><h5>Символика</h5><p>Юноша у края обрыва — душа перед воплощением, доверие к неизвестному. Белая роза в руке — чистота намерений. Узелок на посохе — опыт прошлого, который мы несём с собой. Белый пёс — инстинкт и верный спутник, предупреждающий об опасности. Горы вдали — испытания, которые ещё впереди. Солнце за спиной — благословение начала.</p></div>
   </div>
 
@@ -489,7 +503,7 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
       <h2 style="font-size:24px;margin-top:30px">Немного о вас</h2>
       <p class="lead">Дата рождения откроет ваш личный аркан — карту-спутницу вашей жизни.</p>
       <div class="field"><small>ИМЯ</small><div>Анна</div></div>
-      <div class="field"><small>ДАТА РОЖДЕНИЯ</small><div>15 марта 1994</div></div>
+      <div class="field"><small>ДАТА РОЖДЕНИЯ</small><div>10 февраля 1994</div></div>
       <button class="btn" onclick="obStep(3)">ОТКРЫТЬ МОЙ АРКАН</button>
       <div class="dots"><i></i><i class="on"></i><i></i></div>
     </div>
@@ -506,7 +520,7 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
   <!-- ===== УРОК ===== -->
   <div class="view" id="v-lesson">
     <div class="date fadeup d1">МОДУЛЬ 1 · УРОК 1</div>
-    <div class="h2 fadeup d1" style="font-size:22px">Что такое таро на самом деле</div>
+    <div class="h2 fadeup d1" style="font-size:22px">Что такое таро и как оно работает</div>
     <div class="prog fadeup d2"><div class="bar"><i></i></div><b>2/6</b></div>
     <div class="theory fadeup d3"><p>Забудьте всё, что вы видели в кино: таро — это не предсказание судьбы и не «магический шар». Это колода из 78 картинок, которая помогает разговаривать с самой собой честнее, чем обычно.</p></div>
     <div class="quiz fadeup d4">
@@ -559,6 +573,15 @@ font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
         <span class="pl">Язык</span><span class="pv">Русский</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
         <span class="pl">Напоминания</span><span class="pv">9:00 · 21:00</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>
+        <span class="pl">Имя и дата рождения</span><span class="pv">Анна · 10.02.1994</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 17.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg>
+        <span class="pl">Экспорт дневника</span><span class="pv">JSON</span></div>
+      <div class="prow" onclick="this.querySelector('.pv').textContent='Откроется письмо ✉'">
+        <svg viewBox="0 0 24 24"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v10a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 17V7A1.5 1.5 0 0 1 4 5.5z"/><path d="m3 7 9 6.5L21 7"/></svg>
+        <span class="pl">Обратная связь и ошибки</span><span class="pv">Написать нам</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8v.4"/></svg>
+        <span class="pl">О приложении</span><span class="pv">v0.1</span></div>
     </div>
   </div>
 
@@ -618,6 +641,7 @@ document.querySelectorAll('#nav>div').forEach(n=>{
 /* today: flip */
 const stage=document.getElementById('stage');
 stage.onclick=()=>{
+  if(stage.classList.contains('done')) return; // карта одна на день (product-spec §1)
   const on = stage.classList.toggle('done');
   document.getElementById('plate').classList.toggle('show',on);
   document.getElementById('mean').classList.toggle('show',on);
@@ -679,12 +703,16 @@ tabs.querySelectorAll('button').forEach(b=>{
 
 /* spreads */
 const SPS=[
+ {n:'Карта дня',c:1,d:'Ежедневный ритуал — живёт на главном экране',pos:[[19,22]],free:1},
  {n:'Три карты',c:3,d:'Прошлое · Настоящее · Будущее',pos:[[0,22],[19,22],[38,22]],free:1},
+ {n:'Ситуация — Действие — Итог',c:3,d:'Что происходит · Что делать · К чему приведёт',pos:[[0,22],[19,22],[38,22]]},
+ {n:'На месяц',c:4,d:'Четыре недели вперёд — по карте на каждую',pos:[[0,22],[13,22],[26,22],[39,22]]},
  {n:'На отношения',c:5,d:'Вы · Партнёр · Что соединяет · Что мешает · Куда движется',pos:[[0,10],[38,10],[19,0],[19,22],[19,44]]},
+ {n:'Выбор из двух',c:5,d:'Два пути от одной развилки: по два света на каждый',pos:[[19,44],[4,22],[34,22],[4,0],[34,0]]},
  {n:'Подкова',c:7,d:'Развёрнутый взгляд: от предыстории до совета',pos:[[0,0],[6,20],[16,32],[28,36],[40,32],[50,20],[56,0]]},
  {n:'Кельтский крест',c:10,d:'Классика Уэйта 1911 года — глубокий разбор ситуации',pos:[[14,16],[20,16],[14,0],[14,34],[0,16],[28,16],[44,0],[44,12],[44,24],[44,36]]}];
 document.getElementById('sps').innerHTML = SPS.map(s=>`
- <div class="sp" onclick="${s.free ? "show('v-spread3')" : ''}"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
+ <div class="sp" onclick="${s.n==='Три карты' ? "show('v-spread3')" : ''}"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
  <div class="tx"><b>${s.n}</b><small>${s.c} карт · ${s.d}</small></div>
  ${s.free?'':'<span class="lk">PREMIUM</span>'}</div>`).join('');
 
@@ -732,7 +760,7 @@ document.getElementById('journal').innerHTML = JOURNAL.map(j=>
 /* рефлексия */
 function reflectDone(t){
   document.getElementById('rbtns').style.display='none';
-  const d=document.getElementById('rdone'); d.textContent='Записано в дневник · '+t; d.style.display='block';
+  const d=document.getElementById('rdone'); d.textContent='Записано в дневник · '+t+' · изменить можно до полуночи'; d.style.display='block';
 }
 
 /* расклад три карты */
@@ -753,6 +781,11 @@ function s3flip(i){
   document.getElementById('s3n'+i).textContent = S3[i].name;
   if(++s3open===3) document.getElementById('s3mean').classList.add('show');
 }
+
+
+document.querySelectorAll('.node.lock').forEach(n=>n.onclick=()=>{
+  const c=n.querySelector('.nc'); c.classList.remove('wob'); void c.offsetWidth; c.classList.add('wob');
+});
 
 </script>
 </body></html>
