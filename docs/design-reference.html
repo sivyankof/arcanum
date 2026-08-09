@@ -351,6 +351,17 @@ border-radius:15px;padding:12px 14px;margin-top:10px;backdrop-filter:blur(10px)}
 .mcard .mt b{display:block;font-family:var(--serif);font-size:15px;color:var(--head);font-weight:600}
 .mcard .mt span{font-size:10.5px;color:var(--muted)}
 
+
+.mnav{display:flex;align-items:center;justify-content:space-between;margin-top:22px}
+.mnav b{font-size:10px;letter-spacing:3px;color:var(--muted);font-weight:700}
+.mnav .ar{width:26px;height:26px;border:1px solid var(--line);border-radius:13px;display:flex;
+align-items:center;justify-content:center;color:var(--accent);cursor:pointer;font-size:12px;transition:.2s}
+.mnav .ar:hover{border-color:var(--frame)}
+.jfilters{display:flex;gap:6px;margin-top:10px}
+.jfilters span{border:1px solid var(--line);border-radius:14px;padding:4px 11px;font-size:10px;
+font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
+.jfilters span.on{background:var(--chipbg);border-color:var(--frame);color:var(--accent)}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -530,7 +541,10 @@ border-radius:15px;padding:12px 14px;margin-top:10px;backdrop-filter:blur(10px)}
       <div class="bt"><small>АРКАН РОЖДЕНИЯ</small><b>VIII · Сила</b></div>
     </div>
 
-    <div class="date fadeup d4" style="text-align:left;margin-top:22px">ДНЕВНИК · АВГУСТ</div>
+    <div class="mnav fadeup d4"><div class="ar">‹</div><b>ДНЕВНИК · АВГУСТ 2026</b><div class="ar" style="opacity:.35">›</div></div>
+    <div class="jfilters fadeup d4">
+      <span class="on">Все · 18</span><span>✓ 12</span><span>≈ 4</span><span>✗ 2</span><span>С заметкой</span>
+    </div>
     <div class="mcard fadeup d4">
       <img id="mcardimg" src="" alt="">
       <div class="mt"><small>КАРТА МЕСЯЦА</small><b>Верховная Жрица · 4 раза</b>
