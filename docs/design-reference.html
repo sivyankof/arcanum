@@ -618,7 +618,12 @@ border-radius:16px;display:flex;align-items:center;justify-content:center;color:
     <div class="mcard fadeup d4">
       <img id="mcardimg" src="" alt="">
       <div class="mt"><small>КАРТА МЕСЯЦА</small><b>Верховная Жрица · 4 раза</b>
-      <span>Отозвалось 12 из 18 дней</span></div>
+      <span>Отозвалось 12 из 18 дней</span>
+      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;margin-top:6px;gap:2px">
+        <i style="flex:12;background:var(--done, #3d7a5c);background:#5aa07e;border-radius:3px"></i>
+        <i style="flex:4;background:var(--accent);border-radius:3px"></i>
+        <i style="flex:2;background:var(--muted);opacity:.5;border-radius:3px"></i>
+      </div></div>
     </div>
     <div class="fadeup d4" id="journal"></div>
 
@@ -637,6 +642,8 @@ border-radius:16px;display:flex;align-items:center;justify-content:center;color:
         <span class="pl">Язык</span><span class="pv">Русский</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
         <span class="pl">Напоминания</span><span class="pv">9:00 · 21:00</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3.5 2"/></svg>
+        <span class="pl">Вечерняя рефлексия</span><span class="pv" style="color:var(--accent)">Вкл</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>
         <span class="pl">Имя и дата рождения</span><span class="pv">Анна · 10.02.1994</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 17.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg>
