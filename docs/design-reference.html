@@ -24,12 +24,12 @@ background:linear-gradient(160deg,#2e2e33,#0f0f12 60%);
 box-shadow:0 50px 110px rgba(0,0,0,.8),0 6px 18px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.12)}
 .sc{position:absolute;inset:11px;border-radius:43px;overflow:hidden;color:var(--text);transition:.5s}
 .sc{background:var(--bg)}
-[data-mode="dark"]{--bg:radial-gradient(135% 100% at 50% -12%,#1c2244 0%,#0e1129 48%,#070917 100%);
+[data-mode="dark"]{--glass:rgba(12,15,34,.42);--bg:radial-gradient(135% 100% at 50% -12%,#1c2244 0%,#0e1129 48%,#070917 100%);
 --text:#e2e6f4;--head:#f5eacb;--muted:#7e86ab;--line:#262e56;--panel:rgba(24,30,62,.55);
 --accent:#e2bd72;--accent2:#f0d9a4;--glow:rgba(226,189,114,.35);--ring:#39426f;
 --frame:#8f7439;--navbg:rgba(7,9,23,.66);--lock:#525a80;--done:#3d7a5c;
 --chipbg:rgba(226,189,114,.1)}
-[data-mode="light"]{--bg:linear-gradient(#fcf8ee,#efe8d2);
+[data-mode="light"]{--glass:rgba(250,246,236,.45);--bg:linear-gradient(#fcf8ee,#efe8d2);
 --text:#3d3d55;--head:#4a3a16;--muted:#a29878;--line:#e3d8ba;--panel:rgba(255,255,255,.66);
 --accent:#a8802e;--accent2:#8a6a24;--glow:rgba(168,128,46,.25);--ring:#d8c89e;
 --frame:#c4a259;--navbg:rgba(252,248,238,.7);--lock:#c9bd9c;--done:#4d9370;
@@ -424,6 +424,12 @@ letter-spacing:2.5px;color:var(--muted)}
 .lightbox .lbx{position:absolute;top:18px;right:18px;width:32px;height:32px;border:1px solid var(--line);
 border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 
+
+.stickysearch{position:sticky;top:-16px;z-index:12;margin:0 -18px;padding:14px 18px 12px;
+background:var(--glass);backdrop-filter:blur(18px);
+-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent);
+mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -503,10 +509,12 @@ border-radius:16px;display:flex;align-items:center;justify-content:center;color:
   <div class="view" id="v-cards">
     <div class="date fadeup d1">Справочник · Райдер–Уэйт 1909</div>
     <div class="h2 fadeup d1">78 карт</div>
-    <div class="search fadeup d2"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>Найти карту…</div>
-    <div class="seg fadeup d3">
+    <div class="stickysearch fadeup d2">
+    <div class="search" style="margin-top:0"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>Найти карту…</div>
+    <div class="seg" style="margin-top:9px">
       <button class="on">Все</button><button>Старшие</button><button>Жезлы</button>
       <button>Кубки</button><button>Мечи</button><button>Пентакли</button>
+    </div>
     </div>
     <div class="grid fadeup d4" id="grid"></div>
   </div>
