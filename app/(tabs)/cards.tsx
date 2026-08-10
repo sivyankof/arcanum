@@ -169,8 +169,9 @@ const st = StyleSheet.create({
   pad: { paddingHorizontal: spacing.xl },
   sub: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center', paddingTop: spacing.xl },
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 },
-  // .stickysearch: паддинги 14/12 по вертикали, во всю ширину; фон и края — в StickyGlass
-  sticky: { paddingTop: 14, paddingBottom: 12 },
+  // паддинги увеличены против макета (14/12), чтобы зоны растворения краёв умещались в них
+  // и не наползали на поле поиска и чипы; фон и края рисует StickyGlass
+  sticky: { paddingTop: 22, paddingBottom: 20 },
   segRow: { flexDirection: 'row', gap: 6, marginTop: 9 },
   seg: { borderWidth: 1, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 7 },
   segTxt: { fontSize: 10.5, fontWeight: '700', letterSpacing: 0.6 },

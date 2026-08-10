@@ -22,8 +22,15 @@ import { useTheme } from '../theme/useTheme';
 const CSS_BLUR = 18;
 const NATIVE_BLUR_INTENSITY = 40;
 
-const MASK_CSS = 'linear-gradient(transparent, #000 22%, #000 78%, transparent)';
-const MASK_STOPS = [0, 0.22, 0.78, 1] as const;
+/** Высота зон растворения в пикселях. Считаем именно в px, а не в процентах: зона должна
+ *  умещаться в вертикальные отступы панели, иначе полупрозрачность наползает на поле поиска
+ *  сверху и на чипы снизу — они выглядят размытыми (правка по фидбеку Артёма 11.08). */
+const FADE_TOP = 18;
+const FADE_BOTTOM = 16;
+
+const MASK_CSS =
+  `linear-gradient(to bottom, transparent 0px, #000 ${FADE_TOP}px,` +
+  ` #000 calc(100% - ${FADE_BOTTOM}px), transparent 100%)`;
 
 export function StickyGlass({
   children,
@@ -33,6 +40,8 @@ export function StickyGlass({
   style?: StyleProp<ViewStyle>;
 }) {
   const t = useTheme();
+  // на нативе стопы градиента задаются долями, поэтому нужна измеренная высота панели
+  const [h, setH] = React.useState(0);
 
   if (Platform.OS === 'web') {
     return (
@@ -52,17 +61,21 @@ export function StickyGlass({
     );
   }
 
+  // до первого замера растворяем края по долям — панель успевает отрисоваться без скачка
+  const stops: [number, number, number, number] =
+    h > FADE_TOP + FADE_BOTTOM ? [0, FADE_TOP / h, (h - FADE_BOTTOM) / h, 1] : [0, 0.15, 0.85, 1];
+
   return (
     <MaskedView
       maskElement={
         <LinearGradient
           colors={['transparent', '#000', '#000', 'transparent']}
-          locations={MASK_STOPS}
+          locations={stops}
           style={StyleSheet.absoluteFill}
         />
       }
     >
-      <View style={style}>
+      <View style={style} onLayout={(e) => setH(e.nativeEvent.layout.height)}>
         <BlurView
           intensity={NATIVE_BLUR_INTENSITY}
           tint={t.mode === 'dark' ? 'dark' : 'light'}
