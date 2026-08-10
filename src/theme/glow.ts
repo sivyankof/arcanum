@@ -17,7 +17,7 @@
  * @param cssBlur    радиус размытия в CSS-пикселях, как в эталоне: drop-shadow(0 0 <cssBlur>px ...)
  * @param iosOpacity непрозрачность тени на iOS (shadowOpacity)
  */
-import { Platform, type ViewStyle } from 'react-native';
+import { Platform, type TextStyle, type ViewStyle } from 'react-native';
 
 export function glowShadow(glowColor: string, iosColor: string, cssBlur: number, iosOpacity: number): ViewStyle {
   if (Platform.OS === 'ios') {
@@ -30,4 +30,28 @@ export function glowShadow(glowColor: string, iosColor: string, cssBlur: number,
     };
   }
   return { filter: `drop-shadow(0px 0px ${cssBlur}px ${glowColor})` } as ViewStyle;
+}
+
+/**
+ * Свечение вокруг текста (CSS `text-shadow: 0 0 <cssBlur>px <color>` в эталоне).
+ *
+ * В отличие от `shadow*`, старые `textShadow*`-пропы работают на всех платформах: iOS и Android
+ * рисуют их нативно, react-native-web конвертирует в CSS. Но в вебе конвертация сопровождается
+ * предупреждением «"textShadow*" style props are deprecated», а строкового пропа `textShadow`
+ * в React Native 0.81 ещё нет (в типах только тройка) — на нативе строка ничего не нарисует.
+ * Отсюда сплит: в вебе строка, на нативе тройка.
+ *
+ * @param color   цвет свечения (обычно t.glow)
+ * @param cssBlur радиус размытия в CSS-пикселях, как в эталоне
+ */
+export function textGlow(color: string, cssBlur: number): TextStyle {
+  if (Platform.OS === 'web') {
+    return { textShadow: `0 0 ${cssBlur}px ${color}` } as TextStyle;
+  }
+  return {
+    textShadowColor: color,
+    // как и в glowShadow: нативный радиус примерно вдвое меньше CSS blur-радиуса
+    textShadowRadius: cssBlur / 2,
+    textShadowOffset: { width: 0, height: 0 },
+  };
 }

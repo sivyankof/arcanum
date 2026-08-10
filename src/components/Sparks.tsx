@@ -15,6 +15,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { textGlow } from '../theme/glow';
 import { useTheme } from '../theme/useTheme';
 
 const BURST_MS = 900;
@@ -89,10 +90,8 @@ function Spark({
           position: 'absolute',
           color: t.accent,
           fontSize,
-          // text-shadow 0 0 9px var(--glow) из .spark; на вебе не отрисовывается — это норма
-          textShadowColor: t.glow,
-          textShadowOffset: { width: 0, height: 0 },
-          textShadowRadius: 4.5,
+          // text-shadow 0 0 9px var(--glow) из .spark
+          ...textGlow(t.glow, 9),
         },
         anim,
       ]}
