@@ -19,7 +19,8 @@ export interface Theme {
   accent2: string;
   glow: string;
   frame: string;       // золочёные рамки
-  navBg: string;
+  navBg: string;       // плотная подложка таб-бара
+  glass: string;       // «невидимое стекло» липких панелей: оттенок фона, без линий
   chipBg: string;
   danger: string;
   success: string;
@@ -41,6 +42,7 @@ export const darkTheme: Theme = {
   glow: 'rgba(226,189,114,0.35)',
   frame: '#8f7439',
   navBg: 'rgba(7,9,23,0.66)',
+  glass: 'rgba(12,15,34,0.42)',
   chipBg: 'rgba(226,189,114,0.10)',
   danger: '#e07a6a',
   success: '#5aa07e',
@@ -62,6 +64,7 @@ export const lightTheme: Theme = {
   glow: 'rgba(168,128,46,0.25)',
   frame: '#c4a259',
   navBg: 'rgba(252,248,238,0.7)',
+  glass: 'rgba(250,246,236,0.45)',
   chipBg: 'rgba(168,128,46,0.10)',
   danger: '#c05a4a',
   success: '#4d9370',

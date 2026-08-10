@@ -4,12 +4,12 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, ScrollView, SectionList, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BlurSurface } from '../../src/components/BlurSurface';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { SearchField } from '../../src/components/SearchField';
 import { Skeleton } from '../../src/components/Skeleton';
+import { StickyGlass } from '../../src/components/StickyGlass';
 import { Txt } from '../../src/components/Txt';
 import { cardImages } from '../../src/lib/cardImages';
 import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/lib/cardSearch';
@@ -104,9 +104,8 @@ export default function CardsScreen() {
             </FadeUp>
           }
           renderSectionHeader={() => (
-            // липкая панель: поиск + чипы на подложке navBg с размытием (.stickysearch эталона)
-            <View style={[st.sticky, { borderBottomColor: t.line }]}>
-              <BlurSurface />
+            // липкая панель: поиск + чипы на «невидимом стекле» с растворёнными краями
+            <StickyGlass style={st.sticky}>
               <View style={st.pad}>
                 <SearchField
                   value={query}
@@ -141,7 +140,7 @@ export default function CardsScreen() {
                   </PressableScale>
                 ))}
               </ScrollView>
-            </View>
+            </StickyGlass>
           )}
           renderItem={({ item: row }) => (
             <View style={[st.pad, st.row]}>
@@ -170,8 +169,8 @@ const st = StyleSheet.create({
   pad: { paddingHorizontal: spacing.xl },
   sub: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center', paddingTop: spacing.xl },
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 },
-  // .stickysearch: паддинги 14/10 по вертикали, подложка во всю ширину, снизу граница
-  sticky: { paddingTop: 14, paddingBottom: 10, borderBottomWidth: 1, overflow: 'hidden' },
+  // .stickysearch: паддинги 14/12 по вертикали, во всю ширину; фон и края — в StickyGlass
+  sticky: { paddingTop: 14, paddingBottom: 12 },
   segRow: { flexDirection: 'row', gap: 6, marginTop: 9 },
   seg: { borderWidth: 1, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 7 },
   segTxt: { fontSize: 10.5, fontWeight: '700', letterSpacing: 0.6 },
