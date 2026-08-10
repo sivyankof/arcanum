@@ -17,7 +17,11 @@ const resources = {
         t1: "Любопытная", t2: "Ученица", t3: "Читающая",
         t4: "Толковательница", t5: "Хранительница", t6: "Мастерица",
       },
-      cards: { title: "Все карты", major: "Старшие арканы", wands: "Жезлы", cups: "Кубки", swords: "Мечи", pentacles: "Пентакли" },
+      // major — подпись чипа-фильтра, поэтому короткая: длинная не влезала в одну строку (спека 04)
+      cards: {
+        title: "78 карт", major: "Старшие", wands: "Жезлы", cups: "Кубки", swords: "Мечи", pentacles: "Пентакли",
+        all: "Все", searchPlaceholder: "Найти карту…", empty: "Такой карты нет — проверьте написание",
+      },
       card: {
         general: "Общее значение", reversed: "Перевёрнутая", love: "Любовь", career: "Работа",
         finances: "Финансы", health: "Здоровье", day_card: "Как карта дня", symbolism: "Символика",
@@ -39,7 +43,10 @@ const resources = {
         t1: "Curious", t2: "Student", t3: "Reader",
         t4: "Interpreter", t5: "Keeper", t6: "Adept",
       },
-      cards: { title: "All cards", major: "Major Arcana", wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pentacles" },
+      cards: {
+        title: "78 cards", major: "Major", wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pentacles",
+        all: "All", searchPlaceholder: "Find a card…", empty: "No such card — check the spelling",
+      },
       card: {
         general: "General meaning", reversed: "Reversed", love: "Love", career: "Career",
         finances: "Finances", health: "Health", day_card: "As card of the day", symbolism: "Symbolism",

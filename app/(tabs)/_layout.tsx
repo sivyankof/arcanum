@@ -1,4 +1,3 @@
-import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Tabs, usePathname } from 'expo-router';
 import React from 'react';
@@ -13,6 +12,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import { BlurSurface } from '../../src/components/BlurSurface';
 import { TabIcon as TabGlyph, type TabIconName } from '../../src/components/TabIcons';
 import { glowShadow } from '../../src/theme/glow';
 import { hapticTap } from '../../src/lib/haptics';
@@ -83,13 +83,7 @@ function TabBarBackground() {
 
   return (
     <View style={StyleSheet.absoluteFill}>
-      <BlurView
-        intensity={40}
-        tint={t.mode === 'dark' ? 'dark' : 'light'}
-        experimentalBlurMethod="dimezisBlurView"
-        style={StyleSheet.absoluteFill}
-      />
-      <View style={[StyleSheet.absoluteFill, { backgroundColor: t.navBg }]} />
+      <BlurSurface />
       <LinearGradient
         colors={[`${t.accent}00`, t.accent, `${t.accent}00`]}
         start={{ x: 0, y: 0 }}
