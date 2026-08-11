@@ -28,11 +28,14 @@ const resources = {
         keywords: "Ключевые слова", soon: "Текст готовится", backAll: "Карты", backToday: "Сегодня",
         backProfile: "Профиль", todayHighlight: "Ваша карта сегодня",
         tabGeneral: "Общее", sphereLove: "В любви", sphereCareer: "В работе", sphereFinances: "В финансах", sphereHealth: "Для здоровья",
+        resonated: "отзывалась {{n}}",
       },
       profile: { title: "Профиль", streak: "СЕРИЯ", cards: "КАРТ ДНЯ" },
       settings: {
         title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая",
         language: "Язык", languageValue: "Русский", resetToday: "Сбросить карту дня",
+        reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
+        reflectNow: "Рефлексия: показать сейчас",
       },
       // дневник в профиле и блок «Ваша история с картой» (product-spec §5, logic-spec §3).
       // Числительные — плюрализация i18next: _one/_few/_many для русского
@@ -48,6 +51,8 @@ const resources = {
         drawn_one: "Выпадала {{count}} раз", drawn_few: "Выпадала {{count}} раза", drawn_many: "Выпадала {{count}} раз",
         drawnOnce: "Выпадала {{date}}",
         lastDate: "последняя {{date}}",
+        resonated: "Отозвалось {{n}} из {{total}} дней",
+        filters: { all: "Все", yes: "✓", partly: "≈", no: "✗", note: "С заметкой" },
       },
       note: {
         title: "Заметка",
@@ -57,6 +62,14 @@ const resources = {
         leaveTitle: "Уйти без сохранения?",
         leaveText: "Заметка не сохранится",
         leave: "Уйти", stay: "Остаться",
+      },
+      // вечерняя рефлексия (product-spec §1). Слово «сбылось» запрещено content-guide:
+      // мы про рефлексию, а не про предсказание, — везде «отозвалась»
+      reflect: {
+        title: "Как прошёл день",
+        yes: "Отозвалась", partly: "Отчасти", no: "Не отозвалась",
+        saved: "Записано в дневник · {{answer}}",
+        edit: "изменить можно до полуночи",
       },
     },
   },
@@ -83,11 +96,14 @@ const resources = {
         keywords: "Keywords", soon: "Text in progress", backAll: "Cards", backToday: "Today",
         backProfile: "Profile", todayHighlight: "Your card today",
         tabGeneral: "General", sphereLove: "In love", sphereCareer: "At work", sphereFinances: "In finances", sphereHealth: "For health",
+        resonated: "resonated {{n}}",
       },
       profile: { title: "Profile", streak: "STREAK", cards: "DAILY CARDS" },
       settings: {
         title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
         language: "Language", languageValue: "English", resetToday: "Reset daily card",
+        reflection: "Evening reflection", on: "On", off: "Off",
+        reflectNow: "Reflection: show now",
       },
       journal: {
         title: "Journal",
@@ -101,6 +117,8 @@ const resources = {
         drawn_one: "Drawn {{count}} time", drawn_other: "Drawn {{count}} times",
         drawnOnce: "Drawn on {{date}}",
         lastDate: "last on {{date}}",
+        resonated: "Resonated on {{n}} of {{total}} days",
+        filters: { all: "All", yes: "✓", partly: "≈", no: "✗", note: "With a note" },
       },
       note: {
         title: "Note",
@@ -110,6 +128,12 @@ const resources = {
         leaveTitle: "Leave without saving?",
         leaveText: "The note will not be saved",
         leave: "Leave", stay: "Stay",
+      },
+      reflect: {
+        title: "How was your day",
+        yes: "Resonated", partly: "Partly", no: "Not really",
+        saved: "Saved to your journal · {{answer}}",
+        edit: "you can change this until midnight",
       },
     },
   },
