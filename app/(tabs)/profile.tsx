@@ -13,6 +13,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmptyState } from '../../src/components/EmptyState';
 import { FadeUp } from '../../src/components/FadeUp';
+import { FilterChips } from '../../src/components/FilterChips';
 import { JournalRow } from '../../src/components/JournalRow';
 import { MonthCard } from '../../src/components/MonthCard';
 import { MonthNav } from '../../src/components/MonthNav';
@@ -21,7 +22,17 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
-import { entriesOfMonth, monthsWithEntries, monthSummary, type DailyDraw } from '../../src/lib/journal';
+import {
+  entriesOfMonth,
+  filterCounts,
+  filterEntries,
+  JOURNAL_FILTERS,
+  monthsWithEntries,
+  monthSummary,
+  type DailyDraw,
+  type JournalFilter,
+} from '../../src/lib/journal';
+import { pickPhrase } from '../../src/lib/phrases';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -51,6 +62,18 @@ export default function ProfileScreen() {
 
   const entries = React.useMemo(() => (month ? entriesOfMonth(history, month) : []), [history, month]);
   const summary = React.useMemo(() => (month ? monthSummary(history, month) : null), [history, month]);
+
+  const [filter, setFilter] = React.useState<JournalFilter>('all');
+  // смена месяца сбрасывает фильтр: счётчики в чипах относятся к текущему месяцу
+  React.useEffect(() => setFilter('all'), [month]);
+
+  const counts = React.useMemo(() => filterCounts(entries), [entries]);
+  // чип с нулём не показываем — тап по нему вёл бы в пустоту; «Все» остаётся всегда
+  const chips = React.useMemo(
+    () => JOURNAL_FILTERS.filter((f) => f === 'all' || counts[f] > 0),
+    [counts],
+  );
+  const shown = React.useMemo(() => filterEntries(entries, filter), [entries, filter]);
 
   // месяцы отсортированы от новых к старым: старший месяц лежит ДАЛЬШЕ по списку
   const index = month ? months.indexOf(month) : -1;
@@ -90,6 +113,22 @@ export default function ProfileScreen() {
           <MonthCard summary={summary} lang={lang} onPress={openCard} />
         </FadeUp>
       )}
+
+      {month && chips.length > 1 && (
+        <FadeUp index={2}>
+          <FilterChips
+            values={chips}
+            labels={(f) =>
+              f === 'all'
+                ? tr('journal.filters.all')
+                : `${tr(`journal.filters.${f}`)} ${counts[f]}`
+            }
+            active={filter}
+            onPick={setFilter}
+            contentStyle={st.chips}
+          />
+        </FadeUp>
+      )}
     </>
   );
 
@@ -98,7 +137,7 @@ export default function ProfileScreen() {
       <ScreenBg />
       <FlatList
         ref={listRef}
-        data={entries}
+        data={shown}
         keyExtractor={(e) => e.date}
         renderItem={({ item, index }) => {
           const row = (
@@ -123,7 +162,17 @@ export default function ProfileScreen() {
           );
         }}
         ListHeaderComponent={header}
-        ListEmptyComponent={<View style={st.pad}><EmptyState text={tr('journal.empty')} /></View>}
+        ListEmptyComponent={
+          <View style={st.pad}>
+            <EmptyState
+              text={
+                entries.length === 0
+                  ? pickPhrase('empty.journal', today, lang)
+                  : pickPhrase('empty.filter', today, lang)
+              }
+            />
+          </View>
+        }
         contentContainerStyle={{
           paddingTop: insets.top + spacing.xl,
           paddingBottom: 120,
@@ -149,6 +198,7 @@ const st = StyleSheet.create({
   // горизонтальный отступ держат сами элементы, а не контейнер списка: иначе лента чипов
   // обрывается за 24px до края экрана (правило задачи 19, design-system §5)
   pad: { marginHorizontal: spacing.xl },
+  chips: { marginTop: 12 },
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center' },
   stats: { flexDirection: 'row', gap: spacing.m, marginTop: spacing.xl },
   stat: { flex: 1, alignItems: 'center', borderWidth: 1, borderRadius: radius.l, paddingVertical: spacing.l },
