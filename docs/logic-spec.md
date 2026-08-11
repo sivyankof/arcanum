@@ -100,12 +100,20 @@ product-spec отвечает «что видит пользователь», э
 
 ## 7. Хранение (все данные локально)
 
-AsyncStorage, ключ `arcanum-app` (zustand persist), схема v1:
-`{ schemaVersion: 1, installSeed, profile: {name?, birthDate?, birthArcanaId?}, themeMode, lang,
+AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 2`):
+`{ schemaVersion: 2, installSeed, profile: {name?, birthDate?, birthArcanaId?}, themeMode, lang,
 streak, lastDrawDate, freezes, xp, history: DailyDraw[365], lessonsProgress: {lessonId: {done, errors, ts}},
-spreadsHistory: SpreadDraw[100], settings: {pushMorning: '09:00', pushEvening: '21:00', pushesOn} }`
+spreadsHistory: SpreadDraw[100], settings: {reflectionOn: true, pushMorning: '09:00', pushEvening: '21:00', pushesOn} }`
 `DailyDraw = {date, cardId, reversed: false, outcome?, note?}`.
 **Миграции:** schemaVersion обязателен; при повышении версии — функция migrate в store (без потери history).
+⚠️ **Ловушка поверхностного слияния `settings`.** `zustand/persist` сливает сохранённое состояние
+с дефолтом ТОЛЬКО по верхнему уровню ключей: сохранённый `settings: {reflectionOn: false}` заменит
+объект-дефолт `settings` целиком, а не сольётся с ним по ключам — полей, которых не было в момент
+сохранения, у уже установленного приложения само по себе не появится. Поэтому каждая задача,
+добавляющая поле в `settings` (06а подняла `version` до 2 ради `reflectionOn`; 06б добавит
+`pushMorning`/`pushEvening`/`pushesOn` и обязана поднять `version` до 3), обязана поднять `version`
+персиста и дописать недостающие ключи руками в `migrate` — иначе новые настройки не появятся
+у пользователей, обновившихся с более старой версии.
 **Уточнение:** `schemaVersion` из этой схемы хранится не отдельным полем состояния, а как поле `version` в опциях zustand persist.
 **Лимиты:** history 365 записей, spreadsHistory 100 (старые отрезаются). Экспорт (backlog: бэкап) — JSON-файл
 через Share, импорт с валидацией схемы.
