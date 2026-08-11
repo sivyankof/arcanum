@@ -1,7 +1,6 @@
 /** Строка дневника (`.jrow` эталона, design-system §5): мини-карта + дата + первая строка
  *  заметки. Тап — на страницу карты, долгий тап по СЕГОДНЯШНЕЙ записи — на экран заметки
- *  (прошлые фиксируются в полночь, logic-spec §3). Место справа под отметку рефлексии
- *  займёт задача 06. */
+ *  (прошлые фиксируются в полночь, logic-spec §3). Справа — отметка рефлексии, если на день дан ответ. */
 import { Image } from 'expo-image';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,11 +8,16 @@ import { StyleSheet, View } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { formatEntryDate } from '../lib/dates';
 import { hapticTap } from '../lib/haptics';
-import type { DailyDraw } from '../lib/journal';
+import { OUTCOME_MARK, type DailyDraw, type Outcome } from '../lib/journal';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
 import { Txt } from './Txt';
+
+/** Цвет отметки: отозвалась — успех, отчасти — золото, не отозвалась — приглушённый.
+ *  Красного здесь нет намеренно: «не отозвалась» — не ошибка (design-system §4). */
+const markColor = (t: ReturnType<typeof useTheme>, o: Outcome) =>
+  o === 'yes' ? t.success : o === 'partly' ? t.accent : t.muted;
 
 export function JournalRow({
   entry,
@@ -51,6 +55,11 @@ export function JournalRow({
           {entry.note ?? tr('journal.noNote')}
         </Txt>
       </View>
+      {entry.outcome && (
+        <Txt style={[st.mark, { color: markColor(t, entry.outcome) }]}>
+          {OUTCOME_MARK[entry.outcome]}
+        </Txt>
+      )}
     </PressableScale>
   );
 }
@@ -71,4 +80,5 @@ const st = StyleSheet.create({
   texts: { flex: 1 },
   date: { fontSize: 9, letterSpacing: 1.5 },
   note: { fontSize: 12, marginTop: 1 },
+  mark: { fontSize: 12 },
 });
