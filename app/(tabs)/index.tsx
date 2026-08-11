@@ -29,6 +29,7 @@ import { daysAgoISO, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
+import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -151,6 +152,7 @@ export default function TodayScreen() {
   const drawn = useApp((s) => s.todayDraw());
   const installSeed = useApp((s) => s.installSeed);
   const history = useApp((s) => s.history);
+  const scrollRef = useTabTopRef<ScrollView>();
 
   const todayISO = localDateISO();
   // анти-повтор карты дня: карты, выпадавшие за последние 7 дней (не считая сегодня)
@@ -257,6 +259,7 @@ export default function TodayScreen() {
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
       <ScrollView
+        ref={scrollRef}
         contentContainerStyle={{ paddingTop: insets.top + spacing.xl, paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
       >

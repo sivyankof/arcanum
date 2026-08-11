@@ -18,7 +18,7 @@ import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, type TarotCard } from '../../src/lib/content';
 import { hapticTap } from '../../src/lib/haptics';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
-import { useTabScrollToTop } from '../../src/lib/useTabScrollToTop';
+import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -26,6 +26,11 @@ const { width: W } = Dimensions.get('window');
 const COLS = 3;
 const GAP = 11; // .grid эталона: gap 11 в обе стороны
 const CELL_W = (W - spacing.xl * 2 - GAP * (COLS - 1)) / COLS;
+
+/** Сколько рядов сетки участвует в появлении экрана — примерно один экран карточек. */
+const BODY_ROWS = 4;
+/** Шаг каскада для тела списка: на две ступеньки позже шапки, как `.grid d4` против `.d2` эталона. */
+const BODY_STEP = 3;
 
 /** Размытие парящей панели в CSS-пикселях эталона (`.cardsbar`: backdrop-filter blur(20px)). */
 const BAR_BLUR = 20;
@@ -134,12 +139,8 @@ export default function CardsScreen() {
   const [filter, setFilter] = useState<CardFilter>('all');
   const [query, setQuery] = useState('');
 
-  const listRef = React.useRef<FlatList<TarotCard[]>>(null);
+  const listRef = useTabTopRef<FlatList<TarotCard[]>>();
   const { onScroll, barStyle, onBarLayout, setFocused } = useScrollAwareBar();
-
-  useTabScrollToTop(
-    React.useCallback(() => listRef.current?.scrollToOffset({ offset: 0, animated: true }), []),
-  );
 
   // 78 карт фильтруются мгновенно — задержки ввода (debounce) не нужно
   const rows = useMemo(
@@ -186,18 +187,24 @@ export default function CardsScreen() {
             </FadeUp>
           </View>
         }
-        renderItem={({ item: row }) => (
-          <View style={[st.pad, st.row]}>
-            {row.map((c) => (
-              <Cell key={c.id} item={c} lang={lang} />
-            ))}
-            {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
-            {row.length < COLS &&
-              Array.from({ length: COLS - row.length }, (_, i) => (
-                <View key={`gap-${i}`} style={{ width: CELL_W }} />
+        renderItem={({ item: row, index }) => {
+          const cells = (
+            <View style={[st.pad, st.row]}>
+              {row.map((c) => (
+                <Cell key={c.id} item={c} lang={lang} />
               ))}
-          </View>
-        )}
+              {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
+              {row.length < COLS &&
+                Array.from({ length: COLS - row.length }, (_, i) => (
+                  <View key={`gap-${i}`} style={{ width: CELL_W }} />
+                ))}
+            </View>
+          );
+          // сетка входит вместе с шапкой — но ОДНИМ блоком, как `.grid` в эталоне: у всех рядов
+          // один и тот же индекс каскада, ступенек между карточками нет (motion-spec §4).
+          // Ниже первого экрана анимации нет: иначе ряды всплывали бы прямо во время прокрутки
+          return index < BODY_ROWS ? <FadeUp index={BODY_STEP}>{cells}</FadeUp> : cells;
+        }}
         ListFooterComponent={
           rows.length === 0 ? (
             <Txt style={[st.empty, { color: t.muted }]}>{tr('cards.empty')}</Txt>

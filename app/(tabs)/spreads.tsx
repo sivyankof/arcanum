@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { spreads } from '../../src/lib/content';
+import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { Txt } from '../../src/components/Txt';
@@ -15,11 +16,13 @@ export default function SpreadsScreen() {
   const { i18n } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const scrollRef = useTabTopRef<ScrollView>();
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
       <ScrollView
+        ref={scrollRef}
         contentContainerStyle={{
           paddingTop: insets.top + spacing.xl,
           paddingHorizontal: spacing.xl,

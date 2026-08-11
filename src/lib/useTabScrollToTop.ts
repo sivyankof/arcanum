@@ -23,3 +23,26 @@ export function useTabScrollToTop(scrollToTop: () => void) {
     [nav, scrollToTop],
   );
 }
+
+/** То, что умеет прокручиваться к началу: у списков это `scrollToOffset`, у ScrollView — `scrollTo`. */
+type Scrollable = {
+  scrollToOffset?: (params: { offset: number; animated?: boolean | null }) => void;
+  scrollTo?: (params: { y?: number; animated?: boolean }) => void;
+};
+
+/** Готовый ref для экрана таба: вешает прокрутку к началу по повторному тапу и возвращает ref,
+ *  который остаётся передать списку или ScrollView. Избавляет каждый таб от одинаковых пяти строк. */
+export function useTabTopRef<T extends Scrollable>() {
+  const ref = React.useRef<T>(null);
+
+  useTabScrollToTop(
+    React.useCallback(() => {
+      const view = ref.current;
+      if (!view) return;
+      if (view.scrollToOffset) view.scrollToOffset({ offset: 0, animated: true });
+      else view.scrollTo?.({ y: 0, animated: true });
+    }, []),
+  );
+
+  return ref;
+}

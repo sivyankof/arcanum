@@ -21,16 +21,24 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
-import { entriesOfMonth, monthsWithEntries, monthSummary } from '../../src/lib/journal';
+import { entriesOfMonth, monthsWithEntries, monthSummary, type DailyDraw } from '../../src/lib/journal';
+import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+
+/** Сколько записей участвует в появлении экрана — примерно один экран строк. */
+const BODY_ROWS = 4;
+/** Шаг каскада тела списка: на ступеньку позже шапки дневника (motion-spec §4). */
+const BODY_STEP = 3;
 
 export default function ProfileScreen() {
   const t = useTheme();
   const { t: tr, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+
+  const listRef = useTabTopRef<FlatList<DailyDraw>>();
 
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
@@ -89,21 +97,27 @@ export default function ProfileScreen() {
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
       <FlatList
+        ref={listRef}
         data={entries}
         keyExtractor={(e) => e.date}
-        renderItem={({ item }) => (
-          <JournalRow
-            entry={item}
-            lang={lang}
-            onPress={() => openCard(item.cardId)}
-            // правится только сегодняшняя запись (logic-spec §3)
-            onEdit={
-              item.date === today
-                ? () => router.push({ pathname: '/note/[date]', params: { date: item.date } })
-                : undefined
-            }
-          />
-        )}
+        renderItem={({ item, index }) => {
+          const row = (
+            <JournalRow
+              entry={item}
+              lang={lang}
+              onPress={() => openCard(item.cardId)}
+              // правится только сегодняшняя запись (logic-spec §3)
+              onEdit={
+                item.date === today
+                  ? () => router.push({ pathname: '/note/[date]', params: { date: item.date } })
+                  : undefined
+              }
+            />
+          );
+          // записи входят вместе с шапкой одним блоком (motion-spec §4); ниже первого экрана
+          // анимации нет, иначе строки всплывали бы во время прокрутки
+          return index < BODY_ROWS ? <FadeUp index={BODY_STEP}>{row}</FadeUp> : row;
+        }}
         ListHeaderComponent={header}
         ListEmptyComponent={<EmptyState text={tr('journal.empty')} />}
         contentContainerStyle={{
