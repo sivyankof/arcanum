@@ -24,6 +24,10 @@ export default function SettingsScreen() {
   const setThemeMode = useApp((s) => s.setThemeMode);
   const setLang = useApp((s) => s.setLang);
   const resetToday = useApp((s) => s.resetToday);
+  const reflectionOn = useApp((s) => s.settings.reflectionOn);
+  const setReflectionOn = useApp((s) => s.setReflectionOn);
+  const devReflect = useApp((s) => s.devReflect);
+  const setDevReflect = useApp((s) => s.setDevReflect);
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -54,15 +58,33 @@ export default function SettingsScreen() {
             onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
           />
         </FadeUp>
+        <FadeUp index={2}>
+          <SettingsRow
+            icon="moon-outline"
+            label={tr('settings.reflection')}
+            value={reflectionOn ? tr('settings.on') : tr('settings.off')}
+            onPress={() => setReflectionOn(!reflectionOn)}
+          />
+        </FadeUp>
         {__DEV__ && (
-          <FadeUp index={2}>
-            <SettingsRow
-              icon="refresh"
-              label={tr('settings.resetToday')}
-              value="DEV"
-              onPress={resetToday}
-            />
-          </FadeUp>
+          <>
+            <FadeUp index={3}>
+              <SettingsRow
+                icon="refresh"
+                label={tr('settings.resetToday')}
+                value="DEV"
+                onPress={resetToday}
+              />
+            </FadeUp>
+            <FadeUp index={4}>
+              <SettingsRow
+                icon="time-outline"
+                label={tr('settings.reflectNow')}
+                value={devReflect ? 'DEV · ВКЛ' : 'DEV'}
+                onPress={() => setDevReflect(!devReflect)}
+              />
+            </FadeUp>
+          </>
         )}
       </ScrollView>
     </View>
