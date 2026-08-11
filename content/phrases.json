@@ -40,6 +40,22 @@
    }
   ]
  },
+ "reflect": {
+  "question": [
+   {
+    "ru": "Как отозвалась {card} сегодня?",
+    "en": "How did {card} resonate today?"
+   },
+   {
+    "ru": "{card} была с вами весь день. Что скажете?",
+    "en": "{card} was with you all day. How was it?"
+   },
+   {
+    "ru": "Вечер — время оглянуться: {card} про ваш день?",
+    "en": "Evening is for looking back — was {card} about your day?"
+   }
+  ]
+ },
  "push": {
   "morning_card": [
    {
@@ -69,8 +85,8 @@
     "en": "{card} was with you all day. Did it resonate?"
    },
    {
-    "ru": "Минутка перед сном: сбылась ли {card}?",
-    "en": "A moment before sleep: did {card} ring true?"
+    "ru": "Минутка перед сном: отозвалась ли {card}?",
+    "en": "A moment before sleep — did {card} resonate?"
    }
   ],
   "streak_save": [
