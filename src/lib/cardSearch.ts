@@ -14,16 +14,56 @@ export function normalize(s: string): string {
   return s.trim().toLowerCase().replace(/ё/g, 'е');
 }
 
-/** Совпадает ли карта с запросом: подстрока в названии, в ключевом слове ИЛИ в поисковом
- *  синониме (текущий язык). Пустой запрос совпадает со всем.
+/** Разбивает строку на слова: «баланс работы и дома» → четыре токена (спека 04з).
+ *  Фразы в ключевых словах — норма, а искать человек будет по одному слову из фразы. */
+export function tokenize(s: string): string[] {
+  return normalize(s).split(/[\s-]+/).filter(Boolean);
+}
+
+/** Окончания для отсечения, сначала длинные — иначе «деньгами» потеряет только «и». */
+const ENDINGS: Record<Lang, string[]> = {
+  ru: ['ами', 'ями', 'ого', 'его', 'ому', 'ему', 'ыми', 'ими', 'ах', 'ях', 'ов', 'ев', 'ей',
+    'ой', 'ый', 'ий', 'ая', 'яя', 'ое', 'ее', 'ом', 'ем', 'ам', 'ям', 'ы', 'и', 'а', 'я',
+    'е', 'у', 'ю', 'ь', 'о'],
+  en: ['ing', 'es', 'ed', 's'],
+};
+
+/** Минимальная длина основы: без неё «дом» превратился бы в «д» и совпал с половиной колоды. */
+const MIN_STEM = 4;
+
+/** Отсекает окончание — грубо, таблицей (спека 04з): «работе» и «работа» → «работ».
+ *  Не морфологический анализатор: чередования ему не по силам («денег» ≠ «деньг»). */
+export function stem(token: string, lang: Lang): string {
+  let out = token;
+  // два прохода: «feelings» → «feeling» → «feel», иначе форма с двумя окончаниями
+  // не сходится со словарной. MIN_STEM не даёт проходам съесть слово целиком.
+  for (let pass = 0; pass < 2; pass++) {
+    const end = ENDINGS[lang].find(
+      (e) => out.endsWith(e) && out.length - e.length >= MIN_STEM,
+    );
+    if (!end) break;
+    out = out.slice(0, -end.length);
+  }
+  return out;
+}
+
+/** Совпадение двух слов: слово начинается с запроса (набор по буквам) или общая основа. */
+function tokenMatches(word: string, queryToken: string, lang: Lang): boolean {
+  if (word.startsWith(queryToken)) return true;
+  return stem(word, lang) === stem(queryToken, lang);
+}
+
+/** Совпадает ли карта с запросом: сравниваются слова названия, ключевых слов и поисковых
+ *  синонимов (текущий язык) — с учётом словоформ, спека 04з. Пустой запрос совпадает со всем.
+ *  Каждый токен запроса обязан найти пару: «мир в семье» требует все три слова.
  *  `search` — скрытый слой (спека 04г): новичок ищет «расставание», а не «Тройку Мечей».
  *  `?? []` — защита границы данных: JSON приходит из бандла и типом не проверяется. */
 export function matchesQuery(card: TarotCard, query: string, lang: Lang): boolean {
-  const q = normalize(query);
-  if (!q) return true;
-  if (normalize(card.name[lang]).includes(q)) return true;
-  const words = [...(card.keywords[lang] ?? []), ...(card.search?.[lang] ?? [])];
-  return words.some((k) => normalize(k).includes(q));
+  const queryTokens = tokenize(query);
+  if (!queryTokens.length) return true;
+  const source = [card.name[lang], ...(card.keywords[lang] ?? []), ...(card.search?.[lang] ?? [])];
+  const words = source.flatMap(tokenize);
+  return queryTokens.every((q) => words.some((w) => tokenMatches(w, q, lang)));
 }
 
 /** Отбор карт: сначала аркан/масть, затем текстовый запрос.

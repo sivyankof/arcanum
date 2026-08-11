@@ -1,6 +1,6 @@
 /** Тесты поиска по справочнику (спека 04): совпадение по имени и ключевым словам,
  *  регистр, «ё/е», сложение фильтра с запросом, нарезка на ряды сетки. */
-import { filterCards, matchesQuery, normalize, toRows } from '../cardSearch';
+import { filterCards, matchesQuery, normalize, stem, tokenize, toRows } from '../cardSearch';
 import { cardById, cards } from '../content';
 
 const fool = cardById.get('fool')!;
@@ -91,11 +91,58 @@ describe('наполнение ключевых слов (спека 04г)', () 
     expect(bad.map((c) => c.id)).toEqual([]);
   });
 
-  it('житейские запросы находят от 1 до 8 карт — не пусто и не пол-колоды', () => {
+  it('житейские запросы находят от 1 до 12 карт — не пусто и не пол-колоды', () => {
+    // верхняя граница поднята с 8 до 12 в задаче 04з: поиск научился словоформам,
+    // и «работа» законно подтянула карты со словами «работы», «работу», «работе»
     const probes = ['любовь', 'деньги', 'работа', 'здоровье', 'расставание',
       'переезд', 'выгорание', 'одиночество', 'ссора', 'учёба'];
     const out = probes.map((q) => [q, filterCards(cards, { query: q, filter: 'all', lang: 'ru' }).length]);
-    expect(out.filter(([, n]) => (n as number) < 1 || (n as number) > 8)).toEqual([]);
+    expect(out.filter(([, n]) => (n as number) < 1 || (n as number) > 12)).toEqual([]);
+  });
+});
+
+describe('словоформы и токены (спека 04з)', () => {
+  const ids = (query: string) =>
+    filterCards(cards, { query, filter: 'all', lang: 'ru' }).map((c) => c.id);
+
+  it('tokenize разбивает фразу на слова', () => {
+    expect(tokenize('баланс работы и дома')).toEqual(['баланс', 'работы', 'и', 'дома']);
+  });
+
+  it('stem срезает окончание, но бережёт короткие слова', () => {
+    expect(stem('деньгами', 'ru')).toBe(stem('деньги', 'ru'));
+    expect(stem('работе', 'ru')).toBe(stem('работа', 'ru'));
+    expect(stem('дом', 'ru')).toBe('дом');
+    expect(stem('feelings', 'en')).toBe(stem('feeling', 'en'));
+  });
+
+  it('падежная форма находит то же, что словарная', () => {
+    expect(ids('работе')).toEqual(ids('работа'));
+    expect(ids('деньгами')).toEqual(ids('деньги'));
+    expect(ids('переезда')).toEqual(ids('переезд'));
+  });
+
+  it('запросы, которые раньше не находили ничего, теперь находят карты', () => {
+    expect(ids('семьи').length).toBeGreaterThan(0);
+    expect(ids('ссоры').length).toBeGreaterThan(0);
+    expect(ids('тревоге').length).toBeGreaterThan(0);
+  });
+
+  it('подстрока в середине слова больше не срабатывает', () => {
+    expect(ids('рост')).toEqual(['w01', 'w03']);           // не «щедрость», «мудрость», «скорость»
+    expect(ids('дом')).not.toContain('c05');               // «опора рядом» — не про дом
+    expect(matchesQuery(cardById.get('empress')!, 'рост', 'ru')).toBe(false);
+  });
+
+  it('набор по буквам работает как прежде', () => {
+    expect(ids('дур')).toEqual(['fool']);
+    expect(ids('люб').length).toBeGreaterThan(0);
+    expect(ids('пент')).toHaveLength(14);
+  });
+
+  it('многословный запрос требует все слова', () => {
+    expect(ids('мир семья')).toContain('c10');
+    expect(ids('мир кракозябра')).toEqual([]);
   });
 });
 
