@@ -1,14 +1,13 @@
 /** Карточка месяца в шапке дневника (`.mcard` эталона, design-system §5): мини-карта +
- *  «КАРТА МЕСЯЦА» + самая частая карта с числом выпадений + строка статистики месяца.
- *  Строку «Отозвалось X из Y дней» и полоску распределения добавит задача 06 — до неё
- *  ответов рефлексии в записях нет. */
+ *  «КАРТА МЕСЯЦА» + самая частая карта с числом выпадений + строка статистики месяца +
+ *  сводка вечерних рефлексий (строка «Отозвалось X из Y» и трёхсегментная полоска, задача 06а). */
 import { Image } from 'expo-image';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { cardById } from '../lib/content';
-import type { MonthSummary } from '../lib/journal';
+import type { MonthSummary, OutcomeStats } from '../lib/journal';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
@@ -16,10 +15,12 @@ import { Txt } from './Txt';
 
 export function MonthCard({
   summary,
+  stats,
   lang,
   onPress,
 }: {
   summary: MonthSummary;
+  stats: OutcomeStats | null;
   lang: 'ru' | 'en';
   onPress: (cardId: string) => void;
 }) {
@@ -29,9 +30,12 @@ export function MonthCard({
   // «Карта месяца» имеет смысл только при повторе: с одним выпадением это просто случайная
   // карта из ленты, и подпись «КАРТА МЕСЯЦА · 1 раз» обещает закономерность, которой нет
   const card = summary.topCount > 1 && summary.topCardId ? cardById.get(summary.topCardId) : undefined;
-  if (!card) return null;
+  const answered = stats?.answered ?? 0;
+  // без карты месяца карточка всё равно нужна, если есть ответы: иначе сводка рефлексии
+  // в таком месяце не покажется никогда
+  if (!card && answered === 0) return null;
 
-  const stats = [
+  const statsLine = [
     tr('journal.entries', { count: summary.count }),
     summary.withNote > 0 ? tr('journal.withNote', { count: summary.withNote }) : null,
   ]
@@ -40,18 +44,38 @@ export function MonthCard({
 
   return (
     <PressableScale
-      onPress={() => onPress(card.id)}
+      onPress={card ? () => onPress(card.id) : undefined}
       style={[st.card, { backgroundColor: t.panel, borderColor: t.line }]}
     >
-      <View style={[st.thumbClip, { borderColor: t.frame }]}>
-        <Image source={cardImages[card.id]} style={st.thumb} contentFit="cover" cachePolicy="memory-disk" />
-      </View>
+      {card && (
+        <View style={[st.thumbClip, { borderColor: t.frame }]}>
+          <Image source={cardImages[card.id]} style={st.thumb} contentFit="cover" cachePolicy="memory-disk" />
+        </View>
+      )}
       <View style={st.texts}>
-        <Txt style={[st.overline, { color: t.accent }]}>{tr('journal.monthCard').toUpperCase()}</Txt>
-        <Txt style={[st.name, { color: t.head }]}>
-          {`${card.name[lang]} · ${tr('journal.times', { count: summary.topCount })}`}
-        </Txt>
-        <Txt style={[st.stats, { color: t.muted }]}>{stats}</Txt>
+        {card && (
+          <>
+            <Txt style={[st.overline, { color: t.accent }]}>{tr('journal.monthCard').toUpperCase()}</Txt>
+            <Txt style={[st.name, { color: t.head }]}>
+              {`${card.name[lang]} · ${tr('journal.times', { count: summary.topCount })}`}
+            </Txt>
+          </>
+        )}
+        <Txt style={[st.stats, { color: t.muted }]}>{statsLine}</Txt>
+        {stats && answered > 0 && (
+          <>
+            <Txt style={[st.stats, { color: t.muted }]}>
+              {tr('journal.resonated', { n: stats.resonated, total: answered })}
+            </Txt>
+            {/* трёхсегментная полоска распределения (product-spec §5): доли ✓/≈/✗ за месяц.
+                Единственная визуализация рефлексий в v1 — графиков и «процента точности» нет */}
+            <View style={[st.bar, { backgroundColor: t.line }]}>
+              <View style={{ flex: stats.yes, backgroundColor: t.success }} />
+              <View style={{ flex: stats.partly, backgroundColor: t.accent }} />
+              <View style={{ flex: stats.no, backgroundColor: t.muted }} />
+            </View>
+          </>
+        )}
       </View>
     </PressableScale>
   );
@@ -74,4 +98,6 @@ const st = StyleSheet.create({
   overline: { fontSize: 8.5, letterSpacing: 2 },
   name: { fontFamily: fonts.displaySemi, fontSize: 15, marginTop: 1 },
   stats: { fontSize: 10.5, marginTop: 1 },
+  // тонкий трёхсегментный бар: сегменты встык, подложка line видна, когда доля нулевая
+  bar: { flexDirection: 'row', height: 4, borderRadius: 2, overflow: 'hidden', marginTop: 8 },
 });

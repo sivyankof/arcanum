@@ -29,6 +29,7 @@ import {
   JOURNAL_FILTERS,
   monthsWithEntries,
   monthSummary,
+  outcomeStats,
   type DailyDraw,
   type JournalFilter,
 } from '../../src/lib/journal';
@@ -62,6 +63,7 @@ export default function ProfileScreen() {
 
   const entries = React.useMemo(() => (month ? entriesOfMonth(history, month) : []), [history, month]);
   const summary = React.useMemo(() => (month ? monthSummary(history, month) : null), [history, month]);
+  const stats = React.useMemo(() => (month ? outcomeStats(history, month) : null), [history, month]);
 
   const [filter, setFilter] = React.useState<JournalFilter>('all');
   // смена месяца сбрасывает фильтр: счётчики в чипах относятся к текущему месяцу
@@ -116,7 +118,7 @@ export default function ProfileScreen() {
             onPrev={() => setPicked(months[index + 1])}
             onNext={() => setPicked(months[index - 1])}
           />
-          <MonthCard summary={summary} lang={lang} onPress={openCard} />
+          <MonthCard summary={summary} stats={stats} lang={lang} onPress={openCard} />
         </FadeUp>
       )}
 
