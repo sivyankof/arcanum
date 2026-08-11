@@ -1,130 +1,147 @@
+/** Профиль: статистика пути + дневник карт дня (спека 05).
+ *
+ *  Список — FlatList, а не ScrollView: записей в месяце до 31, а шапка (статы, навигатор,
+ *  карточка месяца) едет вместе с ними как ListHeaderComponent (product-spec §5).
+ *  Утилитарные строки (тема, язык, dev-сброс) уехали на экран «Настройки» за шестерёнку —
+ *  профиль остаётся эмоциональным «путём».
+ */
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { EmptyState } from '../../src/components/EmptyState';
 import { FadeUp } from '../../src/components/FadeUp';
+import { JournalRow } from '../../src/components/JournalRow';
+import { MonthCard } from '../../src/components/MonthCard';
+import { MonthNav } from '../../src/components/MonthNav';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { Txt } from '../../src/components/Txt';
+import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
+import { entriesOfMonth, monthsWithEntries, monthSummary } from '../../src/lib/journal';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
-import { Txt } from '../../src/components/Txt';
-
-/** Строка настройки: иконка · подпись · текущее значение. */
-function Row({
-  icon,
-  label,
-  value,
-  onPress,
-}: {
-  icon: React.ComponentProps<typeof Ionicons>['name'];
-  label: string;
-  value: string;
-  onPress?: () => void;
-}) {
-  const t = useTheme();
-  return (
-    <PressableScale
-      onPress={
-        onPress &&
-        (() => {
-          hapticTap(); // строки профиля — переключатели, отклик как у фильтров
-          onPress();
-        })
-      }
-      style={[st.row, { backgroundColor: t.panel, borderColor: t.line }]}
-    >
-      <Ionicons name={icon} size={18} color={t.accent} />
-      <Txt style={{ color: t.text, fontSize: 14, flex: 1 }}>{label}</Txt>
-      <Txt style={{ color: t.muted, fontSize: 13, fontWeight: '600' }}>{value}</Txt>
-    </PressableScale>
-  );
-}
 
 export default function ProfileScreen() {
   const t = useTheme();
-  const { i18n } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
 
-  const themeMode = useApp((s) => s.themeMode);
-  const setThemeMode = useApp((s) => s.setThemeMode);
-  const setLang = useApp((s) => s.setLang);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
-  const resetToday = useApp((s) => s.resetToday);
+
+  const months = React.useMemo(() => monthsWithEntries(history), [history]);
+  const [picked, setPicked] = React.useState<string | null>(null);
+  // выбранный месяц держим «мягко»: если записи появились или уехали (сброс карты дня),
+  // возвращаемся к самому свежему месяцу вместо пустого экрана
+  const month = picked && months.includes(picked) ? picked : months[0];
+
+  const entries = React.useMemo(() => (month ? entriesOfMonth(history, month) : []), [history, month]);
+  const summary = React.useMemo(() => (month ? monthSummary(history, month) : null), [history, month]);
+
+  // месяцы отсортированы от новых к старым: старший месяц лежит ДАЛЬШЕ по списку
+  const index = month ? months.indexOf(month) : -1;
+  const hasPrev = index >= 0 && index < months.length - 1;
+  const hasNext = index > 0;
+
+  const today = localDateISO();
+  const openCard = (id: string) => router.push({ pathname: '/card/[id]', params: { id, from: 'journal' } });
+
+  const header = (
+    <>
+      <FadeUp index={0}>
+        <Txt style={[st.title, { color: t.head }]}>{tr('profile.title')}</Txt>
+      </FadeUp>
+
+      <FadeUp index={1} style={st.stats}>
+        <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
+          <Txt style={[st.statNum, { color: t.head }]}>{streak}</Txt>
+          <Txt style={[st.statLbl, { color: t.muted }]}>{tr('profile.streak')}</Txt>
+        </View>
+        <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
+          <Txt style={[st.statNum, { color: t.head }]}>{history.length}</Txt>
+          <Txt style={[st.statLbl, { color: t.muted }]}>{tr('profile.cards')}</Txt>
+        </View>
+      </FadeUp>
+
+      {month && summary && (
+        <FadeUp index={2}>
+          <MonthNav
+            month={month}
+            lang={lang}
+            hasPrev={hasPrev}
+            hasNext={hasNext}
+            onPrev={() => setPicked(months[index + 1])}
+            onNext={() => setPicked(months[index - 1])}
+          />
+          <MonthCard summary={summary} lang={lang} onPress={openCard} />
+        </FadeUp>
+      )}
+    </>
+  );
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
-      <ScrollView
+      <FlatList
+        data={entries}
+        keyExtractor={(e) => e.date}
+        renderItem={({ item }) => (
+          <JournalRow
+            entry={item}
+            lang={lang}
+            onPress={() => openCard(item.cardId)}
+            // правится только сегодняшняя запись (logic-spec §3)
+            onEdit={
+              item.date === today
+                ? () => router.push({ pathname: '/note/[date]', params: { date: item.date } })
+                : undefined
+            }
+          />
+        )}
+        ListHeaderComponent={header}
+        ListEmptyComponent={<EmptyState text={tr('journal.empty')} />}
         contentContainerStyle={{
           paddingTop: insets.top + spacing.xl,
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}
+        showsVerticalScrollIndicator={false}
+      />
+
+      {/* шестерёнка — поверх списка, чтобы не уезжала со скроллом (эталон: правый верхний угол) */}
+      <PressableScale
+        onPress={() => {
+          hapticTap();
+          router.push('/settings');
+        }}
+        style={[st.gear, { top: insets.top + spacing.xl, backgroundColor: t.panel, borderColor: t.line }]}
       >
-        <FadeUp index={0}>
-          <Txt style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Профиль' : 'Profile'}</Txt>
-        </FadeUp>
-
-        <FadeUp index={1} style={st.stats}>
-          <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
-            <Txt style={[st.statNum, { color: t.head }]}>{streak}</Txt>
-            <Txt style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'СЕРИЯ' : 'STREAK'}</Txt>
-          </View>
-          <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
-            <Txt style={[st.statNum, { color: t.head }]}>{history.length}</Txt>
-            <Txt style={[st.statLbl, { color: t.muted }]}>{lang === 'ru' ? 'КАРТ ДНЯ' : 'DAILY CARDS'}</Txt>
-          </View>
-        </FadeUp>
-
-        <FadeUp index={2}>
-          <Row
-            icon={themeMode === 'dark' ? 'moon' : 'sunny'}
-            label={lang === 'ru' ? 'Тема' : 'Theme'}
-            value={themeMode === 'dark' ? (lang === 'ru' ? 'Тёмная' : 'Dark') : lang === 'ru' ? 'Светлая' : 'Light'}
-            onPress={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}
-          />
-        </FadeUp>
-        <FadeUp index={3}>
-          <Row
-            icon="language"
-            label={lang === 'ru' ? 'Язык' : 'Language'}
-            value={lang === 'ru' ? 'Русский' : 'English'}
-            onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-          />
-        </FadeUp>
-        {__DEV__ && (
-          <FadeUp index={4}>
-            <Row
-              icon="refresh"
-              label={lang === 'ru' ? 'Сбросить карту дня' : 'Reset daily card'}
-              value="DEV"
-              onPress={resetToday}
-            />
-          </FadeUp>
-        )}
-      </ScrollView>
+        <Ionicons name="settings-outline" size={17} color={t.muted} />
+      </PressableScale>
     </View>
   );
 }
 
 const st = StyleSheet.create({
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center' },
-  stats: { flexDirection: 'row', gap: spacing.m, marginTop: spacing.xl, marginBottom: spacing.l },
+  stats: { flexDirection: 'row', gap: spacing.m, marginTop: spacing.xl },
   stat: { flex: 1, alignItems: 'center', borderWidth: 1, borderRadius: radius.l, paddingVertical: spacing.l },
   statNum: { fontFamily: fonts.display, fontSize: 30 },
   statLbl: { fontSize: 9, letterSpacing: 2, marginTop: 2 },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
+  gear: {
+    position: 'absolute',
+    right: spacing.xl,
+    width: 34,
+    height: 34,
     borderWidth: 1,
-    borderRadius: radius.l,
-    padding: spacing.l,
-    marginTop: spacing.s,
+    borderRadius: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

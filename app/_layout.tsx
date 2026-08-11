@@ -78,6 +78,12 @@ export default function RootLayout() {
             animation: 'fade',
           }}
         />
+        {/* заметка к карте дня — модалка: экран ввода не должен уводить с «Сегодня»,
+            а свайп вниз читается как «закрыть» (перехватывается на beforeRemove, спека 05) */}
+        <Stack.Screen
+          name="note/[date]"
+          options={{ presentation: 'modal', headerTintColor: t.accent, headerShadowVisible: false }}
+        />
       </Stack>
     </>
   );

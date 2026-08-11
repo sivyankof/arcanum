@@ -19,3 +19,36 @@ export function localDateISO(d: Date = new Date()): string {
 export function daysAgoISO(n: number, from: Date = new Date()): string {
   return localDateISO(new Date(from.getFullYear(), from.getMonth(), from.getDate() - n));
 }
+
+/** YYYY-MM-DD → Date по ЛОКАЛЬНОЙ полуночи. `new Date('2026-08-11')` разобрал бы строку
+ *  как UTC и в отрицательных поясах показал бы 10 августа — та же ловушка, что в аудите H2. */
+export function parseISODate(iso: string): Date {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+const LOCALES: Record<Lang, string> = { ru: 'ru-RU', en: 'en-US' };
+type Lang = 'ru' | 'en';
+
+/** «пн · 11 августа» (weekday 'long' → «понедельник · 11 августа»).
+ *  Регистр задаёт вызывающий: в дневнике строка идёт в UPPERCASE как Overline. */
+export function formatEntryDate(iso: string, lang: Lang, weekday: 'short' | 'long' = 'short'): string {
+  const d = parseISODate(iso);
+  const locale = LOCALES[lang];
+  return `${d.toLocaleDateString(locale, { weekday })} · ${d.toLocaleDateString(locale, {
+    day: 'numeric',
+    month: 'long',
+  })}`;
+}
+
+/** «11 августа» — дата внутри фразы (блок «Ваша история с картой»). */
+export function formatDayMonth(iso: string, lang: Lang): string {
+  return parseISODate(iso).toLocaleDateString(LOCALES[lang], { day: 'numeric', month: 'long' });
+}
+
+/** YYYY-MM → «август 2026» для заголовка навигатора дневника. Год приписываем сами:
+ *  с `year: 'numeric'` русская локаль возвращает «август 2026 г.» — хвост «г.» в Overline лишний. */
+export function formatMonthTitle(month: string, lang: Lang): string {
+  const d = parseISODate(`${month}-01`);
+  return `${d.toLocaleDateString(LOCALES[lang], { month: 'long' })} ${d.getFullYear()}`;
+}

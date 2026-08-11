@@ -10,7 +10,7 @@ export function BlurSurface({ intensity = 40 }: { intensity?: number }) {
   const t = useTheme();
 
   return (
-    <View style={StyleSheet.absoluteFill} pointerEvents="none">
+    <View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }]}>
       <BlurView
         intensity={intensity}
         tint={t.mode === 'dark' ? 'dark' : 'light'}

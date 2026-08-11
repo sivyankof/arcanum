@@ -125,8 +125,11 @@ export function Sparks({
 }) {
   return (
     <Animated.View
-      pointerEvents="none"
-      style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }, style]}
+      style={[
+        StyleSheet.absoluteFill,
+        { alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' },
+        style,
+      ]}
     >
       {Array.from({ length: count }, (_, i) => (
         <Spark

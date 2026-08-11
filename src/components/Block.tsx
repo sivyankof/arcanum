@@ -13,7 +13,9 @@ import { Txt } from './Txt';
 
 interface BlockProps {
   title: string;
-  text: string;
+  /** Текст значения. Не задан — панель показывает только `children` (плашка заметки и т.п.). */
+  text?: string;
+  children?: React.ReactNode;
   todo?: boolean;
   contentStyle?: StyleProp<ViewStyle>;
   // Контекстный блок «ваша карта сегодня» (product-spec §3): золотая рамка вместо обычной...
@@ -23,7 +25,7 @@ interface BlockProps {
   star?: boolean;
 }
 
-export function Block({ title, text, todo, contentStyle, accentBorder, star }: BlockProps) {
+export function Block({ title, text, children, todo, contentStyle, accentBorder, star }: BlockProps) {
   const t = useTheme();
   // 'transparent' в градиенте на iOS даёт серый ореол, поэтому гасим через альфу самого цвета
   const clear = `${t.line}00`;
@@ -36,7 +38,10 @@ export function Block({ title, text, todo, contentStyle, accentBorder, star }: B
           <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
           <LinearGradient colors={[t.line, clear]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={st.tail} />
         </View>
-        <Text style={[st.text, { color: todo ? t.muted : t.text }, todo && st.textTodo]}>{text}</Text>
+        {text !== undefined && (
+          <Text style={[st.text, { color: todo ? t.muted : t.text }, todo && st.textTodo]}>{text}</Text>
+        )}
+        {children}
       </Animated.View>
     </View>
   );

@@ -3,17 +3,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { daysAgoISO, localDateISO } from '../lib/dates';
+import { canEditNote, normalizeNote, type DailyDraw } from '../lib/journal';
 import type { ThemeMode } from '../theme/theme';
 
 export type Lang = 'ru' | 'en';
 
-interface DailyDraw {
-  date: string;      // YYYY-MM-DD
-  cardId: string;
-  reversed: boolean;
-  note?: string;
-  outcome?: 'yes' | 'partly' | 'no'; // вечерняя рефлексия «сбылось?»
-}
+// тип записи живёт в src/lib/journal.ts вместе с чистой арифметикой дневника,
+// здесь — только реэкспорт, чтобы экраны импортировали его привычным путём
+export type { DailyDraw };
 
 interface AppState {
   themeMode: ThemeMode;
@@ -27,6 +24,7 @@ interface AppState {
   setLang: (l: Lang) => void;
   drawToday: (cardId: string, reversed: boolean) => void;
   todayDraw: () => DailyDraw | undefined;
+  setNote: (date: string, text: string) => void;
   resetToday: () => void;
 }
 
@@ -57,6 +55,20 @@ export const useApp = create<AppState>()(
       },
 
       todayDraw: () => get().history.find((h) => h.date === localDateISO()),
+
+      // Заметка к карте дня. Правится только сегодняшняя запись (logic-spec §3: в полночь
+      // запись фиксируется). Пустой текст удаляет поле, а не пишет пустую строку.
+      setNote: (date, text) => {
+        if (!canEditNote(date)) return;
+        const note = normalizeNote(text);
+        set({
+          history: get().history.map((h) => {
+            if (h.date !== date) return h;
+            const { note: _prev, ...rest } = h;
+            return note ? { ...rest, note } : rest;
+          }),
+        });
+      },
 
       // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
       // Серия уменьшается на 1 (точное прежнее значение не хранится).

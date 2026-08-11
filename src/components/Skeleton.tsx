@@ -18,5 +18,5 @@ export function Skeleton({ style }: { style?: StyleProp<ViewStyle> }) {
 
   const anim = useAnimatedStyle(() => ({ opacity: p.value }));
 
-  return <Animated.View pointerEvents="none" style={[{ backgroundColor: t.panel }, style, anim]} />;
+  return <Animated.View style={[{ backgroundColor: t.panel, pointerEvents: 'none' }, style, anim]} />;
 }

@@ -27,12 +27,20 @@ import { Txt } from '../../src/components/Txt';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardImages } from '../../src/lib/cardImages';
 import { cardById, cardNumeral } from '../../src/lib/content';
+import { formatDayMonth } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
+import { cardHistory } from '../../src/lib/journal';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
 const FLY_MS = 350;
+
+/** Подпись нативной кнопки «назад» по источнику перехода (параметр from). */
+const BACK_TITLES: Record<string, string> = {
+  today: 'card.backToday',
+  journal: 'card.backProfile',
+};
 
 /** Ключ сферы значения — вкладки под героем страницы карты. Строгий порядок эталона.
  *  tabKey — подпись вкладки, blockKey — заголовок блока значения снизу. */
@@ -135,6 +143,7 @@ export default function CardDetail() {
   // Селектор возвращает примитив (id карты, а не саму функцию todayDraw), иначе стор не
   // уведомит компонент об обновлении при вытягивании новой карты дня
   const todayCardId = useApp((s) => s.todayDraw()?.cardId);
+  const history = useApp((s) => s.history);
   const fadeStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
   // вибрация при возврате: кнопка «назад» теперь системная (нативная), на неё нельзя повесить
   // onPress, поэтому ловим сам уход с экрана — это покрывает и тап по кнопке, и свайп-жест назад
@@ -175,6 +184,20 @@ export default function CardDetail() {
     });
   };
 
+  // личная история: сколько раз карта выпадала, когда в последний раз и последняя заметка
+  const personal = cardHistory(history, card.id);
+  const lastDay = personal.lastDate ? formatDayMonth(personal.lastDate, lang) : '';
+  const personalText = [
+    // при единственном выпадении «выпадала 1 раз · последняя 10 августа» звучит как отчёт;
+    // одной датой — по-человечески
+    personal.times === 1
+      ? tr('journal.drawnOnce', { date: lastDay })
+      : `${tr('journal.drawn', { count: personal.times })} · ${tr('journal.lastDate', { date: lastDay })}`,
+    personal.lastNote ? `«${personal.lastNote}»` : null,
+  ]
+    .filter(Boolean)
+    .join('\n');
+
   const activeSphere = SPHERES.find((s) => s.key === sphere)!;
   const sphereBlock = blockOf(sphere);
   const reversed = blockOf('reversed');
@@ -190,8 +213,9 @@ export default function CardDetail() {
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       {/* подпись нативной кнопки «назад» зависит от источника перехода (параметр from):
-          с «Сегодня» — «Сегодня» и возврат туда, иначе (сетка справочника или прямая ссылка) — «Карты» */}
-      <Stack.Screen options={{ headerBackTitle: from === 'today' ? tr('card.backToday') : tr('card.backAll') }} />
+          с «Сегодня» — «Сегодня», из дневника — «Профиль», иначе (сетка справочника
+          или прямая ссылка) — «Карты» */}
+      <Stack.Screen options={{ headerBackTitle: tr(BACK_TITLES[from ?? ''] ?? 'card.backAll') }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
@@ -281,6 +305,14 @@ export default function CardDetail() {
         <FadeUp index={5}>
           <Block title={tr('card.symbolism')} text={symbolism.text} todo={symbolism.todo} />
         </FadeUp>
+
+        {/* личная история карты (logic-spec §3): только если карта уже выпадала.
+            Счётчик «отзывалась N» добавит задача 06 — ответов рефлексии пока нет */}
+        {personal.times > 0 && (
+          <FadeUp index={5}>
+            <Block title={tr('journal.cardHistory').toUpperCase()} text={personalText} accentBorder />
+          </FadeUp>
+        )}
       </ScrollView>
     </View>
   );

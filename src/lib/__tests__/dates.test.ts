@@ -1,7 +1,7 @@
 /** Тесты локальных границ дня (hf-01/H2). Все кейсы строятся из локальных компонентов
  *  (new Date(year, month, day, ...)), поэтому результат не зависит от часового пояса машины,
  *  на которой гоняются тесты, — как и сам контракт localDateISO/daysAgoISO. */
-import { daysAgoISO, localDateISO } from '../dates';
+import { daysAgoISO, localDateISO, parseISODate } from '../dates';
 
 describe('localDateISO', () => {
   it('сразу после полуночи — сегодняшняя дата', () => {
@@ -32,5 +32,16 @@ describe('daysAgoISO', () => {
 
   it('обычный случай внутри месяца: минус 7 суток', () => {
     expect(daysAgoISO(7, new Date(2026, 7, 9))).toBe('2026-08-02');
+  });
+});
+
+describe('parseISODate', () => {
+  it('строка разбирается по локальной полуночи, а не по UTC', () => {
+    const d = parseISODate('2026-08-11');
+    expect([d.getFullYear(), d.getMonth(), d.getDate()]).toEqual([2026, 7, 11]);
+  });
+
+  it('обратное преобразование не теряет день', () => {
+    expect(localDateISO(parseISODate('2026-01-05'))).toBe('2026-01-05');
   });
 });

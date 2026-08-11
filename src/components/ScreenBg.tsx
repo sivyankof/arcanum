@@ -50,7 +50,7 @@ export function ScreenBg() {
         style={StyleSheet.absoluteFill}
       />
       {t.mode === 'dark' && (
-        <View style={StyleSheet.absoluteFill} pointerEvents="none">
+        <View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }]}>
           {STARS.map((s) => (
             <Star key={`${s.left}-${s.top}`} {...s} />
           ))}

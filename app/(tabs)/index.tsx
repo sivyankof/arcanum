@@ -14,9 +14,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Block } from '../../src/components/Block';
 import { CardBack } from '../../src/components/CardBack';
+import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
-import { PressableScale } from '../../src/components/PressableScale';
+import { NotePlate } from '../../src/components/NotePlate';
 import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Sparks } from '../../src/components/Sparks';
@@ -105,9 +107,9 @@ function Ring({
 
   return (
     <Animated.View
-      pointerEvents="none"
       style={[
         {
+          pointerEvents: 'none',
           position: 'absolute',
           left: (CARD_W - size) / 2,
           top: (CARD_H - size) / 2,
@@ -298,7 +300,7 @@ export default function TodayScreen() {
               <View style={[st.faceClip, { borderColor: t.frame }]}>
                 <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
                 {/* блик: проходит по лицу карты сразу после переворота */}
-                <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, glareStyle]}>
+                <Animated.View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }, glareStyle]}>
                   <LinearGradient
                     colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']}
                     locations={[0, 0.32, 0.48, 0.6, 1]}
@@ -344,25 +346,18 @@ export default function TodayScreen() {
                 <Txt style={[st.meanTxt, { color: t.text }]}>
                   {hasText ? dayText : tr('card.soon')}
                 </Txt>
-                {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
-                <PressableScale
+                <CtaButton
+                  label={lang === 'ru' ? 'ПРОДОЛЖИТЬ ПУТЬ →' : 'CONTINUE YOUR PATH →'}
                   onPress={() => router.push(`/card/${card.id}?from=today`)}
-                  style={[st.cta, { boxShadow: `0px 12px 30px ${t.glow}` }]}
-                >
-                  <View style={st.ctaClip}>
-                    <LinearGradient
-                      colors={gold.gradient}
-                      start={{ x: 0, y: 0 }}
-                      end={{ x: 1, y: 0.6 }}
-                      style={st.ctaGrad}
-                    >
-                      {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
-                      <View style={st.ctaGloss} />
-                      <Txt style={st.ctaTxt}>{lang === 'ru' ? 'ПРОДОЛЖИТЬ ПУТЬ →' : 'CONTINUE YOUR PATH →'}</Txt>
-                    </LinearGradient>
-                  </View>
-                </PressableScale>
+                />
               </View>
+              {/* заметка о дне (спека 05): плашка в потоке, ввод — на отдельном экране */}
+              <Block title={tr('note.title')}>
+                <NotePlate
+                  note={drawn?.note}
+                  onPress={() => router.push({ pathname: '/note/[date]', params: { date: todayISO } })}
+                />
+              </Block>
             </Animated.View>
           </>
         )}
