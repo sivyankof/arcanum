@@ -51,7 +51,9 @@ const resources = {
         drawn_one: "Выпадала {{count}} раз", drawn_few: "Выпадала {{count}} раза", drawn_many: "Выпадала {{count}} раз",
         drawnOnce: "Выпадала {{date}}",
         lastDate: "последняя {{date}}",
-        resonated: "Отозвалось {{n}} из {{total}} дней",
+        resonated_one: "Отозвалось {{n}} из {{count}} дня",
+        resonated_few: "Отозвалось {{n}} из {{count}} дней",
+        resonated_many: "Отозвалось {{n}} из {{count}} дней",
         filters: { all: "Все", yes: "✓", partly: "≈", no: "✗", note: "С заметкой" },
       },
       note: {
@@ -117,7 +119,8 @@ const resources = {
         drawn_one: "Drawn {{count}} time", drawn_other: "Drawn {{count}} times",
         drawnOnce: "Drawn on {{date}}",
         lastDate: "last on {{date}}",
-        resonated: "Resonated on {{n}} of {{total}} days",
+        resonated_one: "Resonated on {{n}} of {{count}} day",
+        resonated_other: "Resonated on {{n}} of {{count}} days",
         filters: { all: "All", yes: "✓", partly: "≈", no: "✗", note: "With a note" },
       },
       note: {

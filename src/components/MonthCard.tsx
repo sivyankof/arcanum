@@ -65,7 +65,7 @@ export function MonthCard({
         {stats && answered > 0 && (
           <>
             <Txt style={[st.stats, { color: t.muted }]}>
-              {tr('journal.resonated', { n: stats.resonated, total: answered })}
+              {tr('journal.resonated', { n: stats.resonated, count: answered })}
             </Txt>
             {/* трёхсегментная полоска распределения (product-spec §5): доли ✓/≈/✗ за месяц.
                 Единственная визуализация рефлексий в v1 — графиков и «процента точности» нет */}

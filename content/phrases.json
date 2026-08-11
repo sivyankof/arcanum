@@ -43,11 +43,11 @@
  "reflect": {
   "question": [
    {
-    "ru": "Как отозвалась {card} сегодня?",
+    "ru": "Как отозвалась сегодня карта {card}?",
     "en": "How did {card} resonate today?"
    },
    {
-    "ru": "{card} была с вами весь день. Что скажете?",
+    "ru": "Карта {card} была с вами весь день. Что скажете?",
     "en": "{card} was with you all day. How was it?"
    },
    {
@@ -81,11 +81,11 @@
     "en": "How did your day go with {card}?"
    },
    {
-    "ru": "{card} была с вами весь день. Отозвалась?",
+    "ru": "Карта {card} была с вами весь день. Отозвалась?",
     "en": "{card} was with you all day. Did it resonate?"
    },
    {
-    "ru": "Минутка перед сном: отозвалась ли {card}?",
+    "ru": "Минутка перед сном: отозвалась ли карта {card}?",
     "en": "A moment before sleep — did {card} resonate?"
    }
   ],
