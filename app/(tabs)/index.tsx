@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
@@ -19,6 +19,7 @@ import { CardBack } from '../../src/components/CardBack';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
 import { NotePlate } from '../../src/components/NotePlate';
+import { Reflection } from '../../src/components/Reflection';
 import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Sparks } from '../../src/components/Sparks';
@@ -27,8 +28,10 @@ import { XpPill } from '../../src/components/XpPill';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { daysAgoISO, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
+import type { Outcome } from '../../src/lib/journal';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
+import { reflectionVisible } from '../../src/lib/reflection';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
@@ -152,7 +155,22 @@ export default function TodayScreen() {
   const drawn = useApp((s) => s.todayDraw());
   const installSeed = useApp((s) => s.installSeed);
   const history = useApp((s) => s.history);
+  const setOutcome = useApp((s) => s.setOutcome);
+  const reflectionOn = useApp((s) => s.settings.reflectionOn);
+  const devReflect = useApp((s) => s.devReflect);
   const scrollRef = useTabTopRef<ScrollView>();
+
+  // час пересчитываем при возврате на таб, а не таймером каждую минуту: сидеть в приложении
+  // ровно в 17:59:59 — не тот случай, ради которого стоит держать интервал
+  const [hour, setHour] = React.useState(() => new Date().getHours());
+  useFocusEffect(React.useCallback(() => setHour(new Date().getHours()), []));
+
+  const showReflection = reflectionVisible({
+    drawn: !!drawn,
+    hour,
+    enabled: reflectionOn,
+    devForce: __DEV__ && devReflect,
+  });
 
   const todayISO = localDateISO();
   // анти-повтор карты дня: карты, выпадавшие за последние 7 дней (не считая сегодня)
@@ -354,8 +372,18 @@ export default function TodayScreen() {
                   onPress={() => router.push(`/card/${card.id}?from=today`)}
                 />
               </View>
-              {/* заметка о дне (спека 05): плашка в потоке, ввод — на отдельном экране */}
-              <Block title={tr('note.title')}>
+              {/* один блок на весь вечерний ритуал: до 18:00 это «Заметка о дне» с плашкой,
+                  после — тот же блок с вопросом и кнопками над той же плашкой (спека 06а) */}
+              <Block title={showReflection ? tr('reflect.title') : tr('note.title')}>
+                {showReflection && (
+                  <Reflection
+                    cardName={card.name[lang]}
+                    dateISO={todayISO}
+                    lang={lang}
+                    outcome={drawn?.outcome}
+                    onAnswer={(o: Outcome) => setOutcome(todayISO, o)}
+                  />
+                )}
                 <NotePlate
                   note={drawn?.note}
                   onPress={() => router.push({ pathname: '/note/[date]', params: { date: todayISO } })}
