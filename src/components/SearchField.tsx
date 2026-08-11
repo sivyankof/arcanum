@@ -2,7 +2,7 @@
  *  Значения (radius 15, паддинг 11×15, шрифт 12.5) — design-system §5 «Панель поиска». */
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, TextInput, View, type StyleProp, type ViewStyle } from 'react-native';
 import { hapticTap } from '../lib/haptics';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -11,19 +11,29 @@ export function SearchField({
   value,
   onChangeText,
   placeholder,
+  onFocus,
+  onBlur,
+  style,
 }: {
   value: string;
   onChangeText: (v: string) => void;
   placeholder: string;
+  /** нужны scroll-aware панели: пока в поле стоит курсор, она не уезжает (спека 04е) */
+  onFocus?: () => void;
+  onBlur?: () => void;
+  /** компактный вариант поля внутри парящей панели отличается только паддингами */
+  style?: StyleProp<ViewStyle>;
 }) {
   const t = useTheme();
 
   return (
-    <View style={[st.wrap, { backgroundColor: t.panel, borderColor: t.line }]}>
+    <View style={[st.wrap, { backgroundColor: t.panel, borderColor: t.line }, style]}>
       <Ionicons name="search-outline" size={15} color={t.muted} />
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        onFocus={onFocus}
+        onBlur={onBlur}
         placeholder={placeholder}
         placeholderTextColor={t.muted}
         style={[st.input, { color: t.text }]}
