@@ -10,7 +10,8 @@
   suit          — wands | cups | swords | pentacles | null
   number        — 0..21 для старших, 1..14 для младших
   name          — {ru, en}
-  keywords      — {ru: [...], en: [...]}
+  keywords      — {ru: [...], en: [...]} — витрина, 4 слова (чипы на странице карты)
+  search        — {ru: [...], en: [...]} — скрытые поисковые синонимы, 8-12 (спека 04г)
   image         — имя файла в assets/cards/
   source        — {waite_upright, waite_reversed, waite_description} (EN, public domain)
   content       — 6 блоков × 2 языка, каждый блок {ru, en, status}
@@ -101,6 +102,13 @@ def clean(s: str) -> str:
 def main():
     data = json.loads(SRC.read_text(encoding="utf-8"))
     cards_src = data["cards"] if isinstance(data, dict) else data
+    # Уже написанный контент переносим в новую сборку: keywords, search и тексты блоков —
+    # это работа редактора, источник tarot-api про них ничего не знает. Из источника
+    # обновляются только name/image/source. Без этого один прогон стирал 624 блока.
+    dst_path = ROOT / "content" / "cards.json"
+    existing = {}
+    if dst_path.exists():
+        existing = {c["id"]: c for c in json.loads(dst_path.read_text(encoding="utf-8"))["cards"]}
     out = []
     for c in cards_src:
         if c["type"] == "major":
@@ -121,6 +129,10 @@ def main():
                          "en": f"{RANKS_EN[n]} of {SUITS_EN[suit]}"},
                 "keywords": {"ru": [], "en": []},  # заполняются в работе над контентом
             }
+        prev = existing.get(card["id"])
+        if prev:
+            card["keywords"] = prev.get("keywords", card["keywords"])
+        card["search"] = (prev or {}).get("search", {"ru": [], "en": []})
         card["image"] = f"{card['id']}.jpg"
         card["source"] = {
             "waite_upright": clean(c.get("meaning_up")),
@@ -128,17 +140,21 @@ def main():
             "waite_description": clean(c.get("desc")),
             "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)",
         }
-        card["content"] = {b: {"ru": "", "en": "", "status": "todo"} for b in BLOCKS}
+        card["content"] = (prev or {}).get(
+            "content", {b: {"ru": "", "en": "", "status": "todo"} for b in BLOCKS}
+        )
         out.append(card)
 
     order = {"major": 0, "wands": 1, "cups": 2, "swords": 3, "pentacles": 4}
     out.sort(key=lambda x: (order[x["suit"] or "major"] if x["arcana"] == "minor" else 0,
                             0 if x["arcana"] == "major" else 1, x["number"]))
-    dst = ROOT / "content" / "cards.json"
-    dst.write_text(json.dumps({"version": 1, "deck": "rider-waite-smith-1909",
-                               "cards": out}, ensure_ascii=False, indent=2), encoding="utf-8")
+    dst_path.write_text(json.dumps({"version": 1, "deck": "rider-waite-smith-1909",
+                                    "cards": out}, ensure_ascii=False, indent=1) + "\n",
+                        encoding="utf-8", newline="\n")
     majors = sum(1 for x in out if x["arcana"] == "major")
-    print(f"OK: {len(out)} карт ({majors} старших, {len(out)-majors} младших) -> {dst}")
+    kept = sum(1 for x in out if any(b["status"] != "todo" for b in x["content"].values()))
+    print(f"OK: {len(out)} карт ({majors} старших, {len(out)-majors} младших) -> {dst_path}")
+    print(f"перенесено из прежней сборки: {len(existing)} карт, из них с готовым текстом {kept}")
 
 if __name__ == "__main__":
     main()

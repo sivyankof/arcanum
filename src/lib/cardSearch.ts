@@ -14,13 +14,16 @@ export function normalize(s: string): string {
   return s.trim().toLowerCase().replace(/ё/g, 'е');
 }
 
-/** Совпадает ли карта с запросом: подстрока в названии ИЛИ в любом ключевом слове (текущий язык).
- *  Пустой запрос совпадает со всем. */
+/** Совпадает ли карта с запросом: подстрока в названии, в ключевом слове ИЛИ в поисковом
+ *  синониме (текущий язык). Пустой запрос совпадает со всем.
+ *  `search` — скрытый слой (спека 04г): новичок ищет «расставание», а не «Тройку Мечей».
+ *  `?? []` — защита границы данных: JSON приходит из бандла и типом не проверяется. */
 export function matchesQuery(card: TarotCard, query: string, lang: Lang): boolean {
   const q = normalize(query);
   if (!q) return true;
   if (normalize(card.name[lang]).includes(q)) return true;
-  return card.keywords[lang].some((k) => normalize(k).includes(q));
+  const words = [...(card.keywords[lang] ?? []), ...(card.search?.[lang] ?? [])];
+  return words.some((k) => normalize(k).includes(q));
 }
 
 /** Отбор карт: сначала аркан/масть, затем текстовый запрос.

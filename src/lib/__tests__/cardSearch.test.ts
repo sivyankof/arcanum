@@ -51,6 +51,54 @@ describe('matchesQuery — по ключевым словам', () => {
   });
 });
 
+describe('matchesQuery — по скрытым поисковым синонимам (спека 04г)', () => {
+  it('находит Тройку Мечей по житейскому «измена»', () => {
+    expect(matchesQuery(cardById.get('s03')!, 'измена', 'ru')).toBe(true);
+  });
+
+  it('находит Десятку Жезлов по «выгорание»', () => {
+    expect(matchesQuery(cardById.get('w10')!, 'выгорание', 'ru')).toBe(true);
+  });
+
+  it('находит Дьявола по смыслу перевёрнутой карты «освобождение»', () => {
+    expect(matchesQuery(cardById.get('devil')!, 'освобождение', 'ru')).toBe(true);
+  });
+
+  it('работает и на английском', () => {
+    expect(matchesQuery(cardById.get('p05')!, 'debt', 'en')).toBe(true);
+  });
+});
+
+describe('наполнение ключевых слов (спека 04г)', () => {
+  it('у каждой карты ровно 4 слова витрины в обоих языках', () => {
+    const bad = cards.filter((c) => c.keywords.ru.length !== 4 || c.keywords.en.length !== 4);
+    expect(bad.map((c) => c.id)).toEqual([]);
+  });
+
+  it('у каждой карты 8–12 поисковых синонимов в обоих языках', () => {
+    const inRange = (a: string[]) => a.length >= 8 && a.length <= 12;
+    const bad = cards.filter((c) => !inRange(c.search.ru) || !inRange(c.search.en));
+    expect(bad.map((c) => c.id)).toEqual([]);
+  });
+
+  it('поисковые синонимы не дублируют витрину', () => {
+    const bad = cards.filter((c) =>
+      (['ru', 'en'] as const).some((lang) => {
+        const shown = new Set(c.keywords[lang].map(normalize));
+        return c.search[lang].some((w) => shown.has(normalize(w)));
+      }),
+    );
+    expect(bad.map((c) => c.id)).toEqual([]);
+  });
+
+  it('житейские запросы находят от 1 до 8 карт — не пусто и не пол-колоды', () => {
+    const probes = ['любовь', 'деньги', 'работа', 'здоровье', 'расставание',
+      'переезд', 'выгорание', 'одиночество', 'ссора', 'учёба'];
+    const out = probes.map((q) => [q, filterCards(cards, { query: q, filter: 'all', lang: 'ru' }).length]);
+    expect(out.filter(([, n]) => (n as number) < 1 || (n as number) > 8)).toEqual([]);
+  });
+});
+
 describe('filterCards', () => {
   const all = { query: '', filter: 'all' as const, lang: 'ru' as const };
 

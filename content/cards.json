@@ -25,6 +25,29 @@
      "freedom"
     ]
    },
+   "search": {
+    "ru": [
+     "начать с нуля",
+     "новый этап",
+     "риск",
+     "прыжок в неизвестность",
+     "наивность",
+     "путешествие",
+     "довериться",
+     "авантюра",
+     "нет опыта"
+    ],
+    "en": [
+     "starting over",
+     "new chapter",
+     "risk",
+     "leap into the unknown",
+     "naivety",
+     "travel",
+     "trusting the process",
+     "taking a chance"
+    ]
+   },
    "image": "fool.jpg",
    "source": {
     "waite_upright": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
@@ -96,6 +119,28 @@
      "skill",
      "manifestation",
      "resources"
+    ]
+   },
+   "search": {
+    "ru": [
+     "воплотить замысел",
+     "ресурсы под рукой",
+     "талант",
+     "начать действовать",
+     "уверенность",
+     "общение",
+     "фокус",
+     "всё есть для старта"
+    ],
+    "en": [
+     "making it happen",
+     "resources at hand",
+     "talent",
+     "taking action",
+     "focus",
+     "communication",
+     "confidence",
+     "getting started"
     ]
    },
    "image": "magician.jpg",
@@ -171,6 +216,28 @@
      "stillness"
     ]
    },
+   "search": {
+    "ru": [
+     "слушать себя",
+     "не время действовать",
+     "подсознание",
+     "сны",
+     "скрытое",
+     "терпение",
+     "внутренний голос",
+     "тихое знание"
+    ],
+    "en": [
+     "listening within",
+     "not the time to act",
+     "subconscious",
+     "dreams",
+     "hidden things",
+     "inner voice",
+     "patience",
+     "secrets"
+    ]
+   },
    "image": "high-priestess.jpg",
    "source": {
     "waite_upright": "Secrets, mystery, the future as yet unrevealed; the woman who interests the Querent, if male; the Querent herself, if female; silence, tenacity; mystery, wisdom, science.",
@@ -242,6 +309,30 @@
      "nurturing",
      "creativity",
      "nature"
+    ]
+   },
+   "search": {
+    "ru": [
+     "любовь",
+     "дом",
+     "женственность",
+     "материнство",
+     "наслаждение жизнью",
+     "расцвет",
+     "уют",
+     "щедрость",
+     "здоровье"
+    ],
+    "en": [
+     "love",
+     "home",
+     "femininity",
+     "motherhood",
+     "enjoying life",
+     "comfort",
+     "generosity",
+     "beauty",
+     "health"
     ]
    },
    "image": "empress.jpg",
@@ -317,6 +408,28 @@
      "boundaries"
     ]
    },
+   "search": {
+    "ru": [
+     "дисциплина",
+     "руководитель",
+     "отец",
+     "структура",
+     "правила",
+     "ответственность",
+     "контроль",
+     "опора"
+    ],
+    "en": [
+     "order",
+     "discipline",
+     "leader",
+     "father",
+     "rules",
+     "responsibility",
+     "control",
+     "protection"
+    ]
+   },
    "image": "emperor.jpg",
    "source": {
     "waite_upright": "Stability, power, protection, realization; a great person; aid, reason, conviction; also authority and will.",
@@ -388,6 +501,28 @@
      "learning",
      "mentorship",
      "convention"
+    ]
+   },
+   "search": {
+    "ru": [
+     "учитель",
+     "брак",
+     "консультация",
+     "духовный путь",
+     "следовать правилам",
+     "система",
+     "старшие",
+     "ритуал"
+    ],
+    "en": [
+     "teacher",
+     "mentor",
+     "marriage",
+     "guidance",
+     "spiritual path",
+     "institution",
+     "rules",
+     "ceremony"
     ]
    },
    "image": "hierophant.jpg",
@@ -463,6 +598,28 @@
      "harmony"
     ]
    },
+   "search": {
+    "ru": [
+     "любовь",
+     "отношения",
+     "партнёр",
+     "решение сердцем",
+     "притяжение",
+     "что важнее",
+     "свидание",
+     "верность"
+    ],
+    "en": [
+     "love",
+     "relationship",
+     "partner",
+     "following your heart",
+     "attraction",
+     "date",
+     "commitment",
+     "romance"
+    ]
+   },
    "image": "lovers.jpg",
    "source": {
     "waite_upright": "Attraction, love, beauty, trials overcome.",
@@ -534,6 +691,28 @@
      "control",
      "momentum",
      "determination"
+    ]
+   },
+   "search": {
+    "ru": [
+     "движение вперёд",
+     "поездка",
+     "добиться цели",
+     "воля к победе",
+     "преодоление",
+     "дисциплина",
+     "рывок",
+     "целеустремлённость"
+    ],
+    "en": [
+     "moving forward",
+     "travel",
+     "achieving a goal",
+     "overcoming",
+     "discipline",
+     "self-discipline",
+     "winning",
+     "forward motion"
     ]
    },
    "image": "chariot.jpg",
@@ -609,6 +788,30 @@
      "courage"
     ]
    },
+   "search": {
+    "ru": [
+     "справиться со страхом",
+     "самообладание",
+     "укротить гнев",
+     "выдержка",
+     "принять себя",
+     "доброта",
+     "спокойная сила",
+     "сдержать порыв",
+     "здоровье"
+    ],
+    "en": [
+     "facing fear",
+     "self-control",
+     "taming anger",
+     "compassion",
+     "resilience",
+     "calm strength",
+     "kindness",
+     "self-mastery",
+     "health"
+    ]
+   },
    "image": "strength.jpg",
    "source": {
     "waite_upright": "Power, energy, action, courage, magnanimity; also complete success and honours.",
@@ -680,6 +883,28 @@
      "solitude",
      "wisdom",
      "inner guidance"
+    ]
+   },
+   "search": {
+    "ru": [
+     "одиночество",
+     "пауза",
+     "самоанализ",
+     "наставник",
+     "отойти от суеты",
+     "тишина",
+     "найти ответ внутри",
+     "побыть одному"
+    ],
+    "en": [
+     "retreat",
+     "pause",
+     "self-reflection",
+     "mentor",
+     "stepping back",
+     "introspection",
+     "quiet time",
+     "seeking answers"
     ]
    },
    "image": "hermit.jpg",
@@ -755,6 +980,28 @@
      "turning point"
     ]
    },
+   "search": {
+    "ru": [
+     "удача",
+     "полоса везения",
+     "случай",
+     "всё меняется",
+     "точка поворота",
+     "шанс",
+     "везение",
+     "неожиданный поворот"
+    ],
+    "en": [
+     "luck",
+     "fate",
+     "good fortune",
+     "chance",
+     "things shifting",
+     "twist of fate",
+     "opportunity",
+     "ups and downs"
+    ]
+   },
    "image": "wheel-of-fortune.jpg",
    "source": {
     "waite_upright": "Destiny, fortune, success, elevation, luck, felicity.",
@@ -826,6 +1073,28 @@
      "truth",
      "cause and effect",
      "balance"
+    ]
+   },
+   "search": {
+    "ru": [
+     "суд",
+     "договор",
+     "ответственность за выбор",
+     "честность",
+     "документы",
+     "последствия",
+     "равновесие",
+     "принять решение"
+    ],
+    "en": [
+     "court",
+     "contract",
+     "accountability",
+     "honesty",
+     "paperwork",
+     "consequences",
+     "fairness",
+     "legal matters"
     ]
    },
    "image": "justice.jpg",
@@ -901,6 +1170,29 @@
      "letting go"
     ]
    },
+   "search": {
+    "ru": [
+     "застой",
+     "посмотреть иначе",
+     "ожидание",
+     "отпустить контроль",
+     "жертва ради цели",
+     "тупик",
+     "смена угла зрения",
+     "подвешенность",
+     "смириться"
+    ],
+    "en": [
+     "standstill",
+     "waiting",
+     "letting go of control",
+     "sacrifice",
+     "limbo",
+     "seeing differently",
+     "delay",
+     "acceptance"
+    ]
+   },
    "image": "hanged-man.jpg",
    "source": {
     "waite_upright": "Wisdom, circumspection, discernment, trials, sacrifice, intuition, divination, prophecy.",
@@ -972,6 +1264,28 @@
      "transformation",
      "transition",
      "renewal"
+    ]
+   },
+   "search": {
+    "ru": [
+     "перемены",
+     "конец этапа",
+     "отпустить прошлое",
+     "новая жизнь",
+     "необратимость",
+     "расставание",
+     "точка невозврата",
+     "закрыть главу"
+    ],
+    "en": [
+     "ending",
+     "change",
+     "end of a chapter",
+     "letting go of the past",
+     "new life",
+     "irreversible",
+     "closure",
+     "rebirth"
     ]
    },
    "image": "death.jpg",
@@ -1047,6 +1361,30 @@
      "blending"
     ]
    },
+   "search": {
+    "ru": [
+     "золотая середина",
+     "примирение",
+     "гармония",
+     "постепенность",
+     "компромисс",
+     "спокойствие",
+     "смешение",
+     "исцеление",
+     "здоровье"
+    ],
+    "en": [
+     "middle ground",
+     "reconciliation",
+     "harmony",
+     "gradual progress",
+     "compromise",
+     "healing",
+     "calm",
+     "finding balance",
+     "health"
+    ]
+   },
    "image": "temperance.jpg",
    "source": {
     "waite_upright": "Economy, moderation, frugality, management, accommodation.",
@@ -1118,6 +1456,28 @@
      "addiction",
      "shadow self",
      "temptation"
+    ]
+   },
+   "search": {
+    "ru": [
+     "токсичные отношения",
+     "вредные привычки",
+     "страсть",
+     "контроль",
+     "материальное",
+     "освобождение",
+     "признать проблему",
+     "созависимость"
+    ],
+    "en": [
+     "toxic relationship",
+     "bad habits",
+     "obsession",
+     "control",
+     "breaking free",
+     "codependency",
+     "materialism",
+     "unhealthy patterns"
     ]
    },
    "image": "devil.jpg",
@@ -1193,6 +1553,28 @@
      "liberation"
     ]
    },
+   "search": {
+    "ru": [
+     "крах",
+     "разрушение планов",
+     "шок",
+     "увольнение",
+     "разрыв",
+     "правда вскрылась",
+     "кризис",
+     "давно назревало"
+    ],
+    "en": [
+     "collapse",
+     "shattered plans",
+     "shock",
+     "being fired",
+     "breakup",
+     "truth revealed",
+     "crisis",
+     "unexpected news"
+    ]
+   },
    "image": "tower.jpg",
    "source": {
     "waite_upright": "Misery, distress, indigence, adversity, calamity, disgrace, deception, ruin. It is a card in particular of unforeseen catastrophe.",
@@ -1264,6 +1646,30 @@
      "inspiration",
      "healing",
      "faith"
+    ]
+   },
+   "search": {
+    "ru": [
+     "вера в лучшее",
+     "исцеление души",
+     "спокойствие после бури",
+     "мечта",
+     "свет впереди",
+     "обновление",
+     "доверие",
+     "передышка",
+     "здоровье"
+    ],
+    "en": [
+     "calm after the storm",
+     "dream",
+     "light ahead",
+     "renewal",
+     "peace",
+     "recovery",
+     "optimism",
+     "clarity after chaos",
+     "health"
     ]
    },
    "image": "star.jpg",
@@ -1339,6 +1745,28 @@
      "uncertainty"
     ]
    },
+   "search": {
+    "ru": [
+     "тревога",
+     "обман",
+     "сны",
+     "интуиция",
+     "сомнения",
+     "не вижу правды",
+     "туман",
+     "неопределённость"
+    ],
+    "en": [
+     "fears",
+     "anxiety",
+     "deception",
+     "illusions",
+     "dreams",
+     "intuition",
+     "doubt",
+     "fog"
+    ]
+   },
    "image": "moon.jpg",
    "source": {
     "waite_upright": "Hidden enemies, danger, calumny, darkness, terror, deception, occult forces, error.",
@@ -1410,6 +1838,30 @@
      "success",
      "clarity",
      "vitality"
+    ]
+   },
+   "search": {
+    "ru": [
+     "счастье",
+     "дети",
+     "лето",
+     "энергия",
+     "всё складывается",
+     "оптимизм",
+     "признание",
+     "тепло",
+     "здоровье"
+    ],
+    "en": [
+     "happiness",
+     "children",
+     "summer",
+     "energy",
+     "things working out",
+     "optimism",
+     "warmth",
+     "good times",
+     "health"
     ]
    },
    "image": "sun.jpg",
@@ -1485,6 +1937,28 @@
      "second chance"
     ]
    },
+   "search": {
+    "ru": [
+     "подвести итоги",
+     "простить",
+     "вернуться к прошлому",
+     "честный взгляд",
+     "решение о будущем",
+     "зов",
+     "итоги",
+     "переосмысление"
+    ],
+    "en": [
+     "reassessment",
+     "taking stock",
+     "forgiveness",
+     "revisiting the past",
+     "honest look",
+     "wake-up call",
+     "life review",
+     "decision about the future"
+    ]
+   },
    "image": "judgement.jpg",
    "source": {
     "waite_upright": "Change of position, renewal, outcome. Another account specifies total loss though lawsuit.",
@@ -1558,6 +2032,28 @@
      "travel"
     ]
    },
+   "search": {
+    "ru": [
+     "завершение",
+     "достижение цели",
+     "диплом",
+     "итог",
+     "признание",
+     "круг замкнулся",
+     "свобода",
+     "новый уровень"
+    ],
+    "en": [
+     "achieving a goal",
+     "graduation",
+     "result",
+     "recognition",
+     "coming full circle",
+     "milestone",
+     "completion of a cycle",
+     "new level"
+    ]
+   },
    "image": "world.jpg",
    "source": {
     "waite_upright": "Assured success, recompense, voyage, route, emigration, flight, change of place.",
@@ -1618,8 +2114,43 @@
     "en": "Ace of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "искра",
+     "начинание",
+     "вдохновение",
+     "рост"
+    ],
+    "en": [
+     "spark",
+     "new venture",
+     "inspiration",
+     "growth"
+    ]
+   },
+   "search": {
+    "ru": [
+     "новый проект",
+     "старт",
+     "идея",
+     "творческий импульс",
+     "энтузиазм",
+     "потенциал",
+     "первый шаг",
+     "запуск дела",
+     "затея",
+     "прилив сил"
+    ],
+    "en": [
+     "new project",
+     "start",
+     "idea",
+     "creative impulse",
+     "enthusiasm",
+     "potential",
+     "first step",
+     "launching something",
+     "drive"
+    ]
    },
    "image": "w01.jpg",
    "source": {
@@ -1681,8 +2212,40 @@
     "en": "Two of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "планы",
+     "выбор пути",
+     "перспектива",
+     "решение"
+    ],
+    "en": [
+     "planning",
+     "choosing a path",
+     "perspective",
+     "decision"
+    ]
+   },
+   "search": {
+    "ru": [
+     "планирование",
+     "дальние планы",
+     "партнёрство",
+     "расширение",
+     "амбиции",
+     "взгляд вперёд",
+     "обдумывание",
+     "развилка"
+    ],
+    "en": [
+     "long-term plans",
+     "partnership",
+     "expansion",
+     "ambition",
+     "looking ahead",
+     "crossroads",
+     "strategy",
+     "options"
+    ]
    },
    "image": "w02.jpg",
    "source": {
@@ -1744,8 +2307,40 @@
     "en": "Three of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "расширение",
+     "ожидание",
+     "горизонты",
+     "дальние связи"
+    ],
+    "en": [
+     "expansion",
+     "waiting",
+     "horizons",
+     "far connections"
+    ]
+   },
+   "search": {
+    "ru": [
+     "дальняя дорога",
+     "торговля",
+     "ожидание результата",
+     "зарубежные связи",
+     "рост дела",
+     "терпение",
+     "планы сбываются",
+     "выход на новый уровень"
+    ],
+    "en": [
+     "long journey",
+     "trade",
+     "waiting for results",
+     "overseas",
+     "business growth",
+     "patience",
+     "next level",
+     "future prospects"
+    ]
    },
    "image": "w03.jpg",
    "source": {
@@ -1807,8 +2402,40 @@
     "en": "Four of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "праздник",
+     "дом",
+     "стабильность",
+     "веха"
+    ],
+    "en": [
+     "celebration",
+     "home",
+     "stability",
+     "milestone"
+    ]
+   },
+   "search": {
+    "ru": [
+     "свадьба",
+     "новоселье",
+     "семья",
+     "встреча",
+     "торжество",
+     "уют",
+     "отдых с близкими",
+     "веселье"
+    ],
+    "en": [
+     "wedding",
+     "housewarming",
+     "family",
+     "reunion",
+     "comfort",
+     "party",
+     "harmony at home",
+     "safe haven"
+    ]
    },
    "image": "w04.jpg",
    "source": {
@@ -1870,8 +2497,40 @@
     "en": "Five of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "соперничество",
+     "спор",
+     "задор",
+     "разногласия"
+    ],
+    "en": [
+     "competition",
+     "argument",
+     "liveliness",
+     "disagreement"
+    ]
+   },
+   "search": {
+    "ru": [
+     "конкуренция",
+     "ссора",
+     "конфликт",
+     "соревнование",
+     "столкновение мнений",
+     "борьба за место",
+     "суета",
+     "отстоять себя"
+    ],
+    "en": [
+     "conflict",
+     "rivalry",
+     "clash",
+     "tension",
+     "standing your ground",
+     "friction",
+     "quarrel",
+     "sparring"
+    ]
    },
    "image": "w05.jpg",
    "source": {
@@ -1933,8 +2592,40 @@
     "en": "Six of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "победа",
+     "признание",
+     "награда",
+     "успех"
+    ],
+    "en": [
+     "victory",
+     "recognition",
+     "reward",
+     "success"
+    ]
+   },
+   "search": {
+    "ru": [
+     "повышение",
+     "хорошие новости",
+     "триумф",
+     "гордость",
+     "результат",
+     "заслуженная похвала",
+     "слава",
+     "выйти победителем"
+    ],
+    "en": [
+     "award",
+     "promotion",
+     "good news",
+     "triumph",
+     "pride",
+     "achievement",
+     "acclaim",
+     "public success"
+    ]
    },
    "image": "w06.jpg",
    "source": {
@@ -1996,8 +2687,40 @@
     "en": "Seven of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "оборона",
+     "стойкость",
+     "отстоять своё",
+     "вызов"
+    ],
+    "en": [
+     "defence",
+     "perseverance",
+     "standing ground",
+     "challenge"
+    ]
+   },
+   "search": {
+    "ru": [
+     "защита позиции",
+     "отстоять границы",
+     "давление",
+     "критика",
+     "не сдаваться",
+     "держать оборону",
+     "спор",
+     "меня не понимают"
+    ],
+    "en": [
+     "defending your position",
+     "boundaries",
+     "pressure",
+     "criticism",
+     "standing firm",
+     "pushback",
+     "holding your ground",
+     "self-defence"
+    ]
    },
    "image": "w07.jpg",
    "source": {
@@ -2059,8 +2782,40 @@
     "en": "Eight of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "скорость",
+     "новости",
+     "движение",
+     "развязка"
+    ],
+    "en": [
+     "speed",
+     "news",
+     "momentum",
+     "swift progress"
+    ]
+   },
+   "search": {
+    "ru": [
+     "сообщение",
+     "быстрые перемены",
+     "поездка",
+     "ускорение",
+     "звонок",
+     "письмо",
+     "всё завертелось",
+     "срочность"
+    ],
+    "en": [
+     "message",
+     "fast changes",
+     "travel",
+     "phone call",
+     "quick progress",
+     "things moving",
+     "urgency",
+     "acceleration"
+    ]
    },
    "image": "w08.jpg",
    "source": {
@@ -2122,8 +2877,41 @@
     "en": "Nine of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "настороженность",
+     "выдержка",
+     "усталость",
+     "последний рубеж"
+    ],
+    "en": [
+     "wariness",
+     "resilience",
+     "fatigue",
+     "last stand"
+    ]
+   },
+   "search": {
+    "ru": [
+     "недоверие",
+     "почти дошёл",
+     "вымотанность",
+     "опыт потерь",
+     "держаться",
+     "не опускать руки",
+     "истощение",
+     "осторожность"
+    ],
+    "en": [
+     "exhaustion",
+     "distrust",
+     "guarded",
+     "almost there",
+     "worn out",
+     "keeping going",
+     "caution",
+     "endurance",
+     "tiredness"
+    ]
    },
    "image": "w09.jpg",
    "source": {
@@ -2185,8 +2973,40 @@
     "en": "Ten of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "ноша",
+     "перегрузка",
+     "ответственность",
+     "финальный рывок"
+    ],
+    "en": [
+     "burden",
+     "overload",
+     "responsibility",
+     "final push"
+    ]
+   },
+   "search": {
+    "ru": [
+     "взвалил на себя",
+     "много работы",
+     "выгорание",
+     "тяжесть",
+     "не могу делегировать",
+     "устал тянуть всё",
+     "переработки",
+     "непосильная нагрузка"
+    ],
+    "en": [
+     "taking on too much",
+     "too much work",
+     "burnout",
+     "heavy load",
+     "cannot delegate",
+     "overwork",
+     "carrying everything",
+     "exhaustion"
+    ]
    },
    "image": "w10.jpg",
    "source": {
@@ -2248,8 +3068,40 @@
     "en": "Page of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "любопытство",
+     "весть",
+     "проба сил",
+     "энтузиазм"
+    ],
+    "en": [
+     "curiosity",
+     "message",
+     "trying out",
+     "enthusiasm"
+    ]
+   },
+   "search": {
+    "ru": [
+     "новое увлечение",
+     "первые шаги",
+     "ученичество",
+     "энтузиазм новичка",
+     "азарт",
+     "начать учиться",
+     "хочу попробовать",
+     "новичок"
+    ],
+    "en": [
+     "new hobby",
+     "first steps",
+     "apprenticeship",
+     "beginner enthusiasm",
+     "trying something new",
+     "eagerness",
+     "novice",
+     "exploring"
+    ]
    },
    "image": "w11.jpg",
    "source": {
@@ -2311,8 +3163,40 @@
     "en": "Knight of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "порыв",
+     "переезд",
+     "авантюра",
+     "страсть"
+    ],
+    "en": [
+     "impulse",
+     "relocation",
+     "adventure",
+     "passion"
+    ]
+   },
+   "search": {
+    "ru": [
+     "спешка",
+     "смена обстановки",
+     "импульсивность",
+     "поездка",
+     "риск",
+     "сорваться с места",
+     "приключение",
+     "срочный отъезд"
+    ],
+    "en": [
+     "moving house",
+     "haste",
+     "change of scene",
+     "impulsive decision",
+     "travel",
+     "risk",
+     "restlessness",
+     "sudden departure"
+    ]
    },
    "image": "w12.jpg",
    "source": {
@@ -2374,8 +3258,40 @@
     "en": "Queen of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "харизма",
+     "уверенность",
+     "тепло",
+     "независимость"
+    ],
+    "en": [
+     "charisma",
+     "confidence",
+     "warmth",
+     "independence"
+    ]
+   },
+   "search": {
+    "ru": [
+     "уверенность в себе",
+     "обаяние",
+     "лидерство",
+     "самопрезентация",
+     "творческая энергия",
+     "притяжение",
+     "яркость",
+     "нравиться людям"
+    ],
+    "en": [
+     "self-confidence",
+     "charm",
+     "leadership",
+     "self-presentation",
+     "creative energy",
+     "magnetism",
+     "boldness",
+     "presence"
+    ]
    },
    "image": "w13.jpg",
    "source": {
@@ -2437,8 +3353,41 @@
     "en": "King of Wands"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "воля",
+     "лидерство",
+     "предприимчивость",
+     "видение"
+    ],
+    "en": [
+     "willpower",
+     "leadership",
+     "enterprise",
+     "vision"
+    ]
+   },
+   "search": {
+    "ru": [
+     "лидер",
+     "предприниматель",
+     "дело своей жизни",
+     "руководство",
+     "смелые решения",
+     "авторитет",
+     "начальник",
+     "масштаб",
+     "вести за собой"
+    ],
+    "en": [
+     "leader",
+     "entrepreneur",
+     "life's work",
+     "management",
+     "bold decisions",
+     "authority",
+     "boss",
+     "big picture"
+    ]
    },
    "image": "w14.jpg",
    "source": {
@@ -2500,8 +3449,41 @@
     "en": "Ace of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "новое чувство",
+     "открытое сердце",
+     "нежность",
+     "источник"
+    ],
+    "en": [
+     "new feeling",
+     "open heart",
+     "tenderness",
+     "wellspring"
+    ]
+   },
+   "search": {
+    "ru": [
+     "влюблённость",
+     "начало отношений",
+     "любовь",
+     "признание в чувствах",
+     "эмоциональный подъём",
+     "открыться",
+     "доверие",
+     "симпатия",
+     "новая привязанность"
+    ],
+    "en": [
+     "falling in love",
+     "new relationship",
+     "love",
+     "confession of feelings",
+     "emotional uplift",
+     "opening up",
+     "trust",
+     "affection"
+    ]
    },
    "image": "c01.jpg",
    "source": {
@@ -2563,8 +3545,40 @@
     "en": "Two of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "союз",
+     "взаимность",
+     "партнёрство",
+     "притяжение"
+    ],
+    "en": [
+     "union",
+     "mutual feelings",
+     "partnership",
+     "attraction"
+    ]
+   },
+   "search": {
+    "ru": [
+     "любовь",
+     "отношения",
+     "пара",
+     "свидание",
+     "помириться",
+     "симпатия",
+     "сделать предложение",
+     "влюблённость"
+    ],
+    "en": [
+     "love",
+     "relationship",
+     "couple",
+     "date",
+     "making up",
+     "falling in love",
+     "reconciliation",
+     "commitment"
+    ]
    },
    "image": "c02.jpg",
    "source": {
@@ -2626,8 +3640,41 @@
     "en": "Three of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "дружба",
+     "общая радость",
+     "поддержка",
+     "торжество"
+    ],
+    "en": [
+     "friendship",
+     "shared joy",
+     "support",
+     "celebration"
+    ]
+   },
+   "search": {
+    "ru": [
+     "подруги",
+     "компания",
+     "праздник",
+     "поддержка близких",
+     "вечеринка",
+     "радость вместе",
+     "общий успех",
+     "встреча друзей",
+     "чувство плеча"
+    ],
+    "en": [
+     "friends",
+     "good company",
+     "party",
+     "reunion",
+     "gathering",
+     "shared success",
+     "community",
+     "joy together"
+    ]
    },
    "image": "c03.jpg",
    "source": {
@@ -2689,8 +3736,40 @@
     "en": "Four of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "апатия",
+     "пресыщение",
+     "скука",
+     "упущенное"
+    ],
+    "en": [
+     "apathy",
+     "satiety",
+     "boredom",
+     "missed offer"
+    ]
+   },
+   "search": {
+    "ru": [
+     "неудовлетворённость",
+     "всё надоело",
+     "упустить возможность",
+     "хандра",
+     "застой в чувствах",
+     "равнодушие",
+     "не вижу хорошего",
+     "отказ от предложения"
+    ],
+    "en": [
+     "dissatisfaction",
+     "feeling stuck",
+     "missed opportunity",
+     "low mood",
+     "indifference",
+     "taking things for granted",
+     "disengagement",
+     "withdrawal"
+    ]
    },
    "image": "c04.jpg",
    "source": {
@@ -2752,8 +3831,40 @@
     "en": "Five of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "потеря",
+     "сожаление",
+     "печаль",
+     "опора рядом"
+    ],
+    "en": [
+     "loss",
+     "regret",
+     "sorrow",
+     "support remains"
+    ]
+   },
+   "search": {
+    "ru": [
+     "горе",
+     "расставание",
+     "разочарование",
+     "сожалеть о прошлом",
+     "утрата",
+     "не замечать хорошего",
+     "пережить боль",
+     "тоска"
+    ],
+    "en": [
+     "grief",
+     "breakup",
+     "disappointment",
+     "sadness",
+     "dwelling on the past",
+     "healing after loss",
+     "mourning",
+     "focusing on what is lost"
+    ]
    },
    "image": "c05.jpg",
    "source": {
@@ -2815,8 +3926,40 @@
     "en": "Six of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "воспоминания",
+     "детство",
+     "ностальгия",
+     "простота"
+    ],
+    "en": [
+     "memories",
+     "childhood",
+     "nostalgia",
+     "simplicity"
+    ]
+   },
+   "search": {
+    "ru": [
+     "прошлое",
+     "старый друг",
+     "вернуться домой",
+     "тёплые воспоминания",
+     "невинность",
+     "встреча из прошлого",
+     "простые радости",
+     "родной дом"
+    ],
+    "en": [
+     "the past",
+     "old friend",
+     "returning home",
+     "innocence",
+     "simple joys",
+     "reunion",
+     "sentimentality",
+     "revisiting the past"
+    ]
    },
    "image": "c06.jpg",
    "source": {
@@ -2878,8 +4021,40 @@
     "en": "Seven of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "иллюзии",
+     "множество путей",
+     "мечты",
+     "туман"
+    ],
+    "en": [
+     "illusions",
+     "many options",
+     "dreams",
+     "haze"
+    ]
+   },
+   "search": {
+    "ru": [
+     "много вариантов",
+     "фантазии",
+     "выбор",
+     "не могу решить",
+     "туман в голове",
+     "соблазн",
+     "воздушные замки",
+     "размытые планы"
+    ],
+    "en": [
+     "too many options",
+     "fantasy",
+     "choice",
+     "indecision",
+     "confusion",
+     "temptation",
+     "wishful thinking",
+     "scattered focus"
+    ]
    },
    "image": "c07.jpg",
    "source": {
@@ -2941,8 +4116,40 @@
     "en": "Eight of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "уход",
+     "оставить позади",
+     "поиск смысла",
+     "перерасти"
+    ],
+    "en": [
+     "walking away",
+     "leaving behind",
+     "search for meaning",
+     "outgrowing"
+    ]
+   },
+   "search": {
+    "ru": [
+     "уйти",
+     "разрыв",
+     "уволиться",
+     "закончить отношения",
+     "разочарование",
+     "отпустить",
+     "идти дальше",
+     "сменить путь"
+    ],
+    "en": [
+     "moving on",
+     "searching for meaning",
+     "quitting",
+     "ending a relationship",
+     "letting go",
+     "leaving a job",
+     "seeking more",
+     "turning the page"
+    ]
    },
    "image": "c08.jpg",
    "source": {
@@ -3004,8 +4211,40 @@
     "en": "Nine of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "желание сбылось",
+     "довольство",
+     "благополучие",
+     "удовольствие"
+    ],
+    "en": [
+     "wish fulfilled",
+     "contentment",
+     "wellbeing",
+     "pleasure"
+    ]
+   },
+   "search": {
+    "ru": [
+     "наслаждение",
+     "исполнение мечты",
+     "самодостаточность",
+     "комфорт",
+     "радость",
+     "гордость собой",
+     "удовлетворение",
+     "маленькая победа"
+    ],
+    "en": [
+     "enjoyment",
+     "dream come true",
+     "satisfaction",
+     "comfort",
+     "getting what you wanted",
+     "self-indulgence",
+     "success",
+     "feeling good"
+    ]
    },
    "image": "c09.jpg",
    "source": {
@@ -3067,8 +4306,40 @@
     "en": "Ten of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "гармония",
+     "семья",
+     "любовь",
+     "полнота"
+    ],
+    "en": [
+     "harmony",
+     "family",
+     "love",
+     "fulfilment"
+    ]
+   },
+   "search": {
+    "ru": [
+     "счастье",
+     "гармония в доме",
+     "дети",
+     "брак",
+     "близкие",
+     "мир в семье",
+     "полнота жизни",
+     "благодарность"
+    ],
+    "en": [
+     "happiness",
+     "harmony at home",
+     "children",
+     "marriage",
+     "loved ones",
+     "domestic bliss",
+     "togetherness",
+     "lasting happiness"
+    ]
    },
    "image": "c10.jpg",
    "source": {
@@ -3130,8 +4401,40 @@
     "en": "Page of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "чувствительность",
+     "нежное начало",
+     "творческая идея",
+     "весть"
+    ],
+    "en": [
+     "sensitivity",
+     "gentle beginning",
+     "creative idea",
+     "message"
+    ]
+   },
+   "search": {
+    "ru": [
+     "симпатия",
+     "признание",
+     "робость",
+     "первое чувство",
+     "приглашение",
+     "мечтательность",
+     "весточка",
+     "открыться чувствам"
+    ],
+    "en": [
+     "crush",
+     "confession",
+     "shyness",
+     "first feelings",
+     "invitation",
+     "daydreaming",
+     "new feelings",
+     "gentle news"
+    ]
    },
    "image": "c11.jpg",
    "source": {
@@ -3193,8 +4496,40 @@
     "en": "Knight of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "предложение",
+     "ухаживание",
+     "романтика",
+     "идеал"
+    ],
+    "en": [
+     "proposal",
+     "courtship",
+     "romance",
+     "ideal"
+    ]
+   },
+   "search": {
+    "ru": [
+     "признание в любви",
+     "приглашение",
+     "идеализация",
+     "свидание",
+     "обаяние",
+     "шаг навстречу",
+     "романтичный человек",
+     "романтичный жест"
+    ],
+    "en": [
+     "declaration of love",
+     "invitation",
+     "idealising",
+     "date",
+     "making a move",
+     "romantic gesture",
+     "offer",
+     "charm"
+    ]
    },
    "image": "c12.jpg",
    "source": {
@@ -3256,8 +4591,40 @@
     "en": "Queen of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "эмпатия",
+     "забота",
+     "интуиция",
+     "глубина чувств"
+    ],
+    "en": [
+     "empathy",
+     "care",
+     "intuition",
+     "emotional depth"
+    ]
+   },
+   "search": {
+    "ru": [
+     "чуткость",
+     "поддержать",
+     "материнская теплота",
+     "мягкость",
+     "понимание",
+     "сопереживание",
+     "принятие",
+     "душевность"
+    ],
+    "en": [
+     "sensitivity",
+     "support",
+     "nurturing warmth",
+     "understanding",
+     "compassion",
+     "listening",
+     "acceptance",
+     "emotional support"
+    ]
    },
    "image": "c13.jpg",
    "source": {
@@ -3319,8 +4686,40 @@
     "en": "King of Cups"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "зрелость чувств",
+     "самообладание",
+     "доброта",
+     "дипломатия"
+    ],
+    "en": [
+     "emotional maturity",
+     "self-control",
+     "kindness",
+     "diplomacy"
+    ]
+   },
+   "search": {
+    "ru": [
+     "эмоциональная зрелость",
+     "мудрый совет",
+     "спокойствие",
+     "наставник",
+     "уравновешенность",
+     "сдержанность",
+     "принять и понять",
+     "зрелость"
+    ],
+    "en": [
+     "wise counsel",
+     "calm",
+     "balance",
+     "composure",
+     "maturity",
+     "steadiness",
+     "wise support",
+     "level-headed"
+    ]
    },
    "image": "c14.jpg",
    "source": {
@@ -3382,8 +4781,40 @@
     "en": "Ace of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "ясность",
+     "правда",
+     "прорыв",
+     "решение"
+    ],
+    "en": [
+     "clarity",
+     "truth",
+     "breakthrough",
+     "decision"
+    ]
+   },
+   "search": {
+    "ru": [
+     "понять суть",
+     "честный разговор",
+     "острый ум",
+     "новая идея",
+     "момент истины",
+     "назвать вещи своими именами",
+     "истина",
+     "чёткость"
+    ],
+    "en": [
+     "seeing clearly",
+     "honest conversation",
+     "sharp mind",
+     "new idea",
+     "insight",
+     "cutting through",
+     "mental clarity",
+     "the truth comes out"
+    ]
    },
    "image": "s01.jpg",
    "source": {
@@ -3445,8 +4876,40 @@
     "en": "Two of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "тупик выбора",
+     "отрицание",
+     "перемирие",
+     "равновесие"
+    ],
+    "en": [
+     "stalemate",
+     "denial",
+     "truce",
+     "balance"
+    ]
+   },
+   "search": {
+    "ru": [
+     "не могу выбрать",
+     "тупик",
+     "избегание решения",
+     "закрыть глаза на правду",
+     "пауза в конфликте",
+     "сомнения",
+     "не хочу знать",
+     "равновесие сил"
+    ],
+    "en": [
+     "cannot choose",
+     "avoiding a decision",
+     "refusing to see",
+     "hesitation",
+     "standoff",
+     "indecision",
+     "blocked",
+     "weighing options"
+    ]
    },
    "image": "s02.jpg",
    "source": {
@@ -3508,8 +4971,40 @@
     "en": "Three of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "боль",
+     "разрыв",
+     "горькая правда",
+     "обида"
+    ],
+    "en": [
+     "heartache",
+     "breakup",
+     "hard truth",
+     "hurt"
+    ]
+   },
+   "search": {
+    "ru": [
+     "измена",
+     "предательство",
+     "тяжёлые слова",
+     "разбитое сердце",
+     "ссора",
+     "пережить утрату",
+     "сердечная боль",
+     "слёзы"
+    ],
+    "en": [
+     "betrayal",
+     "painful words",
+     "broken heart",
+     "sorrow",
+     "cheating",
+     "grief",
+     "tears",
+     "emotional pain"
+    ]
    },
    "image": "s03.jpg",
    "source": {
@@ -3571,8 +5066,42 @@
     "en": "Four of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "отдых",
+     "пауза",
+     "тишина",
+     "восстановление"
+    ],
+    "en": [
+     "rest",
+     "pause",
+     "quiet",
+     "recovery"
+    ]
+   },
+   "search": {
+    "ru": [
+     "отпуск",
+     "сон",
+     "восстановить силы",
+     "уединение",
+     "передышка",
+     "замедлиться",
+     "восстановиться",
+     "покой",
+     "здоровье"
+    ],
+    "en": [
+     "time off",
+     "sleep",
+     "regaining strength",
+     "retreat",
+     "slowing down",
+     "recuperation",
+     "stillness",
+     "taking a break",
+     "health"
+    ]
    },
    "image": "s04.jpg",
    "source": {
@@ -3634,8 +5163,40 @@
     "en": "Five of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "конфликт",
+     "победа любой ценой",
+     "разлад",
+     "гордыня"
+    ],
+    "en": [
+     "conflict",
+     "winning at any cost",
+     "falling out",
+     "pride"
+    ]
+   },
+   "search": {
+    "ru": [
+     "ссора",
+     "обида",
+     "унижение",
+     "спор без победителя",
+     "проиграть",
+     "испортить отношения",
+     "склока",
+     "нечестная победа"
+    ],
+    "en": [
+     "quarrel",
+     "humiliation",
+     "hollow victory",
+     "defeat",
+     "petty victory",
+     "resentment",
+     "loss of face",
+     "burned bridges"
+    ]
    },
    "image": "s05.jpg",
    "source": {
@@ -3697,8 +5258,40 @@
     "en": "Six of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "переход",
+     "отъезд",
+     "к лучшему",
+     "сопровождение"
+    ],
+    "en": [
+     "transition",
+     "departure",
+     "toward better",
+     "guidance"
+    ]
+   },
+   "search": {
+    "ru": [
+     "переезд",
+     "уехать от проблем",
+     "движение к лучшему",
+     "восстановление после трудного",
+     "дорога",
+     "смена места",
+     "постепенное улучшение",
+     "оставить трудное позади"
+    ],
+    "en": [
+     "relocation",
+     "leaving",
+     "moving away from trouble",
+     "journey",
+     "gradual improvement",
+     "change of place",
+     "recovery",
+     "calmer waters"
+    ]
    },
    "image": "s06.jpg",
    "source": {
@@ -3760,8 +5353,40 @@
     "en": "Seven of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "хитрость",
+     "тайна",
+     "своя стратегия",
+     "увиливание"
+    ],
+    "en": [
+     "cunning",
+     "secrecy",
+     "own strategy",
+     "dodging"
+    ]
+   },
+   "search": {
+    "ru": [
+     "обман",
+     "скрывать",
+     "действовать в одиночку",
+     "увильнуть",
+     "ложь",
+     "стратегия",
+     "недоверие",
+     "взять чужое"
+    ],
+    "en": [
+     "deception",
+     "hiding something",
+     "going it alone",
+     "lies",
+     "strategy",
+     "secret plans",
+     "avoiding confrontation",
+     "trickery"
+    ]
    },
    "image": "s07.jpg",
    "source": {
@@ -3823,8 +5448,40 @@
     "en": "Eight of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "ловушка в голове",
+     "бессилие",
+     "ограничения",
+     "страх"
+    ],
+    "en": [
+     "mental trap",
+     "powerlessness",
+     "restriction",
+     "fear"
+    ]
+   },
+   "search": {
+    "ru": [
+     "чувство ловушки",
+     "самоограничение",
+     "не вижу выхода",
+     "зависимость от обстоятельств",
+     "скованность",
+     "тревога",
+     "жертва обстоятельств",
+     "разрешить себе выйти"
+    ],
+    "en": [
+     "feeling trapped",
+     "self-limitation",
+     "no way out",
+     "victim mindset",
+     "anxiety",
+     "stuck",
+     "helplessness",
+     "limiting beliefs"
+    ]
    },
    "image": "s08.jpg",
    "source": {
@@ -3886,8 +5543,40 @@
     "en": "Nine of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "тревога",
+     "ночные мысли",
+     "самоедство",
+     "страх"
+    ],
+    "en": [
+     "anxiety",
+     "night thoughts",
+     "self-blame",
+     "fear"
+    ]
+   },
+   "search": {
+    "ru": [
+     "бессонница",
+     "вина",
+     "отчаяние",
+     "паника",
+     "накрутить себя",
+     "тяжёлые мысли",
+     "не спится",
+     "переживания"
+    ],
+    "en": [
+     "sleepless nights",
+     "racing thoughts",
+     "guilt",
+     "despair",
+     "overthinking",
+     "worry",
+     "nightmares",
+     "mental anguish"
+    ]
    },
    "image": "s09.jpg",
    "source": {
@@ -3949,8 +5638,40 @@
     "en": "Ten of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "конец",
+     "дно",
+     "предательство",
+     "рассвет впереди"
+    ],
+    "en": [
+     "ending",
+     "rock bottom",
+     "betrayal",
+     "dawn ahead"
+    ]
+   },
+   "search": {
+    "ru": [
+     "крах",
+     "хуже некуда",
+     "финал",
+     "удар в спину",
+     "полное истощение",
+     "начать заново",
+     "рассвет после ночи",
+     "полный крах"
+    ],
+    "en": [
+     "collapse",
+     "the worst is over",
+     "final blow",
+     "exhaustion",
+     "starting over",
+     "hitting bottom",
+     "betrayed",
+     "end of the road"
+    ]
    },
    "image": "s10.jpg",
    "source": {
@@ -4012,8 +5733,40 @@
     "en": "Page of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "наблюдение",
+     "любопытство ума",
+     "новости",
+     "бдительность"
+    ],
+    "en": [
+     "observation",
+     "curious mind",
+     "news",
+     "vigilance"
+    ]
+   },
+   "search": {
+    "ru": [
+     "любопытство",
+     "наблюдать",
+     "учиться",
+     "задавать вопросы",
+     "осторожность",
+     "сплетни",
+     "разузнать",
+     "острый язык"
+    ],
+    "en": [
+     "curiosity",
+     "observing",
+     "studying",
+     "asking questions",
+     "caution",
+     "gossip",
+     "alertness",
+     "watchfulness"
+    ]
    },
    "image": "s11.jpg",
    "source": {
@@ -4075,8 +5828,40 @@
     "en": "Knight of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "напор",
+     "спешка",
+     "прямота",
+     "решительность"
+    ],
+    "en": [
+     "drive",
+     "haste",
+     "bluntness",
+     "decisiveness"
+    ]
+   },
+   "search": {
+    "ru": [
+     "резкость",
+     "действовать без раздумий",
+     "амбиции",
+     "конфликт",
+     "рвануть вперёд",
+     "торопить события",
+     "натиск",
+     "агрессия"
+    ],
+    "en": [
+     "aggression",
+     "acting without thinking",
+     "ambition",
+     "charging ahead",
+     "rushing in",
+     "impatience",
+     "confrontation",
+     "forcefulness"
+    ]
    },
    "image": "s12.jpg",
    "source": {
@@ -4138,8 +5923,40 @@
     "en": "Queen of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "ясный ум",
+     "честность",
+     "границы",
+     "независимость"
+    ],
+    "en": [
+     "clear mind",
+     "honesty",
+     "boundaries",
+     "independence"
+    ]
+   },
+   "search": {
+    "ru": [
+     "трезвый взгляд",
+     "прямота",
+     "опыт потерь",
+     "самостоятельность",
+     "проницательность",
+     "сказать как есть",
+     "здравый смысл",
+     "не питать иллюзий"
+    ],
+    "en": [
+     "sober view",
+     "directness",
+     "perceptiveness",
+     "self-reliance",
+     "clear thinking",
+     "no illusions",
+     "straight talk",
+     "discernment"
+    ]
    },
    "image": "s13.jpg",
    "source": {
@@ -4201,8 +6018,40 @@
     "en": "King of Swords"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "закон",
+     "логика",
+     "авторитет",
+     "беспристрастность"
+    ],
+    "en": [
+     "law",
+     "logic",
+     "authority",
+     "impartiality"
+    ]
+   },
+   "search": {
+    "ru": [
+     "справедливое решение",
+     "суд",
+     "профессионализм",
+     "правила",
+     "экспертное мнение",
+     "холодный разум",
+     "правовые вопросы",
+     "строгость"
+    ],
+    "en": [
+     "fair judgement",
+     "court",
+     "professionalism",
+     "expert opinion",
+     "legal matters",
+     "rules",
+     "objectivity",
+     "command"
+    ]
    },
    "image": "s14.jpg",
    "source": {
@@ -4264,8 +6113,43 @@
     "en": "Ace of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "новая возможность",
+     "основа",
+     "достаток",
+     "предложение"
+    ],
+    "en": [
+     "new opportunity",
+     "foundation",
+     "prosperity",
+     "offer"
+    ]
+   },
+   "search": {
+    "ru": [
+     "деньги",
+     "новая работа",
+     "предложение о работе",
+     "возможность",
+     "начало дела",
+     "доход",
+     "вложение",
+     "первый заработок",
+     "стабильная основа",
+     "шанс"
+    ],
+    "en": [
+     "money",
+     "new job",
+     "job offer",
+     "opportunity",
+     "starting a business",
+     "income",
+     "investment",
+     "first earnings",
+     "solid ground"
+    ]
    },
    "image": "p01.jpg",
    "source": {
@@ -4327,8 +6211,40 @@
     "en": "Two of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "баланс дел",
+     "гибкость",
+     "приоритеты",
+     "жонглирование"
+    ],
+    "en": [
+     "juggling",
+     "flexibility",
+     "priorities",
+     "adaptability"
+    ]
+   },
+   "search": {
+    "ru": [
+     "успеть всё",
+     "баланс работы и дома",
+     "жонглировать делами",
+     "нехватка времени",
+     "подработка",
+     "многозадачность",
+     "свести концы с концами",
+     "перераспределить"
+    ],
+    "en": [
+     "work-life balance",
+     "lack of time",
+     "side job",
+     "multitasking",
+     "making ends meet",
+     "balancing act",
+     "juggling money",
+     "busy schedule"
+    ]
    },
    "image": "p02.jpg",
    "source": {
@@ -4390,8 +6306,40 @@
     "en": "Three of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "мастерство",
+     "команда",
+     "признание труда",
+     "обучение"
+    ],
+    "en": [
+     "craftsmanship",
+     "teamwork",
+     "recognition of work",
+     "learning"
+    ]
+   },
+   "search": {
+    "ru": [
+     "работа в команде",
+     "обучение ремеслу",
+     "проект",
+     "сотрудничество",
+     "экспертиза",
+     "ремонт",
+     "план и исполнение",
+     "расти в профессии"
+    ],
+    "en": [
+     "learning a trade",
+     "project",
+     "collaboration",
+     "expertise",
+     "building",
+     "skilled work",
+     "renovation",
+     "working together"
+    ]
    },
    "image": "p03.jpg",
    "source": {
@@ -4453,8 +6401,40 @@
     "en": "Four of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "удержание",
+     "экономия",
+     "контроль",
+     "страх потерять"
+    ],
+    "en": [
+     "holding on",
+     "saving",
+     "control",
+     "fear of loss"
+    ]
+   },
+   "search": {
+    "ru": [
+     "копить",
+     "контроль над деньгами",
+     "жадность",
+     "накопления",
+     "держаться за своё",
+     "стабильность",
+     "скупость",
+     "не отпускать"
+    ],
+    "en": [
+     "hoarding",
+     "control over money",
+     "greed",
+     "savings",
+     "stability",
+     "frugality",
+     "clinging",
+     "security"
+    ]
    },
    "image": "p04.jpg",
    "source": {
@@ -4516,8 +6496,43 @@
     "en": "Five of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "нужда",
+     "исключённость",
+     "поддержка рядом",
+     "трудная полоса"
+    ],
+    "en": [
+     "hardship",
+     "exclusion",
+     "help nearby",
+     "rough patch"
+    ]
+   },
+   "search": {
+    "ru": [
+     "безденежье",
+     "долги",
+     "потеря работы",
+     "одиночество",
+     "стыд",
+     "просить помощи",
+     "чёрная полоса",
+     "бедность",
+     "поддержка",
+     "восстановление"
+    ],
+    "en": [
+     "hard times",
+     "debt",
+     "job loss",
+     "loneliness",
+     "shame",
+     "asking for help",
+     "poverty",
+     "support",
+     "recovery"
+    ]
    },
    "image": "p05.jpg",
    "source": {
@@ -4579,8 +6594,40 @@
     "en": "Six of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "щедрость",
+     "помощь",
+     "обмен",
+     "равновесие"
+    ],
+    "en": [
+     "generosity",
+     "help",
+     "exchange",
+     "balance"
+    ]
+   },
+   "search": {
+    "ru": [
+     "подарок",
+     "благотворительность",
+     "дать в долг",
+     "принять помощь",
+     "зарплата",
+     "справедливый обмен",
+     "поддержка деньгами",
+     "делиться"
+    ],
+    "en": [
+     "gift",
+     "charity",
+     "lending",
+     "receiving help",
+     "salary",
+     "fair exchange",
+     "sharing",
+     "financial help"
+    ]
    },
    "image": "p06.jpg",
    "source": {
@@ -4642,8 +6689,41 @@
     "en": "Seven of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "терпение",
+     "оценка вложений",
+     "пауза",
+     "урожай зреет"
+    ],
+    "en": [
+     "patience",
+     "assessing investment",
+     "pause",
+     "harvest ripening"
+    ]
+   },
+   "search": {
+    "ru": [
+     "ждать результата",
+     "оценить вложения",
+     "долгий проект",
+     "инвестиции",
+     "стоит ли продолжать",
+     "промежуточный итог",
+     "вложить время",
+     "окупится ли",
+     "урожай"
+    ],
+    "en": [
+     "waiting for results",
+     "long project",
+     "investment",
+     "whether to continue",
+     "taking stock",
+     "harvest",
+     "long-term view",
+     "reviewing progress"
+    ]
    },
    "image": "p07.jpg",
    "source": {
@@ -4705,8 +6785,40 @@
     "en": "Eight of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "ремесло",
+     "усердие",
+     "навык",
+     "шлифовка"
+    ],
+    "en": [
+     "craft",
+     "diligence",
+     "skill",
+     "refining"
+    ]
+   },
+   "search": {
+    "ru": [
+     "учёба",
+     "освоить профессию",
+     "практика",
+     "курсы",
+     "повышать квалификацию",
+     "кропотливая работа",
+     "стажировка",
+     "делать хорошо"
+    ],
+    "en": [
+     "study",
+     "learning a profession",
+     "practice",
+     "courses",
+     "upskilling",
+     "apprenticeship",
+     "mastery through practice",
+     "training"
+    ]
    },
    "image": "p08.jpg",
    "source": {
@@ -4768,8 +6880,40 @@
     "en": "Nine of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "самодостаточность",
+     "заслуженный комфорт",
+     "независимость",
+     "изящество"
+    ],
+    "en": [
+     "self-sufficiency",
+     "earned comfort",
+     "independence",
+     "grace"
+    ]
+   },
+   "search": {
+    "ru": [
+     "свой доход",
+     "наслаждаться результатом",
+     "одиночество по выбору",
+     "финансовая свобода",
+     "достаток",
+     "сама себе опора",
+     "ухоженность",
+     "личное пространство"
+    ],
+    "en": [
+     "own income",
+     "enjoying results",
+     "chosen solitude",
+     "financial freedom",
+     "refinement",
+     "self-made",
+     "personal space",
+     "enjoying independence"
+    ]
    },
    "image": "p09.jpg",
    "source": {
@@ -4831,8 +6975,40 @@
     "en": "Ten of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "наследие",
+     "семья",
+     "достаток",
+     "долгий срок"
+    ],
+    "en": [
+     "legacy",
+     "family",
+     "wealth",
+     "long term"
+    ]
+   },
+   "search": {
+    "ru": [
+     "наследство",
+     "дом",
+     "поколения",
+     "долгосрочная стабильность",
+     "недвижимость",
+     "семейное дело",
+     "надёжность",
+     "обеспеченность"
+    ],
+    "en": [
+     "inheritance",
+     "home",
+     "generations",
+     "long-term stability",
+     "property",
+     "family business",
+     "family wealth",
+     "roots"
+    ]
    },
    "image": "p10.jpg",
    "source": {
@@ -4894,8 +7070,41 @@
     "en": "Page of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "ученичество",
+     "прилежание",
+     "новая цель",
+     "первые деньги"
+    ],
+    "en": [
+     "apprenticeship",
+     "diligence",
+     "new goal",
+     "first earnings"
+    ]
+   },
+   "search": {
+    "ru": [
+     "учёба",
+     "первая работа",
+     "новые знания",
+     "накопить на цель",
+     "стажёр",
+     "практичность",
+     "изучать финансы",
+     "маленький шаг",
+     "поставить цель"
+    ],
+    "en": [
+     "studying",
+     "first job",
+     "new knowledge",
+     "saving for a goal",
+     "intern",
+     "practicality",
+     "setting a goal",
+     "learning finances"
+    ]
    },
    "image": "p11.jpg",
    "source": {
@@ -4957,8 +7166,40 @@
     "en": "Knight of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "надёжность",
+     "методичность",
+     "рутина",
+     "терпеливый труд"
+    ],
+    "en": [
+     "reliability",
+     "method",
+     "routine",
+     "patient work"
+    ]
+   },
+   "search": {
+    "ru": [
+     "стабильная работа",
+     "консерватизм",
+     "довести до конца",
+     "медленно но верно",
+     "обязательность",
+     "однообразие",
+     "постоянство",
+     "трудолюбие"
+    ],
+    "en": [
+     "steady job",
+     "seeing it through",
+     "slow and steady",
+     "dependability",
+     "steadiness",
+     "hard work",
+     "consistency",
+     "duty"
+    ]
    },
    "image": "p12.jpg",
    "source": {
@@ -5020,8 +7261,40 @@
     "en": "Queen of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "практичность",
+     "тепло дома",
+     "ресурсность",
+     "забота"
+    ],
+    "en": [
+     "practicality",
+     "warm home",
+     "resourcefulness",
+     "care"
+    ]
+   },
+   "search": {
+    "ru": [
+     "быт",
+     "забота о доме",
+     "хозяйственность",
+     "совмещать работу и семью",
+     "уют",
+     "забота о себе",
+     "здравый смысл",
+     "домашние дела"
+    ],
+    "en": [
+     "home life",
+     "running a household",
+     "work and family",
+     "comfort",
+     "self-care",
+     "common sense",
+     "nurturing home",
+     "down to earth"
+    ]
    },
    "image": "p13.jpg",
    "source": {
@@ -5083,8 +7356,40 @@
     "en": "King of Pentacles"
    },
    "keywords": {
-    "ru": [],
-    "en": []
+    "ru": [
+     "обеспеченность",
+     "деловая хватка",
+     "надёжность",
+     "щедрость"
+    ],
+    "en": [
+     "wealth",
+     "business acumen",
+     "reliability",
+     "generosity"
+    ]
+   },
+   "search": {
+    "ru": [
+     "деньги",
+     "бизнес",
+     "инвестор",
+     "надёжный партнёр",
+     "богатство",
+     "управлять капиталом",
+     "статус",
+     "покровитель"
+    ],
+    "en": [
+     "money",
+     "business",
+     "investor",
+     "reliable partner",
+     "managing capital",
+     "status",
+     "prosperity",
+     "financial mastery"
+    ]
    },
    "image": "p14.jpg",
    "source": {

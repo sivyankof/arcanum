@@ -13,7 +13,11 @@ export interface TarotCard {
   suit: "wands" | "cups" | "swords" | "pentacles" | null;
   number: number;
   name: Record<Lang, string>;
+  /** Витрина: 4 канонических слова, показываются чипами под названием карты. */
   keywords: Record<Lang, string[]>;
+  /** Только для поиска: житейские формулировки и смыслы перевёрнутой карты (спека 04г).
+   *  В интерфейсе не показывается никогда — иначе «расставание» и «долги» лезут в чипы. */
+  search: Record<Lang, string[]>;
   image: string;
   content: Record<string, CardContentBlock>;
 }

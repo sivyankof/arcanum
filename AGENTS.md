@@ -11,7 +11,7 @@ Read the exact versioned docs at https://docs.expo.dev/versions/v54.0.0/ before 
 - `npm start` — dev-сервер Expo (`npm run android` / `ios` / `web` — сразу на платформу).
 - `npx tsc --noEmit` — проверка типов (strict). Линтера и тестов в проекте нет.
 - Контент-конвейер (Python, запускать из корня):
-  - `python scripts/build_cards.py` — пересобирает `content/cards.json` из исходника tarot-api (ожидает `/tmp/tarot-api/static/card_data.json`).
+  - `python scripts/build_cards.py` — пересобирает `content/cards.json` из исходника tarot-api (ожидает `/tmp/tarot-api/static/card_data.json`). Сливает, а не затирает: `keywords`, `search` и тексты блоков переносятся из существующего файла, из источника обновляются только `name`/`image`/`source`. (До 11.08 скрипт стирал весь написанный контент.)
   - `python scripts/gen_card_images.py` — регенерирует `src/lib/cardImages.ts` после изменения списка карт.
   - `python scripts/content_stats.py` — отчёт о готовности контента по статусам блоков.
 
@@ -19,7 +19,7 @@ Read the exact versioned docs at https://docs.expo.dev/versions/v54.0.0/ before 
 
 **Роутинг** — expo-router v6, file-based: дерево `app/` и есть маршруты.
 
-**Контент** — статические JSON в `content/` (`cards.json`, `spreads.json`, `course.json`), доступ ТОЛЬКО через `src/lib/content.ts` (типизированные экспорты `cards`, `spreads`, `course`, `cardById`, `cardOfDay`). Каждая карта: 8 контент-блоков (general, reversed, love, career, finances, health, day_card, symbolism), каждый блок `{ru, en, status}` со статусным workflow `todo → draft → reviewed → final`. Расклады и модули курса имеют флаг `free` (freemium).
+**Контент** — статические JSON в `content/` (`cards.json`, `spreads.json`, `course.json`), доступ ТОЛЬКО через `src/lib/content.ts` (типизированные экспорты `cards`, `spreads`, `course`, `cardById`, `cardOfDay`). Каждая карта: 8 контент-блоков (general, reversed, love, career, finances, health, day_card, symbolism), каждый блок `{ru, en, status}` со статусным workflow `todo → draft → reviewed → final`. Слов у карты два набора: `keywords` — 4 слова витрины (чипы под названием), `search` — 8–12 скрытых поисковых синонимов, которые нигде не отображаются (правила подбора — `docs/content-guide.md`). Расклады и модули курса имеют флаг `free` (freemium).
 
 **Изображения карт** — Metro требует статических `require`, поэтому `src/lib/cardImages.ts` — автогенерируемая карта id → require. Руками не править, только `python scripts/gen_card_images.py`.
 
