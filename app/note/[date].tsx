@@ -19,7 +19,7 @@ import { cardById } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { formatEntryDate } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
-import { canEditNote, normalizeNote, NOTE_MAX } from '../../src/lib/journal';
+import { canEditEntry, normalizeNote, NOTE_MAX } from '../../src/lib/journal';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -46,7 +46,7 @@ export default function NoteScreen() {
   // после сохранения уход разрешён без вопросов
   const leaving = React.useRef(false);
 
-  const editable = !!entry && canEditNote(date ?? '');
+  const editable = !!entry && canEditEntry(date ?? '');
   const dirty = editable && normalizeNote(text) !== saved;
 
   // перехватываем и кнопку «назад», и свайп-жест закрытия модалки

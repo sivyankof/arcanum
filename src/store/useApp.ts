@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { daysAgoISO, localDateISO } from '../lib/dates';
-import { canEditNote, normalizeNote, type DailyDraw } from '../lib/journal';
+import { canEditEntry, normalizeNote, type DailyDraw } from '../lib/journal';
 import type { ThemeMode } from '../theme/theme';
 
 export type Lang = 'ru' | 'en';
@@ -59,7 +59,7 @@ export const useApp = create<AppState>()(
       // Заметка к карте дня. Правится только сегодняшняя запись (logic-spec §3: в полночь
       // запись фиксируется). Пустой текст удаляет поле, а не пишет пустую строку.
       setNote: (date, text) => {
-        if (!canEditNote(date)) return;
+        if (!canEditEntry(date)) return;
         const note = normalizeNote(text);
         set({
           history: get().history.map((h) => {

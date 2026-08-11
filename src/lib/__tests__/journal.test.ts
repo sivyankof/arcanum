@@ -1,13 +1,17 @@
 import { localDateISO } from '../dates';
 import {
-  canEditNote,
+  canEditEntry,
   cardHistory,
   entriesOfMonth,
+  filterCounts,
+  filterEntries,
   monthSummary,
   monthsWithEntries,
   normalizeNote,
   NOTE_MAX,
+  outcomeStats,
   type DailyDraw,
+  type Outcome,
 } from '../journal';
 
 /** Короткая запись: дата, карта и (необязательно) заметка. */
@@ -16,6 +20,12 @@ const d = (date: string, cardId: string, note?: string): DailyDraw => ({
   cardId,
   reversed: false,
   ...(note ? { note } : {}),
+});
+
+/** Запись с ответом рефлексии. */
+const o = (date: string, cardId: string, outcome: Outcome, note?: string): DailyDraw => ({
+  ...d(date, cardId, note),
+  outcome,
 });
 
 describe('monthsWithEntries', () => {
@@ -115,16 +125,17 @@ describe('cardHistory', () => {
   it('карта не выпадала — пустая история', () => {
     expect(cardHistory(history, 'tower')).toEqual({
       times: 0,
+      resonated: 0,
       lastDate: undefined,
       lastNote: undefined,
     });
   });
 });
 
-describe('canEditNote', () => {
+describe('canEditEntry', () => {
   it('сегодняшнюю запись править можно, вчерашнюю нельзя', () => {
-    expect(canEditNote(localDateISO())).toBe(true);
-    expect(canEditNote('2026-08-10', '2026-08-11')).toBe(false);
+    expect(canEditEntry(localDateISO())).toBe(true);
+    expect(canEditEntry('2026-08-10', '2026-08-11')).toBe(false);
   });
 });
 
@@ -139,5 +150,89 @@ describe('normalizeNote', () => {
 
   it('строка из одних пробелов превращается в пустую', () => {
     expect(normalizeNote('   ')).toBe('');
+  });
+});
+
+describe('outcomeStats', () => {
+  const history = [
+    o('2026-08-11', 'moon', 'yes'),
+    o('2026-08-10', 'sun', 'partly'),
+    o('2026-08-09', 'star', 'no'),
+    o('2026-08-08', 'moon', 'yes'),
+    d('2026-08-07', 'tower'), // без ответа — в знаменатель не идёт
+    o('2026-07-30', 'moon', 'yes'), // чужой месяц
+  ];
+
+  it('считает ответы по видам', () => {
+    const s = outcomeStats(history, '2026-08');
+    expect(s.yes).toBe(2);
+    expect(s.partly).toBe(1);
+    expect(s.no).toBe(1);
+  });
+
+  it('знаменатель — только дни С ОТВЕТОМ, запись без ответа не считается', () => {
+    expect(outcomeStats(history, '2026-08').answered).toBe(4);
+  });
+
+  it('отозвалось = «да» + «отчасти»', () => {
+    expect(outcomeStats(history, '2026-08').resonated).toBe(3);
+  });
+
+  it('соседний месяц не подмешивается', () => {
+    expect(outcomeStats(history, '2026-07').answered).toBe(1);
+  });
+
+  it('месяц без ответов даёт нули', () => {
+    expect(outcomeStats([d('2026-06-01', 'moon')], '2026-06')).toEqual({
+      answered: 0, resonated: 0, yes: 0, partly: 0, no: 0,
+    });
+  });
+});
+
+describe('filterEntries', () => {
+  const entries = [
+    o('2026-08-11', 'moon', 'yes', 'с заметкой'),
+    o('2026-08-10', 'sun', 'partly'),
+    o('2026-08-09', 'star', 'no'),
+    d('2026-08-08', 'tower', 'только заметка'),
+  ];
+
+  it('«все» отдаёт список как есть', () => {
+    expect(filterEntries(entries, 'all')).toHaveLength(4);
+  });
+
+  it('фильтр по ответу', () => {
+    expect(filterEntries(entries, 'yes').map((e) => e.cardId)).toEqual(['moon']);
+    expect(filterEntries(entries, 'partly').map((e) => e.cardId)).toEqual(['sun']);
+    expect(filterEntries(entries, 'no').map((e) => e.cardId)).toEqual(['star']);
+  });
+
+  it('«с заметкой» не зависит от ответа', () => {
+    expect(filterEntries(entries, 'note').map((e) => e.cardId)).toEqual(['moon', 'tower']);
+  });
+});
+
+describe('filterCounts', () => {
+  it('даёт число для каждого чипа', () => {
+    const entries = [
+      o('2026-08-11', 'moon', 'yes', 'с заметкой'),
+      o('2026-08-10', 'sun', 'yes'),
+      d('2026-08-09', 'star'),
+    ];
+    expect(filterCounts(entries)).toEqual({ all: 3, yes: 2, partly: 0, no: 0, note: 1 });
+  });
+});
+
+describe('cardHistory · отзывалась', () => {
+  it('считает «да» и «отчасти», записи без ответа не в счёт', () => {
+    const history = [
+      o('2026-08-11', 'moon', 'yes'),
+      o('2026-08-04', 'moon', 'partly'),
+      o('2026-07-20', 'moon', 'no'),
+      d('2026-07-10', 'moon'),
+    ];
+    const h = cardHistory(history, 'moon');
+    expect(h.times).toBe(4);
+    expect(h.resonated).toBe(2);
   });
 });

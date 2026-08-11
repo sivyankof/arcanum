@@ -6,14 +6,24 @@
  */
 import { localDateISO } from './dates';
 
-/** Запись дня: карта дня, заметка и вечерняя рефлексия (outcome наполнится в задаче 06). */
+/** Ответ вечерней рефлексии (logic-spec §3). */
+export type Outcome = 'yes' | 'partly' | 'no';
+
+/** Знак ответа в интерфейсе: строка дневника, чипы-фильтры, свёрнутая строка рефлексии. */
+export const OUTCOME_MARK: Record<Outcome, string> = { yes: '✓', partly: '≈', no: '✗' };
+
+/** Запись дня: карта дня, заметка и вечерняя рефлексия. */
 export interface DailyDraw {
   date: string; // YYYY-MM-DD
   cardId: string;
   reversed: boolean;
   note?: string;
-  outcome?: 'yes' | 'partly' | 'no'; // вечерняя рефлексия «сбылось?»
+  outcome?: Outcome;
 }
+
+/** Фильтры ленты дневника (product-spec §5). */
+export type JournalFilter = 'all' | Outcome | 'note';
+export const JOURNAL_FILTERS: JournalFilter[] = ['all', 'yes', 'partly', 'no', 'note'];
 
 /** Предел длины заметки (logic-spec §3). */
 export const NOTE_MAX = 500;
@@ -26,15 +36,26 @@ export interface MonthSummary {
   topCount: number;           // сколько раз она выпадала
 }
 
+/** Сводка рефлексий месяца: для строки «Отозвалось X из Y» и полоски распределения. */
+export interface OutcomeStats {
+  answered: number;   // дни С ОТВЕТОМ — знаменатель
+  resonated: number;  // yes + partly
+  yes: number;
+  partly: number;
+  no: number;
+}
+
 /** Личная история одной карты для блока на её странице. */
 export interface CardHistory {
   times: number;
+  resonated: number;
   lastDate?: string;
   lastNote?: string;
 }
 
-/** Правка заметки разрешена только за сегодня: в полночь запись фиксируется (logic-spec §3). */
-export function canEditNote(date: string, today: string = localDateISO()): boolean {
+/** Правка разрешена только за сегодня: в полночь запись фиксируется (logic-spec §3).
+ *  Одно правило и для заметки, и для ответа рефлексии. */
+export function canEditEntry(date: string, today: string = localDateISO()): boolean {
   return date === today;
 }
 
@@ -98,7 +119,36 @@ export function cardHistory(history: DailyDraw[], cardId: string): CardHistory {
   const entries = history.filter((h) => h.cardId === cardId).sort(byDateDesc);
   return {
     times: entries.length,
+    resonated: entries.filter((e) => e.outcome === 'yes' || e.outcome === 'partly').length,
     lastDate: entries[0]?.date,
     lastNote: entries.find((e) => e.note)?.note,
+  };
+}
+
+/** Сводка ответов за месяц. Знаменатель — дни С ОТВЕТОМ, а не все записи месяца:
+ *  «Отозвалось 12 из 18» читается как «из 18 дней, когда вы отвечали» (logic-spec §3). */
+export function outcomeStats(history: DailyDraw[], month: string): OutcomeStats {
+  const entries = entriesOfMonth(history, month);
+  const yes = entries.filter((e) => e.outcome === 'yes').length;
+  const partly = entries.filter((e) => e.outcome === 'partly').length;
+  const no = entries.filter((e) => e.outcome === 'no').length;
+  return { answered: yes + partly + no, resonated: yes + partly, yes, partly, no };
+}
+
+/** Записи, попавшие под фильтр ленты. */
+export function filterEntries(entries: DailyDraw[], filter: JournalFilter): DailyDraw[] {
+  if (filter === 'all') return entries;
+  if (filter === 'note') return entries.filter((e) => !!e.note);
+  return entries.filter((e) => e.outcome === filter);
+}
+
+/** Числа для чипов-фильтров. Чип с нулём не показывается, поэтому счёт нужен заранее. */
+export function filterCounts(entries: DailyDraw[]): Record<JournalFilter, number> {
+  return {
+    all: entries.length,
+    yes: filterEntries(entries, 'yes').length,
+    partly: filterEntries(entries, 'partly').length,
+    no: filterEntries(entries, 'no').length,
+    note: filterEntries(entries, 'note').length,
   };
 }
