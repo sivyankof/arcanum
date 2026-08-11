@@ -73,6 +73,12 @@ export default function ProfileScreen() {
     () => JOURNAL_FILTERS.filter((f) => f === 'all' || counts[f] > 0),
     [counts],
   );
+  // фильтр сбрасывается и когда его чип пропал из ленты: иначе запись, потерявшая заметку
+  // или ответ, оставляет пользователя с пустым списком и без чипа, чтобы вернуться к «Все»
+  React.useEffect(() => {
+    if (!chips.includes(filter)) setFilter('all');
+  }, [chips, filter]);
+
   const shown = React.useMemo(() => filterEntries(entries, filter), [entries, filter]);
 
   // месяцы отсортированы от новых к старым: старший месяц лежит ДАЛЬШЕ по списку
