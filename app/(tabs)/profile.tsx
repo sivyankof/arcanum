@@ -62,11 +62,11 @@ export default function ProfileScreen() {
 
   const header = (
     <>
-      <FadeUp index={0}>
+      <FadeUp index={0} style={st.pad}>
         <Txt style={[st.title, { color: t.head }]}>{tr('profile.title')}</Txt>
       </FadeUp>
 
-      <FadeUp index={1} style={st.stats}>
+      <FadeUp index={1} style={[st.stats, st.pad]}>
         <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
           <Txt style={[st.statNum, { color: t.head }]}>{streak}</Txt>
           <Txt style={[st.statLbl, { color: t.muted }]}>{tr('profile.streak')}</Txt>
@@ -78,7 +78,7 @@ export default function ProfileScreen() {
       </FadeUp>
 
       {month && summary && (
-        <FadeUp index={2}>
+        <FadeUp index={2} style={st.pad}>
           <MonthNav
             month={month}
             lang={lang}
@@ -116,13 +116,16 @@ export default function ProfileScreen() {
           );
           // записи входят вместе с шапкой одним блоком (motion-spec §4); ниже первого экрана
           // анимации нет, иначе строки всплывали бы во время прокрутки
-          return index < BODY_ROWS ? <FadeUp index={BODY_STEP}>{row}</FadeUp> : row;
+          return index < BODY_ROWS ? (
+            <FadeUp index={BODY_STEP} style={st.pad}>{row}</FadeUp>
+          ) : (
+            <View style={st.pad}>{row}</View>
+          );
         }}
         ListHeaderComponent={header}
-        ListEmptyComponent={<EmptyState text={tr('journal.empty')} />}
+        ListEmptyComponent={<View style={st.pad}><EmptyState text={tr('journal.empty')} /></View>}
         contentContainerStyle={{
           paddingTop: insets.top + spacing.xl,
-          paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}
         showsVerticalScrollIndicator={false}
@@ -143,6 +146,9 @@ export default function ProfileScreen() {
 }
 
 const st = StyleSheet.create({
+  // горизонтальный отступ держат сами элементы, а не контейнер списка: иначе лента чипов
+  // обрывается за 24px до края экрана (правило задачи 19, design-system §5)
+  pad: { marginHorizontal: spacing.xl },
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center' },
   stats: { flexDirection: 'row', gap: spacing.m, marginTop: spacing.xl },
   stat: { flex: 1, alignItems: 'center', borderWidth: 1, borderRadius: radius.l, paddingVertical: spacing.l },
