@@ -65,12 +65,16 @@ export function Reflection({
 
   const question = pickPhrase('reflect.question', dateISO, lang, { card: cardName });
 
+  // ответа фактически нет — показываем кнопки, даже если состояние успело переключиться:
+  // на стыке суток стор откажется писать ответ, и свёрнутая строка осталась бы пустой
+  const showButtons = editing || !outcome;
+
   return (
     <View>
       <Txt style={[st.question, { color: t.text }]}>{question}</Txt>
 
       <Animated.View style={fadeStyle}>
-        {editing ? (
+        {showButtons ? (
           <View style={st.btns}>
             {ORDER.map((o) => {
               const active = outcome === o;

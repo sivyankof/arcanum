@@ -8,16 +8,11 @@ import { StyleSheet, View } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { formatEntryDate } from '../lib/dates';
 import { hapticTap } from '../lib/haptics';
-import { OUTCOME_MARK, type DailyDraw, type Outcome } from '../lib/journal';
+import { OUTCOME_COLOR, OUTCOME_MARK, type DailyDraw } from '../lib/journal';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
 import { Txt } from './Txt';
-
-/** Цвет отметки: отозвалась — успех, отчасти — золото, не отозвалась — приглушённый.
- *  Красного здесь нет намеренно: «не отозвалась» — не ошибка (design-system §4). */
-const markColor = (t: ReturnType<typeof useTheme>, o: Outcome) =>
-  o === 'yes' ? t.success : o === 'partly' ? t.accent : t.muted;
 
 export function JournalRow({
   entry,
@@ -56,7 +51,7 @@ export function JournalRow({
         </Txt>
       </View>
       {entry.outcome && (
-        <Txt style={[st.mark, { color: markColor(t, entry.outcome) }]}>
+        <Txt style={[st.mark, { color: t[OUTCOME_COLOR[entry.outcome]] }]}>
           {OUTCOME_MARK[entry.outcome]}
         </Txt>
       )}

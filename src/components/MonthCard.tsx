@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { cardById } from '../lib/content';
-import type { MonthSummary, OutcomeStats } from '../lib/journal';
+import { OUTCOME_COLOR, type MonthSummary, type OutcomeStats } from '../lib/journal';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
@@ -45,6 +45,7 @@ export function MonthCard({
   return (
     <PressableScale
       onPress={card ? () => onPress(card.id) : undefined}
+      disabled={!card}
       style={[st.card, { backgroundColor: t.panel, borderColor: t.line }]}
     >
       {card && (
@@ -70,9 +71,9 @@ export function MonthCard({
             {/* трёхсегментная полоска распределения (product-spec §5): доли ✓/≈/✗ за месяц.
                 Единственная визуализация рефлексий в v1 — графиков и «процента точности» нет */}
             <View style={[st.bar, { backgroundColor: t.line }]}>
-              <View style={{ flex: stats.yes, backgroundColor: t.success }} />
-              <View style={{ flex: stats.partly, backgroundColor: t.accent }} />
-              <View style={{ flex: stats.no, backgroundColor: t.muted }} />
+              <View style={{ flex: stats.yes, backgroundColor: t[OUTCOME_COLOR.yes] }} />
+              <View style={{ flex: stats.partly, backgroundColor: t[OUTCOME_COLOR.partly] }} />
+              <View style={{ flex: stats.no, backgroundColor: t[OUTCOME_COLOR.no] }} />
             </View>
           </>
         )}

@@ -3,7 +3,7 @@ import { router, useFocusEffect } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { AppState, Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -164,6 +164,16 @@ export default function TodayScreen() {
   // ровно в 17:59:59 — не тот случай, ради которого стоит держать интервал
   const [hour, setHour] = React.useState(() => new Date().getHours());
   useFocusEffect(React.useCallback(() => setHour(new Date().getHours()), []));
+
+  // возврат из фона фокус экрана НЕ меняет, поэтому useFocusEffect тут не поможет:
+  // утром открыл и свернул, вечером вернулся — без этого час остался бы утренним
+  // и вечерний блок не появился бы до переключения таба
+  React.useEffect(() => {
+    const sub = AppState.addEventListener('change', (s) => {
+      if (s === 'active') setHour(new Date().getHours());
+    });
+    return () => sub.remove();
+  }, []);
 
   const showReflection = reflectionVisible({
     drawn: !!drawn,

@@ -91,7 +91,11 @@ export const useApp = create<AppState>()(
       setOutcome: (date, outcome) => {
         if (!canEditEntry(date)) return;
         set({
-          history: get().history.map((h) => (h.date === date ? { ...h, outcome } : h)),
+          history: get().history.map((h) => {
+            if (h.date !== date) return h;
+            if (h.outcome === outcome) return h;
+            return { ...h, outcome };
+          }),
         });
       },
 

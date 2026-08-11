@@ -29,6 +29,7 @@ import {
   JOURNAL_FILTERS,
   monthsWithEntries,
   monthSummary,
+  OUTCOME_MARK,
   outcomeStats,
   type DailyDraw,
   type JournalFilter,
@@ -126,10 +127,12 @@ export default function ProfileScreen() {
         <FadeUp index={2}>
           <FilterChips
             values={chips}
+            // «Все» и «С заметкой» — текст из i18n; три ответа — знак ✓/≈/✗ (один источник
+            // на весь экран, см. OUTCOME_MARK). У каждого чипа свой счётчик (design-reference.html)
             labels={(f) =>
-              f === 'all'
-                ? tr('journal.filters.all')
-                : `${tr(`journal.filters.${f}`)} ${counts[f]}`
+              f === 'all' || f === 'note'
+                ? `${tr(`journal.filters.${f}`)} ${counts[f]}`
+                : `${OUTCOME_MARK[f]} ${counts[f]}`
             }
             active={filter}
             onPick={setFilter}

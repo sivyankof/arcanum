@@ -12,6 +12,18 @@ export type Outcome = 'yes' | 'partly' | 'no';
 /** Знак ответа в интерфейсе: строка дневника, чипы-фильтры, свёрнутая строка рефлексии. */
 export const OUTCOME_MARK: Record<Outcome, string> = { yes: '✓', partly: '≈', no: '✗' };
 
+/** «Отозвалась» = утвердительный ответ или частичный (logic-spec §3): так считается
+ *  и сводка месяца, и счётчик на странице карты. */
+export const isResonated = (o?: Outcome): boolean => o === 'yes' || o === 'partly';
+
+/** Токен темы для каждого ответа. Красного нет намеренно: «не отозвалась» — не ошибка
+ *  (design-system §4). Имена токенов, а не цвета: модуль чистый и про тему не знает. */
+export const OUTCOME_COLOR: Record<Outcome, 'success' | 'accent' | 'muted'> = {
+  yes: 'success',
+  partly: 'accent',
+  no: 'muted',
+};
+
 /** Запись дня: карта дня, заметка и вечерняя рефлексия. */
 export interface DailyDraw {
   date: string; // YYYY-MM-DD
@@ -119,7 +131,7 @@ export function cardHistory(history: DailyDraw[], cardId: string): CardHistory {
   const entries = history.filter((h) => h.cardId === cardId).sort(byDateDesc);
   return {
     times: entries.length,
-    resonated: entries.filter((e) => e.outcome === 'yes' || e.outcome === 'partly').length,
+    resonated: entries.filter((e) => isResonated(e.outcome)).length,
     lastDate: entries[0]?.date,
     lastNote: entries.find((e) => e.note)?.note,
   };
