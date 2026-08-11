@@ -425,10 +425,18 @@ letter-spacing:2.5px;color:var(--muted)}
 border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
 
 
-.stickysearch{position:sticky;top:-16px;z-index:12;margin:0 -18px;padding:22px 18px 20px;
-background:var(--glass);backdrop-filter:blur(18px);
--webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 16px),transparent 100%);
-mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 16px),transparent 100%)}
+.stickysearch{padding:14px 0 4px}
+
+
+/* scroll-aware панель поиска (паттерн топ-приложений): вниз — прячется, вверх — въезжает */
+.cardsbar{position:absolute;top:0;left:0;right:0;z-index:30;padding:52px 22px 14px;
+background:var(--glass);backdrop-filter:blur(20px);
+-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent);
+mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent);
+transform:translateY(-110%);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
+.cardsbar.show{transform:translateY(0)}
+.cardsbar .search{margin-top:0;padding:9px 14px}
+.cardsbar .seg{margin-top:8px}
 
 </style></head>
 <body>
@@ -721,6 +729,10 @@ mask-image:linear-gradient(to bottom,transparent 0,#000 18px,#000 calc(100% - 16
         <div class="cct"><div class="ccp">10 · ИТОГ</div><div class="ccn">Нажмите, чтобы открыть</div></div></div></div>
   </div>
 
+    <div class="cardsbar" id="cardsbar">
+    <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>Найти карту…</div>
+    <div class="seg"><button class="on">Все</button><button>Старшие</button><button>Жезлы</button><button>Кубки</button><button>Мечи</button><button>Пентакли</button></div>
+  </div>
   <div class="lightbox" id="lightbox" onclick="lbClose(this)">
     <div class="lbstage"><div class="lbcard" id="lbcard">
       <div class="lbface"><img id="lbimg" src="" alt=""><div class="lbglare"></div></div>
@@ -968,5 +980,20 @@ function openLightbox(src){
   const c = document.getElementById('lbcard'); c.style.animation='none'; void c.offsetWidth; c.style.animation='';
 }
 function lbClose(lb){ lb.classList.remove('on'); }
+
+/* scroll-aware поиск в «Картах» */
+(function(){
+  const v = document.getElementById('v-cards'), bar = document.getElementById('cardsbar');
+  if(!v || !bar) return;
+  let last = 0;
+  v.addEventListener('scroll', ()=>{
+    const y = v.scrollTop;
+    if (y < 140) { bar.classList.remove('show'); }          // шапка ещё видна в потоке
+    else if (y < last - 6) { bar.classList.add('show'); }   // палец вверх — показать
+    else if (y > last + 6) { bar.classList.remove('show'); }// палец вниз — спрятать
+    last = y;
+  }, {passive:true});
+})();
+
 </script>
 </body></html>
