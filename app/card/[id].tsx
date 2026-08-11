@@ -187,12 +187,18 @@ export default function CardDetail() {
   // личная история: сколько раз карта выпадала, когда в последний раз и последняя заметка
   const personal = cardHistory(history, card.id);
   const lastDay = personal.lastDate ? formatDayMonth(personal.lastDate, lang) : '';
-  const personalText = [
+  const drawnLine =
     // при единственном выпадении «выпадала 1 раз · последняя 10 августа» звучит как отчёт;
     // одной датой — по-человечески
     personal.times === 1
       ? tr('journal.drawnOnce', { date: lastDay })
-      : `${tr('journal.drawn', { count: personal.times })} · ${tr('journal.lastDate', { date: lastDay })}`,
+      : `${tr('journal.drawn', { count: personal.times })} · ${tr('journal.lastDate', { date: lastDay })}`;
+
+  const personalText = [
+    // «отзывалась N» — счёт ответов «да» и «отчасти» (logic-spec §3), только если они были
+    personal.resonated > 0
+      ? `${drawnLine} · ${tr('card.resonated', { n: personal.resonated })}`
+      : drawnLine,
     personal.lastNote ? `«${personal.lastNote}»` : null,
   ]
     .filter(Boolean)
@@ -306,8 +312,7 @@ export default function CardDetail() {
           <Block title={tr('card.symbolism')} text={symbolism.text} todo={symbolism.todo} />
         </FadeUp>
 
-        {/* личная история карты (logic-spec §3): только если карта уже выпадала.
-            Счётчик «отзывалась N» добавит задача 06 — ответов рефлексии пока нет */}
+        {/* личная история карты (logic-spec §3): только если карта уже выпадала */}
         {personal.times > 0 && (
           <FadeUp index={5}>
             <Block title={tr('journal.cardHistory').toUpperCase()} text={personalText} accentBorder />
