@@ -100,7 +100,7 @@ function Filters({ query, onQuery, filter, onFilter, compact, onFocus, onBlur }:
         placeholder={tr('cards.searchPlaceholder')}
         onFocus={onFocus}
         onBlur={onBlur}
-        style={compact ? st.searchCompact : undefined}
+        style={[st.searchPad, compact && st.searchCompact]}
       />
       <ScrollView
         horizontal
@@ -175,17 +175,20 @@ export default function CardsScreen() {
         contentContainerStyle={{ paddingTop: insets.top, paddingBottom: 120 }}
         ItemSeparatorComponent={() => <View style={{ height: GAP }} />}
         ListHeaderComponent={
-          <View style={st.pad}>
-            <FadeUp index={0}>
+          <>
+            <FadeUp index={0} style={st.pad}>
               <Txt style={[st.sub, { color: t.muted }]}>
                 {lang === 'ru' ? 'СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909' : 'REFERENCE · RIDER–WAITE 1909'}
               </Txt>
               <Txt style={[st.title, { color: t.head }]}>{tr('cards.title')}</Txt>
             </FadeUp>
+            {/* поиск и чипы БЕЗ внешнего паддинга: отступы они задают себе сами, поэтому
+                лента чипов прокручивается от края до края экрана, а не обрывается за 24px
+                до него (замечено Артёмом 11.08) */}
             <FadeUp index={1} style={st.flowBar}>
               <Filters {...filters} />
             </FadeUp>
-          </View>
+          </>
         }
         renderItem={({ item: row, index }) => {
           const cells = (
@@ -217,7 +220,9 @@ export default function CardsScreen() {
         <GlassPanel
           blur={BAR_BLUR}
           fadeBottom={BAR_FADE}
-          style={{ paddingTop: insets.top + 10, paddingHorizontal: spacing.xl, paddingBottom: BAR_FADE }}
+          // горизонтальных паддингов у панели нет: их держат само поле и лента чипов,
+          // иначе чипы обрывались бы, не доехав до края экрана
+          style={{ paddingTop: insets.top + 10, paddingBottom: BAR_FADE }}
         >
           <Filters
             {...filters}
@@ -239,8 +244,11 @@ const st = StyleSheet.create({
   flowBar: { paddingTop: 14, paddingBottom: 4, marginBottom: 15 },
   bar: { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 30 },
   // .cardsbar .search: поле в панели поджато против варианта в потоке (11×15)
+  // отступ от краёв экрана поле и чипы держат сами (см. Filters): у поля это внешний отступ,
+  // у ленты чипов — внутренний, чтобы прокрутка уходила под самый край
+  searchPad: { marginHorizontal: spacing.xl },
   searchCompact: { paddingVertical: 9, paddingHorizontal: 14 },
-  segRow: { flexDirection: 'row', gap: 6, marginTop: 9 },
+  segRow: { flexDirection: 'row', gap: 6, marginTop: 9, paddingHorizontal: spacing.xl },
   segRowCompact: { marginTop: 8 },
   seg: { borderWidth: 1, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 7 },
   segTxt: { fontSize: 10.5, fontWeight: '700', letterSpacing: 0.6 },
