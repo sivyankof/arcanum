@@ -2,10 +2,11 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions, FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
+import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
@@ -16,7 +17,6 @@ import { cardImages } from '../../src/lib/cardImages';
 import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/lib/cardSearch';
 import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, type TarotCard } from '../../src/lib/content';
-import { hapticTap } from '../../src/lib/haptics';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -88,7 +88,6 @@ type FiltersProps = {
 /** Поиск + чипы. Живут в двух местах сразу — в потоке шапки и в парящей панели, — поэтому
  *  разметка одна, а различаются экземпляры только отступами. */
 function Filters({ query, onQuery, filter, onFilter, compact, onFocus, onBlur }: FiltersProps) {
-  const t = useTheme();
   const { t: tr } = useTranslation();
   const label = (f: CardFilter) => tr(f === 'all' ? 'cards.all' : `cards.${f}`);
 
@@ -102,31 +101,13 @@ function Filters({ query, onQuery, filter, onFilter, compact, onFocus, onBlur }:
         onBlur={onBlur}
         style={[st.searchPad, compact && st.searchCompact]}
       />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={[st.segRow, compact && st.segRowCompact]}
-      >
-        {CARD_FILTERS.map((f) => (
-          <PressableScale
-            key={f}
-            onPress={() => {
-              hapticTap();
-              onFilter(f);
-            }}
-            style={[
-              st.seg,
-              {
-                borderColor: filter === f ? t.frame : t.line,
-                backgroundColor: filter === f ? t.chipBg : 'transparent',
-              },
-            ]}
-          >
-            <Txt style={[st.segTxt, { color: filter === f ? t.accent : t.muted }]}>{label(f)}</Txt>
-          </PressableScale>
-        ))}
-      </ScrollView>
+      <FilterChips
+        values={CARD_FILTERS}
+        labels={label}
+        active={filter}
+        onPick={onFilter}
+        contentStyle={compact && st.segRowCompact}
+      />
     </>
   );
 }
@@ -248,10 +229,7 @@ const st = StyleSheet.create({
   // у ленты чипов — внутренний, чтобы прокрутка уходила под самый край
   searchPad: { marginHorizontal: spacing.xl },
   searchCompact: { paddingVertical: 9, paddingHorizontal: 14 },
-  segRow: { flexDirection: 'row', gap: 6, marginTop: 9, paddingHorizontal: spacing.xl },
   segRowCompact: { marginTop: 8 },
-  seg: { borderWidth: 1, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 7 },
-  segTxt: { fontSize: 10.5, fontWeight: '700', letterSpacing: 0.6 },
   row: { flexDirection: 'row', gap: GAP },
   cell: { width: CELL_W },
   imWrap: {
