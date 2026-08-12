@@ -10,8 +10,8 @@
  *  «3+ дня тишины → один возвратный» получается из этого само.
  */
 import { localDateISO } from './dates';
-import type { Outcome } from './journal';
-import { parseHHMM } from './settings';
+import type { DailyDraw, Outcome } from './journal';
+import { parseHHMM, type AppSettings } from './settings';
 
 export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback';
 
@@ -72,6 +72,27 @@ function daysAheadISO(n: number, from: Date): string {
 function isPast(p: PlannedPush, now: Date): boolean {
   const [y, m, d] = p.date.split('-').map(Number);
   return new Date(y, m - 1, d, p.hour, p.minute).getTime() <= now.getTime();
+}
+
+/** Собирает вход планировщика из среза стора (settings/streak/history): та же сборка, что
+ *  делает живой планировщик (usePushScheduler), вынесена сюда, чтобы DEV-показ плана в
+ *  настройках считал ровно теми же данными, а не держал собственную копию этого маппинга. */
+export function planInputFromStore(
+  settings: AppSettings,
+  streak: number,
+  history: DailyDraw[],
+  now: Date = new Date(),
+): PlanInput {
+  const today = history.find((h) => h.date === localDateISO(now));
+  return {
+    pushesOn: settings.pushesOn,
+    reflectionOn: settings.reflectionOn,
+    morning: settings.pushMorning,
+    evening: settings.pushEvening,
+    streak,
+    todayCardId: today?.cardId,
+    todayOutcome: today?.outcome,
+  };
 }
 
 export function planPushes(input: PlanInput, now: Date): PlannedPush[] {

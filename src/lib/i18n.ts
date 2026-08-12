@@ -43,6 +43,7 @@ const resources = {
         testPush: "Тестовый пуш (10 сек)",
         showPlan: "План пушей",
         planEmpty: "Ничего не запланировано",
+        queuedCount: "В очереди системы: {{count}}",
         close: "Закрыть",
       },
       // заголовки баннеров: тело пуша берётся из content/phrases.json (правило вариативности),
@@ -130,6 +131,7 @@ const resources = {
         testPush: "Test push (10 sec)",
         showPlan: "Scheduled pushes",
         planEmpty: "Nothing scheduled",
+        queuedCount: "Queued with the system: {{count}}",
         close: "Close",
       },
       push: {

@@ -13,6 +13,7 @@ import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
 import { TimePicker } from '../src/components/TimePicker';
 import { Txt } from '../src/components/Txt';
+import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import { getPermission, listScheduled, sendTestPush, type PermissionState } from '../src/lib/pushes';
 import { timeLabel } from '../src/lib/settings';
 import { useAppActive } from '../src/lib/useAppActive';
@@ -39,32 +40,41 @@ export default function SettingsScreen() {
   const pushEvening = useApp((s) => s.settings.pushEvening);
   const setPushesOn = useApp((s) => s.setPushesOn);
   const setPushTime = useApp((s) => s.setPushTime);
+  // весь settings/streak/history — только для DEV-строки «План пушей» (planInputFromStore
+  // хочет их целиком, а не по отдельному полю, как остальной экран)
+  const settings = useApp((s) => s.settings);
+  const streak = useApp((s) => s.streak);
+  const history = useApp((s) => s.history);
 
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
 
   const [planText, setPlanText] = React.useState<string | null>(null);
 
-  // читаемая расшифровка очереди: что и когда система реально пришлёт
+  // читаемая расшифровка плана: две независимые вещи, путать нельзя.
+  // 1) Строки «дата · время · вид» — то, что НАСЧИТАЛ planPushes с теми же входными данными,
+  //    что берёт живой планировщик (planInputFromStore — общая сборка с usePushScheduler.ts):
+  //    цифры точные, это ровно те числа, из которых строится системное расписание.
+  // 2) Число в счётчике — сколько уведомлений РЕАЛЬНО лежит в очереди ОС (listScheduled().length).
+  //    Даты из ответа ОС достать нельзя, хотя тайпинги expo-notifications обещают обратное:
+  //    на Android DATE-триггер возвращается как {type:'date', value: <timestamp>} — поле
+  //    называется `value`, а не `date`, которого тайпинги ждут; на iOS DATE-триггер система
+  //    вообще хранит как задержку в секундах от момента постановки (тип приходит как
+  //    'timeInterval'), и к моменту показа эта задержка уже «утекла» — обратный пересчёт
+  //    даты был бы тихо неверным. Поэтому даты берём со своей стороны, а число — с ОС:
+  //    расхождение между числом строк плана и счётчиком само по себе сигнал, что
+  //    перепланирование не долетело до системы.
   const showPlan = async () => {
-    const list = await listScheduled();
-    const lines = list.map((r) => {
-      const trigger = r.trigger;
-      // из всех форм триггера дату несёт только 'date' (так планирует applyPlan);
-      // у тестового пуша (задача 5) триггер 'timeInterval' и к моменту просмотра плана
-      // он обычно уже успевает сработать и пропасть из очереди
-      const when =
-        trigger && 'type' in trigger && trigger.type === 'date'
-          ? typeof trigger.date === 'number'
-            ? new Date(trigger.date)
-            : trigger.date
-          : null;
-      const stamp = when
-        ? `${when.getDate()}.${when.getMonth() + 1} ${when.getHours()}:${String(when.getMinutes()).padStart(2, '0')}`
-        : '—';
-      return `${stamp} · ${r.content.title ?? ''}`;
-    });
-    setPlanText(lines.length ? lines.join('\n') : tr('settings.planEmpty'));
+    const now = new Date();
+    const plan = planPushes(planInputFromStore(settings, streak, history, now), now);
+    const lines = plan.map(
+      (p) => `${p.date} ${String(p.hour).padStart(2, '0')}:${String(p.minute).padStart(2, '0')} · ${p.kind}`,
+    );
+    // в браузере listScheduled — no-op (src/lib/pushes.ts), очередь ОС там всегда пуста;
+    // строки плана при этом всё равно печатаются — это ожидаемое поведение веба, не баг
+    const queued = (await listScheduled()).length;
+    const planLines = lines.length ? lines.join('\n') : tr('settings.planEmpty');
+    setPlanText(`${tr('settings.queuedCount', { count: queued })}\n\n${planLines}`);
   };
 
   // системное разрешение спрашиваем при входе на экран и при возврате из фона:

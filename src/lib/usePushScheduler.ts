@@ -6,8 +6,7 @@
  */
 import React from 'react';
 import { useApp } from '../store/useApp';
-import { localDateISO } from './dates';
-import { planPushes } from './pushPlan';
+import { planInputFromStore, planPushes } from './pushPlan';
 import { applyPlan, initPushes } from './pushes';
 import { useAppActive } from './useAppActive';
 
@@ -23,19 +22,8 @@ export function usePushScheduler(): void {
   useAppActive(() => setTick((n) => n + 1));
 
   React.useEffect(() => {
-    const today = history.find((h) => h.date === localDateISO());
-    const plan = planPushes(
-      {
-        pushesOn: settings.pushesOn,
-        reflectionOn: settings.reflectionOn,
-        morning: settings.pushMorning,
-        evening: settings.pushEvening,
-        streak,
-        todayCardId: today?.cardId,
-        todayOutcome: today?.outcome,
-      },
-      new Date(),
-    );
+    const now = new Date();
+    const plan = planPushes(planInputFromStore(settings, streak, history, now), now);
     // разрешения и API уведомлений умеют бросать (отказ пользователя, сбой канала и т.п.).
     // Без catch это необработанный reject где-то в микротаске: приложение не падает, но и
     // диагностики никакой — в проекте нет сервиса отчётов об ошибках, поэтому предупреждение
