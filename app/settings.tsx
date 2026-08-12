@@ -5,7 +5,7 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Linking, ScrollView, StyleSheet, View } from 'react-native';
+import { Linking, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../src/components/FadeUp';
 import { ScreenBg } from '../src/components/ScreenBg';
@@ -96,7 +96,17 @@ export default function SettingsScreen() {
             icon="notifications-outline"
             label={tr('settings.pushes')}
             value={denied ? tr('settings.pushDenied') : pushesOn ? tr('settings.on') : tr('settings.off')}
-            onPress={() => (denied ? Linking.openSettings() : setPushesOn(!pushesOn))}
+            onPress={() => {
+              // getPermission() на вебе никогда не отдаёт 'denied' (см. src/lib/pushes.ts),
+              // так что на практике сюда не попасть — но react-native-web не реализует
+              // Linking.openSettings вовсе, и звать несуществующий метод «на всякий случай»
+              // нельзя: защита от падения экрана, если это условие когда-нибудь изменится
+              if (denied) {
+                if (Platform.OS !== 'web') Linking.openSettings();
+                return;
+              }
+              setPushesOn(!pushesOn);
+            }}
           />
         </FadeUp>
         {pushesOn && !denied && (

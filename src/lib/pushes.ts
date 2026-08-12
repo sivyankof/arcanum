@@ -65,7 +65,14 @@ async function initPushesImpl(): Promise<void> {
 }
 
 export async function getPermission(): Promise<PermissionState> {
-  if (WEB) return 'denied';
+  // 'undetermined', а не 'denied': на вебе систему в принципе не спросишь, а не «спросили и
+  // отказали» — это разные состояния. Отдать здесь 'denied' удобно выглядело бы как честный
+  // отказ, но экран настроек читает 'denied' как «прятать блок напоминаний и открывать системные
+  // настройки по тапу», а react-native-web не даёт открыть то, чего у него нет (нет
+  // Linking.openSettings) — так браузерная проверка этого экрана становится невозможной,
+  // хотя весь смысл веб-заглушек модуля в том, чтобы экран оставался прокликиваемым в браузере.
+  // НЕ возвращать сюда 'denied' обратно — это тот самый регресс.
+  if (WEB) return 'undetermined';
   const { status } = await Notifications.getPermissionsAsync();
   return status as PermissionState;
 }
