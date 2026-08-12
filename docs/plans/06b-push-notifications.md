@@ -38,10 +38,11 @@ zustand + persist, react-i18next, jest-expo.
 | `src/lib/pushes.ts` | **создать** — единственный модуль, знающий про `expo-notifications` |
 | `src/lib/useAppActive.ts` | **создать** — общий слушатель возврата приложения из фона |
 | `src/lib/usePushScheduler.ts` | **создать** — связка стор → план → расписание |
+| `src/components/ModalPanel.tsx` | **создать** — затемнение + центрированная панель, общая геометрия всех модалок |
 | `src/components/TimePicker.tsx` | **создать** — натив: системное колесо |
 | `src/components/TimePicker.web.tsx` | **создать** — веб: список целых часов |
 | `src/store/useApp.ts` | новые поля `settings`, три экшена, `version: 3` |
-| `src/components/ConfirmDialog.tsx` | новый проп `confirmTone` (у прелюдии кнопка не красная) |
+| `src/components/ConfirmDialog.tsx` | переезд на `ModalPanel` (задача 7) + проп `confirmTone` (задача 9) |
 | `app/settings.tsx` | тумблер, две строки времени, подпись, DEV-строки |
 | `app/(tabs)/index.tsx` | прелюдия разрешения; слушатель `AppState` → общий хук |
 | `app/_layout.tsx` | вызов `usePushScheduler()` |
@@ -1039,19 +1040,113 @@ git commit -m "feat: перепланирование пушей при изме
 ### Задача 7: `TimePicker` — системное колесо и веб-список
 
 **Файлы:**
+- Create: `src/components/ModalPanel.tsx` (общая подложка модалок)
 - Create: `src/components/TimePicker.tsx` (натив)
 - Create: `src/components/TimePicker.web.tsx` (веб)
+- Modify: `src/components/ConfirmDialog.tsx` (перевести на `ModalPanel`)
 
 **Интерфейсы:**
 - Consumes: `parseHHMM`, `formatHHMM` из `src/lib/settings.ts`
-- Produces: компонент `TimePicker` с пропами
-  `{ visible: boolean; value: string; title: string; hours: number[]; onPick: (hhmm: string) => void; onClose: () => void }`
+- Produces: `ModalPanel` с пропами `{ visible, onClose, children }`; компонент `TimePicker`
+  с пропами `{ visible: boolean; value: string; title: string; hours?: number[];
+  onPick: (hhmm: string) => void; onClose: () => void }`
 
 Metro сам подставляет `.web.tsx` в веб-сборке, поэтому импорт в экране один:
 `import { TimePicker } from '../src/components/TimePicker';`. Прямого импорта
 `@react-native-community/datetimepicker` в вебе не случится — у пакета нет веб-реализации.
 
-- [ ] **Шаг 1: Написать нативную реализацию**
+- [ ] **Шаг 1: Вынести общую подложку модалок**
+
+Затемнение на весь экран и центрированная панель — одна и та же геометрия у `ConfirmDialog`
+и у обеих реализаций `TimePicker`. Третье появление, поэтому выносим (решение 12.08 перед стартом).
+
+Создать `src/components/ModalPanel.tsx`:
+
+```tsx
+/** Модальная подложка: затемнение на весь экран + центрированная панель.
+ *
+ *  Геометрия у всех модалок приложения одна (подтверждение, выбор времени, дальше — расклады),
+ *  поэтому живёт одним компонентом. Тап по затемнению закрывает: случайный промах мимо панели
+ *  не должен ничего терять.
+ */
+import React from 'react';
+import { Modal, Pressable, StyleSheet } from 'react-native';
+import { radius, spacing } from '../theme/theme';
+import { useTheme } from '../theme/useTheme';
+
+export function ModalPanel({
+  visible,
+  onClose,
+  children,
+}: {
+  visible: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  const t = useTheme();
+
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+      <Pressable style={st.scrim} onPress={onClose}>
+        <Pressable
+          style={[st.panel, { backgroundColor: t.bg, borderColor: t.line }]}
+          onPress={() => {}}
+        >
+          {children}
+        </Pressable>
+      </Pressable>
+    </Modal>
+  );
+}
+
+const st = StyleSheet.create({
+  scrim: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.55)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: spacing.xl,
+  },
+  panel: {
+    width: '100%',
+    maxWidth: 320,
+    borderWidth: 1,
+    borderRadius: radius.l,
+    padding: spacing.xl,
+  },
+});
+```
+
+- [ ] **Шаг 2: Перевести `ConfirmDialog` на `ModalPanel`**
+
+В `src/components/ConfirmDialog.tsx` заменить `Modal` + два `Pressable` на `ModalPanel`, оставив
+внутри только содержимое:
+
+```tsx
+  return (
+    <ModalPanel visible={visible} onClose={onCancel}>
+      <Txt style={[st.title, { color: t.head }]}>{title}</Txt>
+      <Txt style={[st.msg, { color: t.muted }]}>{message}</Txt>
+      <View style={st.row}>
+        <PressableScale onPress={onCancel} style={[st.btn, { borderColor: t.frame }]}>
+          <Txt style={[st.btnTxt, { color: t.accent }]}>{cancelLabel}</Txt>
+        </PressableScale>
+        <PressableScale onPress={onConfirm} style={[st.btn, { borderColor: t.line }]}>
+          <Txt style={[st.btnTxt, { color: t.danger }]}>{confirmLabel}</Txt>
+        </PressableScale>
+      </View>
+    </ModalPanel>
+  );
+```
+
+Импорты: убрать `Modal` и `Pressable` из `react-native` (остаётся `StyleSheet`, `View`),
+добавить `import { ModalPanel } from './ModalPanel';`. Из `st` удалить `scrim` и `panel` —
+они уехали в `ModalPanel`. Остальные стили и вся логика не меняются.
+
+Проверить в браузере, что диалог выглядит как раньше: экран заметки → ввести текст → выйти
+без сохранения. Панель того же размера, затемнение то же, тап мимо панели закрывает.
+
+- [ ] **Шаг 3: Написать нативную реализацию**
 
 Создать `src/components/TimePicker.tsx`:
 
@@ -1062,10 +1157,11 @@ Metro сам подставляет `.web.tsx` в веб-сборке, поэт�
  */
 import DateTimePicker, { type DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import React from 'react';
-import { Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
+import { Platform, Pressable, StyleSheet } from 'react-native';
 import { formatHHMM, parseHHMM } from '../lib/settings';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { ModalPanel } from './ModalPanel';
 import { Txt } from './Txt';
 
 export function TimePicker({
@@ -1111,45 +1207,24 @@ export function TimePicker({
 
   // iOS: колесо живёт внутри нашей модалки, закрытие — своей кнопкой
   return (
-    <Modal visible transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={st.scrim} onPress={onClose}>
-        <Pressable
-          style={[st.panel, { backgroundColor: t.bg, borderColor: t.line }]}
-          onPress={() => {}}
-        >
-          <Txt style={[st.title, { color: t.head }]}>{title}</Txt>
-          <DateTimePicker value={date} mode="time" is24Hour display="spinner" onChange={onChange} />
-          <Pressable onPress={onClose} style={[st.done, { borderColor: t.frame }]}>
-            <Txt style={[st.doneTxt, { color: t.accent }]}>OK</Txt>
-          </Pressable>
-        </Pressable>
+    <ModalPanel visible onClose={onClose}>
+      <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
+      <DateTimePicker value={date} mode="time" is24Hour display="spinner" onChange={onChange} />
+      <Pressable onPress={onClose} style={[st.done, { borderColor: t.frame }]}>
+        <Txt style={[st.doneTxt, { color: t.accent }]}>OK</Txt>
       </Pressable>
-    </Modal>
+    </ModalPanel>
   );
 }
 
 const st = StyleSheet.create({
-  scrim: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xl,
-  },
-  panel: {
-    width: '100%',
-    maxWidth: 320,
-    borderWidth: 1,
-    borderRadius: radius.l,
-    padding: spacing.xl,
-  },
-  title: { fontSize: 11, letterSpacing: 2, textAlign: 'center', marginBottom: spacing.s },
+  title: { fontSize: 10, letterSpacing: 2, textAlign: 'center', marginBottom: spacing.m },
   done: { borderWidth: 1, borderRadius: radius.m, paddingVertical: 11, alignItems: 'center' },
   doneTxt: { fontSize: 12.5, fontWeight: '700' },
 });
 ```
 
-- [ ] **Шаг 2: Написать веб-реализацию**
+- [ ] **Шаг 4: Написать веб-реализацию**
 
 Создать `src/components/TimePicker.web.tsx`:
 
@@ -1162,10 +1237,11 @@ const st = StyleSheet.create({
  *  экрана, а точное время — на устройстве.
  */
 import React from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { formatHHMM, parseHHMM } from '../lib/settings';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { ModalPanel } from './ModalPanel';
 import { Txt } from './Txt';
 
 export function TimePicker({
@@ -1187,57 +1263,33 @@ export function TimePicker({
   const current = parseHHMM(value, hours[0]).hour;
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={st.scrim} onPress={onClose}>
-        <Pressable
-          style={[st.panel, { backgroundColor: t.bg, borderColor: t.line }]}
-          onPress={() => {}}
-        >
-          <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
-          <ScrollView style={{ maxHeight: 260 }}>
-            {hours.map((h) => {
-              const selected = h === current;
-              return (
-                <Pressable
-                  key={h}
-                  onPress={() => {
-                    onPick(formatHHMM(h, 0));
-                    onClose();
-                  }}
-                  style={[
-                    st.row,
-                    selected && { backgroundColor: t.chipBg, borderColor: t.frame },
-                  ]}
-                >
-                  <Txt style={{ color: selected ? t.head : t.text, fontSize: 15.5, flex: 1 }}>
-                    {`${h}:00`}
-                  </Txt>
-                  {selected && <Txt style={{ color: t.accent, fontSize: 13 }}>✓</Txt>}
-                </Pressable>
-              );
-            })}
-          </ScrollView>
-        </Pressable>
-      </Pressable>
-    </Modal>
+    <ModalPanel visible={visible} onClose={onClose}>
+      <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
+      <ScrollView style={{ maxHeight: 260 }}>
+        {hours.map((h) => {
+          const selected = h === current;
+          return (
+            <Pressable
+              key={h}
+              onPress={() => {
+                onPick(formatHHMM(h, 0));
+                onClose();
+              }}
+              style={[st.row, selected && { backgroundColor: t.chipBg, borderColor: t.frame }]}
+            >
+              <Txt style={{ color: selected ? t.head : t.text, fontSize: 15.5, flex: 1 }}>
+                {`${h}:00`}
+              </Txt>
+              {selected && <Txt style={{ color: t.accent, fontSize: 13 }}>✓</Txt>}
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+    </ModalPanel>
   );
 }
 
 const st = StyleSheet.create({
-  scrim: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xl,
-  },
-  panel: {
-    width: '100%',
-    maxWidth: 320,
-    borderWidth: 1,
-    borderRadius: radius.l,
-    padding: spacing.xl,
-  },
   title: { fontSize: 10, letterSpacing: 2, textAlign: 'center', marginBottom: spacing.m },
   row: {
     flexDirection: 'row',
@@ -1252,19 +1304,19 @@ const st = StyleSheet.create({
 });
 ```
 
-- [ ] **Шаг 3: Проверить типы**
+- [ ] **Шаг 5: Проверить типы**
 
 ```bash
 npx tsc --noEmit
 ```
 
-Ожидание: чисто. Компонент пока никем не используется — это нормально, подключение в задаче 8.
+Ожидание: чисто. `TimePicker` пока никем не используется — это нормально, подключение в задаче 8.
 
-- [ ] **Шаг 4: Коммит**
+- [ ] **Шаг 6: Коммит**
 
 ```bash
-git add src/components/TimePicker.tsx src/components/TimePicker.web.tsx
-git commit -m "feat: выбор времени напоминания — системное колесо и веб-список (спека 06б)"
+git add src/components/ModalPanel.tsx src/components/TimePicker.tsx src/components/TimePicker.web.tsx src/components/ConfirmDialog.tsx
+git commit -m "feat: общая подложка модалок и выбор времени напоминания (спека 06б)"
 ```
 
 ---
