@@ -101,6 +101,10 @@ export default function SettingsScreen() {
   });
 
   const denied = perm === 'denied';
+  // между тапом «включить» и ответом системного диалога стор ещё не тронут (см. onPress ниже) —
+  // без отдельного состояния строка либо молчала бы про ожидание, либо (что хуже) показывала
+  // «Вкл» до того, как разрешение реально получено
+  const [requestingPerm, setRequestingPerm] = React.useState(false);
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -143,8 +147,19 @@ export default function SettingsScreen() {
           <SettingsRow
             icon="notifications-outline"
             label={tr('settings.pushes')}
-            value={denied ? tr('settings.pushDenied') : pushesOn ? tr('settings.on') : tr('settings.off')}
+            value={
+              denied
+                ? tr('settings.pushDenied')
+                : requestingPerm
+                  ? tr('settings.pushRequesting')
+                  : pushesOn
+                    ? tr('settings.on')
+                    : tr('settings.off')
+            }
             onPress={() => {
+              // повторный тап, пока ждём ответ системы, ничего нового не запускает — иначе
+              // можно было бы всплыть двумя системными диалогами разрешения подряд
+              if (requestingPerm) return;
               // getPermission() на вебе никогда не отдаёт 'denied' (см. src/lib/pushes.ts),
               // так что на практике сюда не попасть — но react-native-web не реализует
               // Linking.openSettings вовсе, и звать несуществующий метод «на всякий случай»
@@ -154,16 +169,40 @@ export default function SettingsScreen() {
                 return;
               }
               const next = !pushesOn;
-              setPushesOn(next);
-              // Отказ в прелюдии («Не сейчас») больше не спрашивает сам — системный диалог даётся
-              // один раз навсегда, и это осознанное решение (product-spec §1). Но тогда разрешение
-              // так и остаётся 'undetermined', и без этой ветки строка «Напоминания» включалась бы
-              // тумблером, показывала бы время и DEV-план — а до ОС ни один пуш бы не доехал,
-              // потому что планирование требует 'granted'. Второй и последний шанс спросить — здесь,
-              // при явном включении тумблера (найдено финальным ревью 06б, пункт B)
-              if (next && perm === 'undetermined' && Platform.OS !== 'web') {
-                requestPermission().then(setPerm);
+              // выключение — всегда сразу и без вопросов, спрашивать тут нечего
+              if (!next) {
+                setPushesOn(false);
+                return;
               }
+              // Отказ в прелюдии («Не сейчас») больше не спрашивает сам — системный диалог даётся
+              // один раз навсегда, и это осознанное решение (product-spec §1). Второй и последний
+              // шанс спросить — явное включение тумблера здесь (найдено финальным ревью 06б, пункт B).
+              // ⚠️ Разрешение спрашиваем ДО записи в стор, а не после: смена `settings.pushesOn` —
+              // это и есть сигнал планировщику пересчитать план (usePushScheduler.ts слушает
+              // `settings` целиком), и сигнал обязан прийти УЖЕ с известным ответом ОС. Раньше стор
+              // менялся первым, эффект планировщика срабатывал на 'undetermined', гасил всё
+              // и ничего не ставил, а результат запроса прилетал только в локальный `setPerm`,
+              // который планировщик не слушает вовсе, — второй пересчёт не запускало ничто.
+              // Тот самый баг, который уже чинили в прелюдии («Разрешить» на «Сегодня»), предыдущая
+              // правка вернула именно сюда — второй волной фиксов 06б исправлено тем же приёмом.
+              if (perm === 'undetermined' && Platform.OS !== 'web') {
+                setRequestingPerm(true);
+                requestPermission()
+                  .then((status) => {
+                    setPerm(status);
+                    setPushesOn(true);
+                  })
+                  .catch((err) => {
+                    // сбой запроса (отклонённый промис) не должен ронять экран и не должен тихо
+                    // оставлять тумблер «включённым» без подтверждения системы — стор не трогаем,
+                    // строка вернётся к «Выкл», это и есть честное состояние
+                    console.warn('[settings] не удалось запросить разрешение на пуши:', err);
+                  })
+                  .finally(() => setRequestingPerm(false));
+                return;
+              }
+              // разрешение уже решено (granted) или веб — спрашивать нечего, пишем сразу
+              setPushesOn(true);
             }}
           />
         </FadeUp>

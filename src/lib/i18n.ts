@@ -38,6 +38,10 @@ const resources = {
         reflectNow: "Рефлексия: показать сейчас",
         pushes: "Напоминания",
         pushMorning: "Утреннее", pushEvening: "Вечернее", pushDenied: "Выключены в системе",
+        // между тапом по тумблеру и ответом системного диалога тумблер ещё не включён —
+        // строка обязана честно показывать это промежуточное состояние, а не заранее «Вкл»
+        // (пункт 1 второй волны фиксов 06б)
+        pushRequesting: "Спрашиваем…",
         pushHint: "Ещё напомним, если серия под угрозой, и один раз — если вы давно не заходили",
         pickMorning: "Когда напомнить утром", pickEvening: "Когда напомнить вечером",
         testPush: "Тестовый пуш (10 сек)",
@@ -139,6 +143,7 @@ const resources = {
         reflectNow: "Reflection: show now",
         pushes: "Reminders",
         pushMorning: "Morning", pushEvening: "Evening", pushDenied: "Off in system settings",
+        pushRequesting: "Asking…",
         pushHint: "We'll also nudge you if your streak is at risk, and once if you've been away",
         pickMorning: "Morning reminder time", pickEvening: "Evening reminder time",
         testPush: "Test push (10 sec)",

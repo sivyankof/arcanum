@@ -16,9 +16,7 @@
  *  Нативные `Platform.OS === 'web'`-проверки в `pushes.ts` остаются как есть (защита на случай,
  *  если платформенное разрешение когда-нибудь подведёт) — пункт H финального ревью 06б.
  */
-import { cardById } from './content';
-import i18n from './i18n';
-import { pickPhrase } from './phrases';
+import { pushBody } from './pushBody';
 import type { PlannedPush } from './pushPlan';
 
 export type PermissionState = 'granted' | 'denied' | 'undetermined';
@@ -35,20 +33,13 @@ export async function requestPermission(): Promise<PermissionState> {
   return 'denied';
 }
 
-/** Чистая сборка текста — экспортируется для паритета публичного API с `pushes.ts`,
- *  хотя на вебе её никто не зовёт: `applyPlan` и `sendTestPush` ниже ничего не планируют.
- *  Логика — точная копия `pushBody` из `pushes.ts` (та же плюрализация {days}, пункт C
- *  финального ревью 06б): держать её одинаковой в обоих файлах важнее, чем не повторяться,
- *  иначе веб-копия однажды молча разойдётся с той, что реально шлёт уведомления. */
-export function pushBody(p: PlannedPush, lang: 'ru' | 'en'): string {
-  const card = p.cardId ? cardById.get(p.cardId) : undefined;
-  const n = p.n ?? 0;
-  return pickPhrase(p.phraseKey, p.date, lang, {
-    card: card ? card.name[lang] : '',
-    n,
-    days: i18n.getFixedT(lang)('push.streakDays', { count: n }),
-  });
-}
+// реэкспорт для паритета публичного API с `pushes.ts`, хотя на вебе её никто не зовёт:
+// `applyPlan` и `sendTestPush` ниже ничего не планируют. Раньше здесь лежала ручная копия
+// функции — регресс-тест на плюрализацию {days} проверял именно её, а не «боевую» версию из
+// `pushes.ts`, поэтому баг там тест бы не поймал (пункт 3 второй волны фиксов 06б). Теперь
+// обе версии — один и тот же код из `pushBody.ts` (модуль без единого импорта expo-notifications,
+// поэтому его можно спокойно тянуть и в веб-бандл)
+export { pushBody };
 
 export function applyPlan(_plan: PlannedPush[], _lang: 'ru' | 'en'): Promise<void> {
   return Promise.resolve();

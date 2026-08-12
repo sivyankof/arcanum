@@ -6,11 +6,16 @@
  */
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
-import { cardById } from './content';
 import { localDateISO } from './dates';
 import i18n from './i18n';
 import { pickPhrase } from './phrases';
+import { pushBody } from './pushBody';
 import type { PlannedPush, PushKind } from './pushPlan';
+
+// реэкспорт: `pushBody` — чистая сборка текста, живёт в `pushBody.ts` без единого импорта
+// expo-notifications, чтобы её мог напрямую проверять юнит-тест (пункт 3 второй волны фиксов
+// 06б). Здесь только публикуем то же имя — паблик API модуля не меняется
+export { pushBody };
 
 const WEB = Platform.OS === 'web';
 
@@ -89,22 +94,6 @@ const TITLE_KEY: Record<PushKind, string> = {
   streak: 'push.titleStreak',
   comeback: 'push.titleComeback',
 };
-
-/** Тело пуша: вариант выбирается по дате самого пуша, поэтому текст стабилен в течение дня
- *  (logic-spec §9) и не меняется при каждом пересчёте плана. */
-export function pushBody(p: PlannedPush, lang: 'ru' | 'en'): string {
-  const card = p.cardId ? cardById.get(p.cardId) : undefined;
-  const n = p.n ?? 0;
-  return pickPhrase(p.phraseKey, p.date, lang, {
-    card: card ? card.name[lang] : '',
-    n,
-    // готовая плюрализованная форма для {days} у push.streak_save («Серия {days}» вместо
-    // «Серия {n} дней» — «Серия 3 дней» было согласованием только для одного числа, см. пункт C
-    // финального ревью 06б). Переводчик берём ЯВНО под нужный язык (getFixedT), а не окружающий
-    // i18n.t: тело и заголовок пуша обязаны совпадать по языку (пункт D)
-    days: i18n.getFixedT(lang)('push.streakDays', { count: n }),
-  });
-}
 
 // Номер последнего вызова applyPlan и хвост цепочки его применений. Планировщик вызывает
 // applyPlan реактивно на каждое изменение стора, а сама она — «отменить всё, затем поставить
