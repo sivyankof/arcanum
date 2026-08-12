@@ -2,6 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import type { LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from '../lib/settings';
@@ -17,6 +18,9 @@ export type { DailyDraw };
 // реэкспорт типа, чтобы экраны не меняли импорты
 export type { AppSettings };
 
+// прогресс уроков курса — тип живёт в src/lib/courseProgress.ts рядом с логикой пути
+export type { LessonProgressMap };
+
 interface AppState {
   themeMode: ThemeMode;
   lang: Lang;
@@ -25,6 +29,9 @@ interface AppState {
   streak: number;
   lastDrawDate: string | null;
   history: DailyDraw[];
+  /** Прогресс уроков курса по id урока (logic-spec §7). В 07 читается для состояний
+   *  узлов пути; пишут только DEV-строки настроек — настоящая запись в задаче 08. */
+  lessonsProgress: LessonProgressMap;
   settings: AppSettings;
   /** Только для разработки: показать блок рефлексии, не дожидаясь 18:00. */
   devReflect: boolean;
@@ -34,6 +41,8 @@ interface AppState {
   todayDraw: () => DailyDraw | undefined;
   setNote: (date: string, text: string) => void;
   setOutcome: (date: string, outcome: Outcome) => void;
+  setLessonDone: (lessonId: string, done: boolean) => void;
+  resetCourse: () => void;
   setReflectionOn: (on: boolean) => void;
   setPushesOn: (on: boolean) => void;
   setPushTime: (kind: 'morning' | 'evening', hhmm: string) => void;
@@ -51,6 +60,7 @@ export const useApp = create<AppState>()(
       streak: 0,
       lastDrawDate: null,
       history: [],
+      lessonsProgress: {},
       settings: DEFAULT_SETTINGS,
       devReflect: false,
 
@@ -99,6 +109,17 @@ export const useApp = create<AppState>()(
         });
       },
 
+      // Прогресс урока. До движка урока (08) сюда пишут только DEV-строки настроек;
+      // errors всегда 0 — считать их научит викторина задачи 08.
+      setLessonDone: (lessonId, done) =>
+        set({
+          lessonsProgress: {
+            ...get().lessonsProgress,
+            [lessonId]: { done, errors: 0, ts: Date.now() },
+          },
+        }),
+      resetCourse: () => set({ lessonsProgress: {} }),
+
       setReflectionOn: (on) => set({ settings: { ...get().settings, reflectionOn: on } }),
       setPushesOn: (on) => set({ settings: { ...get().settings, pushesOn: on } }),
       setPushTime: (kind, hhmm) =>
@@ -131,7 +152,10 @@ export const useApp = create<AppState>()(
       // schemaVersion из logic-spec §7 хранится тут же, отдельного поля в состоянии нет.
       // v1 → v2: появились настройки (settings.reflectionOn).
       // v2 → v3: настройки пушей (pushesOn, pushMorning, pushEvening, pushAsked).
-      version: 3,
+      // v3 → v4: lessonsProgress (прогресс курса, спека 07). Ключ ВЕРХНЕГО уровня —
+      // поверхностное слияние persist подставит дефолт {} само (ловушка 06а бьёт только
+      // по вложенным объектам вроде settings), поэтому отдельная ветка миграции не нужна.
+      version: 4,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт
       // целиком, а не сливается с ним по ключам. Поэтому недостающие ключи дописываем здесь
       // руками — и следующая задача, добавляя поля в settings, обязана поднять версию и сделать
