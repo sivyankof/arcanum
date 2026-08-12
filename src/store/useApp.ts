@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
+import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from '../lib/settings';
 import type { ThemeMode } from '../theme/theme';
 
 export type Lang = 'ru' | 'en';
@@ -12,13 +13,9 @@ export type Lang = 'ru' | 'en';
 // здесь — только реэкспорт, чтобы экраны импортировали его привычным путём
 export type { DailyDraw };
 
-/** Настройки приложения (logic-spec §7). Пуш-поля добавит задача 06б. */
-export interface AppSettings {
-  /** Вечерняя рефлексия: блок на «Сегодня» (06а) и вечерний пуш (06б). */
-  reflectionOn: boolean;
-}
-
-const DEFAULT_SETTINGS: AppSettings = { reflectionOn: true };
+// сами настройки (тип, дефолт, слияние при обновлении) живут в src/lib/settings.ts —
+// реэкспорт типа, чтобы экраны не меняли импорты
+export type { AppSettings };
 
 interface AppState {
   themeMode: ThemeMode;
@@ -38,6 +35,9 @@ interface AppState {
   setNote: (date: string, text: string) => void;
   setOutcome: (date: string, outcome: Outcome) => void;
   setReflectionOn: (on: boolean) => void;
+  setPushesOn: (on: boolean) => void;
+  setPushTime: (kind: 'morning' | 'evening', hhmm: string) => void;
+  setPushAsked: () => void;
   setDevReflect: (on: boolean) => void;
   resetToday: () => void;
 }
@@ -100,6 +100,15 @@ export const useApp = create<AppState>()(
       },
 
       setReflectionOn: (on) => set({ settings: { ...get().settings, reflectionOn: on } }),
+      setPushesOn: (on) => set({ settings: { ...get().settings, pushesOn: on } }),
+      setPushTime: (kind, hhmm) =>
+        set({
+          settings: {
+            ...get().settings,
+            ...(kind === 'morning' ? { pushMorning: hhmm } : { pushEvening: hhmm }),
+          },
+        }),
+      setPushAsked: () => set({ settings: { ...get().settings, pushAsked: true } }),
       setDevReflect: (devReflect) => set({ devReflect }),
 
       // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
@@ -121,14 +130,15 @@ export const useApp = create<AppState>()(
       storage: createJSONStorage(() => AsyncStorage),
       // schemaVersion из logic-spec §7 хранится тут же, отдельного поля в состоянии нет.
       // v1 → v2: появились настройки (settings.reflectionOn).
-      version: 2,
+      // v2 → v3: настройки пушей (pushesOn, pushMorning, pushEvening, pushAsked).
+      version: 3,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт
       // целиком, а не сливается с ним по ключам. Поэтому недостающие ключи дописываем здесь
       // руками — и следующая задача, добавляя поля в settings, обязана поднять версию и сделать
       // то же самое, иначе новые настройки не появятся у уже существующих пользователей.
       migrate: (persistedState) => {
         const s = (persistedState ?? {}) as Partial<AppState>;
-        return { ...s, settings: { ...DEFAULT_SETTINGS, ...(s.settings ?? {}) } } as AppState;
+        return { ...s, settings: mergeSettings(s.settings) } as AppState;
       },
       // После гидрации назначаем личный сид карты дня, если он ещё не назначен (installSeed === 0):
       // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.
