@@ -21,6 +21,7 @@ export function ConfirmDialog({
   cancelLabel,
   onConfirm,
   onCancel,
+  confirmTone = 'danger',
 }: {
   visible: boolean;
   title: string;
@@ -29,6 +30,9 @@ export function ConfirmDialog({
   cancelLabel: string;
   onConfirm: () => void;
   onCancel: () => void;
+  /** Тон кнопки подтверждения. 'danger' — «удалить / уйти без сохранения» (по умолчанию),
+   *  'accent' — когда подтверждение не разрушительное (показ плана пушей, прелюдия разрешения). */
+  confirmTone?: 'danger' | 'accent';
 }) {
   const t = useTheme();
 
@@ -40,8 +44,13 @@ export function ConfirmDialog({
         <PressableScale onPress={onCancel} style={[st.btn, { borderColor: t.frame }]}>
           <Txt style={[st.btnTxt, { color: t.accent }]}>{cancelLabel}</Txt>
         </PressableScale>
-        <PressableScale onPress={onConfirm} style={[st.btn, { borderColor: t.line }]}>
-          <Txt style={[st.btnTxt, { color: t.danger }]}>{confirmLabel}</Txt>
+        <PressableScale
+          onPress={onConfirm}
+          style={[st.btn, { borderColor: confirmTone === 'accent' ? t.frame : t.line }]}
+        >
+          <Txt style={[st.btnTxt, { color: confirmTone === 'accent' ? t.accent : t.danger }]}>
+            {confirmLabel}
+          </Txt>
         </PressableScale>
       </View>
     </ModalPanel>

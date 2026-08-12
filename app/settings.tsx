@@ -7,12 +7,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ConfirmDialog } from '../src/components/ConfirmDialog';
 import { FadeUp } from '../src/components/FadeUp';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
 import { TimePicker } from '../src/components/TimePicker';
 import { Txt } from '../src/components/Txt';
-import { getPermission, type PermissionState } from '../src/lib/pushes';
+import { getPermission, listScheduled, sendTestPush, type PermissionState } from '../src/lib/pushes';
 import { timeLabel } from '../src/lib/settings';
 import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
@@ -41,6 +42,30 @@ export default function SettingsScreen() {
 
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
+
+  const [planText, setPlanText] = React.useState<string | null>(null);
+
+  // читаемая расшифровка очереди: что и когда система реально пришлёт
+  const showPlan = async () => {
+    const list = await listScheduled();
+    const lines = list.map((r) => {
+      const trigger = r.trigger;
+      // из всех форм триггера дату несёт только 'date' (так планирует applyPlan);
+      // у тестового пуша (задача 5) триггер 'timeInterval' и к моменту просмотра плана
+      // он обычно уже успевает сработать и пропасть из очереди
+      const when =
+        trigger && 'type' in trigger && trigger.type === 'date'
+          ? typeof trigger.date === 'number'
+            ? new Date(trigger.date)
+            : trigger.date
+          : null;
+      const stamp = when
+        ? `${when.getDate()}.${when.getMonth() + 1} ${when.getHours()}:${String(when.getMinutes()).padStart(2, '0')}`
+        : '—';
+      return `${stamp} · ${r.content.title ?? ''}`;
+    });
+    setPlanText(lines.length ? lines.join('\n') : tr('settings.planEmpty'));
+  };
 
   // системное разрешение спрашиваем при входе на экран и при возврате из фона:
   // человек мог уйти в системные настройки и вернуться уже с другим ответом
@@ -152,6 +177,22 @@ export default function SettingsScreen() {
                 onPress={() => setDevReflect(!devReflect)}
               />
             </FadeUp>
+            <FadeUp index={8}>
+              <SettingsRow
+                icon="send-outline"
+                label={tr('settings.testPush')}
+                value="DEV"
+                onPress={() => sendTestPush(lang)}
+              />
+            </FadeUp>
+            <FadeUp index={9}>
+              <SettingsRow
+                icon="list-outline"
+                label={tr('settings.showPlan')}
+                value="DEV"
+                onPress={showPlan}
+              />
+            </FadeUp>
           </>
         )}
         <TimePicker
@@ -161,6 +202,16 @@ export default function SettingsScreen() {
           hours={picker === 'evening' ? [19, 20, 21, 22, 23] : [7, 8, 9, 10, 11]}
           onPick={(hhmm) => picker && setPushTime(picker, hhmm)}
           onClose={() => setPicker(null)}
+        />
+        <ConfirmDialog
+          visible={planText !== null}
+          title={tr('settings.showPlan')}
+          message={planText ?? ''}
+          confirmLabel="OK"
+          cancelLabel={tr('settings.close')}
+          confirmTone="accent"
+          onConfirm={() => setPlanText(null)}
+          onCancel={() => setPlanText(null)}
         />
       </ScrollView>
     </View>
