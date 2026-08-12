@@ -123,6 +123,8 @@ async function applyPlanImpl(plan: PlannedPush[], lang: 'ru' | 'en', mySeq: numb
   // нас обогнали, пока мы ждали своей очереди в цепочке — писать устаревший план не нужно
   if (mySeq !== planSeq) return;
 
+  // ДИАГНОСТИКА (временно, разбор «тестовый пуш не приходит при открытом приложении»)
+  console.log('[push-debug] applyPlan: снимаю очередь, seq', mySeq, 'план из', plan.length);
   await Notifications.cancelAllScheduledNotificationsAsync();
   if ((await getPermission()) !== 'granted') return;
 
@@ -162,8 +164,10 @@ export async function sendTestPush(lang: 'ru' | 'en'): Promise<void> {
   if (WEB) return;
   await initPushes();
   const status = (await getPermission()) === 'granted' ? 'granted' : await requestPermission();
+  // ДИАГНОСТИКА (временно, разбор «тестовый пуш не приходит при открытом приложении»)
+  console.log('[push-debug] sendTestPush: разрешение =', status);
   if (status !== 'granted') return;
-  await Notifications.scheduleNotificationAsync({
+  const id = await Notifications.scheduleNotificationAsync({
     content: {
       // фиксированный переводчик под lang — та же причина, что в applyPlanImpl (пункт D)
       title: i18n.getFixedT(lang)('push.titleMorning'),
@@ -175,4 +179,8 @@ export async function sendTestPush(lang: 'ru' | 'en'): Promise<void> {
       channelId: CHANNEL_ID,
     },
   });
+  // ДИАГНОСТИКА (временно): id поставленного уведомления и полный состав очереди сразу после
+  console.log('[push-debug] sendTestPush: поставлен id =', id);
+  const queue = await Notifications.getAllScheduledNotificationsAsync();
+  console.log('[push-debug] в очереди сразу после постановки:', queue.length, queue.map((r) => r.identifier));
 }

@@ -254,7 +254,13 @@ export default function SettingsScreen() {
                 icon="send-outline"
                 label={tr('settings.testPush')}
                 value="DEV"
-                onPress={() => sendTestPush(lang)}
+                // без catch сбой постановки уходил бы в необработанный reject: строка молчит,
+                // и «пуш не пришёл» невозможно отличить от «пуш не поставился»
+                onPress={() =>
+                  sendTestPush(lang).catch((err) =>
+                    console.warn('[push-debug] sendTestPush упал:', err),
+                  )
+                }
               />
             </FadeUp>
             <FadeUp index={9}>
