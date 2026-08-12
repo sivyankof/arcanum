@@ -136,7 +136,7 @@ export function PathNode({
   return (
     <View style={st.node}>
       {state === 'current' && (
-        <Animated.View pointerEvents="none" style={[st.ring, { borderColor: t.accent }, ringStyle]} />
+        <Animated.View style={[st.ring, { borderColor: t.accent, pointerEvents: 'none' }, ringStyle]} />
       )}
       <PressableScale
         onPress={onNodePress}
@@ -159,14 +159,14 @@ export function PathNode({
         </View>
       </PressableScale>
       {state === 'current' && (
-        <Animated.View pointerEvents="none" style={[st.chipWrap, bobStyle]}>
+        <Animated.View style={[st.chipWrap, bobStyle]}>
           <View style={[st.chip, { backgroundColor: t.panel, borderColor: t.frame }]}>
             <Txt style={[st.chipText, { color: t.accent }]}>{chipLabel}</Txt>
             <View style={[st.chipTail, { backgroundColor: t.panel, borderColor: t.frame }]} />
           </View>
         </Animated.View>
       )}
-      <View pointerEvents="none" style={st.labelWrap}>
+      <View style={st.labelWrap}>
         <Txt
           numberOfLines={2}
           style={[st.label, { color: state === 'current' ? t.head : t.muted }]}
@@ -207,6 +207,7 @@ const st = StyleSheet.create({
     width: CHIP_W,
     alignItems: 'center',
     zIndex: 3,
+    pointerEvents: 'none' as const,
   },
   chip: {
     borderWidth: 1,
@@ -232,6 +233,7 @@ const st = StyleSheet.create({
     left: (NODE_SIZE - LABEL_W) / 2,
     width: LABEL_W,
     alignItems: 'center',
+    pointerEvents: 'none' as const,
   },
   label: {
     width: '100%',

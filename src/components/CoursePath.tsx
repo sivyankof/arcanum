@@ -53,7 +53,7 @@ export function CoursePath({
     <View style={{ height }} onLayout={onLayout}>
       {width > 0 && (
         <>
-          <Svg width={width} height={height} style={{ position: 'absolute' }} pointerEvents="none">
+          <Svg width={width} height={height} style={{ position: 'absolute', pointerEvents: 'none' }}>
             <Path
               d={d}
               stroke={t.line}
