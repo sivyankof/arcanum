@@ -94,5 +94,8 @@ export const radius = { s: 8, m: 12, l: 16, xl: 20, card: 16 } as const;
 export const gold = {
   gradient: ['#caa45a', '#efd9a2', '#caa45a'] as readonly [string, string, string],
   tabGradient: ['#caa45a', '#e9d095'] as readonly [string, string],
+  // узел «текущий» на пути курса: 2 стопа под 140° — ТРЕТИЙ вариант золота эталона,
+  // не совпадает ни с CTA (3 стопа), ни с вкладками (второй стоп #e9d095) — спека 07
+  nodeGradient: ['#caa45a', '#efd9a2'] as readonly [string, string],
   text: '#241c0d', // цвет текста поверх золотой заливки
 };
