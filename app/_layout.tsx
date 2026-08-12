@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import '../src/lib/i18n';
 import i18n from '../src/lib/i18n';
+import { usePushScheduler } from '../src/lib/usePushScheduler';
 import { useApp } from '../src/store/useApp';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -39,6 +40,7 @@ export default function RootLayout() {
     Manrope_700Bold,
     Manrope_800ExtraBold,
   });
+  usePushScheduler();
 
   useEffect(() => {
     i18n.changeLanguage(lang);
