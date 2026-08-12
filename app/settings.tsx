@@ -5,11 +5,16 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, View } from 'react-native';
+import { Linking, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../src/components/FadeUp';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
+import { TimePicker } from '../src/components/TimePicker';
+import { Txt } from '../src/components/Txt';
+import { getPermission, type PermissionState } from '../src/lib/pushes';
+import { timeLabel } from '../src/lib/settings';
+import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
 import { spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
@@ -28,6 +33,26 @@ export default function SettingsScreen() {
   const setReflectionOn = useApp((s) => s.setReflectionOn);
   const devReflect = useApp((s) => s.devReflect);
   const setDevReflect = useApp((s) => s.setDevReflect);
+  const pushesOn = useApp((s) => s.settings.pushesOn);
+  const pushMorning = useApp((s) => s.settings.pushMorning);
+  const pushEvening = useApp((s) => s.settings.pushEvening);
+  const setPushesOn = useApp((s) => s.setPushesOn);
+  const setPushTime = useApp((s) => s.setPushTime);
+
+  // какой пикер открыт (null — ни один)
+  const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
+
+  // системное разрешение спрашиваем при входе на экран и при возврате из фона:
+  // человек мог уйти в системные настройки и вернуться уже с другим ответом
+  const [perm, setPerm] = React.useState<PermissionState>('undetermined');
+  React.useEffect(() => {
+    getPermission().then(setPerm);
+  }, []);
+  useAppActive(() => {
+    getPermission().then(setPerm);
+  });
+
+  const denied = perm === 'denied';
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -66,9 +91,42 @@ export default function SettingsScreen() {
             onPress={() => setReflectionOn(!reflectionOn)}
           />
         </FadeUp>
+        <FadeUp index={3}>
+          <SettingsRow
+            icon="notifications-outline"
+            label={tr('settings.pushes')}
+            value={denied ? tr('settings.pushDenied') : pushesOn ? tr('settings.on') : tr('settings.off')}
+            onPress={() => (denied ? Linking.openSettings() : setPushesOn(!pushesOn))}
+          />
+        </FadeUp>
+        {pushesOn && !denied && (
+          <>
+            <FadeUp index={4}>
+              <SettingsRow
+                icon="sunny-outline"
+                label={tr('settings.pushMorning')}
+                value={timeLabel(pushMorning)}
+                onPress={() => setPicker('morning')}
+              />
+            </FadeUp>
+            <FadeUp index={5}>
+              <SettingsRow
+                icon="moon-outline"
+                label={tr('settings.pushEvening')}
+                value={timeLabel(pushEvening)}
+                onPress={() => setPicker('evening')}
+              />
+            </FadeUp>
+            {/* единственное место, где можно рассказать про два молчаливых пуша:
+                своих тумблеров у спасения серии и возврата нет (спека 06б, решение 4) */}
+            <FadeUp index={5}>
+              <Txt style={[st.hint, { color: t.muted }]}>{tr('settings.pushHint')}</Txt>
+            </FadeUp>
+          </>
+        )}
         {__DEV__ && (
           <>
-            <FadeUp index={3}>
+            <FadeUp index={6}>
               <SettingsRow
                 icon="refresh"
                 label={tr('settings.resetToday')}
@@ -76,7 +134,7 @@ export default function SettingsScreen() {
                 onPress={resetToday}
               />
             </FadeUp>
-            <FadeUp index={4}>
+            <FadeUp index={7}>
               <SettingsRow
                 icon="time-outline"
                 label={tr('settings.reflectNow')}
@@ -86,7 +144,19 @@ export default function SettingsScreen() {
             </FadeUp>
           </>
         )}
+        <TimePicker
+          visible={picker !== null}
+          value={picker === 'evening' ? pushEvening : pushMorning}
+          title={picker === 'evening' ? tr('settings.pickEvening') : tr('settings.pickMorning')}
+          hours={picker === 'evening' ? [19, 20, 21, 22, 23] : [7, 8, 9, 10, 11]}
+          onPick={(hhmm) => picker && setPushTime(picker, hhmm)}
+          onClose={() => setPicker(null)}
+        />
       </ScrollView>
     </View>
   );
 }
+
+const st = StyleSheet.create({
+  hint: { fontSize: 12, lineHeight: 17, marginTop: spacing.s, paddingHorizontal: spacing.xs },
+});

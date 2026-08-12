@@ -37,6 +37,9 @@ const resources = {
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
         pushes: "Напоминания",
+        pushMorning: "Утреннее", pushEvening: "Вечернее", pushDenied: "Выключены в системе",
+        pushHint: "Ещё напомним, если серия под угрозой, и один раз — если вы давно не заходили",
+        pickMorning: "Когда напомнить утром", pickEvening: "Когда напомнить вечером",
       },
       // заголовки баннеров: тело пуша берётся из content/phrases.json (правило вариативности),
       // а заголовок — короткая метка типа. Числительное — плюрализацией, иначе «Серия 3 дней»
@@ -117,6 +120,9 @@ const resources = {
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
         pushes: "Reminders",
+        pushMorning: "Morning", pushEvening: "Evening", pushDenied: "Off in system settings",
+        pushHint: "We'll also nudge you if your streak is at risk, and once if you've been away",
+        pickMorning: "Morning reminder time", pickEvening: "Evening reminder time",
       },
       push: {
         titleMorning: "Card of the day ✦",
