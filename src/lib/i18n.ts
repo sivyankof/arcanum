@@ -55,6 +55,11 @@ const resources = {
         titleStreak_few: "Серия {{count}} дня",
         titleStreak_many: "Серия {{count}} дней",
         titleComeback: "Давно не виделись",
+        // прелюдия разрешения на пуши — вопрос после первого переворота карты дня (спека 06б)
+        preludeTitle: "Напомнить утром?",
+        preludeText: "Пришлём одно тихое напоминание, когда придёт время новой карты. Выключить можно в любой момент в настройках.",
+        preludeYes: "Напомнить",
+        preludeNo: "Не сейчас",
       },
       // дневник в профиле и блок «Ваша история с картой» (product-spec §5, logic-spec §3).
       // Числительные — плюрализация i18next: _one/_few/_many для русского
@@ -140,6 +145,10 @@ const resources = {
         titleStreak_one: "{{count}}-day streak",
         titleStreak_other: "{{count}}-day streak",
         titleComeback: "It's been a while",
+        preludeTitle: "A morning nudge?",
+        preludeText: "We'll send one quiet reminder when it's time for a new card. You can turn it off anytime in settings.",
+        preludeYes: "Remind me",
+        preludeNo: "Not now",
       },
       journal: {
         title: "Journal",

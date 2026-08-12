@@ -16,6 +16,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
 import { CardBack } from '../../src/components/CardBack';
+import { ConfirmDialog } from '../../src/components/ConfirmDialog';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
 import { NotePlate } from '../../src/components/NotePlate';
@@ -31,6 +32,7 @@ import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import type { Outcome } from '../../src/lib/journal';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
+import { requestPermission } from '../../src/lib/pushes';
 import { reflectionVisible } from '../../src/lib/reflection';
 import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
@@ -159,6 +161,18 @@ export default function TodayScreen() {
   const setOutcome = useApp((s) => s.setOutcome);
   const reflectionOn = useApp((s) => s.settings.reflectionOn);
   const devReflect = useApp((s) => s.devReflect);
+  const pushAsked = useApp((s) => s.settings.pushAsked);
+  const setPushAsked = useApp((s) => s.setPushAsked);
+  const [preludeOpen, setPreludeOpen] = React.useState(false);
+  // таймер прелюдии храним в ref, чтобы снять его при уходе с экрана — иначе висящий колбэк
+  // мог бы сработать после размонтирования
+  const preludeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  React.useEffect(
+    () => () => {
+      if (preludeTimer.current) clearTimeout(preludeTimer.current);
+    },
+    [],
+  );
   const scrollRef = useTabTopRef<ScrollView>();
 
   // час пересчитываем при возврате на таб, а не таймером каждую минуту: сидеть в приложении
@@ -261,6 +275,18 @@ export default function TodayScreen() {
     if (newStreak > prevStreak) setTimeout(() => setBurst((b) => b + 1), FLIP_MS * 0.7);
     // Success бережём для настоящих побед: 7-й день серии (и позже — завершённый урок)
     if (newStreak === STREAK_MILESTONE) setTimeout(hapticSuccess, FLIP_MS);
+
+    // прелюдия — только один раз за всё время и только после того, как карта уже открылась:
+    // системный диалог даётся однажды навсегда, и показывать его на пустом экране — значит
+    // потерять согласие безвозвратно (product-spec §1). Флаг перечитываем из стора в момент
+    // срабатывания таймера, а не полагаемся на значение, захваченное при планировании: если
+    // карту дня успели сбросить (DEV) и вытянуть заново, пока первый таймер ещё ждал, второй
+    // не должен переоткрыть уже отвеченную прелюдию
+    if (!pushAsked) {
+      preludeTimer.current = setTimeout(() => {
+        if (!useApp.getState().settings.pushAsked) setPreludeOpen(true);
+      }, FLIP_MS + 600);
+    }
   };
 
   const dayText = card.content.day_card?.[lang];
@@ -397,6 +423,25 @@ export default function TodayScreen() {
           </>
         )}
       </ScrollView>
+      <ConfirmDialog
+        visible={preludeOpen}
+        title={tr('push.preludeTitle')}
+        message={tr('push.preludeText')}
+        confirmLabel={tr('push.preludeYes')}
+        cancelLabel={tr('push.preludeNo')}
+        confirmTone="accent"
+        onConfirm={() => {
+          setPushAsked();
+          setPreludeOpen(false);
+          requestPermission();
+        }}
+        onCancel={() => {
+          // «Не сейчас» и промах мимо панели — одно и то же: больше не спрашиваем,
+          // выключить или включить напоминания можно в настройках
+          setPushAsked();
+          setPreludeOpen(false);
+        }}
+      />
     </View>
   );
 }
