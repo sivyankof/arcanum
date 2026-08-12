@@ -45,8 +45,7 @@ export default function CourseScreen() {
     scrollRef.current?.scrollTo({ y: Math.max(0, target - spacing.m), animated: false });
   };
 
-  // typedRoutes не знает /lesson/[id] — экран появится в задаче 9, тогда каст снимается
-  const openLesson = (l: CourseLesson) => router.push(`/lesson/${l.id}` as never);
+  const openLesson = (l: CourseLesson) => router.push(`/lesson/${l.id}`);
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
