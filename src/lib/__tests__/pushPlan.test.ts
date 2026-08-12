@@ -82,12 +82,13 @@ describe('planPushes — вечерний', () => {
 });
 
 describe('planPushes — спасение серии', () => {
-  it('серия 3 и карта не открыта — спасение в 20:00 с числом дней', () => {
+  it('серия 3 и карта не открыта — спасение в 20:00 с числом дней, и только на сегодня', () => {
     const plan = planPushes({ ...base, streak: 3 }, MORNING_8AM);
-    const save = plan.find((p) => p.kind === 'streak');
-    expect(save).toBeDefined();
-    expect(save!.hour).toBe(20);
-    expect(save!.n).toBe(3);
+    const streakPushes = plan.filter((p) => p.kind === 'streak');
+    expect(streakPushes).toHaveLength(1);
+    expect(streakPushes[0].date).toBe('2026-08-12');
+    expect(streakPushes[0].hour).toBe(20);
+    expect(streakPushes[0].n).toBe(3);
   });
 
   it('серия 2 — спасения нет', () => {
@@ -131,5 +132,34 @@ describe('planPushes — возврат и инварианты', () => {
     const plan = planPushes({ ...base, streak: 5 }, MORNING_8AM);
     expect(plan.length).toBeGreaterThan(0);
     for (const p of plan) expect(p.phraseKey.startsWith('push.')).toBe(true);
+  });
+
+  it('время утреннего, вечернего и возвратного пушей берётся из настроек, а не захардкожено', () => {
+    const custom: PlanInput = { ...base, morning: '07:45', evening: '22:30' };
+    // 07:00 — до настроенного утреннего (07:45), сегодняшний утренний ещё не прошёл
+    const earlyMorning = new Date(2026, 7, 12, 7, 0);
+
+    // карта не открыта: сегодняшний утренний, будущие утренние и возвратный — время из morning
+    const notDrawn = planPushes(custom, earlyMorning);
+    const todayMorning = notDrawn.find((p) => p.kind === 'morning' && p.date === '2026-08-12');
+    expect(todayMorning!.hour).toBe(7);
+    expect(todayMorning!.minute).toBe(45);
+
+    const futureMorning = notDrawn.filter((p) => p.kind === 'morning' && p.date > '2026-08-12');
+    expect(futureMorning.length).toBeGreaterThan(0);
+    for (const p of futureMorning) {
+      expect(p.hour).toBe(7);
+      expect(p.minute).toBe(45);
+    }
+
+    const comeback = notDrawn.find((p) => p.kind === 'comeback');
+    expect(comeback!.hour).toBe(7);
+    expect(comeback!.minute).toBe(45);
+
+    // карта открыта: вечерний — время из evening
+    const drawn = planPushes({ ...custom, todayCardId: 'the-tower' }, earlyMorning);
+    const evening = drawn.find((p) => p.kind === 'evening');
+    expect(evening!.hour).toBe(22);
+    expect(evening!.minute).toBe(30);
   });
 });
