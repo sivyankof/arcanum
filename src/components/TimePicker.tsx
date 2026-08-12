@@ -35,29 +35,57 @@ export function TimePicker({
     return d;
   }, [hour, minute]);
 
-  const onChange = (event: DateTimePickerEvent, picked?: Date) => {
-    // Android рисует системный диалог сам: 'dismissed' = отмена, 'set' = выбор
+  // iOS-колесо (display="spinner") шлёт onChange на КАЖДЫЙ тик прокрутки — это штатное
+  // поведение самого пикера (задокументировано в README пакета), а не разовое подтверждение
+  // выбора. Поэтому крутить колесо ≠ сохранять: значение копится в черновике и коммитится
+  // в onPick только по кнопке «OK». НЕ упрощать обратно на прямой onChange→onPick — так
+  // значение будет записываться при каждом движении пальца, и «отмены» не станет вовсе.
+  // Android этой проблемы не касается: системный диалог сам присылает onChange один раз,
+  // при подтверждении ('set'), поэтому черновик там не нужен — пишем сразу.
+  const [draft, setDraft] = React.useState(date);
+
+  // Открыли модалку заново (или сменили входное value, пока она была открыта) — черновик
+  // подтягиваем к актуальному сохранённому значению. Без этого повторное открытие показало бы
+  // огрызок прошлой прокрутки колеса, а не то, что реально лежит в настройках.
+  React.useEffect(() => {
+    if (visible) setDraft(date);
+  }, [visible, date]);
+
+  const onChangeAndroid = (event: DateTimePickerEvent, picked?: Date) => {
+    // Android рисует системный диалог сам: 'dismissed' = отмена, 'set' = выбор — событие одно
     if (event.type === 'dismissed' || !picked) {
       onClose();
       return;
     }
     onPick(formatHHMM(picked.getHours(), picked.getMinutes()));
-    if (Platform.OS === 'android') onClose();
+    onClose();
+  };
+
+  const onChangeIOS = (_event: DateTimePickerEvent, picked?: Date) => {
+    if (picked) setDraft(picked);
+  };
+
+  const confirmIOS = () => {
+    onPick(formatHHMM(draft.getHours(), draft.getMinutes()));
+    onClose();
   };
 
   if (!visible) return null;
 
   // Android: компонент сам открывает системный диалог, обёртка не нужна
   if (Platform.OS === 'android') {
-    return <DateTimePicker value={date} mode="time" is24Hour display="default" onChange={onChange} />;
+    return (
+      <DateTimePicker value={date} mode="time" is24Hour display="default" onChange={onChangeAndroid} />
+    );
   }
 
-  // iOS: колесо живёт внутри нашей модалки, закрытие — своей кнопкой
+  // iOS: колесо живёт внутри нашей модалки. Тап по затемнению и аппаратная «назад» уходят
+  // через onClose из ModalPanel и ничего не пишут — запись только через кнопку «OK».
   return (
     <ModalPanel visible onClose={onClose}>
       <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
-      <DateTimePicker value={date} mode="time" is24Hour display="spinner" onChange={onChange} />
-      <Pressable onPress={onClose} style={[st.done, { borderColor: t.frame }]}>
+      <DateTimePicker value={draft} mode="time" is24Hour display="spinner" onChange={onChangeIOS} />
+      <Pressable onPress={confirmIOS} style={[st.done, { borderColor: t.frame }]}>
         <Txt style={[st.doneTxt, { color: t.accent }]}>OK</Txt>
       </Pressable>
     </ModalPanel>
