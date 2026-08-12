@@ -55,6 +55,10 @@ describe('lessonStates — сквозная блокировка (решение
       a1: 'current', a2: 'done', b1: 'locked', b2: 'locked', b3: 'locked',
     });
   });
+
+  it('пустой курс не ломает разбор состояний', () => {
+    expect(lessonStates([], {})).toEqual({});
+  });
 });
 
 describe('nextLessonId', () => {
@@ -63,6 +67,22 @@ describe('nextLessonId', () => {
   });
   it('всё пройдено → null', () => {
     expect(nextLessonId(MODULES, done('a1', 'a2', 'b1', 'b2', 'b3'))).toBeNull();
+  });
+
+  it('переход через границу модулей: закрыт весь "a" — следующий в начале "b"', () => {
+    expect(nextLessonId(MODULES, done('a1', 'a2'))).toBe('b1');
+  });
+
+  it('частичный прогресс внутри модуля', () => {
+    expect(nextLessonId(MODULES, done('a1'))).toBe('a2');
+  });
+
+  // страховка от расхождения двух копий правила «первый непройденный»
+  it('совпадает с узлом, который lessonStates пометила current', () => {
+    for (const p of [{}, done('a1'), done('a1', 'a2'), done('a1', 'a2', 'b1')]) {
+      const current = Object.entries(lessonStates(MODULES, p)).find(([, s]) => s === 'current')?.[0] ?? null;
+      expect(nextLessonId(MODULES, p)).toBe(current);
+    }
   });
 });
 
@@ -80,6 +100,9 @@ describe('moduleProgress — процент для шапки модуля', () 
   });
   it('чужие уроки не считаются', () => {
     expect(moduleProgress(b, done('a1', 'a2')).done).toBe(0);
+  });
+  it('модуль без уроков не делит на ноль', () => {
+    expect(moduleProgress(fx('c', 0), {})).toEqual({ done: 0, total: 0, pct: 0 });
   });
 });
 

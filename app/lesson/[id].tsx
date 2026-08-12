@@ -1,6 +1,6 @@
 /** Заглушка урока (спека 07): маршрут, шапка и композиция настоящие, содержимое привезёт
  *  задача 08 (теория → викторина → результат). Открывается с узла пути курса. */
-import { Stack, useLocalSearchParams, useNavigation } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -10,7 +10,7 @@ import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { course } from '../../src/lib/content';
-import { hapticTap } from '../../src/lib/haptics';
+import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { fonts, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -30,10 +30,8 @@ export default function LessonScreen() {
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  // вибрация на уходе с экрана — паттерн card/[id]: кнопка «назад» нативная, onPress не
-  // повесить, поэтому ловим beforeRemove (покрывает и кнопку, и свайп-жест)
-  const navigation = useNavigation();
-  React.useEffect(() => navigation.addListener('beforeRemove', () => { hapticTap(); }), [navigation]);
+  // вибрация на уходе с экрана — общий хук (второе появление паттерна card/[id])
+  useBackHaptic();
 
   const found = findLesson(id);
 

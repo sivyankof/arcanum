@@ -40,13 +40,12 @@ export function lessonStates(
   return states;
 }
 
-/** id урока-current — для DEV-строки «пройти следующий урок». null — курс пройден целиком. */
+/** id урока-current — для DEV-строки «пройти следующий урок». Производная от lessonStates,
+ *  а не вторая копия её правила «первый непройденный»: current у lessonStates ровно один
+ *  или ни одного, ровно это утверждение и нужно здесь. null — курс пройден целиком. */
 export function nextLessonId(modules: CourseModule[], progress: LessonProgressMap): string | null {
-  for (const m of modules) {
-    const open = m.lessons.find((l) => !progress[l.id]?.done);
-    if (open) return open.id;
-  }
-  return null;
+  const states = lessonStates(modules, progress);
+  return Object.keys(states).find((id) => states[id] === 'current') ?? null;
 }
 
 /** Прогресс модуля для шапки: pct — целые проценты, обычное округление. */

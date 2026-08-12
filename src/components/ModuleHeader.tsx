@@ -62,7 +62,7 @@ const st = StyleSheet.create({
     paddingHorizontal: spacing.l,
   },
   overlineRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  overline: { fontSize: 9.5, letterSpacing: 2, fontWeight: '600' },
+  overline: { fontSize: 9.5, letterSpacing: 2.5, fontWeight: '600' },
   title: { fontFamily: fonts.displaySemi, fontSize: 20, marginTop: 2 },
   counters: { fontSize: 11, letterSpacing: 1, fontWeight: '600', marginTop: 3 },
   pct: { fontSize: 14, fontWeight: '700' },

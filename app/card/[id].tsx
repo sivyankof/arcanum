@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Stack, useLocalSearchParams, useNavigation } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -30,6 +30,7 @@ import { cardById, cardNumeral } from '../../src/lib/content';
 import { formatDayMonth } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { cardHistory } from '../../src/lib/journal';
+import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -145,10 +146,8 @@ export default function CardDetail() {
   const todayCardId = useApp((s) => s.todayDraw()?.cardId);
   const history = useApp((s) => s.history);
   const fadeStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
-  // вибрация при возврате: кнопка «назад» теперь системная (нативная), на неё нельзя повесить
-  // onPress, поэтому ловим сам уход с экрана — это покрывает и тап по кнопке, и свайп-жест назад
-  const navigation = useNavigation();
-  React.useEffect(() => navigation.addListener('beforeRemove', () => { hapticTap(); }), [navigation]);
+  // вибрация при возврате — общий хук (второе появление паттерна вынесено в useBackHaptic)
+  useBackHaptic();
 
   const card = cardById.get(id ?? '');
   if (!card) return null;
