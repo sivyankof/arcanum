@@ -19,13 +19,32 @@ const CHANNEL_ID = 'daily';
 
 export type PermissionState = 'granted' | 'denied' | 'undetermined';
 
-let inited = false;
+// Промис инициализации (а не булев флаг): планировщик пересчитывает план реактивно и может
+// вызвать initPushes несколько раз почти одновременно (типичный случай — холодный старт: эффект
+// срабатывает на дефолтном состоянии стора, затем ещё раз сразу после гидрации persist). Булев
+// флаг выставлялся синхронно ДО завершения `setNotificationChannelAsync`, поэтому второй
+// параллельный вызов видел `inited === true` и запускал `applyPlan`, пока канал Android ещё
+// не был создан первым вызовом — та самая гонка, которую упорядочивание
+// `initPushes().then(() => applyPlan(...))` должно было исключить. Храня сам промис, все
+// конкурентные вызовы дожидаются ОДНОЙ настоящей инициализации.
+let initPromise: Promise<void> | null = null;
 
 /** Хендлер + канал. Идемпотентна: вызывается из планировщика на каждом пересчёте. */
-export async function initPushes(): Promise<void> {
-  if (WEB || inited) return;
-  inited = true;
+export function initPushes(): Promise<void> {
+  if (WEB) return Promise.resolve();
+  if (!initPromise) {
+    initPromise = initPushesImpl().catch((err) => {
+      // сбой (например, `setNotificationChannelAsync` упал) не должен НАВСЕГДА заблокировать
+      // инициализацию — сбрасываем промис, чтобы следующий пересчёт получил шанс попробовать
+      // снова, а не унаследовал один раз отклонённый результат
+      initPromise = null;
+      throw err;
+    });
+  }
+  return initPromise;
+}
 
+async function initPushesImpl(): Promise<void> {
   // ⚠️ без этого на iOS баннер не показывается, пока приложение открыто, — и DEV-проверка
   // выглядит так, будто пуш не пришёл вовсе
   Notifications.setNotificationHandler({
@@ -74,14 +93,41 @@ export function pushBody(p: PlannedPush, lang: 'ru' | 'en'): string {
   });
 }
 
+// Номер последнего вызова applyPlan и хвост цепочки его применений. Планировщик вызывает
+// applyPlan реактивно на каждое изменение стора, а сама она — «отменить всё, затем поставить
+// всё заново», не атомарная операция. Без сериализации два близких по времени пересчёта могли
+// бы чередовать свои await'ы (cancelAll одного посреди scheduleNotificationAsync другого), и
+// в очереди ОС осталась бы мешанина вместо согласованного плана. Каждый вызов встаёт в хвост
+// этой цепочки (гарантия «не чередуемся») и клеймится растущим номером: если, пока вызов ждал
+// своей очереди, пришёл более новый пересчёт, номер уже не совпадает с последним выданным —
+// такой вызов бросает свою работу вместо того, чтобы дописывать в очередь устаревший план.
+let planSeq = 0;
+let applyChain: Promise<void> = Promise.resolve();
+
 /** Снимает всё запланированное и ставит план заново. Другого способа выразить условные
  *  правила logic-spec §8 нет: система условий не проверяет, она просто шлёт в срок. */
-export async function applyPlan(plan: PlannedPush[], lang: 'ru' | 'en'): Promise<void> {
-  if (WEB) return;
+export function applyPlan(plan: PlannedPush[], lang: 'ru' | 'en'): Promise<void> {
+  if (WEB) return Promise.resolve();
+  const mySeq = ++planSeq;
+  const run = applyChain.then(() => applyPlanImpl(plan, lang, mySeq));
+  // хвост цепочки не должен оборваться из-за ошибки одного вызова — иначе все последующие
+  // пересчёты зависнут навсегда, ожидая уже отклонённый applyChain; саму ошибку наружу видит
+  // вызывающий через промис `run`, который возвращаем как есть
+  applyChain = run.catch(() => {});
+  return run;
+}
+
+async function applyPlanImpl(plan: PlannedPush[], lang: 'ru' | 'en', mySeq: number): Promise<void> {
+  // нас обогнали, пока мы ждали своей очереди в цепочке — писать устаревший план не нужно
+  if (mySeq !== planSeq) return;
+
   await Notifications.cancelAllScheduledNotificationsAsync();
   if ((await getPermission()) !== 'granted') return;
 
   for (const p of plan) {
+    // тот же самый обгон может случиться и посреди цикла — длинный план не должен дописывать
+    // уведомления после того, как более новый пересчёт уже встал в очередь позади нас
+    if (mySeq !== planSeq) return;
     const [y, m, d] = p.date.split('-').map(Number);
     await Notifications.scheduleNotificationAsync({
       content: {
