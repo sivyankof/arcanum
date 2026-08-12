@@ -32,6 +32,7 @@ export const NODE_SIZE = 76;
 const ICON = 28;
 const RING_INSET = -10; // пульс-кольцо на 10px шире узла с каждой стороны
 const LABEL_W = 132; // подпись до двух строк (в макете nowrap — в RN он бы обрезался)
+const CHIP_W = 150; // обёртка чипа: шире узла, иначе «НАЧАТЬ УРОК» не помещается в одну строку
 const SHAKE_STEP_MS = 58; // качание замка: ±8°, три раза, ~350мс (motion-spec №13)
 
 /** Иконки состояний — пути из эталона (блок course path в design-reference.html). */
@@ -158,20 +159,21 @@ export function PathNode({
         </View>
       </PressableScale>
       {state === 'current' && (
-        <Animated.View
-          pointerEvents="none"
-          style={[st.chip, { backgroundColor: t.panel, borderColor: t.frame }, bobStyle]}
-        >
-          <Txt style={[st.chipText, { color: t.accent }]}>{chipLabel}</Txt>
-          <View style={[st.chipTail, { backgroundColor: t.panel, borderColor: t.frame }]} />
+        <Animated.View pointerEvents="none" style={[st.chipWrap, bobStyle]}>
+          <View style={[st.chip, { backgroundColor: t.panel, borderColor: t.frame }]}>
+            <Txt style={[st.chipText, { color: t.accent }]}>{chipLabel}</Txt>
+            <View style={[st.chipTail, { backgroundColor: t.panel, borderColor: t.frame }]} />
+          </View>
         </Animated.View>
       )}
-      <Txt
-        numberOfLines={2}
-        style={[st.label, { color: state === 'current' ? t.head : t.muted }]}
-      >
-        {title}
-      </Txt>
+      <View pointerEvents="none" style={st.labelWrap}>
+        <Txt
+          numberOfLines={2}
+          style={[st.label, { color: state === 'current' ? t.head : t.muted }]}
+        >
+          {title}
+        </Txt>
+      </View>
     </View>
   );
 }
@@ -196,15 +198,21 @@ const st = StyleSheet.create({
     borderRadius: (NODE_SIZE - RING_INSET * 2) / 2,
     borderWidth: 1.5,
   },
-  chip: {
+  // обёртка чипа шире узла (CHIP_W > NODE_SIZE) — иначе react-native-web ограничивает
+  // детей max-width: 100% от родителя-узла и «НАЧАТЬ УРОК» ломается на две строки
+  chipWrap: {
     position: 'absolute',
     top: -53,
-    alignSelf: 'center',
+    left: (NODE_SIZE - CHIP_W) / 2,
+    width: CHIP_W,
+    alignItems: 'center',
+    zIndex: 3,
+  },
+  chip: {
     borderWidth: 1,
     borderRadius: 12,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    zIndex: 3,
   },
   chipText: { fontSize: 11.5, fontWeight: '700', letterSpacing: 1.5 },
   chipTail: {
@@ -217,11 +225,16 @@ const st = StyleSheet.create({
     borderBottomWidth: 1,
     transform: [{ rotate: '45deg' }],
   },
-  label: {
+  // та же причина, что у chipWrap: подпись шире узла, поэтому её тоже несём в обёртке
+  labelWrap: {
     position: 'absolute',
     top: 80,
     left: (NODE_SIZE - LABEL_W) / 2,
     width: LABEL_W,
+    alignItems: 'center',
+  },
+  label: {
+    width: '100%',
     textAlign: 'center',
     fontSize: 11,
     fontWeight: '600',
