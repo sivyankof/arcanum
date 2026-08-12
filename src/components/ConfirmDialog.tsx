@@ -6,9 +6,10 @@
  *  Тон кнопок — design-system §8: без «Ошибка!» и приказов.
  */
 import React from 'react';
-import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { ModalPanel } from './ModalPanel';
 import { PressableScale } from './PressableScale';
 import { Txt } from './Txt';
 
@@ -32,44 +33,22 @@ export function ConfirmDialog({
   const t = useTheme();
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
-      {/* тап по затемнению = «остаться»: случайный промах не должен терять текст */}
-      <Pressable style={st.scrim} onPress={onCancel}>
-        <Pressable style={[st.panel, { backgroundColor: t.bg, borderColor: t.line }]} onPress={() => {}}>
-          <Txt style={[st.title, { color: t.head }]}>{title}</Txt>
-          <Txt style={[st.msg, { color: t.muted }]}>{message}</Txt>
-          <View style={st.row}>
-            <PressableScale
-              onPress={onCancel}
-              style={[st.btn, { borderColor: t.frame }]}
-            >
-              <Txt style={[st.btnTxt, { color: t.accent }]}>{cancelLabel}</Txt>
-            </PressableScale>
-            <PressableScale onPress={onConfirm} style={[st.btn, { borderColor: t.line }]}>
-              <Txt style={[st.btnTxt, { color: t.danger }]}>{confirmLabel}</Txt>
-            </PressableScale>
-          </View>
-        </Pressable>
-      </Pressable>
-    </Modal>
+    <ModalPanel visible={visible} onClose={onCancel}>
+      <Txt style={[st.title, { color: t.head }]}>{title}</Txt>
+      <Txt style={[st.msg, { color: t.muted }]}>{message}</Txt>
+      <View style={st.row}>
+        <PressableScale onPress={onCancel} style={[st.btn, { borderColor: t.frame }]}>
+          <Txt style={[st.btnTxt, { color: t.accent }]}>{cancelLabel}</Txt>
+        </PressableScale>
+        <PressableScale onPress={onConfirm} style={[st.btn, { borderColor: t.line }]}>
+          <Txt style={[st.btnTxt, { color: t.danger }]}>{confirmLabel}</Txt>
+        </PressableScale>
+      </View>
+    </ModalPanel>
   );
 }
 
 const st = StyleSheet.create({
-  scrim: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.55)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xl,
-  },
-  panel: {
-    width: '100%',
-    maxWidth: 320,
-    borderWidth: 1,
-    borderRadius: radius.l,
-    padding: spacing.xl,
-  },
   title: { fontFamily: fonts.displaySemi, fontSize: 20, textAlign: 'center' },
   msg: { fontSize: 13, lineHeight: 19, textAlign: 'center', marginTop: 6 },
   row: { flexDirection: 'row', gap: spacing.s, marginTop: spacing.l },
