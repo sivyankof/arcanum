@@ -13,6 +13,8 @@ import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
 import { TimePicker } from '../src/components/TimePicker';
 import { Txt } from '../src/components/Txt';
+import { course } from '../src/lib/content';
+import { nextLessonId } from '../src/lib/courseProgress';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import {
   getPermission,
@@ -51,6 +53,9 @@ export default function SettingsScreen() {
   const settings = useApp((s) => s.settings);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const lessonsProgress = useApp((s) => s.lessonsProgress);
+  const setLessonDone = useApp((s) => s.setLessonDone);
+  const resetCourse = useApp((s) => s.resetCourse);
 
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
@@ -269,6 +274,26 @@ export default function SettingsScreen() {
                 label={tr('settings.showPlan')}
                 value="DEV"
                 onPress={showPlan}
+              />
+            </FadeUp>
+            <FadeUp index={10}>
+              <SettingsRow
+                icon="school-outline"
+                label={tr('settings.devLessonDone')}
+                value="DEV"
+                // проверка состояний пути до движка урока (08): двигает current по курсу
+                onPress={() => {
+                  const next = nextLessonId(course, lessonsProgress);
+                  if (next) setLessonDone(next, true);
+                }}
+              />
+            </FadeUp>
+            <FadeUp index={11}>
+              <SettingsRow
+                icon="arrow-undo-outline"
+                label={tr('settings.devCourseReset')}
+                value="DEV"
+                onPress={resetCourse}
               />
             </FadeUp>
           </>
