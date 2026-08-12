@@ -438,6 +438,23 @@ transform:translateY(-110%);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
 .cardsbar .search{margin-top:0;padding:9px 14px}
 .cardsbar .seg{margin-top:8px}
 
+
+/* урок: шаг карты и финал */
+.lcard{display:flex;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--frame);
+border-radius:16px;padding:14px;margin-top:16px;backdrop-filter:blur(10px)}
+.lcard img{width:74px;border-radius:8px;border:1px solid var(--frame);box-shadow:0 8px 22px var(--glow)}
+.lcard .lt small{font-size:8.5px;letter-spacing:2px;color:var(--accent)}
+.lcard .lt b{display:block;font-family:var(--serif);font-size:19px;color:var(--head);font-weight:500}
+.lcard .lt .kw2{margin-top:5px;font-size:11px;color:var(--muted)}
+.lresult{display:none;text-align:center;background:var(--panel);border:1px solid var(--frame);
+border-radius:18px;padding:20px;margin-top:16px;backdrop-filter:blur(12px)}
+.lresult.on{display:block;animation:fu .5s ease}
+.lresult .xpn{font-family:var(--serif);font-size:34px;color:var(--accent);font-weight:600}
+.lresult .lp{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:1px}
+.lresult .lbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:12px 30px 0}
+.lresult .lbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));
+border-radius:3px;transition:width .8s cubic-bezier(.25,1.2,.4,1)}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -592,12 +609,23 @@ transform:translateY(-110%);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
     <div class="h2 fadeup d1" style="font-size:22px">Что такое таро и как оно работает</div>
     <div class="prog fadeup d2"><div class="bar"><i></i></div><b>2/6</b></div>
     <div class="theory fadeup d3"><p>Забудьте всё, что вы видели в кино: таро — это не предсказание судьбы и не «магический шар». Это колода из 78 картинок, которая помогает разговаривать с самой собой честнее, чем обычно.</p></div>
+    <div class="lcard fadeup d3">
+      <img id="lcimg" src="" alt="">
+      <div class="lt"><small>ШАГ 3 · КАРТА УРОКА</small><b>Дурак</b>
+        <div class="kw2">✦ новое начало · свобода · доверие · прыжок</div></div>
+    </div>
     <div class="quiz fadeup d4">
       <div class="q">Сколько карт в колоде таро?</div>
       <div class="opt" onclick="answer(this,false)">52 карты</div>
       <div class="opt" onclick="answer(this,true)">78 карт</div>
       <div class="opt" onclick="answer(this,false)">100 карт</div>
-      <div class="xpchip" id="xp">+10 XP ✦</div>
+      <div class="xpchip" id="xp" style="display:none"></div>
+    <div class="lresult" id="lresult">
+      <div class="xpn" id="xpn">+0 XP</div>
+      <div class="lp">ПРОЙДЕНО 1 ИЗ 6 УРОКОВ МОДУЛЯ</div>
+      <div class="lbar"><i id="lbar"></i></div>
+      <button class="cta" style="margin-top:16px" onclick="show('v-course')">ДАЛЬШЕ ПО ПУТИ →</button>
+    </div>
     </div>
   </div>
 
@@ -877,12 +905,30 @@ function answer(el, ok){
   if(document.querySelector('.opt.ok')) return;
   el.classList.add(ok ? 'ok' : 'no');
   if(!ok){ setTimeout(()=>document.querySelectorAll('.opt')[1].classList.add('ok'), 400); }
-  document.getElementById('xp').classList.add('on');
+  setTimeout(()=>{
+    const r = document.getElementById('lresult'); r.classList.add('on');
+    /* катящийся счётчик XP */
+    const target = ok ? 10 : 8; let cur = 0;
+    const t = setInterval(()=>{ cur++; document.getElementById('xpn').textContent = '+'+cur+' XP';
+      if(cur>=target) clearInterval(t); }, 55);
+    document.getElementById('lbar').style.width = '17%';
+    /* конфетти */
+    const pr = sc.getBoundingClientRect(), rr = r.getBoundingClientRect();
+    for(let i=0;i<22;i++){
+      const s=document.createElement('span'); s.className='spark';
+      s.textContent=['✦','✧','❖','·'][i%4]; s.style.fontSize=(8+Math.random()*10)+'px';
+      s.style.left=(rr.left-pr.left+rr.width/2)+'px'; s.style.top=(rr.top-pr.top+30)+'px';
+      const a=Math.PI*(1+Math.random()), d=90+Math.random()*130;
+      s.style.setProperty('--dx',Math.cos(a)*d+'px'); s.style.setProperty('--dy',(Math.sin(a)*d-60)+'px');
+      sc.appendChild(s); setTimeout(()=>s.remove(),1150);
+    }
+  }, 700);
 }
 
 
 /* профиль: аркан рождения + дневник */
 document.getElementById('barcimg').src = 'data:image/jpeg;base64,' + THUMBS['strength'];
+document.getElementById('lcimg').src = 'data:image/jpeg;base64,' + THUMBS['fool'];
 document.getElementById('mcardimg').src = 'data:image/jpeg;base64,' + THUMBS['high-priestess'];
 function openCardSafe(id){ if(id==='fool'){show('v-detail');} }
 const JOURNAL = [

@@ -1,0 +1,1363 @@
+{
+ "_comment": "Черновики вопросов викторин М1–М2 (статус draft, вычитка редактора). Схема: type single|card; card имеет cardId для показа изображения. Слить в course.json по схеме движка урока (задача 08).",
+ "status": "draft",
+ "lessons": [
+  {
+   "lessonId": "m1l1",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Как карта помогает найти ответ?",
+      "en": "How does a card help you find an answer?"
+     },
+     "options": [
+      {
+       "ru": "Она передаёт послание извне — от высших сил",
+       "en": "It delivers a message from beyond — from higher powers"
+      },
+      {
+       "ru": "Картинка запускает проекцию: наружу выходит ваш собственный ответ, который уже зрел внутри",
+       "en": "The image sparks projection: it draws out your own answer, the one already forming inside"
+      },
+      {
+       "ru": "У каждой карты есть одно точное предсказание — его нужно просто узнать",
+       "en": "Each card holds one fixed prediction you just need to look up"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Это как фигура в облаке: карта не говорит за вас — она помогает услышать себя.",
+      "en": "Like spotting a shape in a cloud: the card doesn't speak for you — it helps you hear yourself."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что на самом деле нужно, чтобы читать таро?",
+      "en": "What do you actually need to read tarot?"
+     },
+     "options": [
+      {
+       "ru": "Любопытство и немного практики каждый день",
+       "en": "Curiosity and a little daily practice"
+      },
+      {
+       "ru": "Врождённый дар — он либо есть, либо нет",
+       "en": "An inborn gift — you either have it or you don't"
+      },
+      {
+       "ru": "Ритуал посвящения от опытного таролога",
+       "en": "An initiation ritual from an experienced reader"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Никакой избранности: таро учат, как новый язык, — маленькими порциями.",
+      "en": "No chosen ones here: tarot is learned like a new language, in small portions."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Вы неделю сомневаетесь насчёт новой работы и вытянули карту. Что она может для вас сделать?",
+      "en": "You've been torn about a new job for a week and draw a card. What can it do for you?"
+     },
+     "options": [
+      {
+       "ru": "Показать, чем всё закончится, если согласиться",
+       "en": "Show how things will end if you say yes"
+      },
+      {
+       "ru": "Принять решение за вас, чтобы не мучиться",
+       "en": "Make the decision for you, so you can stop agonising"
+      },
+      {
+       "ru": "Помочь сформулировать то, что вы уже чувствуете, но не проговаривали",
+       "en": "Help you put into words what you already feel but haven't said out loud"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Карта — повод для честного разговора с собой, а решение всё равно ваше.",
+      "en": "The card opens an honest talk with yourself — the decision is still yours."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какой из этих вопросов — открытый, а значит удачный для карт?",
+      "en": "Which of these questions is open — and therefore a good one for the cards?"
+     },
+     "options": [
+      {
+       "ru": "«Стоит ли мне увольняться?»",
+       "en": "\"Should I quit my job?\""
+      },
+      {
+       "ru": "«Что мне важно понять про мою работу?»",
+       "en": "\"What do I need to understand about my job?\""
+      },
+      {
+       "ru": "«Уволюсь ли я в этом году?»",
+       "en": "\"Will I quit this year?\""
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Открытый вопрос даёт картинке пространство — и ответ получается глубже.",
+      "en": "An open question gives the image room to breathe — and the answer goes deeper."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Кем будет таро для нас в этом курсе?",
+      "en": "What role will tarot play in this course?"
+     },
+     "options": [
+      {
+       "ru": "Зеркалом и собеседником для честного разговора с собой",
+       "en": "A mirror and a conversation partner for honest talks with yourself"
+      },
+      {
+       "ru": "Оракулом, который сообщает готовое будущее",
+       "en": "An oracle that hands you a ready-made future"
+      },
+      {
+       "ru": "Магическим шаром, который всё сделает сам",
+       "en": "A crystal ball that does all the work for you"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Зеркало не приказывает — оно показывает. Поэтому с таро так спокойно.",
+      "en": "A mirror doesn't give orders — it reflects. That's what makes tarot feel so safe."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m1l2",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Сколько в колоде Старших арканов?",
+      "en": "How many Major Arcana are in the deck?"
+     },
+     "options": [
+      {
+       "ru": "56",
+       "en": "56"
+      },
+      {
+       "ru": "78",
+       "en": "78"
+      },
+      {
+       "ru": "22",
+       "en": "22"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "22 «крупные» карты — главные главы большой книги о жизни; остальные 56 — Младшие.",
+      "en": "The 22 'headline' cards are the main chapters of the deck's big book of life; the other 56 are Minors."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "В раскладе почти одни Старшие арканы. О чём это говорит?",
+      "en": "Your reading is almost all Major Arcana. What does that tell you?"
+     },
+     "options": [
+      {
+       "ru": "Речь о чём-то действительно важном — больших темах и поворотных моментах",
+       "en": "Something genuinely important is at play — big themes and turning points"
+      },
+      {
+       "ru": "Расклад не получился — лучше перемешать и вытянуть заново",
+       "en": "The reading misfired — better shuffle and draw again"
+      },
+      {
+       "ru": "Вопрос был о бытовых мелочах",
+       "en": "The question was about small everyday things"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Старшие арканы — про повороты судьбы: влюблённость, кризис, переезд, взросление.",
+      "en": "Majors mark the turning points: falling in love, a crisis, a move, growing up."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Подруга переживает из-за ссоры с любимым. Какая масть чаще всего говорит о чувствах и отношениях?",
+      "en": "Your friend is upset after a fight with her partner. Which suit usually speaks about feelings and relationships?"
+     },
+     "options": [
+      {
+       "ru": "Жезлы",
+       "en": "Wands"
+      },
+      {
+       "ru": "Кубки",
+       "en": "Cups"
+      },
+      {
+       "ru": "Пентакли",
+       "en": "Pentacles"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Кубки — масть сердца; Жезлы — про энергию и действие, Пентакли — про материальное.",
+      "en": "Cups are the suit of the heart; Wands cover energy and action, Pentacles the material world."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Почему масти таро так похожи на обычные игральные карты?",
+      "en": "Why do tarot suits look so much like regular playing cards?"
+     },
+     "options": [
+      {
+       "ru": "Создатели таро скопировали игральную колоду",
+       "en": "Tarot makers copied the playing-card deck"
+      },
+      {
+       "ru": "Это случайное совпадение",
+       "en": "It's pure coincidence"
+      },
+      {
+       "ru": "Наоборот: игральная колода произошла от таро",
+       "en": "It's the other way round: playing cards descend from tarot"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Так что колода для покера — дальняя родственница таро, а не наоборот.",
+      "en": "So the deck you play cards with is actually tarot's distant relative — not the other way around."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Кто из придворных карт — ученик и новичок?",
+      "en": "Which court card is the student and beginner?"
+     },
+     "options": [
+      {
+       "ru": "Рыцарь",
+       "en": "The Knight"
+      },
+      {
+       "ru": "Паж",
+       "en": "The Page"
+      },
+      {
+       "ru": "Король",
+       "en": "The King"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Паж только начинает путь; Рыцарь — энергия в движении, Королева и Король — зрелость и мастерство.",
+      "en": "The Page is just starting out; the Knight is energy in motion, the Queen and King are mastery."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m1l3",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "С каким вопросом тянут карту дня?",
+      "en": "What question do you ask when drawing a card of the day?"
+     },
+     "options": [
+      {
+       "ru": "«Что мне сегодня важно заметить?»",
+       "en": "\"What do I need to notice today?\""
+      },
+      {
+       "ru": "«Что плохого случится со мной сегодня?»",
+       "en": "\"What bad thing will happen to me today?\""
+      },
+      {
+       "ru": "«Что мне сегодня делать?»",
+       "en": "\"What should I do today?\""
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Карта дня настраивает внимание, а не расписывает день по минутам.",
+      "en": "The daily card tunes your attention — it doesn't script your day."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Утром выпала неприятная карта. Как поступить?",
+      "en": "Your morning card feels unpleasant. What do you do?"
+     },
+     "options": [
+      {
+       "ru": "Перетянуть, пока не выпадет что-то доброе",
+       "en": "Redraw until something kinder shows up"
+      },
+      {
+       "ru": "Отложить колоду и пропустить этот день",
+       "en": "Put the deck away and skip the day"
+      },
+      {
+       "ru": "Оставить её: неудобные карты учат лучше всего",
+       "en": "Keep it: the uncomfortable cards are the best teachers"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Карта дня — не приговор на сутки, а тема для наблюдения.",
+      "en": "A card of the day isn't a verdict — it's a theme to watch for."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Зачем вечером возвращаться к утренней записи?",
+      "en": "Why come back to your morning note in the evening?"
+     },
+     "options": [
+      {
+       "ru": "Чтобы вытянуть вторую карту — итог дня",
+       "en": "To draw a second card summing up the day"
+      },
+      {
+       "ru": "Чтобы заметить, где карта «проявилась» за день",
+       "en": "To notice where the card showed up during your day"
+      },
+      {
+       "ru": "Чтобы выучить наизусть все значения этой карты",
+       "en": "To memorise every meaning of that card"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Именно через такие маленькие истории значения карт становятся личным опытом.",
+      "en": "Those little stories are how card meanings turn into lived experience."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Утром выпала Колесница — а днём вы наконец доделали отчёт. Мистика?",
+      "en": "You drew the Chariot in the morning — and by afternoon you finally finished that report. Magic?"
+     },
+     "options": [
+      {
+       "ru": "Нет: утренняя карта просто настроила внимание, как очки с новым фильтром",
+       "en": "No: the morning card simply tuned your attention, like glasses with a new filter"
+      },
+      {
+       "ru": "Да: карта управляет событиями дня",
+       "en": "Yes: the card steers the day's events"
+      },
+      {
+       "ru": "Это чистая случайность, и замечать её не стоит",
+       "en": "Pure chance — not worth noticing"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Совпадение не волшебное, но очень ценное: так карта становится вашим опытом.",
+      "en": "The coincidence isn't magic, but it's precious: that's how a card becomes your own experience."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Почему «одна карта в день» работает лучше зубрёжки?",
+      "en": "Why does one card a day beat cramming?"
+     },
+     "options": [
+      {
+       "ru": "Колода «выдаёт» только одну правдивую карту в сутки",
+       "en": "The deck only gives one truthful card per day"
+      },
+      {
+       "ru": "Больше одного значения в день запомнить невозможно",
+       "en": "It's impossible to memorise more than one meaning a day"
+      },
+      {
+       "ru": "Маленькая, но регулярная практика — как ежедневный урок в языковом приложении",
+       "en": "Small but consistent practice works — like a daily lesson in a language app"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Пять минут утром — и через пару месяцев колода станет доброй знакомой.",
+      "en": "Five minutes each morning, and in a couple of months the deck will feel like an old friend."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m1l4",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "«Карты сказали мне расстаться». Что здесь не так?",
+      "en": "\"The cards told me to break up.\" What's off here?"
+     },
+     "options": [
+      {
+       "ru": "Ответ нужно было проверить ещё одним раскладом",
+       "en": "The answer should have been double-checked with another spread"
+      },
+      {
+       "ru": "Выбор всегда остаётся за вами — карты лишь помогают увидеть ситуацию объёмнее",
+       "en": "The choice is always yours — cards only help you see the situation from more angles"
+      },
+      {
+       "ru": "Про отношения у карт вообще не спрашивают",
+       "en": "You should never ask the cards about relationships"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Ответственность за свои решения — лучшая защита от зависимости от раскладов.",
+      "en": "Owning your decisions is the best protection against depending on readings."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Очень хочется узнать, что думает о вас бывший. Как поступить этично?",
+      "en": "You're dying to know what your ex thinks of you. What's the ethical move?"
+     },
+     "options": [
+      {
+       "ru": "Сделать расклад, но никому о нём не рассказывать",
+       "en": "Do the spread, just keep it to yourself"
+      },
+      {
+       "ru": "Гадать можно, если намерения добрые",
+       "en": "Reading on him is fine, as long as your intentions are kind"
+      },
+      {
+       "ru": "Спросить о себе: «Что мне важно понять в этих отношениях?»",
+       "en": "Ask about yourself: \"What do I need to understand about this relationship?\""
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Расклад о другом без его согласия покажет лишь ваши тревоги — вопрос о себе честнее и полезнее.",
+      "en": "A reading about someone without consent only mirrors your own worries — asking about yourself is kinder and truer."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Подруга просит расклад о своём здоровье и диагнозе. Что ответить?",
+      "en": "A friend asks for a reading about her health and a diagnosis. What do you say?"
+     },
+     "options": [
+      {
+       "ru": "Диагнозы — к врачу; картами можно поддержать: «Как позаботиться о себе в этот период?»",
+       "en": "Diagnoses belong to doctors; the cards can offer support: \"How can I care for myself right now?\""
+      },
+      {
+       "ru": "Сделать расклад, но очень аккуратно подбирать слова",
+       "en": "Do the reading, just choose your words very carefully"
+      },
+      {
+       "ru": "В трудные периоды таро лучше вообще не трогать",
+       "en": "In hard times it's better not to touch tarot at all"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Таро может поддержать, но не заменяет врача, юриста или психотерапевта.",
+      "en": "Tarot can hold your hand, but it never replaces a doctor, lawyer or therapist."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Ответ расклада вам не понравился. Что дальше?",
+      "en": "You don't like what the spread said. Now what?"
+     },
+     "options": [
+      {
+       "ru": "Тянуть заново, пока не выпадет понятный ответ",
+       "en": "Keep drawing until a clearer answer shows up"
+      },
+      {
+       "ru": "Один вопрос — один расклад, а дальше время и действия",
+       "en": "One question, one spread — then time and action"
+      },
+      {
+       "ru": "Задать тот же вопрос, но другой колодой",
+       "en": "Ask the same question with a different deck"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Десятый расклад на тот же вопрос даёт не ясность, а кашу.",
+      "en": "A tenth spread on the same question brings noise, not clarity."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Зачем тарологу правила и границы?",
+      "en": "Why does a tarot reader need rules and boundaries?"
+     },
+     "options": [
+      {
+       "ru": "Чтобы не обидеть колоду и не «испортить» карты",
+       "en": "So you don't offend the deck or \"spoil\" the cards"
+      },
+      {
+       "ru": "Это формальность для профессионалов — новичкам не обязательно",
+       "en": "They're a formality for professionals — beginners can skip them"
+      },
+      {
+       "ru": "Это забота о себе: внутри границ таро остаётся добрым инструментом",
+       "en": "They're self-care: within boundaries, tarot stays a kind tool"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Как «не навреди» у врача: границы делают практику безопасной и приятной.",
+      "en": "Like a doctor's \"do no harm\": boundaries keep the practice safe and enjoyable."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m2l1",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какой номер носит карта Дурак и что он означает?",
+      "en": "What number does The Fool carry, and what does it mean?"
+     },
+     "options": [
+      {
+       "ru": "Один — первый шаг уже сделан",
+       "en": "One — the first step is already taken"
+      },
+      {
+       "ru": "Ноль — чистый потенциал, всё возможно",
+       "en": "Zero — pure potential, anything is possible"
+      },
+      {
+       "ru": "Семь — завершение пути",
+       "en": "Seven — the journey's completion"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Ноль — это чистый лист: ещё ничего не решено, и всё впереди.",
+      "en": "That's right! Zero is a blank page: nothing is decided yet, and everything lies ahead."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что означают четыре предмета на столе Мага — жезл, кубок, меч и пентакль?",
+      "en": "What do the four objects on the Magician's table — wand, cup, sword and pentacle — mean?"
+     },
+     "options": [
+      {
+       "ru": "Всё необходимое у тебя уже есть — это символы четырёх мастей",
+       "en": "You already have everything you need — they symbolize the four suits"
+      },
+      {
+       "ru": "Подарки, которые Маг приготовил Дураку",
+       "en": "Gifts the Magician prepared for the Fool"
+      },
+      {
+       "ru": "Награды за четыре прошлые победы Мага",
+       "en": "Trophies from the Magician's four past victories"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Именно так! Маг напоминает: все инструменты для мечты уже в ваших руках.",
+      "en": "Exactly! The Magician reminds you: every tool for your dream is already in your hands."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "В чём главный риск энергии Дурака?",
+      "en": "What is the main risk of the Fool's energy?"
+     },
+     "options": [
+      {
+       "ru": "Излишняя строгость к себе",
+       "en": "Being too strict with yourself"
+      },
+      {
+       "ru": "Страх перед любым новым делом",
+       "en": "Fear of anything new"
+      },
+      {
+       "ru": "Беспечность — обрыв под ногами настоящий",
+       "en": "Carelessness — the cliff underfoot is real"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Да! Доверие к жизни прекрасно, но смотреть под ноги всё же стоит.",
+      "en": "Yes! Trusting life is beautiful, but it's still worth watching your step."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта говорит «задумай — и воплоти» и олицетворяет волю и мастерство?",
+      "en": "Which card says \"envision it — and make it real,\" embodying willpower and skill?"
+     },
+     "options": [
+      {
+       "ru": "Дурак",
+       "en": "The Fool"
+      },
+      {
+       "ru": "Верховная Жрица",
+       "en": "The High Priestess"
+      },
+      {
+       "ru": "Маг",
+       "en": "The Magician"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Верно! Одна рука Мага к небу, другая к земле: мечта превращается в план.",
+      "en": "Correct! One of the Magician's hands points to the sky, the other to the earth: a dream becomes a plan."
+     },
+     "cardId": "magician"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какова формула любого начинания по этому уроку?",
+      "en": "According to this lesson, what is the formula for any new beginning?"
+     },
+     "options": [
+      {
+       "ru": "Сначала смелость Дурака, затем собранность Мага",
+       "en": "First the Fool's courage, then the Magician's focus"
+      },
+      {
+       "ru": "Сначала план Мага, затем прыжок Дурака",
+       "en": "First the Magician's plan, then the Fool's leap"
+      },
+      {
+       "ru": "Достаточно одной лишь веры Дурака",
+       "en": "The Fool's faith alone is enough"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Точно! Сначала захотеть и шагнуть, потом собрать мечту в конкретный план.",
+      "en": "Exactly! First dare to want it and step forward, then shape the dream into a concrete plan."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m2l2",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Вы чувствуете: «Не могу объяснить почему, но не надо». Чья это энергия?",
+      "en": "You feel: \"I can't explain why, but don't do it.\" Whose energy is that?"
+     },
+     "options": [
+      {
+       "ru": "Императрицы — забота о близких",
+       "en": "The Empress — caring for loved ones"
+      },
+      {
+       "ru": "Жрицы — интуиция и внутреннее знание",
+       "en": "The High Priestess — intuition and inner knowing"
+      },
+      {
+       "ru": "Мага — воля к действию",
+       "en": "The Magician — the will to act"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Это внутренний голос Жрицы — его стоит дослушать до конца.",
+      "en": "Right! That's the High Priestess's inner voice — it deserves to be heard to the end."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что скрывает завеса с гранатами за спиной Жрицы?",
+      "en": "What does the pomegranate veil behind the High Priestess conceal?"
+     },
+     "options": [
+      {
+       "ru": "Цветущий сад Императрицы",
+       "en": "The Empress's blooming garden"
+      },
+      {
+       "ru": "Трон Императора",
+       "en": "The Emperor's throne"
+      },
+      {
+       "ru": "Тайну — знание, открытое не сразу",
+       "en": "A mystery — knowledge that isn't revealed at once"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Да! Жрица хранит тайну: не все ответы приходят сразу, некоторые ждут тишины.",
+      "en": "Yes! The High Priestess keeps a mystery: not all answers come at once — some wait for stillness."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта про изобилие, заботу и творчество — она сидит в цветущем саду со знаком Венеры у ног?",
+      "en": "Which card is about abundance, nurturing and creativity — seated in a blooming garden with the sign of Venus at her feet?"
+     },
+     "options": [
+      {
+       "ru": "Императрица",
+       "en": "The Empress"
+      },
+      {
+       "ru": "Верховная Жрица",
+       "en": "The High Priestess"
+      },
+      {
+       "ru": "Дурак",
+       "en": "The Fool"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Верно! Императрица — тёплая энергия, которая выращивает всё живое.",
+      "en": "Correct! The Empress is the warm energy that helps everything alive grow."
+     },
+     "cardId": "empress"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Урок сравнивает эту пару с вдохом и выдохом. Что это значит?",
+      "en": "The lesson compares this pair to inhaling and exhaling. What does that mean?"
+     },
+     "options": [
+      {
+       "ru": "Жрица принимает и слушает, Императрица отдаёт и растит",
+       "en": "The High Priestess receives and listens, the Empress gives and grows"
+      },
+      {
+       "ru": "Обе карты учат только молчанию",
+       "en": "Both cards teach silence only"
+      },
+      {
+       "ru": "Императрица слушает, а Жрица действует",
+       "en": "The Empress listens while the High Priestess acts"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Именно! Сначала услышать, чего хочется по-настоящему, потом терпеливо это вырастить.",
+      "en": "Exactly! First hear what you truly want, then patiently grow it."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Каков простой совет Жрицы?",
+      "en": "What is the High Priestess's simple advice?"
+     },
+     "options": [
+      {
+       "ru": "Действуй немедленно, пока есть шанс",
+       "en": "Act immediately while you have the chance"
+      },
+      {
+       "ru": "Спроси совета у старших",
+       "en": "Ask your elders for advice"
+      },
+      {
+       "ru": "Не спеши, помолчи — ответ уже внутри",
+       "en": "Don't rush, be still — the answer is already within"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Да! Иногда лучший ход — пауза и тишина без телефона.",
+      "en": "Yes! Sometimes the best move is a pause and some quiet time away from your phone."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m2l3",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "В чём «подарок» Императора, по уроку?",
+      "en": "According to the lesson, what is the Emperor's gift?"
+     },
+     "options": [
+      {
+       "ru": "Внутри надёжных стен порядка можно расслабиться",
+       "en": "Within reliable walls of order, you can finally relax"
+      },
+      {
+       "ru": "Он избавляет от всех правил",
+       "en": "He frees you from all rules"
+      },
+      {
+       "ru": "Он дарит вдохновение и спонтанность",
+       "en": "He grants inspiration and spontaneity"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Верно! Когда финансы посчитаны и границы отстроены, приходит спокойствие.",
+      "en": "Right! When your finances are counted and boundaries are set, calm settles in."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта про традицию, обучение и наставника — перед ним склонились два ученика?",
+      "en": "Which card stands for tradition, learning and mentorship — with two students bowed before him?"
+     },
+     "options": [
+      {
+       "ru": "Император",
+       "en": "The Emperor"
+      },
+      {
+       "ru": "Иерофант",
+       "en": "The Hierophant"
+      },
+      {
+       "ru": "Верховная Жрица",
+       "en": "The High Priestess"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Да! Иерофант передаёт знания, которые бережно идут от человека к человеку.",
+      "en": "Yes! The Hierophant passes on knowledge carried gently from person to person."
+     },
+     "cardId": "hierophant"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Чем различается порядок Императора и порядок Иерофанта?",
+      "en": "How does the Emperor's order differ from the Hierophant's?"
+     },
+     "options": [
+      {
+       "ru": "Император следует традиции, Иерофант создаёт свои правила",
+       "en": "The Emperor follows tradition, the Hierophant makes his own rules"
+      },
+      {
+       "ru": "Они ничем не отличаются",
+       "en": "There is no difference between them"
+      },
+      {
+       "ru": "Император строит порядок своей волей, Иерофант передаёт проверенный поколениями",
+       "en": "The Emperor builds order by his own will, the Hierophant passes down order proven by generations"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Точно! «Я так решил» — Император; «так делали до нас, и это работает» — Иерофант.",
+      "en": "Exactly! \"I decided so\" is the Emperor; \"it was done before us, and it works\" is the Hierophant."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какова тень Иерофанта?",
+      "en": "What is the Hierophant's shadow side?"
+     },
+     "options": [
+      {
+       "ru": "Излишняя мечтательность",
+       "en": "Excessive daydreaming"
+      },
+      {
+       "ru": "Слепое «так принято» — правило без смысла",
+       "en": "Blind \"that's how it's done\" — a rule kept without meaning"
+      },
+      {
+       "ru": "Страх перед любым порядком",
+       "en": "Fear of any kind of order"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Традиция жива, пока мы помним её смысл, а не следуем по привычке.",
+      "en": "Right! A tradition stays alive while we remember its meaning, not just follow it out of habit."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что из этого — Император в повседневной жизни?",
+      "en": "Which of these is the Emperor showing up in everyday life?"
+     },
+     "options": [
+      {
+       "ru": "Спокойное «нет» коллеге и посчитанный бюджет",
+       "en": "A calm \"no\" to a colleague and a counted budget"
+      },
+      {
+       "ru": "Пять минут тишины без телефона",
+       "en": "Five minutes of silence without your phone"
+      },
+      {
+       "ru": "Семейный рецепт от бабушки",
+       "en": "A family recipe from grandma"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Да! Границы и порядок — это и есть забота Императора о вашем спокойствии.",
+      "en": "Yes! Boundaries and structure are exactly how the Emperor takes care of your peace of mind."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m2l4",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какой глубокий смысл, кроме любви, спрятан в карте Влюблённые?",
+      "en": "Besides love, what deeper meaning is hidden in The Lovers?"
+     },
+     "options": [
+      {
+       "ru": "Победа над соперниками",
+       "en": "Victory over rivals"
+      },
+      {
+       "ru": "Выбор, который определяет, кем вы станете",
+       "en": "A choice that defines who you will become"
+      },
+      {
+       "ru": "Богатство и изобилие",
+       "en": "Wealth and abundance"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Влюблённые — про решения сердца, совпадающие с вашими ценностями.",
+      "en": "Right! The Lovers are about decisions of the heart that align with your values."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Как воин Колесницы управляет сфинксами, если поводьев нет?",
+      "en": "How does the Chariot's warrior steer the sphinxes when there are no reins?"
+     },
+     "options": [
+      {
+       "ru": "Силой воли",
+       "en": "By willpower"
+      },
+      {
+       "ru": "Громким приказом",
+       "en": "With a loud command"
+      },
+      {
+       "ru": "Он просто отпускает их куда угодно",
+       "en": "He simply lets them wander anywhere"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Да! Колесница — это внутренняя решимость, которая держит курс без поводьев.",
+      "en": "Yes! The Chariot is inner determination that holds the course without reins."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что символизируют чёрный и белый сфинксы?",
+      "en": "What do the black and white sphinxes symbolize?"
+     },
+     "options": [
+      {
+       "ru": "День и ночь в пути героя",
+       "en": "Day and night on the hero's journey"
+      },
+      {
+       "ru": "Двух верных друзей воина",
+       "en": "The warrior's two loyal friends"
+      },
+      {
+       "ru": "Внутренние противоречия, тянущие в разные стороны",
+       "en": "Inner contradictions pulling in different directions"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Точно! «Хочу спать» и «надо на тренировку» — знакомые сфинксы, правда?",
+      "en": "Exactly! \"I want to sleep\" vs \"I should work out\" — familiar sphinxes, right?"
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта — про энергию «собралась и сделала»: сдать проект, пробежать первые пять километров?",
+      "en": "Which card carries the \"pulled myself together and did it\" energy — finishing the project, running your first five kilometers?"
+     },
+     "options": [
+      {
+       "ru": "Влюблённые",
+       "en": "The Lovers"
+      },
+      {
+       "ru": "Колесница",
+       "en": "The Chariot"
+      },
+      {
+       "ru": "Маг",
+       "en": "The Magician"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Колесница — первая победа воли, когда все силы везут в одну сторону.",
+      "en": "Correct! The Chariot is the will's first victory, when all your forces pull in one direction."
+     },
+     "cardId": "chariot"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какова формула этой пары карт?",
+      "en": "What is the formula of this pair of cards?"
+     },
+     "options": [
+      {
+       "ru": "Сначала доехать, потом решить, куда хотелось",
+       "en": "First arrive, then decide where you wanted to go"
+      },
+      {
+       "ru": "Выбор и движение не связаны между собой",
+       "en": "Choice and movement are unrelated"
+      },
+      {
+       "ru": "Выбрать направление сердцем — и доехать туда волей",
+       "en": "Choose the direction with your heart — and get there by will"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Да! Выбор без движения — мечта, движение без выбора — суета.",
+      "en": "Yes! Choice without movement stays a dream; movement without choice is just busyness."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m2l5",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "В каком порядке разворачивается арка первых восьми арканов?",
+      "en": "In what order does the arc of the first eight arcana unfold?"
+     },
+     "options": [
+      {
+       "ru": "Структура → импульс → выбор → рост",
+       "en": "Structure → impulse → choice → growth"
+      },
+      {
+       "ru": "Импульс и инструменты → рост → структура и знания → зрелый выбор и достижение",
+       "en": "Impulse and tools → growth → structure and knowledge → mature choice and achievement"
+      },
+      {
+       "ru": "Выбор → знания → импульс → победа",
+       "en": "Choice → knowledge → impulse → victory"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Эта арка повторяется в любом деле — от новой работы до нового хобби.",
+      "en": "Right! This arc repeats in any endeavor — from a new job to a new hobby."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта учит: «Не изобретай всё с нуля — учись у тех, кто шёл раньше»?",
+      "en": "Which card teaches: \"Don't reinvent everything — learn from those who walked before you\"?"
+     },
+     "options": [
+      {
+       "ru": "Иерофант",
+       "en": "The Hierophant"
+      },
+      {
+       "ru": "Император",
+       "en": "The Emperor"
+      },
+      {
+       "ru": "Маг",
+       "en": "The Magician"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Да! Иерофант — хранитель традиции и бережно переданных знаний.",
+      "en": "Yes! The Hierophant is the keeper of tradition and carefully passed-down knowledge."
+     },
+     "cardId": "hierophant"
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта завершает первую часть пути — воля собирает всё выученное и привозит к цели?",
+      "en": "Which card completes the first part of the journey — will gathers everything learned and carries you to the goal?"
+     },
+     "options": [
+      {
+       "ru": "Маг",
+       "en": "The Magician"
+      },
+      {
+       "ru": "Влюблённые",
+       "en": "The Lovers"
+      },
+      {
+       "ru": "Колесница",
+       "en": "The Chariot"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Верно! Колесница — первая победа героя, седьмая ступень пути.",
+      "en": "Correct! The Chariot is the hero's first victory, the seventh step of the path."
+     },
+     "cardId": "chariot"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Почему Старшие арканы легче учить как сюжет, а не как список значений?",
+      "en": "Why is it easier to learn the Major Arcana as a story rather than a list of meanings?"
+     },
+     "options": [
+      {
+       "ru": "Сюжет короче списка",
+       "en": "A story is shorter than a list"
+      },
+      {
+       "ru": "Забыли карту — вспомните этап героя, и значение вернётся само",
+       "en": "Forget a card — recall the hero's stage, and the meaning comes back on its own"
+      },
+      {
+       "ru": "Список значений выучить невозможно",
+       "en": "A list of meanings is impossible to memorize"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Именно! История взросления героя хранит значения лучше любого словарика.",
+      "en": "Exactly! The hero's coming-of-age story holds the meanings better than any glossary."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какая ступень пути идёт сразу после Мага (1)?",
+      "en": "Which step of the journey comes right after the Magician (1)?"
+     },
+     "options": [
+      {
+       "ru": "Императрица — забота и терпение",
+       "en": "The Empress — nurturing and patience"
+      },
+      {
+       "ru": "Император — порядок и опора",
+       "en": "The Emperor — order and support"
+      },
+      {
+       "ru": "Жрица — интуиция и пауза",
+       "en": "The High Priestess — intuition and pause"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Верно! После инструментов Мага герой учится слушать себя — это Жрица, номер два.",
+      "en": "Right! After the Magician's tools, the hero learns to listen inward — that's the High Priestess, number two."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m2l6",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какой главный секрет чтения двух карт в связке?",
+      "en": "What is the main secret of reading two cards together?"
+     },
+     "options": [
+      {
+       "ru": "Построить мостик — соединить значения союзом «потому что», «чтобы», «но»",
+       "en": "Build a bridge — link the meanings with \"because,\" \"so that,\" or \"but\""
+      },
+      {
+       "ru": "Читать каждую карту отдельно по словарику",
+       "en": "Read each card separately from a glossary"
+      },
+      {
+       "ru": "Выбрать только ту карту, что нравится больше",
+       "en": "Pick only the card you like more"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Верно! Одна карта — слово, две карты с мостиком — уже фраза.",
+      "en": "Right! One card is a word; two cards with a bridge become a phrase."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "О чём «спорят» Маг и Жрица, когда встречаются в раскладе?",
+      "en": "What do the Magician and the High Priestess \"argue\" about when they meet in a spread?"
+     },
+     "options": [
+      {
+       "ru": "Мягкость или дисциплина",
+       "en": "Softness or discipline"
+      },
+      {
+       "ru": "Действовать или подождать",
+       "en": "To act or to wait"
+      },
+      {
+       "ru": "Своё или чужое мнение",
+       "en": "Your opinion or someone else's"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Да! И ответ обычно «и то и другое»: сперва пауза Жрицы, потом действие Мага.",
+      "en": "Yes! And the answer is usually \"both, each in turn\": first the Priestess's pause, then the Magician's action."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Меняет ли порядок карт смысл пары?",
+      "en": "Does the order of the cards change the meaning of a pair?"
+     },
+     "options": [
+      {
+       "ru": "Нет, пара читается одинаково в любом порядке",
+       "en": "No, a pair reads the same in any order"
+      },
+      {
+       "ru": "Порядок важен только для Старших арканов",
+       "en": "Order matters only for the Major Arcana"
+      },
+      {
+       "ru": "Да — как порядок слов меняет фразу",
+       "en": "Yes — just as word order changes a sentence"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Точно! Влюблённые → Колесница и Колесница → Влюблённые — две разные истории.",
+      "en": "Exactly! Lovers → Chariot and Chariot → Lovers tell two different stories."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "В паре «Императрица и Колесница» — «забота о себе даёт силы для рывка» — какая карта отвечает за заботу?",
+      "en": "In the pair \"Empress and Chariot\" — \"self-care fuels the breakthrough\" — which card stands for the care?"
+     },
+     "options": [
+      {
+       "ru": "Колесница",
+       "en": "The Chariot"
+      },
+      {
+       "ru": "Императрица",
+       "en": "The Empress"
+      },
+      {
+       "ru": "Верховная Жрица",
+       "en": "The High Priestess"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Верно! Императрица наполняет ресурсом, а Колесница превращает его в движение.",
+      "en": "Correct! The Empress fills you with resources, and the Chariot turns them into motion."
+     },
+     "cardId": "empress"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Пара «Жрица и Влюблённые» из урока подсказывает…",
+      "en": "The lesson's pair \"High Priestess and Lovers\" suggests…"
+     },
+     "options": [
+      {
+       "ru": "Не торопись с выбором — сначала прислушайся к себе",
+       "en": "Don't rush the choice — listen to yourself first"
+      },
+      {
+       "ru": "Выбирай как можно быстрее",
+       "en": "Choose as quickly as possible"
+      },
+      {
+       "ru": "Доверь выбор кому-то другому",
+       "en": "Let someone else choose for you"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Да! Интуиция Жрицы — лучший советчик перед большим выбором Влюблённых.",
+      "en": "Yes! The Priestess's intuition is the best advisor before the Lovers' big choice."
+     }
+    }
+   ]
+  }
+ ]
+}
