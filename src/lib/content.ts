@@ -22,9 +22,27 @@ export interface TarotCard {
   content: Record<string, CardContentBlock>;
 }
 
+/** Урок курса. theory написана пока только у М1–М2 — у остальных уроков поля нет вовсе;
+ *  форма блока та же, что у блоков карты ({ru, en, status}), поэтому тип переиспользуем. */
+export interface CourseLesson {
+  id: string; // "m1l1"
+  title: Record<Lang, string>;
+  /** id карт, разбираемых в уроке; пустой у вводных и практических уроков */
+  cards: string[];
+  theory?: CardContentBlock;
+}
+
+export interface CourseModule {
+  id: string; // "m1"
+  /** freemium-флаг: false = премиальный модуль (М3+). В v1 не блокирует — только замок в шапке */
+  free: boolean;
+  title: Record<Lang, string>;
+  lessons: CourseLesson[];
+}
+
 export const cards = (cardsJson as any).cards as TarotCard[];
 export const spreads = (spreadsJson as any).spreads as any[];
-export const course = (courseJson as any).modules as any[];
+export const course = (courseJson as any).modules as CourseModule[];
 
 export const cardById = new Map(cards.map((c) => [c.id, c]));
 

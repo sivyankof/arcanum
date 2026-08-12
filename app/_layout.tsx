@@ -86,6 +86,18 @@ export default function RootLayout() {
           name="note/[date]"
           options={{ presentation: 'modal', headerTintColor: t.accent, headerShadowVisible: false }}
         />
+        {/* заглушка урока (спека 07): обычный push с прозрачной шапкой — движок урока (08)
+            наполнит экран, маршрут и навигация уже настоящие */}
+        <Stack.Screen
+          name="lesson/[id]"
+          options={{
+            title: '',
+            headerTransparent: true,
+            headerStyle: { backgroundColor: 'transparent' },
+            headerShadowVisible: false,
+            headerTintColor: t.accent,
+          }}
+        />
       </Stack>
     </>
   );
