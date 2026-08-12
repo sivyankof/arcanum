@@ -91,7 +91,7 @@
   ],
   "streak_save": [
    {
-    "ru": "Серия {n} дней — ещё можно сохранить",
+    "ru": "Серия {days} — ещё можно сохранить",
     "en": "Your {n}-day streak can still be saved"
    },
    {

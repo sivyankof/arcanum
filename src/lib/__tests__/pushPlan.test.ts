@@ -1,8 +1,10 @@
 import {
+  capPerDay,
   COMEBACK_AFTER_DAYS,
   MAX_PER_DAY,
   MORNING_AHEAD_DAYS,
   planPushes,
+  type PlannedPush,
   type PlanInput,
 } from '../pushPlan';
 
@@ -161,5 +163,44 @@ describe('planPushes — возврат и инварианты', () => {
     const evening = drawn.find((p) => p.kind === 'evening');
     expect(evening!.hour).toBe(22);
     expect(evening!.minute).toBe(30);
+  });
+});
+
+describe('capPerDay — обрезка на искусственном входе', () => {
+  // planPushes никогда не рождает больше двух претендентов на день (спасение серии живёт при
+  // закрытой карте, вечерний — при открытой), поэтому тест выше («в сутки не больше двух пушей»)
+  // проверяет только СЧЁТ на реалистичном входе и никогда не заходит внутрь ветки обрезки —
+  // её можно было бы стереть, и тот тест остался бы зелёным. Здесь день собирается руками,
+  // с четырьмя претендентами сразу, специально в обход planPushes.
+  const day = '2026-08-20';
+  const four: PlannedPush[] = [
+    { kind: 'comeback', date: day, hour: 9, minute: 0, phraseKey: 'push.winback' },
+    { kind: 'morning', date: day, hour: 9, minute: 0, phraseKey: 'push.morning_card' },
+    { kind: 'evening', date: day, hour: 21, minute: 0, phraseKey: 'push.evening_reflect', cardId: 'the-tower' },
+    { kind: 'streak', date: day, hour: 20, minute: 0, phraseKey: 'push.streak_save', n: 5 },
+  ];
+
+  it('из четырёх претендентов остаются ровно два', () => {
+    expect(capPerDay(four)).toHaveLength(MAX_PER_DAY);
+  });
+
+  it('выживают именно streak и evening — верх PRIORITY, а не первые по списку или по времени', () => {
+    const kinds = capPerDay(four).map((p) => p.kind);
+    expect(kinds).toEqual(expect.arrayContaining(['streak', 'evening']));
+    expect(kinds).not.toEqual(expect.arrayContaining(['morning']));
+    expect(kinds).not.toEqual(expect.arrayContaining(['comeback']));
+  });
+
+  it('без спасения серии в претендентах выживают evening и morning, а comeback обрезается', () => {
+    const three = four.filter((p) => p.kind !== 'streak');
+    const kinds = capPerDay(three).map((p) => p.kind);
+    expect(kinds).toHaveLength(MAX_PER_DAY);
+    expect(kinds).toEqual(expect.arrayContaining(['evening', 'morning']));
+    expect(kinds).not.toEqual(expect.arrayContaining(['comeback']));
+  });
+
+  it('два претендента и меньше — обрезка ничего не убирает', () => {
+    const two = four.filter((p) => p.kind === 'streak' || p.kind === 'morning');
+    expect(capPerDay(two)).toHaveLength(2);
   });
 });

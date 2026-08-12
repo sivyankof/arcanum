@@ -45,6 +45,7 @@ const resources = {
         planEmpty: "Ничего не запланировано",
         queuedCount: "В очереди системы: {{count}}",
         close: "Закрыть",
+        ok: "Готово",
       },
       // заголовки баннеров: тело пуша берётся из content/phrases.json (правило вариативности),
       // а заголовок — короткая метка типа. Числительное — плюрализацией, иначе «Серия 3 дней»
@@ -55,6 +56,13 @@ const resources = {
         titleStreak_few: "Серия {{count}} дня",
         titleStreak_many: "Серия {{count}} дней",
         titleComeback: "Давно не виделись",
+        // готовая форма «N дней» для подстановки {days} в push.streak_save (content/phrases.json):
+        // сырая подстановка числа без плюрализации давала «Серия 3 дней» — заголовок пуша строкой
+        // выше уже согласован числительным, а тело было рассинхронизировано (пункт C финального
+        // ревью 06б)
+        streakDays_one: "{{count}} день",
+        streakDays_few: "{{count}} дня",
+        streakDays_many: "{{count}} дней",
         // прелюдия разрешения на пуши — вопрос после первого переворота карты дня (спека 06б)
         preludeTitle: "Напомнить утром?",
         preludeText: "Пришлём одно тихое напоминание, когда придёт время новой карты. Выключить можно в любой момент в настройках.",
@@ -138,6 +146,7 @@ const resources = {
         planEmpty: "Nothing scheduled",
         queuedCount: "Queued with the system: {{count}}",
         close: "Close",
+        ok: "Done",
       },
       push: {
         titleMorning: "Card of the day ✦",
@@ -145,6 +154,10 @@ const resources = {
         titleStreak_one: "{{count}}-day streak",
         titleStreak_other: "{{count}}-day streak",
         titleComeback: "It's been a while",
+        // не используется в англ. варианте фразы («{n}-day streak» уже корректно без плюрализации
+        // слова «day»), но ключ должен существовать в обоих языках — правило проекта
+        streakDays_one: "{{count}} day",
+        streakDays_other: "{{count}} days",
         preludeTitle: "A morning nudge?",
         preludeText: "We'll send one quiet reminder when it's time for a new card. You can turn it off anytime in settings.",
         preludeYes: "Remind me",

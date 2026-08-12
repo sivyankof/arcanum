@@ -14,7 +14,13 @@ import { SettingsRow } from '../src/components/SettingsRow';
 import { TimePicker } from '../src/components/TimePicker';
 import { Txt } from '../src/components/Txt';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
-import { getPermission, listScheduled, sendTestPush, type PermissionState } from '../src/lib/pushes';
+import {
+  getPermission,
+  listScheduled,
+  requestPermission,
+  sendTestPush,
+  type PermissionState,
+} from '../src/lib/pushes';
 import { timeLabel } from '../src/lib/settings';
 import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
@@ -64,6 +70,13 @@ export default function SettingsScreen() {
   //    даты был бы тихо неверным. Поэтому даты берём со своей стороны, а число — с ОС:
   //    расхождение между числом строк плана и счётчиком само по себе сигнал, что
   //    перепланирование не долетело до системы.
+  //    ⚠️ Два безобидных случая расхождения, которые НЕ значат «планировщик сломан» (пункт F
+  //    финального ревью 06б): (1) сразу после «DEV · тестовый пуш» счётчик на 10 секунд больше
+  //    строк плана — тестовый пуш стоит в очереди ОС, но не входит в planPushes; (2) если за эти
+  //    же 10 секунд свернуть и развернуть приложение, тестовый пуш пропадает: он поставлен В
+  //    ОБХОД сериализованной цепочки applyPlan (см. src/lib/pushes.ts), а возврат из фона зовёт
+  //    свой пересчёт, который начинается с cancelAllScheduledNotificationsAsync — отменяет вообще
+  //    всё, включая тестовый пуш.
   const showPlan = async () => {
     const now = new Date();
     const plan = planPushes(planInputFromStore(settings, streak, history, now), now);
@@ -140,7 +153,17 @@ export default function SettingsScreen() {
                 if (Platform.OS !== 'web') Linking.openSettings();
                 return;
               }
-              setPushesOn(!pushesOn);
+              const next = !pushesOn;
+              setPushesOn(next);
+              // Отказ в прелюдии («Не сейчас») больше не спрашивает сам — системный диалог даётся
+              // один раз навсегда, и это осознанное решение (product-spec §1). Но тогда разрешение
+              // так и остаётся 'undetermined', и без этой ветки строка «Напоминания» включалась бы
+              // тумблером, показывала бы время и DEV-план — а до ОС ни один пуш бы не доехал,
+              // потому что планирование требует 'granted'. Второй и последний шанс спросить — здесь,
+              // при явном включении тумблера (найдено финальным ревью 06б, пункт B)
+              if (next && perm === 'undetermined' && Platform.OS !== 'web') {
+                requestPermission().then(setPerm);
+              }
             }}
           />
         </FadeUp>
@@ -217,7 +240,7 @@ export default function SettingsScreen() {
           visible={planText !== null}
           title={tr('settings.showPlan')}
           message={planText ?? ''}
-          confirmLabel="OK"
+          confirmLabel={tr('settings.ok')}
           cancelLabel={tr('settings.close')}
           confirmTone="accent"
           onConfirm={() => setPlanText(null)}

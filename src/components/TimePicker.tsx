@@ -4,6 +4,7 @@
  */
 import DateTimePicker, { type DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet } from 'react-native';
 import { formatHHMM, parseHHMM } from '../lib/settings';
 import { radius, spacing } from '../theme/theme';
@@ -28,6 +29,7 @@ export function TimePicker({
   onClose: () => void;
 }) {
   const t = useTheme();
+  const { t: tr } = useTranslation();
   const { hour, minute } = parseHHMM(value, 9);
   const date = React.useMemo(() => {
     const d = new Date();
@@ -84,9 +86,20 @@ export function TimePicker({
   return (
     <ModalPanel visible onClose={onClose}>
       <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
-      <DateTimePicker value={draft} mode="time" is24Hour display="spinner" onChange={onChangeIOS} />
+      <DateTimePicker
+        value={draft}
+        mode="time"
+        is24Hour
+        display="spinner"
+        onChange={onChangeIOS}
+        // тема приложения — своя настройка (themeMode в сторе), от системного Light/Dark
+        // не зависит; без themeVariant колесо красит текст под СИСТЕМНУЮ тему телефона, и на
+        // светлом iOS с тёмной темой приложения получались тёмные цифры на тёмной панели —
+        // невидимое колесо (пункт G финального ревью 06б)
+        themeVariant={t.mode === 'dark' ? 'dark' : 'light'}
+      />
       <Pressable onPress={confirmIOS} style={[st.done, { borderColor: t.frame }]}>
-        <Txt style={[st.doneTxt, { color: t.accent }]}>OK</Txt>
+        <Txt style={[st.doneTxt, { color: t.accent }]}>{tr('settings.ok')}</Txt>
       </Pressable>
     </ModalPanel>
   );

@@ -94,9 +94,15 @@ const TITLE_KEY: Record<PushKind, string> = {
  *  (logic-spec §9) и не меняется при каждом пересчёте плана. */
 export function pushBody(p: PlannedPush, lang: 'ru' | 'en'): string {
   const card = p.cardId ? cardById.get(p.cardId) : undefined;
+  const n = p.n ?? 0;
   return pickPhrase(p.phraseKey, p.date, lang, {
     card: card ? card.name[lang] : '',
-    n: p.n ?? 0,
+    n,
+    // готовая плюрализованная форма для {days} у push.streak_save («Серия {days}» вместо
+    // «Серия {n} дней» — «Серия 3 дней» было согласованием только для одного числа, см. пункт C
+    // финального ревью 06б). Переводчик берём ЯВНО под нужный язык (getFixedT), а не окружающий
+    // i18n.t: тело и заголовок пуша обязаны совпадать по языку (пункт D)
+    days: i18n.getFixedT(lang)('push.streakDays', { count: n }),
   });
 }
 
@@ -131,6 +137,12 @@ async function applyPlanImpl(plan: PlannedPush[], lang: 'ru' | 'en', mySeq: numb
   await Notifications.cancelAllScheduledNotificationsAsync();
   if ((await getPermission()) !== 'granted') return;
 
+  // фиксированный переводчик под ПЕРЕДАННЫЙ lang, а не окружающий i18n.t: заголовок и тело
+  // должны быть на одном языке. `app/_layout.tsx` вызывает `usePushScheduler()` раньше эффекта,
+  // который зовёт `i18n.changeLanguage`, — сразу после смены языка в настройках ambient-язык ещё
+  // старый, и заголовок с i18n.t мог бы разъехаться с телом (пункт D финального ревью 06б)
+  const tFixed = i18n.getFixedT(lang);
+
   for (const p of plan) {
     // тот же самый обгон может случиться и посреди цикла — длинный план не должен дописывать
     // уведомления после того, как более новый пересчёт уже встал в очередь позади нас
@@ -138,7 +150,7 @@ async function applyPlanImpl(plan: PlannedPush[], lang: 'ru' | 'en', mySeq: numb
     const [y, m, d] = p.date.split('-').map(Number);
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: i18n.t(TITLE_KEY[p.kind], { count: p.n ?? 0 }),
+        title: tFixed(TITLE_KEY[p.kind], { count: p.n ?? 0 }),
         body: pushBody(p, lang),
       },
       trigger: {
@@ -164,7 +176,8 @@ export async function sendTestPush(lang: 'ru' | 'en'): Promise<void> {
   if (status !== 'granted') return;
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: i18n.t('push.titleMorning'),
+      // фиксированный переводчик под lang — та же причина, что в applyPlanImpl (пункт D)
+      title: i18n.getFixedT(lang)('push.titleMorning'),
       body: pickPhrase('push.morning_card', localDateISO(), lang),
     },
     trigger: {
