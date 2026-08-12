@@ -3,7 +3,7 @@ import { router, useFocusEffect } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import { AppState, Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -32,6 +32,7 @@ import type { Outcome } from '../../src/lib/journal';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
 import { reflectionVisible } from '../../src/lib/reflection';
+import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
@@ -165,15 +166,8 @@ export default function TodayScreen() {
   const [hour, setHour] = React.useState(() => new Date().getHours());
   useFocusEffect(React.useCallback(() => setHour(new Date().getHours()), []));
 
-  // возврат из фона фокус экрана НЕ меняет, поэтому useFocusEffect тут не поможет:
-  // утром открыл и свернул, вечером вернулся — без этого час остался бы утренним
-  // и вечерний блок не появился бы до переключения таба
-  React.useEffect(() => {
-    const sub = AppState.addEventListener('change', (s) => {
-      if (s === 'active') setHour(new Date().getHours());
-    });
-    return () => sub.remove();
-  }, []);
+  // возврат из фона фокус экрана не меняет — час обновляем ещё и по AppState (06а)
+  useAppActive(() => setHour(new Date().getHours()));
 
   const showReflection = reflectionVisible({
     drawn: !!drawn,
