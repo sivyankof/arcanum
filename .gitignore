@@ -43,3 +43,6 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# визуальный компаньон брейншторма (superpowers)
+.superpowers/
