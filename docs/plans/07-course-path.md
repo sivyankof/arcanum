@@ -114,7 +114,7 @@ import {
   type LessonProgressMap,
 } from '../courseProgress';
 
-// Фабрика модулей: fx('a', 2) — модуль "a" с уроками a1, a2; cardsPerLesson карт в каждом
+// Фабрика модулей: fx('a', 2) — модуль "a" с уроками a1, a2; cardsPerLesson РАЗНЫХ карт в каждом
 const fx = (id: string, lessons: number, cardsPerLesson = 0): CourseModule => ({
   id,
   free: true,
@@ -122,7 +122,7 @@ const fx = (id: string, lessons: number, cardsPerLesson = 0): CourseModule => ({
   lessons: Array.from({ length: lessons }, (_, i) => ({
     id: `${id}${i + 1}`,
     title: { ru: `${id}${i + 1}`, en: `${id}${i + 1}` },
-    cards: Array.from({ length: cardsPerLesson }, (_, c) => `card-${c}`),
+    cards: Array.from({ length: cardsPerLesson }, (_, c) => `${id}${i + 1}-card-${c}`),
   })),
 });
 
@@ -188,12 +188,22 @@ describe('moduleProgress — процент для шапки модуля', () 
   });
 });
 
-describe('moduleCardCount', () => {
-  it('сумма карт по урокам', () => {
+describe('moduleCardCount — РАЗНЫЕ карты модуля', () => {
+  it('разные карты по урокам складываются', () => {
     expect(moduleCardCount(fx('c', 3, 2))).toBe(6);
   });
   it('модуль без карт → 0 (счётчик карт в шапке скрывается)', () => {
     expect(moduleCardCount(fx('c', 3))).toBe(0);
+  });
+  it('урок-повторение не удваивает счёт: карты, повторённые в другом уроке, считаются раз', () => {
+    // так устроен реальный М2: четыре урока по две карты + «Повторение» со всеми восемью
+    const mod = fx('c', 2, 2);
+    mod.lessons.push({
+      id: 'c3',
+      title: { ru: 'Повторение', en: 'Review' },
+      cards: [...mod.lessons[0].cards, ...mod.lessons[1].cards],
+    });
+    expect(moduleCardCount(mod)).toBe(4);
   });
 });
 
@@ -221,6 +231,8 @@ describe('реальный course.json', () => {
     expect(course.reduce((n, m) => n + m.lessons.length, 0)).toBe(32);
   });
   it('М2 разбирает 8 карт — как в шапке эталона «6 УРОКОВ · 8 КАРТ»', () => {
+    // в JSON у М2 шестнадцать записей карт: урок «Повторение» перечисляет все восемь заново
+    expect(course[1].lessons.flatMap((l) => l.cards)).toHaveLength(16);
     expect(moduleCardCount(course[1])).toBe(8);
   });
 });
@@ -297,9 +309,11 @@ export function moduleProgress(
   return { done, total, pct: total === 0 ? 0 : Math.round((done / total) * 100) };
 }
 
-/** Сколько карт разбирается в модуле («N УРОКОВ · M КАРТ»; при 0 счётчик карт скрывается). */
+/** Сколько РАЗНЫХ карт разбирается в модуле («N УРОКОВ · M КАРТ»; при 0 счётчик скрывается).
+ *  Считаем уникальные id, а не сумму длин: в М2 урок «Повторение» перечисляет все восемь карт
+ *  модуля заново, и сумма дала бы «16 КАРТ» там, где эталон показывает «8 КАРТ». */
 export function moduleCardCount(module: CourseModule): number {
-  return module.lessons.reduce((n, l) => n + l.cards.length, 0);
+  return new Set(module.lessons.flatMap((l) => l.cards)).size;
 }
 
 // Змейка эталона: первый узел по центру, дальше берега чередуются с разной амплитудой.
@@ -319,7 +333,7 @@ export function nodeXs(count: number): number[] {
 - [ ] **Шаг 4: Убедиться, что тесты зелёные**
 
 Выполнить: `npx jest src/lib/__tests__/courseProgress.test.ts`
-Ожидание: PASS, 17 тестов. Затем `npx tsc --noEmit` — чисто.
+Ожидание: PASS, 18 тестов. Затем `npx tsc --noEmit` — чисто.
 
 - [ ] **Шаг 5: Коммит**
 

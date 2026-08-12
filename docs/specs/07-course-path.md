@@ -67,7 +67,10 @@ export function nextLessonId(modules, progress): string | null;  // урок-cur
 export function moduleProgress(module: CourseModule, progress: LessonProgressMap):
   { done: number; total: number; pct: number };   // pct = Math.round(done / total * 100)
 
-export function moduleCardCount(module: CourseModule): number;   // Σ lessons[].cards.length
+export function moduleCardCount(module: CourseModule): number;
+// Число УНИКАЛЬНЫХ id карт модуля (⚠️ не сумма длин lessons[].cards: в М2 урок «Повторение»
+// перечисляет все 8 карт заново — сумма дала бы «16 КАРТ» у модуля, разбирающего 8, а эталон
+// показывает «8 КАРТ». У остальных модулей обе формулы совпадают). 0 → счётчик карт скрыт.
 
 export function nodeXs(count: number): number[];
 // x-координаты змейки в % ширины тропы. Паттерн макета: [50, 24, 70, 38, 66, 42];
