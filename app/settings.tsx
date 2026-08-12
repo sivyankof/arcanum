@@ -258,7 +258,7 @@ export default function SettingsScreen() {
                 // и «пуш не пришёл» невозможно отличить от «пуш не поставился»
                 onPress={() =>
                   sendTestPush(lang).catch((err) =>
-                    console.warn('[push-debug] sendTestPush упал:', err),
+                    console.warn('[pushes] тестовый пуш не поставился:', err),
                   )
                 }
               />

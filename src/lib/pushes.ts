@@ -34,7 +34,28 @@ export type PermissionState = 'granted' | 'denied' | 'undetermined';
 // конкурентные вызовы дожидаются ОДНОЙ настоящей инициализации.
 let initPromise: Promise<void> | null = null;
 
-/** Хендлер + канал. Идемпотентна: вызывается из планировщика на каждом пересчёте. */
+// Обработчик показа регистрируется ПРИ ЗАГРУЗКЕ МОДУЛЯ, а не внутри initPushes.
+// Причина: это две разные обязанности. initPushes отвечает за подготовку к ПОСТАНОВКЕ
+// уведомлений (канал Android), а обработчик — за ПОКАЗ уже пришедшего уведомления, пока
+// приложение открыто. Связывать их нельзя: пока приложение на экране, iOS не показывает
+// уведомление само, а спрашивает приложение и ждёт ответа не дольше трёх секунд; если
+// обработчик не зарегистрирован или молчит, система получает «не показывать ничего» —
+// и уведомление пропадает бесследно, его нет даже в центре уведомлений (проверено по
+// исходникам expo-notifications: NotificationCenterManager.willPresent → `if !handled
+// { completionHandler([]) }`). Регистрация на верхнем уровне модуля — канонический приём
+// из документации Expo — снимает зависимость показа от того, дошли ли руки до расписания.
+if (!WEB) {
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowBanner: true,
+      shouldShowList: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+}
+
+/** Канал уведомлений Android. Идемпотентна: вызывается из планировщика на каждом пересчёте. */
 export function initPushes(): Promise<void> {
   if (WEB) return Promise.resolve();
   if (!initPromise) {
@@ -50,26 +71,6 @@ export function initPushes(): Promise<void> {
 }
 
 async function initPushesImpl(): Promise<void> {
-  // ⚠️ без этого на iOS баннер не показывается, пока приложение открыто, — и DEV-проверка
-  // выглядит так, будто пуш не пришёл вовсе
-  Notifications.setNotificationHandler({
-    handleNotification: async () => {
-      // ДИАГНОСТИКА (временно): доходит ли до нас запрос «показывать ли баннер»
-      console.log('[push-debug] handleNotification: система спросила, отвечаю «показать»');
-      return {
-        shouldShowBanner: true,
-        shouldShowList: true,
-        shouldPlaySound: false,
-        shouldSetBadge: false,
-      };
-    },
-    // ДИАГНОСТИКА (временно): сюда попадают сбой обработчика и таймаут ответа (3 секунды)
-    handleError: (id, err) => console.log('[push-debug] handleNotification ОШИБКА:', id, err),
-    handleSuccess: (id) => console.log('[push-debug] handleNotification успех:', id),
-  });
-  // ДИАГНОСТИКА (временно): подтверждение, что обработчик вообще зарегистрирован
-  console.log('[push-debug] обработчик показа зарегистрирован');
-
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
       name: i18n.t('settings.pushes'),
@@ -132,8 +133,6 @@ async function applyPlanImpl(plan: PlannedPush[], lang: 'ru' | 'en', mySeq: numb
   // нас обогнали, пока мы ждали своей очереди в цепочке — писать устаревший план не нужно
   if (mySeq !== planSeq) return;
 
-  // ДИАГНОСТИКА (временно, разбор «тестовый пуш не приходит при открытом приложении»)
-  console.log('[push-debug] applyPlan: снимаю очередь, seq', mySeq, 'план из', plan.length);
   await Notifications.cancelAllScheduledNotificationsAsync();
   if ((await getPermission()) !== 'granted') return;
 
@@ -173,10 +172,8 @@ export async function sendTestPush(lang: 'ru' | 'en'): Promise<void> {
   if (WEB) return;
   await initPushes();
   const status = (await getPermission()) === 'granted' ? 'granted' : await requestPermission();
-  // ДИАГНОСТИКА (временно, разбор «тестовый пуш не приходит при открытом приложении»)
-  console.log('[push-debug] sendTestPush: разрешение =', status);
   if (status !== 'granted') return;
-  const id = await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync({
     content: {
       // фиксированный переводчик под lang — та же причина, что в applyPlanImpl (пункт D)
       title: i18n.getFixedT(lang)('push.titleMorning'),
@@ -188,8 +185,4 @@ export async function sendTestPush(lang: 'ru' | 'en'): Promise<void> {
       channelId: CHANNEL_ID,
     },
   });
-  // ДИАГНОСТИКА (временно): id поставленного уведомления и полный состав очереди сразу после
-  console.log('[push-debug] sendTestPush: поставлен id =', id);
-  const queue = await Notifications.getAllScheduledNotificationsAsync();
-  console.log('[push-debug] в очереди сразу после постановки:', queue.length, queue.map((r) => r.identifier));
 }
