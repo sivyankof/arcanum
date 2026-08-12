@@ -53,13 +53,22 @@ async function initPushesImpl(): Promise<void> {
   // ⚠️ без этого на iOS баннер не показывается, пока приложение открыто, — и DEV-проверка
   // выглядит так, будто пуш не пришёл вовсе
   Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowBanner: true,
-      shouldShowList: true,
-      shouldPlaySound: false,
-      shouldSetBadge: false,
-    }),
+    handleNotification: async () => {
+      // ДИАГНОСТИКА (временно): доходит ли до нас запрос «показывать ли баннер»
+      console.log('[push-debug] handleNotification: система спросила, отвечаю «показать»');
+      return {
+        shouldShowBanner: true,
+        shouldShowList: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+      };
+    },
+    // ДИАГНОСТИКА (временно): сюда попадают сбой обработчика и таймаут ответа (3 секунды)
+    handleError: (id, err) => console.log('[push-debug] handleNotification ОШИБКА:', id, err),
+    handleSuccess: (id) => console.log('[push-debug] handleNotification успех:', id),
   });
+  // ДИАГНОСТИКА (временно): подтверждение, что обработчик вообще зарегистрирован
+  console.log('[push-debug] обработчик показа зарегистрирован');
 
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
