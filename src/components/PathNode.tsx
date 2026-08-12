@@ -82,10 +82,17 @@ export function PathNode({
 
   React.useEffect(() => {
     if (state !== 'current') return;
-    // keyframes pulse эталона: линейно бежим цикл 1.8s, форма кривой — в стиле ниже
+    // keyframes pulse эталона: 70% цикла (1260мс) кольцо растёт и гаснет с ease-out,
+    // оставшиеся 30% (540мс) — пауза, где pulse.value стоит на 1 и кольцо не видно.
+    // Драйвер разбит на две стадии явно (как bob ниже) — единый эйзженный withTiming(1800мс)
+    // с делением postfactum на 0.7 в ringStyle давал не те пропорции: ease-out нелинеен по
+    // времени, поэтому 0.7 от ЗНАЧЕНИЯ достигается заметно раньше 70% от ВРЕМЕНИ.
     pulse.value = 0;
     pulse.value = withRepeat(
-      withTiming(1, { duration: 1800, easing: Easing.out(Easing.ease), reduceMotion: ReduceMotion.System }),
+      withSequence(
+        withTiming(1, { duration: 1260, easing: Easing.out(Easing.ease), reduceMotion: ReduceMotion.System }),
+        withTiming(1, { duration: 540, easing: Easing.linear, reduceMotion: ReduceMotion.System }),
+      ),
       -1,
     );
     // keyframes bob2: ±5px за 2s
@@ -102,12 +109,12 @@ export function PathNode({
     };
   }, [state, pulse, bob]);
 
-  // до 70% цикла кольцо расширяется 0.82→1.14 и гаснет 0.9→0, остаток цикла невидимо —
-  // так в keyframes эталона (70%{scale:1.14;opacity:0} 100%{opacity:0})
-  const ringStyle = useAnimatedStyle(() => {
-    const k = Math.min(pulse.value / 0.7, 1);
-    return { opacity: 0.9 * (1 - k), transform: [{ scale: 0.82 + 0.32 * k }] };
-  });
+  // pulse.value сам идёт 0→1 ровно на отрезке роста (1260мс) и держится на 1 всю паузу
+  // (540мс) — деление на долю цикла больше не нужно, граница стадий уже в драйвере выше.
+  const ringStyle = useAnimatedStyle(() => ({
+    opacity: 0.9 * (1 - pulse.value),
+    transform: [{ scale: 0.82 + 0.32 * pulse.value }],
+  }));
   const bobStyle = useAnimatedStyle(() => ({ transform: [{ translateY: bob.value }] }));
   const shakeStyle = useAnimatedStyle(() => ({ transform: [{ rotate: `${shake.value * 8}deg` }] }));
 
