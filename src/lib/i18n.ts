@@ -36,6 +36,17 @@ const resources = {
         language: "Язык", languageValue: "Русский", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
+        pushes: "Напоминания",
+      },
+      // заголовки баннеров: тело пуша берётся из content/phrases.json (правило вариативности),
+      // а заголовок — короткая метка типа. Числительное — плюрализацией, иначе «Серия 3 дней»
+      push: {
+        titleMorning: "Карта дня ✦",
+        titleEvening: "Как прошёл день?",
+        titleStreak_one: "Серия {{count}} день",
+        titleStreak_few: "Серия {{count}} дня",
+        titleStreak_many: "Серия {{count}} дней",
+        titleComeback: "Давно не виделись",
       },
       // дневник в профиле и блок «Ваша история с картой» (product-spec §5, logic-spec §3).
       // Числительные — плюрализация i18next: _one/_few/_many для русского
@@ -105,6 +116,14 @@ const resources = {
         language: "Language", languageValue: "English", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
+        pushes: "Reminders",
+      },
+      push: {
+        titleMorning: "Card of the day ✦",
+        titleEvening: "How was your day?",
+        titleStreak_one: "{{count}}-day streak",
+        titleStreak_other: "{{count}}-day streak",
+        titleComeback: "It's been a while",
       },
       journal: {
         title: "Journal",
