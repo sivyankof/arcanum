@@ -921,12 +921,18 @@ export default function Onboarding() {
     }
   };
 
-  // финал: профиль в стор одним куском; гард в _layout закрывает онбординг навсегда
+  // Финал: профиль в стор одним куском. Дальше уводит САМ гард — expo-router, потеряв
+  // текущий экран из навигатора, переходит на anchor (у нас initialRouteName '(tabs)').
+  // ⚠️ Своего router.replace('/(tabs)') здесь быть НЕ должно: в момент вызова состояние
+  // ещё не перерисовалось, маршрута (tabs) в навигаторе нет, и переход уходит в никуда.
+  // По той же причине переход на страницу аркана откладывается на следующий тик — к нему
+  // гард уже отработал и маршрут card/[id] существует.
   const finish = (cardId: string | null) => {
     completeOnboarding(name, birthDate ?? undefined);
-    router.replace('/(tabs)');
-    // страница аркана — ПОВЕРХ «Сегодня»: «назад» с неё ведёт домой, а не в онбординг
-    if (cardId) router.push({ pathname: '/card/[id]', params: { id: cardId, from: 'today' } });
+    // «назад» со страницы карты ведёт на «Сегодня»: под ней лежит anchor, а не онбординг
+    if (cardId) {
+      setTimeout(() => router.push({ pathname: '/card/[id]', params: { id: cardId, from: 'today' } }), 0);
+    }
   };
 
   const arcana = birthDate ? cardById.get(birthArcanaId(birthDate)) : undefined;
@@ -954,8 +960,10 @@ export default function Onboarding() {
               <>
                 <FadeUp index={0}>
                   <Animated.View style={[st.emblem, spin]}>
+                    {/* ticks={false} — у эмблемы онбординга (.emb2 эталона) засечек
+                        по сторонам света нет, в отличие от рубашки карты (.emb) */}
                     <View style={glowShadow(t.glow, t.accent, 16, 0.35)}>
-                      <Emblem size={EMBLEM_SIZE} />
+                      <Emblem size={EMBLEM_SIZE} ticks={false} />
                     </View>
                   </Animated.View>
                 </FadeUp>
@@ -1027,7 +1035,12 @@ export default function Onboarding() {
                       hoverStyle,
                     ]}
                   >
-                    <Image source={cardImages[arcana.id]} style={st.revealImg} contentFit="cover" />
+                    <Image
+                      source={cardImages[arcana.id]}
+                      style={st.revealImg}
+                      contentFit="cover"
+                      cachePolicy="memory-disk"
+                    />
                   </Animated.View>
                 </FadeUp>
                 <FadeUp index={2}>
@@ -1151,6 +1164,15 @@ Run: `npx tsc --noEmit` → пусто.
 ⚠️ Если ругается на маршрут `/onboarding` в `router`-вызовах — маршрут новый, `typedRoutes`
 пересобирает `.expo/types/router.d.ts` только при работающем dev-сервере (ловушка задачи 07):
 запустить `npx expo start --web`, дождаться сборки, повторить tsc.
+
+⚠️ **Проверено по документации Expo v54 перед реализацией** (`docs.expo.dev/router/advanced/protected/`):
+«если экран становится защищённым, пока он активен, пользователя перенаправляет на anchor-маршрут
+или на ПЕРВЫЙ ДОСТУПНЫЙ экран стека». Отсюда два следствия, которые нельзя нарушать:
+1. При `!onboarded` доступен ровно ОДИН экран (онбординг) — потому все четыре остальных обязаны
+   лежать внутри `Stack.Protected guard={onboarded}`. Оставь хоть один снаружи — и «первым
+   доступным» на холодном старте может оказаться он, порядок тут не наш.
+2. `unstable_settings = { initialRouteName: '(tabs)' }` остаётся как есть: при `onboarded`
+   он и есть anchor, на который роутер уводит сам после финальной CTA.
 
 - [ ] **Step 4: ручная проверка на вебе (smoke, не 6а)**
 
@@ -1326,8 +1348,12 @@ git push -u origin feat/09-onboarding
 
 - [ ] **Step 4: доложить Артёму** — задача готова к лайв-проверке на iPhone (пункт 6в):
   колесо пикера в ОБЕИХ темах приложения (themeVariant), хаптика Light/Success, холодный старт
-  с флагом и без, реальные данные (серия/дневник/XP целы после онбординга). Merge в main —
-  только после его ✓.
+  с флагом и без, реальные данные (серия/дневник/XP целы после онбординга).
+  ⚠️ Отдельным пунктом — **формат даты рождения в поле шага 2**: ru «10 февраля 1994»
+  (родительный падеж месяца, без хвоста «г.»), en «February 10, 1994». Это ровно тот класс,
+  который по правилу hf-02 не доказывают ни веб, ни jest: формат считает сам движок, у Node
+  и браузера полный ICU, у Hermes — урезанный. Судья только устройство.
+  Merge в main — только после его ✓.
 
 ---
 
