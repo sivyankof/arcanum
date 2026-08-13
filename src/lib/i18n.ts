@@ -105,6 +105,7 @@ export const resources = {
         language: "Язык", languageValue: "Русский", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
+        devSkipYesterday: "Пропустить вчера",
         pushes: "Напоминания",
         pushMorning: "Утреннее", pushEvening: "Вечернее", pushDenied: "Выключены в системе",
         // между тапом по тумблеру и ответом системного диалога тумблер ещё не включён —
@@ -261,6 +262,7 @@ export const resources = {
         language: "Language", languageValue: "English", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
+        devSkipYesterday: "Skip yesterday",
         pushes: "Reminders",
         pushMorning: "Morning", pushEvening: "Evening", pushDenied: "Off in system settings",
         pushRequesting: "Asking…",

@@ -43,13 +43,14 @@ export default function SettingsScreen() {
   const setReflectionOn = useApp((s) => s.setReflectionOn);
   const devReflect = useApp((s) => s.devReflect);
   const setDevReflect = useApp((s) => s.setDevReflect);
+  const devSkipYesterday = useApp((s) => s.devSkipYesterday);
   const pushesOn = useApp((s) => s.settings.pushesOn);
   const pushMorning = useApp((s) => s.settings.pushMorning);
   const pushEvening = useApp((s) => s.settings.pushEvening);
   const setPushesOn = useApp((s) => s.setPushesOn);
   const setPushTime = useApp((s) => s.setPushTime);
-  // весь settings/streak/history — только для DEV-строки «План пушей» (planInputFromStore
-  // хочет их целиком, а не по отдельному полю, как остальной экран)
+  // весь settings/streak/history/freezes/lastDrawDate — только для DEV-строки «План пушей»
+  // (planInputFromStore хочет их целиком, а не по отдельному полю, как остальной экран)
   const settings = useApp((s) => s.settings);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
@@ -250,6 +251,17 @@ export default function SettingsScreen() {
                 label={tr('settings.resetToday')}
                 value="DEV"
                 onPress={resetToday}
+              />
+            </FadeUp>
+            <FadeUp index={7}>
+              <SettingsRow
+                icon="snow-outline"
+                label={tr('settings.devSkipYesterday')}
+                value="DEV"
+                // симуляция пропуска: следующий переворот карты тратит заморозку или,
+                // если запас нулевой, сбрасывает серию (спека 10) — иначе механику
+                // не проверить ни в вебе, ни на лайв-проверке, не ожидая сутки
+                onPress={devSkipYesterday}
               />
             </FadeUp>
             <FadeUp index={7}>
