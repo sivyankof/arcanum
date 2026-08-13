@@ -95,6 +95,11 @@
      "ru": "Юноша у края обрыва — душа перед воплощением, доверие к неизвестному. Белая роза в руке — чистота намерений. Узелок на посохе — опыт прошлого, который мы несём с собой. Белый пёс — инстинкт и верный спутник, предупреждающий об опасности. Горы вдали — испытания, которые ещё впереди. Солнце за спиной — благословение начала.",
      "en": "The youth at the cliff's edge — the soul before its journey, trusting the unknown. The white rose — purity of intention. The bundle on the staff — past experience carried along. The white dog — instinct, a loyal companion warning of danger. The distant mountains — trials yet to come. The sun behind — the blessing of beginnings.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — доверие к началу: вы умеете шагать в новое налегке, и мир отвечает вам дорогой.",
+     "en": "Your path is trust in beginnings: you step into the new travelling light, and the road rises to meet you.",
+     "status": "draft"
     }
    }
   },
@@ -190,6 +195,11 @@
      "ru": "Жест Мага — одна рука к небу, другая к земле: «что наверху, то и внизу», проведение замысла в материю. Знак бесконечности над головой — безграничность духа. Змея, кусающая свой хвост, на поясе — вечный цикл. На столе четыре символа мастей — все стихии и инструменты в его распоряжении. Розы и лилии в саду — союз страсти и чистоты мысли.",
      "en": "The Magician's gesture — one hand to heaven, one to earth: 'as above, so below', drawing vision into matter. The lemniscate overhead — the spirit's endlessness. The serpent-belt biting its tail — the eternal cycle. On the table, the four suit emblems — every element and tool at his command. Roses and lilies in the garden — passion united with purity of thought.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — воплощение: у вас под рукой всегда есть всё, чтобы замысел стал делом.",
+     "en": "Your path is manifestation: you always have everything at hand to turn an idea into reality.",
+     "status": "draft"
     }
    }
   },
@@ -285,6 +295,11 @@
      "ru": "Жрица сидит между чёрной и белой колоннами (Боаз и Яхин храма Соломона) — между тьмой и светом, зная обе стороны. Завеса с гранатами за спиной скрывает вход в тайное знание. Свиток «Тора» в руках — закон и память, раскрытые лишь частично. Полумесяц у ног — власть над миром чувств и подсознания. Крест на груди — равновесие.",
      "en": "The Priestess sits between the black and white pillars (Boaz and Jachin of Solomon's Temple) — between dark and light, knowing both. The pomegranate veil behind her conceals the entrance to hidden knowledge. The 'Tora' scroll — law and memory, only partly revealed. The crescent at her feet — command of feeling and the subconscious. The cross on her breast — equilibrium.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — внутренний голос: вы слышите то, что ещё не сказано вслух, и редко ошибаетесь, доверяя тишине.",
+     "en": "Your path is the inner voice: you hear what has not yet been said aloud, and silence rarely misleads you.",
+     "status": "draft"
     }
    }
   },
@@ -382,6 +397,11 @@
      "ru": "Императрица восседает среди зреющей пшеницы — символа плодородия и награды за заботу. Венец из двенадцати звёзд — связь с циклами природы и небесным порядком. Знак Венеры на щите — любовь как основа жизни. Водопад за спиной — неиссякаемый поток чувств и энергии. Гранаты на одеянии — женская сила и изобилие. Мягкие подушки трона — умение принимать удовольствие без вины.",
      "en": "The Empress sits amid ripening wheat — fertility and the reward of care. Her crown of twelve stars — connection to nature's cycles and the order of the heavens. The Venus sign on her shield — love as the foundation of life. The waterfall behind her — an unending flow of feeling and vitality. Pomegranates on her robe — feminine power and abundance. The soft cushions of her throne — the ability to receive pleasure without guilt.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — взращивание: рядом с вами люди и замыслы расцветают, как сад в заботливых руках.",
+     "en": "Your path is nurturing: people and plans blossom around you like a well-tended garden.",
+     "status": "draft"
     }
    }
   },
@@ -477,6 +497,11 @@
      "ru": "Император сидит на массивном каменном троне — власть, которая опирается на устойчивость, а не на порыв. Головы баранов на троне — знак Овна: воля, инициатива, лидерство. Скипетр в форме анкха — власть над жизнью, держава в левой руке — мир, за который он отвечает. Доспехи под мантией — готовность защищать своё. Голые скалы позади — порядок, созданный трудом там, где ничего не росло само.",
      "en": "The Emperor sits on a massive stone throne — power grounded in stability, not impulse. The rams' heads on the throne — the sign of Aries: will, initiative, leadership. The ankh-shaped sceptre — authority over life; the orb in his left hand — the world he answers for. Armour beneath the robe — readiness to defend what is his. The bare mountains behind — order built by effort where nothing grew on its own.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — опора: вы строите порядок, на который могут положиться другие.",
+     "en": "Your path is foundation: you build an order others can lean on.",
+     "status": "draft"
     }
    }
   },
@@ -572,6 +597,11 @@
      "ru": "Иерофант в тройной короне и с тройным крестом — власть над тремя мирами: телесным, душевным и духовным. Правая рука поднята в благословении: два пальца к небу, два к земле — знание передаётся, но часть его остаётся сокрытой. Скрещённые ключи у ног — ключи к тайне, доступной через обучение. Два служителя перед ним — путь ученичества: знание живёт, пока его передают.",
      "en": "The Hierophant wears the triple crown and holds the triple cross — authority over three worlds: body, soul and spirit. His right hand is raised in blessing, two fingers to heaven, two to earth — knowledge is passed on, yet part remains concealed. The crossed keys at his feet — keys to a mystery unlocked through learning. The two ministers before him — the path of discipleship: knowledge lives while it is being handed down.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — передача смысла: вы соединяете опыт поколений с собственной мудростью и делитесь ею просто.",
+     "en": "Your path is passing on meaning: you join the wisdom of generations with your own and share it simply.",
+     "status": "draft"
     }
    }
   },
@@ -667,6 +697,11 @@
      "ru": "Над обнажёнными мужчиной и женщиной — архангел с распростёртыми руками, благословляющий союз с высоты. Солнце в зените — ясность и полнота жизни. За женщиной — Древо познания со змеем: искушение и опыт; за мужчиной — Древо жизни с двенадцатью плодами: жизненная сила. Нагота фигур — доверие без масок. Гора между ними — вершина, к которой союз ещё поднимется.",
      "en": "Above the naked man and woman, an archangel spreads his arms, blessing the union from on high. The sun at its zenith — clarity and fullness of life. Behind the woman, the Tree of Knowledge with the serpent: temptation and experience; behind the man, the Tree of Life with twelve fruits: vitality. The figures' nakedness — trust without masks. The mountain between them — the summit the union has yet to climb.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — выбор сердцем: вы умеете находить своё среди множества дорог и хранить верность выбранному.",
+     "en": "Your path is choosing with the heart: you find what is truly yours among many roads and stay faithful to it.",
+     "status": "draft"
     }
    }
   },
@@ -762,6 +797,11 @@
      "ru": "Возничий стоит в каменной колеснице под звёздным пологом — под защитой высшего порядка. Два сфинкса, чёрный и белый, тянут её в разные стороны — противоположные силы, которые он ведёт волей, без поводьев. Полумесяцы на плечах — власть над переменчивыми эмоциями. Жезл в руке — воля вместо кнута. Город за спиной — освоенное остаётся позади: путь лежит к новому.",
      "en": "The charioteer stands in a stone chariot beneath a canopy of stars — under the protection of a higher order. Two sphinxes, black and white, pull in opposite directions — opposing forces he steers by will alone, with no reins. The crescents on his shoulders — command over shifting emotions. The wand in his hand — willpower in place of a whip. The city behind him — the familiar left behind: the road leads to the new.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — движение: воля и собранность несут вас туда, куда другие лишь смотрят.",
+     "en": "Your path is motion: will and focus carry you where others only look.",
+     "status": "draft"
     }
    }
   },
@@ -859,6 +899,11 @@
      "ru": "Женщина в белом закрывает пасть льву — не силой, а спокойной уверенностью: высшая природа приручает страсти. Знак бесконечности над её головой — тот же, что у Мага: неисчерпаемость духа. Гирлянда цветов вместо цепи — «лёгкое иго»: лев уже укрощён и следует за ней добровольно. Лев — наши инстинкты и желания, которые не нужно убивать, только направить.",
      "en": "A woman in white closes a lion's jaws — not by force, but with quiet confidence: the higher nature taming the passions. The lemniscate above her head — the same as the Magician's — is the spirit's inexhaustibility. A garland of flowers instead of a chain is the 'sweet yoke': the lion is already tamed and follows her willingly. The lion is our instincts and desires — not to be destroyed, only guided.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — мягкая смелость: вы приручаете бури терпением там, где другие ломают двери.",
+     "en": "Your path is gentle courage: you tame storms with patience where others break down doors.",
+     "status": "draft"
     }
    }
   },
@@ -954,6 +999,11 @@
      "ru": "Старец в сером плаще стоит на вершине горы — он уже прошёл путь, на который смотрит сверху. В поднятом фонаре горит шестиконечная звезда — внутренний свет, который не спрятан под плащом, а поднят для других: «где я, там можешь быть и ты». Посох — опора опыта. Снег вокруг — тишина и ясность, в которых слышно главное.",
      "en": "An old man in a grey cloak stands on a mountain peak — he has already walked the path he now overlooks. In his raised lantern shines a six-pointed star: the inner light, not hidden under the cloak but lifted for others — 'where I am, you may be also'. The staff is the support of experience. The snow all around is the silence and clarity in which what matters can be heard.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — глубина: вы находите ответы наедине с собой и возвращаетесь к людям со светом.",
+     "en": "Your path is depth: you find answers alone with yourself and return to people carrying light.",
+     "status": "draft"
     }
    }
   },
@@ -1049,6 +1099,11 @@
      "ru": "Колесо с буквами ROTA/TARO и буквами Божественного имени — судьба и провидение, вплетённые друг в друга: случайностей нет. Сфинкс на вершине — равновесие и загадка посреди вечного движения. Змей Тифон, скользящий вниз, — сила спада; поднимающийся Анубис — сила роста. Четыре крылатые фигуры по углам с книгами — устойчивая мудрость среди перемен: колесо вертится, но ось неподвижна.",
      "en": "The wheel bears the letters ROTA/TARO interwoven with the letters of the Divine Name — fate and providence entwined: there is no blind chance. The sphinx on top is equilibrium and mystery amid perpetual motion. The serpent Typhon sliding down is the force of decline; rising Anubis, the force of growth. The four winged creatures in the corners, each with a book, are steady wisdom amid change: the wheel turns, but the axis stands still.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — чувство поворота: вы умеете ловить момент, когда жизнь меняет курс, и разворачиваться вместе с ней.",
+     "en": "Your path is sensing the turn: you catch the moment life changes course and turn with it.",
+     "status": "draft"
     }
    }
   },
@@ -1144,6 +1199,11 @@
      "ru": "Фигура Справедливости сидит между двух колонн — как Жрица, но её колонны открываются в мир земных дел. Поднятый меч в правой руке — решение, которое не откладывают, и ясность, отсекающая лишнее. Весы в левой — беспристрастная оценка: каждому по делам его. Корона — власть закона над эмоциями. Её взгляд открыт: правде не нужна повязка на глазах.",
      "en": "The figure of Justice sits between two pillars — like the High Priestess, but these open onto the world of earthly affairs. The raised sword in her right hand is decision that will not be postponed, clarity cutting away the inessential. The scales in her left are impartial measure: to each according to their deeds. The crown is law's authority over emotion. Her gaze is open — truth needs no blindfold.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — ясность и честность: вы видите суть и умеете называть вещи своими именами.",
+     "en": "Your path is clarity and honesty: you see the essence and call things by their names.",
+     "status": "draft"
     }
    }
   },
@@ -1240,6 +1300,11 @@
      "ru": "Юноша висит вниз головой на живом дереве в форме буквы Т — и дерево с листьями подсказывает: это не казнь, а жизнь в состоянии паузы. Его лицо спокойно, почти умиротворено, а вокруг головы — сияние: в добровольной остановке рождается озарение. Ноги сложены как цифра 4 — порядок внутри кажущегося хаоса. Он привязан лишь за одну ногу: выход есть, но он ещё не время.",
      "en": "A young man hangs upside down from a living, leafy T-shaped tree — and the leaves tell us this is no execution, but life in suspension. His face is calm, almost serene, and a halo glows around his head: in the voluntary stop, illumination is born. His legs form the shape of a 4 — order within apparent chaos. He is bound by one foot only: the way out exists, but its time has not yet come.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — иной взгляд: там, где все видят тупик, вы находите смысл, просто посмотрев с другой стороны.",
+     "en": "Your path is another angle: where everyone sees a dead end, you find meaning simply by looking differently.",
+     "status": "draft"
     }
    }
   },
@@ -1335,6 +1400,11 @@
      "ru": "На карте Уэйта — не жнец с косой, а всадник в доспехах с чёрным знаменем, на котором белая роза: жизнь, продолжающаяся сквозь любые перемены. У него нет оружия — перемены приходят сами, без насилия. Перед ним король, ребёнок, девушка и епископ: переход касается всех, независимо от статуса. Вдали между двумя башнями встаёт солнце — обещание, что за каждым завершением есть рассвет.",
      "en": "On Waite's card there is no reaper with a scythe, but an armoured rider with a black banner bearing a white rose: life continuing through every change. He carries no weapon — change arrives on its own, without violence. Before him stand a king, a child, a maiden and a bishop: transition comes to everyone, whatever their status. In the distance, the sun rises between two towers — a promise that behind every ending there is a dawn.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — обновление: вы не боитесь завершать отжившее, и потому новое приходит к вам легче, чем к другим.",
+     "en": "Your path is renewal: you are not afraid to end what is over, so the new comes to you more easily.",
+     "status": "draft"
     }
    }
   },
@@ -1432,6 +1502,11 @@
      "ru": "Ангел с солнечным знаком на лбу переливает воду из чаши в чашу — живой поток чувств, который не должен застаиваться. Одна нога стоит на земле, другая — в воде: равновесие между материальным и эмоциональным. Треугольник в квадрате на груди — дух, вписанный в материю. Тропа за спиной ведёт к горам, над которыми сияет свет короны: путь к цели лежит через терпение и меру.",
      "en": "The angel with the sun-sign on its brow pours water from cup to cup — the living stream of feeling that must not stagnate. One foot rests on land, the other in water: balance between the material and the emotional. The triangle within a square on the chest — spirit held within matter. Behind, a path leads to mountains crowned with radiant light: the way to the goal runs through patience and right measure.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — соразмерность: вы соединяете противоположности в живое равновесие.",
+     "en": "Your path is balance: you blend opposites into living harmony.",
+     "status": "draft"
     }
    }
   },
@@ -1527,6 +1602,11 @@
      "ru": "Рогатая фигура с крыльями летучей мыши восседает на постаменте — искажённое отражение Иерофанта: вместо благословения — жест подчинения. Перевёрнутая пентаграмма на лбу — материя, поставленная выше духа. Внизу мужчина и женщина в цепях — как Влюблённые, но после утраты свободы. Главная деталь: цепи на шеях висят свободно — их можно снять в любой момент. Опущенный факел — энергия, направленная вниз, но не погасшая.",
      "en": "The horned figure with bat wings sits on a pedestal — a distorted mirror of the Hierophant: instead of blessing, a gesture of domination. The inverted pentagram on the forehead — matter placed above spirit. Below, a man and woman in chains — like the Lovers, but after freedom was lost. The key detail: the chains hang loosely around their necks and could be lifted off at any moment. The lowered torch — energy turned downward, yet not extinguished.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — честность с собственными желаниями: вы видите свои привязанности в лицо, и в этом ваша свобода.",
+     "en": "Your path is honesty with your own desires: you look your attachments in the eye, and that is your freedom.",
+     "status": "draft"
     }
    }
   },
@@ -1622,6 +1702,11 @@
      "ru": "Башня стоит на скале — конструкция, построенная гордыней на неподходящем основании. Молния сбивает корону с вершины: вспышка истины свергает ложную власть. Пламя вырывается из окон, и две фигуры падают вниз — старое понимание мира и его ложное толкование; падение здесь — освобождение из тюрьмы, которую принимали за крепость. Двадцать два язычка пламени — как арканы Таро: очищающий огонь духа.",
      "en": "The Tower stands on a rock — a structure raised by pride on unsuitable ground. Lightning knocks the crown from its top: a flash of truth toppling false authority. Flames burst from the windows and two figures fall — the old picture of the world and its false interpretation; here, the fall is release from a prison mistaken for a fortress. The twenty-two tongues of flame echo the tarot's arcana: the purifying fire of spirit.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — правда: вы умеете отпускать шаткое, чтобы строить на настоящем.",
+     "en": "Your path is truth: you can let go of the shaky to build on what is real.",
+     "status": "draft"
     }
    }
   },
@@ -1719,6 +1804,11 @@
      "ru": "Обнажённая женщина у воды — искренность и естественность: ей нечего скрывать. Она льёт воду из двух кувшинов — на землю и в озеро: живая сила питает и материальное, и душевное, и поток этот не иссякает. Одно колено на земле, стопа на воде — опора и на реальность, и на чувства. Большая восьмилучевая звезда в окружении семи меньших — путеводный свет и дары духа. Птица на дереве — ибис, символ мудрости, — знак, что мысль обрела покой.",
      "en": "The naked woman by the water — sincerity and naturalness: she has nothing to hide. She pours water from two jugs — onto the land and into the pool: living energy nourishing both the material and the inner life, a stream that never runs dry. One knee on the earth, one foot on the water — grounded in reality and in feeling at once. The great eight-rayed star amid seven smaller ones — guiding light and gifts of the spirit. The bird in the tree — an ibis, emblem of wisdom — a sign that the mind has found its rest.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — тихая надежда: вы умеете видеть свет впереди и вести к нему других.",
+     "en": "Your path is quiet hope: you see the light ahead and lead others toward it.",
+     "status": "draft"
     }
    }
   },
@@ -1814,6 +1904,11 @@
      "ru": "Луна с человеческим лицом растёт «стороной милосердия» и роняет капли — «росу мысли». Внизу пёс и волк воют на свет: приручённые и дикие страхи нашей природы. Из глубин водоёма выползает рак — смутные тревоги подсознания, которые поднимаются и снова уходят на дно. Тропа между двумя башнями ведёт в неизвестное: путь есть, но идти по нему придётся при отражённом, неверном свете.",
      "en": "The Moon with a human face waxes on the 'side of mercy' and sheds drops — the 'dew of thought'. Below, a dog and a wolf howl at the light: the tamed and the wild fears of our nature. A crayfish crawls up from the pool — the dim anxieties of the subconscious that surface and sink back again. The path between two towers leads into the unknown: the way exists, but you must walk it by reflected, uncertain light.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — чуткость: вы читаете полутона и сны там, где другие видят только темноту.",
+     "en": "Your path is sensitivity: you read the half-tones and dreams where others see only darkness.",
+     "status": "draft"
     }
    }
   },
@@ -1911,6 +2006,11 @@
      "ru": "Обнажённый ребёнок на белом коне — простота и невинность, которым нечего скрывать; это, по Уэйту, «восстановленный мир» и мудрость в облике детства. Красное знамя в его руке — жизненная сила и победа. Огромное солнце с прямыми и волнистыми лучами — свет сознания, прямой, а не отражённый (в отличие от Луны). Подсолнухи за каменной стеной — расцвет, повернувшийся к свету; стена — сад прежней, защищённой жизни, из которого ребёнок уже выехал навстречу открытому миру.",
      "en": "A naked child on a white horse — simplicity and innocence with nothing to hide; for Waite, the 'restored world' and wisdom in the form of childhood. The red banner in the child's hand — life force and victory. The great sun with straight and wavy rays — the light of consciousness, direct rather than reflected (the opposite of the Moon). Sunflowers behind a stone wall — full bloom turned towards the light; the wall is the garden of the old, sheltered life, which the child has already ridden out of, into the open world.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — ясная радость: ваше тепло освещает и вас, и тех, кто рядом.",
+     "en": "Your path is clear joy: your warmth lights up both you and those around you.",
+     "status": "draft"
     }
    }
   },
@@ -2006,6 +2106,11 @@
      "ru": "Архангел в облаках трубит в трубу с флагом, на котором крест, — зов свыше, знак завершения великой работы. Из открытых гробниц поднимаются люди: женщина, мужчина и ребёнок между ними — прошлое «я», которое воскресает обновлённым. Их руки раскрыты в изумлении и благодарности: все фигуры едины в этом отклике. Вода вокруг гробниц — глубина чувств и памяти, из которой мы поднимаемся. По Уэйту, труба звучит не столько снаружи, сколько внутри нас.",
      "en": "An archangel in the clouds sounds a trumpet bearing a banner with a cross — the call from above, the sign that the great work is complete. From open tombs the dead arise: a woman, a man, and a child between them — the former self, resurrected and renewed. Their arms are open in wonder and gratitude: every figure is united in that response. The water around the tombs — the depth of feeling and memory we rise from. For Waite, the trumpet sounds not so much outside us as within.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — пробуждение: вы умеете слышать зов перемен и отвечать на него всей жизнью.",
+     "en": "Your path is awakening: you hear the call of change and answer it with your whole life.",
+     "status": "draft"
     }
    }
   },
@@ -2101,6 +2206,11 @@
      "ru": "Танцующая фигура в лёгком шарфе держит два жезла — равновесие противоположностей, завершённость, соединившая начало и конец. Овальный венок вокруг неё — замкнутый цикл и лавры победы; ленты на венке образуют знаки бесконечности. По четырём углам — те же фигуры, что и на Колесе Фортуны: ангел, орёл, телец и лев, четыре стихии и четыре стороны света, теперь в полном согласии. Это образ мира, который, по Уэйту, «понимает себя» — радость завершённого творения.",
      "en": "A dancing figure wrapped in a light scarf holds two wands — the balance of opposites, a completeness that joins beginning and end. The oval wreath around her — the closed cycle and the laurels of victory; its ribbons form figure-eight signs of infinity. In the four corners, the same figures as on the Wheel of Fortune: angel, eagle, bull, and lion — the four elements and four directions, now in full accord. This is the image of a world that, in Waite's words, 'understands itself' — the joy of completed creation.",
      "status": "reviewed"
+    },
+    "birth_path": {
+     "ru": "Ваш путь — целостность: вы доводите начатое до полноты и умеете праздновать завершение.",
+     "en": "Your path is wholeness: you carry what you began to completion and know how to celebrate it.",
+     "status": "draft"
     }
    }
   },
