@@ -24,3 +24,7 @@ export const hapticSuccess = () =>
 /** Отказ: тап по заблокированному уроку. */
 export const hapticWarning = () =>
   fire(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning));
+
+/** Ошибка: неверный ответ викторины (спека 08). */
+export const hapticError = () =>
+  fire(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error));

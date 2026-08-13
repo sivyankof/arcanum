@@ -2,10 +2,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import type { LessonProgressMap } from '../lib/courseProgress';
+import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from '../lib/settings';
+import { XP_DRAW, XP_REFLECT } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
 export type Lang = 'ru' | 'en';
@@ -32,6 +33,9 @@ interface AppState {
   /** Прогресс уроков курса по id урока (logic-spec §7). В 07 читается для состояний
    *  узлов пути; пишут только DEV-строки настроек — настоящая запись в задаче 08. */
   lessonsProgress: LessonProgressMap;
+  /** Сумма XP (logic-spec §4). Источники: урок, повтор урока, карта дня, первый ответ
+   *  рефлексии дня. Задним числом за прошлые дни не начисляется — счёт с нуля у всех. */
+  xp: number;
   settings: AppSettings;
   /** Только для разработки: показать блок рефлексии, не дожидаясь 18:00. */
   devReflect: boolean;
@@ -42,6 +46,8 @@ interface AppState {
   setNote: (date: string, text: string) => void;
   setOutcome: (date: string, outcome: Outcome) => void;
   setLessonDone: (lessonId: string, done: boolean) => void;
+  /** Завершение урока движком (спека 08). Возвращает начисленный XP для экрана результата. */
+  completeLesson: (lessonId: string, errors: number) => number;
   resetCourse: () => void;
   setReflectionOn: (on: boolean) => void;
   setPushesOn: (on: boolean) => void;
@@ -61,6 +67,7 @@ export const useApp = create<AppState>()(
       lastDrawDate: null,
       history: [],
       lessonsProgress: {},
+      xp: 0,
       settings: DEFAULT_SETTINGS,
       devReflect: false,
 
@@ -69,7 +76,7 @@ export const useApp = create<AppState>()(
 
       drawToday: (cardId, reversed) => {
         const t = localDateISO();
-        const { lastDrawDate, streak, history } = get();
+        const { lastDrawDate, streak, history, xp } = get();
         if (lastDrawDate === t) return; // уже тянули сегодня
         const yesterday = daysAgoISO(1);
         const newStreak = lastDrawDate === yesterday ? streak + 1 : 1;
@@ -77,6 +84,8 @@ export const useApp = create<AppState>()(
           lastDrawDate: t,
           streak: newStreak,
           history: [{ date: t, cardId, reversed }, ...history].slice(0, 365),
+          // ритуал дня: +5 XP (logic-spec §4); повторное начисление отсекает проверка выше
+          xp: xp + XP_DRAW,
         });
       },
 
@@ -98,14 +107,14 @@ export const useApp = create<AppState>()(
 
       // Ответ вечерней рефлексии. Правило то же, что у заметки: правится только сегодняшняя
       // запись (logic-spec §3). Смена ответа до полуночи разрешена, снятия ответа нет.
+      // +3 XP — только за ПЕРВЫЙ ответ дня: смена ответа повторно не начисляет (logic-spec §4).
       setOutcome: (date, outcome) => {
         if (!canEditEntry(date)) return;
+        const entry = get().history.find((h) => h.date === date);
+        if (!entry || entry.outcome === outcome) return;
         set({
-          history: get().history.map((h) => {
-            if (h.date !== date) return h;
-            if (h.outcome === outcome) return h;
-            return { ...h, outcome };
-          }),
+          history: get().history.map((h) => (h.date === date ? { ...h, outcome } : h)),
+          xp: get().xp + (entry.outcome === undefined ? XP_REFLECT : 0),
         });
       },
 
@@ -118,6 +127,14 @@ export const useApp = create<AppState>()(
             [lessonId]: { done, errors: 0, ts: Date.now() },
           },
         }),
+      // Завершение урока: вся арифметика — в чистой completeLessonProgress (courseProgress.ts),
+      // экшен применяет результат и возвращает начисленный XP экрану результата.
+      completeLesson: (lessonId, errors) => {
+        const { lessonsProgress, xp } = get();
+        const r = completeLessonProgress(lessonsProgress, lessonId, errors, localDateISO(), Date.now());
+        set({ lessonsProgress: r.progress, xp: xp + r.gained });
+        return r.gained;
+      },
       resetCourse: () => set({ lessonsProgress: {} }),
 
       setReflectionOn: (on) => set({ settings: { ...get().settings, reflectionOn: on } }),
@@ -155,7 +172,10 @@ export const useApp = create<AppState>()(
       // v3 → v4: lessonsProgress (прогресс курса, спека 07). Ключ ВЕРХНЕГО уровня —
       // поверхностное слияние persist подставит дефолт {} само (ловушка 06а бьёт только
       // по вложенным объектам вроде settings), поэтому отдельная ветка миграции не нужна.
-      version: 4,
+      // v4 → v5: xp (спека 08) — снова ключ ВЕРХНЕГО уровня, дефолт 0 доливается поверхностным
+      // слиянием сам; repeatDate живёт ВНУТРИ записей lessonsProgress и опционален — миграция
+      // не нужна. Следующая задача, меняющая схему, поднимает до 6.
+      version: 5,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт
       // целиком, а не сливается с ним по ключам. Поэтому недостающие ключи дописываем здесь
       // руками — и следующая задача, добавляя поля в settings, обязана поднять версию и сделать
