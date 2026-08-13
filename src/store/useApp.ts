@@ -7,6 +7,7 @@ import { completeLessonProgress, type LessonProgressMap } from '../lib/coursePro
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from '../lib/settings';
+import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
@@ -33,6 +34,12 @@ interface AppState {
   installSeed: number;
   streak: number;
   lastDrawDate: string | null;
+  /** Заморозки серии (logic-spec §2, спека 10): запас (0..FREEZE_MAX), месяц последнего
+   *  начисления ('YYYY-MM', null до первой синхронизации) и день последней траты —
+   *  по нему «Сегодня» весь день спасения показывает строку «Серию спасла заморозка». */
+  freezes: number;
+  freezeMonth: string | null;
+  freezeSpentDate: string | null;
   history: DailyDraw[];
   /** Прогресс уроков курса по id урока (logic-spec §7). В 07 читается для состояний
    *  узлов пути; пишут только DEV-строки настроек — настоящая запись в задаче 08. */
@@ -69,6 +76,10 @@ interface AppState {
   resetOnboarding: () => void;
   setDevReflect: (on: boolean) => void;
   resetToday: () => void;
+  /** Ленивое начисление заморозок: зовётся на гидрации и при возврате из фона. */
+  syncFreezeGrant: () => void;
+  /** Только для разработки: симулирует пропущенный вчера день. */
+  devSkipYesterday: () => void;
 }
 
 export const useApp = create<AppState>()(
@@ -79,6 +90,9 @@ export const useApp = create<AppState>()(
       installSeed: 0,
       streak: 0,
       lastDrawDate: null,
+      freezes: 1,
+      freezeMonth: null,
+      freezeSpentDate: null,
       history: [],
       lessonsProgress: {},
       xp: 0,
@@ -91,13 +105,15 @@ export const useApp = create<AppState>()(
 
       drawToday: (cardId, reversed) => {
         const t = localDateISO();
-        const { lastDrawDate, streak, history, xp } = get();
+        const { lastDrawDate, streak, freezes, history, xp } = get();
         if (lastDrawDate === t) return; // уже тянули сегодня
-        const yesterday = daysAgoISO(1);
-        const newStreak = lastDrawDate === yesterday ? streak + 1 : 1;
+        // вся арифметика серии и заморозки — в чистом advanceStreak (streak.ts)
+        const adv = advanceStreak({ streak, lastDrawDate, freezes }, t);
         set({
           lastDrawDate: t,
-          streak: newStreak,
+          streak: adv.streak,
+          freezes: adv.freezes,
+          ...(adv.freezeSpent ? { freezeSpentDate: t } : {}),
           history: [{ date: t, cardId, reversed }, ...history].slice(0, 365),
           // ритуал дня: +5 XP (logic-spec §4); повторное начисление отсекает проверка выше
           xp: xp + XP_DRAW,
@@ -174,13 +190,38 @@ export const useApp = create<AppState>()(
       // Серия уменьшается на 1 (точное прежнее значение не хранится).
       resetToday: () => {
         const t = localDateISO();
-        const { history, streak } = get();
+        const { history, streak, freezes, freezeSpentDate } = get();
         if (!history.some((h) => h.date === t)) return;
         const rest = history.filter((h) => h.date !== t);
         set({
           history: rest,
           lastDrawDate: rest[0]?.date ?? null,
           streak: Math.max(0, streak - 1),
+          // сегодняшняя трата возвращается — иначе каждый DEV-сброс сжигал бы заморозку
+          ...(freezeSpentDate === t
+            ? { freezes: Math.min(FREEZE_MAX, freezes + 1), freezeSpentDate: null }
+            : {}),
+        });
+      },
+
+      // Ленивое «1-е число месяца»: фоновых задач нет, поэтому начисление происходит при
+      // первом открытии приложения в новом месяце — из onRehydrateStorage (холодный старт)
+      // и по возврату из фона (app/_layout.tsx, useAppActive). Пустой set не делаем.
+      syncFreezeGrant: () => {
+        const { freezes, freezeMonth } = get();
+        const next = grantFreezes({ freezes, freezeMonth }, localDateISO());
+        if (next.freezes !== freezes || next.freezeMonth !== freezeMonth) set(next);
+      },
+
+      // Только для разработки: «вчера пропущен» — lastDrawDate уезжает на позавчера,
+      // сегодняшняя запись стирается. Следующий переворот карты либо тратит заморозку,
+      // либо (freezes === 0) сбрасывает серию — иначе механику не проверить, не ждя сутки.
+      devSkipYesterday: () => {
+        const t = localDateISO();
+        set({
+          history: get().history.filter((h) => h.date !== t),
+          lastDrawDate: daysAgoISO(2),
+          freezeSpentDate: null,
         });
       },
     }),
@@ -229,8 +270,11 @@ export const useApp = create<AppState>()(
       // «дату предложим позже» пишет экшен setBirthDate в УЖЕ объявленные опциональные поля
       // birthDate/birthArcanaId, новых ключей схемы не появилось. Правило выше от этого не
       // ослабло — просто здесь оно не сработало.
-      // Следующая задача, меняющая схему, поднимает до 7.
-      version: 6,
+      // v6 → v7: freezes/freezeMonth/freezeSpentDate (спека 10) — снова ключи ВЕРХНЕГО уровня,
+      // дефолты (1/null/null) доливаются поверхностным слиянием сами, ветка миграции не нужна.
+      // Существующие пользователи получают freezes: 1 сразу (решение 2 спеки 10).
+      // Следующая задача, меняющая схему, поднимает до 8.
+      version: 7,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт
       // целиком, а не сливается с ним по ключам. Поэтому недостающие ключи дописываем здесь
       // руками — и следующая задача, добавляя поля в settings, обязана поднять версию и сделать
@@ -246,6 +290,9 @@ export const useApp = create<AppState>()(
         if (state && state.installSeed === 0) {
           useApp.setState({ installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)) });
         }
+        // холодный старт в новом месяце — момент «1-го числа» для начисления заморозки;
+        // возврат из фона ловит useAppActive в app/_layout.tsx
+        useApp.getState().syncFreezeGrant();
       },
     },
   ),
