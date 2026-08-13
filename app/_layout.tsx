@@ -13,7 +13,7 @@ import {
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import '../src/lib/i18n';
 import i18n from '../src/lib/i18n';
@@ -31,6 +31,19 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const t = useTheme();
   const lang = useApp((s) => s.lang);
+  // сплэш держится до гидрации persist: иначе у нового пользователя мигнёт «Сегодня»
+  // до редиректа на онбординг, а у старого — наоборот (спека 09)
+  const [hydrated, setHydrated] = useState(() => useApp.persist.hasHydrated());
+  const onboarded = useApp((s) => s.profile.onboarded);
+  // Подписываемся ПЕРВЫМ, и только потом перечитываем флаг: `onFinishHydration` зовёт
+  // слушателей ровно один раз в момент завершения, опоздавший подписчик не получит ничего.
+  // Инициализатор useState закрывает случай «гидрация кончилась до первого рендера», а эта
+  // перепроверка — «кончилась между рендером и запуском эффекта». Без неё сплэш завис бы навсегда.
+  useEffect(() => {
+    const unsubscribe = useApp.persist.onFinishHydration(() => setHydrated(true));
+    if (useApp.persist.hasHydrated()) setHydrated(true);
+    return unsubscribe;
+  }, []);
   const [fontsLoaded] = useFonts({
     CormorantGaramond_500Medium,
     CormorantGaramond_600SemiBold,
@@ -47,10 +60,10 @@ export default function RootLayout() {
   }, [lang]);
 
   useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
+    if (fontsLoaded && hydrated) SplashScreen.hideAsync();
+  }, [fontsLoaded, hydrated]);
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded || !hydrated) return null;
 
   return (
     <>
@@ -62,42 +75,61 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: t.bg },
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="card/[id]"
-          options={{
-            // шапка системная (нативная кнопка «назад»), но прозрачная: своего заголовка не нужно —
-            // название карты уже есть в теле экрана. Подпись кнопки задаётся на самом экране
-            // (зависит от источника перехода, см. Stack.Screen внутри card/[id].tsx)
-            title: '',
-            headerTransparent: true,
-            // без явного сброса фон наследуется из screenOptions.headerStyle.backgroundColor выше
-            // и рисует непрозрачную полосу поверх контента — это уже случалось
-            headerStyle: { backgroundColor: 'transparent' },
-            headerShadowVisible: false,
-            headerTintColor: t.accent,
-            // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
-            animation: 'fade',
-          }}
-        />
-        {/* заметка к карте дня — модалка: экран ввода не должен уводить с «Сегодня»,
-            а свайп вниз читается как «закрыть» (перехватывается на beforeRemove, спека 05) */}
-        <Stack.Screen
-          name="note/[date]"
-          options={{ presentation: 'modal', headerTintColor: t.accent, headerShadowVisible: false }}
-        />
-        {/* заглушка урока (спека 07): обычный push с прозрачной шапкой — движок урока (08)
-            наполнит экран, маршрут и навигация уже настоящие */}
-        <Stack.Screen
-          name="lesson/[id]"
-          options={{
-            title: '',
-            headerTransparent: true,
-            headerStyle: { backgroundColor: 'transparent' },
-            headerShadowVisible: false,
-            headerTintColor: t.accent,
-          }}
-        />
+        {/* Онбординг — ПЕРВЫЙ ребёнок Stack. При !onboarded он обязан остаться единственным
+            доступным маршрутом: тогда роутер садится на него сам («первый доступный» из
+            документации Stack.Protected). Поэтому ВСЕ остальные экраны корневого стека лежат
+            под гардом onboarded ниже — включая те, которым свои options здесь не нужны (спека 09) */}
+        <Stack.Protected guard={!onboarded}>
+          <Stack.Screen
+            name="onboarding"
+            options={{ headerShown: false, gestureEnabled: false, animation: 'fade' }}
+          />
+        </Stack.Protected>
+        <Stack.Protected guard={onboarded}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          {/* ⚠️ Экран настроек ОБЯЗАН быть объявлен здесь, хотя своих options ему тут не нужно
+              (он ставит их сам внутри app/settings.tsx). Необъявленные файловые маршруты
+              expo-router добавляет в навигатор сам — то есть молча мимо обоих гардов: без этой
+              строки «Настройки» открывались бы по прямой ссылке до онбординга, а DEV-сброс,
+              нажатый на самом экране настроек, никуда бы не уводил. Любой НОВЫЙ маршрут
+              корневого стека тоже придётся вписать сюда. */}
+          <Stack.Screen name="settings" />
+          <Stack.Screen
+            name="card/[id]"
+            options={{
+              // шапка системная (нативная кнопка «назад»), но прозрачная: своего заголовка не нужно —
+              // название карты уже есть в теле экрана. Подпись кнопки задаётся на самом экране
+              // (зависит от источника перехода, см. Stack.Screen внутри card/[id].tsx)
+              title: '',
+              headerTransparent: true,
+              // без явного сброса фон наследуется из screenOptions.headerStyle.backgroundColor выше
+              // и рисует непрозрачную полосу поверх контента — это уже случалось
+              headerStyle: { backgroundColor: 'transparent' },
+              headerShadowVisible: false,
+              headerTintColor: t.accent,
+              // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
+              animation: 'fade',
+            }}
+          />
+          {/* заметка к карте дня — модалка: экран ввода не должен уводить с «Сегодня»,
+              а свайп вниз читается как «закрыть» (перехватывается на beforeRemove, спека 05) */}
+          <Stack.Screen
+            name="note/[date]"
+            options={{ presentation: 'modal', headerTintColor: t.accent, headerShadowVisible: false }}
+          />
+          {/* заглушка урока (спека 07): обычный push с прозрачной шапкой — движок урока (08)
+              наполнит экран, маршрут и навигация уже настоящие */}
+          <Stack.Screen
+            name="lesson/[id]"
+            options={{
+              title: '',
+              headerTransparent: true,
+              headerStyle: { backgroundColor: 'transparent' },
+              headerShadowVisible: false,
+              headerTintColor: t.accent,
+            }}
+          />
+        </Stack.Protected>
       </Stack>
     </>
   );
