@@ -9,6 +9,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, type StyleProp, type ViewStyle, View } from 'react-native';
 import { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
+import { levelTitleKey } from '../lib/xp';
 import { useTheme } from '../theme/useTheme';
 import { Pill } from './Pill';
 import { PROGRESS_EASE, ProgressBar } from './ProgressBar';
@@ -16,7 +17,6 @@ import { Txt } from './Txt';
 
 const FILL_DELAY = 500;
 const FILL_MS = 1500;
-const LAST_TITLE = 6; // титул шестого уровня носят все уровни выше (logic-spec §4)
 
 export function XpPill({
   level,
@@ -44,7 +44,7 @@ export function XpPill({
     );
   }, [fill, progress]);
 
-  const title = tr(`level.t${Math.min(level, LAST_TITLE)}`);
+  const title = tr(levelTitleKey(level));
 
   return (
     <Pill style={style}>
