@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { levelFromXp, levelTitleKey, nextLevelXp } from '../lib/xp';
-import { fonts, radius } from '../theme/theme';
+import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PROGRESS_EASE, ProgressBar } from './ProgressBar';
 import { Txt } from './Txt';
@@ -52,8 +52,11 @@ const st = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 14,
   },
-  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
-  name: { fontFamily: fonts.displaySemi, fontSize: 16 }, // `.lt b`: serif 16 w600
-  xp: { fontSize: 10, fontWeight: '700' }, // `.lt small`
+  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', gap: spacing.s },
+  // в RN дефолт flexShrink:0 (в CSS — 1): без явного flex:1 длинный титул («Толковательница»
+  // с 4-го уровня) не сжимается и не переносится, а вылезает за карточку — та же ловушка,
+  // что уже чинили в BirthArcanaCard (86c60e0) и что изначально решена в MonthCard/JournalRow.
+  name: { flex: 1, fontFamily: fonts.displaySemi, fontSize: 16 }, // `.lt b`: serif 16 w600
+  xp: { flexShrink: 0, fontSize: 10, fontWeight: '700' }, // `.lt small` — подпись к полосе, не обрезаем
   track: { height: 7, marginTop: 8 }, // `.lvlbar`
 });
