@@ -103,6 +103,7 @@ const TITLE_KEY: Record<PushKind, string> = {
   evening: 'push.titleEvening',
   streak: 'push.titleStreak',
   comeback: 'push.titleComeback',
+  freeze: 'push.titleFreeze',
 };
 
 // Номер последнего вызова applyPlan и хвост цепочки его применений. Планировщик вызывает

@@ -7,6 +7,7 @@ import {
   type PlannedPush,
   type PlanInput,
 } from '../pushPlan';
+import { pickPhrase } from '../phrases';
 
 // 12 августа 2026, 08:00 локального времени — до утреннего пуша
 const MORNING_8AM = new Date(2026, 7, 12, 8, 0);
@@ -20,6 +21,8 @@ const base: PlanInput = {
   morning: '09:00',
   evening: '21:00',
   streak: 0,
+  freezes: 0,
+  lastDrawDate: null,
 };
 
 const kinds = (input: PlanInput, now: Date) => planPushes(input, now).map((p) => p.kind);
@@ -202,5 +205,64 @@ describe('capPerDay — обрезка на искусственном вход�
   it('два претендента и меньше — обрезка ничего не убирает', () => {
     const two = four.filter((p) => p.kind === 'streak' || p.kind === 'morning');
     expect(capPerDay(two)).toHaveLength(2);
+  });
+
+  it('freeze в PRIORITY выше утреннего: из freeze+morning+comeback выживают freeze и morning', () => {
+    const three: PlannedPush[] = [
+      { kind: 'comeback', date: day, hour: 9, minute: 0, phraseKey: 'push.winback' },
+      { kind: 'morning', date: day, hour: 9, minute: 0, phraseKey: 'push.morning_card' },
+      { kind: 'freeze', date: day, hour: 9, minute: 0, phraseKey: 'push.freeze_saved', n: 5 },
+    ];
+    const kept = capPerDay(three).map((p) => p.kind);
+    expect(kept).toEqual(expect.arrayContaining(['freeze', 'morning']));
+    expect(kept).not.toEqual(expect.arrayContaining(['comeback']));
+  });
+});
+
+describe('planPushes — пуш «серию спасла заморозка» (спека 10)', () => {
+  // MORNING_8AM = 12 августа; «вчера» = 11-е, «позавчера» = 10-е
+
+  it('карта открыта — freeze-пуш на послезавтра вместо утреннего', () => {
+    const input = { ...base, streak: 5, freezes: 1, lastDrawDate: '2026-08-12', todayCardId: 'the-tower' };
+    const plan = planPushes(input, MORNING_8AM);
+    const freeze = plan.filter((p) => p.kind === 'freeze');
+    expect(freeze).toHaveLength(1);
+    expect(freeze[0].date).toBe('2026-08-14');
+    expect(freeze[0].hour).toBe(9);
+    expect(freeze[0].n).toBe(5);
+    // замена, а не добавка: обычного утреннего в этот день нет
+    expect(onDate(input, MORNING_8AM, '2026-08-14').map((p) => p.kind)).toEqual(['freeze']);
+  });
+
+  it('карта не открыта, вчера открывали — freeze-пуш на завтра вместо утреннего', () => {
+    const input = { ...base, streak: 5, freezes: 1, lastDrawDate: '2026-08-11' };
+    const plan = planPushes(input, MORNING_8AM);
+    const freeze = plan.filter((p) => p.kind === 'freeze');
+    expect(freeze).toHaveLength(1);
+    expect(freeze[0].date).toBe('2026-08-13');
+    expect(onDate(input, MORNING_8AM, '2026-08-13').map((p) => p.kind)).toEqual(['freeze']);
+  });
+
+  it('последнее открытие позавчера — к утру серию уже не спасти, freeze-пуша нет', () => {
+    const input = { ...base, streak: 5, freezes: 1, lastDrawDate: '2026-08-10' };
+    expect(kinds(input, MORNING_8AM)).not.toContain('freeze');
+  });
+
+  it('заморозок нет — freeze-пуша нет', () => {
+    const input = { ...base, streak: 5, freezes: 0, lastDrawDate: '2026-08-11' };
+    expect(kinds(input, MORNING_8AM)).not.toContain('freeze');
+  });
+
+  it('серии нет — freeze-пуша нет', () => {
+    const input = { ...base, streak: 0, freezes: 2, lastDrawDate: '2026-08-11' };
+    expect(kinds(input, MORNING_8AM)).not.toContain('freeze');
+  });
+
+  it('ключ фразы push.freeze_saved существует в phrases.json', () => {
+    const input = { ...base, streak: 5, freezes: 1, lastDrawDate: '2026-08-11' };
+    const freeze = planPushes(input, MORNING_8AM).find((p) => p.kind === 'freeze')!;
+    expect(freeze.phraseKey).toBe('push.freeze_saved');
+    expect(pickPhrase('push.freeze_saved', freeze.date, 'ru', { days: '5 дней' })).not.toBe('');
+    expect(pickPhrase('push.freeze_saved', freeze.date, 'en', { days: '5 days' })).not.toBe('');
   });
 });

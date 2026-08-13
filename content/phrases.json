@@ -108,6 +108,20 @@
     "ru": "Колода на месте, никуда не ушла ✦",
     "en": "The deck is right where you left it ✦"
    }
+  ],
+  "freeze_saved": [
+   {
+    "ru": "Серия {days} цела — пропущенный день укрыла заморозка",
+    "en": "Your streak of {days} is safe — the freeze covered the missed day"
+   },
+   {
+    "ru": "Заморозка сработала: серия продолжается, карта ждёт ✦",
+    "en": "The freeze did its job — your streak lives on, a card is waiting ✦"
+   },
+   {
+    "ru": "Вчера прошло без карты, но серию сохранила заморозка",
+    "en": "Yesterday passed without a card, but the freeze kept your streak"
+   }
   ]
  },
  "lesson_done": [

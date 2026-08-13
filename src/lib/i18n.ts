@@ -131,6 +131,7 @@ export const resources = {
         titleStreak_few: "Серия {{count}} дня",
         titleStreak_many: "Серия {{count}} дней",
         titleComeback: "Давно не виделись",
+        titleFreeze: "Серия спасена ❄",
         // готовая форма «N дней» для подстановки {days} в push.streak_save (content/phrases.json):
         // сырая подстановка числа без плюрализации давала «Серия 3 дней» — заголовок пуша строкой
         // выше уже согласован числительным, а тело было рассинхронизировано (пункт C финального
@@ -279,6 +280,7 @@ export const resources = {
         titleStreak_one: "{{count}}-day streak",
         titleStreak_other: "{{count}}-day streak",
         titleComeback: "It's been a while",
+        titleFreeze: "Streak saved ❄",
         // не используется в англ. варианте фразы («{n}-day streak» уже корректно без плюрализации
         // слова «day»), но ключ должен существовать в обоих языках — правило проекта
         streakDays_one: "{{count}} day",

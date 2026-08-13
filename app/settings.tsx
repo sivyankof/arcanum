@@ -53,6 +53,8 @@ export default function SettingsScreen() {
   const settings = useApp((s) => s.settings);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const freezes = useApp((s) => s.freezes);
+  const lastDrawDate = useApp((s) => s.lastDrawDate);
   const lessonsProgress = useApp((s) => s.lessonsProgress);
   const setLessonDone = useApp((s) => s.setLessonDone);
   const resetCourse = useApp((s) => s.resetCourse);
@@ -85,7 +87,10 @@ export default function SettingsScreen() {
   //    всё, включая тестовый пуш.
   const showPlan = async () => {
     const now = new Date();
-    const plan = planPushes(planInputFromStore(settings, streak, history, now), now);
+    const plan = planPushes(
+      planInputFromStore(settings, streak, history, freezes, lastDrawDate, now),
+      now,
+    );
     const lines = plan.map(
       (p) => `${p.date} ${String(p.hour).padStart(2, '0')}:${String(p.minute).padStart(2, '0')} · ${p.kind}`,
     );
