@@ -35,3 +35,17 @@ export function levelFromXp(xp: number): { level: number; progress: number } {
   const start = levelStart(level);
   return { level, progress: (xp - start) / (levelStart(level + 1) - start) };
 }
+
+/** Сумма XP, с которой начнётся следующий уровень — для подписи «X / Y XP» карточки
+ *  уровня в профиле (спека 16): полоса там заполняется долей xp / nextLevelXp(level). */
+export function nextLevelXp(level: number): number {
+  return levelStart(level + 1);
+}
+
+/** Титул шестого уровня носят все уровни выше (logic-spec §4). */
+export const LAST_TITLE = 6;
+
+/** i18n-ключ титула уровня — общий для пилюли «Сегодня» и карточки уровня профиля. */
+export function levelTitleKey(level: number): string {
+  return `level.t${Math.min(level, LAST_TITLE)}`;
+}

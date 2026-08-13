@@ -1,4 +1,13 @@
-import { lessonXp, levelFromXp, reflectXp, REPEAT_XP, XP_DRAW, XP_REFLECT } from '../xp';
+import {
+  lessonXp,
+  levelFromXp,
+  levelTitleKey,
+  nextLevelXp,
+  reflectXp,
+  REPEAT_XP,
+  XP_DRAW,
+  XP_REFLECT,
+} from '../xp';
 
 describe('lessonXp — 10 − 2×ошибки, минимум 4 (logic-spec §4)', () => {
   it.each([
@@ -40,5 +49,21 @@ describe('levelFromXp — пороги 0/50/150/300/500, дальше +250', () 
     expect(XP_DRAW).toBe(5);
     expect(XP_REFLECT).toBe(3);
     expect(REPEAT_XP).toBe(2);
+  });
+});
+
+describe('nextLevelXp — порог следующего уровня для подписи «X / Y XP» (спека 16)', () => {
+  it.each([
+    [1, 50], [2, 150], [3, 300], [4, 500], [5, 750], [6, 1000], [7, 1250],
+  ])('уровень %i → следующий с %i XP', (level, next) => {
+    expect(nextLevelXp(level)).toBe(next);
+  });
+});
+
+describe('levelTitleKey — титул шестого уровня носят все уровни выше (logic-spec §4)', () => {
+  it.each([
+    [1, 'level.t1'], [5, 'level.t5'], [6, 'level.t6'], [7, 'level.t6'], [42, 'level.t6'],
+  ])('уровень %i → ключ %s', (level, key) => {
+    expect(levelTitleKey(level)).toBe(key);
   });
 });

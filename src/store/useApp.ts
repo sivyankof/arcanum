@@ -2,7 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { buildProfile, type Profile } from '../lib/birthArcana';
+import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
@@ -62,6 +62,9 @@ interface AppState {
   setPushAsked: () => void;
   /** Финальная CTA онбординга: профиль пишется одним куском (buildProfile). */
   completeOnboarding: (name: string, birthDate?: string) => void;
+  /** Дата рождения, пропущенная в онбординге, — из карточки-приглашения профиля (спека 16).
+   *  Заполняет СУЩЕСТВУЮЩИЕ опциональные поля profile — persist version не меняется. */
+  setBirthDate: (iso: string) => void;
   /** Только для разработки: вернуть онбординг — гард в _layout сам уведёт на экран. */
   resetOnboarding: () => void;
   setDevReflect: (on: boolean) => void;
@@ -160,6 +163,10 @@ export const useApp = create<AppState>()(
         }),
       setPushAsked: () => set({ settings: { ...get().settings, pushAsked: true } }),
       completeOnboarding: (name, birthDate) => set({ profile: buildProfile(name, birthDate) }),
+      setBirthDate: (iso) =>
+        set({
+          profile: { ...get().profile, birthDate: iso, birthArcanaId: birthArcanaId(iso) },
+        }),
       resetOnboarding: () => set({ profile: { onboarded: false } }),
       setDevReflect: (devReflect) => set({ devReflect }),
 
@@ -215,10 +222,13 @@ export const useApp = create<AppState>()(
       // доливается поверхностным слиянием сам, ветка миграции не нужна. Существующие установки
       // получают onboarded: false и проходят онбординг один раз (решение Артёма 13.08).
       // ⚠️ Но profile — ВТОРОЙ вложенный объект состояния после settings, и ловушка 06а
-      // распространяется на него целиком: задача, которая добавит ПОЛЕ ВНУТРЬ profile
-      // (например «дату предложим позже» из задачи 16), обязана поднять версию И дописать
-      // слияние руками в migrate — как это сделано для settings. Само по себе новое поле
-      // у уже установленного приложения не появится.
+      // распространяется на него целиком: задача, которая добавит ПОЛЕ ВНУТРЬ profile,
+      // обязана поднять версию И дописать слияние руками в migrate — как это сделано
+      // для settings. Само по себе новое поле у уже установленного приложения не появится.
+      // Задача 16 (профиль = эталон) кандидатом на этот бамп числилась, но обошлась без него:
+      // «дату предложим позже» пишет экшен setBirthDate в УЖЕ объявленные опциональные поля
+      // birthDate/birthArcanaId, новых ключей схемы не появилось. Правило выше от этого не
+      // ослабло — просто здесь оно не сработало.
       // Следующая задача, меняющая схему, поднимает до 7.
       version: 6,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт

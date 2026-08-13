@@ -91,7 +91,14 @@ export const resources = {
         birthOverline: "ВАШ АРКАН РОЖДЕНИЯ",
         learnMore: "УЗНАТЬ БОЛЬШЕ ОБО МНЕ",
       },
-      profile: { title: "Профиль", streak: "СЕРИЯ", cards: "КАРТ ДНЯ" },
+      profile: {
+        // огонёк у серии рисуется ИКОНКОЙ рядом с подписью (StatBox), а не эмодзи в строке:
+        // на «Сегодня» та же серия уже иконочная, два разных огня выглядели бы небрежностью
+        title: "Профиль", overline: "ВАШ ПУТЬ", streak: "СЕРИЯ", cards: "КАРТ ДНЯ",
+        arcana: "АРКАН РОЖДЕНИЯ", arcanaCta: "Указать дату рождения",
+        // «XP» инвариант к числу — плюрализация не нужна (правило logic-spec §10 — про формы слов)
+        xpOf: "{{xp}} / {{next}} XP",
+      },
       settings: {
         title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая",
         language: "Язык", languageValue: "Русский", resetToday: "Сбросить карту дня",
@@ -241,7 +248,11 @@ export const resources = {
         birthOverline: "YOUR BIRTH ARCANA",
         learnMore: "TELL ME MORE",
       },
-      profile: { title: "Profile", streak: "STREAK", cards: "DAILY CARDS" },
+      profile: {
+        title: "Profile", overline: "YOUR PATH", streak: "STREAK", cards: "DAILY CARDS",
+        arcana: "BIRTH ARCANA", arcanaCta: "Add your birth date",
+        xpOf: "{{xp}} / {{next}} XP",
+      },
       settings: {
         title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
         language: "Language", languageValue: "English", resetToday: "Reset daily card",

@@ -41,6 +41,7 @@ const FLY_MS = 350;
 const BACK_TITLES: Record<string, string> = {
   today: 'card.backToday',
   journal: 'card.backProfile',
+  profile: 'card.backProfile',
 };
 
 /** Ключ сферы значения — вкладки под героем страницы карты. Строгий порядок эталона.
