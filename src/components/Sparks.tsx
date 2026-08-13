@@ -61,9 +61,14 @@ function Spark({
 
   // угол раскладываем равномерно по кругу и слегка «сбиваем», чтобы салют не выглядел машинным;
   // длина без заданного разброса просто чередуется — так было до появления пропсов
-  // сектор задан — раскладываем угол равномерно по нему; нет — полный круг, как раньше
+  // сектор задан — раскладываем угол равномерно по нему; нет — полный круг, как раньше.
+  // Для сектора доля берётся от count - 1, а не от count: иначе последняя частица не долетает
+  // до конца диапазона и на краю сектора остаётся пустой промежуток (для полного круга это не
+  // нужно — там точки идут по кругу и index/count само замыкается). При count <= 1 доля — 0
+  // (единственная частица садится на начало сектора), чтобы не делить на ноль.
+  const sectorFrac = count > 1 ? index / (count - 1) : 0;
   const angle = angleRange
-    ? angleRange[0] + ((angleRange[1] - angleRange[0]) * index) / count + noise(index, 0) * angleJitter
+    ? angleRange[0] + (angleRange[1] - angleRange[0]) * sectorFrac + noise(index, 0) * angleJitter
     : (Math.PI * 2 * index) / count - Math.PI / 2 + noise(index, 0) * angleJitter;
   const len = Array.isArray(distance)
     ? distance[0] + noise(index, 1) * (distance[1] - distance[0])
