@@ -4,7 +4,6 @@
  *  (и позже в коллекции, этап 3+) — редкость сохраняет праздник.
  *  gained = 0 (повтор, +2 сегодня уже получены): счётчика нет — заголовок «Повторение пройдено».
  *  Reduce motion: счётчик мгновенный, конфетти не запускается (motion-spec §16). */
-import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -20,6 +19,7 @@ import { hapticSuccess } from '../lib/haptics';
 import { fonts, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { CtaButton } from './CtaButton';
+import { PROGRESS_EASE, ProgressBar } from './ProgressBar';
 import { Sparks } from './Sparks';
 import { Txt } from './Txt';
 
@@ -85,7 +85,7 @@ export function LessonResult({
       setTimeout(() => {
         bar.value = withTiming(total ? done / total : 0, {
           duration: BAR_MS,
-          easing: Easing.bezier(0.25, 1.2, 0.4, 1), // перелёт за цель, как полоса XpPill
+          easing: PROGRESS_EASE, // перелёт за цель, как полоса XpPill (общий модуль ProgressBar)
           reduceMotion: ReduceMotion.System,
         });
         if (!reduced) setBurst((b) => b + 1);
@@ -104,7 +104,6 @@ export function LessonResult({
     opacity: enter.value,
     transform: [{ translateY: (1 - enter.value) * 14 }],
   }));
-  const barStyle = useAnimatedStyle(() => ({ width: `${bar.value * 100}%` as `${number}%` }));
 
   return (
     <Animated.View style={enterStyle}>
@@ -117,16 +116,7 @@ export function LessonResult({
         <Txt style={[st.line, { color: t.muted }]}>
           {tr('lesson.passedOf', { done, count: total })}
         </Txt>
-        <View style={[st.bar, { backgroundColor: t.line }]}>
-          <Animated.View style={[st.fill, barStyle]}>
-            <LinearGradient
-              colors={[t.accent, t.accent2]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={StyleSheet.absoluteFill}
-            />
-          </Animated.View>
-        </View>
+        <ProgressBar progress={bar} radius={3} style={st.bar} />
         <CtaButton label={tr('lesson.nextOnPath')} onPress={onNext} style={st.cta} />
         {/* конфетти из-за панели: верхняя полуокружность + подброс, цвета через один */}
         <Sparks
@@ -152,7 +142,6 @@ const st = StyleSheet.create({
   xp: { fontFamily: fonts.displaySemi, fontSize: 36 },
   repeat: { fontFamily: fonts.display, fontSize: 24 },
   line: { fontSize: 11, letterSpacing: 1, marginTop: 4 },
-  bar: { height: 6, borderRadius: 3, overflow: 'hidden', alignSelf: 'stretch', marginTop: 12, marginHorizontal: 30 },
-  fill: { height: '100%', borderRadius: 3, overflow: 'hidden' },
+  bar: { height: 6, alignSelf: 'stretch', marginTop: 12, marginHorizontal: 30 },
   cta: { marginTop: spacing.l, alignSelf: 'stretch' },
 });
