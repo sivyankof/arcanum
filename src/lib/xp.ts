@@ -11,6 +11,12 @@ export function lessonXp(errors: number): number {
   return Math.max(10 - 2 * errors, 4);
 }
 
+/** XP за ответ вечерней рефлексии: +3 только за ПЕРВЫЙ ответ дня (prevOutcome ещё не задан),
+ *  смена уже данного ответа второй раз ничего не начисляет. */
+export function reflectXp(prevOutcome: string | undefined): number {
+  return prevOutcome === undefined ? XP_REFLECT : 0;
+}
+
 // Накопительные пороги: L1 = 0, L2 = 50, L3 = 150, L4 = 300, L5 = 500, дальше каждый +250.
 // Даунгрейда нет, XP не сгорает.
 const THRESHOLDS = [0, 50, 150, 300, 500];

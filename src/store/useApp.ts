@@ -6,7 +6,7 @@ import { completeLessonProgress, type LessonProgressMap } from '../lib/coursePro
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from '../lib/settings';
-import { XP_DRAW, XP_REFLECT } from '../lib/xp';
+import { reflectXp, XP_DRAW } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
 export type Lang = 'ru' | 'en';
@@ -114,7 +114,7 @@ export const useApp = create<AppState>()(
         if (!entry || entry.outcome === outcome) return;
         set({
           history: get().history.map((h) => (h.date === date ? { ...h, outcome } : h)),
-          xp: get().xp + (entry.outcome === undefined ? XP_REFLECT : 0),
+          xp: get().xp + reflectXp(entry.outcome),
         });
       },
 

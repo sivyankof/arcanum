@@ -1,10 +1,22 @@
-import { lessonXp, levelFromXp, REPEAT_XP, XP_DRAW, XP_REFLECT } from '../xp';
+import { lessonXp, levelFromXp, reflectXp, REPEAT_XP, XP_DRAW, XP_REFLECT } from '../xp';
 
 describe('lessonXp — 10 − 2×ошибки, минимум 4 (logic-spec §4)', () => {
   it.each([
     [0, 10], [1, 8], [2, 6], [3, 4], [4, 4], [10, 4],
   ])('%i ошибок → %i XP', (errors, expected) => {
     expect(lessonXp(errors)).toBe(expected);
+  });
+});
+
+describe('reflectXp — +3 только за первый ответ рефлексии дня (logic-spec §4)', () => {
+  it('первый ответ (prevOutcome не задан) → XP_REFLECT', () => {
+    expect(reflectXp(undefined)).toBe(XP_REFLECT);
+  });
+
+  it('смена уже данного ответа → 0', () => {
+    expect(reflectXp('yes')).toBe(0);
+    expect(reflectXp('partly')).toBe(0);
+    expect(reflectXp('no')).toBe(0);
   });
 });
 
