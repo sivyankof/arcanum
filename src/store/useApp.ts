@@ -2,7 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { buildProfile, type Profile } from '../lib/birthArcana';
+import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
@@ -62,6 +62,9 @@ interface AppState {
   setPushAsked: () => void;
   /** Финальная CTA онбординга: профиль пишется одним куском (buildProfile). */
   completeOnboarding: (name: string, birthDate?: string) => void;
+  /** Дата рождения, пропущенная в онбординге, — из карточки-приглашения профиля (спека 16).
+   *  Заполняет СУЩЕСТВУЮЩИЕ опциональные поля profile — persist version не меняется. */
+  setBirthDate: (iso: string) => void;
   /** Только для разработки: вернуть онбординг — гард в _layout сам уведёт на экран. */
   resetOnboarding: () => void;
   setDevReflect: (on: boolean) => void;
@@ -160,6 +163,10 @@ export const useApp = create<AppState>()(
         }),
       setPushAsked: () => set({ settings: { ...get().settings, pushAsked: true } }),
       completeOnboarding: (name, birthDate) => set({ profile: buildProfile(name, birthDate) }),
+      setBirthDate: (iso) =>
+        set({
+          profile: { ...get().profile, birthDate: iso, birthArcanaId: birthArcanaId(iso) },
+        }),
       resetOnboarding: () => set({ profile: { onboarded: false } }),
       setDevReflect: (devReflect) => set({ devReflect }),
 
