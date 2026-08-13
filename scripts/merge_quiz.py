@@ -21,6 +21,14 @@ def fail(msg: str) -> None:
     sys.exit(1)
 
 
+def req(d: dict, key: str, where: str):
+    """Безопасный доступ к обязательному полю словаря: пропавший ключ у редактора даёт то же
+    русское сообщение с номером урока/вопроса, что и остальные проверки, а не голый KeyError."""
+    if key not in d:
+        fail(f"{where}: нет поля {key!r}")
+    return d[key]
+
+
 def main() -> None:
     course = json.loads(COURSE.read_text(encoding="utf-8"))
     quiz = json.loads(QUIZ.read_text(encoding="utf-8"))
@@ -30,30 +38,39 @@ def main() -> None:
     status = quiz.get("status", "draft")
 
     for entry in quiz["lessons"]:
-        lid = entry["lessonId"]
+        lid = req(entry, "lessonId", "запись в quiz-m1-m2.json")
         lesson = lessons_by_id.get(lid)
         if lesson is None:
             fail(f"урок {lid} не найден в course.json")
-        for i, q in enumerate(entry["questions"]):
+        questions = req(entry, "questions", lid)
+        if len(questions) != 5:
+            fail(f"{lid}: вопросов {len(questions)}, ожидалось 5")
+        for i, q in enumerate(questions):
             where = f"{lid}, вопрос {i + 1}"
-            if q["type"] not in ("single", "card"):
-                fail(f"{where}: неизвестный type {q['type']!r}")
-            if len(q["options"]) != 3:
-                fail(f"{where}: вариантов {len(q['options'])}, ожидалось 3")
-            if not (0 <= q["correct"] < 3):
-                fail(f"{where}: correct {q['correct']} вне диапазона 0..2")
-            for field in ("q", "explain"):
-                if not (q[field].get("ru") and q[field].get("en")):
-                    fail(f"{where}: поле {field} не двуязычно")
-            for o in q["options"]:
+            q_type = req(q, "type", where)
+            if q_type not in ("single", "card"):
+                fail(f"{where}: неизвестный type {q_type!r}")
+            options = req(q, "options", where)
+            if len(options) != 3:
+                fail(f"{where}: вариантов {len(options)}, ожидалось 3")
+            correct = req(q, "correct", where)
+            if not (0 <= correct < 3):
+                fail(f"{where}: correct {correct} вне диапазона 0..2")
+            for field_name in ("q", "explain"):
+                f_val = req(q, field_name, where)
+                if not (f_val.get("ru") and f_val.get("en")):
+                    fail(f"{where}: поле {field_name} не двуязычно")
+            for o in options:
                 if not (o.get("ru") and o.get("en")):
                     fail(f"{where}: вариант не двуязычен")
-            if q["type"] == "card" and q.get("cardId") not in card_ids:
+            if q_type == "card" and q.get("cardId") not in card_ids:
                 fail(f"{where}: cardId {q.get('cardId')!r} нет в cards.json")
-        lesson["quiz"] = entry["questions"]
+        lesson["quiz"] = questions
         lesson["quizStatus"] = status
 
-    COURSE.write_text(json.dumps(course, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    COURSE.write_text(
+        json.dumps(course, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n"
+    )
     total = sum(len(e["questions"]) for e in quiz["lessons"])
     print(f"OK: {total} вопросов слиты в {len(quiz['lessons'])} уроков, статус {status}")
 
