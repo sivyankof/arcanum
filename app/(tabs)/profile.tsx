@@ -22,6 +22,7 @@ import { MonthNav } from '../../src/components/MonthNav';
 import { PressableScale } from '../../src/components/PressableScale';
 import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { StatBox } from '../../src/components/StatBox';
 import { Txt } from '../../src/components/Txt';
 import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
@@ -111,14 +112,10 @@ export default function ProfileScreen() {
       </FadeUp>
 
       <FadeUp index={2} style={[st.stats, st.pad]}>
-        <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
-          <Txt style={[st.statNum, { color: t.head }]}>{streak}</Txt>
-          <Txt style={[st.statLbl, { color: t.muted }]}>{tr('profile.streak')}</Txt>
-        </View>
-        <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
-          <Txt style={[st.statNum, { color: t.head }]}>{history.length}</Txt>
-          <Txt style={[st.statLbl, { color: t.muted }]}>{tr('profile.cards')}</Txt>
-        </View>
+        {/* огонёк — иконкой, как на «Сегодня»: эмодзи из макета рядом с иконочным
+            огоньком той же серии выглядел бы вторым, чужим (правка по лайв-проверке) */}
+        <StatBox value={streak} label={tr('profile.streak')} icon="flame" />
+        <StatBox value={history.length} label={tr('profile.cards')} />
       </FadeUp>
 
       <FadeUp index={2} style={st.pad}>
@@ -229,15 +226,7 @@ const st = StyleSheet.create({
   overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' }, // `.date`
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 }, // `.h2`
   stats: { flexDirection: 'row', gap: 10, marginTop: 14 }, // `.statrow`
-  stat: {
-    flex: 1,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: radius.l - 1, // 15 — как `.statbox`
-    paddingVertical: 13,
-  },
-  statNum: { fontFamily: fonts.display, fontSize: 24 }, // `.statbox b` (было 30)
-  statLbl: { fontSize: 8.5, letterSpacing: 2, marginTop: 2 }, // `.statbox small`
+  // сама коробка (`.statbox`) живёт в компоненте StatBox — их уже две, а задача 10 добавит третью
   gear: {
     position: 'absolute',
     right: spacing.xl,

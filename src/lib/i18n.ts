@@ -92,7 +92,9 @@ export const resources = {
         learnMore: "УЗНАТЬ БОЛЬШЕ ОБО МНЕ",
       },
       profile: {
-        title: "Профиль", overline: "ВАШ ПУТЬ", streak: "СЕРИЯ 🔥", cards: "КАРТ ДНЯ",
+        // огонёк у серии рисуется ИКОНКОЙ рядом с подписью (StatBox), а не эмодзи в строке:
+        // на «Сегодня» та же серия уже иконочная, два разных огня выглядели бы небрежностью
+        title: "Профиль", overline: "ВАШ ПУТЬ", streak: "СЕРИЯ", cards: "КАРТ ДНЯ",
         arcana: "АРКАН РОЖДЕНИЯ", arcanaCta: "Указать дату рождения",
         // «XP» инвариант к числу — плюрализация не нужна (правило logic-spec §10 — про формы слов)
         xpOf: "{{xp}} / {{next}} XP",
@@ -247,7 +249,7 @@ export const resources = {
         learnMore: "TELL ME MORE",
       },
       profile: {
-        title: "Profile", overline: "YOUR PATH", streak: "STREAK 🔥", cards: "DAILY CARDS",
+        title: "Profile", overline: "YOUR PATH", streak: "STREAK", cards: "DAILY CARDS",
         arcana: "BIRTH ARCANA", arcanaCta: "Add your birth date",
         xpOf: "{{xp}} / {{next}} XP",
       },
