@@ -1,6 +1,6 @@
 {
- "_comment": "Черновики вопросов викторин М1–М2 (статус draft, вычитка редактора). Схема: type single|card; card имеет cardId для показа изображения. Слить в course.json по схеме движка урока (задача 08).",
- "status": "draft",
+ "_comment": "Вопросы викторин М1–М2, вычитаны редактором 13.08 (статус reviewed). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py, статусы двигает scripts/set_status.py. Открытая правка: зачины пояснений поздравляют за неверный ответ (задача 21 бэклога).",
+ "status": "reviewed",
  "lessons": [
   {
    "lessonId": "m1l1",
