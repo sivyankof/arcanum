@@ -13,7 +13,7 @@ import { Txt } from '../../src/components/Txt';
 /** Каталог раскладов — v0: список. Этап 5 плана: режим «разложить» с сохранением в дневник. */
 export default function SpreadsScreen() {
   const t = useTheme();
-  const { i18n } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
   const scrollRef = useTabTopRef<ScrollView>();
@@ -31,8 +31,8 @@ export default function SpreadsScreen() {
         showsVerticalScrollIndicator={false}
       >
         <FadeUp index={0}>
-          <Txt style={[st.sub, { color: t.muted }]}>{lang === 'ru' ? 'ПРАКТИКА' : 'PRACTICE'}</Txt>
-          <Txt style={[st.title, { color: t.head }]}>{lang === 'ru' ? 'Расклады' : 'Spreads'}</Txt>
+          <Txt style={[st.sub, { color: t.muted }]}>{tr('spreads.overline')}</Txt>
+          <Txt style={[st.title, { color: t.head }]}>{tr('spreads.title')}</Txt>
         </FadeUp>
 
         {spreads.map((s: any, si: number) => (
@@ -40,12 +40,14 @@ export default function SpreadsScreen() {
             <View style={{ flex: 1 }}>
               <Txt style={[st.name, { color: t.head }]}>{s.name[lang]}</Txt>
               <Txt style={[st.desc, { color: t.muted }]}>
-                {s.cards} {lang === 'ru' ? 'карт' : 'cards'} · {s.description[lang]}
+                {tr('spreads.cards', { count: s.cards })} · {s.description[lang]}
               </Txt>
             </View>
             {!s.free && (
               <View style={[st.badge, { borderColor: t.frame, backgroundColor: t.chipBg }]}>
-                <Txt style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.2, fontWeight: '700' }}>PREMIUM</Txt>
+                <Txt style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.2, fontWeight: '700' }}>
+                  {tr('spreads.premium')}
+                </Txt>
               </View>
             )}
           </FadeUp>

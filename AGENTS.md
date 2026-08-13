@@ -10,7 +10,7 @@ Read the exact versioned docs at https://docs.expo.dev/versions/v54.0.0/ before 
 
 - `npm start` — dev-сервер Expo (`npm run android` / `ios` / `web` — сразу на платформу).
 - `npx tsc --noEmit` — проверка типов (strict). Линтера нет.
-- `npm test` — юнит-тесты (jest-expo). На 13.08: 240 тестов в 15 сьютах, все зелёные. Правило: новая формула или алгоритм — тест в том же коммите (`docs/testing-strategy.md`).
+- `npm test` — юнит-тесты (jest-expo). На 13.08: 281 тест в 16 сьютах, все зелёные. Правило: новая формула или алгоритм — тест в том же коммите (`docs/testing-strategy.md`). ⚠️ Node несёт полный ICU, а Hermes на телефоне — урезанный, поэтому всё, что считает сам движок (формы числительных, даты, форматы чисел), обычным тестом не проверяется: механизм сносится руками до загрузки модуля — образец `src/lib/__tests__/i18nPlurals.test.ts` (hf-02).
 - Контент-конвейер (Python, запускать из корня):
   - `python scripts/build_cards.py` — пересобирает `content/cards.json` из исходника tarot-api (ожидает `/tmp/tarot-api/static/card_data.json`). Сливает, а не затирает: `keywords`, `search` и тексты блоков переносятся из существующего файла, из источника обновляются только `name`/`image`/`source`. (До 11.08 скрипт стирал весь написанный контент.)
   - `python scripts/merge_quiz.py` — сливает черновик викторин `content/quiz-m1-m2.json` в `content/course.json` (поля `quiz`/`quizStatus`, остальное не трогает). Идемпотентен, валидирует схему до записи: ровно 5 вопросов и 3 варианта, `correct` в 0..2, двуязычность, `cardId` существует в колоде.

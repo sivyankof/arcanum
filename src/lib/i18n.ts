@@ -1,7 +1,18 @@
+// Полифилл `Intl.PluralRules` для Hermes (hf-02). Стоит ПЕРВОЙ строкой файла намеренно:
+// импорты выполняются по порядку объявления, поэтому правила встают до `i18n.init()` и до первого
+// `t()`. В Hermes встроенного механизма выбора формы числительного нет, i18next 26 молча берёт
+// заглушку «1 → one, всё остальное → other», ключа `*_other` у русских семейств нет ни одного,
+// и строка уходит на `fallbackLng: "en"` — в русском интерфейсе появляется «6 MODULES · 32 LESSONS».
+// Пакет ставит себя ТОЛЬКО когда движок не тянет правила сам, поэтому в браузере и в тестах
+// продолжает работать родной ICU и веб с устройством считают формы одинаково.
+// Разбор: docs/specs/hf-02-plurals-research.md, решение: docs/specs/hf-02-hermes-plurals.md
+import "intl-pluralrules";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-const resources = {
+// экспортируется ради тестов плюрализации: структурный тест и оракул обходят языки
+// по `Object.keys(resources)`, а не по литералам "ru"/"en" — иначе третий язык проехал бы мимо
+export const resources = {
   ru: {
     translation: {
       tabs: { today: "Сегодня", course: "Курс", cards: "Карты", spreads: "Расклады", profile: "Профиль" },
@@ -54,6 +65,15 @@ const resources = {
         passedOf_many: "ПРОЙДЕНО {{done}} ИЗ {{count}} УРОКОВ МОДУЛЯ",
         repeatDone: "Повторение пройдено",
         nextOnPath: "ДАЛЬШЕ ПО ПУТИ →",
+      },
+      // экран раскладов. cards — НЕ дубль course.cardsCount: там строка живёт в overline шапки
+      // модуля и набрана капсом («8 КАРТ»), здесь — в описании обычным регистром («3 карты»).
+      // Один ключ на оба места дал бы капс посреди предложения
+      spreads: {
+        overline: "ПРАКТИКА",
+        title: "Расклады",
+        premium: "ПРЕМИУМ",
+        cards_one: "{{count}} карта", cards_few: "{{count}} карты", cards_many: "{{count}} карт",
       },
       profile: { title: "Профиль", streak: "СЕРИЯ", cards: "КАРТ ДНЯ" },
       settings: {
@@ -183,6 +203,12 @@ const resources = {
         repeatDone: "Review complete",
         nextOnPath: "CONTINUE THE PATH →",
       },
+      spreads: {
+        overline: "PRACTICE",
+        title: "Spreads",
+        premium: "PREMIUM",
+        cards_one: "{{count}} card", cards_other: "{{count}} cards",
+      },
       profile: { title: "Profile", streak: "STREAK", cards: "DAILY CARDS" },
       settings: {
         title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
@@ -258,6 +284,25 @@ i18n.use(initReactI18next).init({
   fallbackLng: "en",
   interpolation: { escapeValue: false },
 });
+
+// Единственный оставшийся риск hf-02 — «а вдруг Intl на Hermes не расширяем»: симптом тогда
+// будет ровно тот же самый, что до починки, и «не встало» станет неотличимо от «диагноз был
+// не тот». Проверяем не наличие конструктора, а результат — так один и тот же код закрывает оба
+// возможных варианта поломки движка.
+if (__DEV__) {
+  let form: string;
+  try {
+    form = new Intl.PluralRules("ru").select(4);
+  } catch {
+    form = "конструктор недоступен";
+  }
+  if (form !== "few") {
+    console.warn(
+      `[i18n] Правила плюрализации не встали: ru, 4 → «${form}», ожидалось «few». ` +
+        "Русские числительные покажутся по-английски — см. docs/specs/hf-02-hermes-plurals.md",
+    );
+  }
+}
 
 export default i18n;
 export const lang = () => (i18n.language.startsWith("ru") ? "ru" : "en") as "ru" | "en";
