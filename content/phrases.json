@@ -124,6 +124,18 @@
    }
   ]
  },
+ "freeze": {
+  "saved": [
+   {
+    "ru": "Серию спасла заморозка",
+    "en": "A freeze saved your streak"
+   },
+   {
+    "ru": "Пропущенный день укрыла заморозка — серия цела",
+    "en": "The freeze covered the missed day — your streak is safe"
+   }
+  ]
+ },
  "lesson_done": [
   {
    "ru": "Урок пройден. Знание уложилось на своё место",
