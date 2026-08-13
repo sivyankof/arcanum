@@ -1,6 +1,8 @@
 import type { CourseModule } from '../content';
 import { course } from '../content';
 import {
+  completeLessonProgress,
+  learnedCardIds,
   lessonStates,
   moduleCardCount,
   moduleProgress,
@@ -152,5 +154,68 @@ describe('реальный course.json', () => {
     // в JSON у М2 шестнадцать записей карт: урок «Повторение» перечисляет все восемь заново
     expect(course[1].lessons.flatMap((l) => l.cards)).toHaveLength(16);
     expect(moduleCardCount(course[1])).toBe(8);
+  });
+});
+
+describe('learnedCardIds — карты пройденных уроков (бейдж «Изучено ✓», спека 08)', () => {
+  const MODS = [fx('a', 2, 2)]; // у a1 карты a1-card-0/1, у a2 — a2-card-0/1
+
+  it('пустой прогресс — пустое множество', () => {
+    expect(learnedCardIds(MODS, {}).size).toBe(0);
+  });
+
+  it('только карты пройденных уроков', () => {
+    expect([...learnedCardIds(MODS, done('a1'))].sort()).toEqual(['a1-card-0', 'a1-card-1']);
+  });
+
+  it('повторяющиеся карты не задваиваются (урок-повторение перечисляет их заново)', () => {
+    const m = fx('a', 2, 0);
+    m.lessons[0].cards = ['fool'];
+    m.lessons[1].cards = ['fool', 'magician'];
+    expect(learnedCardIds([m], done('a1', 'a2')).size).toBe(2);
+  });
+});
+
+describe('completeLessonProgress — запись прохождения и XP (спека 08)', () => {
+  const DAY = '2026-08-13';
+
+  it('первое прохождение: done + errors + XP по формуле', () => {
+    const r = completeLessonProgress({}, 'a1', 1, DAY, 42);
+    expect(r.progress.a1).toEqual({ done: true, errors: 1, ts: 42 });
+    expect(r.gained).toBe(8);
+  });
+
+  it('минимум 4 XP при любом числе ошибок', () => {
+    expect(completeLessonProgress({}, 'a1', 5, DAY, 1).gained).toBe(4);
+  });
+
+  it('повтор: +2, errors обновляются, done остаётся, дата повтора записана', () => {
+    const first = completeLessonProgress({}, 'a1', 0, DAY, 1).progress;
+    const r = completeLessonProgress(first, 'a1', 2, DAY, 2);
+    expect(r.gained).toBe(2);
+    expect(r.progress.a1).toEqual({ done: true, errors: 2, ts: 2, repeatDate: DAY });
+  });
+
+  it('второй повтор в тот же день — без XP, но ошибки последнего прохождения пишутся', () => {
+    const p1 = completeLessonProgress({}, 'a1', 0, DAY, 1).progress;
+    const p2 = completeLessonProgress(p1, 'a1', 0, DAY, 2).progress;
+    const r = completeLessonProgress(p2, 'a1', 1, DAY, 3);
+    expect(r.gained).toBe(0);
+    expect(r.progress.a1.errors).toBe(1);
+    expect(r.progress.a1.repeatDate).toBe(DAY);
+  });
+
+  it('повтор на следующий день снова даёт +2', () => {
+    const p1 = completeLessonProgress({}, 'a1', 0, '2026-08-13', 1).progress;
+    const p2 = completeLessonProgress(p1, 'a1', 0, '2026-08-13', 2).progress;
+    const r = completeLessonProgress(p2, 'a1', 0, '2026-08-14', 3);
+    expect(r.gained).toBe(2);
+    expect(r.progress.a1.repeatDate).toBe('2026-08-14');
+  });
+
+  it('исходная карта прогресса не мутируется', () => {
+    const src: LessonProgressMap = {};
+    completeLessonProgress(src, 'a1', 0, DAY, 1);
+    expect(src).toEqual({});
   });
 });

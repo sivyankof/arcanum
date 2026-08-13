@@ -3,22 +3,15 @@
  *
  *  Полоса заполняется один раз при появлении экрана: задержка 500 мс, ход 1.5 с,
  *  кривая cubic-bezier(.25,1.2,.4,1) — лёгкий перелёт за цель, как в эталоне.
- *  Перелёт срезается обрезкой дорожки. При progress 0 движения не видно — так и задумано,
- *  пока уровни не считаются по-настоящему (задача 08). */
-import { LinearGradient } from 'expo-linear-gradient';
+ *  Перелёт срезается обрезкой дорожки. При progress 0 движения не видно — так и задумано.
+ *  Уровень и progress считаются по-настоящему (levelFromXp, src/lib/xp.ts, задача 08). */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
-import Animated, {
-  Easing,
-  ReduceMotion,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withTiming,
-} from 'react-native-reanimated';
+import { StyleSheet, type StyleProp, type ViewStyle, View } from 'react-native';
+import { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { useTheme } from '../theme/useTheme';
 import { Pill } from './Pill';
+import { PROGRESS_EASE, ProgressBar } from './ProgressBar';
 import { Txt } from './Txt';
 
 const FILL_DELAY = 500;
@@ -45,13 +38,11 @@ export function XpPill({
       FILL_DELAY,
       withTiming(progress, {
         duration: FILL_MS,
-        easing: Easing.bezier(0.25, 1.2, 0.4, 1),
+        easing: PROGRESS_EASE,
         reduceMotion: ReduceMotion.System,
       }),
     );
   }, [fill, progress]);
-
-  const fillStyle = useAnimatedStyle(() => ({ width: `${fill.value * 100}%` as `${number}%` }));
 
   const title = tr(`level.t${Math.min(level, LAST_TITLE)}`);
 
@@ -59,16 +50,7 @@ export function XpPill({
     <Pill style={style}>
       <View style={st.col}>
         <Txt style={[st.level, { color: t.head }]}>{tr('level.line', { n: level, title })}</Txt>
-        <View style={[st.track, { backgroundColor: t.line }]}>
-          <Animated.View style={[st.fill, fillStyle]}>
-            <LinearGradient
-              colors={[t.accent, t.accent2]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={StyleSheet.absoluteFill}
-            />
-          </Animated.View>
-        </View>
+        <ProgressBar progress={fill} radius={3} style={st.track} />
       </View>
     </Pill>
   );
@@ -77,6 +59,5 @@ export function XpPill({
 const st = StyleSheet.create({
   col: { flex: 1 },
   level: { fontSize: 11, fontWeight: '700' },
-  track: { height: 6, borderRadius: 3, marginTop: 5, overflow: 'hidden' },
-  fill: { height: '100%', borderRadius: 3, overflow: 'hidden' },
+  track: { height: 6, marginTop: 5 },
 });

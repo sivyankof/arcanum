@@ -1,6 +1,7 @@
 /** Чистая логика экрана курса (спека 07): состояния узлов пути, прогресс модуля,
  *  x-координаты змейки. Ни одного импорта react/expo — модуль целиком под юнит-тестами. */
 import type { CourseModule } from './content';
+import { lessonXp, REPEAT_XP } from './xp';
 
 /** Прогресс одного урока — схема logic-spec §7. В 07 пишется только DEV-строками
  *  настроек, по-настоящему — задача 08 (движок урока). */
@@ -10,6 +11,8 @@ export interface LessonProgress {
   errors: number;
   /** момент записи, Date.now() */
   ts: number;
+  /** дата последнего НАГРАЖДЁННОГО повтора (локальный ISO-день): +2 не чаще раза в день */
+  repeatDate?: string;
 }
 export type LessonProgressMap = Record<string, LessonProgress>;
 
@@ -76,4 +79,43 @@ export function nodeXs(count: number): number[] {
   return Array.from({ length: count }, (_, i) =>
     i === 0 ? WAVE_FIRST : WAVE_CYCLE[(i - 1) % WAVE_CYCLE.length],
   );
+}
+
+/** Карты пройденных уроков — бейдж «Изучено ✓» в справочнике (спека 08). Set уникальных id:
+ *  уроки-повторения перечисляют карты модуля заново (та же ловушка, что у moduleCardCount). */
+export function learnedCardIds(
+  modules: CourseModule[],
+  progress: LessonProgressMap,
+): Set<string> {
+  const ids = new Set<string>();
+  for (const m of modules)
+    for (const l of m.lessons) if (progress[l.id]?.done) l.cards.forEach((c) => ids.add(c));
+  return ids;
+}
+
+/** Завершение урока (спека 08). Первое прохождение: done + errors + XP по формуле.
+ *  Повтор: обновляются errors/ts (ошибки последнего прохождения — схема logic-spec §7),
+ *  +2 XP не чаще раза в день (repeatDate). Чистая функция: стор только применяет результат. */
+export function completeLessonProgress(
+  progress: LessonProgressMap,
+  lessonId: string,
+  errors: number,
+  todayISO: string,
+  now: number,
+): { progress: LessonProgressMap; gained: number } {
+  const prev = progress[lessonId];
+  if (!prev?.done) {
+    return {
+      progress: { ...progress, [lessonId]: { done: true, errors, ts: now } },
+      gained: lessonXp(errors),
+    };
+  }
+  const rewarded = prev.repeatDate === todayISO;
+  return {
+    progress: {
+      ...progress,
+      [lessonId]: { ...prev, errors, ts: now, ...(rewarded ? {} : { repeatDate: todayISO }) },
+    },
+    gained: rewarded ? 0 : REPEAT_XP,
+  };
 }

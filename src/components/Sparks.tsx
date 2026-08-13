@@ -39,6 +39,9 @@ function Spark({
   glyphs,
   duration,
   angleJitter,
+  angleRange,
+  lift,
+  colors,
   burst,
 }: {
   index: number;
@@ -48,6 +51,9 @@ function Spark({
   glyphs: string[];
   duration: number;
   angleJitter: number;
+  angleRange?: [number, number];
+  lift: number;
+  colors?: string[];
   burst: number;
 }) {
   const t = useTheme();
@@ -55,13 +61,21 @@ function Spark({
 
   // угол раскладываем равномерно по кругу и слегка «сбиваем», чтобы салют не выглядел машинным;
   // длина без заданного разброса просто чередуется — так было до появления пропсов
-  const angle = (Math.PI * 2 * index) / count - Math.PI / 2 + noise(index, 0) * angleJitter;
+  // сектор задан — раскладываем угол равномерно по нему; нет — полный круг, как раньше.
+  // Для сектора доля берётся от count - 1, а не от count: иначе последняя частица не долетает
+  // до конца диапазона и на краю сектора остаётся пустой промежуток (для полного круга это не
+  // нужно — там точки идут по кругу и index/count само замыкается). При count <= 1 доля — 0
+  // (единственная частица садится на начало сектора), чтобы не делить на ноль.
+  const sectorFrac = count > 1 ? index / (count - 1) : 0;
+  const angle = angleRange
+    ? angleRange[0] + (angleRange[1] - angleRange[0]) * sectorFrac + noise(index, 0) * angleJitter
+    : (Math.PI * 2 * index) / count - Math.PI / 2 + noise(index, 0) * angleJitter;
   const len = Array.isArray(distance)
     ? distance[0] + noise(index, 1) * (distance[1] - distance[0])
     : distance * (index % 2 ? 0.72 : 1);
   const fontSize = Array.isArray(size) ? size[0] + noise(index, 2) * (size[1] - size[0]) : size;
   const dx = Math.cos(angle) * len;
-  const dy = Math.sin(angle) * len;
+  const dy = Math.sin(angle) * len + lift;
 
   React.useEffect(() => {
     if (!burst) return;
@@ -88,7 +102,7 @@ function Spark({
       style={[
         {
           position: 'absolute',
-          color: t.accent,
+          color: colors ? colors[index % colors.length] : t.accent,
           fontSize,
           // text-shadow 0 0 9px var(--glow) из .spark
           ...textGlow(t.glow, 9),
@@ -109,6 +123,9 @@ export function Sparks({
   glyphs = GLYPHS,
   duration = BURST_MS,
   angleJitter = 0,
+  angleRange,
+  lift = 0,
+  colors,
   style,
 }: {
   burst: number;
@@ -121,6 +138,13 @@ export function Sparks({
   duration?: number;
   /** Максимальный «сбив» угла в радианах (0 — строго равномерный круг). */
   angleJitter?: number;
+  /** Сектор разлёта [от, до] в радианах; ось x вправо, y вниз (верхняя полуокружность —
+   *  [Math.PI, Math.PI * 2]). Не задан — полный круг. */
+  angleRange?: [number, number];
+  /** Постоянный вертикальный сдвиг конца траектории (минус — вверх): «подброс» конфетти. */
+  lift?: number;
+  /** Цвета глифов по кругу (index % length). Не задан — accent темы. */
+  colors?: string[];
   style?: StyleProp<ViewStyle>;
 }) {
   return (
@@ -141,6 +165,9 @@ export function Sparks({
           glyphs={glyphs}
           duration={duration}
           angleJitter={angleJitter}
+          angleRange={angleRange}
+          lift={lift}
+          colors={colors}
           burst={burst}
         />
       ))}

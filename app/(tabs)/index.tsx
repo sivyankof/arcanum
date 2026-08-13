@@ -36,6 +36,7 @@ import { requestPermission } from '../../src/lib/pushes';
 import { reflectionVisible } from '../../src/lib/reflection';
 import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
+import { levelFromXp } from '../../src/lib/xp';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -46,10 +47,6 @@ const CARD_W = Math.min(W * 0.56, 230);
 const CARD_H = CARD_W * 1.72;
 const FLIP_MS = 850;
 const STREAK_MILESTONE = 7; // 7-й день серии — единственная «победа» на этом экране
-
-// мок уровня до задачи 08 (реальные XP считаются там): первый уровень, полоса пустая
-const MOCK_LEVEL = 1;
-const MOCK_PROGRESS = 0;
 
 // пропорции колец из эталона: карта 216 → кольца 330 и 378
 const RING_A = CARD_W * 1.53;
@@ -154,6 +151,8 @@ export default function TodayScreen() {
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
 
   const streak = useApp((s) => s.streak);
+  const xp = useApp((s) => s.xp);
+  const lvl = levelFromXp(xp);
   const drawToday = useApp((s) => s.drawToday);
   const drawn = useApp((s) => s.todayDraw());
   const installSeed = useApp((s) => s.installSeed);
@@ -330,7 +329,7 @@ export default function TodayScreen() {
         {/* ряд пилюль (.pills эталона): серия слева, уровень справа и чуть шире */}
         <FadeUp index={2} style={st.pills}>
           <StreakPill streak={streak} burst={burst} style={st.pillStreak} />
-          <XpPill level={MOCK_LEVEL} progress={MOCK_PROGRESS} style={st.pillXp} />
+          <XpPill level={lvl.level} progress={lvl.progress} style={st.pillXp} />
         </FadeUp>
 
         {/* сцена с картой */}

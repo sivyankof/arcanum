@@ -22,6 +22,20 @@ export interface TarotCard {
   content: Record<string, CardContentBlock>;
 }
 
+/** Вопрос викторины урока (спека 08). type card — с изображением карты над вопросом. */
+export type QuizType = "single" | "card";
+export interface QuizQuestion {
+  type: QuizType;
+  q: Record<Lang, string>;
+  /** ровно 3 варианта; порядок в контенте фиксированный, перемешивает движок (lesson.ts) */
+  options: Record<Lang, string>[];
+  correct: number;
+  /** пояснение, появляется после ответа */
+  explain: Record<Lang, string>;
+  /** только у type: "card" */
+  cardId?: string;
+}
+
 /** Урок курса. theory написана пока только у М1–М2 — у остальных уроков поля нет вовсе;
  *  форма блока та же, что у блоков карты ({ru, en, status}), поэтому тип переиспользуем. */
 export interface CourseLesson {
@@ -30,6 +44,10 @@ export interface CourseLesson {
   /** id карт, разбираемых в уроке; пустой у вводных и практических уроков */
   cards: string[];
   theory?: CardContentBlock;
+  /** викторина 5 вопросов; есть пока только у М1–М2 (сливается scripts/merge_quiz.py) */
+  quiz?: QuizQuestion[];
+  /** workflow готовности викторины, как у блоков карт */
+  quizStatus?: BlockStatus;
 }
 
 export interface CourseModule {

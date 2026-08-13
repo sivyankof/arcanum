@@ -16,9 +16,11 @@ import { Txt } from '../../src/components/Txt';
 import { cardImages } from '../../src/lib/cardImages';
 import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/lib/cardSearch';
 import { setCardOrigin } from '../../src/lib/cardTransition';
-import { cards, type TarotCard } from '../../src/lib/content';
+import { cards, course, type TarotCard } from '../../src/lib/content';
+import { learnedCardIds } from '../../src/lib/courseProgress';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
+import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -41,8 +43,9 @@ const AnimatedList = Animated.createAnimatedComponent(FlatList<TarotCard[]>);
 
 /** Ячейка сетки. Позицию картинки меряем на нажатии — с неё начнётся перелёт
  *  на страницу карты (пункт 6 motion-spec). */
-function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
+function Cell({ item, lang, learned }: { item: TarotCard; lang: 'ru' | 'en'; learned: boolean }) {
   const t = useTheme();
+  const { t: tr } = useTranslation();
   const imRef = React.useRef<View>(null);
   const [loaded, setLoaded] = React.useState(false);
 
@@ -66,6 +69,11 @@ function Cell({ item, lang }: { item: TarotCard; lang: 'ru' | 'en' }) {
           onLoad={() => setLoaded(true)}
         />
         {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
+        {learned && (
+          <View style={st.learned}>
+            <Txt style={[st.learnedTxt, { color: t.accent2 }]}>{tr('cards.learned')}</Txt>
+          </View>
+        )}
       </View>
       <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
         {item.name[lang]}
@@ -129,6 +137,10 @@ export default function CardsScreen() {
     [query, filter, lang],
   );
 
+  // карты пройденных уроков — бейдж «Изучено ✓» (спека 08)
+  const lessonsProgress = useApp((s) => s.lessonsProgress);
+  const learned = useMemo(() => learnedCardIds(course, lessonsProgress), [lessonsProgress]);
+
   // поиск всегда идёт по всей колоде: иначе «Мечи» + «шут» дают пустой экран без видимой причины
   const onQuery = (v: string) => {
     setQuery(v);
@@ -175,7 +187,7 @@ export default function CardsScreen() {
           const cells = (
             <View style={[st.pad, st.row]}>
               {row.map((c) => (
-                <Cell key={c.id} item={c} lang={lang} />
+                <Cell key={c.id} item={c} lang={lang} learned={learned.has(c.id)} />
               ))}
               {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
               {row.length < COLS &&
@@ -241,6 +253,17 @@ const st = StyleSheet.create({
     boxShadow: '0px 8px 20px rgba(0,0,0,0.28)',
   },
   im: { width: '100%', height: '100%' },
+  // .st2 эталона: скрим-подложка литералом — как тень imWrap (не тема: затемнение поверх фото)
+  learned: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderRadius: radius.s,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+  },
+  learnedTxt: { fontSize: 8, letterSpacing: 0.5, fontWeight: '700' },
   name: { fontSize: 9.5, textAlign: 'center', marginTop: 5, fontWeight: '600', letterSpacing: 0.3, lineHeight: 12 },
   empty: { fontSize: 12.5, textAlign: 'center', marginTop: 40, paddingHorizontal: spacing.xl },
 });
