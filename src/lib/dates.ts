@@ -30,6 +30,18 @@ export function parseISODate(iso: string): Date {
 const LOCALES: Record<Lang, string> = { ru: 'ru-RU', en: 'en-US' };
 type Lang = 'ru' | 'en';
 
+/** Тег локали (BCP-47) по языку приложения.
+ *
+ *  ⚠️ Нужен там, где строку форматирует НЕ наш код, а системный компонент. Язык приложения —
+ *  наша собственная настройка в сторе, и он не обязан совпадать ни с языком устройства, ни с тем,
+ *  что готова показать система: iOS локализует системные виджеты по списку языков приложения-хоста,
+ *  а хост в разработке — Expo Go, чей список мы не контролируем. Поэтому локаль таким компонентам
+ *  передаём явно, а не надеемся на окружение (найдено Артёмом 13.08: колесо даты говорило
+ *  по-английски при русских и приложении, и телефоне). */
+export function localeTag(lang: Lang): string {
+  return LOCALES[lang];
+}
+
 /** «пн · 11 августа» (weekday 'long' → «понедельник · 11 августа»).
  *  Регистр задаёт вызывающий: в дневнике строка идёт в UPPERCASE как Overline. */
 export function formatEntryDate(iso: string, lang: Lang, weekday: 'short' | 'long' = 'short'): string {
@@ -51,4 +63,19 @@ export function formatDayMonth(iso: string, lang: Lang): string {
 export function formatMonthTitle(month: string, lang: Lang): string {
   const d = parseISODate(`${month}-01`);
   return `${d.toLocaleDateString(LOCALES[lang], { month: 'long' })} ${d.getFullYear()}`;
+}
+
+/** «10 февраля 1994» — дата рождения в поле онбординга (спека 09).
+ *  Языки разведены намеренно: у английской локали правильный формат с запятой
+ *  («February 10, 1994»), а русская с `year: 'numeric'` добавляет хвост «г.» (ловушка
+ *  formatMonthTitle) — поэтому в ru год приписываем сами к уже готовому «дню с месяцем». */
+export function formatFullDate(iso: string, lang: Lang): string {
+  if (lang === 'en') {
+    return parseISODate(iso).toLocaleDateString(LOCALES.en, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  }
+  return `${formatDayMonth(iso, lang)} ${parseISODate(iso).getFullYear()}`;
 }

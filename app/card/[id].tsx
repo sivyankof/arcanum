@@ -145,6 +145,8 @@ export default function CardDetail() {
   // уведомит компонент об обновлении при вытягивании новой карты дня
   const todayCardId = useApp((s) => s.todayDraw()?.cardId);
   const history = useApp((s) => s.history);
+  // золотой чип у названия, если карта — аркан рождения пользователя (product-spec §3, спека 09)
+  const birthCardId = useApp((s) => s.profile.birthArcanaId);
   const fadeStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
   // вибрация при возврате — общий хук (второе появление паттерна вынесено в useBackHaptic)
   useBackHaptic();
@@ -155,6 +157,7 @@ export default function CardDetail() {
   // контекстный блок «ваша карта сегодня» (product-spec §3): поднимается над вкладками,
   // получает золотую рамку и звёздочку в заголовке; на обычном месте блок не дублируется
   const isTodayCard = todayCardId === card.id;
+  const isBirthArcana = birthCardId === card.id;
 
   const num = cardNumeral(card);
   const arcanaLabel =
@@ -242,7 +245,16 @@ export default function CardDetail() {
           )}
           <FadeUp index={0} style={{ flex: 1 }}>
             <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
-            <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
+            <View style={st.nameRow}>
+              <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
+              {isBirthArcana && (
+                <View style={[st.birthChip, { backgroundColor: t.chipBg, borderColor: t.frame }]}>
+                  <Txt style={[st.birthChipTxt, { color: t.accent }]}>
+                    ✦ {tr('ob.birthOverline')}
+                  </Txt>
+                </View>
+              )}
+            </View>
             <View style={st.kws}>
               {card.keywords[lang].map((k) => (
                 <View key={k} style={[st.kw, { backgroundColor: t.chipBg, borderColor: t.line }]}>
@@ -340,6 +352,9 @@ const st = StyleSheet.create({
   im: { width: '100%', height: '100%' },
   num: { fontSize: 9.5, letterSpacing: 2.5 },
   name: { fontFamily: fonts.display, fontSize: 26, marginTop: 4, lineHeight: 32 },
+  nameRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', columnGap: 8 },
+  birthChip: { borderWidth: 1, borderRadius: 8, paddingVertical: 3, paddingHorizontal: 8 },
+  birthChipTxt: { fontSize: 9, letterSpacing: 1.5, fontWeight: '700' },
   kws: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: spacing.m },
   kw: { borderWidth: 1, borderRadius: 14, paddingHorizontal: 10, paddingVertical: 4 },
   // пилюля вкладок (.tabs эталона)

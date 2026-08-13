@@ -56,6 +56,7 @@ export default function SettingsScreen() {
   const lessonsProgress = useApp((s) => s.lessonsProgress);
   const setLessonDone = useApp((s) => s.setLessonDone);
   const resetCourse = useApp((s) => s.resetCourse);
+  const resetOnboarding = useApp((s) => s.resetOnboarding);
 
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
@@ -294,6 +295,15 @@ export default function SettingsScreen() {
                 label={tr('settings.devCourseReset')}
                 value="DEV"
                 onPress={resetCourse}
+              />
+            </FadeUp>
+            <FadeUp index={12}>
+              <SettingsRow
+                icon="sparkles-outline"
+                label={tr('settings.devOnboarding')}
+                value="DEV"
+                // сброс профиля целиком: гард в _layout сам уводит на онбординг
+                onPress={resetOnboarding}
               />
             </FadeUp>
           </>
