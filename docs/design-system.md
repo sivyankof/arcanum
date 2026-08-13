@@ -180,6 +180,22 @@ letterSpacing 1.5 `accent`, хвостик-ромб 10×10, top −53, боб ±
 режет его по родителю (всем `Text` там проставлен `max-width: 100%`), и веб расходится
 с устройством.
 
+**Экран урока (08).** Прогресс-бар: высота 7, radius 4, фон line, заполнение — градиент
+accent→accent2, подпись «X/N» 11/700 accent, ряд gap 10. Теория — Block (текст Cormorant 16/24).
+Карта урока: панель panel/frame 1px, radius 16, паддинг 14, ряд gap 14; изображение 74px
+(radius 8, бордер frame, boxShadow 0 8px 22px glow); overline «КАРТА УРОКА» 9/2 accent;
+имя Cormorant 20; слова 12 muted «✦ а · б · в · г». Вопрос: Cormorant 19 head по центру;
+card-вопрос — изображение 110px (radius 12, бордер frame) над текстом. Вариант ответа: панель
+panel, бордер 1.5 line, radius 14, паддинг 13×16, Body 14, отступ 9; верный — бордер success +
+фон success 12% (hex-альфа 1F); неверный — бордер danger + opacity 0.6, правильный
+подсвечивается через 400мс. Пояснение: Cormorant 15/22 по центру. Финал: панель panel/frame,
+radius 18, паддинг 20; счётчик Cormorant SemiBold 36 accent; подпись 11/ls1 muted; полоса 6/3,
+отступ 12/30/0; конфетти — Sparks сектором [π, 2π], 22 шт, 8–18px, разлёт 90–220, подброс −60,
+1.1с, цвета accent/accent2 через один. Бейдж «ИЗУЧЕНО ✓» в сетке справочника (.st2): угол 6/6,
+шрифт 8/700, ls 0.5, accent2 на rgba(0,0,0,.4), radius 8, паддинг 2×6.
+Хаптика: верный ответ Light, неверный Notification.Error, финал Success (дополнение к
+motion-spec п.8).
+
 ## 6. Иконография
 
 Ionicons, только outline-варианты (sunny-outline, moon-outline…), размер 21–22 в таб-баре, 16–18 в строках.

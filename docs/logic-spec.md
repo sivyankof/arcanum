@@ -74,8 +74,10 @@ product-spec отвечает «что видит пользователь», э
 
 ## 4. XP и уровни
 
-Источники XP (v1): открытие карты дня +5 · ответ рефлексии +3 · урок: 10 − 2×ошибки, мин 4 ·
-повторное прохождение урока +2 (раз в день на урок) · расклад целиком +5.
+Источники XP (v1): открытие карты дня +5 · первый ответ рефлексии за день +3 (смена ответа до
+полуночи повторно не начисляет) · урок: 10 − 2×ошибки, мин 4 ·
+повторное прохождение урока +2 (раз в день на урок) — дата награждённого повтора в
+`lessonsProgress[id].repeatDate` · расклад целиком +5.
 Уровни: 1→2: 50 XP; 2→3: 150; 3→4: 300; 4→5: 500; далее каждый +250. Даунгрейда нет, XP не сгорает.
 Названия уровней (RU): 1 Любопытная · 2 Ученица · 3 Читающая · 4 Толковательница · 5 Хранительница ·
 6+ Мастерица (EN: Curious/Student/Reader/Interpreter/Keeper/Adept).
@@ -102,7 +104,7 @@ product-spec отвечает «что видит пользователь», э
 
 AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 4`):
 `{ schemaVersion: 3, installSeed, profile: {name?, birthDate?, birthArcanaId?}, themeMode, lang,
-streak, lastDrawDate, freezes, xp, history: DailyDraw[365], lessonsProgress: {lessonId: {done, errors, ts}},
+streak, lastDrawDate, freezes, xp, history: DailyDraw[365], lessonsProgress: {lessonId: {done, errors, ts, repeatDate?}},
 spreadsHistory: SpreadDraw[100], settings: {reflectionOn: true, pushesOn: true, pushMorning: '09:00',
 pushEvening: '21:00', pushAsked: false} }`
 `DailyDraw = {date, cardId, reversed: false, outcome?, note?}`.
@@ -122,6 +124,9 @@ pushEvening: '21:00', pushAsked: false} }`
 а не вложенность внутри `settings`, поэтому отдельная ветка миграции ему не нужна: поверхностное
 слияние persist подставляет дефолт `{}` само (ловушка выше бьёт только по вложенным объектам
 вроде `settings`, где слияние идёт лишь по их собственному верхнему уровню ключей).
+**08 подняла `version` до 5** ради поля `xp` — ключ верхнего уровня, дефолт 0 доливается
+поверхностным слиянием сам; `repeatDate` живёт внутри записей `lessonsProgress` и опционален —
+миграция не нужна. Следующая задача, меняющая схему, поднимает до 6.
 **Уточнение:** `schemaVersion` из этой схемы хранится не отдельным полем состояния, а как поле `version` в опциях zustand persist.
 **Лимиты:** history 365 записей, spreadsHistory 100 (старые отрезаются). Экспорт (backlog: бэкап) — JSON-файл
 через Share, импорт с валидацией схемы.
