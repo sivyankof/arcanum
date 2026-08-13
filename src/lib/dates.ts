@@ -52,3 +52,18 @@ export function formatMonthTitle(month: string, lang: Lang): string {
   const d = parseISODate(`${month}-01`);
   return `${d.toLocaleDateString(LOCALES[lang], { month: 'long' })} ${d.getFullYear()}`;
 }
+
+/** «10 февраля 1994» — дата рождения в поле онбординга (спека 09).
+ *  Языки разведены намеренно: у английской локали правильный формат с запятой
+ *  («February 10, 1994»), а русская с `year: 'numeric'` добавляет хвост «г.» (ловушка
+ *  formatMonthTitle) — поэтому в ru год приписываем сами к уже готовому «дню с месяцем». */
+export function formatFullDate(iso: string, lang: Lang): string {
+  if (lang === 'en') {
+    return parseISODate(iso).toLocaleDateString(LOCALES.en, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  }
+  return `${formatDayMonth(iso, lang)} ${parseISODate(iso).getFullYear()}`;
+}

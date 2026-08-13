@@ -1,7 +1,7 @@
 /** Тесты локальных границ дня (hf-01/H2). Все кейсы строятся из локальных компонентов
  *  (new Date(year, month, day, ...)), поэтому результат не зависит от часового пояса машины,
  *  на которой гоняются тесты, — как и сам контракт localDateISO/daysAgoISO. */
-import { daysAgoISO, localDateISO, parseISODate } from '../dates';
+import { daysAgoISO, formatFullDate, localDateISO, parseISODate } from '../dates';
 
 describe('localDateISO', () => {
   it('сразу после полуночи — сегодняшняя дата', () => {
@@ -44,4 +44,11 @@ describe('parseISODate', () => {
   it('обратное преобразование не теряет день', () => {
     expect(localDateISO(parseISODate('2026-01-05'))).toBe('2026-01-05');
   });
+});
+
+describe('formatFullDate — дата рождения в поле онбординга (спека 09)', () => {
+  test('ru: «10 февраля 1994», год без хвоста «г.»', () =>
+    expect(formatFullDate('1994-02-10', 'ru')).toBe('10 февраля 1994'));
+  test('en: «February 10, 1994» — запятая от локали, ручной склейки тут нет', () =>
+    expect(formatFullDate('1994-02-10', 'en')).toBe('February 10, 1994'));
 });
