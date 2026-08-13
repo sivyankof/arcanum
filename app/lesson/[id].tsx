@@ -67,12 +67,17 @@ export default function LessonScreen() {
 
   const found = React.useMemo(() => findLesson(id), [id]);
 
-  // шаги строятся один раз на урок; язык внутри зафиксирован сознательно (см. шапку файла)
-  const steps = React.useMemo<LessonStep[]>(() => {
+  // шаги строятся один раз на урок; язык внутри зафиксирован сознательно (см. шапку файла).
+  // useMemo не гарантирует сохранность кэша между рендерами — его сброс посреди вопроса
+  // перетасовал бы варианты, а уже выбранный ответ и correct указывали бы на другие строки.
+  // Ленивая инициализация состояния вызывает lessonSteps ровно один раз на монтирование экрана.
+  // id стабилен в рамках одного монтирования: единственный переход на этот маршрут — router.push
+  // из app/(tabs)/course.tsx с новым id на каждый тап, внутри самого экрана перехода на другой
+  // урок нет (только router.back() на финале) — новый урок всегда получает новый экземпляр экрана.
+  const [steps] = React.useState<LessonStep[]>(() => {
     if (!found || !lessonPlayable(found.lesson)) return [];
     return lessonSteps(found.lesson, lang, Math.random);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [found]);
+  });
 
   const completeLesson = useApp((s) => s.completeLesson);
   const lessonsProgress = useApp((s) => s.lessonsProgress);
@@ -83,6 +88,7 @@ export default function LessonScreen() {
   const [showCorrect, setShowCorrect] = React.useState(false);
   const [result, setResult] = React.useState<{ gained: number; prevDone: number } | null>(null);
   const revealTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollRef = React.useRef<ScrollView>(null);
 
   React.useEffect(
     () => () => {
@@ -99,6 +105,8 @@ export default function LessonScreen() {
     setPicked(null);
     setShowCorrect(false);
     setStepIdx(next);
+    // контент погашен (opacity 0) в этот момент — сброс скролла здесь не виден пользователю
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
     fade.value = withTiming(1, { duration: FADE_IN_MS, reduceMotion: ReduceMotion.System });
   };
 
@@ -162,6 +170,7 @@ export default function LessonScreen() {
       <Stack.Screen options={{ headerBackTitle: tr('tabs.course') }} />
       <ScreenBg />
       <ScrollView
+        ref={scrollRef}
         contentContainerStyle={{
           // как card/[id]: insets.top + высота системной шапки, иначе контент уедет под неё
           paddingTop: insets.top + 64 + spacing.l,
@@ -211,6 +220,13 @@ export default function LessonScreen() {
               {step.kind === 'card' && <CardStep cardId={step.cardId} lang={lang} />}
 
               {step.kind === 'quiz' && (
+                // текст вопроса/вариантов/пояснения читает ЖИВОЙ lang, а не вмороженный, как теория:
+                // step.question хранит объект QuizQuestion целиком (оба языка сразу), нужный язык
+                // выбирается прямо тут при рендере, а не при сборке шагов. Сегодня разницы не видно —
+                // сменить язык, не размонтировав экран урока, нельзя. Разъедутся они, если появится
+                // способ сменить язык БЕЗ размонтирования этого экрана (например, общий переключатель
+                // языка поверх текущего таба) — тогда вопрос перескочит на новый язык на середине
+                // урока, а уже пройденная теория останется на старом.
                 <View style={{ marginTop: spacing.l }}>
                   {step.question.type === 'card' && step.question.cardId && (
                     <View style={[st.qImWrap, { borderColor: t.frame }]}>
@@ -281,8 +297,8 @@ function CardStep({ cardId, lang }: { cardId: string; lang: 'ru' | 'en' }) {
 const st = StyleSheet.create({
   overline: { fontSize: 9.5, letterSpacing: 2.5, textAlign: 'center', fontWeight: '600' },
   title: { fontFamily: fonts.display, fontSize: 26, textAlign: 'center', marginTop: 4 },
-  // .prog эталона: полоса 7/4 + подпись X/N
-  progRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: spacing.m },
+  // .prog эталона: полоса 7/4 + подпись X/N, отступ сверху 6 — design-reference.html, не spacing.m
+  progRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 6 },
   progTrack: { flex: 1, height: 7 },
   progLabel: { fontSize: 11, fontWeight: '700' },
   // вопрос (.quiz .q, масштаб рамы: 17 → 19)
