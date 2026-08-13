@@ -21,6 +21,7 @@ const resources = {
       cards: {
         title: "78 карт", major: "Старшие", wands: "Жезлы", cups: "Кубки", swords: "Мечи", pentacles: "Пентакли",
         all: "Все", searchPlaceholder: "Найти карту…", empty: "Такой карты нет — проверьте написание",
+        learned: "ИЗУЧЕНО ✓",
       },
       card: {
         general: "Общее значение", reversed: "Перевёрнутая", love: "Любовь", career: "Работа",
@@ -40,6 +41,19 @@ const resources = {
         startLesson: "НАЧАТЬ УРОК",
         lessonOverline: "МОДУЛЬ {{m}} · УРОК {{l}}",
         lessonPreparing: "Урок готовится",
+      },
+      // экран урока (спека 08). passedOf: «уроков» склоняется по ЧИСЛУ M (count) —
+      // «из 1 урока», «из 6 уроков»; та же ловушка, что «из 1 дней» в 06а
+      lesson: {
+        theoryTitle: "Теория",
+        cardStep: "КАРТА УРОКА",
+        next: "ДАЛЕЕ",
+        xpGain: "+{{n}} XP",
+        passedOf_one: "ПРОЙДЕНО {{done}} ИЗ {{count}} УРОКА МОДУЛЯ",
+        passedOf_few: "ПРОЙДЕНО {{done}} ИЗ {{count}} УРОКОВ МОДУЛЯ",
+        passedOf_many: "ПРОЙДЕНО {{done}} ИЗ {{count}} УРОКОВ МОДУЛЯ",
+        repeatDone: "Повторение пройдено",
+        nextOnPath: "ДАЛЬШЕ ПО ПУТИ →",
       },
       profile: { title: "Профиль", streak: "СЕРИЯ", cards: "КАРТ ДНЯ" },
       settings: {
@@ -139,6 +153,7 @@ const resources = {
       cards: {
         title: "78 cards", major: "Major", wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pentacles",
         all: "All", searchPlaceholder: "Find a card…", empty: "No such card — check the spelling",
+        learned: "LEARNED ✓",
       },
       card: {
         general: "General meaning", reversed: "Reversed", love: "Love", career: "Career",
@@ -157,6 +172,16 @@ const resources = {
         startLesson: "START LESSON",
         lessonOverline: "MODULE {{m}} · LESSON {{l}}",
         lessonPreparing: "Lesson coming soon",
+      },
+      lesson: {
+        theoryTitle: "Theory",
+        cardStep: "LESSON CARD",
+        next: "NEXT",
+        xpGain: "+{{n}} XP",
+        passedOf_one: "{{done}} OF {{count}} MODULE LESSON DONE",
+        passedOf_other: "{{done}} OF {{count}} MODULE LESSONS DONE",
+        repeatDone: "Review complete",
+        nextOnPath: "CONTINUE THE PATH →",
       },
       profile: { title: "Profile", streak: "STREAK", cards: "DAILY CARDS" },
       settings: {
