@@ -95,6 +95,7 @@ export const resources = {
         // огонёк у серии рисуется ИКОНКОЙ рядом с подписью (StatBox), а не эмодзи в строке:
         // на «Сегодня» та же серия уже иконочная, два разных огня выглядели бы небрежностью
         title: "Профиль", overline: "ВАШ ПУТЬ", streak: "СЕРИЯ", cards: "КАРТ ДНЯ",
+        freeze: "ЗАМОРОЗКА",
         arcana: "АРКАН РОЖДЕНИЯ", arcanaCta: "Указать дату рождения",
         // «XP» инвариант к числу — плюрализация не нужна (правило logic-spec §10 — про формы слов)
         xpOf: "{{xp}} / {{next}} XP",
@@ -251,6 +252,7 @@ export const resources = {
       },
       profile: {
         title: "Profile", overline: "YOUR PATH", streak: "STREAK", cards: "DAILY CARDS",
+        freeze: "FREEZE",
         arcana: "BIRTH ARCANA", arcanaCta: "Add your birth date",
         xpOf: "{{xp}} / {{next}} XP",
       },
