@@ -8,10 +8,11 @@
  *  в онбординге (`.emb2` эталона), дублировать пути не будем. */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Svg, { Circle, Defs, Path, RadialGradient, Rect, Stop } from 'react-native-svg';
+import Svg, { Defs, RadialGradient, Rect, Stop } from 'react-native-svg';
 import { glowShadow } from '../theme/glow';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { Emblem } from './Emblem';
 import { Txt } from './Txt';
 
 /** Цвета рубашки из `.backpat` эталона. Живут здесь, а не в theme.ts: это не токены
@@ -49,20 +50,7 @@ export function CardBack({ hint }: { hint?: string }) {
             тень вокруг прозрачного фона. Висит на отдельной обёртке: рядом с overflow:'hidden'
             тень срезает, поэтому обрезка — только на faceClip */}
         <View style={glowShadow(t.glow, t.accent, 12, 0.35)}>
-          <Svg
-            width={EMB_SIZE}
-            height={EMB_SIZE}
-            viewBox="0 0 100 100"
-            fill="none"
-            stroke={t.accent}
-            strokeWidth={0.9}
-          >
-            <Circle cx={50} cy={50} r={33} />
-            <Circle cx={50} cy={50} r={41} strokeDasharray="2 5" />
-            <Path d="M50 23 L57 43 L77 50 L57 57 L50 77 L43 57 L23 50 L43 43 Z" />
-            <Circle cx={50} cy={50} r={7} />
-            <Path d="M50 9v6M50 85v6M9 50h6M85 50h6" />
-          </Svg>
+          <Emblem size={EMB_SIZE} />
         </View>
 
         <Txt style={[st.word, { color: t.accent }]}>ARCANUM</Txt>
