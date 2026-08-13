@@ -38,7 +38,7 @@ export function BirthArcanaCard({ lang }: { lang: 'ru' | 'en' }) {
           }}
           style={[st.card, st.invite, { borderColor: t.line }]}
         >
-          <View>
+          <View style={st.texts}>
             <Txt style={[st.overline, { color: t.accent }]}>{tr('profile.arcana')}</Txt>
             <Txt style={[st.cta, { color: t.text }]}>{tr('profile.arcanaCta')}</Txt>
           </View>
@@ -69,7 +69,7 @@ export function BirthArcanaCard({ lang }: { lang: 'ru' | 'en' }) {
           <Image source={cardImages[card.id]} style={st.im} contentFit="cover" cachePolicy="memory-disk" />
         </View>
       </View>
-      <View>
+      <View style={st.texts}>
         <Txt style={[st.overline, { color: t.accent }]}>{tr('profile.arcana')}</Txt>
         <Txt style={[st.name, { color: t.head }]}>{`${cardNumeral(card)} · ${card.name[lang]}`}</Txt>
       </View>
@@ -93,6 +93,9 @@ const st = StyleSheet.create({
   imShadow: { borderRadius: 6 },
   imClip: { width: 44, height: 71, borderWidth: 1, borderRadius: 6, overflow: 'hidden' },
   im: { width: '100%', height: '100%' },
+  // без flex:1 текстовый блок не сжимается (в RN дефолт flexShrink:0, не как в CSS) и вылезает
+  // за карточку при длинном названии аркана / крупном системном шрифте — как MonthCard/JournalRow
+  texts: { flex: 1 },
   overline: { fontSize: 8.5, letterSpacing: 2 }, // `.bt small`
   name: { fontFamily: fonts.display, fontSize: 17, marginTop: 1 }, // `.bt b`: serif 17 w500
   cta: { fontSize: 13, marginTop: 2 },
