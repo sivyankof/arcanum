@@ -3,8 +3,8 @@
  *
  *  Полоса заполняется один раз при появлении экрана: задержка 500 мс, ход 1.5 с,
  *  кривая cubic-bezier(.25,1.2,.4,1) — лёгкий перелёт за цель, как в эталоне.
- *  Перелёт срезается обрезкой дорожки. При progress 0 движения не видно — так и задумано,
- *  пока уровни не считаются по-настоящему (задача 08). */
+ *  Перелёт срезается обрезкой дорожки. При progress 0 движения не видно — так и задумано.
+ *  Уровень и progress считаются по-настоящему (levelFromXp, src/lib/xp.ts, задача 08). */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, type StyleProp, type ViewStyle, View } from 'react-native';
