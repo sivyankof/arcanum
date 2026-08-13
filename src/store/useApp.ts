@@ -2,6 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
@@ -22,6 +23,9 @@ export type { AppSettings };
 // прогресс уроков курса — тип живёт в src/lib/courseProgress.ts рядом с логикой пути
 export type { LessonProgressMap };
 
+// профиль (имя, дата и аркан рождения) — тип живёт в src/lib/birthArcana.ts рядом с формулой
+export type { Profile };
+
 interface AppState {
   themeMode: ThemeMode;
   lang: Lang;
@@ -37,6 +41,9 @@ interface AppState {
    *  рефлексии дня. Задним числом за прошлые дни не начисляется — счёт с нуля у всех. */
   xp: number;
   settings: AppSettings;
+  /** Профиль онбординга (logic-spec §7): имя, дата и аркан рождения.
+   *  onboarded: false — онбординг ещё не пройден, корневой layout уводит на /onboarding. */
+  profile: Profile;
   /** Только для разработки: показать блок рефлексии, не дожидаясь 18:00. */
   devReflect: boolean;
   setThemeMode: (m: ThemeMode) => void;
@@ -53,6 +60,10 @@ interface AppState {
   setPushesOn: (on: boolean) => void;
   setPushTime: (kind: 'morning' | 'evening', hhmm: string) => void;
   setPushAsked: () => void;
+  /** Финальная CTA онбординга: профиль пишется одним куском (buildProfile). */
+  completeOnboarding: (name: string, birthDate?: string) => void;
+  /** Только для разработки: вернуть онбординг — гард в _layout сам уведёт на экран. */
+  resetOnboarding: () => void;
   setDevReflect: (on: boolean) => void;
   resetToday: () => void;
 }
@@ -69,6 +80,7 @@ export const useApp = create<AppState>()(
       lessonsProgress: {},
       xp: 0,
       settings: DEFAULT_SETTINGS,
+      profile: { onboarded: false },
       devReflect: false,
 
       setThemeMode: (themeMode) => set({ themeMode }),
@@ -147,6 +159,8 @@ export const useApp = create<AppState>()(
           },
         }),
       setPushAsked: () => set({ settings: { ...get().settings, pushAsked: true } }),
+      completeOnboarding: (name, birthDate) => set({ profile: buildProfile(name, birthDate) }),
+      resetOnboarding: () => set({ profile: { onboarded: false } }),
       setDevReflect: (devReflect) => set({ devReflect }),
 
       // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
@@ -165,7 +179,29 @@ export const useApp = create<AppState>()(
     }),
     {
       name: 'arcanum-app',
-      storage: createJSONStorage(() => AsyncStorage),
+      // ⚠️ БИТУЮ запись считаем отсутствующей. С задачи 09 первый экран ждёт завершения
+      // гидрации (гейт онбординга в app/_layout.tsx), а zustand на ошибке разбора НЕ поднимает
+      // hasHydrated и не зовёт слушателей вовсе — приложение осталось бы на сплэше навсегда,
+      // и починить это можно было бы только переустановкой, то есть потерей дневника.
+      // Раньше та же порча просто означала старт с дефолтов; возвращаем это поведение.
+      // Глотаем ТОЛЬКО ошибку разбора: сбои доступа к самому хранилищу пробрасываем как прежде —
+      // на вебе expo-router рендерит страницы ещё и в Node (output: "static"), где AsyncStorage
+      // падает на отсутствии window, и подменять там гидрацию дефолтами нельзя: серверный кадр
+      // тогда покажет онбординг всем подряд, включая тех, кто его давно прошёл.
+      storage: createJSONStorage(() => ({
+        getItem: async (name: string) => {
+          const raw = await AsyncStorage.getItem(name);
+          if (raw === null) return null;
+          try {
+            JSON.parse(raw); // проверка читаемости: сам разбор идёт дальше в createJSONStorage
+          } catch {
+            return null;
+          }
+          return raw;
+        },
+        setItem: (name: string, value: string) => AsyncStorage.setItem(name, value),
+        removeItem: (name: string) => AsyncStorage.removeItem(name),
+      })),
       // schemaVersion из logic-spec §7 хранится тут же, отдельного поля в состоянии нет.
       // v1 → v2: появились настройки (settings.reflectionOn).
       // v2 → v3: настройки пушей (pushesOn, pushMorning, pushEvening, pushAsked).
@@ -174,8 +210,17 @@ export const useApp = create<AppState>()(
       // по вложенным объектам вроде settings), поэтому отдельная ветка миграции не нужна.
       // v4 → v5: xp (спека 08) — снова ключ ВЕРХНЕГО уровня, дефолт 0 доливается поверхностным
       // слиянием сам; repeatDate живёт ВНУТРИ записей lessonsProgress и опционален — миграция
-      // не нужна. Следующая задача, меняющая схему, поднимает до 6.
-      version: 5,
+      // не нужна.
+      // v5 → v6: profile (спека 09) — снова ключ ВЕРХНЕГО уровня, дефолт { onboarded: false }
+      // доливается поверхностным слиянием сам, ветка миграции не нужна. Существующие установки
+      // получают onboarded: false и проходят онбординг один раз (решение Артёма 13.08).
+      // ⚠️ Но profile — ВТОРОЙ вложенный объект состояния после settings, и ловушка 06а
+      // распространяется на него целиком: задача, которая добавит ПОЛЕ ВНУТРЬ profile
+      // (например «дату предложим позже» из задачи 16), обязана поднять версию И дописать
+      // слияние руками в migrate — как это сделано для settings. Само по себе новое поле
+      // у уже установленного приложения не появится.
+      // Следующая задача, меняющая схему, поднимает до 7.
+      version: 6,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт
       // целиком, а не сливается с ним по ключам. Поэтому недостающие ключи дописываем здесь
       // руками — и следующая задача, добавляя поля в settings, обязана поднять версию и сделать
