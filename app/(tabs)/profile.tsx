@@ -11,13 +11,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BirthArcanaCard } from '../../src/components/BirthArcanaCard';
 import { EmptyState } from '../../src/components/EmptyState';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { JournalRow } from '../../src/components/JournalRow';
+import { LevelCard } from '../../src/components/LevelCard';
 import { MonthCard } from '../../src/components/MonthCard';
 import { MonthNav } from '../../src/components/MonthNav';
 import { PressableScale } from '../../src/components/PressableScale';
+import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { localDateISO } from '../../src/lib/dates';
@@ -43,7 +46,7 @@ import { useTheme } from '../../src/theme/useTheme';
 /** Сколько записей участвует в появлении экрана — примерно один экран строк. */
 const BODY_ROWS = 4;
 /** Шаг каскада тела списка: на ступеньку позже шапки дневника (motion-spec §4). */
-const BODY_STEP = 3;
+const BODY_STEP = 4;
 
 export default function ProfileScreen() {
   const t = useTheme();
@@ -55,6 +58,8 @@ export default function ProfileScreen() {
 
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const xp = useApp((s) => s.xp);
+  const name = useApp((s) => s.profile.name);
 
   const months = React.useMemo(() => monthsWithEntries(history), [history]);
   const [picked, setPicked] = React.useState<string | null>(null);
@@ -95,10 +100,17 @@ export default function ProfileScreen() {
   const header = (
     <>
       <FadeUp index={0} style={st.pad}>
-        <Txt style={[st.title, { color: t.head }]}>{tr('profile.title')}</Txt>
+        {/* эталон: overline «ВАШ ПУТЬ» + имя; имени нет (пропущено в онбординге) — «Профиль» */}
+        <Txt style={[st.overline, { color: t.muted }]}>{tr('profile.overline')}</Txt>
+        <Txt style={[st.title, { color: t.head }]}>{name ?? tr('profile.title')}</Txt>
       </FadeUp>
 
-      <FadeUp index={1} style={[st.stats, st.pad]}>
+      <FadeUp index={1} style={st.pad}>
+        <Rule />
+        <LevelCard xp={xp} />
+      </FadeUp>
+
+      <FadeUp index={2} style={[st.stats, st.pad]}>
         <View style={[st.stat, { backgroundColor: t.panel, borderColor: t.line }]}>
           <Txt style={[st.statNum, { color: t.head }]}>{streak}</Txt>
           <Txt style={[st.statLbl, { color: t.muted }]}>{tr('profile.streak')}</Txt>
@@ -109,8 +121,12 @@ export default function ProfileScreen() {
         </View>
       </FadeUp>
 
+      <FadeUp index={2} style={st.pad}>
+        <BirthArcanaCard lang={lang} />
+      </FadeUp>
+
       {month && summary && (
-        <FadeUp index={2} style={st.pad}>
+        <FadeUp index={3} style={st.pad}>
           <MonthNav
             month={month}
             lang={lang}
@@ -124,7 +140,7 @@ export default function ProfileScreen() {
       )}
 
       {month && chips.length > 1 && (
-        <FadeUp index={2}>
+        <FadeUp index={3}>
           <FilterChips
             values={chips}
             // «Все» и «С заметкой» — текст из i18n; три ответа — знак ✓/≈/✗ (один источник
@@ -210,11 +226,18 @@ const st = StyleSheet.create({
   // обрывается за 24px до края экрана (правило задачи 19, design-system §5)
   pad: { marginHorizontal: spacing.xl },
   chips: { marginTop: 12 },
-  title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center' },
-  stats: { flexDirection: 'row', gap: spacing.m, marginTop: spacing.xl },
-  stat: { flex: 1, alignItems: 'center', borderWidth: 1, borderRadius: radius.l, paddingVertical: spacing.l },
-  statNum: { fontFamily: fonts.display, fontSize: 30 },
-  statLbl: { fontSize: 9, letterSpacing: 2, marginTop: 2 },
+  overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' }, // `.date`
+  title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 }, // `.h2`
+  stats: { flexDirection: 'row', gap: 10, marginTop: 14 }, // `.statrow`
+  stat: {
+    flex: 1,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: radius.l - 1, // 15 — как `.statbox`
+    paddingVertical: 13,
+  },
+  statNum: { fontFamily: fonts.display, fontSize: 24 }, // `.statbox b` (было 30)
+  statLbl: { fontSize: 8.5, letterSpacing: 2, marginTop: 2 }, // `.statbox small`
   gear: {
     position: 'absolute',
     right: spacing.xl,
