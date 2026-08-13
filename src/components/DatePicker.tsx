@@ -5,7 +5,7 @@ import DateTimePicker, { type DateTimePickerEvent } from '@react-native-communit
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet } from 'react-native';
-import { localDateISO, parseISODate } from '../lib/dates';
+import { localDateISO, localeTag, parseISODate } from '../lib/dates';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { ModalPanel } from './ModalPanel';
@@ -30,7 +30,8 @@ export function DatePicker({
   onClose: () => void;
 }) {
   const t = useTheme();
-  const { t: tr } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
+  const locale = localeTag(i18n.language.startsWith('ru') ? 'ru' : 'en');
   const date = React.useMemo(() => (value ? parseISODate(value) : DEFAULT_DATE), [value]);
   // верхнюю границу фиксируем на монтирование: колесо iOS шлёт onChange на КАЖДЫЙ тик
   // прокрутки (ловушка 06б), а `new Date()` прямо в пропе давал бы пикеру новое значение
@@ -90,6 +91,12 @@ export function DatePicker({
         // тема приложения — своя настройка; без themeVariant колесо красится под системную
         // тему телефона и на светлом iOS с тёмной темой приложения невидимо (ловушка 06б)
         themeVariant={t.mode === 'dark' ? 'dark' : 'light'}
+        // ...и ровно то же самое с ЯЗЫКОМ (найдено Артёмом 13.08 на лайв-проверке): названия
+        // месяцев в колесе шли по-английски при русских и приложении, и телефоне. iOS локализует
+        // системные виджеты по списку языков приложения-ХОСТА, а хост здесь — Expo Go, и русского
+        // в его списке нет. Проп locale документация пакета не советует «в общем случае», но прямо
+        // называет надёжным для display="spinner" — наш случай.
+        locale={locale}
       />
       <Pressable onPress={confirmIOS} style={[st.done, { borderColor: t.frame }]}>
         <Txt style={[st.doneTxt, { color: t.accent }]}>{tr('settings.ok')}</Txt>

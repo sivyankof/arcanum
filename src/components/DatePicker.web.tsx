@@ -4,7 +4,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
-import { localDateISO, parseISODate } from '../lib/dates';
+import { localDateISO, localeTag, parseISODate } from '../lib/dates';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { ModalPanel } from './ModalPanel';
@@ -31,7 +31,7 @@ export function DatePicker({
 }) {
   const t = useTheme();
   const { t: tr, i18n } = useTranslation();
-  const locale = i18n.language.startsWith('ru') ? 'ru-RU' : 'en-US';
+  const locale = localeTag(i18n.language.startsWith('ru') ? 'ru' : 'en');
 
   const init = value ? parseISODate(value) : DEFAULT_DATE;
   const [day, setDay] = React.useState(init.getDate());

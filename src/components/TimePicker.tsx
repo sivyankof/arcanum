@@ -6,6 +6,7 @@ import DateTimePicker, { type DateTimePickerEvent } from '@react-native-communit
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet } from 'react-native';
+import { localeTag } from '../lib/dates';
 import { formatHHMM, parseHHMM } from '../lib/settings';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -29,7 +30,8 @@ export function TimePicker({
   onClose: () => void;
 }) {
   const t = useTheme();
-  const { t: tr } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
+  const locale = localeTag(i18n.language.startsWith('ru') ? 'ru' : 'en');
   const { hour, minute } = parseHHMM(value, 9);
   const date = React.useMemo(() => {
     const d = new Date();
@@ -97,6 +99,10 @@ export function TimePicker({
         // светлом iOS с тёмной темой приложения получались тёмные цифры на тёмной панели —
         // невидимое колесо (пункт G финального ревью 06б)
         themeVariant={t.mode === 'dark' ? 'dark' : 'light'}
+        // язык — та же история, что и тема: своя настройка приложения, системе не видна
+        // (разбор — в DatePicker.tsx). Здесь колесо набрано цифрами и при is24Hour почти
+        // не зависит от локали, но расходиться поведению двух пикеров незачем
+        locale={locale}
       />
       <Pressable onPress={confirmIOS} style={[st.done, { borderColor: t.frame }]}>
         <Txt style={[st.doneTxt, { color: t.accent }]}>{tr('settings.ok')}</Txt>
