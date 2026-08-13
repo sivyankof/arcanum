@@ -102,7 +102,7 @@ product-spec отвечает «что видит пользователь», э
 
 ## 7. Хранение (все данные локально)
 
-AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 4`):
+AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 5`):
 `{ schemaVersion: 3, installSeed, profile: {name?, birthDate?, birthArcanaId?}, themeMode, lang,
 streak, lastDrawDate, freezes, xp, history: DailyDraw[365], lessonsProgress: {lessonId: {done, errors, ts, repeatDate?}},
 spreadsHistory: SpreadDraw[100], settings: {reflectionOn: true, pushesOn: true, pushMorning: '09:00',
@@ -115,7 +115,8 @@ pushEvening: '21:00', pushAsked: false} }`
 сохранения, у уже установленного приложения само по себе не появится. Поэтому каждая задача,
 добавляющая поле в `settings` (06а подняла `version` до 2 ради `reflectionOn`; 06б подняла до 3,
 добавив `pushesOn`/`pushMorning`/`pushEvening`/`pushAsked`; следующая задача с новым полем
-в `settings` обязана поднять до 5), обязана поднять `version` персиста и дописать недостающие
+в `settings` поднимает версию по общему правилу, сформулированному ниже в этом разделе),
+обязана поднять `version` персиста и дописать недостающие
 ключи руками в `migrate` — иначе новые настройки не появятся у пользователей, обновившихся
 с более старой версии. **Реализовано (06б):** правило вынесено в чистый модуль `src/lib/settings.ts` —
 `DEFAULT_SETTINGS` + `mergeSettings(saved)` (дописывает отсутствующие ключи); `migrate` стора
