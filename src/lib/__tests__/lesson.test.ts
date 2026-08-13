@@ -92,4 +92,18 @@ describe('lessonSteps — теория → карты → вопросы', () =>
     expect(lessonPlayable(empty)).toBe(false);
     expect(lessonPlayable(lesson())).toBe(true);
   });
+
+  it('только теория, без квиза: lessonPlayable = false', () => {
+    expect(lessonPlayable(lesson({ quiz: undefined }))).toBe(false);
+  });
+
+  it('только квиз, без теории: lessonPlayable = false', () => {
+    expect(lessonPlayable(lesson({ theory: undefined }))).toBe(false);
+  });
+
+  it('шаг quiz несёт перемешанный вопрос — сравниваем с shuffleOptions напрямую', () => {
+    const l = lesson({ quiz: [q(0)] });
+    const quizStep = lessonSteps(l, 'ru', rngZero).find((s) => s.kind === 'quiz');
+    expect(quizStep).toEqual({ kind: 'quiz', question: shuffleOptions(q(0), rngZero) });
+  });
 });

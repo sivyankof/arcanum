@@ -11,6 +11,14 @@ describe('контракт викторин М1–М2 (course.json)', () => {
     expect(lessons).toHaveLength(10);
   });
 
+  it.each(lessons.map((l) => [l.id, l] as const))('%s: теория заполнена на обоих языках', (_id, l) => {
+    // theory.ru/en редактируются руками (в отличие от quiz, который идёт через скрипт):
+    // пропавший язык даст урок без теории именно у этого языка — lessonPlayable этого не ловит,
+    // она смотрит только theory.ru (спека 08).
+    expect(l.theory?.ru).toBeTruthy();
+    expect(l.theory?.en).toBeTruthy();
+  });
+
   it.each(lessons.map((l) => [l.id, l] as const))('%s: 5 вопросов по схеме', (_id, l) => {
     expect(l.quiz).toBeDefined();
     expect(l.quiz!).toHaveLength(5);
