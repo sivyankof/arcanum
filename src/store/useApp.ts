@@ -291,8 +291,12 @@ export const useApp = create<AppState>()(
           useApp.setState({ installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)) });
         }
         // холодный старт в новом месяце — момент «1-го числа» для начисления заморозки;
-        // возврат из фона ловит useAppActive в app/_layout.tsx
-        useApp.getState().syncFreezeGrant();
+        // возврат из фона ловит useAppActive в app/_layout.tsx.
+        // Начисление ТОЛЬКО при удавшейся гидрации: state === undefined значит SSR-рендер веба
+        // (expo-router рендерит страницы ещё и в Node, у AsyncStorage там нет window — запись
+        // бросает и роняет процесс) или битую запись — начислять нечего и писать в хранилище
+        // нельзя. Свежая установка сюда не попадает: у неё state есть (дефолты), как у installSeed.
+        if (state) useApp.getState().syncFreezeGrant();
       },
     },
   ),
