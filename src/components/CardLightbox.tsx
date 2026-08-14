@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
-  Easing, interpolate, ReduceMotion, runOnJS, useAnimatedStyle, useReducedMotion,
+  Easing, Extrapolation, interpolate, ReduceMotion, runOnJS, useAnimatedStyle, useReducedMotion,
   useSharedValue, withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -75,20 +75,24 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     return () => setStatusBarHidden(false, 'fade');
   }, [open, prog, closing]);
 
-  const close = React.useCallback(() => {
-    closing.value = withTiming(
-      1,
-      { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System },
-      (finished) => { if (finished) runOnJS(onClose)(); },
-    );
-  }, [closing, onClose]);
-
   // зум и пан — состояние жестов (спека 14, задача 5)
   const zoom = useSharedValue(1);
   const savedZoom = useSharedValue(1);
   const panX = useSharedValue(0);
   const panY = useSharedValue(0);
   const savedPan = useSharedValue({ x: 0, y: 0 });
+
+  const close = React.useCallback(() => {
+    // полёт стартует с текущего сдвига пальца (Task 6): panY едет в 0 тем же
+    // таймингом, что и closing, — сложение с translateY(from.dy*k) даёт один плавный полёт,
+    // а не рывок «сначала прыжок в центр, потом полёт».
+    panY.value = withTiming(0, { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System });
+    closing.value = withTiming(
+      1,
+      { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System },
+      (finished) => { if (finished) runOnJS(onClose)(); },
+    );
+  }, [closing, panY, onClose]);
 
   const pinch = Gesture.Pinch()
     .onUpdate((e) => {
@@ -166,6 +170,11 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
       ? interpolate(prog.value, [0, 1], [360, 0])
       : interpolate(closing.value, [0, 1], [0, 180]);
     if (reduceMotion) spin = 0; // reduce motion: без оборота, только перелёт/масштаб
+    // лёгкий наклон вслед за пальцем при свайпе-вниз (Task 6) — только при ×1 и вне полёта
+    // закрытия: при зуме panY — это панорамирование, а не свайп, наклон там неуместен.
+    const rotZ = savedZoom.value === 1 && closing.value === 0
+      ? interpolate(panY.value, [0, 300], [0, 2])
+      : 0;
     return {
       transform: [
         { translateX: from.dx * k },
@@ -175,6 +184,7 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
         { perspective: 1200 },
         { rotateY: `${spin}deg` },
         { scale: (1 + (from.scale - 1) * k) * zoom.value },
+        { rotateZ: `${rotZ}deg` },
       ],
     };
   });
@@ -183,9 +193,11 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     transform: [{ rotateY: '180deg' }],
     backfaceVisibility: 'hidden' as const,
   }));
-  const scrimStyle = useAnimatedStyle(() => ({
-    opacity: Math.min(prog.value, 1 - closing.value),
-  }));
+  const scrimStyle = useAnimatedStyle(() => {
+    // скрим бледнеет вместе со свайпом — обратная связь «отпустишь — закроется»
+    const fade = interpolate(panY.value, [0, 300], [1, 0.5], Extrapolation.CLAMP);
+    return { opacity: Math.min(prog.value, 1 - closing.value) * fade };
+  });
 
   if (!open) return null;
   return (
