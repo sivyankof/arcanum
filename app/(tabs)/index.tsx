@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   interpolate,
   ReduceMotion,
@@ -17,6 +18,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
 import { CardBack } from '../../src/components/CardBack';
+import { CardLightbox } from '../../src/components/CardLightbox';
 import { ConfirmDialog } from '../../src/components/ConfirmDialog';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
@@ -27,6 +29,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Sparks } from '../../src/components/Sparks';
 import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
+import type { Rect } from '../../src/lib/cardTransition';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { daysAgoISO, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
@@ -40,6 +43,7 @@ import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { levelFromXp } from '../../src/lib/xp';
 import { useApp } from '../../src/store/useApp';
+import { GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../../src/theme/glow';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { Txt } from '../../src/components/Txt';
@@ -54,12 +58,12 @@ const STREAK_MILESTONE = 7; // 7-й день серии — единственн
 const RING_A = CARD_W * 1.53;
 const RING_B = CARD_W * 1.75;
 
-// блик по лицу карты (.glare из эталона): диагональ 112°, ход ±140% ширины, задержка 500 мс, 1100 мс.
+// блик по лицу карты (.glare из эталона): ход ±140% ширины, задержка 500 мс, 1100 мс
+// (геометрия — GLARE_ANGLE/COLORS/LOCATIONS в theme/glow.ts, общая с CardLightbox).
 // Сверх эталона (motion-spec п.7): пока карта открыта, проход повторяется каждые ~7 с
 const GLARE_DELAY = 500;
 const GLARE_MS = 1100;
 const GLARE_PAUSE = 7000;
-const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
 
 // салют при перевороте (.spark эталона + stage.onclick): 18 искр, кегль 8–17, разлёт 85–180 px
 const SPARK_COUNT = 18;
@@ -177,6 +181,18 @@ export default function TodayScreen() {
   );
   const scrollRef = useTabTopRef<ScrollView>();
 
+  // полноэкранный просмотр карты дня (спека 14): origin — прямоугольник сцены на момент тапа,
+  // sceneRef меряет его через measureInWindow (собственная система координат модалки)
+  const sceneRef = React.useRef<View>(null);
+  const [lbOrigin, setLbOrigin] = React.useState<Rect | null>(null);
+  // M2: id карты фиксируется на момент открытия отдельно от `card` — после полуночи `card`
+  // пересчитывается (новая карта дня), и без этого картинка в уже открытом просмотре
+  // подменилась бы под пользователем
+  const [lbCardId, setLbCardId] = React.useState<string | null>(null);
+  // I6: зеркало открытости просмотра для колбэка таймера прелюдии (см. ниже) — стору и
+  // ре-рендеру он не нужен, поэтому обычный ref, а не state
+  const lbOpenRef = React.useRef(false);
+
   // час пересчитываем при возврате на таб, а не таймером каждую минуту: сидеть в приложении
   // ровно в 17:59:59 — не тот случай, ради которого стоит держать интервал
   const [hour, setHour] = React.useState(() => new Date().getHours());
@@ -227,10 +243,19 @@ export default function TodayScreen() {
     glare.value = withDelay(GLARE_DELAY, sweepLoop(GLARE_MS, GLARE_PAUSE, EASE));
   }, [drawn, glare]);
 
-  // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона)
+  // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона).
+  // Хотфикс дефект 2 (спека 14): на время полноэкранного просмотра остановлено — иначе
+  // к посадке копии карты в лайтбоксе источник успевает сместиться покачиванием, и на экране
+  // на миг видны две карты со сдвигом. Заморозка ПЕРЕД замером происходит синхронно в onDraw
+  // (cancelAnimation до measureInWindow) — если положить её сюда, эффект сработал бы уже
+  // ПОСЛЕ замера (React перерисовывает по lbOrigin постфактум), а тут только перезапуск
   React.useEffect(() => {
+    if (lbOrigin !== null) {
+      cancelAnimation(bob);
+      return;
+    }
     bob.value = pingPong(-6, 2100);
-  }, [bob]);
+  }, [lbOrigin, bob]);
 
   const backStyle = useAnimatedStyle(() => ({
     transform: [
@@ -264,7 +289,19 @@ export default function TodayScreen() {
     withDelay(delay, withTiming(1, { duration: REVEAL_MS, easing: EASE, reduceMotion: ReduceMotion.System }));
 
   const onDraw = () => {
-    if (drawn) return;
+    if (drawn) {
+      // карта уже открыта — тап берёт её «в руки» (спека 14; до переворота тап открывает карту дня)
+      // хотфикс дефект 2: парение замирает СНАЧАЛА, замер — ПОТОМ (тот же приём, что у героя
+      // страницы карты) — иначе к посадке копии в лайтбоксе источник успеет сместиться
+      // покачиванием (см. эффект по lbOrigin ниже)
+      cancelAnimation(bob);
+      sceneRef.current?.measureInWindow((x, y, w, h) => {
+        lbOpenRef.current = true; // I6
+        setLbCardId(card.id); // M2: фиксируем id на момент открытия
+        setLbOrigin({ x, y, w, h });
+      });
+      return;
+    }
     const prevStreak = streak;
     hapticReveal();
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
@@ -285,9 +322,20 @@ export default function TodayScreen() {
     // карту дня успели сбросить (DEV) и вытянуть заново, пока первый таймер ещё ждал, второй
     // не должен переоткрыть уже отвеченную прелюдию
     if (!pushAsked) {
-      preludeTimer.current = setTimeout(() => {
-        if (!useApp.getState().settings.pushAsked) setPreludeOpen(true);
-      }, FLIP_MS + 600);
+      // I6: если пользователь уже открыл полноэкранный просмотр повторным тапом, показывать
+      // прелюдию нельзя — второй Modal поверх первого (на iOS системный диалог поверх второй
+      // модалки может вовсе не показаться, а переспросить получится только завтра). Пока
+      // просмотр открыт, перевзводим таймер каждые 1500мс и ждём, пока его закроют
+      const tryShowPrelude = () => {
+        if (!useApp.getState().settings.pushAsked) {
+          if (lbOpenRef.current) {
+            preludeTimer.current = setTimeout(tryShowPrelude, 1500);
+          } else {
+            setPreludeOpen(true);
+          }
+        }
+      };
+      preludeTimer.current = setTimeout(tryShowPrelude, FLIP_MS + 600);
     }
   };
 
@@ -350,32 +398,37 @@ export default function TodayScreen() {
         {/* сцена с картой */}
         <FadeUp index={3}>
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
-          <View style={{ width: CARD_W, height: CARD_H }}>
-            {/* кольца позади карты */}
+          <View ref={sceneRef} collapsable={false} style={{ width: CARD_W, height: CARD_H }}>
+            {/* кольца позади карты — на время просмотра НЕ прячутся (хотфикс дефект 2) */}
             <Ring size={RING_A} duration={70000} opacity={0.55} star="✦" starSize={8} />
             <Ring size={RING_B} duration={100000} reverse opacity={0.3} star="✧" starSize={6} />
-            {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
-            <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
-              <View style={[st.faceClip, { borderColor: t.frame }]}>
-                <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
-              </View>
-            </Animated.View>
-            {/* лицо */}
-            <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
-              <View style={[st.faceClip, { borderColor: t.frame }]}>
-                <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
-                {/* блик: проходит по лицу карты сразу после переворота */}
-                <Animated.View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }, glareStyle]}>
-                  <LinearGradient
-                    colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']}
-                    locations={[0, 0.32, 0.48, 0.6, 1]}
-                    start={GLARE_ANGLE.start}
-                    end={GLARE_ANGLE.end}
-                    style={StyleSheet.absoluteFill}
-                  />
-                </Animated.View>
-              </View>
-            </Animated.View>
+            {/* обе грани карты прячутся на время полноэкранного просмотра — копия летит
+                в лайтбоксе, живой источник (застывший, см. cancelAnimation выше) в это время
+                виден быть не должен (хотфикс дефект 2, спека 14) */}
+            <View style={[StyleSheet.absoluteFill, lbOrigin !== null && st.hidden]}>
+              {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
+              <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+                <View style={[st.faceClip, { borderColor: t.frame }]}>
+                  <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
+                </View>
+              </Animated.View>
+              {/* лицо */}
+              <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+                <View style={[st.faceClip, { borderColor: t.frame }]}>
+                  <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
+                  {/* блик: проходит по лицу карты сразу после переворота */}
+                  <Animated.View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }, glareStyle]}>
+                    <LinearGradient
+                      colors={GLARE_COLORS}
+                      locations={GLARE_LOCATIONS}
+                      start={GLARE_ANGLE.start}
+                      end={GLARE_ANGLE.end}
+                      style={StyleSheet.absoluteFill}
+                    />
+                  </Animated.View>
+                </View>
+              </Animated.View>
+            </View>
           </View>
           {/* салют поверх сцены; внутри Sparks стоит pointerEvents none, нажатию не мешает */}
           <Sparks
@@ -470,11 +523,22 @@ export default function TodayScreen() {
           setPreludeOpen(false);
         }}
       />
+      <CardLightbox
+        cardId={lbCardId ?? card.id}
+        origin={lbOrigin}
+        onClose={() => {
+          lbOpenRef.current = false; // I6
+          setLbOrigin(null);
+          setLbCardId(null);
+        }}
+      />
     </View>
   );
 }
 
 const st = StyleSheet.create({
+  // хотфикс дефект 2: прячет живые грани карты дня на время полноэкранного просмотра
+  hidden: { opacity: 0 },
   date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
   moon: { fontSize: 13, textAlign: 'center', marginTop: 12 },

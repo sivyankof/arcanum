@@ -19,6 +19,16 @@
  */
 import { Platform, type TextStyle, type ViewStyle } from 'react-native';
 
+/** Полоса блика: карта дня («Сегодня») и полноэкранный просмотр карты (CardLightbox) —
+ *  диагональ 112° (в координатах градиента 0..1), три стопа прозрачность/0.3/прозрачность.
+ *  Тайминги (задержка, длительность, повтор) у мест разные — они остаются локальными. */
+export const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
+export const GLARE_COLORS = [
+  'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)',
+  'rgba(255,255,255,0)', 'rgba(255,255,255,0)',
+] as const;
+export const GLARE_LOCATIONS = [0, 0.32, 0.48, 0.6, 1] as const;
+
 export function glowShadow(glowColor: string, iosColor: string, cssBlur: number, iosOpacity: number): ViewStyle {
   if (Platform.OS === 'ios') {
     return {

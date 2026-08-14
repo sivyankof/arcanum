@@ -14,6 +14,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import '../src/lib/i18n';
 import i18n from '../src/lib/i18n';
@@ -70,7 +71,8 @@ export default function RootLayout() {
   if (!fontsLoaded || !hydrated) return null;
 
   return (
-    <>
+    // жесты RNGH (pinch/pan в просмотре карты, спека 14) требуют корневой обёртки
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar style={t.mode === 'dark' ? 'light' : 'dark'} />
       <Stack
         screenOptions={{
@@ -139,6 +141,6 @@ export default function RootLayout() {
           />
         </Stack.Protected>
       </Stack>
-    </>
+    </GestureHandlerRootView>
   );
 }

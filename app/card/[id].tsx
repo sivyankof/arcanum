@@ -3,8 +3,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   measure,
   ReduceMotion,
@@ -20,6 +21,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
+import { CardLightbox } from '../../src/components/CardLightbox';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
@@ -58,9 +60,23 @@ const SPHERES: { key: SphereKey; tabKey: string; blockKey: string }[] = [
 
 /** Изображение в шапке. Если экран открыт из сетки карт, картинка «перелетает»
  *  от своей ячейки на место (пункт 6 motion-spec); иначе появляется как обычно. */
-function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) {
+function HeroImage({
+  cardId,
+  origin,
+  hidden,
+  onOpen,
+}: {
+  cardId: string;
+  origin: Rect | null;
+  hidden: boolean; // полноэкранный просмотр открыт — источник заморожен и спрятан (спека 14, хотфикс)
+  onOpen: (r: Rect) => void;
+}) {
   const t = useTheme();
+  const { t: tr } = useTranslation();
   const ref = useAnimatedRef<Animated.View>();
+  // отдельный обычный ref для полноэкранного просмотра (спека 14): useAnimatedRef выше занят
+  // перелётом из сетки, а measureInWindow нужен именно на живой позиции в момент тапа
+  const heroRef = React.useRef<View>(null);
 
   const progress = useSharedValue(origin ? 0 : 1); // 0 — в позиции ячейки, 1 — на своём месте
   const dx = useSharedValue(0);
@@ -69,20 +85,42 @@ function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) 
   const shown = useSharedValue(origin ? 0 : 1); // до замера не показываем, иначе мигнёт на финальном месте
   const hover = useSharedValue(0); // парение героя (эталон .hero .im: hov 4.5s ease-in-out infinite)
 
-  // Парение стартует ПОСЛЕ «перелёта» из сетки (иначе смешается с ним и собьёт замер),
-  // а при обычном открытии карты — сразу
-  React.useEffect(() => {
-    hover.value = withDelay(
-      origin ? FLY_MS : 0,
-      withRepeat(
-        withSequence(
-          withTiming(-8, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
-          withTiming(0, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+  const openLightbox = () => {
+    // хотфикс дефект 2: парение замирает СНАЧАЛА, замер — ПОТОМ. Копия карты в лайтбоксе летит
+    // назад именно в эту, замеренную здесь позицию; если источник продолжит парить, к моменту
+    // посадки копии он сместится, и в конце полёта на экране на миг видны две карты со сдвигом
+    cancelAnimation(hover);
+    heroRef.current?.measureInWindow((x, y, w, h) => onOpen({ x, y, w, h }));
+  };
+
+  // Запуск/перезапуск цикла парения — общий код для монтирования и для закрытия просмотра
+  // (правило проекта «2+ раза → выносить»)
+  const startHover = React.useCallback(
+    (delayMs: number) => {
+      hover.value = withDelay(
+        delayMs,
+        withRepeat(
+          withSequence(
+            withTiming(-8, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+            withTiming(0, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+          ),
+          -1,
         ),
-        -1,
-      ),
-    );
-  }, [hover, origin]);
+      );
+    },
+    [hover],
+  );
+
+  // Парение стартует ПОСЛЕ «перелёта» из сетки при монтировании (иначе смешается с ним
+  // и собьёт замер), при обычном открытии карты — сразу; на время полноэкранного просмотра
+  // остановлено (cancelAnimation в openLightbox выше, ДО замера) и перезапускается, когда
+  // просмотр закрылся (hidden: true → false)
+  const everStarted = React.useRef(false);
+  React.useEffect(() => {
+    if (hidden) return; // уже заморожено синхронно в openLightbox
+    startHover(everStarted.current ? 0 : origin ? FLY_MS : 0);
+    everStarted.current = true;
+  }, [hidden, origin, startHover]);
 
   const onLayout = () => {
     if (!origin) return;
@@ -117,16 +155,32 @@ function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) 
   });
 
   return (
-    // тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень
-    <Animated.View
-      ref={ref}
-      onLayout={onLayout}
-      style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
-    >
-      <View style={[st.imClip, { borderColor: t.frame }]}>
-        <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
-      </View>
-    </Animated.View>
+    // heroRef — на новом обычном View вокруг героя (collapsable={false}, иначе Android
+    // схлопнёт узел и measureInWindow ничего не вернёт); Pressable — тап открывает лайтбокс
+    <View ref={heroRef} collapsable={false}>
+      <Pressable
+        onPress={openLightbox}
+        accessibilityRole="imagebutton"
+        accessibilityLabel={tr('card.viewerOpen')}
+      >
+        {/* хотфикс дефект 2: на время просмотра источник прячется отдельной обёрткой-View,
+            а не полем fly-стиля — opacity внутри анимированного стиля уже занята значением
+            shown, и порядок слияния animated- и plain-стилей по одному ключу в одном массиве
+            не гарантирован. Копия карты в этот момент летит в модалке (CardLightbox) */}
+        <View style={hidden ? st.hidden : undefined}>
+          {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
+          <Animated.View
+            ref={ref}
+            onLayout={onLayout}
+            style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
+          >
+            <View style={[st.imClip, { borderColor: t.frame }]}>
+              <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
+            </View>
+          </Animated.View>
+        </View>
+      </Pressable>
+    </View>
   );
 }
 
@@ -140,6 +194,8 @@ export default function CardDetail() {
   const [origin] = React.useState(() => takeCardOrigin(id ?? ''));
   // активная вкладка сферы значения — не персистится, при каждом открытии страницы сброс на «Общее»
   const [sphere, setSphere] = React.useState<SphereKey>('general');
+  // позиция героя в момент тапа — открывает полноэкранный просмотр карты (спека 14)
+  const [lbOrigin, setLbOrigin] = React.useState<Rect | null>(null);
   const fade = useSharedValue(1);
   // Хуки должны вызываться до условного return, иначе нарушится их порядок между рендерами.
   // Селектор возвращает примитив (id карты, а не саму функцию todayDraw), иначе стор не
@@ -238,10 +294,10 @@ export default function CardDetail() {
       >
         <View style={st.hero}>
           {origin ? (
-            <HeroImage cardId={card.id} origin={origin} />
+            <HeroImage cardId={card.id} origin={origin} hidden={lbOrigin !== null} onOpen={setLbOrigin} />
           ) : (
             <FadeUp index={0}>
-              <HeroImage cardId={card.id} origin={null} />
+              <HeroImage cardId={card.id} origin={null} hidden={lbOrigin !== null} onOpen={setLbOrigin} />
             </FadeUp>
           )}
           <FadeUp index={0} style={{ flex: 1 }}>
@@ -331,12 +387,15 @@ export default function CardDetail() {
           </FadeUp>
         )}
       </ScrollView>
+      <CardLightbox cardId={card.id} origin={lbOrigin} onClose={() => setLbOrigin(null)} />
     </View>
   );
 }
 
 const st = StyleSheet.create({
   hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start' },
+  // хотфикс дефект 2: прячет живой источник на время полноэкранного просмотра
+  hidden: { opacity: 0 },
   // виньетка = тёплое свечение вокруг карты; в эталоне `.hero .im`: box-shadow 0 18px 40px var(--glow).
   // Значение берём напрямую из CSS макета — boxShadow принимает ту же синтаксическую форму
   imShadow: {

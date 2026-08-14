@@ -40,7 +40,8 @@ export const resources = {
         keywords: "Ключевые слова", soon: "Текст готовится", backAll: "Карты", backToday: "Сегодня",
         backProfile: "Профиль", todayHighlight: "Ваша карта сегодня",
         tabGeneral: "Общее", sphereLove: "В любви", sphereCareer: "В работе", sphereFinances: "В финансах", sphereHealth: "Для здоровья",
-        resonated: "отзывалась {{n}}",
+        resonated: "отзывалась {{n}}", tapToClose: "НАЖМИТЕ, ЧТОБЫ ЗАКРЫТЬ",
+        viewerClose: "Закрыть просмотр", viewerOpen: "Рассмотреть карту",
       },
       // экран курса — «путь» (спека 07); числительные плюрализацией, иначе «1 УРОКОВ»
       course: {
@@ -256,7 +257,8 @@ export const resources = {
         keywords: "Keywords", soon: "Text in progress", backAll: "Cards", backToday: "Today",
         backProfile: "Profile", todayHighlight: "Your card today",
         tabGeneral: "General", sphereLove: "In love", sphereCareer: "At work", sphereFinances: "In finances", sphereHealth: "For health",
-        resonated: "resonated {{n}}",
+        resonated: "resonated {{n}}", tapToClose: "TAP TO CLOSE",
+        viewerClose: "Close viewer", viewerOpen: "View card",
       },
       course: {
         title: "Course",
