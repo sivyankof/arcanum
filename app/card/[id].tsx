@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -265,6 +265,8 @@ export default function CardDetail() {
 
   const activeSphere = SPHERES.find((s) => s.key === sphere)!;
   const sphereBlock = blockOf(sphere);
+  // перевёрнутая приписка внутри сферы (спека 25): у «Общего» такого понятия нет
+  const sphereReversed = sphere === 'general' ? null : blockOf(`${sphere}_reversed`);
   const reversed = blockOf('reversed');
   const dayCard = blockOf('day_card');
   const symbolism = blockOf('symbolism');
@@ -362,9 +364,18 @@ export default function CardDetail() {
           })}
         </FadeUp>
 
-        {/* блок активной сферы: заголовок и текст гаснут/проявляются при смене вкладки */}
+        {/* блок активной сферы: заголовок и текст гаснут/проявляются при смене вкладки.
+            Перевёрнутая приписка (спека 25) — children, попадает под тот же fade бесплатно */}
         <FadeUp index={idxSphere}>
-          <Block title={tr(activeSphere.blockKey)} text={sphereBlock.text} todo={sphereBlock.todo} contentStyle={fadeStyle} />
+          <Block title={tr(activeSphere.blockKey)} text={sphereBlock.text} todo={sphereBlock.todo} contentStyle={fadeStyle}>
+            {sphereReversed && !sphereReversed.todo && (
+              <>
+                <View style={[st.reversedDivider, { backgroundColor: t.line }]} />
+                <Txt style={[st.reversedLabel, { color: t.muted }]}>{tr('card.reversed').toUpperCase()}</Txt>
+                <Text style={[st.reversedText, { color: t.muted }]}>{sphereReversed.text}</Text>
+              </>
+            )}
+          </Block>
         </FadeUp>
 
         {/* постоянные блоки — всегда видны, порядок по product-spec §3 */}
@@ -425,4 +436,8 @@ const st = StyleSheet.create({
   // Подложка-фон под тень (как раньше требовали старые shadow*-пропы) больше не нужна
   tabFill: { ...StyleSheet.absoluteFillObject, borderRadius: 11, overflow: 'hidden' },
   tabLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 0.4, textAlign: 'center' },
+  // приписка «Перевёрнутая» внутри сферы (спека 25): разделитель + мини-заголовок + текст
+  reversedDivider: { height: 1, marginTop: 12 },
+  reversedLabel: { fontSize: 9, letterSpacing: 2.5, marginTop: 10 },
+  reversedText: { fontFamily: fonts.display, fontSize: 15, lineHeight: 22, marginTop: 6 },
 });

@@ -94,7 +94,8 @@ KW = {
               ["completion", "wholeness", "achievement", "travel"]),
 }
 
-BLOCKS = ["general", "reversed", "love", "career", "finances", "health", "day_card", "symbolism"]
+BLOCKS = ["general", "reversed", "love", "career", "finances", "health", "day_card", "symbolism",
+          "love_reversed", "career_reversed", "finances_reversed", "health_reversed"]
 
 def clean(s: str) -> str:
     return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", s or "")).strip()
@@ -140,9 +141,12 @@ def main():
             "waite_description": clean(c.get("desc")),
             "attribution": "A.E. Waite, The Pictorial Key to the Tarot (1911), public domain; via tarot-api (MIT)",
         }
-        card["content"] = (prev or {}).get(
-            "content", {b: {"ru": "", "en": "", "status": "todo"} for b in BLOCKS}
-        )
+        content = dict((prev or {}).get("content", {}))
+        # спека 25: недостающие ключи BLOCKS дописываются пустыми todo-блоками —
+        # схема сама чинится при будущих пересборках (например, когда в BLOCKS добавят новый блок)
+        for b in BLOCKS:
+            content.setdefault(b, {"ru": "", "en": "", "status": "todo"})
+        card["content"] = content
         out.append(card)
 
     order = {"major": 0, "wands": 1, "cups": 2, "swords": 3, "pentacles": 4}
