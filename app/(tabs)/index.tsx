@@ -17,6 +17,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
 import { CardBack } from '../../src/components/CardBack';
+import { CardLightbox } from '../../src/components/CardLightbox';
 import { ConfirmDialog } from '../../src/components/ConfirmDialog';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
@@ -27,6 +28,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Sparks } from '../../src/components/Sparks';
 import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
+import type { Rect } from '../../src/lib/cardTransition';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { daysAgoISO, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
@@ -178,6 +180,11 @@ export default function TodayScreen() {
   );
   const scrollRef = useTabTopRef<ScrollView>();
 
+  // полноэкранный просмотр карты дня (спека 14): origin — прямоугольник сцены на момент тапа,
+  // sceneRef меряет его через measureInWindow (собственная система координат модалки)
+  const sceneRef = React.useRef<View>(null);
+  const [lbOrigin, setLbOrigin] = React.useState<Rect | null>(null);
+
   // час пересчитываем при возврате на таб, а не таймером каждую минуту: сидеть в приложении
   // ровно в 17:59:59 — не тот случай, ради которого стоит держать интервал
   const [hour, setHour] = React.useState(() => new Date().getHours());
@@ -265,7 +272,11 @@ export default function TodayScreen() {
     withDelay(delay, withTiming(1, { duration: REVEAL_MS, easing: EASE, reduceMotion: ReduceMotion.System }));
 
   const onDraw = () => {
-    if (drawn) return;
+    if (drawn) {
+      // карта уже открыта — тап берёт её «в руки» (спека 14; до переворота тап открывает карту дня)
+      sceneRef.current?.measureInWindow((x, y, w, h) => setLbOrigin({ x, y, w, h }));
+      return;
+    }
     const prevStreak = streak;
     hapticReveal();
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
@@ -351,7 +362,7 @@ export default function TodayScreen() {
         {/* сцена с картой */}
         <FadeUp index={3}>
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
-          <View style={{ width: CARD_W, height: CARD_H }}>
+          <View ref={sceneRef} collapsable={false} style={{ width: CARD_W, height: CARD_H }}>
             {/* кольца позади карты */}
             <Ring size={RING_A} duration={70000} opacity={0.55} star="✦" starSize={8} />
             <Ring size={RING_B} duration={100000} reverse opacity={0.3} star="✧" starSize={6} />
@@ -471,6 +482,7 @@ export default function TodayScreen() {
           setPreludeOpen(false);
         }}
       />
+      <CardLightbox cardId={card.id} origin={lbOrigin} onClose={() => setLbOrigin(null)} />
     </View>
   );
 }
