@@ -69,6 +69,7 @@ function HeroImage({
   onOpen: (r: Rect) => void;
 }) {
   const t = useTheme();
+  const { t: tr } = useTranslation();
   const ref = useAnimatedRef<Animated.View>();
   // отдельный обычный ref для полноэкранного просмотра (спека 14): useAnimatedRef выше занят
   // перелётом из сетки, а measureInWindow нужен именно на живой позиции в момент тапа
@@ -136,7 +137,11 @@ function HeroImage({
     // heroRef — на новом обычном View вокруг героя (collapsable={false}, иначе Android
     // схлопнёт узел и measureInWindow ничего не вернёт); Pressable — тап открывает лайтбокс
     <View ref={heroRef} collapsable={false}>
-      <Pressable onPress={openLightbox}>
+      <Pressable
+        onPress={openLightbox}
+        accessibilityRole="imagebutton"
+        accessibilityLabel={tr('card.viewerOpen')}
+      >
         {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
         <Animated.View
           ref={ref}

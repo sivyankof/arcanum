@@ -9,10 +9,10 @@ import { setStatusBarHidden } from 'expo-status-bar';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, {
   Easing, Extrapolation, interpolate, ReduceMotion, runOnJS, useAnimatedStyle, useReducedMotion,
-  useSharedValue, withDelay, withRepeat, withSequence, withTiming,
+  useSharedValue, withDelay, withRepeat, withSequence, withSpring, withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardBack } from './CardBack';
@@ -63,6 +63,9 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
   const prog = useSharedValue(0);
   // 0 — открытие/просмотр, 1 — карта долетела назад (модалка закрывается)
   const closing = useSharedValue(0);
+  // reduce motion: отдельный shared value БЕЗ withTiming(reduceMotion) — тот режим прыгает
+  // к цели мгновенно, а спека требует простой fade на открытии/закрытии (I2)
+  const fade = useSharedValue(1);
 
   const open = origin !== null;
 
@@ -85,19 +88,45 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     };
   }, [origin, viewW, viewH]);
 
+  // зум и пан — состояние жестов (спека 14, задача 5); объявлены до эффекта открытия ниже,
+  // потому что C2 сбрасывает их прямо там
+  const zoom = useSharedValue(1);
+  const savedZoom = useSharedValue(1);
+  const panX = useSharedValue(0);
+  const panY = useSharedValue(0);
+  const savedPan = useSharedValue({ x: 0, y: 0 });
+
   React.useEffect(() => {
     if (!open) return;
     setStatusBarHidden(true, 'fade');
     hapticTap(); // Light на старте (motion-spec §15)
     prog.value = 0;
     closing.value = 0;
-    prog.value = withTiming(
-      1,
-      { duration: OPEN_MS, easing: OPEN_EASE, reduceMotion: ReduceMotion.System },
-      (finished) => { if (finished) runOnJS(hapticSoft)(); }, // Soft на посадке карты
-    );
+    // сброс жестов на новую сессию просмотра (C2): без этого зум/пан «утекают» из прошлой
+    // сессии — двойной тап ×2 → закрыть → следующее открытие стартует уже зумленным
+    zoom.value = 1;
+    savedZoom.value = 1;
+    panX.value = 0;
+    panY.value = 0;
+    savedPan.value = { x: 0, y: 0 };
+    if (reduceMotion) {
+      // reduce motion: без полёта и оборота — карта сразу в конечном состоянии,
+      // появление — простым fade (I2), а не мгновенным прыжком withTiming(reduceMotion)
+      prog.value = 1;
+      fade.value = 0;
+      fade.value = withTiming(1, { duration: 200 }, (finished) => {
+        if (finished) runOnJS(hapticSoft)(); // Soft на посадке карты
+      });
+    } else {
+      fade.value = 1;
+      prog.value = withTiming(
+        1,
+        { duration: OPEN_MS, easing: OPEN_EASE, reduceMotion: ReduceMotion.System },
+        (finished) => { if (finished) runOnJS(hapticSoft)(); }, // Soft на посадке карты
+      );
+    }
     return () => setStatusBarHidden(false, 'fade');
-  }, [open, prog, closing]);
+  }, [open, prog, closing, reduceMotion, zoom, savedZoom, panX, panY, savedPan, fade]);
 
   // качание камеры без сенсора: пока идёт наклон устройства (hasTilt) или включён reduce motion —
   // не запускаем вовсе, эффекты параллакса/качания в этом случае не должны идти вовсе
@@ -124,24 +153,35 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     glare.value = withDelay(GLARE_DELAY, withTiming(1, { duration: GLARE_MS }));
   }, [open, reduceMotion, glare]);
 
-  // зум и пан — состояние жестов (спека 14, задача 5)
-  const zoom = useSharedValue(1);
-  const savedZoom = useSharedValue(1);
-  const panX = useSharedValue(0);
-  const panY = useSharedValue(0);
-  const savedPan = useSharedValue({ x: 0, y: 0 });
-
   const close = React.useCallback(() => {
+    // I5.1: повторный вызов (двойной тап на «назад», второй тап по ✕) не перезапускает
+    // уже идущее закрытие
+    if (closing.value !== 0) return;
+    if (reduceMotion) {
+      // reduce motion: без полёта — простое исчезание (I2); onClose из колбэка fade,
+      // а не closing (closing тут не анимируется, только флагом переключает режим стилей)
+      closing.value = 1;
+      fade.value = withTiming(0, { duration: 200 }, (finished) => {
+        if (finished) runOnJS(onClose)();
+      });
+      return;
+    }
     // полёт стартует с текущего сдвига пальца (Task 6): panY едет в 0 тем же
     // таймингом, что и closing, — сложение с translateY(from.dy*k) даёт один плавный полёт,
     // а не рывок «сначала прыжок в центр, потом полёт».
     panY.value = withTiming(0, CLOSE_ANIM);
+    // C2: зум и пан гасятся тем же таймингом, что и полёт — карта одновременно сжимается
+    // к масштабу героя и улетает на место, без скачка «сначала обнулился зум, потом полетела»
+    panX.value = withTiming(0, CLOSE_ANIM);
+    zoom.value = withTiming(1, CLOSE_ANIM);
     closing.value = withTiming(1, CLOSE_ANIM, (finished) => { if (finished) runOnJS(onClose)(); });
-  }, [closing, panY, onClose]);
+  }, [closing, panX, panY, zoom, fade, reduceMotion, onClose]);
 
   const pinch = Gesture.Pinch()
     .onUpdate((e) => {
       'worklet';
+      // I5: жест живёт только после посадки карты и вне полёта закрытия
+      if (prog.value < 1 || closing.value > 0) return;
       // упругое сопротивление за пределами: излишек входит в четверть силы
       const raw = savedZoom.value * e.scale;
       const clamped = clampZoom(raw);
@@ -149,22 +189,32 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     })
     .onEnd(() => {
       'worklet';
-      zoom.value = withTiming(clampZoom(zoom.value), { duration: 180 });
+      if (prog.value < 1 || closing.value > 0) return;
+      // M4: возврат пружиной (damping 20), а не мгновенным withTiming — та же упругость,
+      // что и у сопротивления на границе
+      zoom.value = withSpring(clampZoom(zoom.value), { damping: 20 });
       savedZoom.value = clampZoom(zoom.value);
       const b = panBounds(savedZoom.value, CARD_W, CARD_H, viewW, viewH);
       const p = clampPan(panX.value, panY.value, b);
-      panX.value = withTiming(p.x, { duration: 180 });
-      panY.value = withTiming(p.y, { duration: 180 });
+      panX.value = withSpring(p.x, { damping: 20 });
+      panY.value = withSpring(p.y, { damping: 20 });
       savedPan.value = p;
     });
 
   const pan = Gesture.Pan()
     .onUpdate((e) => {
       'worklet';
+      // I5: свайп-вниз и панорамирование зумленной карты работают только после посадки
+      // и вне полёта закрытия
+      if (prog.value !== 1 || closing.value !== 0) return;
       if (!swipeCloseAllowed(savedZoom.value)) {
+        // M4: упругое сопротивление за границей пана — та же формула, что у pinch
         const b = panBounds(savedZoom.value, CARD_W, CARD_H, viewW, viewH);
-        const p = clampPan(savedPan.value.x + e.translationX, savedPan.value.y + e.translationY, b);
-        panX.value = p.x; panY.value = p.y;
+        const rawX = savedPan.value.x + e.translationX;
+        const rawY = savedPan.value.y + e.translationY;
+        const p = clampPan(rawX, rawY, b);
+        panX.value = p.x + (rawX - p.x) * 0.25;
+        panY.value = p.y + (rawY - p.y) * 0.25;
       } else {
         // свайп-вниз при ×1 — Task 6 (карта следует за пальцем)
         panY.value = Math.max(0, e.translationY);
@@ -172,8 +222,15 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     })
     .onEnd((e) => {
       'worklet';
+      if (prog.value !== 1 || closing.value !== 0) return;
       if (!swipeCloseAllowed(savedZoom.value)) {
-        savedPan.value = { x: panX.value, y: panY.value };
+        // M4: возврат к границам пружиной (damping 20), savedPan — уже зажатые значения
+        // (снимает упругий излишек, накопленный в onUpdate)
+        const b = panBounds(savedZoom.value, CARD_W, CARD_H, viewW, viewH);
+        const p = clampPan(panX.value, panY.value, b);
+        panX.value = withSpring(p.x, { damping: 20 });
+        panY.value = withSpring(p.y, { damping: 20 });
+        savedPan.value = p;
       } else if (panY.value > SWIPE_CLOSE_PX) {
         runOnJS(close)();
       } else {
@@ -184,21 +241,29 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
   const doubleTap = Gesture.Tap().numberOfTaps(2)
     .onEnd((e) => {
       'worklet';
+      // I5: двойной тап во время полёта открытия/закрытия не должен растить/сбрасывать карту
+      if (prog.value < 1 || closing.value > 0) return;
       const target = doubleTapTarget(savedZoom.value);
       const b = panBounds(target, CARD_W, CARD_H, viewW, viewH);
       // точка тапа в координатах карты относительно её центра (карта в центре экрана при ×1)
       const p = target === ZOOM_MIN
         ? { x: 0, y: 0 }
         : focalTranslate(e.absoluteX - viewW / 2, e.absoluteY - viewH / 2, target, b);
-      zoom.value = withTiming(target, { duration: 220 });
-      panX.value = withTiming(p.x, { duration: 220 });
-      panY.value = withTiming(p.y, { duration: 220 });
+      // M4: та же пружина (damping 20), что у возврата pinch — масштаб и pan-цели те же
+      zoom.value = withSpring(target, { damping: 20 });
+      panX.value = withSpring(p.x, { damping: 20 });
+      panY.value = withSpring(p.y, { damping: 20 });
       savedZoom.value = target;
       savedPan.value = p;
     });
 
   const singleTap = Gesture.Tap()
-    .onEnd(() => { 'worklet'; runOnJS(close)(); });
+    .onEnd(() => {
+      'worklet';
+      // I5: тап на середине полёта открытия/закрытия не щёлкает карту
+      if (prog.value < 1 || closing.value > 0) return;
+      runOnJS(close)();
+    });
 
   // pinch и pan живут одновременно (зумишь и ведёшь одним движением);
   // Exclusive сам заставляет одиночный тап ждать провала двойного
@@ -234,6 +299,9 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
       }
     }
     return {
+      // I2: reduce motion — простой fade вместо полёта; тень (I3, живёт на этом же контейнере
+      // через boxShadow в st.card) гаснет вместе с картой — это правильно
+      opacity: reduceMotion ? fade.value : 1,
       transform: [
         { translateX: from.dx * k },
         { translateY: from.dy * k },
@@ -253,9 +321,15 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     backfaceVisibility: 'hidden' as const,
   }));
   const scrimStyle = useAnimatedStyle(() => {
-    // скрим бледнеет вместе со свайпом — обратная связь «отпустишь — закроется»
-    const fade = interpolate(panY.value, [0, 300], [1, 0.5], Extrapolation.CLAMP);
-    return { opacity: Math.min(prog.value, 1 - closing.value) * fade };
+    // скрим бледнеет вместе со свайпом — обратная связь «отпустишь — закроется»; множитель
+    // считаем только когда свайп-закрытие вообще возможно (I4, тот же гвард, что у rotZ) —
+    // иначе panY это панорамирование зумленной карты, и скрим не должен тускнеть от пана
+    const swipeFade = savedZoom.value === 1 && closing.value === 0
+      ? interpolate(panY.value, [0, 300], [1, 0.5], Extrapolation.CLAMP)
+      : 1;
+    return {
+      opacity: reduceMotion ? fade.value : Math.min(prog.value, 1 - closing.value) * swipeFade,
+    };
   });
   const glareStyle = useAnimatedStyle(() => {
     // противофаза наклону: блик идёт слегка навстречу качанию/наклону устройства
@@ -270,38 +344,48 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
   if (!open) return null;
   return (
     <Modal transparent statusBarTranslucent visible onRequestClose={close}>
-      <Animated.View style={[StyleSheet.absoluteFill, scrimStyle]}>
-        <BlurView intensity={20} tint="dark" style={StyleSheet.absoluteFill} />
-        <View style={[StyleSheet.absoluteFill, { backgroundColor: SCRIM }]} />
-      </Animated.View>
-      {/* pinch+pan одновременно (Simultaneous), одиночный тап закрывает и ждёт провала
-          двойного (Exclusive), оба режима гонятся Race — вся сцена под одним детектором */}
-      <GestureDetector gesture={gestures}>
-        <View style={st.stage}>
-          <Animated.View style={[st.card, cardStyle]}>
-            <Animated.View style={[st.face, frontStyle, { borderColor: t.frame, boxShadow: CARD_SHADOW }]}>
-              <Image source={cardImages[cardId]} style={st.im} contentFit="cover" cachePolicy="memory-disk" />
-              {/* блик: один проход по лицу карты вскоре после посадки (motion-spec §15) */}
-              <Animated.View style={[StyleSheet.absoluteFill, st.glareLayer, glareStyle]}>
-                <LinearGradient
-                  colors={GLARE_COLORS}
-                  locations={GLARE_LOCATIONS}
-                  start={GLARE_ANGLE.start}
-                  end={GLARE_ANGLE.end}
-                  style={StyleSheet.absoluteFill}
-                />
+      {/* C1: RNGH на Android требует свою обёртку ВНУТРИ каждого Modal — Modal рисуется
+          в отдельном нативном окне, и корневая GestureHandlerRootView из _layout.tsx его
+          не покрывает (документация react-native-gesture-handler, раздел про Modal на Android) */}
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Animated.View style={[StyleSheet.absoluteFill, scrimStyle]}>
+          <BlurView intensity={20} tint="dark" style={StyleSheet.absoluteFill} />
+          <View style={[StyleSheet.absoluteFill, { backgroundColor: SCRIM }]} />
+        </Animated.View>
+        {/* pinch+pan одновременно (Simultaneous), одиночный тап закрывает и ждёт провала
+            двойного (Exclusive), оба режима гонятся Race — вся сцена под одним детектором */}
+        <GestureDetector gesture={gestures}>
+          <View style={st.stage}>
+            <Animated.View style={[st.card, cardStyle]}>
+              <Animated.View style={[st.face, frontStyle, { borderColor: t.frame }]}>
+                <Image source={cardImages[cardId]} style={st.im} contentFit="cover" cachePolicy="memory-disk" />
+                {/* блик: один проход по лицу карты вскоре после посадки (motion-spec §15) */}
+                <Animated.View style={[StyleSheet.absoluteFill, st.glareLayer, glareStyle]}>
+                  <LinearGradient
+                    colors={GLARE_COLORS}
+                    locations={GLARE_LOCATIONS}
+                    start={GLARE_ANGLE.start}
+                    end={GLARE_ANGLE.end}
+                    style={StyleSheet.absoluteFill}
+                  />
+                </Animated.View>
+              </Animated.View>
+              <Animated.View style={[st.face, backStyle, { borderColor: t.frame }]}>
+                <CardBack />
               </Animated.View>
             </Animated.View>
-            <Animated.View style={[st.face, backStyle, { borderColor: t.frame }]}>
-              <CardBack />
-            </Animated.View>
-          </Animated.View>
-        </View>
-      </GestureDetector>
-      <Pressable onPress={close} style={[st.x, { top: Math.max(insets.top, 18), borderColor: t.line }]}>
-        <Txt style={{ color: t.muted, fontSize: 14 }}>✕</Txt>
-      </Pressable>
-      <Txt style={[st.hint, { color: t.muted, bottom: insets.bottom + 26 }]}>{tr('card.tapToClose')}</Txt>
+          </View>
+        </GestureDetector>
+        <Pressable
+          onPress={close}
+          style={[st.x, { top: Math.max(insets.top, 18), borderColor: t.line }]}
+          accessibilityRole="button"
+          accessibilityLabel={tr('card.viewerClose')}
+        >
+          <Txt style={{ color: t.muted, fontSize: 14 }}>✕</Txt>
+        </Pressable>
+        <Txt style={[st.hint, { color: t.muted, bottom: insets.bottom + 26 }]}>{tr('card.tapToClose')}</Txt>
+      </GestureHandlerRootView>
     </Modal>
   );
 }
@@ -314,7 +398,10 @@ const st = StyleSheet.create({
   // на родительской сцене st.stage, а не на самой карте, поэтому клик «проваливается» сквозь
   // непрозрачную для указателя карту прямо на сцену — тапы и pan продолжают работать.
   // На устройстве (touch) этого механизма нет, это не дефект жестов, а веб-плоскости.
-  card: { width: CARD_W, height: CARD_H, pointerEvents: 'none' as const },
+  // boxShadow — на этом контейнере, а не на лицевой грани (I3): у грани overflow:'hidden'
+  // (обрезка изображения по borderRadius), и на iOS это срезает собственную тень вчистую —
+  // тот же паттерн, что st.face/st.faceClip в app/(tabs)/index.tsx.
+  card: { width: CARD_W, height: CARD_H, pointerEvents: 'none' as const, boxShadow: CARD_SHADOW },
   face: {
     ...StyleSheet.absoluteFillObject,
     borderRadius: radius.l, borderWidth: 1, overflow: 'hidden',
@@ -325,5 +412,10 @@ const st = StyleSheet.create({
     position: 'absolute', right: 18, width: 32, height: 32, borderRadius: 16,
     borderWidth: 1, alignItems: 'center', justifyContent: 'center',
   },
-  hint: { position: 'absolute', width: '100%', textAlign: 'center', fontSize: 10, letterSpacing: 2.5 },
+  // M3: подсказка лежит поверх GestureDetector — без pointerEvents:'none' Txt перехватывает
+  // тап в своей полосе, и одиночный тап там не закрывает просмотр
+  hint: {
+    position: 'absolute', width: '100%', textAlign: 'center', fontSize: 10, letterSpacing: 2.5,
+    pointerEvents: 'none' as const,
+  },
 });

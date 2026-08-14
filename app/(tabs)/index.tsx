@@ -184,6 +184,13 @@ export default function TodayScreen() {
   // sceneRef меряет его через measureInWindow (собственная система координат модалки)
   const sceneRef = React.useRef<View>(null);
   const [lbOrigin, setLbOrigin] = React.useState<Rect | null>(null);
+  // M2: id карты фиксируется на момент открытия отдельно от `card` — после полуночи `card`
+  // пересчитывается (новая карта дня), и без этого картинка в уже открытом просмотре
+  // подменилась бы под пользователем
+  const [lbCardId, setLbCardId] = React.useState<string | null>(null);
+  // I6: зеркало открытости просмотра для колбэка таймера прелюдии (см. ниже) — стору и
+  // ре-рендеру он не нужен, поэтому обычный ref, а не state
+  const lbOpenRef = React.useRef(false);
 
   // час пересчитываем при возврате на таб, а не таймером каждую минуту: сидеть в приложении
   // ровно в 17:59:59 — не тот случай, ради которого стоит держать интервал
@@ -274,7 +281,11 @@ export default function TodayScreen() {
   const onDraw = () => {
     if (drawn) {
       // карта уже открыта — тап берёт её «в руки» (спека 14; до переворота тап открывает карту дня)
-      sceneRef.current?.measureInWindow((x, y, w, h) => setLbOrigin({ x, y, w, h }));
+      sceneRef.current?.measureInWindow((x, y, w, h) => {
+        lbOpenRef.current = true; // I6
+        setLbCardId(card.id); // M2: фиксируем id на момент открытия
+        setLbOrigin({ x, y, w, h });
+      });
       return;
     }
     const prevStreak = streak;
@@ -297,9 +308,20 @@ export default function TodayScreen() {
     // карту дня успели сбросить (DEV) и вытянуть заново, пока первый таймер ещё ждал, второй
     // не должен переоткрыть уже отвеченную прелюдию
     if (!pushAsked) {
-      preludeTimer.current = setTimeout(() => {
-        if (!useApp.getState().settings.pushAsked) setPreludeOpen(true);
-      }, FLIP_MS + 600);
+      // I6: если пользователь уже открыл полноэкранный просмотр повторным тапом, показывать
+      // прелюдию нельзя — второй Modal поверх первого (на iOS системный диалог поверх второй
+      // модалки может вовсе не показаться, а переспросить получится только завтра). Пока
+      // просмотр открыт, перевзводим таймер каждые 1500мс и ждём, пока его закроют
+      const tryShowPrelude = () => {
+        if (!useApp.getState().settings.pushAsked) {
+          if (lbOpenRef.current) {
+            preludeTimer.current = setTimeout(tryShowPrelude, 1500);
+          } else {
+            setPreludeOpen(true);
+          }
+        }
+      };
+      preludeTimer.current = setTimeout(tryShowPrelude, FLIP_MS + 600);
     }
   };
 
@@ -482,7 +504,15 @@ export default function TodayScreen() {
           setPreludeOpen(false);
         }}
       />
-      <CardLightbox cardId={card.id} origin={lbOrigin} onClose={() => setLbOrigin(null)} />
+      <CardLightbox
+        cardId={lbCardId ?? card.id}
+        origin={lbOrigin}
+        onClose={() => {
+          lbOpenRef.current = false; // I6
+          setLbOrigin(null);
+          setLbCardId(null);
+        }}
+      />
     </View>
   );
 }
