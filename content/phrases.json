@@ -111,16 +111,16 @@
   ],
   "freeze_saved": [
    {
-    "ru": "Серия {days} цела — пропущенный день укрыла заморозка",
-    "en": "Your streak of {days} is safe — the freeze covered the missed day"
+    "ru": "Пропущенный день укроет заморозка — откройте карту сегодня, и серия {days} продолжится",
+    "en": "A freeze can cover the missed day — open today's card and your {days} streak goes on"
    },
    {
-    "ru": "Заморозка сработала: серия продолжается, карта ждёт ✦",
-    "en": "The freeze did its job — your streak lives on, a card is waiting ✦"
+    "ru": "Заморозка прощает один пропуск. Карта уже ждёт ✦",
+    "en": "One skipped day, forgiven by the freeze. Your card is waiting ✦"
    },
    {
-    "ru": "Вчера прошло без карты, но серию сохранила заморозка",
-    "en": "Yesterday passed without a card, but the freeze kept your streak"
+    "ru": "Вчера прошло без карты — заморозка удержит серию, если вернуться сегодня",
+    "en": "Yesterday passed without a card — return today and the freeze will hold your streak"
    }
   ]
  },

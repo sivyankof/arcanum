@@ -46,4 +46,11 @@ describe('pickPhrase', () => {
   it('работает с вложенным ключом пустых состояний', () => {
     expect(pickPhrase('empty.filter', '2026-08-11', 'ru').length).toBeGreaterThan(0);
   });
+
+  // контракт-тест: опечатка в ключе экрана «Сегодня» (задача 10) молча дала бы '' —
+  // pickPhrase на неизвестном ключе не падает, поэтому только явная проверка длины ловит опечатку
+  it('freeze.saved отдаёт непустой текст на обоих языках', () => {
+    expect(pickPhrase('freeze.saved', '2026-08-11', 'ru').length).toBeGreaterThan(0);
+    expect(pickPhrase('freeze.saved', '2026-08-11', 'en').length).toBeGreaterThan(0);
+  });
 });

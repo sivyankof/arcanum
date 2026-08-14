@@ -25,7 +25,7 @@ export interface PlannedPush {
   phraseKey: string;
   /** Подстановка {card} у вечернего. */
   cardId?: string;
-  /** Подстановка {n} у спасения серии. */
+  /** Подстановка {n} у спасения серии; freeze-пуш несёт то же поле для {days} (push.freeze_saved). */
   n?: number;
 }
 

@@ -231,7 +231,7 @@ const st = StyleSheet.create({
   overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' }, // `.date`
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 }, // `.h2`
   stats: { flexDirection: 'row', gap: 10, marginTop: 14 }, // `.statrow`
-  // сама коробка (`.statbox`) живёт в компоненте StatBox — их уже две, а задача 10 добавит третью
+  // сама коробка (`.statbox`) живёт в компоненте StatBox — коробок три, заморозку добавила задача 10
   gear: {
     position: 'absolute',
     right: spacing.xl,
