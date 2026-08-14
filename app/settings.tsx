@@ -13,8 +13,19 @@ import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
 import { TimePicker } from '../src/components/TimePicker';
 import { Txt } from '../src/components/Txt';
+import {
+  backupFileName,
+  backupSummary,
+  buildBackup,
+  parseBackup,
+  SCHEMA_VERSION,
+  type BackupState,
+  type ParseError,
+} from '../src/lib/backup';
+import { pickBackupText, shareBackup } from '../src/lib/backupIo';
 import { course } from '../src/lib/content';
 import { nextLessonId } from '../src/lib/courseProgress';
+import { formatFullDate, localDateISO } from '../src/lib/dates';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import {
   getPermission,
@@ -28,6 +39,13 @@ import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
 import { spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
+
+// код ошибки parseBackup → ключ текста; тексты в i18n, коды в чистом модуле (приём pushPlan)
+const ERR_TEXT: Record<ParseError, string> = {
+  notBackup: 'settings.importErrNotBackup',
+  newerVersion: 'settings.importErrNewer',
+  corrupt: 'settings.importErrCorrupt',
+};
 
 export default function SettingsScreen() {
   const t = useTheme();
@@ -66,6 +84,15 @@ export default function SettingsScreen() {
 
   const [planText, setPlanText] = React.useState<string | null>(null);
 
+  const restoreBackup = useApp((s) => s.restoreBackup);
+  // импорт: сначала подтверждение со сводкой файла, после — уведомление об исходе.
+  // В notice лежат КЛЮЧИ i18n, а не готовый текст: язык может смениться самим импортом,
+  // и уведомление обязано выйти уже на языке из бэкапа
+  const [importAsk, setImportAsk] = React.useState<
+    { state: BackupState; entries: number; streak: number; dateISO: string } | null
+  >(null);
+  const [notice, setNotice] = React.useState<{ titleKey: string; textKey: string } | null>(null);
+
   // читаемая расшифровка плана: две независимые вещи, путать нельзя.
   // 1) Строки «дата · время · вид» — то, что НАСЧИТАЛ planPushes с теми же входными данными,
   //    что берёт живой планировщик (planInputFromStore — общая сборка с usePushScheduler.ts):
@@ -100,6 +127,34 @@ export default function SettingsScreen() {
     const queued = (await listScheduled()).length;
     const planLines = lines.length ? lines.join('\n') : tr('settings.planEmpty');
     setPlanText(`${tr('settings.queuedCount', { count: queued })}\n\n${planLines}`);
+  };
+
+  const onExport = async () => {
+    try {
+      const file = buildBackup(useApp.getState(), SCHEMA_VERSION, new Date().toISOString());
+      await shareBackup(JSON.stringify(file, null, 2), backupFileName(localDateISO()));
+    } catch (err) {
+      // сбой записи или шаринга не должен молчать: иначе «поделился или нет» неотличимо
+      console.warn('[backup] экспорт не удался:', err);
+      setNotice({ titleKey: 'settings.errTitle', textKey: 'settings.exportErr' });
+    }
+  };
+
+  const onImport = async () => {
+    try {
+      const text = await pickBackupText();
+      if (text === null) return; // передумал в системном пикере — это не ошибка, молчим
+      const parsed = parseBackup(text, SCHEMA_VERSION);
+      if (!parsed.ok) {
+        setNotice({ titleKey: 'settings.errTitle', textKey: ERR_TEXT[parsed.error] });
+        return;
+      }
+      setImportAsk({ state: parsed.state, ...backupSummary(parsed) });
+    } catch (err) {
+      // не прочитался сам файл (права, обрыв) — по смыслу для человека то же «повреждён»
+      console.warn('[backup] импорт не удался:', err);
+      setNotice({ titleKey: 'settings.errTitle', textKey: 'settings.importErrCorrupt' });
+    }
   };
 
   // системное разрешение спрашиваем при входе на экран и при возврате из фона:
@@ -243,6 +298,12 @@ export default function SettingsScreen() {
             </FadeUp>
           </>
         )}
+        <FadeUp index={6}>
+          <SettingsRow icon="share-outline" label={tr('settings.exportData')} value="" onPress={onExport} />
+        </FadeUp>
+        <FadeUp index={6}>
+          <SettingsRow icon="folder-open-outline" label={tr('settings.importData')} value="" onPress={onImport} />
+        </FadeUp>
         {__DEV__ && (
           <>
             <FadeUp index={6}>
@@ -342,6 +403,35 @@ export default function SettingsScreen() {
           confirmTone="accent"
           onConfirm={() => setPlanText(null)}
           onCancel={() => setPlanText(null)}
+        />
+        <ConfirmDialog
+          visible={importAsk !== null}
+          title={tr('settings.importConfirmTitle')}
+          message={
+            importAsk
+              ? tr('settings.importConfirmText', {
+                  date: formatFullDate(importAsk.dateISO, lang),
+                  entries: importAsk.entries,
+                  streak: importAsk.streak,
+                })
+              : ''
+          }
+          confirmLabel={tr('settings.importConfirm')}
+          cancelLabel={tr('settings.importCancel')}
+          onConfirm={() => {
+            if (importAsk) restoreBackup(importAsk.state);
+            setImportAsk(null);
+            setNotice({ titleKey: 'settings.importDoneTitle', textKey: 'settings.importDoneText' });
+          }}
+          onCancel={() => setImportAsk(null)}
+        />
+        <ConfirmDialog
+          visible={notice !== null}
+          title={notice ? tr(notice.titleKey) : ''}
+          message={notice ? tr(notice.textKey) : ''}
+          confirmLabel={tr('settings.ok')}
+          confirmTone="accent"
+          onConfirm={() => setNotice(null)}
         />
       </ScrollView>
     </View>
