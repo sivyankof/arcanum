@@ -1,0 +1,1094 @@
+{
+ "_comment": "Вопросы викторин М4, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
+ "status": "draft",
+ "lessons": [
+  {
+   "lessonId": "m4l1",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Какая стихия у Жезлов и что она означает?",
+      "en": "Which element do Wands belong to, and what does it stand for?"
+     },
+     "options": [
+      {
+       "ru": "Вода: чувства, привязанность, близость",
+       "en": "Water: feelings, attachment, closeness"
+      },
+      {
+       "ru": "Огонь: воля, замысел, действие",
+       "en": "Fire: will, intention, action"
+      },
+      {
+       "ru": "Земля: тело, труд, материальные дела",
+       "en": "Earth: the body, labour, material things"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Жезлы — стихия огня: всё, что зажигает и требует действия прямо сейчас.",
+      "en": "Wands are the element of fire: whatever lights you up and demands action right now."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что советует Туз Жезлов, когда приходит вдохновение?",
+      "en": "What does the Ace of Wands advise when inspiration strikes?"
+     },
+     "options": [
+      {
+       "ru": "Подождать, пока идея дозреет сама",
+       "en": "Wait for the idea to ripen on its own"
+      },
+      {
+       "ru": "Сделать первый конкретный шаг прямо сейчас",
+       "en": "Take one concrete step right now"
+      },
+      {
+       "ru": "Записать идею и вернуться к ней через месяц",
+       "en": "Write the idea down and return to it in a month"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Энергия Туза разгорается в действии, а не в ожидании подходящего момента.",
+      "en": "The Ace's energy catches fire through doing, not through waiting for the right moment."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Двойка Жезлов показывает первый успех. О чём она в первую очередь?",
+      "en": "The Two of Wands shows a first success. What is it mainly about?"
+     },
+     "options": [
+      {
+       "ru": "О планировании и выборе дальнейшего пути",
+       "en": "About planning and choosing the next direction"
+      },
+      {
+       "ru": "О завершении дел и полном отдыхе от забот",
+       "en": "About wrapping up all your tasks and resting fully"
+      },
+      {
+       "ru": "О соперничестве и споре с другими людьми",
+       "en": "About rivalry and arguing with other people"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Мир уже в руках героя, но пока в виде замысла — карта про выбор маршрута, а не про финал.",
+      "en": "The world is already in the figure's hands, but only as a vision — the card is about choosing a route, not an ending."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что на самом деле означает шум и спор в Пятёрке Жезлов?",
+      "en": "What does the noise and argument in the Five of Wands really mean?"
+     },
+     "options": [
+      {
+       "ru": "Серьёзный конфликт, который нужно немедленно прекратить",
+       "en": "A serious conflict that must be stopped immediately"
+      },
+      {
+       "ru": "Тренировочное столкновение мнений — проверка на прочность",
+       "en": "A sparring match of opinions testing your strength"
+      },
+      {
+       "ru": "Знак, что нужно уступить и перестать отстаивать своё",
+       "en": "A sign to give in and stop standing your ground"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Никто не ранен, жезлы подняты вверх: это скорее игра, чем битва, — этап притирки.",
+      "en": "No one is hurt, the wands are raised high: it's more play than battle — a stage of finding your fit."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта перед вами?",
+      "en": "Which card is this?"
+     },
+     "options": [
+      {
+       "ru": "Восьмёрка Жезлов",
+       "en": "Eight of Wands"
+      },
+      {
+       "ru": "Двойка Жезлов",
+       "en": "Two of Wands"
+      },
+      {
+       "ru": "Тройка Жезлов",
+       "en": "Three of Wands"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Три жезла, укреплённые в земле, и корабли в море: человек смотрит, как его замыслы плывут к цели, — результаты уже в пути.",
+      "en": "Three wands planted in the ground and ships at sea: the figure watches his plans sail toward their goal — the results are already on their way."
+     },
+     "cardId": "w03"
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l2",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что говорит Шестёрка Жезлов о признанном успехе?",
+      "en": "What does the Six of Wands say about recognised success?"
+     },
+     "options": [
+      {
+       "ru": "Его можно принять без ложной скромности",
+       "en": "You can accept it without false modesty"
+      },
+      {
+       "ru": "Его лучше держать в тайне, чтобы не сглазить",
+       "en": "It's better kept quiet, or you'll jinx it"
+      },
+      {
+       "ru": "Он означает, что дальше будет только легче",
+       "en": "It means everything from here on will be easy"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Всадник возвращается с лавровым венком — заслуженные лавры принимают открыто, а не прячут.",
+      "en": "The rider returns wearing a laurel wreath — earned laurels are accepted openly, not hidden."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Как лучше вести себя, когда позиция под давлением (Семёрка Жезлов)?",
+      "en": "What's the best response when your position is under pressure (Seven of Wands)?"
+     },
+     "options": [
+      {
+       "ru": "Извиняться и оправдываться, чтобы избежать конфликта",
+       "en": "Apologise and over-explain to avoid conflict"
+      },
+      {
+       "ru": "Спокойно и твёрдо отстаивать то, что вам дорого",
+       "en": "Calmly and firmly defend what matters to you"
+      },
+      {
+       "ru": "Немедленно уступить, чтобы сохранить силы",
+       "en": "Give in immediately to save your strength"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Позиция выше даёт преимущество: побеждает тот, кто не отступает и не тратит силы на оправдания.",
+      "en": "Higher ground gives the edge: the one who doesn't step back or waste energy explaining is the one who wins."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что советует Восьмёрка Жезлов, когда события вдруг ускоряются?",
+      "en": "What does the Eight of Wands advise when things suddenly speed up?"
+     },
+     "options": [
+      {
+       "ru": "Притормозить и перепроверить всё по десять раз",
+       "en": "Slow down and double-check everything ten times"
+      },
+      {
+       "ru": "Остановить всё и дождаться более удобного момента",
+       "en": "Stop everything and wait for a better moment"
+      },
+      {
+       "ru": "Не медлить: отвечать быстро и двигаться с потоком",
+       "en": "Don't stall: answer quickly and move with the flow"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Жезлы летят с наклоном к земле — полёт завершается, и лучший ответ на попутный ветер — не тормозить.",
+      "en": "The wands tilt earthward — the flight is ending, and the best answer to a tailwind is not to slow down."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Девятка Жезлов напоминает: усталость на последнем рубеже — это повод…",
+      "en": "The Nine of Wands reminds us: fatigue at the last stand is a reason to…"
+     },
+     "options": [
+      {
+       "ru": "сразу всё бросить, раз сил не осталось",
+       "en": "drop everything at once, since your strength is gone"
+      },
+      {
+       "ru": "держаться до конца — и проверить, реальна ли угроза",
+       "en": "hold the line — and check the threat is real"
+      },
+      {
+       "ru": "искать нового противника, чтобы доказать свою силу",
+       "en": "look for a new opponent to prove your strength"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Восемь жезлов за спиной — защита из пройденных испытаний; вопрос в том, ждёт ли вас ещё один бой.",
+      "en": "The eight wands behind him are defence built from past trials; the question is whether another battle is really coming."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта перед вами?",
+      "en": "Which card is this?"
+     },
+     "options": [
+      {
+       "ru": "Десятка Жезлов",
+       "en": "Ten of Wands"
+      },
+      {
+       "ru": "Девятка Жезлов",
+       "en": "Nine of Wands"
+      },
+      {
+       "ru": "Пятёрка Жезлов",
+       "en": "Five of Wands"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Человек несёт десять жезлов, прижав их к груди, и за ними не видит дороги — успех обернулся тяжестью.",
+      "en": "A man carries ten wands pressed to his chest and can't see the road past them — success has turned into weight."
+     },
+     "cardId": "w10"
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l3",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "О чём говорит Туз Кубков?",
+      "en": "What does the Ace of Cups tell you?"
+     },
+     "options": [
+      {
+       "ru": "Чувства нужно сначала проверить и только потом впустить",
+       "en": "Feelings must be tested first and only then let in"
+      },
+      {
+       "ru": "Новое чувство приходит само — и его стоит просто принять",
+       "en": "A new feeling arrives on its own — just accept it"
+      },
+      {
+       "ru": "Хорошее достаётся только тем, кто этого добивается трудом",
+       "en": "Good things come only to those who work hard for them"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Туз — чаша, которая переполняется сама, без всякого усилия: рука из облака просто протягивает дар, и его нужно принять, а не заслуживать.",
+      "en": "The Ace is a chalice overflowing on its own, with no effort at all: a hand from a cloud simply offers the gift, and it's meant to be accepted, not earned."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что подчёркивает Двойка Кубков в отношениях?",
+      "en": "What does the Two of Cups highlight in a relationship?"
+     },
+     "options": [
+      {
+       "ru": "Взаимность: то, что вы отдаёте, возвращается обратно",
+       "en": "Mutuality — what you give comes back to you"
+      },
+      {
+       "ru": "Крепче тот союз, где один вкладывается сильнее другого",
+       "en": "A bond grows stronger when one partner gives more"
+      },
+      {
+       "ru": "Главное в паре — терпеливо молчать о своих чувствах",
+       "en": "What matters most in a couple is keeping your feelings to yourself"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Юноша и девушка меняются чашами на равных — карта про честный обмен, а не про то, кто вложился сильнее.",
+      "en": "The young man and woman trade cups equally — the card is about honest exchange, not about who invested more."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "В чём ловушка Четвёрки Кубков?",
+      "en": "What is the trap of the Four of Cups?"
+     },
+     "options": [
+      {
+       "ru": "Человеку в этой карте нужно больше вещей и впечатлений",
+       "en": "The man in this card simply wants more things and thrills"
+      },
+      {
+       "ru": "Три имеющиеся чаши стоит поскорее разбить и забыть",
+       "en": "The three existing cups should be smashed and forgotten"
+      },
+      {
+       "ru": "Скучающий взгляд не замечает предложенную новую чашу",
+       "en": "A bored gaze fails to notice the new cup being offered"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Юноша сидит, скрестив руки, и не видит четвёртую чашу, протянутую из облака: скука — в застывшем взгляде, а не в мире вокруг.",
+      "en": "The young man sits with arms crossed and doesn't see the fourth cup offered from the cloud: the boredom is in his frozen gaze, not in the world around him."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Как Пятёрка Кубков предлагает обращаться с потерей?",
+      "en": "How does the Five of Cups suggest handling loss?"
+     },
+     "options": [
+      {
+       "ru": "Не задерживаться на горе, а сразу двигаться дальше",
+       "en": "Skip the grief entirely and simply move on right away"
+      },
+      {
+       "ru": "Погоревать честно, заметив две целые чаши за спиной",
+       "en": "Grieve honestly, noticing the two full cups behind you"
+      },
+      {
+       "ru": "Считать, что пролитые чаши ещё можно наполнить заново",
+       "en": "Assume the spilled cups can still be refilled somehow"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Карта не торопит горевание, но напоминает обернуться: за спиной фигуры стоят две полные чаши — опора, которая никуда не делась.",
+      "en": "The card doesn't rush grief, but it reminds you to turn around: two full cups stand behind the figure — support that never went anywhere."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта показана на картинке?",
+      "en": "Which card is shown in the picture?"
+     },
+     "options": [
+      {
+       "ru": "Пятёрка Кубков",
+       "en": "Five of Cups"
+      },
+      {
+       "ru": "Четвёрка Кубков",
+       "en": "Four of Cups"
+      },
+      {
+       "ru": "Тройка Кубков",
+       "en": "Three of Cups"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Чёрный плащ, три опрокинутые чаши, река и мост вдали — это Пятёрка Кубков. Четвёрка и Тройка выглядят иначе: скрещённые руки под деревом и три поднятые чаши в саду.",
+      "en": "The black cloak, three spilled cups, the river and the bridge beyond — this is the Five of Cups. The Four and the Three look different: arms crossed beneath a tree, three cups raised in a garden."
+     },
+     "cardId": "c05"
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l4",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Как лучше использовать тепло Шестёрки Кубков?",
+      "en": "What's the best way to use the warmth of the Six of Cups?"
+     },
+     "options": [
+      {
+       "ru": "Прятаться в прошлом от сегодняшних забот и решений",
+       "en": "Hiding in the past from today's concerns and choices"
+      },
+      {
+       "ru": "Пользоваться теплом воспоминаний, не убегая в них",
+       "en": "Drawing on the warmth of memory without living in it"
+      },
+      {
+       "ru": "Отказаться от воспоминаний вовсе, чтобы не размякнуть",
+       "en": "Cutting memories off entirely so they don't soften you"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Карта разрешает поностальгировать, но предупреждает: воспоминания хороши как источник тепла, а не убежище от сегодняшнего дня.",
+      "en": "The card allows for nostalgia but warns: memories are good as a source of warmth, not as a hiding place from today."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "О чём предупреждает Семёрка Кубков?",
+      "en": "What does the Seven of Cups warn about?"
+     },
+     "options": [
+      {
+       "ru": "Пока вы перебираете фантазии, жизнь стоит на месте",
+       "en": "While you sort through fantasies, life stalls"
+      },
+      {
+       "ru": "Мечтать вредно, поэтому от всех планов лучше отказаться",
+       "en": "Dreaming is harmful, so every plan is better dropped"
+      },
+      {
+       "ru": "Все семь видений одинаково стоит воплотить по очереди",
+       "en": "All seven visions are equally worth chasing in turn"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Шесть чаш держат соблазны — любовь, успех, богатство, славу, страсти, искушение, — и только седьмая, под покрывалом, скрывает то, что вам действительно нужно. Карта не против мечтаний: она против того, чтобы перебирать их вместо выбора.",
+      "en": "Six cups hold temptations — love, success, wealth, fame, passion, lure — and only the seventh, under its veil, hides what you actually need. The card isn't against dreaming: it's against sorting through dreams instead of choosing."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Почему уход Восьмёрки Кубков — не поражение?",
+      "en": "Why isn't the departure in the Eight of Cups a defeat?"
+     },
+     "options": [
+      {
+       "ru": "Потому что там и правда было очень плохо всё это время",
+       "en": "Because things there really were quite bad the whole time"
+      },
+      {
+       "ru": "Потому что оставленное никогда не имело значения вовсе",
+       "en": "Because what he leaves behind never truly mattered at all"
+      },
+      {
+       "ru": "Потому что путник ищет смысл, а не бежит от плохого",
+       "en": "Because he's walking toward meaning, not away from something bad"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Путник уходит от восьми аккуратно составленных чаш не потому, что там было плохо, а потому что душа зовёт дальше, — это взросление, а не бегство.",
+      "en": "The traveller leaves eight neatly stacked cups not because things were bad there, but because something within calls him onward — this is growth, not escape."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что на самом деле показывает Девятка Кубков?",
+      "en": "What does the Nine of Cups really show?"
+     },
+     "options": [
+      {
+       "ru": "Что желаемое само падает с неба, без вашего участия",
+       "en": "That what you want simply falls from the sky on its own"
+      },
+      {
+       "ru": "Умение честно радоваться тому, что уже есть, и делиться этим",
+       "en": "The skill of enjoying what's there, and sharing it"
+      },
+      {
+       "ru": "Что радоваться лучше тихо и наедине с собой",
+       "en": "That joy is better kept quiet and private"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Хозяин на картинке сидит перед готовым изобилием — карта про удовлетворение настоящим и умение замечать хорошее, а не про мечту, случившуюся по волшебству.",
+      "en": "The host in the picture sits before ready-made abundance — the card is about satisfaction with what's real and noticing the good, not about a wish granted by magic."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта показана на картинке?",
+      "en": "Which card is shown in the picture?"
+     },
+     "options": [
+      {
+       "ru": "Десятка Кубков",
+       "en": "Ten of Cups"
+      },
+      {
+       "ru": "Шестёрка Кубков",
+       "en": "Six of Cups"
+      },
+      {
+       "ru": "Девятка Кубков",
+       "en": "Nine of Cups"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Радуга из десяти кубков, пара с поднятыми руками и танцующие дети у дома на холме — это Десятка Кубков, карта состоявшегося семейного счастья.",
+      "en": "A rainbow of ten cups, a couple with raised arms, and dancing children by a hilltop home — this is the Ten of Cups, the card of happiness already here."
+     },
+     "cardId": "c10"
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l5",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Чем стихия Мечей отличается от Жезлов и Кубков?",
+      "en": "How does the element of Swords differ from Wands and Cups?"
+     },
+     "options": [
+      {
+       "ru": "Она сразу зовёт к делу, как Жезлы, и не оставляет времени думать",
+       "en": "It calls you to act at once, like Wands, leaving no time to think"
+      },
+      {
+       "ru": "Она про мысль, слово и цену ясности для разума",
+       "en": "It's about thought, words, and the price of clarity"
+      },
+      {
+       "ru": "Она про деньги и заботу о теле, как Пентакли",
+       "en": "It's about money and the body, like Pentacles"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Мечи — стихия воздуха: ясность и слово стоят в центре, а не порыв к делу или забота о материальном.",
+      "en": "Swords is the element of air: clarity and words sit at its centre, not an urge to act or care for material things."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что означает повязка на глазах героини Двойки Мечей?",
+      "en": "What does the blindfold on the Two of Swords figure mean?"
+     },
+     "options": [
+      {
+       "ru": "Полное доверие интуиции, а разум можно на время отключить",
+       "en": "Total trust in intuition, with reason switched off for a while"
+      },
+      {
+       "ru": "Наказание, которое кто-то навязал ей против воли",
+       "en": "A punishment someone forced on her against her will"
+      },
+      {
+       "ru": "Избегание выбора: мнимое равновесие, пока не видно фактов и чувств",
+       "en": "Avoiding a choice: a calm that lasts only while you look away"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Повязку никто не завязывал силой — её можно снять в любой момент, как только вы решитесь посмотреть на факты и чувства сразу.",
+      "en": "No one tied the blindfold by force — it can come off the moment you're ready to look at both the facts and the feelings at once."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта показывает вспышку ясности после путаницы?",
+      "en": "Which card shows a flash of clarity after confusion?"
+     },
+     "options": [
+      {
+       "ru": "Туз Мечей",
+       "en": "Ace of Swords"
+      },
+      {
+       "ru": "Тройка Мечей",
+       "en": "Three of Swords"
+      },
+      {
+       "ru": "Четвёрка Мечей",
+       "en": "Four of Swords"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Рука из облака держит меч, увенчанный короной, — образ внезапного и честного понимания сути.",
+      "en": "A hand from a cloud holds a crowned sword — the image of a sudden, honest grasp of what matters."
+     },
+     "cardId": "s01"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Тройка Мечей говорит о боли. Что при этом важно помнить?",
+      "en": "The Three of Swords is about pain. What's important to remember?"
+     },
+     "options": [
+      {
+       "ru": "Признанная боль постепенно отпускает, как дождь на карте",
+       "en": "Acknowledged pain gradually eases, like the rain in the picture"
+      },
+      {
+       "ru": "Боль лучше скрывать ото всех и делать вид, что всё в порядке",
+       "en": "Pain is best hidden and never spoken about"
+      },
+      {
+       "ru": "Нужно сразу найти виноватого и свести счёты",
+       "en": "You should immediately find someone to blame and settle the score"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Карта не говорит, что боли не будет, — она показывает дождь, который заканчивается, если позволить себе прожить боль, а не прятать её.",
+      "en": "The card doesn't say there will be no pain — it shows rain that ends once you let yourself feel the pain instead of hiding it."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "В чём урок Пятёрки Мечей?",
+      "en": "What is the lesson of the Five of Swords?"
+     },
+     "options": [
+      {
+       "ru": "Побеждать нужно любой ценой, чего бы это ни стоило",
+       "en": "Win at any cost, no matter what it costs you"
+      },
+      {
+       "ru": "Конфликтов нужно избегать всегда, даже если вы правы",
+       "en": "Always avoid conflict, even when you're right"
+      },
+      {
+       "ru": "Не каждая победа стоит того, чем за неё платят",
+       "en": "Not every victory is worth what it costs"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Пятёрка не запрещает спорить — она спрашивает о цене: что осталось у победителя, кроме собранных мечей?",
+      "en": "The Five doesn't forbid arguing — it asks about the price: what does the winner have left besides the swords he has gathered?"
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l6",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Шестёрка Мечей продолжает путь после Пятёрки. О чём она?",
+      "en": "The Six of Swords continues the journey after the Five. What is it about?"
+     },
+     "options": [
+      {
+       "ru": "О новой победе, которая наконец расставит всё по местам",
+       "en": "Winning a new argument that finally settles things"
+      },
+      {
+       "ru": "О переходе к спокойствию, даже если грусть ещё рядом",
+       "en": "Moving toward calm, even if sadness still lingers"
+      },
+      {
+       "ru": "О полном и мгновенном забвении всего, что случилось раньше",
+       "en": "Instantly forgetting everything that happened before"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Лодочник везёт вас к спокойному берегу: буря позади, а грусть в лодке — это память, которая пока едет с вами, не мешая двигаться.",
+      "en": "A ferryman carries you toward a calm shore: the storm is behind you, and the sadness in the boat is memory that travels with you without stopping the crossing."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "На что в первую очередь указывает Семёрка Мечей?",
+      "en": "What does the Seven of Swords point to first?"
+     },
+     "options": [
+      {
+       "ru": "На обходной путь: хитрость чужую или собственное избегание",
+       "en": "A roundabout path: someone else's cunning, or your own avoidance"
+      },
+      {
+       "ru": "На честный разговор, который наконец состоялся",
+       "en": "An honest conversation that finally happened"
+      },
+      {
+       "ru": "На выгодную сделку, которая устраивает все стороны",
+       "en": "A deal that suits every side"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Карта — про хитрость и увиливание, свои или чужие; она приглашает проверить, не превратилась ли осторожность в прятки с собой.",
+      "en": "The card is about cunning and dodging — someone else's or your own — and invites you to check whether caution has turned into hide-and-seek with yourself."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта показывает дно, за которым на горизонте уже встаёт рассвет?",
+      "en": "Which card shows a rock bottom with dawn already rising on the horizon?"
+     },
+     "options": [
+      {
+       "ru": "Восьмёрка Мечей",
+       "en": "Eight of Swords"
+      },
+      {
+       "ru": "Девятка Мечей",
+       "en": "Nine of Swords"
+      },
+      {
+       "ru": "Десятка Мечей",
+       "en": "Ten of Swords"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "У Десятки всё худшее уже случилось — добавить к нему нечего, а на горизонте той же картинки встаёт солнце.",
+      "en": "In the Ten the worst has already happened — nothing can be added to it, and in the same picture the sun is coming up on the horizon."
+     },
+     "cardId": "s10"
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Восьмёрка Мечей показывает связанную и с завязанными глазами фигуру. Что важно заметить на картинке?",
+      "en": "The Eight of Swords shows a bound, blindfolded figure. What's important to notice in the picture?"
+     },
+     "options": [
+      {
+       "ru": "Путы слабые, и впереди есть проход — ограничение чаще в мыслях",
+       "en": "The ropes are loose and a path stays open: the limit lives in the mind"
+      },
+      {
+       "ru": "Путы затянуты, и мечи стоят сплошной стеной",
+       "en": "The ropes are tight and the swords form an unbroken wall"
+      },
+      {
+       "ru": "Повязка снята, и фигура уже видит выход",
+       "en": "The blindfold is off and the figure can already see the way out"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Настоящая тюрьма здесь — повязка из тревожных мыслей, а не верёвки: снять её можно, поставив под сомнение хотя бы одно «нельзя».",
+      "en": "The real prison here is the blindfold woven from anxious thoughts, not the ropes — it comes off once you question even one of those 'impossibles'."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Девятка Мечей — про тяжёлые мысли ночью. Что карта говорит о мечах на стене?",
+      "en": "The Nine of Swords is about heavy thoughts at night. What does the card say about the swords on the wall?"
+     },
+     "options": [
+      {
+       "ru": "Они прямо ранят героиню каждую ночь, и её тревога — точный приговор",
+       "en": "They actually wound her every night, and her anxiety is an exact verdict"
+      },
+      {
+       "ru": "Мечи на стене — это чужие обиды, и снять их может только тот, кто их повесил",
+       "en": "The swords on the wall are other people's grudges, and only whoever hung them can take them down"
+      },
+      {
+       "ru": "Они висят на стене и не касаются её — страх реален, но не приговор",
+       "en": "They hang on the wall, never touching her — real as a feeling, not a verdict"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Карта не спорит с тем, что тревожно, — она отделяет само переживание от факта: то, что чувствуется правдой ночью, не обязано быть правдой.",
+      "en": "The card doesn't argue that the worry is real — it separates the feeling from the fact: what feels true at night doesn't have to be true."
+     }
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l7",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что на самом деле предлагает вам Туз Пентаклей?",
+      "en": "What does the Ace of Pentacles actually offer you?"
+     },
+     "options": [
+      {
+       "ru": "Гарантию, что деньги придут сами по себе, без ваших усилий",
+       "en": "A guarantee that money will show up on its own, no effort needed"
+      },
+      {
+       "ru": "Семя новой возможности, которому нужны конкретные шаги",
+       "en": "The seed of a new opportunity that needs concrete steps"
+      },
+      {
+       "ru": "Совет вложить все сбережения в новое дело поскорее",
+       "en": "Advice to put all your savings into a new venture right away"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Туз — это возможность в руке, а не готовый результат: семени нужна почва, то есть ваши реальные действия.",
+      "en": "The Ace is an opportunity in your palm, not a finished result: the seed needs soil — your actual actions."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Чему учит образ жонглирования на Двойке Пентаклей?",
+      "en": "What does the juggling image on the Two of Pentacles teach?"
+     },
+     "options": [
+      {
+       "ru": "Сохранять гибкость и держать баланс на ходу",
+       "en": "Stay flexible and keep your balance on the move"
+      },
+      {
+       "ru": "Довести все дела до идеального порядка, а уже потом расслабиться",
+       "en": "Bring every task to perfect order before you finally allow yourself to relax"
+      },
+      {
+       "ru": "Отказаться сразу от одной из двух задач, чтобы не распыляться",
+       "en": "Drop one of the two tasks right away so you don't spread yourself thin"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Танцор удерживает оба пентакля в движении: карта про баланс на ходу, а не про идеальный порядок или отказ от одной из задач.",
+      "en": "The dancer keeps both pentacles moving: the card is about balance on the move, not perfect order or dropping a task."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "В чём разница между Тройкой и Четвёркой Пентаклей?",
+      "en": "What is the difference between the Three and the Four of Pentacles?"
+     },
+     "options": [
+      {
+       "ru": "Обе карты об одном и том же — про то, как накопить как можно больше денег",
+       "en": "Both cards are about the same thing — piling up as much money as possible"
+      },
+      {
+       "ru": "Тройка про деньги, а Четвёрка про отношения между людьми",
+       "en": "The Three is about money, while the Four is about relationships between people"
+      },
+      {
+       "ru": "Тройка — совместный труд и признание, Четвёрка — удержание нажитого в одиночку",
+       "en": "The Three is shared work and recognition, the Four is holding on to what's yours, alone"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Тройка — мастер, чей труд оценили заказчики; Четвёрка — сжатые руки, которые боятся отдать или впустить новое.",
+      "en": "The Three is a craftsman whose work his patrons value; the Four is clenched hands afraid to give or let anything new in."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что важно заметить на Пятёрке Пентаклей рядом с двумя замёрзшими путниками?",
+      "en": "What matters most to notice on the Five of Pentacles, beside the two freezing travellers?"
+     },
+     "options": [
+      {
+       "ru": "Что помощи ждать неоткуда, и рассчитывать можно только на себя",
+       "en": "That there is nowhere to expect help from and you're entirely on your own"
+      },
+      {
+       "ru": "Что светящееся окно рядом — это помощь, которую легко не заметить",
+       "en": "That the glowing window nearby is help that's easy to walk past"
+      },
+      {
+       "ru": "Что нужда — это наказание за прошлые ошибки, которое нужно перетерпеть",
+       "en": "That hardship is a punishment for past mistakes you simply have to endure"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "На карте есть освещённый витраж совсем рядом с путниками — опора существует, её просто нужно заметить и принять.",
+      "en": "There is a lit stained-glass window right beside the travellers — support exists, you just need to notice and accept it."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта перед вами?",
+      "en": "Which card is in front of you?"
+     },
+     "options": [
+      {
+       "ru": "Пятёрка Пентаклей",
+       "en": "Five of Pentacles"
+      },
+      {
+       "ru": "Семёрка Пентаклей",
+       "en": "Seven of Pentacles"
+      },
+      {
+       "ru": "Пятёрка Мечей",
+       "en": "Five of Swords"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Снег, костыли и лохмотья рядом с витражным окном — это Пятёрка Пентаклей: у Семёрки Пентаклей на карте сад и куст с монетами.",
+      "en": "Snow, crutches and rags beside the stained-glass window — this is the Five of Pentacles; the Seven of Pentacles shows a garden and a bush hung with coins."
+     },
+     "cardId": "p05"
+    }
+   ]
+  },
+  {
+   "lessonId": "m4l8",
+   "questions": [
+    {
+     "type": "single",
+     "q": {
+      "ru": "Когда щедрость Шестёрки Пентаклей перестаёт быть здоровой?",
+      "en": "When does the generosity of the Six of Pentacles stop being healthy?"
+     },
+     "options": [
+      {
+       "ru": "Когда помощь приходит с невидимыми условиями",
+       "en": "When help comes with invisible strings attached"
+      },
+      {
+       "ru": "Когда дающий использует весы, чтобы всё было честно и по справедливости",
+       "en": "When the giver uses scales to make sure everything stays fair"
+      },
+      {
+       "ru": "Когда в обмене вообще участвуют деньги, а не только внимание и время",
+       "en": "When money is involved in the exchange at all, not just attention and time"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Здоровый обмен — взвешенный и без скрытой платы; весы в руке купца — это честность, а не проблема.",
+      "en": "A healthy exchange is measured and free of hidden cost; the scales in the merchant's hand are honesty, not the problem."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "О чём предупреждает пауза садовника на Семёрке Пентаклей?",
+      "en": "What does the gardener's pause on the Seven of Pentacles warn about?"
+     },
+     "options": [
+      {
+       "ru": "О том, что все вложенные усилия оказались напрасны и пропали зря",
+       "en": "That all the effort invested was wasted for nothing"
+      },
+      {
+       "ru": "О том, что нужно бросить старое дело и сразу начать новое",
+       "en": "That you should drop the old project and start a new one immediately"
+      },
+      {
+       "ru": "О том, что плоды зреют в своём темпе, а не по нашему нетерпению",
+       "en": "That fruit ripens at its own pace, not on our impatient schedule"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Садовник оценивает, а не паникует: урожай уже зреет, торопить его бесполезно, но честно посмотреть на курс стоит.",
+      "en": "The gardener is assessing, not panicking: the harvest is already ripening, rushing it is pointless, but an honest look at your course is worthwhile."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "В чём разница между Восьмёркой и Девяткой Пентаклей?",
+      "en": "What is the difference between the Eight and the Nine of Pentacles?"
+     },
+     "options": [
+      {
+       "ru": "Восьмёрка — труд ещё в процессе, Девятка — уже заслуженный плод",
+       "en": "The Eight is work in progress, the Nine is fruit already earned"
+      },
+      {
+       "ru": "Обе карты описывают один и тот же этап работы",
+       "en": "Both cards describe the same stage of the work"
+      },
+      {
+       "ru": "Восьмёрка — про врождённый талант, Девятка — про удачное стечение обстоятельств",
+       "en": "The Eight is about natural talent, the Nine about a lucky break"
+      }
+     ],
+     "correct": 0,
+     "explain": {
+      "ru": "Восьмёрка — мастер за верстаком, ещё в процессе; Девятка — тот же путь, но уже пройденный, и здесь можно позволить себе покой.",
+      "en": "The Eight is a craftsman at the workbench, still mid-process; the Nine is the same path already walked, where rest is allowed."
+     }
+    },
+    {
+     "type": "single",
+     "q": {
+      "ru": "Что в первую очередь означает Десятка Пентаклей?",
+      "en": "What does the Ten of Pentacles mean first and foremost?"
+     },
+     "options": [
+      {
+       "ru": "Конец забот: дальше всё будет держаться само собой",
+       "en": "The end of worries: from now on everything holds itself up"
+      },
+      {
+       "ru": "Стабильность и наследие, которые строятся не только для себя",
+       "en": "Stability and legacy built not only for yourself"
+      },
+      {
+       "ru": "Личный достаток, накопленный для себя и на свой век",
+       "en": "Personal wealth built for yourself and your own lifetime"
+      }
+     ],
+     "correct": 1,
+     "explain": {
+      "ru": "Три поколения под одной аркой — это дом и традиции, которые переживут одного человека, а не гарантия беззаботной жизни.",
+      "en": "Three generations under one archway are a home and traditions that outlast one person — not a guarantee of a carefree life."
+     }
+    },
+    {
+     "type": "card",
+     "q": {
+      "ru": "Какая карта изображена?",
+      "en": "Which card is pictured?"
+     },
+     "options": [
+      {
+       "ru": "Десятка Пентаклей",
+       "en": "Ten of Pentacles"
+      },
+      {
+       "ru": "Девятка Кубков",
+       "en": "Nine of Cups"
+      },
+      {
+       "ru": "Девятка Пентаклей",
+       "en": "Nine of Pentacles"
+      }
+     ],
+     "correct": 2,
+     "explain": {
+      "ru": "Женщина в своём саду с соколом на руке и улиткой у ног — это Девятка Пентаклей: благополучие, созданное собственным трудом.",
+      "en": "A woman in her own garden with a falcon on her wrist and a snail at her feet is the Nine of Pentacles: prosperity created by her own labour."
+     },
+     "cardId": "p09"
+    }
+   ]
+  }
+ ]
+}
