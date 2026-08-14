@@ -4439,8 +4439,8 @@
    },
    "content": {
     "general": {
-     "ru": "Двойка Кубков — карта встречи двух сердец. Это взаимность: чувства, которые вы отдаёте, возвращаются к вам. Речь не только о романтике — это и дружба, и партнёрство, и любое честное «мы», где оба слышат друг друга. Карта обещает согласие, примирение и связь, в которой можно быть собой. Цените того, кто сейчас рядом.",
-     "en": "The Two of Cups is the card of two hearts meeting. It is mutuality: the feelings you give come back to you. It's not only about romance — it's friendship, partnership, any honest \"we\" where both people truly hear each other. The card promises harmony, reconciliation and a bond where you can be yourself. Value the person beside you now.",
+     "ru": "Двойка Кубков — карта встречи двух сердец. Это взаимность: чувства, которые вы отдаёте, возвращаются к вам. Речь не только о романтике — это и дружба, и партнёрство, и любое честное «мы», где оба слышат друг друга. Карта говорит о согласии, примирении и связи, в которой можно быть собой. Цените того, кто сейчас рядом.",
+     "en": "The Two of Cups is the card of two hearts meeting. It is mutuality: the feelings you give come back to you. It's not only about romance — it's friendship, partnership, any honest \"we\" where both people truly hear each other. The card speaks of harmony, reconciliation and a bond where you can be yourself. Value the person beside you now.",
      "status": "reviewed"
     },
     "reversed": {
@@ -4455,7 +4455,7 @@
     },
     "career": {
      "ru": "В работе — удачное партнёрство: надёжный союзник, совместный проект, договорённость, выгодная обеим сторонам. Сейчас в команде легко находить общий язык, а старые конфликты решаются мирно и без лишних усилий. Если вы ищете сотрудничества — смело предлагайте: вам ответят взаимностью.",
-     "en": "At work — a fortunate partnership: a reliable ally, a joint project, an agreement that benefits both sides. Common ground is easy to find in a team now, and conflicts resolve peacefully. If you're seeking collaboration, reach out — the answer will be yes.",
+     "en": "At work — a fortunate partnership: a reliable ally, a joint project, an agreement that benefits both sides. Common ground is easy to find in a team now, and conflicts resolve peacefully. If you're seeking collaboration, reach out — you're likely to get a warm response.",
      "status": "reviewed"
     },
     "finances": {
@@ -4469,7 +4469,7 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня день диалога. Сделайте шаг навстречу: напишите первой, предложите встретиться, извинитесь, если давно собирались. Любое искреннее «давай поговорим» сегодня сработает лучше любых ухищрений. И не отказывайтесь от помощи — её предложат от чистого сердца, примите с благодарностью.",
+     "ru": "Сегодня день диалога. Сделайте шаг навстречу: напишите первым делом, предложите встретиться, извинитесь, если давно собирались. Любое искреннее «давай поговорим» сегодня сработает лучше любых ухищрений. И не отказывайтесь от помощи — её предложат от чистого сердца, примите с благодарностью.",
      "en": "Today is a day for dialogue. Take the first step: message first, suggest meeting, apologise if you've been meaning to. Any sincere \"let's talk\" will work today. And accept help — it will be offered wholeheartedly.",
      "status": "reviewed"
     },
@@ -4565,8 +4565,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — светлый период: свидания, знакомства через друзей, семейные праздники, где паре по-настоящему хорошо вместе. Возможна помолвка или радостное событие, которое захочется отметить. Одиноким карта советует чаще бывать среди людей — важная встреча случится именно в живом общении.",
-     "en": "In love — a bright period: dates, meeting someone through friends, family celebrations where a couple feels good together. An engagement or joyful event worth celebrating is possible. If you're single, spend more time among people — the meeting will happen through real connection.",
+     "ru": "В любви — светлый период: свидания, знакомства через друзей, семейные праздники, где паре по-настоящему хорошо вместе. Возможна помолвка или радостное событие, которое захочется отметить. Одиноким карта советует чаще бывать среди людей — на важную встречу больше шансов в живом общении.",
+     "en": "In love — a bright period: dates, meeting someone through friends, family celebrations where a couple feels good together. An engagement or joyful event worth celebrating is possible. If you're single, spend more time among people — real connection gives you the best chance of meeting someone important.",
      "status": "reviewed"
     },
     "career": {
@@ -5150,8 +5150,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах — готовность отказаться от источника дохода ради смысла или душевного покоя. Пересмотрите траты на то, что уже не радует: подписки, статусные вещи. Деньги догонят вас, когда вы пойдёте за собой.",
-     "en": "Financially — a readiness to give up an income source for the sake of meaning or peace of mind. Review what you spend on things that no longer bring joy: subscriptions, status buys. Money will catch up once you follow your own path.",
+     "ru": "В финансах — готовность отказаться от источника дохода ради смысла или душевного покоя. Пересмотрите траты на то, что уже не радует: подписки, статусные вещи. Финансовая сторона обычно налаживается следом, когда вы идёте за собой.",
+     "en": "Financially — a readiness to give up an income source for the sake of meaning or peace of mind. Review what you spend on things that no longer bring joy: subscriptions, status buys. The financial side tends to settle in time, once you follow your own path.",
      "status": "reviewed"
     },
     "health": {
@@ -5255,8 +5255,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — период удовольствия и взаимного восхищения: свидания, комплименты, тёплые вечера. Паре карта советует просто наслаждаться друг другом, без выяснений и претензий. Одиноким она подмигивает: загадайте желание о любви всерьёз — сейчас у него особая сила.",
-     "en": "In love — a season of pleasure and mutual admiration: dates, compliments, warm evenings. For couples, the card suggests simply enjoying each other, with no score-settling. To singles it winks: make a genuine wish about love — right now it carries special power.",
+     "ru": "В любви — период удовольствия и взаимного восхищения: свидания, комплименты, тёплые вечера. Паре карта советует просто наслаждаться друг другом, без выяснений и претензий. Одиноким она подмигивает: загадайте желание о любви всерьёз — сейчас подходящий момент прислушаться к себе.",
+     "en": "In love — a season of pleasure and mutual admiration: dates, compliments, warm evenings. For couples, the card suggests simply enjoying each other, with no score-settling. To singles it winks: make a genuine wish about love — today is a fitting moment to listen to your heart.",
      "status": "reviewed"
     },
     "career": {
@@ -5276,7 +5276,7 @@
     },
     "day_card": {
      "ru": "Сегодня — день маленького праздника. Утром загадайте желание: Девятка Кубков считается картой его исполнения. Побалуйте себя тем, что давно откладывали, — ужин, ванна, встреча с подругой. И заметьте, сколько хорошего в вашей жизни уже есть: благодарность притягивает продолжение.",
-     "en": "Today is a day for a small celebration. Make a wish in the morning: the Nine of Cups is known as the card that grants them. Treat yourself to something long postponed — a dinner, a bath, an evening with a friend. And notice how much good is already in your life: gratitude invites more.",
+     "en": "Today is a day for a small celebration. Make a wish in the morning: the Nine of Cups is traditionally considered the card of their fulfilment. Treat yourself to something long postponed — a dinner, a bath, an evening with a friend. And notice how much good is already in your life: gratitude invites more.",
      "status": "reviewed"
     },
     "symbolism": {
@@ -5370,8 +5370,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — одна из лучших карт колоды: глубокая взаимность, отношения, в которых хочется строить общее будущее — дом, семью, традиции. Для пары — период гармонии и примирения. Одиноким она обещает чувство, способное перерасти в настоящую близость на долгие годы.",
-     "en": "In love — one of the best cards in the deck: deep mutuality, a relationship where you want to build a shared future — home, family, traditions. For couples, a period of harmony and reconciliation. For singles, it promises a feeling that can grow into true closeness for years to come.",
+     "ru": "В любви — одна из лучших карт колоды: глубокая взаимность, отношения, в которых хочется строить общее будущее — дом, семью, традиции. Для пары — период гармонии и примирения. Одиноким стоит присмотреться к чувству, способному перерасти в настоящую близость на долгие годы.",
+     "en": "In love — one of the best cards in the deck: deep mutuality, a relationship where you want to build a shared future — home, family, traditions. For couples, a period of harmony and reconciliation. For singles, this is a moment to notice a feeling that could grow into true closeness for years to come.",
      "status": "reviewed"
     },
     "career": {
@@ -5390,7 +5390,7 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня центр дня — близкие люди. Устройте общий ужин, позвоните родителям, обнимите тех, кто рядом. Отложите телефон и побудьте в моменте: именно из таких вечеров складывается то, что потом называют счастьем. Скажите кому-то простое «я рада, что ты есть».",
+     "ru": "Сегодня центр дня — близкие люди. Устройте общий ужин, позвоните родителям, обнимите тех, кто рядом. Отложите телефон и побудьте в моменте: именно из таких вечеров складывается то, что потом называют счастьем. Скажите кому-то простое «хорошо, что ты есть».",
      "en": "Today, your loved ones are the centre of the day. Plan a shared dinner, call your parents, hug the people near you. Put the phone away and stay in the moment: evenings like this are what people later call happiness. Tell someone, simply: I'm glad you're in my life.",
      "status": "reviewed"
     },
@@ -5610,8 +5610,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах — привлекательное предложение, которое стоит изучить трезво: цифры важнее красивой презентации. Возможны траты на романтику и красоту — это нормально, если в разумных рамках. Не давайте в долг под обаяние.",
-     "en": "Financially — an attractive offer worth a sober look: the numbers matter more than the lovely presentation. Spending on romance and beauty is fine within reason. Just don't lend money to charm alone.",
+     "ru": "В финансах — тяга к тратам, которые выглядят красиво, но не всегда обоснованы. Возможны траты на романтику и красоту — это нормально, если в разумных рамках. Не давайте в долг под обаяние.",
+     "en": "Financially — a pull toward spending that looks lovely but isn't always justified. Spending on romance and beauty is fine within reason. Just don't lend money to charm alone.",
      "status": "reviewed"
     },
     "health": {
@@ -5798,7 +5798,7 @@
      "уравновешенность",
      "сдержанность",
      "принять и понять",
-     "зрелость"
+     "эмоциональная опора"
     ],
     "en": [
      "wise counsel",
@@ -5808,7 +5808,7 @@
      "maturity",
      "steadiness",
      "wise support",
-     "level-headed"
+     "trusted advisor"
     ]
    },
    "image": "c14.jpg",
