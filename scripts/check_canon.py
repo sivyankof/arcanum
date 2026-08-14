@@ -33,15 +33,19 @@ PHRASES_PATH = ROOT / "content" / "phrases.json"
 # --- пороги и словари (docs/content-guide.md) ---------------------------------
 
 # Лимиты слов основных блоков. birth_path не нормирован — вычитан отдельно (задача 23).
+# ⚠️ Границы РАЗНЫЕ для языков, и это не придирка: русский текст той же мысли короче
+# английского на 20–25% (медиана career: ru 36 слов, en 45) — английский тратит слова
+# на артикли и вспомогательные глаголы. Общая норма на два языка давала 100 «нарушений»,
+# из которых 73 были просто русскими текстами нормальной длины (спека 31, 15.08).
 WORD_LIMITS = {
-    "general": (40, 80),
-    "reversed": (35, 60),
-    "love": (35, 60),
-    "career": (35, 60),
-    "day_card": (35, 60),
-    "finances": (25, 50),
-    "health": (25, 40),
-    "symbolism": (40, 80),
+    "general": {"ru": (40, 70), "en": (50, 85)},
+    "reversed": {"ru": (30, 50), "en": (38, 62)},
+    "love": {"ru": (30, 50), "en": (38, 60)},
+    "career": {"ru": (28, 45), "en": (34, 56)},
+    "day_card": {"ru": (28, 45), "en": (38, 56)},
+    "finances": {"ru": (24, 38), "en": (28, 48)},
+    "health": {"ru": (24, 40), "en": (30, 48)},
+    "symbolism": {"ru": (40, 70), "en": (50, 85)},
 }
 
 # Приписки сфер меряются знаками, а не словами (задача 25).
@@ -134,6 +138,21 @@ STRUCTURAL_TRIGRAM = (
     r"кубков|жезлов|мечей|пентаклей|это карта|карта дня"
 )
 
+# Указатели сферы в начале блока — конвенция корпуса (решение 15.08), не однообразие.
+SPHERE_OPENERS = {
+    "ru": ["в любви", "в отношениях", "в паре", "в работе", "в карьере", "в финансах",
+           "в деньгах", "для самочувствия", "для здоровья", "сегодня", "ваш путь",
+           "в перевёрнутом положении", "в перевёрнутом виде", "перевёрнутая", "перевёрнутый"],
+    "en": ["in love", "in relationships", "at work", "in career", "financially",
+           "with money", "for wellbeing", "for health", "today", "your path", "reversed"],
+}
+
+# Служебные слова: сами по себе зачином не являются, за ними идёт настоящее начало.
+FUNCTION_WORDS = {"the", "a", "an", "is", "it", "this", "of", "это", "и", "а", "но"}
+
+# Формула жанра «X — карта Y»: ею открывается почти каждый general, это не однообразие.
+GENRE_FORMULAS = {"ru": ["карта", "это карта"], "en": ["card of", "card"]}
+
 KEYWORDS_COUNT = 4
 SEARCH_RANGE = (8, 12)
 SEARCH_SPREAD_MAX = 8      # слово, подходящее больше чем 8 картам, поиску бесполезно
@@ -170,6 +189,41 @@ def addr(card: dict, block: str, lang: str) -> str:
     return f"{card['id']}.{block}.{lang}"
 
 
+def strip_sphere_opener(text: str, lang: str, card_name: str = "") -> list[str]:
+    """Слова текста без служебного начала: указателя сферы, имени карты и артиклей.
+
+    Всё это законные зачины, повторять их обязано большинство блоков: «Туз Кубков — …»,
+    «In love, …», «The Ace of Cups is …». Однообразие ищется в том, что идёт следом.
+    """
+    tokens = words(text)
+
+    def drop_function_words():
+        nonlocal tokens
+        while tokens and tokens[0] in FUNCTION_WORDS:
+            tokens = tokens[1:]
+
+    def drop_prefix(prefix: list[str]):
+        nonlocal tokens
+        if prefix and tokens[:len(prefix)] == prefix:
+            tokens = tokens[len(prefix):]
+            return True
+        return False
+
+    for opener in SPHERE_OPENERS[lang]:
+        if drop_prefix(opener.split()):
+            break
+    # Порядок важен: имя карты стоит ПОСЛЕ артикля («The Ace of Cups is…»),
+    # а формула жанра — после имени («… is the card of beginnings»).
+    drop_function_words()
+    drop_prefix(words(card_name))
+    drop_function_words()
+    for formula in GENRE_FORMULAS[lang]:
+        if drop_prefix(formula.split()):
+            break
+    drop_function_words()
+    return tokens
+
+
 # --- проверки -----------------------------------------------------------------
 # Каждая возвращает список строк-находок. Пустой список = проверка чиста.
 
@@ -183,7 +237,7 @@ def check_1_limits(cards: list[dict]) -> list[str]:
     for card in cards:
         for name, lang, text in blocks(card):
             if name in WORD_LIMITS:
-                lo, hi = WORD_LIMITS[name]
+                lo, hi = WORD_LIMITS[name][lang]
                 n, unit = len(words(text)), "слов"
             elif name in CHAR_LIMITS:
                 lo, hi = CHAR_LIMITS[name][lang]
@@ -261,12 +315,17 @@ def check_6_glossary(cards: list[dict]) -> list[str]:
 
 
 def check_7_openings(cards: list[dict]) -> list[str]:
-    """Однообразие зачинов — отдельно по языку И типу блока (урок задачи 25)."""
+    """Однообразие зачинов — отдельно по языку И типу блока (урок задачи 25).
+
+    Указатель сферы («В любви…», «At work…») из зачина срезается: решением 15.08 это
+    осознанная конвенция корпуса, а не однообразие. Считается то, что идёт ПОСЛЕ него —
+    иначе проверка вечно показывала бы 76 из 78 и её перестали бы читать.
+    """
     buckets: dict[tuple[str, str], Counter] = defaultdict(Counter)
     where: dict[tuple[str, str, str], list[str]] = defaultdict(list)
     for card in cards:
         for name, lang, text in blocks(card):
-            opening = " ".join(words(text)[:2])
+            opening = " ".join(strip_sphere_opener(text, lang, card["name"][lang])[:2])
             buckets[(lang, name)][opening] += 1
             where[(lang, name, opening)].append(card["id"])
     out = []
