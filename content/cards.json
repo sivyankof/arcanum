@@ -6190,8 +6190,8 @@
      "status": "reviewed"
     },
     "health": {
-     "ru": "Для самочувствия — напоминание, что душевная боль отражается и в теле: усталость, тяжесть в груди, слёзы близко. Не требуйте от себя бодрости. Сейчас лечит простое: сон, тепло, разговор с тем, кто умеет слушать.",
-     "en": "For wellbeing — a reminder that emotional pain echoes in the body: fatigue, heaviness in the chest, tears close to the surface. Don't demand cheerfulness of yourself. Simple things heal now: sleep, warmth, a conversation with someone who truly listens.",
+     "ru": "Для самочувствия — напоминание, что душевная боль отражается и в теле: усталость, комок в горле, слёзы близко. Не требуйте от себя бодрости. Сейчас лечит простое: сон, тепло, разговор с тем, кто умеет слушать.",
+     "en": "For wellbeing — a reminder that emotional pain echoes in the body: fatigue, a lump in the throat, tears close to the surface. Don't demand cheerfulness of yourself. Simple things heal now: sleep, warmth, a conversation with someone who truly listens.",
      "status": "reviewed"
     },
     "day_card": {
@@ -6662,8 +6662,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Мужчина на цыпочках уносит из лагеря пять мечей, оглядываясь назад, — хитрость кажется удачной, но два меча он унести не смог: обходной путь никогда не даёт всего. Лагерь с флагами позади — сообщество, за спиной которого он действует. Его почти довольное лицо — самообман хитреца, уверенного, что никто не заметит. Мечи остриями вниз — слова и идеи, обращённые не по назначению.",
-     "en": "A man tiptoes away from a camp carrying five swords, glancing back — the trick seems successful, yet two swords stayed behind: the roundabout way never yields everything. The flagged camp is the community he acts behind. His pleased face is the trickster's self-deception: surely no one will notice. The swords point downward — words and ideas turned to the wrong use.",
+     "ru": "Мужчина на цыпочках уносит из лагеря пять мечей, оглядываясь назад, — хитрость кажется удачной, но два меча он унести не смог: обходной путь никогда не даёт всего. Лагерь с флагами позади — сообщество, за спиной которого он действует. Его почти довольное лицо — самообман хитреца, уверенного, что никто не заметит. Два меча остаются в земле остриями вниз — слова и идеи, до которых не дошли руки.",
+     "en": "A man tiptoes away from a camp carrying five swords, glancing back — the trick seems successful, yet two swords stayed behind: the roundabout way never yields everything. The flagged camp is the community he acts behind. His pleased face is the trickster's self-deception: surely no one will notice. The two abandoned swords point downward — words and ideas left unattended.",
      "status": "reviewed"
     },
     "love_reversed": {
@@ -6834,7 +6834,7 @@
      "паника",
      "накрутить себя",
      "тяжёлые мысли",
-     "не спится",
+     "истощение",
      "переживания"
     ],
     "en": [
@@ -6950,7 +6950,7 @@
      "полное истощение",
      "начать заново",
      "рассвет после ночи",
-     "полный крах"
+     "остаться ни с чем"
     ],
     "en": [
      "collapse",
@@ -7337,8 +7337,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах Королева советует трезвый расчёт: проверьте условия, перечитайте договор, задайте неудобные вопросы. Никаких решений «на доверии» или из чувства неловкости. Порядок в документах и ясность в договорённостях — сейчас лучшая защита ваших денег.",
-     "en": "Financially, the Queen counsels sober calculation: check the terms, reread the contract, ask the awkward questions. No decisions made \"on trust\" or out of embarrassment. Tidy paperwork and clear agreements are the best protection for your money right now.",
+     "ru": "В финансах Королева советует смотреть на цифры без сантиментов: составьте честный бюджет, откажитесь от трат, которые оправдываете эмоциями, а не пользой. Решения принимайте головой, а не из чувства неловкости перед тем, кто просит в долг.",
+     "en": "Financially, the Queen counsels looking at the numbers without sentiment: draw up an honest budget and drop the spending you justify with feelings rather than use. Decide with your head, not out of awkwardness toward whoever is asking for a loan.",
      "status": "reviewed"
     },
     "health": {
@@ -7452,8 +7452,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах Король советует стратегию и порядок: долгосрочный план, юридическая чистота, внимательность к договорам и обязательствам. Хорошее время обратиться к профессионалу — консультанту или юристу. Решения принимайте на основе цифр, а не обещаний.",
-     "en": "Financially, the King advises strategy and order: a long-term plan, clean paperwork, attention to contracts and obligations. It's a good time to consult a professional — an adviser or a lawyer. Base your decisions on numbers, not on promises.",
+     "ru": "В финансах Король советует крупный план: не тратьте на сиюминутное, откладывайте на цель, считайте на годы вперёд, а не на месяц. Решения принимайте на основе цифр, а не обещаний.",
+     "en": "Financially, the King advises thinking big: skip the spur-of-the-moment spending, save toward a goal, count in years rather than months. Base your decisions on numbers, not on promises.",
      "status": "reviewed"
     },
     "health": {
