@@ -104,22 +104,22 @@
     "love_reversed": {
      "ru": "Наивность или, наоборот, нерешительность мешают отнестись к чувствам всерьёз: вы то ныряете в лёгкость, то боитесь сделать шаг навстречу. Спросите себя, чего вы избегаете.",
      "en": "Naivety or plain hesitation keeps you from taking these feelings seriously: you dive into lightness one moment, then freeze before the next step. Ask yourself what you're avoiding.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Задуманное буксует: вы берётесь за новое без подготовки или застряли перед первым шагом от страха ошибиться. Оцените риски трезво, прежде чем действовать или отступать.",
      "en": "Plans stall: you're diving into something new without preparation, or frozen before the first step out of fear of failing. Weigh the risks calmly before you act — or retreat.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Энтузиазм обгоняет расчёт: траты идут спонтанно, без плана, а после — тревога, что решение было поспешным. Прежде чем вложиться или потратить, дайте себе паузу на подумать.",
      "en": "Enthusiasm outruns arithmetic: spending happens on impulse, without a plan, followed by worry that the decision was too hasty. Give yourself a pause to think before you commit money.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Спешка оборачивается невнимательностью к себе: вы то хватаетесь за новый режим сразу и без меры, то бросаете начатое на полпути. Выберите один маленький шаг и дайте ему прижиться.",
      "en": "Haste turns into carelessness toward yourself: you either throw yourself into a new routine all at once, or drop it halfway. Pick one small step and let it actually take root.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -224,22 +224,22 @@
     "love_reversed": {
      "ru": "Слова опережают дела: обещания звучат красиво, но конкретных шагов не видно — ни с вашей стороны, ни со стороны партнёра. Спросите, что из сказанного уже подкреплено поступком.",
      "en": "Words are running ahead of actions: promises sound beautiful, but real steps are missing — from you or from your partner. Ask what's actually been backed up by a deed so far.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Способности есть, а применения им вы не находите: распыляетесь между задачами или сомневаетесь в своей компетентности вслух чаще, чем действуете. Выберите одно дело и доведите его.",
      "en": "The ability is there, but you can't find where to aim it: you're scattered across tasks, or voicing self-doubt more often than you act. Pick one thing and see it through.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Умение считать деньги временно отказывает: решения принимаются на обаянии момента, а не на трезвом расчёте, или кто-то убеждает вас вложиться красивыми словами. Проверьте цифры сами.",
      "en": "Your usual grip on money slips: decisions get made on the charm of the moment rather than a clear head, or someone talks you into spending with fine words. Check the numbers yourself.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Вы знаете, что помогает телу, но откладываете это на потом — не хватает не понимания, а решимости начать. Один маленький, честно выполненный шаг сейчас важнее идеального плана.",
      "en": "You know what helps your body, but keep putting it off — it's not understanding you lack, but the resolve to start. One small, honestly kept step now beats a perfect plan.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -344,22 +344,22 @@
     "love_reversed": {
      "ru": "Вы чувствуете больше, чем говорите вслух, но откладываете разговор или спрашиваете совета у всех вокруг вместо себя. Прислушайтесь к тому, что подсказывает тишина, а не чужие мнения.",
      "en": "You feel more than you say out loud, but keep postponing the talk or asking everyone else for advice instead of yourself. Listen to what the quiet tells you, not other opinions.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Внутреннее чутьё насчёт решения есть, но вы заглушаете его чужими советами или спешите поделиться планами раньше времени. Дайте себе паузу услышать собственный ответ.",
      "en": "You have a gut sense about the decision, but keep drowning it in other people's advice, or sharing plans before they're ready. Give yourself a pause to hear your own answer.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Что-то в условиях сделки или договора кажется неясным, но вы не даёте себе времени разобраться и полагаетесь на чужие заверения. Перепроверьте детали сами, не торопясь.",
      "en": "Something about the deal or contract feels unclear, but you're not giving yourself time to look closer, relying on others' reassurances instead. Recheck the details yourself, unhurried.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело подаёт сигналы, а вы объясняете их чужими словами вместо того, чтобы прислушаться напрямую. Отложите на время советы извне и понаблюдайте, что чувствуете именно вы.",
      "en": "Signals from your body keep getting explained away with other people's words instead of a direct listen. Set outside advice aside for now and notice what you actually feel.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -466,22 +466,22 @@
     "love_reversed": {
      "ru": "Вы вкладываетесь в партнёра щедро, а себе оставляете то, что осталось. Присмотритесь: чувствуете ли вы в ответ такую же заботу, или отдаёте в одну сторону дольше, чем стоило бы?",
      "en": "You pour care into your partner generously, keeping whatever's left over for yourself. Notice: are you met with the same care in return, or has the giving been one-sided too long?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Чужие проекты и идеи получают вашу поддержку в первую очередь, а до собственных дело доходит по остаточному принципу. Спросите себя, когда вы в последний раз вкладывались в своё.",
      "en": "Other people's projects and ideas get your support first, while your own keep waiting their turn. Ask yourself when you last invested time and care in something purely your own.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Траты уходят на чужой комфорт и подарки, а на себя откладывать не получается или кажется неуместным. Позвольте и своим нуждам занять место в бюджете, а не только чужим.",
      "en": "Money keeps flowing toward others' comfort and gifts, while saving for yourself feels awkward or never happens. Let your own needs claim a place in the budget too.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Забота о других не оставляет сил на заботу о себе: вы вспоминаете о еде, сне и отдыхе в последнюю очередь. Спросите себя, что бы вы посоветовали человеку, о котором заботитесь так же.",
      "en": "Caring for others leaves no strength for caring for yourself: food, sleep and rest come last on the list. Ask what you'd advise someone you looked after the way you look after everyone.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -586,22 +586,22 @@
     "love_reversed": {
      "ru": "Забота о стабильности превращается в контроль: вы решаете за двоих или требуете отчёта в мелочах. Проверьте, где твёрдость ещё опора для отношений, а где уже давление.",
      "en": "Care for stability turns into control: you decide for both of you, or demand an account of every small thing. Check where firmness still supports the relationship — and where it presses down.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Управление ситуацией даётся с трудом: вы держите всё под личным контролем до изнеможения или, наоборот, откладываете решения, которые давно пора принять. Найдите свою меру твёрдости.",
      "en": "Steering the situation feels hard right now: you're gripping every detail until exhausted, or postponing decisions long overdue. Find your own measure of firmness between the two.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Порядок в деньгах держится на слишком жёстких ограничениях или расползается без всякой системы. Пересмотрите правила, которые вы себе поставили: они ещё помогают?",
      "en": "Your money system rests on rules too rigid to live with — or there is no system at all. Take a fresh look at the limits you set yourself: are they still actually helping you?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Дисциплина держит вас в постоянном напряжении, а отдых воспринимается как слабость. Спросите себя: режим ещё служит вам опорой, или вы уже давно служите режиму?",
      "en": "Discipline keeps you in constant tension, and rest feels like weakness. Ask yourself: does the routine still support you, or have you long been serving the routine instead?",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -706,22 +706,22 @@
     "love_reversed": {
      "ru": "Правила, по которым «положено» строить отношения, перестают откликаться: вы соблюдаете форму, а смысл в ней потерян. Спросите себя, какие из ожиданий на самом деле ваши.",
      "en": "The rules 'proper' relationships are supposed to follow stop feeling true: you keep the form while the meaning has drained out of it. Ask which expectations are actually your own.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Устоявшийся порядок в работе тяготит: вы следуете правилам, в которые больше не верите, или чувствуете, что переросли наставника или систему целиком. Ищите живое вместо привычного.",
      "en": "The established order at work weighs on you: you follow rules you no longer believe in, or feel you've outgrown a mentor or the whole system. Look for what's alive, not just familiar.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Проверенные схемы — банк, договор, чужой совет — перестают казаться единственно верными. Прежде чем следовать правилу по инерции, спросите, подходит ли оно именно вам сейчас.",
-     "en": "Tried-and-true paths — the bank, the contract, someone else's advice — stop feeling like the only right answer. Before following a rule out of habit, ask whether it truly suits you now.",
-     "status": "draft"
+     "ru": "Советы банка, финансового блогера или родных о том, «как правильно» с деньгами, перестают звучать убедительно. Прислушайтесь к собственному расчёту и примите одно решение сами, без сверки с чужим мнением.",
+     "en": "Advice about money from banks, experts or family stops sounding convincing on its own. Trust your own arithmetic and make one financial decision without checking it against anyone else's opinion.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Привычки, унаследованные «как принято», перестают поддерживать: то, что помогало родителям или учителю, вам уже не подходит. Позвольте себе искать свой собственный ритм.",
      "en": "Habits inherited 'because that's how it's done' stop being helpful: what worked for your parents or a teacher no longer fits you. Give yourself permission to find your own rhythm.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -826,22 +826,22 @@
     "love_reversed": {
      "ru": "Между «хочу» и «положено» разлад: чувства есть, а решение всё откладывается, или в паре копится недосказанное. Честно спросите себя, чего вы избегаете назвать вслух.",
      "en": "There's a rift between 'I want' and 'I should': the feelings are there, but the decision keeps waiting, or unspoken things pile up between you. Ask what you're avoiding saying aloud.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Выбор между направлениями затягивается: вы вроде определились, но продолжаете держаться за оба варианта разом. Проверьте, какой из них на самом деле совпадает с вашими ценностями.",
      "en": "A choice between paths keeps dragging on: you seem to have decided, yet still hold on to both options at once. Check which one actually matches what you truly value.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Совместное решение о деньгах буксует: позиции не согласованы, а разговор откладывается из раза в раз. Прежде чем действовать поодиночке, проговорите то, что важно каждому.",
      "en": "A shared money decision stalls: positions aren't aligned, and the conversation keeps getting put off. Before acting alone, talk through what actually matters to each of you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Внутренний разлад между «хочу» и «надо» забирает больше сил, чем кажется: невысказанное решение держит тело в напряжении. Дайте себе честный ответ — станет заметно легче.",
      "en": "The inner tug between 'I want' and 'I should' drains more energy than it seems: an unmade decision keeps the body tense. Give yourself an honest answer, and the weight will ease.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -946,22 +946,22 @@
     "love_reversed": {
      "ru": "Отношения либо мчатся быстрее, чем оба готовы, либо буксуют на месте из-за оглядки на чужое мнение. Сбавьте темп и спросите: вы всё ещё едете туда, куда хотите сами?",
      "en": "The relationship is either racing ahead faster than either of you is ready for, or stuck spinning its wheels over what others might think. Slow down and ask: is this still your direction?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Усилия разбегаются в разные стороны: вы берётесь за всё сразу или гоните к цели, не сверяясь с тем, туда ли вообще идёте. Остановитесь на минуту и выберите одно направление.",
      "en": "Effort is scattering in every direction: you're taking on everything at once, or racing toward a goal without checking it's the right one. Pause for a minute and pick one direction.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Деньги утекают на скорости, которую вы не успеваете отследить: траты идут по инерции, а не по плану. Притормозите на день и посмотрите, куда на самом деле уходит бюджет.",
-     "en": "Money is slipping away faster than you can track: spending runs on autopilot rather than a plan. Slow down for a day and see where the budget is actually going.",
-     "status": "draft"
+     "ru": "Деньги утекают быстрее, чем вы успеваете за ними уследить: мелкие траты незаметно складываются в заметную сумму. Возьмите один день и честно распишите каждую трату — до последней мелочи.",
+     "en": "Money slips away faster than you can track it: small purchases quietly add up to a real sum. Take one day and write down every expense — down to the smallest one.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Постоянная спешка не оставляет момента остановиться: вы двигаетесь по инерции, даже когда тело просит паузы. Позвольте себе притормозить прежде, чем вымотаетесь до предела.",
      "en": "Constant rush leaves no moment to stop: you keep moving on autopilot even when the body asks for a pause. Let yourself slow down before you run yourself into the ground.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -1068,22 +1068,22 @@
     "love_reversed": {
      "ru": "Тепло оборачивается уступчивостью: вы сглаживаете конфликт молчанием, лишь бы не спорить, или, наоборот, держите близких на коротком поводке. Спросите себя, где вы путаете мягкость со сдачей позиций.",
      "en": "Warmth turns into overcompliance: you smooth over conflict with silence just to avoid a fight, or keep loved ones on a short leash. Ask yourself where you're mistaking gentleness for giving in.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Выдержка истощается: вы либо молча терпите неприемлемое, либо начинаете давить на команду, чтобы всё шло по-вашему. Присмотритесь, где нужна твёрдость, а где вы просто боитесь конфликта.",
      "en": "Composure runs thin: you either endure the unacceptable in silence or push the team to bend to your will. Notice where firmness is needed — and where you're simply avoiding conflict.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Дисциплина срывается в две стороны: то жёсткий запрет себе на любые траты, то импульсивная покупка в утешение. Разберитесь честно, какое чувство вы на самом деле заглушаете деньгами.",
      "en": "Discipline swings both ways: harsh bans on any spending, then an impulsive purchase for comfort. Be honest about which feeling you're actually trying to soothe with money.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Вы держитесь на упрямстве, а не на заботе о себе: заставляете тело терпеть усталость силой воли вместо отдыха. Спросите себя, где твёрдость с собой уже граничит с жёсткостью.",
      "en": "You're running on stubbornness rather than self-care, forcing your body to push through tiredness by sheer will instead of resting. Ask yourself where firmness with yourself has turned into harshness.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -1188,22 +1188,22 @@
     "love_reversed": {
      "ru": "Потребность в пространстве превращается в стену: вы отдаляетесь под предлогом «мне нужно побыть наедине с собой», хотя на деле избегаете сложного разговора. Проверьте, тишина сближает вас или уже разъединяет.",
      "en": "The need for space turns into a wall: you pull away under the excuse of 'needing time alone', while really avoiding a hard conversation. Check whether this silence brings you closer — or pulls you apart.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Сосредоточенность оборачивается замкнутостью: вы решаете всё в одиночку, не спрашивая совета, даже когда чужой опыт пригодился бы. Отметьте, где независимость уже мешает делу, а не помогает.",
      "en": "Focus turns into isolation: you're handling everything alone, refusing advice even when someone else's experience would help. Notice where independence now gets in the way rather than serving you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Осторожность застревает в откладывании: решение по деньгам зависает без конца, потому что думать в одиночку легче, чем действовать. Спросите себя, чего вы избегаете под видом обдумывания.",
      "en": "Caution stalls into endless postponing: a money decision drags on because thinking it over alone feels easier than acting. Ask yourself what you're avoiding under the guise of deliberation.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Уединение перестаёт питать и начинает изолировать: вы всё реже видите людей, называя это отдыхом. Понаблюдайте, наполняет вас нынешняя тишина или потихоньку опустошает.",
      "en": "Solitude stops nourishing you and starts isolating you: you're seeing people less and calling it rest. Notice whether this quiet is filling you up — or quietly emptying you out.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -1308,22 +1308,22 @@
     "love_reversed": {
      "ru": "Отношения будто застряли не по вашей вине: встречи срываются, разговоры откладываются, момент всё не наступает. Это полоса, а не приговор — сделайте свою часть, остальному дайте время.",
      "en": "The relationship seems stuck through no fault of yours: plans fall through, talks keep getting postponed, the right moment never comes. It's a phase, not a verdict — do your part and let the rest unfold.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Проект буксует из-за обстоятельств, которые вы не выбирали: задержки, отмены, чужие решения не в вашу пользу. Не вините себя за то, что вне вашей власти, — сосредоточьтесь на том, что зависит от вас.",
-     "en": "The project stalls because of circumstances you didn't choose: delays, cancellations, decisions made without you. Don't blame yourself for what's beyond your control — focus on what you can actually shape.",
-     "status": "draft"
+     "ru": "Проект тормозят решения других людей — сроки, согласования, чужие приоритеты. Найдите один шаг, который зависит только от вас, и сделайте его сегодня, не дожидаясь остального.",
+     "en": "The project is being slowed by other people's decisions — timelines, approvals, priorities you don't control. Find the one step that depends only on you, and take it today.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги словно утекают сквозь пальцы: непредвиденные траты, задержка выплаты, неудачное совпадение сроков. Не судите себя строго — сделайте, что в ваших силах, и переждите полосу спокойно.",
      "en": "Money seems to slip through your fingers: unexpected costs, a delayed payment, bad timing all at once. Don't judge yourself harshly — do what you can, and ride out the stretch calmly.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Силы будто идут по кругу без вашего участия: то подъём, то спад, и вы не всегда понимаете почему. Не вините тело за естественные колебания — просто планируйте важное на дни, когда энергия выше.",
-     "en": "Your energy seems to cycle on its own: a lift, then a dip, without an obvious reason. Don't blame your body for these natural swings — just plan what matters for the days when energy runs higher.",
-     "status": "draft"
+     "ru": "Энергия идёт волнами: недолгий подъём сменяется спадом без явной причины, а после — снова прилив. Замечайте этот ритм и подстраивайте день под него, а не пытайтесь удержать одну ровную линию.",
+     "en": "Energy moves in waves — a brief lift, then a dip for no clear reason, then it rises again. Notice this rhythm and shape your day around it instead of forcing one steady line.",
+     "status": "reviewed"
     }
    }
   },
@@ -1426,24 +1426,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Весы качнулись в сторону обид: каждый считает, что вкладывает больше другого, и быть правым хочется больше, чем быть услышанным. Прежде чем требовать честности от партнёра, проверьте свою.",
-     "en": "The scales tip toward resentment: each of you feels you're giving more, and being right starts to matter more than being heard. Before demanding honesty from your partner, check your own.",
-     "status": "draft"
+     "ru": "Счёт вкладов у каждого свой и ведётся молча: один помнит вымытую посуду, другой — оплаченный отпуск. Обида копится не от несправедливости, а от того, что счёт не сверяют вслух.",
+     "en": "Each of you keeps a private ledger: one remembers the dishes washed, the other the holiday paid for. Resentment grows not from unfairness, but from a ledger no one reads aloud.",
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Оценка кажется неверной: заслуги не замечают, или решение выглядит предвзятым. Прежде чем искать виноватых вовне, честно спросите себя, всё ли вы сами сделали честно и открыто.",
-     "en": "Recognition feels off: your work goes unnoticed, or a decision seems biased. Before looking for someone to blame, ask yourself honestly whether your own dealings have been fair and open.",
-     "status": "draft"
+     "ru": "Кажется, что вклад оценили не по заслугам: премию отдали другому, решение приняли без вас. Соберите детали, которых не видели, — обида плохой следователь, ей всё ясно заранее.",
+     "en": "It feels like your contribution was misjudged: the bonus went elsewhere, a decision was made without you. Gather the details you couldn't see — resentment makes a poor investigator.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Расчёты не сходятся, а ответственность хочется переложить: на обстоятельства, на банк, на чужую забывчивость. Проверьте счета сами, прежде чем искать виноватого на стороне.",
      "en": "The numbers don't add up, and it's tempting to shift the blame — onto circumstances, the bank, someone else's forgetfulness. Check the accounts yourself before looking for fault elsewhere.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Вы судите себя слишком строго за то, что не успели позаботиться о себе, — или, наоборот, ищете оправдания вовне. Спросите честно: что вы на самом деле задолжали своему телу?",
-     "en": "You're judging yourself too harshly for not taking better care of yourself — or making excuses elsewhere instead. Ask honestly: what do you actually owe your body right now?",
-     "status": "draft"
+     "ru": "Внутренний судья работает без выходных: пропущенная тренировка становится приговором, а не фактом. Тело откликается не на строгость приговора, а на возвращение к обычному ритму.",
+     "en": "The inner judge never takes a day off: a missed workout turns into a verdict rather than a fact. The body responds to a return to its usual rhythm, not to the severity of the sentence.",
+     "status": "reviewed"
     }
    }
   },
@@ -1549,22 +1549,22 @@
     "love_reversed": {
      "ru": "Ожидание становится невыносимым: вы то торопите партнёра с ответом, то держитесь за отношения, которые давно пора отпустить. Спросите себя честно, чего вы боитесь больше — паузы или перемен.",
      "en": "Waiting starts to feel unbearable: you either rush your partner for an answer or cling to a relationship it's time to release. Ask yourself honestly what scares you more — the pause, or the change.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Пауза раздражает: вы дёргаетесь, торопите решение, которое ещё не созрело, — или застряли в проекте без результата дольше, чем стоило. Проверьте, ждёте вы осмысленно или просто боитесь шага.",
      "en": "The pause feels unbearable: you're pushing for a decision that isn't ready yet, or you've stayed stuck in a project past the point it made sense. Check whether you're waiting with purpose — or just afraid to move.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Жертва не окупается: вы урезаете себя во всём ради цели, которая перестала вдохновлять, или суетливо тратите вместо того, чтобы переждать. Спросите себя, за что именно вы платите сейчас.",
-     "en": "The sacrifice isn't paying off: you're cutting corners for a goal that no longer excites you, or spending restlessly instead of waiting things out. Ask yourself what you're actually paying for right now.",
-     "status": "draft"
+     "en": "You're depriving yourself of everything for a goal that no longer inspires you, or spending restlessly instead of waiting things out. Ask yourself what you're actually paying for right now.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело просит паузы, а вы отвечаете суетой — или, наоборот, слишком долго держите себя в режиме ожидания без отдыха. Понаблюдайте, где вы путаете терпение с игнорированием сигналов.",
      "en": "A pause is being asked for, and restlessness keeps answering instead — or you've stayed in wait-and-see mode too long without actually resting. Notice where you're mistaking patience for ignoring the signals.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -1669,22 +1669,22 @@
     "love_reversed": {
      "ru": "Вы чувствуете, что этот этап отношений исчерпан, но откладываете честный разговор. Держаться за привычное сейчас утомляет больше, чем сама перемена — во что вам обходится это ожидание?",
      "en": "You sense this chapter of the relationship has run its course, yet keep postponing the honest conversation. Holding on to the familiar is more tiring now than the change itself — what is the waiting costing you?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Работа или роль давно не откликаются, но вы продолжаете держаться за них по привычке или из страха начать заново. Честно спросите себя: что вы носите с собой только потому, что жаль отпустить?",
      "en": "The job or role stopped resonating a while ago, yet you keep holding on out of habit or fear of starting over. Ask yourself honestly: what are you carrying only because it feels too hard to release?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Старая схема с деньгами уже не работает, но расстаться с ней трудно — привычка держит крепче смысла. Будьте бережны к себе, разбирая, что стоит закрыть, а что ещё можно перестроить.",
      "en": "An old money habit no longer works, yet it's hard to let go — habit holds tighter than logic here. Be gentle with yourself as you sort what needs closing from what can still be rebuilt.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Пора закончить с привычкой или ритмом, которые больше не поддерживают вас, но прощание откладывается снова и снова. Будьте бережны к себе: отпускать тяжело, и это нормально.",
      "en": "It's time to end a habit or pace that no longer supports you, yet the goodbye keeps getting postponed. Be gentle with yourself — letting go is hard, and that's all right.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -1791,22 +1791,22 @@
     "love_reversed": {
      "ru": "Баланс сбивается в качели: то вы растворяетесь в партнёре без остатка, то отдаляетесь совсем. Небольшая корректировка — договориться о мелочи — сработает лучше, чем резкий разговор обо всём сразу.",
      "en": "Balance turns into a swing: you dissolve completely into your partner one moment, then pull away the next. A small adjustment — agreeing on one small thing — works better than a sweeping talk about everything.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Мера теряется: вы то берёте на себя слишком много задач сразу, то выгораете и бросаете всё на середине. Пересоберите нагрузку по частям — небольшая правка сейчас надёжнее полной перестройки.",
      "en": "Measure slips away: you take on far too much at once, then burn out and drop it all halfway. Rebalance your load piece by piece — a small fix now is more reliable than a full overhaul.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Бюджет качается из крайности в крайность: строгая экономия сменяется тратой без оглядки. Присмотритесь, где именно перекос, и скорректируйте понемногу, а не всё сразу.",
      "en": "Your budget swings between extremes: strict austerity, then spending without a second thought. Look closely at where the imbalance sits, and adjust it gradually rather than all at once.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Режим сбивается: вы то перегружаете себя делами, то падаете в полное бездействие. Телу сейчас нужна не встряска, а маленькая, но постоянная поправка — например, один спокойный ритуал в день.",
      "en": "Your routine swings out of sync: overloading yourself with tasks, then collapsing into total inactivity. Your body needs not a shake-up but one small, steady adjustment — like a single calm ritual each day.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -1911,22 +1911,22 @@
     "love_reversed": {
      "ru": "Вы начинаете замечать, где путаете любовь со страхом одиночества, и это уже шаг вперёд. Не вините себя за прошлые уступки — просто спросите, каких границ вам хочется теперь.",
      "en": "You're starting to notice where you mistake love for fear of being alone, and that's already progress. Don't blame yourself for past compromises — just ask what boundaries you want now.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Работа, которая держала вас деньгами или привычкой, теряет над вами власть — вы всё чаще замечаете, чего она стоит на самом деле. Пробуйте называть условия, которые вам подходят, вслух.",
      "en": "The job that held you through money or habit is losing its grip — you notice more clearly what it actually costs you. Try naming the conditions that would work for you, out loud.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Траты «для настроения» или кредит, который давил, начинают терять хватку — вы замечаете их истинную цену. Маленький шаг к порядку в деньгах сейчас важнее резкого отказа от всего сразу.",
      "en": "Spending 'to feel better' or debt that weighed on you starts losing its hold — you can see its real price now. A small step toward order matters more than swearing off everything at once.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Привычка заедать усталость или зависать в экранах становится вам видна — а увиденное уже легче держит. Попробуйте один раз заменить привычный жест на то, что утешает по-настоящему.",
      "en": "The habit of numbing tiredness with food or screens is becoming visible to you — and seeing it already loosens its grip. Try once replacing the familiar gesture with something that truly comforts.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2031,22 +2031,22 @@
     "love_reversed": {
      "ru": "Трещины в отношениях вы видите давно, но признавать их страшно — а удерживать распадающееся выматывает сильнее честного разговора. Возможно, самое тяжёлое уже позади.",
      "en": "You've seen the cracks in this relationship for a while but dread naming them — propping up what's failing wears you out more than an honest talk would. Maybe the hardest part is already behind you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Проект или роль, которые давно не работают, вы продолжаете подпирать из последних сил. Отпустить старую схему сейчас дешевле, чем тянуть её ещё один квартал.",
      "en": "You keep bracing up a project or role that stopped working long ago, on sheer will. Letting the old plan go now costs less than dragging it through another quarter.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Схему, которая держится на честном слове, вы боитесь проверить — а трещины в бюджете уже видны. Лучше признать это сейчас, пока пересборка требует меньше усилий.",
-     "en": "You're afraid to examine an arrangement held together by good faith, though the cracks in your budget already show. Better to admit it now, while rebuilding still takes less effort.",
-     "status": "draft"
+     "ru": "Одна денежная договорённость — заём другу, обещанная выплата, устное партнёрство — держится только на честном слове, без бумаги. Зафиксируйте условия письменно сейчас, пока это можно сделать спокойно.",
+     "en": "One money arrangement — a loan to a friend, a promised payment, a verbal partnership — rests on good faith alone, with nothing in writing. Put the terms on paper now, while it can still be done calmly.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело давно подаёт сигналы, что нагрузка на пределе, а вы откладываете паузу «до лучших времён». Это ещё можно смягчить: дайте себе отдых сейчас, не дожидаясь, пока силы кончатся совсем.",
      "en": "The load has felt too heavy for a while now, and rest keeps getting pushed to 'later'. This can still be softened: give yourself a break now, without waiting for your strength to run out completely.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2153,22 +2153,22 @@
     "love_reversed": {
      "ru": "Вера в тёплые отношения немного истончилась, и кажется, что света в паре не осталось. Он никуда не делся — вернитесь к простым жестам нежности, с которых всё начиналось.",
      "en": "Faith in warm closeness has worn a little thin, and the light in this relationship can feel gone. It hasn't — return to the simple gestures of tenderness that started it all.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Дальняя цель в работе будто померкла, и вы двигаетесь по инерции. Вспомните, ради чего всё это затевалось, — вдохновение возвращается не рывком, а маленьким интересом.",
-     "en": "The long-term goal at work feels dimmed, and you're moving on momentum alone. Recall what you started this for — inspiration comes back through small interest, not a jolt.",
-     "status": "draft"
+     "ru": "Дальняя цель в работе будто померкла: дни идут один за другим, а смысл пока не возвращается сам собой. Вспомните, ради чего всё это затевалось, — вдохновение приходит через маленький интерес, а не рывком.",
+     "en": "The long-term goal at work feels dimmed: the days pass one after another, and the sense of purpose isn't returning on its own. Recall what you started this for — inspiration comes back through small interest, not a jolt.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "После трудного периода уверенность в деньгах ещё не вернулась, и кажется, что просвета не видно. Ситуация выравнивается медленнее, чем хочется, но выравнивается — заметьте маленькие сдвиги.",
      "en": "After a hard stretch, confidence with money hasn't quite returned, and no light seems visible yet. Things are levelling out slower than you'd like, but they are — notice the small shifts.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Силы в теле есть, просто усталость последних дней их заслоняет. Позвольте себе немного света и движения без цели «доказать» — ощущение лёгкости обычно приходит само, без спешки.",
      "en": "The energy is in your body, recent fatigue just hides it from view. Give yourself some light and movement with no goal to 'prove' anything — lightness tends to show up on its own, without hurry.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2273,22 +2273,22 @@
     "love_reversed": {
      "ru": "Недосказанность с партнёром постепенно проясняется — додумки уступают место фактам. Проверьте только, не закрываете ли вы глаза на то, что сама интуиция давно подсказывает.",
      "en": "Things left unsaid with your partner are slowly clearing up — guesswork gives way to facts. Just check you aren't closing your eyes to something your intuition has been telling you for a while.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Мутные договорённости на работе начинают проясняться, скрытые мотивы становятся видны. Не спешите радоваться раньше времени — перечитайте условия ещё раз при свете дня.",
      "en": "Murky agreements at work are starting to come into focus, and hidden motives grow visible. Don't celebrate too soon — reread the terms once more in the light of day.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Условия, которые казались туманными, постепенно раскрываются — самое время перечитать договор спокойно, без спешки. Мелкий шрифт сейчас виднее, чем неделю назад.",
      "en": "Terms that felt foggy are gradually coming clear — a good moment to reread the contract calmly, without rushing. The fine print is easier to spot now than it was a week ago.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тревожные мысли, которые мешали спать, понемногу отступают — туман рассеивается. Если беспокойство ещё возвращается по вечерам, запишите его на бумаге вместо того, чтобы носить в себе.",
      "en": "The anxious thoughts that kept you up are slowly easing — the fog is lifting. If worry still returns in the evenings, put it on paper instead of carrying it alone.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2395,22 +2395,22 @@
     "love_reversed": {
      "ru": "Тепло в отношениях никуда не делось, просто усталость или сравнение с другими парами мешают его замечать. Один вечер без гаджетов и ожиданий может вернуть эту лёгкость.",
      "en": "The warmth in the relationship hasn't gone anywhere — fatigue or comparing yourselves to other couples just makes it hard to notice. One evening without screens or expectations can bring the lightness back.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Результаты уже есть, но вы привычно обесцениваете их вместо того, чтобы порадоваться. Позвольте себе заметить, что получилось, прежде чем бежать к следующей задаче.",
-     "en": "The results are already there, but you're downplaying them out of habit instead of enjoying them. Let yourself register what worked before rushing to the next task.",
-     "status": "draft"
+     "ru": "Радость от сделанного никуда не делась — просто сравнение с чужими успехами или привычка сразу хвататься за новое дело её заглушает. Позвольте себе на минуту задержаться на результате, которым вы довольны.",
+     "en": "The joy of what you've achieved hasn't disappeared — comparing yourself to others, or rushing straight into the next task, just drowns it out. Let yourself pause for a moment on a result you're proud of.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги в порядке, но тревога или сравнение с другими не дают это почувствовать — либо, наоборот, оптимизм обгоняет реальные цифры. Сверьтесь с фактами и признайте то хорошее, что уже есть.",
      "en": "Money is fine, but anxiety or comparison keeps you from feeling it — or, the opposite, optimism is outrunning the actual numbers. Check the facts and acknowledge the good that's already there.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело чувствует себя лучше, чем вам кажется, — просто вы сравниваете себя со «старой нормой» и не замечаете прогресса. Отметьте одну вещь, которая сегодня даётся легче, чем месяц назад.",
      "en": "Physical energy is probably better than you think — you're comparing yourself to some 'old normal' and missing the progress. Notice one thing that comes easier today than it did a month ago.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2515,22 +2515,22 @@
     "love_reversed": {
      "ru": "Вопрос «куда идут эти отношения» звучит в вас давно, но ответить честно пока страшно. Спросите себя прямо: не хватает доказательств — или просто смелости признать то, что вы уже знаете?",
      "en": "The question of where this is heading has sounded in you a while, but answering honestly still feels frightening. Ask yourself: is it proof you're missing, or the courage to admit what you already know?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Решение сменить роль или направление созрело, а вы всё откладываете его из страха или излишней самокритики. Спросите себя: чего на самом деле не хватает — умений или разрешения действовать?",
      "en": "The decision to change roles or direction has ripened, yet you keep postponing it out of fear or harsh self-judgement. Ask what you're really missing — skill, or permission to act.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Старый финансовый вопрос — долг, спор, невыясненные условия — давно просит закрытия, но вы тянете с разговором. Один честный шаг сейчас развяжет узел, который держит дольше, чем кажется.",
      "en": "An old money matter — a debt, a dispute, unclear terms — has been asking to be closed a while, but you keep putting off the conversation. One honest step now will untangle a knot held longer than it needed to.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Сигнал «пора что-то изменить» звучит внутри давно, но вы откладываете его под грузом самокритики. Начните не с идеального плана, а с одного маленького шага, который точно по силам.",
-     "en": "A quiet signal that it's time for a change has been there for a while, buried under self-criticism. Start not with a perfect plan, but with one small step that's genuinely within reach.",
-     "status": "draft"
+     "ru": "Внутри давно звучит сигнал «пора что-то изменить», но самокритика тут же заглушает его словами «ещё рано». Разрешите себе просто услышать этот зов, не требуя от себя немедленного ответа.",
+     "en": "A quiet signal that it's time for a change has sounded inside for a while, but self-criticism keeps drowning it out with 'not yet.' Let yourself simply hear that call, without demanding an immediate answer from yourself.",
+     "status": "reviewed"
     }
    }
   },
@@ -2635,22 +2635,22 @@
     "love_reversed": {
      "ru": "До ощущения «мы дошли» остаётся будто один шаг, но что-то мешает его сделать — привычка или страх перед завершённостью. Назовите вслух, чего именно не хватает для этой точки.",
      "en": "The feeling of 'we made it' seems one step away, yet something — habit or fear of closure — keeps you from taking it. Name out loud what's actually missing to reach that point.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Проект почти завершён, но вы застряли на последнем шаге, обесценивая то, что уже сделано. Позвольте себе увидеть путь целиком — точка в конце важнее ещё одной доработки.",
      "en": "The project is nearly finished, but you're stuck on the last step, downplaying what's already done. Let yourself see the whole path — closing it matters more than one more tweak.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Финансовая цель уже почти в руках, но вы то ли не замечаете этого, то ли боитесь остановиться и подвести итог. Отметьте вслух, сколько уже пройдено, — это тоже часть пути.",
      "en": "The financial goal is almost within your grasp, yet you either don't notice it or fear stopping to take stock. Say out loud how far you've already come — that's part of the journey too.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Ощущение целостности почти вернулось, но привычная рутина не даёт это заметить. Оглянитесь на путь, который вы прошли в заботе о себе, — он длиннее, чем кажется изнутри.",
      "en": "The sense of wholeness has nearly returned, but routine keeps you from noticing it. Look back at how far you've come in caring for yourself — it's a longer road than it feels from inside.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2753,22 +2753,22 @@
     "love_reversed": {
      "ru": "Влечение вспыхивает и быстро гаснет: знакомство откладывается, а смелости сказать о чувствах не находится. Проверьте, действительно ли вас тянет к этому человеку — или увлекла сама идея романа.",
      "en": "Attraction sparks and fades just as fast: you keep putting off the first move, and the words stay unsaid. Check whether it's this person who draws you in — or just the idea of romance.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Проект застревает на стадии идеи: план готов, а взяться за первый шаг не получается. Возможно, дело не в лени, а в сомнении — та ли это цель, ради которой стоит выкладываться.",
      "en": "A project stalls at the idea stage: the plan is ready, but taking the first step keeps not happening. Maybe it isn't laziness — maybe you're unsure this goal is worth the effort.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Идея подработки или своего дела так и остаётся идеей: расчёты сделаны, а начать страшно. Спросите себя, чего не хватает для старта — смелости, времени или уверенности в самом плане.",
-     "en": "A side-income idea stays just an idea: you've done the math, but starting feels scary. Ask yourself what's missing to begin — courage, time, or trust in the plan itself.",
-     "status": "draft"
+     "ru": "Деньги на старт отложены, а потратить их боязно: жаль, если уйдут впустую. Проверьте, что держит вас на самом деле — сожаление о тратах или сомнение в самом плане.",
+     "en": "Money set aside to start feels risky to spend — it would be a shame to lose it for nothing. Check what's really holding you back: regret over the money, or doubt in the plan itself.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Желание двигаться и что-то менять есть, а сил на первый шаг не хватает. Не давите на себя расписанием «с понедельника» — начните с одного маленького действия сегодня.",
      "en": "You want to move and change something, but the energy for a first step is missing. Don't pressure yourself with a \"starting Monday\" plan — begin with one small action today.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2868,22 +2868,22 @@
     "love_reversed": {
      "ru": "Вы будто застряли на развилке: остаться в привычных отношениях или сделать шаг к большему — но решение всё откладывается. Спросите себя прямо, чего вы боитесь больше: перемен или сожаления, что не решились.",
      "en": "You feel stuck at the fork: stay in the familiar relationship or take a step toward more — but the decision keeps waiting. Ask yourself honestly what scares you more: change, or regret over not deciding.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Планы расширения зависают на бумаге: вы просчитали варианты, но выбираете привычное место вместо нового уровня — или, наоборот, рвётесь вперёд без подготовки. Найдите середину между осторожностью и смелостью.",
-     "en": "Plans to grow stay stuck on paper: you keep choosing the familiar over the next level. Or the opposite — you leap ahead with no preparation. Find the middle ground between caution and courage.",
-     "status": "draft"
+     "en": "Plans to grow stay stuck on paper: you've carefully weighed the options, yet keep choosing the familiar over the next level — or leap ahead unprepared instead. Find the middle ground between caution and courage.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Стратегия составлена, но вложиться вы не решаетесь: деньги лежат «на всякий случай» без движения — или, наоборот, срываетесь в рискованное вложение без расчёта. Вернитесь к плану и честно оцените риск.",
      "en": "You've built a financial strategy but hesitate to act on it, and the money just sits there \"just in case.\" Or you jump into a risky move with no calculation. Go back to the plan and weigh the risk honestly.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Привычный ритм жизни стал тесным, но менять его боязно — вы откладываете любое обновление рутины. Начните с малого: один новый маршрут прогулки, один непривычный час в расписании.",
      "en": "Your usual rhythm has grown too tight, but changing it feels risky, so you keep putting off any refresh of your routine. Start small: one new walking route, one unfamiliar hour in your schedule.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -2983,22 +2983,22 @@
     "love_reversed": {
      "ru": "Отношения будто замерли в ожидании: разговор о будущем откладывается, шаги друг к другу идут медленнее, чем хотелось. Не спешите с выводами — иногда паузе просто нужно больше времени, а не меньше чувств.",
      "en": "The relationship feels stuck in a holding pattern: the future keeps not getting discussed, and steps toward each other come slower than you'd like. Sometimes the pause just needs more time, not less feeling.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Проект буксует: сроки сдвигаются, партнёры не отвечают вовремя, результат заставляет ждать. Пересмотрите план и сроки вместо того, чтобы винить себя, — возможно, расчёт изначально был слишком оптимистичным.",
      "en": "The project is dragging: deadlines slip, partners take too long to reply, results make you wait. Revise the plan and the timeline instead of blaming yourself — the original estimate may simply have been too optimistic.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Доход от вложений или дальнего проекта идёт медленнее, чем вы рассчитывали. Проверьте цифры заново: возможно, дело не в неудаче, а в том, что срок окупаемости был недооценён.",
-     "en": "Income from an investment or a distant project is coming in slower than you expected. Check the numbers again — it may not be failure, just a payback period you underestimated.",
-     "status": "draft"
+     "ru": "Доход от вложений идёт медленнее, чем рассчитывали, и тянет подстраховаться неприкосновенным запасом, чтобы закрыть разрыв. Дайте деньгам дойти своим чередом — резерв сейчас лучше не трогать.",
+     "en": "Income from an investment is coming in slower than planned, tempting you to dip into your reserve to cover the gap. Let the money arrive in its own time — the reserve is better left untouched for now.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Результат от привычек, которые вы завели, пока не виден, и это обескураживает. Дайте себе больше времени: устойчивые изменения редко заметны раньше, чем через несколько недель.",
      "en": "The results of habits you've built aren't visible yet, and that's discouraging. Give yourself more time — lasting change rarely shows before a few weeks have passed.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -3098,22 +3098,22 @@
     "love_reversed": {
      "ru": "Праздник для двоих откладывается — не потому что чувств меньше, а потому что момент пока не тот: переезд, перемены, нехватка времени друг на друга. Спросите, что сейчас важнее — красивый жест или спокойный разговор дома.",
      "en": "Celebrating together is on hold — not because the feelings faded, but because the timing isn't right: a move, changes, too little time for each other. Ask what matters more now — a gesture or a quiet talk at home.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Признание за завершённый этап задерживается, а в коллективе не хватает лёгкости и тепла — возможно, дело в переходном периоде: новом офисе, смене состава команды. Дайте обстановке время устояться.",
      "en": "Recognition for a finished stage is taking its time, and the team feels short on ease and warmth. It may just be a transition — a new office, a shifting team. Give the setting time to settle.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Траты на дом или праздник откладываются, хотя опора в целом крепкая. Возможно, сейчас удачнее момент подкопить, чем тратить, — а радость от уюта никуда не денется.",
      "en": "Spending on your home or a celebration is being postponed, even though your footing is solid overall. This may be a better moment to save than to spend — the joy of comfort will keep.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Ощущение дома и опоры сейчас немного шаткое — из-за переезда, смены обстановки или просто плотного графика. Найдите маленький привычный ритуал, который вернёт чувство «я на своём месте».",
      "en": "Your sense of home and steadiness feels a little shaky right now — a move, a change of setting, or just a packed schedule. Find one small familiar ritual that brings back the feeling of belonging.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -3213,22 +3213,22 @@
     "love_reversed": {
      "ru": "Спор либо тянется без конца и выматывает обоих, либо вы вовсе избегаете разговора, проглатывая несогласие, — и то и другое способ не решать. Назовите то, что действительно важно, и обсудите именно это.",
      "en": "Either the argument drags on and wears you both down, or you're avoiding the conversation and swallowing your disagreement instead. Both are ways of not deciding. Name what actually matters, and talk about that.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Напряжение на работе тянется дольше, чем стоило бы, и съедает силы, нужные для дела, — или вы молча соглашаетесь, лишь бы не спорить, и раздражение копится внутри. Выберите, за что бороться, а что отпустить.",
      "en": "Tension at work drags on longer than it should, draining energy the work itself needs. Or you're quietly agreeing just to avoid the fight, and irritation builds up inside. Choose what's worth fighting for.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Торг или спор о деньгах затянулся дольше, чем того стоило дело, — или вы вовсе избегаете разговора о цене. Внутреннее напряжение из-за денег тоже в счёт: проверьте, с кем вы на самом деле соревнуетесь.",
      "en": "Haggling or a money dispute has dragged on longer than the issue deserved — or you're avoiding the money conversation altogether. Inner tension about money counts too: check who you're actually competing with.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Много энергии уходит на затянувшееся напряжение или на молчаливое несогласие с кем-то. Дайте себе честный выход: спорт, разговор, движение — что угодно, лишь бы не держать это внутри.",
      "en": "A lot of your energy goes into a lingering tension or a quiet disagreement you never voice. Give yourself an honest outlet — sport, a conversation, movement — anything but holding it in.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -3328,22 +3328,22 @@
     "love_reversed": {
      "ru": "Хочется, чтобы чувства заметили и оценили, а признания всё нет — партнёр молчит, или сравнение с другими парами вызывает сомнения. Ваша ценность в этих отношениях не зависит от того, кто и что скажет со стороны.",
      "en": "You want your feelings seen and valued, but the acknowledgment isn't coming — a partner stays quiet, or comparing yourself to other couples stirs doubt. Your worth here doesn't depend on outside opinions.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Заслуженная похвала задерживается: проект готов, а отклика от начальства нет, или лавры достались коллеге. Не гонитесь за чужим одобрением — зафиксируйте результат для себя и продолжайте работать.",
      "en": "The credit you've earned is slow to arrive: the project is done, but there's no word from above, or a colleague gets the praise. Don't chase outside approval — note the result for yourself and keep going.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Ожидаемая премия или благодарность за работу откладывается, и это обидно. Но ценность сделанного не меряется скоростью выплаты — держите фокус на результате, а не на том, когда его признают.",
-     "en": "An expected bonus or thank-you for your work is taking its time, and that stings. But the value of what you did isn't measured by how fast it's paid — stay focused on the result, not on when it gets recognized.",
-     "status": "draft"
+     "ru": "Выплата или премия задерживается, а вы уже мысленно распланировали траты под неё. Дайте деньгам дойти по факту — тратить наперёд то, чего ещё нет на счету, лишний риск.",
+     "en": "A payout or bonus is running late, yet you've already planned your spending around it. Wait for the money to actually arrive — spending ahead of funds that aren't there yet is an unnecessary risk.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Прогресс в самочувствии есть, а гордости за него как будто не хватает — хочется, чтобы кто-то заметил старания. Похвалите себя сами: этого достаточно, чтобы двигаться дальше.",
      "en": "There's real progress in how you feel, but the pride in it feels thin — you want someone else to notice the effort. Praise yourself for it: that's reason enough to keep going.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -3443,22 +3443,22 @@
     "love_reversed": {
      "ru": "Вы устали защищать свой выбор перед чужим мнением — родных, друзей, а порой и собственных сомнений. Уступчивость там, где стоило постоять на своём, оставляет горький след: проверьте, за что действительно держаться.",
      "en": "You're tired of defending your choice against other opinions — family, friends, sometimes your own doubts. Giving in where you should have held firm leaves a bitter aftertaste: check what's truly worth it.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Давление со всех сторон вымотало, и спорить о своей позиции больше нет сил. Проверьте, что из оспариваемого правда стоит борьбы, а что можно спокойно уступить — без чувства поражения.",
      "en": "Pressure from every direction has worn you down, and you're out of energy to defend your position. Check what's actually worth the fight, and what you can calmly let go of — without it feeling like defeat.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Торговаться о цене или зарплате больше нет сил — легче согласиться на меньшее, лишь бы спор закончился. Прежде чем уступить, спросите: это правда не принципиально, или вы просто устали спорить?",
      "en": "You're out of energy to negotiate price or salary — agreeing to less feels easier than keeping up the fight. Before you give in, ask: does it truly not matter, or are you just tired of arguing?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Постоянная готовность отстаивать своё забирает много сил у тела и разума. Дайте себе передышку: не каждое напряжение нужно нести в одиночку до конца.",
      "en": "Constant readiness to defend your ground drains a lot from both body and mind. Give yourself a break — not every tension needs to be carried alone to the finish line.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -3558,22 +3558,22 @@
     "love_reversed": {
      "ru": "Слова будто застревают в пути: сообщение не доходит, свидание срывается, а тишина отзывается ревностью. Прежде чем додумывать за другого, спросите напрямую и дайте разговору свою скорость.",
      "en": "Words seem to get stuck along the way: a message goes unanswered, a date falls through, and the silence breeds jealousy. Before you imagine the worst, ask directly and let the conversation find its own pace.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Дела буксуют именно там, где ждали быстрого ответа: письмо без реакции, встреча переносится, договорённость расползается. Не дожимайте — уточните, куда на самом деле спешите, и наведите порядок в деталях.",
      "en": "Things stall exactly where a quick answer was expected: an email goes unread, a meeting keeps shifting, an agreement unravels. Don't push harder — check where you're really rushing to, and tidy up the details.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Платёж задерживается, ответ по заявке тонет в ожидании, а деньги будто движутся мимо цели. Прежде чем поторапливать события, перечитайте условия — путаница сейчас дороже промедления.",
      "en": "A payment lags, a reply to your application sinks into waiting, and money seems to move past its target. Before you rush things along, reread the terms — confusion costs more than delay right now.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Внутри — суета без движения: хочется всё успеть, а тело будто буксует на месте. Понаблюдайте, где спешка подменяет настоящий отдых, и позвольте себе паузу без чувства вины.",
      "en": "Inside there's fuss without motion: you want to get everything done, yet the body seems stuck. Notice where rushing has replaced real rest, and allow yourself a pause without guilt.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -3674,22 +3674,22 @@
     "love_reversed": {
      "ru": "Оборона, выстроенная в прошлом, срабатывает и там, где рядом просто близкий человек. Близость хочется, а довериться боязно — заметьте, когда щит поднимается раньше, чем появилась причина.",
      "en": "Defences built in the past can trigger even around someone who simply cares about you. You want closeness yet fear trusting again — notice when the shield goes up before there's any real reason.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Силы на пределе, и любое замечание коллеги читается как атака, даже если это не так. Прежде чем занимать оборону, проверьте: угроза реальна или это просто усталость говорит вашим голосом?",
      "en": "Energy is running thin, and any comment from a colleague can feel like an attack, even when it isn't. Before you dig in defensively, check whether the threat is real — or it's simply fatigue speaking.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Тревога за деньги включается даже там, где всё стабильно: хочется откладывать больше, отказывать себе во всём, держать оборону про запас. Спросите, от какой именно потери вы страхуетесь на самом деле.",
      "en": "Money anxiety switches on even when things are stable: you want to save more, deny yourself everything, keep guarding just in case. Ask what loss you're actually bracing for.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Тело давно живёт в режиме готовности к удару, хотя опасности рядом нет. Разрешите себе заметить усталость раньше, чем она станет единственным сигналом остановиться.",
-     "en": "High alert has been the default mode for a while now, even though no danger is actually near. Let yourself notice the tiredness before it becomes the only signal that makes you stop.",
-     "status": "draft"
+     "ru": "Тревога включается раньше, чем появляется настоящий повод, — старые бои отзываются быстрее новых. Проверьте, что беспокоит вас сейчас на самом деле, а что тянется из прошлого.",
+     "en": "Alarm switches on before any real reason appears — old battles react faster than new ones do. Check what's actually troubling you now, and what's simply carried over from before.",
+     "status": "reviewed"
     }
    }
   },
@@ -3789,22 +3789,22 @@
     "love_reversed": {
      "ru": "Список дел на двоих давно держит один — молча, из чувства долга, о котором даже не говорится вслух. Заметьте эту тяжесть раньше, чем усталость станет единственным способом её показать.",
      "en": "One of you has quietly been carrying the shared list alone, out of a duty nobody ever named out loud. Notice that weight before exhaustion becomes the only way it gets shown.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Задачи либо начинают выпадать из рук, либо вы упрямо тянете и чужую часть тоже, лишь бы не просить о помощи. Пересмотрите список: что из этого действительно должны нести именно вы?",
      "en": "Tasks are either starting to slip through your fingers, or you're stubbornly hauling someone else's share too, just to avoid asking for help. Review the list: what here is truly yours to carry?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Есть трата или долг, о котором вы предпочитаете не думать, будто молчание облегчает ношу. Честный взгляд на список обязательств сейчас освобождает больше, чем любая экономия.",
      "en": "There's some expense or debt you'd rather not think about, as if silence made it lighter. An honest look at your obligations right now frees you more than any amount of saving.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Плечи давно несут больше, чем видно со стороны, а отдых кажется роскошью, которую нужно заслужить. Спросите, кому вы всё ещё доказываете, что способны вынести всё в одиночку.",
-     "en": "Your shoulders have been carrying more than shows on the outside, and rest feels like a luxury you have to earn. Ask who you're still trying to prove you can carry everything alone for.",
-     "status": "draft"
+     "en": "Your shoulders have been carrying more than shows on the outside, and rest feels like a luxury you have to earn first. Ask who you're still trying to prove you can carry it all alone.",
+     "status": "reviewed"
     }
    }
   },
@@ -3902,24 +3902,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Внимание вспыхивает ярко и гаснет так же быстро: сообщения без продолжения, планы, которые никто не подтверждает. Проверьте, готовы ли чувства подрасти, прежде чем ждать от них устойчивости.",
-     "en": "Attention flares up brightly and cools just as fast: messages with no follow-up, plans nobody confirms. Check whether the feelings are actually ready to grow before expecting steadiness from them.",
-     "status": "draft"
+     "ru": "Внимание вспыхивает раз за разом и обрывается на полпути — уже не первое такое знакомство без продолжения. Заметьте этот узор раньше, чем спишете его на очередную случайность.",
+     "en": "Attention flares up again and again, then breaks off halfway — this isn't the first acquaintance that goes nowhere. Notice the pattern before writing it off as one more coincidence.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Курс начат, идея вдохновила — а дальше первой недели дело не идёт, и это уже третий такой старт подряд. Выберите один проект и дайте себе месяц, прежде чем хвататься за следующий.",
      "en": "A course gets started, an idea sparks excitement — then nothing moves past week one, and this is already the third start like it. Pick one project and give it a month before reaching for the next.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Замыслов заработка много, а до конкретного шага не доходит ни один: планы обсуждаются, но не оформляются. Небольшое, но реальное действие сейчас важнее ещё одной блестящей идеи.",
-     "en": "Plenty of income schemes come to mind, yet none of them turn into a concrete step: plans get discussed but never made real. One small, actual action now matters more than another shiny idea.",
-     "status": "draft"
+     "ru": "Одна идея заработка сменяет другую, а до результата не доходит ни одна — уже который раз подряд. Выберите одну и доведите её до конца, вместо того чтобы искать следующую.",
+     "en": "One income idea replaces another, and none of them ever reach a result — this keeps happening again and again. Pick one and follow it through, instead of reaching for the next.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Интерес к телу вспыхивает и гаснет: новая привычка живёт неделю, потом забывается ради следующей. Заметьте, что мешает довести хотя бы одно маленькое начинание до привычки.",
      "en": "Interest in your body flares and fades: a new habit lasts a week, then gets dropped for the next one. Notice what keeps even one small start from becoming an actual habit.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4017,24 +4017,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Страсть вспыхивает быстро и так же быстро оборачивается резкими словами или уходом от разговора, едва становится сложно. Прежде чем хлопать дверью в сердцах, дайте себе сутки на остыть.",
-     "en": "Passion flares up fast and just as fast turns into sharp words or walking away from the conversation the moment things get hard. Before you slam the door in anger, give yourself a day to cool down.",
-     "status": "draft"
+     "ru": "Разговор снова рвётся на резком слове или уходе — ровно тогда, когда стоило остаться и договорить. Прежде чем считать тему закрытой, дайте себе сутки на остыть.",
+     "en": "The conversation breaks off again over a sharp word or a walkout, right when it's time to talk it through. Before calling the subject closed, give yourself a day to cool down.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Начатое бросается ради следующей яркой идеи, а решения принимаются на скорости, которая потом оборачивается переделками. Прежде чем сорваться в новый проект, доведите до конца хотя бы этот.",
      "en": "Things get dropped for the next shiny idea, and decisions get made at a speed that later means redoing them. Before you leap into a new project, finish at least this one first.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Крупная трата или ставка кажется решённым делом ещё до того, как вы всё просчитали. Азарт сейчас торопит сильнее разума — дайте решению отлежаться хотя бы до завтра.",
      "en": "A big purchase or a bet feels like a done deal before you've actually worked out the numbers. Excitement is rushing you faster than reason right now — let the decision sit until tomorrow.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Темп, который вы держите, уже граничит с перегревом: раздражительность, невозможность остановиться, ощущение вечной спешки. Огню сейчас нужна не новая цель, а пауза без движения.",
-     "en": "The pace you're keeping is already bordering on burnout: irritability, an inability to stop, a constant sense of rushing. Right now the fire needs not a new goal, but a pause with no motion at all.",
-     "status": "draft"
+     "en": "The pace you're keeping is already running hot: irritability, an inability to stop, a constant sense of rushing. Right now the fire needs not a new goal, but a pause with no motion at all.",
+     "status": "reviewed"
     }
    }
   },
@@ -4134,22 +4134,22 @@
     "love_reversed": {
      "ru": "Сравнение с другими — с чьей-то страницей в соцсетях, с чужой лёгкостью — тихо гасит собственный блеск. Ревность звучит громче уверенности, хотя дело чаще не в партнёре, а в паузе на себя.",
      "en": "Comparing yourself to others — someone's feed, someone's ease — quietly dims your own shine. Jealousy speaks louder than confidence, though the real issue is usually not the partner but a need for self-attention.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Успех коллеги задевает сильнее, чем хотелось бы, и тянет доказывать своё вместо того, чтобы вести дело спокойно. Верните фокус на собственный результат — сравнение крадёт больше сил, чем работа.",
      "en": "A colleague's success stings more than it should, pulling you to prove yourself instead of steadily running your own work. Bring the focus back to your own result — comparison drains more energy than the work does.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Траты начинают равняться на чужой уровень жизни, а не на собственные планы, и щедрость подменяется желанием доказать статус. Спросите, чей достаток вы на самом деле сейчас догоняете.",
-     "en": "Spending starts following someone else's lifestyle rather than your own plans, and generosity turns into proving a status. Ask whose level of comfort you're actually trying to keep up with.",
-     "status": "draft"
+     "ru": "Щедрость всё чаще подменяется желанием доказать свою состоятельность, а не идёт от тепла. Проверьте, кому на самом деле адресован этот подарок — другому человеку или собственной гордости.",
+     "en": "Generosity increasingly turns into proving your worth rather than coming from warmth. Check who this gift is really for — the other person, or your own pride.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Блеск, который обычно даётся легко, сейчас будто приглушён: радость откладывается на потом, забота о себе — на после дел. Верните этому телу немного тепла без повода его заслуживать.",
      "en": "The glow that usually comes easily feels dimmed right now: joy keeps getting postponed, self-care waits until after the to-do list. Give this body some warmth without needing to earn it first.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4250,22 +4250,22 @@
     "love_reversed": {
      "ru": "Забота легко превращается в решение всего за двоих: маршрут, планы, даже то, что лучше для другого человека. Прежде чем настаивать на своей правоте, спросите — а вас в этом решении спросили?",
      "en": "Care can slide into deciding everything for both of you: the plans, the route, even what's best for the other person. Before insisting you're right, ask — were you actually asked what you think?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Голос звучит громче обычного, а чужие идеи всё чаще отклоняются раньше, чем дослушаны до конца. Проверьте, ведёте вы команду или просто продавливаете собственный план.",
      "en": "Your voice comes out louder than usual, and other people's ideas get dismissed before they're even fully heard. Check whether you're leading the team or simply pushing your own plan through.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Контроль над бюджетом становится жёстче обычного: чужие траты кажутся неправильными, а советы — покушением на ваше решение. Спросите, где твёрдость уже переходит в недоверие к близким.",
      "en": "Control over the budget gets tighter than usual: other people's spending looks wrong, and advice feels like a challenge to your decision. Ask where firmness has already slid into distrust of people close to you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Требовательность, обычно направленная наружу, сейчас развернулась на самих себя: отдых кажется слабостью, а усталость — поводом для недовольства собой. Руководите собой мягче, чем командой.",
      "en": "The demanding standard you usually hold others to has turned inward: rest feels like weakness, and tiredness like a reason for self-criticism. Lead yourself more gently than you lead a team.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4364,24 +4364,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Чувство есть, но словам и жестам трудно выйти наружу: вы бережёте сердце или отдаёте больше, чем получаете взамен. Прежде чем ждать тепла от других, загляните — не закрыта ли дверь с вашей стороны?",
-     "en": "The feeling is there, but words and gestures struggle to get out — you're guarding your heart or giving more than you receive. Before expecting warmth from others, check whether the door is closed from your side.",
-     "status": "draft"
+     "ru": "Партнёр спрашивает, как вы, и слышит привычное «нормально» — вместо того, что происходит на самом деле. Попробуйте один раз ответить честно, а не привычной фразой, которая закрывает разговор.",
+     "en": "Your partner asks how you are, and hears the usual \"fine\" instead of what's actually going on. Try answering honestly once, instead of the phrase that shuts the conversation down.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Дело, которое раньше грело, сейчас делается по инерции: азарт пропал, а команда ощущается чужой. Не вините обстоятельства сразу — иногда причина в том, что вы перестали делиться тем, что чувствуете.",
      "en": "Work that once warmed you now runs on autopilot — the spark is gone, and the team feels distant. Don't blame circumstances right away; sometimes the cause is that you stopped sharing what you actually feel.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги тревожат сильнее, чем должны: траты идут на то, чтобы заглушить пустоту, а не порадовать. Прежде чем открывать кошелёк, спросите себя, какое чувство вы на самом деле пытаетесь купить.",
      "en": "Money worries more than it should: spending fills an emptiness rather than bringing joy. Before opening your wallet, ask yourself what feeling you're really trying to buy.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Ресурс на исходе, а просить о поддержке или дать себе передышку — трудно. Прежде чем наполнять чужие чаши, вспомните про собственную: забота о себе — это не роскошь, а необходимость.",
      "en": "Your reserves are low, and asking for support or allowing yourself rest feels hard. Before filling other people's cups, remember your own — self-care is a need, not a luxury.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4479,24 +4479,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Один вкладывается больше другого, и в паре нарастает молчаливая обида. Вместо того чтобы копить претензии, назовите то, что чувствуете, вслух — недосказанность разъедает связь быстрее ссоры.",
-     "en": "One side gives more than the other, and quiet resentment builds between you. Instead of stockpiling grievances, say what you feel out loud — things left unsaid erode a bond faster than an argument does.",
-     "status": "draft"
+     "ru": "В паре вы всё чаще молча считаете, кто написал первым или кто в этот раз уступил. Назовите счёт вслух хотя бы раз — молчаливая бухгалтерия чувств портит отношения быстрее любого спора.",
+     "en": "In the relationship, you're both keeping a silent tally of who texted first or who gave in last time. Say the score out loud for once — a quiet ledger of feelings wears down a bond faster than any argument.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Партнёрство, которое казалось равным, начинает шататься: договорённости соблюдает только одна сторона. Прежде чем разрывать союз, попробуйте честно проговорить, чего каждому не хватает.",
      "en": "A partnership that once felt equal starts to wobble — only one side keeps to the agreements. Before ending the alliance, try an honest talk about what each of you feels is missing.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "В общих деньгах прячется недосказанность: кто вложил больше, кто должен, кто решает, — а молчание здесь только множит обиду. Проговорите условия прямо, пока разница в ощущениях не переросла в спор.",
      "en": "Shared money hides unspoken tension — who put in more, who owes what, who decides — and silence only feeds resentment. State the terms plainly before the gap in perception turns into a fight.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Рядом с кем-то вы в последнее время скорее устаёте, чем наполняетесь, но признаться в этом себе непросто. Присмотритесь честно: эта близость правда поддерживает вас — или вы держитесь за привычку?",
      "en": "Lately you feel drained rather than nourished around someone, but admitting it to yourself is hard. Look honestly: does this closeness truly support you — or are you holding on to habit?",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4595,24 +4595,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Компания вокруг многолюдна, а искренней близости в ней всё меньше — улыбки есть, тепла нет. Спросите себя, с кем из этого круга вы можете быть собой, без роли и без игры на публику.",
-     "en": "The crowd around you is large, yet real closeness is thinning — plenty of smiles, little warmth. Ask yourself who in this circle lets you be yourself, without playing a role for an audience.",
-     "status": "draft"
+     "ru": "На людях вы с партнёром — та самая счастливая пара с фотографий, а наедине разговор быстро сходит на нет. Тепла между вами сейчас больше в кадре, чем в тишине вдвоём.",
+     "en": "In public you and your partner look like the happy couple from the photos, while alone together the conversation runs dry fast. Right now there's more warmth in the pictures than in the quiet between you.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "За общим весельем в команде проступает усталость: успех празднуют все, а держится всё на паре людей. Присмотритесь, кто из коллег правда рядом, а кто просто хорошо улыбается на фото.",
      "en": "Behind the team's cheer, fatigue is showing through: success gets celebrated while the real work rests on just a couple of people. Notice who's genuinely there for you and who simply smiles well for photos.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Траты на угощения и подарки давно перестали радовать — скорее тянут по инерции поддерживать образ жизни компании. Пересчитайте не только бюджет, но и то, ради кого на самом деле эти траты.",
      "en": "Spending on treats and gifts stopped bringing joy a while ago — it's more inertia, keeping up with the group's lifestyle. Recount not just the budget but who these expenses are really for.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "После шумных встреч остаётся не лёгкость, а опустошение — сил уходит больше, чем приходит. Это не повод отказываться от людей вовсе, но повод сократить круг до тех, с кем действительно отдыхается.",
      "en": "Loud gatherings leave you drained rather than light — more energy goes out than comes in. That's not a reason to give up people entirely, but to narrow the circle to those who truly let you rest.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4712,22 +4712,22 @@
     "love_reversed": {
      "ru": "Безразличие, которое держало вас на расстоянии от чувств, начинает отступать — снова хочется тянуться к человеку, а не отворачиваться. Дайте этому интересу шанс, не гасите его привычной осторожностью.",
      "en": "The numbness that kept you at a distance from your feelings is easing — you want to reach toward someone again instead of turning away. Give that interest a chance instead of smothering it with old caution.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Автопилот, в котором вы работали, начинает давать сбой: появляется азарт, идея, которую раньше отклонили бы не глядя. Присмотритесь к предложению, которое недавно казалось «не тем».",
      "en": "The autopilot you've been running on starts to break — curiosity returns, along with an idea you'd have dismissed without a look before. Take a closer look at an offer that recently seemed \"not quite right\".",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Апатия к деньгам проходит: то, что раньше пролистывали не глядя, — вклад, подработка, старое предложение, — вдруг кажется стоящим внимания. Доверьтесь этому проснувшемуся интересу.",
      "en": "Money apathy is fading: something you used to scroll past without a glance — an investment, a side gig, an old offer — suddenly seems worth a look. Trust that reawakened interest.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Внутренняя спячка заканчивается: тело и настроение снова просят движения, новых впечатлений, перемен в привычном маршруте. Идите за этим импульсом, пока он свежий, а не откладывайте на «потом».",
      "en": "The inner hibernation is ending: body and mood are asking for movement again, for new impressions, a change in the usual routine. Follow that impulse while it's fresh instead of putting it off.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4825,24 +4825,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Острая боль от разрыва или обиды понемногу отступает — вы уже можете вспоминать без слёз и смотреть вперёд. Не возвращайтесь мыслями туда, где было темно: путь вперёд важнее пересчёта потерь.",
-     "en": "The sharp pain of a breakup or hurt is easing — you can now look back without tears and start looking ahead. Don't let your thoughts drift back to the dark place: the path forward matters more than counting losses.",
-     "status": "draft"
+     "ru": "Встреча с бывшим партнёром или разговор о прошлой истории больше не сбивает с ног — вы можете говорить об этом ровным голосом. Открыться новому человеку становится немного легче, чем ещё недавно.",
+     "en": "A meeting with an ex or a conversation about that old story no longer knocks you off balance — you can talk about it in an even voice. Opening up to someone new feels a little easier than it did recently.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "После неудачи на работе наконец приходят силы не пересчитывать упущенное, а собрать то, что уцелело, и двигаться дальше. Доверие к себе восстанавливается — обопритесь на него в следующем шаге.",
      "en": "After a work setback, you finally find the strength to stop tallying what's gone and gather what survived instead. Confidence in yourself is returning — lean on it for the next step.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Финансовая потеря перестаёт саднить так остро: приходит трезвость и план, как восстановиться, вместо того чтобы без конца жалеть об упущенном. Спросите себя, какой практичный шаг сделать первым.",
      "en": "The financial loss stops stinging so sharply: clarity arrives, along with a plan to rebuild instead of endlessly mourning what's gone. Ask yourself what practical step to take first.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тяжесть на душе становится легче: горевание своё дело сделало, и появляются силы заботиться о себе снова. Не корите себя, что печаль отпускает не сразу, — восстановление тоже требует времени.",
      "en": "The heaviness in your chest is lifting: the grieving has done its work, and you find strength to care for yourself again. Don't blame yourself if sorrow doesn't lift all at once — recovery takes time too.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -4940,24 +4940,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Вы сравниваете нынешние отношения с тем, как было раньше, и настоящее вечно проигрывает. Пора отпустить идеализированный образ прошлого и увидеть то, что есть сейчас.",
-     "en": "You keep comparing your relationship now with how it used to be, and the present always loses. It may be time to let go of an idealised past and see what's actually here.",
-     "status": "draft"
+     "ru": "В разговоре то и дело всплывает бывший человек — как пример, как мерка, как повод для укола. Дайте нынешним отношениям шанс складываться по-своему, а не по чужому шаблону из прошлого.",
+     "en": "An ex keeps slipping into conversation — as an example, a yardstick, a quiet jab. Let the current relationship take its own shape instead of following an old script.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Старый опыт, старая должность или бывшая команда кажутся лучше нынешних — но, возможно, вы помните их приукрашенными. Оцените сегодняшнюю работу без сравнения: что в ней есть своего, ценного именно сейчас?",
      "en": "An old job, a former role or team seems better than what you have now — though you may be remembering it prettier than it was. Judge today's work on its own, not by comparison: what's valuable in it right now?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Детская привычка к деньгам — жёсткая экономия или, наоборот, транжирство — до сих пор управляет решениями, хотя обстоятельства давно другие. Спросите себя, чей это на самом деле голос: ваш нынешний или из прошлого.",
      "en": "An old money habit from childhood — tight saving or the opposite, overspending — still steers your choices, though circumstances have long since changed. Ask whose voice this really is: yours now, or one from the past.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Ностальгия по тому, «как раньше было легче», забирает силы, которые нужны сегодня. Отпустите сравнение и спросите: что хорошее я могу создать прямо сейчас, а не только вспоминать?",
      "en": "Nostalgia for \"how much easier it used to be\" drains energy you need today. Let go of the comparison and ask: what good can I create right now, not just remember?",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -5057,22 +5057,22 @@
     "love_reversed": {
      "ru": "Туман влюблённости в образ рассеивается: вы наконец видите человека таким, какой он есть, без прикрас. Это может разочаровать — но именно с этой ясности начинаются настоящие, а не выдуманные отношения.",
      "en": "The fog of loving an image is clearing: you finally see the person as they are, without embellishment. It may sting — but real relationships, not imagined ones, start exactly from this clarity.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Из десятка идей и планов наконец выделяется один, реальный: приходит ясность, за какое дело браться, а какие мечты были просто красивой картинкой. Составьте конкретный план — воображение своё дело сделало.",
      "en": "Out of a dozen ideas, one real plan finally stands out: clarity arrives about which project to pursue and which dreams were just a pretty picture. Draft a concrete plan — the daydreaming has done its job.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Заманчивая схема или обещание лёгких денег наконец видится такими, какие они есть, — иллюзией. Разочарование здесь не потеря, а защита: трезвый взгляд бережёт то, что у вас реально есть.",
      "en": "A tempting scheme or a promise of easy money is finally seen for what it is — an illusion. Here, disappointment isn't a loss but a safeguard: a sober view protects what you actually have.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Распылённые желания собираются в одно ясное направление: вы перестаёте разрываться между «надо» и «хочу» и чувствуете, куда действительно стоит вложить силы. Дышать становится заметно легче.",
      "en": "Scattered wishes gather into one clear direction: you stop being torn between \"should\" and \"want\" and sense where your energy truly belongs. Breathing gets noticeably easier.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -5170,24 +5170,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Между «уйти» и «остаться» будто нет решения — сборы откладываются, разговор не начат. Спросите себя честно: держит любовь или страх остаться в одиночестве?",
-     "en": "Leaving and staying both feel unresolved — the packing waits, the conversation hasn't started. Ask honestly: is it love that holds you, or fear of being alone?",
-     "status": "draft"
+     "ru": "Разговор о будущем пары раз за разом откладывается на «потом», а быт идёт своим чередом, будто всё уже решено само собой. Назовите вслух, что держит вас рядом — тепло друг к другу или просто накатанная колея.",
+     "en": "The conversation about your future together keeps getting pushed to \"someday\", while daily life just rolls on. Name what's really keeping you close — genuine warmth, or just a well-worn groove.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Работа давно не радует, но заявление об уходе так и лежит недописанным. Присмотритесь, что держит на месте — забота о деле или страх начать заново.",
      "en": "The job stopped feeling right long ago, yet the resignation letter stays unfinished. Notice what keeps you there — real care for the work, or fear of starting over.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Лишние траты хочется сократить, но рука снова тянется платить по привычке. Спросите, от какой статьи расходов или дохода действительно пора отказаться.",
      "en": "You want to cut back on extra spending, yet your hand keeps paying out of habit. Ask which expense or income source you're genuinely ready to release.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Усталость чувствуется, а пауза для отдыха всё откладывается на потом. Заметьте, чего вы избегаете, когда снова беретесь за дела вместо того, чтобы остановиться.",
      "en": "Tiredness is there, yet the pause you need keeps getting postponed. Notice what you're avoiding each time you pick up more tasks instead of stopping.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -5287,22 +5287,22 @@
     "love_reversed": {
      "ru": "Внимание и комплименты есть, а тепла внутри будто меньше, чем хотелось. Спросите себя, чего вам не хватает на самом деле — признания или подлинной близости.",
      "en": "The attention and compliments are there, yet the warmth inside feels smaller than hoped. Ask what you're actually missing — being admired, or real closeness.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Похвала получена, план выполнен — а гордости почему-то меньше, чем вы ждали. Возможно, дело было не в результате, а в том, что стоит за ним для вас.",
      "en": "The praise arrived, the target was met — yet the pride feels thinner than expected. Perhaps the point was never the result itself, but what it meant to you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Покупка сделана, а удовлетворения хватило ненадолго — рука снова тянется за новым. Присмотритесь, не заменяете ли вещами то, чего хочется на самом деле.",
      "en": "The purchase is made, yet the satisfaction faded fast, and your hand reaches for the next one. Notice whether things are standing in for what you actually want.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Привычные удовольствия — еда, отдых, сериалы — на время отвлекают, но не наполняют по-настоящему. Спросите себя, какая забота о теле нужна вам на самом деле.",
      "en": "Familiar comforts — food, rest, screens — distract for a while but don't truly refill you. Ask yourself what kind of care your body actually needs right now.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -5402,22 +5402,22 @@
     "love_reversed": {
      "ru": "Снаружи всё выглядит благополучно, а между вами копится недосказанность. Возможно, стоит честно назвать то, что давно хочется обсудить, а не скрывать.",
      "en": "From the outside everything looks fine, while something unspoken keeps building between you. It may be time to name what you've quietly wanted to discuss.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Команда выглядит дружной на общих фото, а настоящие разногласия остаются непроговорёнными. Спросите себя, что в атмосфере хочется поправить, а не приукрасить.",
      "en": "The team looks close in group photos, while the real friction stays unspoken. Ask yourself what in the atmosphere needs fixing rather than dressing up.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Траты идут на то, чтобы выглядеть устроенно перед другими, а не на то, что вам действительно нужно. Спросите, чьё представление о достатке вы сейчас копируете.",
-     "en": "Spending goes toward looking put-together for others, not toward what you actually need. Ask whose idea of comfort you're copying right now.",
-     "status": "draft"
+     "en": "Spending goes toward looking put-together for others, not toward what you actually need. Ask whose idea of prosperity you're copying right now.",
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Вы говорите «всё хорошо», а усталость внутри никуда не делась. Попробуйте признаться близким, что сейчас чувствуете на самом деле, вместо привычного фасада.",
-     "en": "You keep saying 'I'm fine', while the tiredness inside hasn't gone anywhere. Try telling someone close what you actually feel, instead of the usual facade.",
-     "status": "draft"
+     "ru": "Роль «у нас всё хорошо» перед родными держит тело в постоянном напряжении, а после встреч приходит не лёгкость, а изнеможение. Разрешите себе хотя бы наедине с собой снять эту роль.",
+     "en": "Keeping up the \"we're fine\" role for family holds the body in constant tension, and gatherings leave you drained rather than light. Allow yourself to drop that role, at least when you're alone.",
+     "status": "reviewed"
     }
    }
   },
@@ -5517,22 +5517,22 @@
     "love_reversed": {
      "ru": "Обида копится молча, а вы ждёте, что её угадают без слов. Попробуйте сказать прямо, что задело, вместо того чтобы намекать и ждать, пока догадаются сами.",
      "en": "Hurt feelings pile up in silence while you wait to be understood without words. Try saying plainly what stung, instead of hinting and hoping to be guessed.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Замечание коллеги задело сильнее, чем хотелось бы показать, — и вместо разговора вы отмалчиваетесь. Скажите прямо, что именно вас зацепило.",
-     "en": "A colleague's comment stung more than you'd like to admit, and silence replaced the conversation. Try saying plainly what actually bothered you.",
-     "status": "draft"
+     "ru": "Любое рабочее замечание отзывается не как повод поправить дело, а как личная обида, которая не отпускает весь день. Мелкий комментарий коллеги в голове успевает разрастись в целую драму.",
+     "en": "Any piece of feedback at work lands less like a cue to fix something and more like a personal slight that won't let go all day. A colleague's small comment has time to grow into a whole drama in your head.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Ожидаемая выплата или подарок задерживается, и вы то раздражаетесь, то фантазируете о лучшем варианте. Спросите прямо о сроках, вместо того чтобы додумывать.",
      "en": "An expected payment or gift is running late, and you swing between irritation and daydreaming about a better version. Ask directly about timing, instead of guessing.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Чувства просятся наружу, а вы вместо разговора уходите в сериалы или соцсети. Спросите себя, что на самом деле хочется сказать — и кому.",
-     "en": "Feelings are asking to be voiced, yet you retreat into shows or scrolling instead of talking. Ask yourself what you actually want to say, and to whom.",
-     "status": "draft"
+     "ru": "Непрожитая обида глушится не разговором, а лишним часом в телефоне, едой не по голоду или сном среди дня. Замените один такой вечер на что-то, что правда восстанавливает, а не просто отвлекает.",
+     "en": "Unprocessed hurt gets numbed not by talking it through but by an extra hour online, eating without real hunger, or sleeping through the day. Swap one such evening for something that actually restores you.",
+     "status": "reviewed"
     }
    }
   },
@@ -5632,22 +5632,22 @@
     "love_reversed": {
      "ru": "Красивые слова звучат часто, а конкретных шагов за ними не видно. Присмотритесь, действием ли подтверждаются обещания — своими или чужими.",
      "en": "Beautiful words keep coming, yet concrete steps behind them are hard to find. Notice whether promises — yours or someone else's — are backed by action.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Предложение звучит вдохновляюще, но подробностей и сроков в нём пока нет. Прежде чем соглашаться, попросите конкретику — план, а не только красивые слова.",
      "en": "The offer sounds inspiring, yet the details and timeline are still missing. Before agreeing, ask for specifics — a plan, not just beautiful words.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Цифры при ближайшем рассмотрении не сходятся, хотя подача выглядит очень убедительно. Доверяйте расчёту больше, чем красивой картинке.",
      "en": "The numbers don't quite add up on closer look, even though the pitch sounds very convincing. Trust the arithmetic more than the polished picture.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Вы мечтаете о том, как начнёте заботиться о себе «с понедельника», а пока откладываете простой шаг сегодня. Спросите, что реально нужно телу прямо сейчас.",
      "en": "You keep picturing the moment you'll finally start taking care of yourself, while postponing one simple step today. Ask what your body actually needs right now.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -5747,22 +5747,22 @@
     "love_reversed": {
      "ru": "Вы так настроены на чувства партнёра, что своих уже не различаете. Спросите себя, где заканчиваются его переживания и начинаются ваши собственные.",
      "en": "You're so tuned to your partner's feelings that your own have become hard to find. Ask where their emotions end and yours begin.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Коллеги делятся тревогами, а вы принимаете их проблемы как свои, забывая про собственные задачи. Спросите, где заканчивается забота и начинается перегрузка.",
-     "en": "Colleagues share their worries, and you take them on as your own, while your tasks wait. Ask yourself where caring ends and overload begins.",
-     "status": "draft"
+     "ru": "Коллеги приходят к вам не только с рабочими вопросами, но и со своими тревогами, и вы разбираете чужое раньше собственных задач. К концу дня список сделанного растёт у всех, кроме вас.",
+     "en": "Colleagues come to you with more than work questions — they bring their worries too, and you sort through what's theirs before your own tasks. By day's end, everyone's to-do list shrinks except yours.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги уходят на чужие просьбы «из жалости», хотя внутри уже звучит тихое «нет». Прислушайтесь к этому голосу — границы в тратах тоже забота о себе.",
      "en": "Money keeps going to other people's requests 'out of pity', even as a quiet 'no' forms inside. Listen to that voice — boundaries in spending are self-care too.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Чужие переживания вы впитываете быстрее, чем успеваете восстановиться сами. Разрешите себе тишину и паузу без чувства вины за отказ кому-то помочь.",
      "en": "You absorb other people's feelings faster than you manage to recover your own. Allow yourself quiet and a pause, without guilt for saying no to someone.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -5862,22 +5862,22 @@
     "love_reversed": {
      "ru": "На вопрос «как ты» слышится ровное «всё нормально», хотя видно, что это не так. Попробуйте назвать то, что чувствуете, вместо привычной сдержанности.",
      "en": "Asked how you are, you answer 'I'm fine' in an even voice, though it clearly isn't true. Try naming what you actually feel instead of the usual composure.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Внешне всё спокойно, а раздражение от рабочей ситуации никуда не делось — оно просто не озвучено. Возможно, стоит назвать проблему прямо, а не сдерживать лицо.",
-     "en": "On the surface all looks calm, yet the frustration with the situation hasn't gone anywhere — it's simply unspoken. It may be time to name the issue directly.",
-     "status": "draft"
+     "ru": "Весь день вы держите раздражение от рабочей ситуации при себе, а к вечеру оно прорывается резкостью в разговоре с тем, кто совсем ни при чём. Слово о проблеме, сказанное раньше, обходится дешевле, чем сорванный вечер.",
+     "en": "You hold in the irritation about a work situation all day, and by evening it comes out as sharpness toward someone who has nothing to do with it. Naming the problem earlier costs less than a snapped evening.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Вы говорите о деньгах спокойным тоном, а тревога внутри никуда не уходит. Разрешите себе признать беспокойство вслух — это не слабость, а честность.",
      "en": "You discuss money in a calm, even tone, while the worry underneath hasn't eased. Allow yourself to say the concern out loud — that's honesty, not weakness.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Внутри копится напряжение без выхода, хотя снаружи — ровный тон и спокойное лицо. Дайте ему честный выход сейчас, вместо того чтобы держать оборону.",
-     "en": "Tension builds inside with no outlet, even as the surface stays calm and composed. Give it an honest outlet now, rather than holding the line.",
-     "status": "draft"
+     "ru": "Плечи давно подняты к ушам, а дыхание стало короче, чем обычно, — тело держит то напряжение, которому не даёт выхода ум. Обратите внимание на тело раньше, чем на мысли: расправьте плечи, замедлите дыхание.",
+     "en": "Your shoulders have been up near your ears and your breathing has grown shorter than usual — the body is holding tension the mind won't let out. Notice the body before the thoughts: drop your shoulders, slow the breath.",
+     "status": "reviewed"
     }
    }
   },
@@ -5977,22 +5977,22 @@
     "love_reversed": {
      "ru": "Слова в разговоре о важном выходят острее, чем вы хотели, или сам разговор снова откладывается. Прежде чем говорить, дайте мыслям отстояться — так легче сказать то, что действительно имеете в виду.",
      "en": "Words about something important come out sharper than you meant — or the conversation keeps getting postponed. Let your thoughts settle before you speak, so you say what you actually mean.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Решение на работе принимается второпях или на голых эмоциях: письмо отправлено сгоряча, спор идёт не по делу, а ради победы. Возьмите паузу и отделите факт от раздражения, прежде чем настаивать.",
-     "en": "A work decision gets made in a rush or on raw emotion: an email fired off in anger, an argument fought to win rather than to solve. Pause and separate the fact from the irritation before you push further.",
-     "status": "draft"
+     "en": "A work decision gets made in a rush or on raw emotion: an angry email, an argument that strays off the real issue and turns into a fight to win. Separate fact from irritation before you push further.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Денежное решение принимается сгоряча или из чистого упрямства: купить назло, отказаться из принципа. Отложите бумаги на день — тот же вопрос выглядит яснее с остывшей головой.",
      "en": "A money decision gets made out of spite or stubbornness — buying to prove a point, refusing just as loudly. Set the papers aside for a day; the same question looks clearer with a cooler head.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Мысли крутятся по кругу и не находят выхода, а «разберусь потом» только добавляет тревоги. Выпишите на бумагу то, что не даёт покоя, — не ради ответа, а чтобы снять этот груз с головы.",
      "en": "Thoughts loop without landing anywhere, and \"I'll deal with it later\" only adds to the unease. Write down what's nagging at you — not to solve it, just to set the weight down.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -6092,22 +6092,22 @@
     "love_reversed": {
      "ru": "Тема, которую вы с партнёром долго обходили, сама выходит на поверхность — молчать дальше не получается. Тревожно, но это шанс наконец сказать то, что откладывали месяцами.",
      "en": "The subject you and your partner kept sidestepping is surfacing on its own — staying silent about it is no longer an option. It's unsettling, but it's a chance to finally say what you've put off for months.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Выбор, который вы откладывали неделями — остаться или уйти, согласиться или нет, — больше не терпит отсрочки. Не решайте в панике: соберите факты, а дальше даже маленький шаг сдвинет дело с места.",
      "en": "The choice you've been postponing for weeks — stay or go, agree or decline — no longer allows for delay. Don't decide in a panic: gather the facts, and even a small step will move things forward.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Цифры, на которые вы боялись смотреть, наконец складываются в понятную картину: счёт, долг, реальный остаток на карте. Знать тяжелее, чем не знать, всего один вечер — дальше становится легче.",
      "en": "The numbers you were afraid to face are finally coming into focus: a bill, a debt, the real balance on your card. Knowing feels harder than not knowing for exactly one evening; after that it gets easier.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело больше не готово держать баланс, который вы удерживали через силу, — усталость требует внимания в открытую. Назовите честно, что именно вас истощает: первый шаг — просто это признать.",
      "en": "Holding a forced balance is no longer sustainable — the tiredness is asking to be noticed openly now. Name honestly what's draining you: admitting it is already the first step.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -6207,22 +6207,22 @@
     "love_reversed": {
      "ru": "Старая обида не проговорена: вы носите её молча, и она подтачивает близость — или, наоборот, боль уже отпускает и дышится легче. Дайте себе сказать вслух то, что долго держали при себе.",
      "en": "An old hurt has never been spoken: you carry it quietly and it wears down the closeness — or the pain is finally easing and breathing feels lighter. Let yourself say out loud what you've held in.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Разочарование от несправедливого решения или резкой критики осело внутри и тормозит новый шаг, пока его не признать. Позвольте себе прожить эту обиду — не как слабость, а как честную реакцию на боль.",
      "en": "Disappointment over an unfair decision or sharp criticism has settled in and stalls your next step until it's acknowledged. Let yourself feel that resentment — not as weakness, but as an honest response to pain.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Неприятная денежная история — долг, потеря, обман — всё ещё саднит, хотя вслух вы говорите «это неважно». Признайте, что задело, без самобичевания: так легче отпустить и двигаться дальше.",
      "en": "A painful money story — a debt, a loss, a betrayal — still stings, even though out loud you say \"it doesn't matter.\" Admit that it hurt, without blaming yourself: that makes it easier to let go and move on.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Боль, которую долго не проговаривали, оседает в теле тяжестью и слезами, подступающими без явной причины. Это не слабость — дайте себе поплакать или рассказать о ней тому, кому доверяете.",
      "en": "Pain left unspoken settles in the body as heaviness, tears rising without an obvious reason. That's not weakness — let yourself cry, or tell someone you trust what's going on.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -6324,22 +6324,22 @@
     "love_reversed": {
      "ru": "Партнёр просит пространства, а вы читаете это как отдаление, — или тишина между вами затянулась и стала привычкой избегать друг друга. Спросите прямо, чего сейчас не хватает: покоя вдвоём или разговора.",
      "en": "Your partner asks for space and you read it as distance — or the quiet between you has stretched into a habit of avoiding each other. Ask directly what's missing right now: shared calm, or an actual conversation.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Вы продолжаете работать на пределе, не давая себе передышки, — или, наоборот, пауза затянулась и превращается в застой. Честно оцените, какая крайность сейчас ваша: бег без остановки или остановка без плана.",
      "en": "You keep pushing at full speed without a real break — or the opposite, the pause has stretched into a stall. Be honest about which extreme you're in: running nonstop, or stopping with no plan to move again.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Траты и решения идут в режиме «надо успеть», без единой паузы, — или, наоборот, вы застряли в бездействии и откладываете даже нужные шаги. Поищите середину между отдыхом и движением.",
-     "en": "Spending and decisions run on \"must keep up,\" with no pause at all — or you're stuck in inaction, postponing even the necessary steps. Look for the middle ground between rest and motion.",
-     "status": "draft"
+     "ru": "Траты и денежные решения принимаются на бегу, в режиме «разберусь потом», без единой настоящей паузы. Один спокойный вечер с калькулятором стоит больше, чем ещё одна поспешная покупка.",
+     "en": "Spending and money decisions get made on the run, in an \"I'll sort it out later\" mode, without a single real pause. One calm evening with a calculator is worth more than another rushed purchase.",
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Тело сигналит об усталости, а вы отмахиваетесь: «отдохну потом» — или отдых уже больше похож на бегство от дел, чем на восстановление. Заметьте, какой сигнал тела вы игнорируете чаще всего.",
-     "en": "Fatigue keeps getting waved off with \"I'll rest later\" — or the rest has started to look more like hiding from life than actual recovery. Notice which body signal you tend to ignore most.",
-     "status": "draft"
+     "ru": "Отдых незаметно превращается в способ не встречаться с делами, которые всё равно ждут: часы уходят, а усталость внутри не меняется. Настоящее восстановление обычно короче и ощутимее, чем такое долгое затишье.",
+     "en": "Rest can quietly turn into a way of avoiding tasks that are still waiting: the hours pass, but the tiredness inside stays the same. Real recovery is usually shorter and more noticeable than that kind of long lull.",
+     "status": "reviewed"
     }
    }
   },
@@ -6439,22 +6439,22 @@
     "love_reversed": {
      "ru": "Затянувшаяся ссора наконец теряет накал: появляется желание помириться первым, отпустить счёт старых обид. Это не слабость и не поражение — а честное решение выбрать отношения вместо правоты.",
      "en": "A long-running quarrel is finally losing its heat: you feel the pull to make the first move, to drop the tally of old grievances. That's not weakness or defeat — it's choosing the relationship over being right.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Рабочий конфликт, который выматывал вас месяцами, начинает сходить на нет: появляется шанс договориться или просто выйти из него без потерь для репутации. Не держитесь за старую правоту — она того не стоит.",
      "en": "A work conflict that's been draining you for months is starting to fade: there's a chance to settle it, or simply step away without cost to your reputation. Don't cling to old being-right — it's not worth it.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Спор о деньгах, где обе стороны упирались из принципа, наконец сдвигается к компромиссу. Готовность немного уступить — не проигрыш, а способ вернуть себе спокойствие, которое дороже доказанной правоты.",
      "en": "A money dispute where both sides dug in on principle is finally moving toward a compromise. A little give on your part isn't losing — it's a way to get back the peace of mind that matters more than being right.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Напряжение от долгого конфликта постепенно отпускает тело: дышится свободнее, зажатость в плечах слабеет. Заметьте этот сдвиг — он подсказывает, что вы уже на пути к перемирию, даже с самим собой.",
-     "en": "The tension from a long conflict is easing out of your body: breathing loosens, the tightness in your shoulders fades. Notice this shift — it's a sign you're already on the way to a truce, even with yourself.",
-     "status": "draft"
+     "ru": "Напряжение от долгого конфликта постепенно отпускает тело: дышится свободнее, зажатость в плечах слабеет. Этот сдвиг подсказывает, что перемирие уже началось — в том числе внутри.",
+     "en": "The tension from a long conflict is easing out of your body: breathing loosens, the tightness in your shoulders fades. That shift is a sign the truce has already begun — inside as well.",
+     "status": "reviewed"
     }
    }
   },
@@ -6554,22 +6554,22 @@
     "love_reversed": {
      "ru": "Хочется наконец оставить трудный период позади, но что-то держит: недосказанный разговор, невыполненное обещание, обида, которую ещё не назвали вслух. Разберитесь, что именно якорит вас, — и завершите это.",
      "en": "You want to finally leave the hard stretch behind, but something is holding you back: an unfinished conversation, a broken promise, a grievance never named aloud. Work out what's anchoring you — and bring it to a close.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Переход — новый проект, увольнение, смена команды — откладывается снова и снова, хотя решение уже почти принято. Возможно, вы тащите с собой старую проблему вместо того, чтобы оставить её на прежнем месте.",
      "en": "The transition — a new project, quitting, a team change — keeps getting pushed back, even though the decision is nearly made. You may be carrying an old problem along instead of leaving it where it belongs.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Улучшение буксует: план по долгам есть, но какой-то незакрытый вопрос — старый счёт, невыясненная договорённость — держит всё на месте. Найдите этот хвост и закройте его, прежде чем двигаться дальше.",
      "en": "Progress is stalling: you have a plan for the debt, but some loose end — an old bill, an agreement never sorted out — is holding everything in place. Find that loose thread and close it before moving on.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Тело хочет отпустить напряжение трудного периода, но что-то держит его в старом режиме: невыговоренный страх, невыполненное обещание себе. Спросите, что мешает вам по-настоящему выдохнуть.",
-     "en": "There's a pull to finally release the tension of a hard stretch, yet something keeps holding on to the old mode: an unspoken fear, a promise to yourself left undone. Ask what's keeping you from truly exhaling.",
-     "status": "draft"
+     "ru": "Плечи и челюсть могут оставаться сжатыми по старой привычке, хотя сам трудный период уже позади. Тело иногда отстаёт от перемен на несколько недель — дайте ему время заметить, что опасность миновала.",
+     "en": "Your shoulders and jaw may stay clenched out of old habit even though the hard stretch itself is already over. The body sometimes lags behind change by a few weeks — give it time to notice the danger has passed.",
+     "status": "reviewed"
     }
    }
   },
@@ -6669,22 +6669,22 @@
     "love_reversed": {
      "ru": "Недосказанность в отношениях подходит к развязке: то, что скрывалось — сомнение, переписка, страх, — становится явным. Играть в открытую сейчас страшнее, чем молчать, но именно так возвращается доверие.",
      "en": "The unspoken thing in the relationship is coming to a head: whatever was hidden — a doubt, a message, a fear — is becoming clear. Playing it straight feels scarier than staying silent, but that's how trust comes back.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Закулисная игра или размытая договорённость наконец выходит на свет — раскрывается чужой манёвр или вы сами устали вести двойную бухгалтерию. Назвать вещи своими именами сейчас легче, чем кажется.",
      "en": "A backstage move or a vague agreement is finally coming into the open — someone's manoeuvre is exposed, or you're simply tired of playing both sides. Calling it what it is turns out easier than it seemed.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Мутная договорённость или невыгодная сделка раскрывается такой, какая есть, — не самое приятное открытие, зато честное. Пересчитайте всё заново и договоритесь на новых, ясных условиях.",
      "en": "A murky agreement or a bad deal is showing itself for what it really is — not a pleasant discovery, but an honest one. Recount everything and renegotiate on clear, honest terms.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Маленькие самообманы — «это не считается», «начну с понедельника» — перестают работать, и вы наконец видите реальную картину. Это неприятный, но освобождающий момент: признание всегда легче притворства.",
      "en": "The small self-deceptions — \"it doesn't count,\" \"I'll start Monday\" — stop working, and the real picture finally comes into view. It's an uncomfortable but freeing moment: honesty is always lighter than pretending.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -6784,22 +6784,22 @@
     "love_reversed": {
      "ru": "Разговор, который казался невозможным, вдруг становится посильным — путы слабеют. Заметьте, не держит ли вас привычка молчать сильнее, чем сама ситуация.",
      "en": "The conversation that felt impossible starts to feel doable — the ropes are loosening. Notice if it's habit, not the situation itself, keeping you silent.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "На работе вдруг находится выход, которого не было видно месяцами: перевод, новый проект, честный разговор с руководителем. Иногда карта, наоборот, показывает, что вы выбираете привычные жалобы вместо шага.",
      "en": "A way out appears at work that you couldn't see for months — a transfer, a new project, an honest talk with your boss. Sometimes it shows you choosing familiar complaints over a step.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги перестают давить так безнадёжно: способ распутать долги или пересмотреть траты находится, стоит только сесть и разобраться в цифрах. Иногда карта отмечает обратное — вы предпочитаете тревожиться, а не считать.",
      "en": "Money stops feeling so hopeless — a way to untangle debts or rework spending appears once you actually sit with the numbers. Sometimes it points the other way: worrying feels easier than counting.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Телу становится легче дышать: напряжение, которое казалось постоянным, ослабевает, если вы даёте себе паузу. Заметьте, какая мысль держит вас в напряжении сильнее всего — часто это просто привычка терпеть.",
      "en": "The body finally gets room to breathe — tension that felt permanent eases once you allow yourself a pause. Notice which thought grips you tightest; often it's just the habit of enduring.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -6899,22 +6899,22 @@
     "love_reversed": {
      "ru": "Ночные тревоги о партнёре понемногу стихают — реальность оказывается спокойнее, чем сценарии в голове. Если страх потерять всё ещё возвращается вечерами, скажите о нём вслух вместо того чтобы носить молча.",
      "en": "Late-night worry about your partner is easing — reality turns out calmer than the scenarios in your head. If the fear of loss keeps returning at night, say it out loud instead of carrying it alone.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Страх ошибки на работе слабеет: задача, что пугала неделями, оказывается не такой тяжёлой, как виделось по ночам. Если тревога о мнении коллег всё ещё держит вас, назовите её вслух — наставнику или другу.",
-     "en": "Fear of failure at work eases — the task that scared you for weeks turns out lighter than it looked at 3 a.m. If worry about what colleagues think still grips you, say it out loud to a mentor or a friend.",
-     "status": "draft"
+     "ru": "То, что ночью выглядело катастрофой на работе, утром обычно сжимается до размера обычной задачи. Разговор с наставником или другом стирает то, что дорисовало воображение в темноте.",
+     "en": "Something that looked like a disaster at work in the middle of the night usually shrinks back to an ordinary task by morning. Talking it through with a mentor or a friend clears out what imagination added in the dark.",
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Тревога о деньгах стихает: цифры на бумаге оказываются спокойнее, чем то, что рисовало воображение по ночам. Если мысленный счёт всё ещё крутится без остановки, запишите его — он перестанет расти сам собой.",
-     "en": "Money anxiety quiets down — the numbers on paper turn out calmer than what your imagination drew at night. If the mental tally keeps spinning, write it down; it will stop growing on its own.",
-     "status": "draft"
+     "ru": "Мысленный счёт, который крутится без остановки, почти всегда крупнее того, что есть на самом деле. Бумага и калькулятор считают честнее, чем тревога в три часа ночи.",
+     "en": "The running mental tally is almost always bigger than what's actually there. Paper and a calculator count more honestly than anxiety at three in the morning.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Сон постепенно возвращается, и голова меньше держится за худшие сценарии. Если тревога перед сном всё ещё сильна, попробуйте тёплый душ или тишину без телефона вместо прокручивания мыслей.",
      "en": "Sleep is gradually returning, and the mind clings less to worst-case scenarios. If bedtime anxiety is still strong, try a warm shower or quiet without your phone instead of replaying thoughts.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7014,22 +7014,22 @@
     "love_reversed": {
      "ru": "Боль после расставания понемногу отпускает — дышать становится легче день ото дня. Если мысли всё ещё возвращаются к тому, что случилось, спросите себя: не держите ли вы прошлое крепче, чем оно держит вас.",
      "en": "The pain after a breakup is slowly easing — breathing gets lighter day by day. If your thoughts keep circling back to what happened, ask yourself: are you holding the past tighter than it's holding you?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "После тяжёлого финала появляются первые силы для нового: интерес возвращается, идеи снова приходят в голову. Если всё ещё пересказываете старую историю каждому встречному, возможно, пора закрыть её и для себя.",
      "en": "Fresh energy for something new tends to appear after a hard ending — interest returns, ideas start coming back. If you're still retelling the old story to everyone, it may be time to close it for yourself too.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Финансовые дела понемногу выравниваются после трудного периода — восстановление идёт, хоть и медленно. Если корите себя за прошлую потерю, попробуйте отпустить самокритику: она не возвращает деньги, только забирает силы.",
      "en": "Financial matters are slowly evening out after a hard stretch — recovery is underway. If you keep blaming yourself for a past loss, let the self-criticism go: it won't bring the money back, only drains you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Самое тяжёлое уже позади: силы возвращаются понемногу, хоть и не сразу. Если продолжаете жить в режиме «надо потерпеть ещё немного», это как раз сигнал остановиться и дать себе полноценный отдых.",
      "en": "The hardest part is behind you — strength is slowly coming back, even if not all at once. If you're still running on \"just a bit more endurance\", that's the sign to stop and let yourself truly rest.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7129,22 +7129,22 @@
     "love_reversed": {
      "ru": "В переписке с партнёром вы вдруг придаёте вес словам, которые могли значить что угодно, и додумываете вместо того чтобы спросить прямо. Проверьте: может, это вы читаете сообщения дважды в поисках скрытого смысла?",
      "en": "In messages with a partner, you may be giving too much weight to words that could mean anything, guessing instead of asking directly. Notice if you're the one rereading texts twice, hunting for hidden meaning.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Появляется соблазн обсудить коллегу за спиной или сделать вывод из обрывка разговора. Прежде чем повторять услышанное дальше, спросите себя: это факт или уже чья-то версия?",
      "en": "A temptation might show up to talk about a colleague behind their back, or to draw a conclusion from a scrap of conversation. Before repeating it, ask yourself: is this a fact, or someone's version?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "В деньгах — риск довериться слуху или совету, который никто толком не проверил: «все так делают» — не аргумент. Прежде чем платить или вкладывать, найдите источник цифр сами, а не пересказ третьих лиц.",
      "en": "With money, there's a risk of trusting a rumor or a tip nobody actually checked — \"everyone does it\" is not an argument. Before you pay or invest, find the numbers yourself instead of relying on someone's retelling.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Ум может метаться от одной непроверенной новости к другой, особенно если вы читаете о здоровье в интернете допоздна. Дайте голове паузу от чужих версий — и время заметить, что на самом деле чувствуете вы сами.",
      "en": "The mind can jump from one unverified headline to the next, especially late-night reading about health online. Give it a break from other people's versions — and time to notice what you actually feel.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7244,22 +7244,22 @@
     "love_reversed": {
      "ru": "В отношениях может вырваться резкое слово, о котором вы уже через час пожалеете — спешка сейчас опаснее молчания. Прежде чем отвечать на обиду, досчитайте до десяти или отложите разговор на завтра.",
      "en": "In a relationship, a sharp word may slip out that you regret within the hour — right now, haste is riskier than silence. Before you answer a hurt, count to ten or put the conversation off until tomorrow.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Легко сорваться в спешку: отправить письмо не перечитав, согласиться на дедлайн не подумав, ответить резче, чем хотели. Прежде чем нажать «отправить», сделайте одну паузу — она сейчас важнее скорости.",
-     "en": "It's easy to slip into haste right now: sending an email unread, agreeing to a deadline without thinking, answering more sharply than intended. Before you hit send, take one pause — it matters more than speed.",
-     "status": "draft"
+     "ru": "На встречах и в переписке легко перебить собеседника, не дав договорить, или поторопить с решением, для которого другим нужно больше времени. Манера торопить чаще мешает делу, чем ускоряет его.",
+     "en": "In meetings and messages, it's easy to cut someone off mid-sentence or push for a decision that others clearly need more time for. Rushing the pace usually gets in the way more than it speeds things up.",
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Соблазн купить или вложиться прямо сейчас, «пока не передумали», сегодня особенно силён. Отложите решение хотя бы на сутки: то, что кажется единственным шансом, обычно никуда не спешит на самом деле.",
-     "en": "The urge to buy or invest right now, \"before you change your mind\", is especially strong today. Put the decision off for a day at least — what feels like a one-time chance usually isn't in as much hurry as it seems.",
-     "status": "draft"
+     "ru": "В денежном вопросе может проснуться нетерпение: поторопить продавца, партнёра или банк с ответом, хотя кроме вас никто никуда не спешит. Скорость сделки — не показатель её выгоды.",
+     "en": "Impatience over money may show up: pushing a seller, a partner, or a bank for a faster answer when nobody but you is actually in a hurry. How fast a deal moves says nothing about how good it is.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело может нестись в темпе, который вы задали голове: без пауз на еду, сон и отдых. Если ловите себя на постоянной спешке, это сигнал притормозить, а не подтверждение, что вы просто много успеваете.",
      "en": "The body may be running at the pace you set for your mind — no pauses for food, sleep or rest. Catching yourself rushing is a signal to slow down, not proof you're getting things done.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7357,24 +7357,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "В отношениях может появиться холодок: точный аргумент побеждает в споре, но ранит того, кто рядом. Прежде чем сказать честную, но острую фразу, спросите себя: я хочу быть правым или быть услышанным?",
-     "en": "A chill may creep into the relationship: a sharp, accurate argument wins the fight but wounds the person beside you. Before the honest, cutting line, ask yourself: do you want to be right, or to be heard?",
-     "status": "draft"
+     "ru": "В разговоре точный, обоснованный довод побеждает в споре — и всё равно ранит того, кто рядом. Не всякую точную мысль стоит произносить вслух именно в эту минуту.",
+     "en": "A precise, well-reasoned point can win the argument and still wound the person beside you. Not every accurate thought needs to be said out loud in that exact moment.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Критика может прозвучать точнее, чем требовалось, и задеть больше, чем вы рассчитывали. Прежде чем дать обратную связь, добавьте к фактам хотя бы одно тёплое слово — правоту без тепла редко слышат.",
      "en": "Feedback may land sharper than needed right now and sting more than intended. Before you give it, add at least one warm word to the facts — being right without warmth rarely gets truly heard.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "В деньгах вы можете стать слишком суровы к себе за прошлую ошибку, пересчитывая её снова и снова. Один неверный расчёт — не приговор вашей способности справляться с финансами, а просто урок.",
-     "en": "With money, you may turn unusually harsh on yourself over a past mistake, recounting it again and again. One wrong calculation isn't a verdict on your ability to manage money — it's just a lesson.",
-     "status": "draft"
+     "ru": "В деньгах вы можете спрашивать с себя строже, чем спросили бы с близкого человека в той же ситуации: чужой промах вы бы назвали случайностью, а свой — небрежностью. Мерьте себя той же линейкой, что и других.",
+     "en": "With money, you may judge yourself more harshly than you'd judge a friend in the same spot: their slip is bad luck, yours is carelessness. Measure yourself by the same ruler you use for everyone else.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Внутренний голос может звучать слишком строгим судьёй: «соберись», «не раскисай», «терпи». Попробуйте на минуту заменить требовательность заботой — телу сейчас нужнее мягкость, чем дисциплина.",
      "en": "Your inner voice may turn into a harsh judge: \"pull yourself together\", \"don't fall apart\", \"endure\". Try swapping strictness for care, even briefly — the body needs gentleness more than discipline right now.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7472,24 +7472,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "В споре с партнёром вы можете стоять на правоте до последнего, забыв, что цель разговора — понимание, а не победа. Спросите себя: этот аргумент нужен, чтобы решить вопрос, или чтобы доказать свою правоту?",
-     "en": "In an argument with a partner, you may hold your ground on being right and forget that understanding, not victory, was the point. Ask yourself: is this argument meant to solve something, or just to win?",
-     "status": "draft"
+     "ru": "В разговоре с партнёром может появиться желание продавить своё: повторять один и тот же довод, пока другой просто не сдастся. Спор, выигранный напором, редко приносит согласие — только тишину до следующего раза.",
+     "en": "In a conversation with a partner, the urge to push a point through may show up: repeating the same argument until the other side gives in. Winning by pressure rarely brings agreement — just quiet until the next round.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Авторитет может превратиться в давление: решение принято правильно по правилам, но без учёта тех, кого оно касается. Прежде чем настоять на своём, спросите мнение того, кто с этим будет жить каждый день.",
      "en": "Authority can tip into pressure: a decision may be correct by the rules yet blind to the people it affects. Before you insist on it, ask the opinion of whoever will actually live with it day to day.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "В деньгах логика подменяется упрямством: «раз решено — менять нельзя» это не то же самое, что «это по-прежнему верно». Пересмотрите план спокойно, будто его предложил кто-то другой.",
      "en": "In money decisions, logic slides into stubbornness: \"the choice is made, so it stands\" is not the same as \"it's still right\". Review the plan calmly, as if someone else had proposed it.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Разум может слишком долго держать оборону, называя усталость слабостью и откладывая отдых до «более подходящего момента». Иногда самое зрелое решение — признать предел и остановиться раньше, чем вынудят обстоятельства.",
-     "en": "The mind may keep defending its position too long, calling tiredness weakness and postponing rest for a \"better moment\". Sometimes the most mature choice is admitting a limit and stopping before circumstances force it.",
-     "status": "draft"
+     "ru": "Разум может держаться за привычный режим и план, хотя тело давно просит остановки. Дисциплина хороша, пока не превращается в способ не признавать, что пора отдохнуть.",
+     "en": "The mind may cling to routine and a fixed plan even though the body has long been asking to stop. Discipline is useful until it becomes a way of refusing to admit that rest is due.",
+     "status": "reviewed"
     }
    }
   },
@@ -7592,22 +7592,22 @@
     "love_reversed": {
      "ru": "В отношениях ощущается зыбкость: обещания звучат, а опоры под ногами будто нет. Спросите себя, чего не хватает — ясности или смелости сделать первый шаг.",
      "en": "The relationship feels shaky: promises are spoken, but the ground underfoot feels thin. Ask yourself what's missing — clarity, or the courage to take a first step.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Предложение по работе выглядит не таким прочным, как казалось, или вы тянете с ответом, пока шанс остывает. Проверьте условия и своё истинное желание, прежде чем решать.",
-     "en": "A work offer looks less solid than it first seemed, or you keep postponing an answer while the chance cools. Check the terms — and your real wish — before deciding.",
-     "status": "draft"
+     "ru": "Вакансия или проект манят, а звонок и подпись под договором раз за разом откладываются. Дело в самом предложении — или в решимости его принять?",
+     "en": "A job opening or project is tempting, yet the call and the signature keep getting postponed again and again. Is the offer itself the issue — or the willingness to commit?",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги буксуют: план откладывается, вложение вызывает сомнения, а в голове крутится «всё равно не хватит». Сверьте цифры на бумаге — страх часто громче реальности.",
      "en": "Money stalls: the plan keeps slipping, the investment feels uncertain, and a voice keeps saying \"there's never enough.\" Check the numbers on paper — fear is usually louder than reality.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело просит опоры, а вы всё откладываете простые вещи — сон, еду, паузу. Начните не с идеального режима, а с одного маленького шага уже сегодня.",
-     "en": "Steadiness is being asked for, but simple things — sleep, food, a pause — keep getting postponed. Start not with a perfect routine, just one small step today.",
-     "status": "draft"
+     "en": "Your body is asking for steadiness, yet simple things — sleep, food, a pause — keep getting postponed. Start not with a perfect routine, just one small step today.",
+     "status": "reviewed"
     }
    }
   },
@@ -7707,22 +7707,22 @@
     "love_reversed": {
      "ru": "Отношениям достаются только остатки сил после дел — на разговор уже не хватает энергии. Признайтесь себе, что жонглировать всем одновременно больше не получается.",
      "en": "The relationship gets only the leftover energy after everything else — there's nothing left for a real conversation. Admit that juggling it all at once has stopped working.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Слишком много задач одновременно, и шарики начинают падать один за другим. Пора честно назвать предел и отложить то, что можно отложить, вместо того чтобы держать лицо.",
-     "en": "Too many tasks at once, and the balls are starting to drop one by one. Name your limit honestly and set aside what can wait, instead of keeping up appearances.",
-     "status": "draft"
+     "ru": "Проекты наслаиваются один на другой без единой паузы между ними, и первым от этого страдает качество. Пересчитайте, сколько задач реально можно вести разом.",
+     "en": "Projects keep stacking on top of each other with no pause in between, and quality is the first thing to suffer. Recount how many tasks can actually run at once.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Учёт денег запущен: то густо, то пусто, а разбираться в цифрах некогда между делами. Один вечер на подсчёт сейчас сэкономит недели тревоги позже.",
      "en": "Money tracking has slipped: feast, then famine, with no time to sort the numbers between tasks. One evening spent counting now saves weeks of worry later.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Расписание заполнено под завязку, а места для отдыха в нём не осталось. Спросите себя, где в этой гонке вы сами — не как пункт списка, а как человек.",
      "en": "The schedule is packed edge to edge, with no room left for rest. Ask yourself where you actually are in this rush — not as a task on the list, but as a person.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7822,22 +7822,22 @@
     "love_reversed": {
      "ru": "Совместные планы буксуют: каждый тянет своё, а роли в паре давно не проговаривались. Возможно, пора честно обсудить, кто и что на самом деле вкладывает.",
      "en": "Shared plans stall: everyone pulls their own way, and the roles in the relationship haven't been discussed in a while. Maybe it's time for an honest talk about who is putting in what.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Работа делается вполсилы, или команда тянет каждый в свою сторону, и вклад остаётся незамеченным. Проверьте, ясны ли роли и ожидания — иногда дело сдвигает один прямой разговор.",
-     "en": "Work is going through the motions, or the team is pulling in different directions, and effort goes unnoticed. Check whether roles and expectations are clear — one honest talk can move things forward.",
-     "status": "draft"
+     "ru": "Вы тащите проект в одиночку, пока вклад коллег остаётся неотмеченным, — или, наоборот, ваша часть работы тонет в общей. Назовите вслух, кто что реально делает.",
+     "en": "You're carrying the project alone while colleagues' input goes unacknowledged — or, the other way round, your own share gets lost in the group effort. Name out loud who is actually doing what.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Оплата не поспевает за вложенным трудом, а обсуждать деньги неловко. Назовите свою работу вслух её настоящей ценой — молчание её не увеличит.",
      "en": "Pay isn't catching up with the effort you're putting in, and talking about money feels awkward. Name your work's real worth out loud — staying silent won't raise it.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Забота о теле держится на редких рывках без системы, а после — упрёк себе за срыв. Одна маленькая, но регулярная привычка честнее любого разового геройства.",
      "en": "Self-care runs on rare bursts with no system, followed by self-blame for slipping. One small, regular habit is more honest than any one-time heroics.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -7937,22 +7937,22 @@
     "love_reversed": {
      "ru": "Контроль в паре стал душным, или, наоборот, границы вдруг размылись без предупреждения. Спросите, где вы держитесь за отношения из страха, а не из тепла.",
      "en": "Control in the relationship has grown suffocating, or the boundaries have suddenly blurred without warning. Ask where you're holding on out of fear rather than warmth.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Вы вцепились в привычную должность так, что не замечаете, как переросли её. Разожмите хватку хотя бы мысленно и спросите, чего боитесь на самом деле — перемен или провала.",
      "en": "You're gripping a familiar position so tightly you don't notice you've outgrown it. Loosen the grip, at least mentally, and ask what you truly fear — change, or failure.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "После долгой экономии деньги вдруг уходят без счёта — или, наоборот, копить стало важнее, чем жить. Проверьте, служит ли вам эта привычка ещё, или уже управляет вами.",
      "en": "After a long stretch of saving, money is suddenly slipping away uncounted — or saving itself has become more important than living. Check whether this habit still serves you, or now runs you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
-     "ru": "Тело держит напряжение в плечах, челюсти, дыхании — след постоянного контроля, который вы почти не замечаете. Найдите то, что расслабляет по-настоящему, и дайте ему место в неделе.",
-     "en": "The body carries tension in the shoulders, jaw, breath — a trace of constant control you barely notice. Find what truly helps you unwind, and give it a real place in your week.",
-     "status": "draft"
+     "ru": "Забота о теле превратилась в обязанность для галочки — или, наоборот, простые привычки давно заброшены без объяснений. Заметьте, какой из двух вариантов сейчас про вас.",
+     "en": "Body care has turned into a box to tick — or, the opposite, simple habits have quietly been dropped altogether. Notice which of the two is closer to where you are now.",
+     "status": "reviewed"
     }
    }
   },
@@ -8055,22 +8055,22 @@
     "love_reversed": {
      "ru": "Холод между вами понемногу отступает: тепло возвращается, если позволить себе снова открыться. Заметьте, кто был рядом всё это время, даже когда вы этого не видели.",
      "en": "The chill between you is slowly lifting: warmth returns once you allow yourself to open up again. Notice who stayed close all along, even when you couldn't see it.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Трудный период на работе отпускает: появляется опора, откликаются люди, к которым вы обратились. Признайте, что справились с большим, чем сами себе засчитали.",
-     "en": "The rough patch at work is easing: support appears, people you reached out to respond. Give yourself credit — you handled more than you gave yourself credit for.",
-     "status": "draft"
+     "ru": "Трудный период на работе отпускает не сам по себе, а именно тогда, когда вы позволяете себе попросить о поддержке вслух. Молчаливая стойкость держит его дольше, чем нужно.",
+     "en": "The hard patch at work eases specifically when you allow yourself to ask for support out loud. Staying silently strong only keeps it going longer than it has to.",
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Финансовое напряжение слабеет: находится подработка, возвращается долг, помощь приходит вовремя. Примите её без чувства вины — просить оказалось не так страшно.",
-     "en": "Financial pressure eases: extra work turns up, a debt gets repaid, help arrives on time. Accept it without guilt — asking turned out far less frightening than it seemed.",
-     "status": "draft"
+     "ru": "Финансовое напряжение слабеет именно тогда, когда вы разрешаете себе попросить о помощи, а не тянете сумму молча в одиночку. Просьба здесь работает быстрее гордости.",
+     "en": "Financial pressure eases exactly when you let yourself ask for help instead of quietly carrying the sum alone. Asking works faster here than pride does.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Силы понемногу возвращаются после изматывающего периода. Позвольте себе восстанавливаться не спеша и не требуйте от тела мгновенно быть прежним.",
      "en": "Strength is slowly coming back after an exhausting stretch. Let yourself recover at your own pace, without demanding your body instantly be as before.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8168,24 +8168,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "В паре вы отдаёте заметно больше, чем получаете, — или забота пришла с незримыми условиями. Проверьте, не пытаетесь ли вы заслужить любовь щедростью вместо того, чтобы просто быть рядом.",
-     "en": "You're giving noticeably more than you receive in the relationship — or care has arrived with invisible strings. Check whether you're trying to earn love through giving instead of simply being present.",
-     "status": "draft"
+     "ru": "Внимание и мелкие знаки заботы в паре идут в основном от вас, а тепла в ответ заметно меньше, чем хотелось бы. Присмотритесь, где вы позволяете партнёру заботиться о вас в ответ.",
+     "en": "In the relationship, warmth and small gestures mostly flow from you, with noticeably less coming back. Notice where you might let a partner take care of you in return.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Помощь от старшего коллеги или руководителя оказалась не такой бескорыстной, как выглядела, — или вы сами помогаете в ущерб себе. Спросите, на каких условиях держится этот обмен.",
      "en": "Support from a senior colleague or manager turns out less selfless than it looked — or you're the one helping at your own expense. Ask what this exchange is really built on.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Деньги идут в одну сторону: вы одалживаете, дарите, покрываете чужое, а обратно почти ничего не возвращается. Верните себе право на равный обмен без чувства долга.",
-     "en": "Money flows one way: you lend, gift, cover for others, with little coming back. Reclaim your right to an equal exchange, free of any sense of owing.",
-     "status": "draft"
+     "ru": "Деньги в основном уходят от вас: одалживаете, покрываете чужие траты, дарите — а в ответ обычно тишина. Отметьте хотя бы для себя, где обмен перестал быть равным.",
+     "en": "Money mostly flows away from you: you lend, cover others' costs, give gifts — and silence usually comes back instead. Notice, at least to yourself, where the exchange stopped being equal.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Вы наливаете заботу другим из почти пустого кувшина. Сегодня честно спросите: что вы оставили для себя — и осталось ли хоть что-то?",
      "en": "You're pouring care for others from a jug that's nearly empty. Ask yourself honestly today: what have you kept for yourself — and is there anything left?",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8284,24 +8284,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Вы устали ждать, когда отношения наконец расцветут, и вопрос «а туда ли я вкладываюсь» звучит всё чаще. Честно оцените, растёт ли здесь хоть что-то, или вы поливаете пустую грядку.",
-     "en": "You're tired of waiting for the relationship to finally bloom, and the question \"am I investing in the right place\" keeps coming back. Honestly assess whether anything is growing here, or you're watering an empty bed.",
-     "status": "draft"
+     "ru": "В отношениях вы давно тянете воз в одиночку, вкладываясь в то, что не отвечает взаимностью. Возможно, дело не в недостатке терпения, а в выборе не того направления.",
+     "en": "In the relationship, you've long been pulling the load alone, investing in something that gives little back. The issue may not be a lack of patience, but the wrong direction chosen.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Труда вложено много, а отдачи почти нет — упрямство держит вас на проекте дольше, чем стоило бы. Признать ошибку сейчас дешевле, чем продолжать вкладываться из принципа.",
      "en": "You've put in a lot of effort with little to show for it — stubbornness is keeping you on this project longer than it deserves. Admitting the mistake now costs less than pushing on out of principle.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Накопления или вложения не оправдывают ожиданий, а расставаться с привычным планом жалко. Пересчитайте честно: что ещё стоит растить, а что пора отпустить.",
      "en": "Savings or investments aren't living up to expectations, and it's hard to let go of the familiar plan. Recalculate honestly: what still deserves growing, and what is it time to release?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Вы стараетесь для себя давно, а заметных перемен всё нет, и накатывает разочарование. Возможно, пора не бросать усилия, а честно пересмотреть, что из них действительно работает.",
      "en": "Self-care has gone on for a while with no visible change, and frustration is creeping in. Maybe it's not time to give up the effort, but to honestly review what's actually working.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8401,22 +8401,22 @@
     "love_reversed": {
      "ru": "Забота о партнёре стала привычным ритуалом без души, либо вы требуете от отношений безупречности, которой не бывает. Что из этого — усталость, а что — потеря интереса?",
      "en": "Caring for a partner has turned into an automatic ritual, or you're demanding a flawlessness no relationship actually has. Which is it — fatigue, or fading interest?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "На работе вы либо действуете на автопилоте, стараясь просто закрыть задачу, либо застряли в шлифовке деталей, которых никто не оценит. Спросите: чему это ещё учит вас — или урок уже пройден?",
      "en": "Right now the job either runs on autopilot, just to get tasks done, or gets stuck polishing details no one will notice. Ask: is this still teaching you something, or has the lesson already ended?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Заработок даётся тяжело и бездумно — деньги ради денег, а углы срезаются там, где раньше вы вкладывались в качество. Стоит вернуться к вопросу «зачем», а не «быстрее».",
      "en": "Earning feels heavy and mechanical — income for its own sake, with corners cut where you once invested in quality. Come back to the question of why, not how fast.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Уход за собой превратился в галочку в списке дел или, наоборот, в изматывающий перфекционизм по поводу режима. Телу нужна не идеальная система, а немного искреннего внимания.",
      "en": "Self-care has become a box to tick, or the opposite — an exhausting perfectionism about routine. Your body doesn't need a flawless system, just a bit of honest attention.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8516,22 +8516,22 @@
     "love_reversed": {
      "ru": "Самодостаточность в отношениях пошатнулась: вы растворяетесь в партнёре или зависите от его одобрения больше, чем от собственных ощущений. Чей голос вы слышите, принимая решения о паре?",
      "en": "Your independence in the relationship has slipped — you dissolve into a partner or need their approval more than your own sense of things. Whose voice guides your choices about the relationship?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Успех есть, а удовлетворения нет: достижения существуют больше для чужих глаз, чем для вас самих. Возможно, пора спросить, ради кого вы на самом деле стараетесь на работе.",
      "en": "Success is there, but satisfaction isn't — achievements seem to exist more for others' eyes than for you. It may be time to ask who you're actually working so hard to impress.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги есть, но вы либо зависите от чужого кошелька больше, чем хотелось бы, либо не разрешаете себе тратить заработанное на удовольствие. Комфорт откладывается «на потом» слишком часто.",
      "en": "The money is there, yet you either depend on someone else's wallet more than you'd like, or won't let yourself spend what you've earned on pleasure. Comfort keeps getting postponed.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Отдых даётся с трудом, если его не на что предъявить: вы цените заботу о себе только тогда, когда её видят другие. Попробуйте отдохнуть так, чтобы об этом никто не узнал.",
      "en": "Rest feels hard to justify unless someone can see it — you value self-care mainly when others notice. Try resting in a way no one else will ever know about.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8631,22 +8631,22 @@
     "love_reversed": {
      "ru": "Ожидания семьи давят на пару сильнее, чем хочется: чужие представления «как надо» заслоняют то, что нужно вам двоим. Какие традиции вы выбрали сами, а какие достались по наследству?",
      "en": "Family expectations weigh on the relationship more than you'd like — someone else's idea of \"how it should be\" crowds out what you two actually need. Which traditions did you choose yourselves?",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Семейное дело или устоявшееся место работы вдруг ощущается клеткой, а не опорой. Обязательства перед близкими тянут в одну сторону, а собственные планы — в другую.",
      "en": "A family business or a long-settled job suddenly feels like a cage rather than support. Obligations to relatives pull one way while your own plans pull another.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги и семья снова переплетаются неудобно: спор о наследстве, одолженная и не возвращённая сумма, траты «ради приличия». Стоит честно посчитать, во что вам обходится семейный мир.",
      "en": "Money and family tangle uncomfortably again — an inheritance dispute, a loan never returned, spending just to keep up appearances. It's worth honestly counting what family peace actually costs you.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Спросите себя, какие привычки заботы о себе вы переняли от семьи по инерции — «отдых потом», вечно на ногах — и стоит ли нести их дальше, если тело просит другого.",
      "en": "Ask yourself which self-care habits you inherited from family out of sheer inertia — always on your feet, \"rest later\" — and whether they're worth keeping if your body wants something else.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8747,22 +8747,22 @@
     "love_reversed": {
      "ru": "Вы говорите о будущем вместе, но откладываете конкретные шаги — переезд, знакомство с близкими, честный разговор. Или примеряете сразу несколько вариантов, не выбирая ни одного.",
      "en": "You talk about a future together but keep postponing concrete steps — moving in, meeting each other's people, an honest conversation. Or you're trying on several options at once, committing to none.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Идей и курсов много, а завершённых дел мало: вы всё готовитесь к работе вместо того, чтобы её делать. Один реальный шаг сейчас стоит больше десяти планов на будущее.",
      "en": "Ideas and courses pile up while finished work stays scarce — you keep preparing to work instead of working. One real step now is worth more than ten plans for later.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Таблицы бюджета и планы накоплений составлены, а первый взнос всё откладывается. Знание без действия не копится — начните с суммы, которая не пугает.",
-     "en": "The budget spreadsheets and savings plans are ready, yet the first deposit keeps getting pushed back. Knowledge without action doesn't add up — start with an amount that doesn't scare you.",
-     "status": "draft"
+     "ru": "Деньги откладываются в уме — «вот скоплю» — а не на счёте, и подходящая сумма для начала всё не находится. План без первого взноса так и остаётся планом.",
+     "en": "Money gets set aside in your head — \"I'll save up eventually\" — rather than in an account, and the right starting amount never quite turns up. A plan with no first deposit stays just a plan.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Новый режим или привычка спланированы уже не первый раз, но начинаются каждый раз «с понедельника». Телу нужен не идеальный план, а один маленький шаг сегодня.",
      "en": "A new routine or habit gets planned yet again, always set to start \"on Monday\". Your body doesn't need a perfect plan — just one small step today.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8862,22 +8862,22 @@
     "love_reversed": {
      "ru": "Стабильность в паре тихо превратилась в застой: вы вместе по привычке, а не потому что выбираете это заново. Или обязательства перед партнёром давно заброшены.",
      "en": "Stability in the relationship has quietly turned into stagnation — you're together out of habit rather than by choosing it again. Or, the opposite: commitments to your partner have long been neglected.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Работа держится на автопилоте: вы делаете, что положено, но давно не чувствуете смысла. Или упорство обернулось упрямством — вы держитесь за проект, который пора отпустить.",
      "en": "Work runs on autopilot — you do what's expected but haven't felt the point of it in a while. Or persistence has curdled into stubbornness, and you're clinging to a project it's time to release.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
-     "ru": "Финансовая осторожность превратилась в топтание на месте: вы копите по привычке, не пересматривая план годами. Или дисциплина давно рассыпалась, а признать это не хочется.",
-     "en": "Financial caution has turned into standing still — you save out of habit without revisiting the plan for years. Or the discipline quietly fell apart, and admitting it feels uncomfortable.",
-     "status": "draft"
+     "ru": "Финансовая осторожность превратилась в топтание на месте: план не пересматривался годами, хотя цифры вокруг давно изменились. Или дисциплина незаметно рассыпалась, а признать это неловко.",
+     "en": "Financial caution has turned into standing still — the plan hasn't been revisited in years, even as the numbers around it changed. Or the discipline has quietly fallen apart, and admitting it feels awkward.",
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Привычная забота о теле идёт по инерции и перестала откликаться, или начатый режим давно заброшен без объяснений даже себе. Спросите, что из рутины вам всё ещё нужно.",
      "en": "Your usual body care runs on autopilot and stopped feeling like it matters, or a routine you started has quietly been dropped. Ask yourself which parts of it you actually still need.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -8975,24 +8975,24 @@
      "status": "reviewed"
     },
     "love_reversed": {
-     "ru": "Вы отдаёте близкому столько, что на себя уже не остаётся сил, — или тревога о деньгах вытесняет из отношений тепло. Кто позаботится о вас, пока вы заботитесь обо всех?",
-     "en": "Care for a partner is eating into your own strength, or money anxiety is crowding the warmth out of the relationship. Who takes care of you while you're taking care of everyone else?",
-     "status": "draft"
+     "ru": "Забота о близком человеке незаметно становится решением за него: вы уже знаете, что ему нужно, и перестаёте спрашивать. Попробуйте хоть раз задать вопрос вместо готового ответа.",
+     "en": "Care for someone close quietly turns into deciding for them: you already know what they need, so you stop asking. Try, just once, asking a question instead of offering a ready answer.",
+     "status": "reviewed"
     },
     "career_reversed": {
      "ru": "Команда, клиенты и чужие задачи тянут на себе весь ваш ресурс, пока собственные силы давно на нуле. Или забота обернулась контролем — «так надёжнее», хоть и утомительно.",
      "en": "The team, the clients, everyone else's tasks are draining your whole resource while your own energy ran dry long ago. Or care has curdled into control — \"safer this way\", if exhausting.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Деньги распределяются на всех, кроме вас: подушка безопасности не растёт, потому что сначала — дом и чужие нужды. Возможно, тревога о финансах не отпускает, даже когда всё в порядке.",
      "en": "Money gets divided among everyone except you — the safety cushion never grows because home and others' needs always come first. Money worry may not let go even when things are fine.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Нужды близких вы замечаете мгновенно, а собственного тела — с трудом. Уют и отдых откладываются, пока чужой список дел не опустеет, а он не пустеет никогда.",
      "en": "You notice your loved ones' needs instantly and your own body's needs with real effort. Comfort and rest wait for everyone else's list to empty — and it never does.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   },
@@ -9092,22 +9092,22 @@
     "love_reversed": {
      "ru": "Тепло подменяется контролем через деньги или вещи: подарки и обеспеченность — вместо разговора на равных. Спросите, кому на самом деле принадлежит решающий голос в паре.",
      "en": "Care for a partner gets replaced by control through money or things — gifts and provision instead of talking as equals. Ask yourself who actually holds the deciding voice in the relationship.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "career_reversed": {
-     "ru": "Статус и цифры стали единственной мерой успеха, а гибкость и доверие к людям — роскошью, которую вы себе не позволяете. Чем управляете вы — и что уже управляет вами?",
-     "en": "Status and numbers have become the only measure of success, while flexibility and trust in people feel like a luxury you can't afford. What are you managing — and what is already managing you?",
-     "status": "draft"
+     "ru": "Успех измеряется только цифрами отчёта, а честный разговор с командой откладывается месяц за месяцем. Цифры не заменяют этого разговора.",
+     "en": "Success is measured only by the numbers in the report, while an honest conversation with the team keeps getting pushed back month after month. Numbers can't replace that conversation.",
+     "status": "reviewed"
     },
     "finances_reversed": {
      "ru": "Накопленное держится мёртвой хваткой: любая трата вызывает тревогу, даже разумная и давно назревшая. Изобилие, которое нельзя тратить, мало отличается от нехватки.",
      "en": "What you've built is held in a death grip — even a sensible, overdue expense triggers anxiety. Abundance you can't spend looks a lot like scarcity.",
-     "status": "draft"
+     "status": "reviewed"
     },
     "health_reversed": {
      "ru": "Тело остаётся последним пунктом в списке дел, пока вы удерживаете под контролем всё остальное — бизнес, деньги, статус. Спросите себя: что случится, если однажды поставить его первым?",
      "en": "Rest and health stay last on the list while everything else gets kept under control — the business, the money, the status. Ask yourself what would happen if, just once, you put it first.",
-     "status": "draft"
+     "status": "reviewed"
     }
    }
   }
