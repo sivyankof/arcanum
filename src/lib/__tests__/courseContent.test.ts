@@ -3,12 +3,12 @@
 import { cardById, course } from '../content';
 
 const lessons = course
-  .filter((m) => ['m1', 'm2'].includes(m.id))
+  .filter((m) => ['m1', 'm2', 'm3'].includes(m.id))
   .flatMap((m) => m.lessons);
 
-describe('контракт викторин М1–М2 (course.json)', () => {
-  it('М1–М2 — это 10 уроков', () => {
-    expect(lessons).toHaveLength(10);
+describe('контракт викторин М1–М3 (course.json)', () => {
+  it('М1–М3 — это 16 уроков', () => {
+    expect(lessons).toHaveLength(16);
   });
 
   it.each(lessons.map((l) => [l.id, l] as const))('%s: теория заполнена на обоих языках', (_id, l) => {
@@ -45,19 +45,5 @@ describe('контракт викторин М1–М2 (course.json)', () => {
     for (const l of lessons) {
       expect(new Set(l.quiz!.map((q) => q.correct)).size).toBeGreaterThan(1);
     }
-  });
-});
-
-// Викторины М3 — следующий шаг спеки 26; после их слияния блок ниже сливается с основным.
-const m3Lessons = course.filter((m) => m.id === 'm3').flatMap((m) => m.lessons);
-
-describe('контракт теории М3 (course.json, спека 26)', () => {
-  it('М3 — это 6 уроков', () => {
-    expect(m3Lessons).toHaveLength(6);
-  });
-
-  it.each(m3Lessons.map((l) => [l.id, l] as const))('%s: теория заполнена на обоих языках', (_id, l) => {
-    expect(l.theory?.ru).toBeTruthy();
-    expect(l.theory?.en).toBeTruthy();
   });
 });

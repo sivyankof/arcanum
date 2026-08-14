@@ -1532,7 +1532,141 @@
       "ru": "В прошлом модуле герой мчался вперёд: Колесница — карта победы через напор и контроль. И вот первое открытие новой части пути: есть сила, которой не нужны поводья.\n\nСила — восьмая карта. На картинке Уэйта нет ни битвы, ни оружия: женщина в белом спокойно закрывает пасть льву, а тот и не сопротивляется — на его шее гирлянда цветов вместо цепи. Лев — это наши собственные страхи, гнев и порывы; их не нужно убивать, только приручить. Над головой женщины — знак бесконечности, тот же, что у Мага: терпение и доброта неисчерпаемы. Ключевые слова: внутренняя сила, мягкость, терпение, смелость. Сила знает: то, что кажется неукротимым, поддаётся доброте быстрее, чем напору. Её риск — перепутать мягкость с попустительством: приручить льва не значит делать вид, что его нет.\n\nПриручив льва, герой замечает, как снаружи стало тихо, — и уходит туда, где тихо по-настоящему. Отшельник, девятая карта, стоит на снежной вершине с фонарём, в котором горит звезда. Он не сбежал от людей — он поднялся выше шума, чтобы услышать себя. Его фонарь поднят для других: «где я, там можешь быть и ты». Ключевые слова: поиск себя, уединение, мудрость, внутренний свет. Отшельник — это пауза для смысла: чего вы на самом деле хотите, куда идёте? Ответы придут не извне, а из тишины.\n\nВместе эти карты — первый урок внутренней части пути: сначала успокоить бурю в себе, потом расслышать в тишине своё. Пока лев рычит, никакой фонарь не поможет — а без фонаря даже укрощённая тишина остаётся пустой.\n\nПопробуйте сегодня: заметьте момент, когда захочется ответить резко или всё бросить, — и сделайте шаг Силы: три спокойных вдоха вместо рывка. А вечером шаг Отшельника: десять минут без телефона и людей, один вопрос — «чего я сейчас хочу на самом деле?»",
       "en": "In the last module the hero raced ahead: the Chariot is a card of victory through drive and control. The new part of the journey opens with a discovery: there is a strength that needs no reins.\n\nFortitude is card eight. In Waite's image there is no battle and no weapon: a woman in white calmly closes a lion's mouth, and the lion does not resist — a garland of flowers lies on his neck instead of a chain. The lion is our own fears, anger and impulses; they don't need to be killed, only tamed. Above the woman's head is the infinity sign, the same one the Magician has: patience and kindness never run out. Keywords: inner strength, gentleness, patience, courage. Fortitude knows that what seems untamable yields to kindness faster than to force. Her risk is mistaking gentleness for indulgence: taming the lion doesn't mean pretending it isn't there.\n\nOnce the lion is calm, the hero notices how quiet it has become — and goes where the quiet is real. The Hermit, card nine, stands on a snowy peak holding a lantern with a star burning inside. He hasn't run away from people — he has climbed above the noise to hear himself. His lantern is raised for others: \"where I stand, you can stand too.\" Keywords: soul-searching, solitude, wisdom, inner guidance. The Hermit is a pause for meaning: what do you really want, where are you going? The answers come not from outside but from silence.\n\nTogether these cards are the first lesson of the inner path: first calm the storm within, then listen for your own voice in the quiet. While the lion roars, no lantern will help — and without a lantern, even a tamed silence stays empty.\n\nTry this today: catch the moment you want to snap back or drop everything — and take Fortitude's step: three slow breaths instead of a lunge. In the evening, the Hermit's step: ten minutes without your phone or people, with one question — \"what do I actually want right now?\"",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "В чём главная сила карты Сила?",
+        "en": "What is the true strength of Fortitude?"
+       },
+       "options": [
+        {
+         "ru": "В умении подавить чувства усилием воли",
+         "en": "The will to suppress your feelings"
+        },
+        {
+         "ru": "В терпении и доброте, которые приручают собственные страхи и порывы",
+         "en": "Patience and kindness that tame your own fears and impulses"
+        },
+        {
+         "ru": "В способности одолеть противника напором",
+         "en": "The power to overwhelm an opponent by force"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Лев на карте — не враг, а наши порывы: их не убивают и не давят, а приручают — на его шее гирлянда цветов вместо цепи.",
+        "en": "The lion is not an enemy but our own impulses: they are not killed or crushed but tamed — a garland of flowers lies on his neck instead of a chain."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Какая карта говорит: то, что кажется неукротимым, поддаётся доброте быстрее, чем напору?",
+        "en": "Which card says that what seems untamable yields to kindness faster than to force?"
+       },
+       "options": [
+        {
+         "ru": "Сила",
+         "en": "Fortitude"
+        },
+        {
+         "ru": "Колесница",
+         "en": "The Chariot"
+        },
+        {
+         "ru": "Отшельник",
+         "en": "The Hermit"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Женщина закрывает пасть льву без всякого оружия: спокойная уверенность сильнее рычания.",
+        "en": "The woman closes the lion's mouth with no weapon at all: calm confidence is stronger than roaring."
+       },
+       "cardId": "strength"
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чем уединение Отшельника отличается от одиночества-наказания?",
+        "en": "How is the Hermit's solitude different from loneliness as punishment?"
+       },
+       "options": [
+        {
+         "ru": "Ничем: карта предупреждает об изоляции",
+         "en": "It isn't: the card warns of isolation"
+        },
+        {
+         "ru": "Отшельник прячется от мира, который его разочаровал",
+         "en": "The Hermit hides from a world that disappointed him"
+        },
+        {
+         "ru": "Это осознанная пауза, чтобы услышать себя, — и она выбрана добровольно",
+         "en": "It is a deliberate pause to hear yourself — chosen freely"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Отшельник сам поднялся выше шума, а его фонарь поднят для других — это выбор, а не изгнание.",
+        "en": "The Hermit climbed above the noise himself, and his lantern is raised for others — it is a choice, not an exile."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В чём риск Силы — её слабое место?",
+        "en": "What is Fortitude's risk — its weak spot?"
+       },
+       "options": [
+        {
+         "ru": "Перепутать мягкость с попустительством и делать вид, что льва нет",
+         "en": "Mistaking gentleness for indulgence and pretending the lion isn't there"
+        },
+        {
+         "ru": "Стать слишком жёсткой и растерять доброту",
+         "en": "Becoming too harsh and losing kindness"
+        },
+        {
+         "ru": "Отдать все силы другим и забыть о себе",
+         "en": "Giving all your strength to others and forgetting yourself"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Приручить льва не значит его не замечать: мягкость Силы работает только вместе с честным взглядом на свои порывы.",
+        "en": "Taming the lion doesn't mean ignoring it: Fortitude's gentleness only works together with an honest look at your own impulses."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что предлагает связка Сила + Отшельник, когда внутри буря?",
+        "en": "What does the pair Fortitude + the Hermit suggest when a storm rages inside?"
+       },
+       "options": [
+        {
+         "ru": "Действовать сразу, пока эмоции дают энергию",
+         "en": "Act at once, while emotions give you energy"
+        },
+        {
+         "ru": "Сначала успокоить бурю, потом в тишине расслышать, чего вы хотите",
+         "en": "First calm the storm, then listen in the quiet for what you want"
+        },
+        {
+         "ru": "Переждать, ничего не меняя: само уляжется",
+         "en": "Wait it out and change nothing: it will settle itself"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Пока лев рычит, фонарь не поможет: сперва три спокойных вдоха, затем тишина и вопрос к себе.",
+        "en": "While the lion roars, no lantern will help: first three slow breaths, then silence and a question to yourself."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m3l2",
@@ -1548,7 +1682,141 @@
       "ru": "Есть вещи, которые мы выбираем, и вещи, которые случаются сами. Сегодняшняя пара карт — об этих двух силах и о том, как они уживаются в одной жизни.\n\nКолесо Фортуны, десятая карта, — единственная в колоде, где нет человека. Огромное колесо висит в небе, по ободу движутся фигуры: змей Тифон скользит вниз, Анубис поднимается, а на вершине сидит невозмутимый сфинкс. Это сама жизнь в движении: обстоятельства меняются без нашего участия, и за спадом идёт подъём. Ключевые слова: перемены, циклы, судьба, поворот. Колесо не спрашивает разрешения — оно просит гибкости: заметить открывшуюся дверь и войти. Его риск — пассивность: «всё решит судьба» — не вывод из этой карты, а её ловушка.\n\nА рядом — ответ на вопрос «что же зависит от меня?». Справедливость, одиннадцатая карта: фигура между двух колонн, в правой руке поднятый меч, в левой — весы. И никакой повязки на глазах: правде она не нужна. Это карта причины и следствия: усилия вознаграждаются, а срезанные углы дают о себе знать. Ключевые слова: справедливость, правда, причина и следствие, баланс. Справедливость просит честности — прежде всего с собой — и решений ясной головой: по фактам, а не по эмоциям.\n\nВместе они — формула зрелости. Колесо крутит то, что нам неподвластно; Справедливость взвешивает то, что мы выбрали сами. Мудрость — не путать одно с другим: не корить себя за повороты Колеса и не списывать на судьбу собственные решения.\n\nПопробуйте сегодня: вспомните ситуацию, которая вас беспокоит, и разделите лист надвое. Слева — что в ней от Колеса (не зависело от вас), справа — что от Справедливости (ваши выборы). Часто уже само это разделение приносит облегчение: становится видно, где стараться, а где — отпустить.",
       "en": "Some things we choose; others simply happen to us. Today's pair of cards is about these two forces and how they share one life.\n\nWheel Of Fortune, card ten, is the only card in the deck with no human on it. A great wheel hangs in the sky with figures moving along its rim: the serpent Typhon slides down, Anubis rises, and on top sits an unmoved sphinx. This is life itself in motion: circumstances change without our participation, and every decline is followed by a rise. Keywords: change, cycles, destiny, turning point. The Wheel doesn't ask permission — it asks for flexibility: notice the door that has opened and step through. Its risk is passivity: \"fate will decide\" is not this card's lesson but its trap.\n\nBeside it stands the answer to \"so what does depend on me?\" Justice, card eleven: a figure between two pillars, a raised sword in the right hand, scales in the left. And no blindfold — truth doesn't need one. This is the card of cause and effect: effort pays off, and cut corners come back around. Keywords: justice, truth, cause and effect, balance. Justice asks for honesty — first of all with yourself — and for decisions made with a clear head: on facts, not emotions.\n\nTogether they form a formula of maturity. The Wheel turns what is beyond our control; Justice weighs what we chose ourselves. Wisdom is not confusing the two: don't blame yourself for the Wheel's turns, and don't blame fate for your own decisions.\n\nTry this today: think of a situation that worries you and divide a page in two. On the left, what in it belongs to the Wheel (was never up to you); on the right, what belongs to Justice (your choices). Often the sorting alone brings relief: you can see where to keep trying — and where to let go.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чего Колесо Фортуны просит от нас?",
+        "en": "What does Wheel Of Fortune ask of us?"
+       },
+       "options": [
+        {
+         "ru": "Контроля: удержать всё в своих руках",
+         "en": "Control: keep everything in your hands"
+        },
+        {
+         "ru": "Смирения: от нас всё равно ничего не зависит",
+         "en": "Resignation: nothing depends on us anyway"
+        },
+        {
+         "ru": "Гибкости: заметить открывшуюся дверь и войти",
+         "en": "Flexibility: notice the door that opened and step through"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Колесо вертится само, но подъём им же и обещан: за спадом идёт рост, и важно не проспать поворот.",
+        "en": "The wheel turns on its own, but the rise is its promise too: decline is followed by growth, and the turn is not to be slept through."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В чём ловушка Колеса Фортуны?",
+        "en": "What is the trap of Wheel Of Fortune?"
+       },
+       "options": [
+        {
+         "ru": "Решить «всё за меня сделает судьба» и перестать выбирать",
+         "en": "Deciding “fate will do it all for me” and giving up choosing"
+        },
+        {
+         "ru": "Поверить, что перемены всегда к худшему",
+         "en": "Believing change is always for the worse"
+        },
+        {
+         "ru": "Увидеть в каждом совпадении тайный знак",
+         "en": "Reading every coincidence as a secret sign"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Карта о том, что жизнь движется сама, — но дверь, которую она открывает, всё равно нужно заметить и войти.",
+        "en": "The card says life moves on its own — but the door it opens still has to be noticed and entered."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Поднятый меч, весы в руке — и никакой повязки на глазах. Какая это карта?",
+        "en": "A raised sword, scales in hand — and no blindfold. Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Умеренность",
+         "en": "Temperance"
+        },
+        {
+         "ru": "Справедливость",
+         "en": "Justice"
+        },
+        {
+         "ru": "Верховная Жрица",
+         "en": "The High Priestess"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Меч — ясность решения, весы — беспристрастная оценка; повязка не нужна: правде нечего прятать.",
+        "en": "The sword is clarity of decision, the scales are impartial judgement; no blindfold is needed: truth has nothing to hide."
+       },
+       "cardId": "justice"
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "О чём говорит Справедливость как карта причины и следствия?",
+        "en": "What does Justice say as the card of cause and effect?"
+       },
+       "options": [
+        {
+         "ru": "Жизнь несправедлива, и с этим нужно смириться",
+         "en": "Life is unfair and must be accepted"
+        },
+        {
+         "ru": "Каждому достаётся случайная доля удачи",
+         "en": "Everyone gets a random share of luck"
+        },
+        {
+         "ru": "Усилия вознаграждаются, а срезанные углы дают о себе знать",
+         "en": "Effort pays off, and cut corners come back around"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Эта карта взвешивает то, что мы выбрали сами: решения ясной головой, по фактам — её территория.",
+        "en": "This card weighs what we chose ourselves: clear-headed decisions based on facts are its territory."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Беспокоящую ситуацию урок предлагает разделить надвое. Как?",
+        "en": "The lesson suggests splitting a worrying situation in two. How?"
+       },
+       "options": [
+        {
+         "ru": "Что в ней от Колеса (не зависело от вас) и что от Справедливости (ваши выборы)",
+         "en": "What in it belongs to the Wheel (was never up to you) and what to Justice (your choices)"
+        },
+        {
+         "ru": "Что в ней приятно и что неприятно",
+         "en": "What in it is pleasant and what is not"
+        },
+        {
+         "ru": "Что было раньше и что случилось потом",
+         "en": "What came first and what happened later"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Разделение возвращает ясность: не корить себя за повороты Колеса и не списывать на судьбу собственные решения.",
+        "en": "The split restores clarity: don't blame yourself for the Wheel's turns, and don't blame fate for your own decisions."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m3l3",
@@ -1565,7 +1833,141 @@
       "ru": "Сегодня — самая глубокая часть пути: три карты о том, как проживаются настоящие перемены. Сначала пауза, потом завершение, потом — тонкая настройка новой жизни.\n\nПовешенный, двенадцатая карта, выглядит странно: юноша висит вниз головой на живом дереве — но лицо его спокойно, а вокруг головы сияние. Это не казнь, а добровольная остановка: жизнь подвесила ситуацию, и торопить её бесполезно. Зато, перевернувшись, видишь то, чего не разглядеть на бегу. Ключевые слова: пауза, новый взгляд, жертва, отпускание. Иногда нужно отпустить контроль и чем-то поступиться, чтобы получить более важное.\n\nЗа паузой приходит Смерть — тринадцатая карта и, пожалуй, самая оболганная в колоде. Она почти никогда не о буквальной смерти. У Уэйта это всадник с белой розой на чёрном знамени — и у него даже нет оружия: перемены приходят сами. Что-то исчерпало себя — этап, роль, привычный способ жить. Грусть здесь уместна, цепляться — нет: вдали, между двумя башнями, уже встаёт солнце. Ключевые слова: завершение, трансформация, переход, обновление.\n\nА после любого завершения нужна Умеренность, четырнадцатая карта: ангел переливает воду из чаши в чашу, одна нога на земле, другая — в воде. Это настройка новой жизни без крайностей и рывков, умение соединять противоположное: работу и отдых, чувства и разум. Всё складывается — не мгновенно, но верно. Ключевые слова: умеренность, баланс, терпение, синтез.\n\nВтроём эти карты — календарь любой большой перемены: остановиться и увидеть (Повешенный), с уважением попрощаться с отжившим (Смерть), собрать новую жизнь по капле (Умеренность).\n\nПопробуйте сегодня: вспомните одну перемену, которую вы уже прожили, — переезд, смену работы, конец отношений. Найдите в ней все три шага: где была пауза? что завершилось? как настраивалась новая жизнь? Прожитое однажды — лучший учебник для перемен, которые ещё впереди.",
       "en": "Today is the deepest part of the journey: three cards about how real change is lived through. First a pause, then an ending, then the fine-tuning of a new life.\n\nThe Hanged Man, card twelve, looks strange: a young man hangs upside down from a living tree — yet his face is calm, and there is a glow around his head. This is not an execution but a voluntary stop: life has suspended the situation, and rushing it is useless. But once you turn upside down, you see what can't be seen on the run. Keywords: pause, new perspective, surrender, letting go. Sometimes you must release control and give something up to receive something more important.\n\nAfter the pause comes Death — card thirteen and perhaps the most slandered card in the deck. It is almost never about literal death. In Waite's image it is a rider with a white rose on a black banner — he carries no weapon at all: change arrives on its own. Something has run its course — a stage, a role, a habitual way of living. Sadness is appropriate here; clinging is not: in the distance, between two towers, the sun is already rising. Keywords: endings, transformation, transition, renewal.\n\nAnd after any ending comes Temperance, card fourteen: an angel pours water from cup to cup, one foot on the earth, the other in the water. This is the tuning of a new life without extremes or jolts — the art of blending opposites: work and rest, feeling and reason. Everything comes together — not instantly, but surely. Keywords: moderation, balance, patience, blending.\n\nTogether the three are the calendar of any great change: stop and see (the Hanged Man), say a respectful goodbye to what is over (Death), assemble the new life drop by drop (Temperance).\n\nTry this today: recall one change you have already lived through — a move, a job change, the end of a relationship. Find all three steps in it: where was the pause? what ended? how did the new life find its measure? A change you once survived is the best textbook for the ones still ahead.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "О чём почти всегда говорит Смерть в чтении карт?",
+        "en": "What does Death almost always mean in a reading?"
+       },
+       "options": [
+        {
+         "ru": "О естественном завершении этапа и обновлении",
+         "en": "A natural ending of a stage, and renewal"
+        },
+        {
+         "ru": "О буквальной опасности, которую надо предотвратить",
+         "en": "A literal danger to prevent"
+        },
+        {
+         "ru": "О чужом дурном влиянии",
+         "en": "Someone else's bad influence"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "У всадника на карте нет оружия, а вдали между башнями встаёт солнце: перемена приходит сама и несёт рассвет.",
+        "en": "The rider on the card carries no weapon, and between the towers the sun is rising: the change arrives on its own and brings a dawn."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Лицо спокойно, вокруг головы сияние, а привязана лишь одна нога. Какая это карта?",
+        "en": "A calm face, a glow around the head, and only one leg bound. Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Дурак",
+         "en": "The Fool"
+        },
+        {
+         "ru": "Суд",
+         "en": "The Last Judgment"
+        },
+        {
+         "ru": "Повешенный",
+         "en": "The Hanged Man"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Живое дерево и спокойное лицо выдают смысл: это не казнь, а добровольная пауза, в которой рождается озарение.",
+        "en": "The living tree and the calm face give it away: not an execution but a voluntary pause in which insight is born."
+       },
+       "cardId": "hanged-man"
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что происходит во время паузы Повешенного?",
+        "en": "What happens during the Hanged Man's pause?"
+       },
+       "options": [
+        {
+         "ru": "Ничего: это потерянное время",
+         "en": "Nothing: it is lost time"
+        },
+        {
+         "ru": "Снаружи ничего не движется, а внутри зреет новый взгляд",
+         "en": "Nothing moves outside, while a new way of seeing ripens within"
+        },
+        {
+         "ru": "Копятся силы для решающего рывка",
+         "en": "Energy builds up for a decisive push"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Перевернувшись, видишь то, чего не разглядеть на бегу; торопить эту остановку бесполезно.",
+        "en": "Upside down, you see what can't be seen on the run; rushing this stop is useless."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чем занимается Умеренность после большого завершения?",
+        "en": "What does Temperance do after a great ending?"
+       },
+       "options": [
+        {
+         "ru": "Тонкой настройкой новой жизни: по капле, без крайностей и рывков",
+         "en": "Fine-tunes the new life: drop by drop, without extremes or jolts"
+        },
+        {
+         "ru": "Строгим самоограничением во всём",
+         "en": "Imposes strict self-denial in everything"
+        },
+        {
+         "ru": "Быстрым стартом с чистого листа",
+         "en": "Makes a fast start from a clean slate"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Ангел на карте переливает воду из чаши в чашу: противоположности — работа и отдых, чувства и разум — соединяются постепенно.",
+        "en": "The angel pours water from cup to cup: opposites — work and rest, feeling and reason — blend gradually."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В каком порядке урок описывает большую перемену?",
+        "en": "In what order does the lesson describe a great change?"
+       },
+       "options": [
+        {
+         "ru": "Завершение → пауза → настройка",
+         "en": "Ending → pause → tuning"
+        },
+        {
+         "ru": "Настройка → пауза → завершение",
+         "en": "Tuning → pause → ending"
+        },
+        {
+         "ru": "Пауза → завершение → настройка",
+         "en": "Pause → ending → tuning"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Сначала остановиться и увидеть (Повешенный), затем попрощаться с отжившим (Смерть), после — собрать новую жизнь по капле (Умеренность).",
+        "en": "First stop and see (the Hanged Man), then say goodbye to what is over (Death), then assemble the new life drop by drop (Temperance)."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m3l4",
@@ -1581,7 +1983,141 @@
       "ru": "Сегодня — две карты, которых новички боятся больше всего. Спокойно: обе они не про наказание, а про освобождение. Просто освобождение редко выглядит нарядно.\n\nДьявол, пятнадцатая карта, — искажённое зеркало Иерофанта: рогатая фигура на постаменте, внизу двое в цепях — как Влюблённые, потерявшие свободу. Это карта несвободы, которую мы часто выбираем сами: зависимость от человека, привычки, работы, чужого одобрения. Что-то держит — и одновременно даёт иллюзию комфорта. А теперь главная деталь картинки: цепи на шеях висят свободно. Их можно снять. Ключевые слова: зависимость, привязанность, теневая сторона, искушение. Увидеть свою несвободу честно, без стыда, — уже половина выхода; вторая половина — решить, что вы достойны большего.\n\nБашня, шестнадцатая карта: молния бьёт в каменную башню, корона слетает с вершины, две фигуры падают. Страшно? Присмотритесь: рушится не жизнь, а конструкция на шатком основании — самообман, планы «на честном слове». Молния — вспышка правды: вы наконец видите, как всё обстоит на самом деле. То, что было настоящим, останется с вами, а на расчищенном месте строят прочнее — уже на правде. Ключевые слова: внезапные перемены, разрушение, откровение, освобождение.\n\nПара работает в связке: Дьявол показывает клетку, которую мы обжили и обставили, Башня её ломает. Неприятно — но после Башни дышится легче, чем в самой уютной клетке.\n\nПопробуйте сегодня — только шаг Дьявола, мягкий. Заметьте одну привычку, к которой тянетесь «на автомате»: лента, сладкое, вечное «да» на чужие просьбы. Не нужно бросать её сегодня. Просто в момент, когда рука уже потянулась, скажите про себя: «это цепь, и она висит свободно». Осознание — начало выхода.",
       "en": "Today, the two cards beginners fear most. Breathe: neither is about punishment — both are about liberation. Liberation just rarely looks pretty.\n\nThe Devil, card fifteen, is a distorted mirror of the Hierophant: a horned figure on a pedestal, and below, two chained figures — like the Lovers after losing their freedom. This is the card of unfreedom we often choose ourselves: dependence on a person, a habit, a job, others' approval. Something holds you — and at the same time offers an illusion of comfort. Now the key detail of the image: the chains hang loose around their necks. They can be taken off. Keywords: attachment, addiction, shadow self, temptation. Seeing your unfreedom honestly, without shame, is half the way out; the other half is deciding you deserve more.\n\nThe Tower, card sixteen: lightning strikes a stone tower, the crown flies off the top, two figures fall. Frightening? Look closer: it is not your life that collapses but a structure built on shaky ground — self-deception, plans held together by wishful thinking. The lightning is a flash of truth: you finally see how things really are. What was real will stay with you, and on the cleared ground people build stronger — this time on truth. Keywords: sudden change, upheaval, revelation, liberation.\n\nThe pair works as one: the Devil shows the cage we have furnished and grown used to, the Tower breaks it. Unpleasant — but after the Tower you breathe easier than in the coziest cage.\n\nTry this today — only the Devil's step, a gentle one. Notice one habit you reach for on autopilot: the feed, the sweets, the automatic \"yes\" to every request. No need to quit it today. Just at the moment your hand reaches out, say to yourself: \"this is a chain, and it hangs loose.\" Awareness is the beginning of the way out.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Какая деталь карты Дьявол меняет её смысл целиком?",
+        "en": "Which detail of The Devil changes the whole meaning of the card?"
+       },
+       "options": [
+        {
+         "ru": "Опущенный факел: энергия погасла навсегда",
+         "en": "The lowered torch: the energy is gone for good"
+        },
+        {
+         "ru": "Цепи на шеях висят свободно — их можно снять",
+         "en": "The chains hang loose — they can be taken off"
+        },
+        {
+         "ru": "Постамент: фигура выше людей и сильнее их",
+         "en": "The pedestal: the figure stands above people and is stronger"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Несвобода на этой карте держится не на замке, а на привычке: осознать это — уже половина выхода.",
+        "en": "The unfreedom on this card is held not by a lock but by habit: seeing that is already half the way out."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что на самом деле рушит Башня?",
+        "en": "What does The Tower actually bring down?"
+       },
+       "options": [
+        {
+         "ru": "Всю жизнь без разбора",
+         "en": "Your whole life, indiscriminately"
+        },
+        {
+         "ru": "Планы, которые были слишком смелыми",
+         "en": "Plans that were too bold"
+        },
+        {
+         "ru": "Конструкцию на шатком основании: самообман и иллюзии",
+         "en": "A structure on shaky ground: self-deception and illusions"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Молния — вспышка правды: настоящее остаётся с вами, а на расчищенном месте строят прочнее.",
+        "en": "The lightning is a flash of truth: what was real stays with you, and on the cleared ground people build stronger."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Молния сбивает корону с вершины, и две фигуры летят вниз. Какая это карта?",
+        "en": "Lightning knocks the crown off the top, and two figures fall. Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Башня",
+         "en": "The Tower"
+        },
+        {
+         "ru": "Колесо Фортуны",
+         "en": "Wheel Of Fortune"
+        },
+        {
+         "ru": "Суд",
+         "en": "The Last Judgment"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Падение здесь — освобождение из тюрьмы, которую принимали за крепость: ложная власть теряет корону.",
+        "en": "The fall here is release from a prison mistaken for a fortress: false power loses its crown."
+       },
+       "cardId": "tower"
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "С чего начинается выход из несвободы, по Дьяволу?",
+        "en": "Where does the way out of unfreedom begin, according to The Devil?"
+       },
+       "options": [
+        {
+         "ru": "С резкого разрыва: бросить всё в один день",
+         "en": "With a sharp break: drop everything in one day"
+        },
+        {
+         "ru": "С честного взгляда без стыда: увидеть, что именно держит",
+         "en": "With an honest, shame-free look: see what exactly holds you"
+        },
+        {
+         "ru": "С поиска виноватых в том, как всё сложилось",
+         "en": "With finding someone to blame for how things turned out"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Сначала заметить цепь и признать её, потом решить, что вы достойны большего, — рывок без осознания приводит обратно.",
+        "en": "First notice the chain and admit it, then decide you deserve more — a leap without awareness leads back."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Как связаны Дьявол и Башня в одном уроке?",
+        "en": "How are The Devil and The Tower linked in this lesson?"
+       },
+       "options": [
+        {
+         "ru": "Дьявол показывает обжитую клетку, Башня её ломает",
+         "en": "The Devil shows the cage we've settled into; The Tower breaks it"
+        },
+        {
+         "ru": "Обе карты предупреждают об одном и том же наказании",
+         "en": "Both cards warn of the same punishment"
+        },
+        {
+         "ru": "Башня строит то, что Дьявол разрушил",
+         "en": "The Tower builds what The Devil destroyed"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "После Башни дышится легче, чем в самой уютной клетке: обе карты в итоге про освобождение.",
+        "en": "After the Tower you breathe easier than in the coziest cage: in the end, both cards are about liberation."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m3l5",
@@ -1598,7 +2134,141 @@
       "ru": "После грозы Башни небо расчищается — и на пути героя одна за другой встают три небесные карты. Их общий сюжет — дорога от надежды к ясности, и она не прямая.\n\nЗвезда, семнадцатая карта, — первая тишина после бури. Женщина у воды льёт воду из двух кувшинов — на землю и в озеро, и поток не иссякает. Ей нечего скрывать и нечего бояться: худшее позади. Это не мгновенное чудо, а ровный внутренний свет: раны затягиваются, силы возвращаются, впереди появляется ориентир. Ключевые слова: надежда, вдохновение, исцеление, вера.\n\nНо между надеждой и солнцем лежит ночь. Луна, восемнадцатая карта: пёс и волк воют на неверный свет, из воды выползает рак, тропа уходит между двумя башнями в темноту. Это карта неясности: вы видите не всю картину, и воображение охотно подсовывает страхи вместо фактов. Луна не пугает — она просит не принимать важных решений вслепую и прислушаться к интуиции: та часто знает то, что разум ещё не сформулировал. Ключевые слова: иллюзии, страхи, подсознание, неясность.\n\nИ наконец — Солнце, девятнадцатая карта, одна из самых счастливых в колоде. Ребёнок на белом коне выезжает из-за садовой стены, над ним огромное солнце, рядом подсолнухи. Этот свет прямой, а не отражённый: тучи рассеялись, вы видите ситуацию как есть — и она хороша. Ключевые слова: радость, успех, ясность, жизненная сила.\n\nВтроём эти карты честны про то, как возвращается свет: сначала вера (Звезда), потом последние страхи (Луна), потом ясность (Солнце). Если у вас сейчас «лунный» этап — это не откат назад, а предрассветный час.\n\nПопробуйте сегодня: поймайте одну тревожную мысль и задайте ей лунный вопрос: «это факт — или додумано?» Если додумано — отложите решение до ясности. А перед сном сделайте шаг Звезды: назовите три вещи, которые сегодня были по-настоящему хороши.",
       "en": "After the Tower's storm the sky clears — and three celestial cards rise on the hero's path, one after another. Their shared story is the road from hope to clarity, and it is not a straight one.\n\nThe Star, card seventeen, is the first quiet after the storm. A woman by the water pours from two jugs — onto the land and into the pool — and the stream never runs dry. She has nothing to hide and nothing to fear: the worst is behind. This is no instant miracle but a steady inner light: wounds close, strength returns, a guiding point appears ahead. Keywords: hope, inspiration, healing, faith.\n\nBut between hope and sunlight lies a night. The Moon, card eighteen: a dog and a wolf howl at the unsteady light, a crayfish crawls out of the water, a path leads between two towers into the dark. This is the card of uncertainty: you are not seeing the whole picture, and imagination eagerly serves up fears instead of facts. The Moon does not frighten — it asks you not to make big decisions blindly and to listen to your intuition: it often knows what the mind hasn't yet put into words. Keywords: illusion, fear, subconscious, uncertainty.\n\nAnd then — The Sun, card nineteen, one of the happiest cards in the deck. A child on a white horse rides out from behind a garden wall, a huge sun above, sunflowers nearby. This light is direct, not reflected: the clouds have parted, you see the situation as it is — and it is good. Keywords: joy, success, clarity, vitality.\n\nTogether the three are honest about how light returns: first faith (the Star), then the last fears (the Moon), then clarity (the Sun). If you are in a \"moon\" stretch right now, it isn't a step back — it's the hour before dawn.\n\nTry this today: catch one anxious thought and ask it the Moon's question: \"is this a fact — or did I fill it in?\" If it's filled in, postpone the decision until things clear. And before sleep, take the Star's step: name three things that were genuinely good today.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "О чём просит Луна?",
+        "en": "What does The Moon ask of you?"
+       },
+       "options": [
+        {
+         "ru": "Довериться первому впечатлению: оно самое верное",
+         "en": "Trust your first impression: it is the truest"
+        },
+        {
+         "ru": "Отложить все дела до новолуния",
+         "en": "Put everything off until the new moon"
+        },
+        {
+         "ru": "Не решать вслепую и дать ситуации время проясниться",
+         "en": "Don't decide blindly — give the situation time to clear"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "При отражённом свете видна не вся картина: интуиция подскажет, а факты стоит проверять при свете дня.",
+        "en": "By reflected light you can't see the whole picture: intuition will hint, and facts are best checked in daylight."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Женщина у воды льёт воду из двух кувшинов, и поток не иссякает. Какая это карта?",
+        "en": "A woman by the water pours from two jugs, and the stream never runs dry. Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Умеренность",
+         "en": "Temperance"
+        },
+        {
+         "ru": "Звезда",
+         "en": "The Star"
+        },
+        {
+         "ru": "Луна",
+         "en": "The Moon"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Умеренность тоже переливает воду, но там ангел и две чаши; здесь — открытость у воды и путеводный свет над головой.",
+        "en": "Temperance pours water too, but there an angel holds two cups; here it is openness at the water's edge and a guiding light overhead."
+       },
+       "cardId": "star"
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чем свет Солнца отличается от света Луны?",
+        "en": "How is The Sun's light different from The Moon's?"
+       },
+       "options": [
+        {
+         "ru": "Он прямой, а не отражённый: ситуация видна как есть",
+         "en": "It is direct, not reflected: the situation is seen as it is"
+        },
+        {
+         "ru": "Он ярче, но быстрее гаснет",
+         "en": "It is brighter but fades faster"
+        },
+        {
+         "ru": "Ничем: обе карты про ясность",
+         "en": "Nothing: both cards mean clarity"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Под Луной воображение дорисовывает страхи, под Солнцем тучи рассеялись — вот почему их советы такие разные.",
+        "en": "Under the Moon imagination sketches in fears; under the Sun the clouds have parted — that is why their advice differs."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что такое «лунный» этап на пути от Звезды к Солнцу?",
+        "en": "What is the “moon” stretch on the road from The Star to The Sun?"
+       },
+       "options": [
+        {
+         "ru": "Откат назад: надежда была ложной",
+         "en": "A rollback: the hope was false"
+        },
+        {
+         "ru": "Расплата за поспешность",
+         "en": "A penalty for haste"
+        },
+        {
+         "ru": "Предрассветный час: последние страхи перед ясностью",
+         "en": "The hour before dawn: the last fears before clarity"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Дорога от надежды к ясности не прямая: ночь сомнений — её законная часть, а не сбой.",
+        "en": "The road from hope to clarity is not straight: a night of doubts is its lawful part, not a failure."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Какой вопрос урок предлагает задавать тревожной мысли?",
+        "en": "What question does the lesson suggest asking an anxious thought?"
+       },
+       "options": [
+        {
+         "ru": "«Кто в этом виноват?»",
+         "en": "“Who is to blame for this?”"
+        },
+        {
+         "ru": "«Это факт — или додумано?»",
+         "en": "“Is this a fact — or filled in?”"
+        },
+        {
+         "ru": "«Что самое худшее может случиться?»",
+         "en": "“What is the worst that could happen?”"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Воображение подсовывает страхи вместо фактов: додуманное откладывают до ясности, а с фактами работают.",
+        "en": "Imagination serves up fears instead of facts: what is filled in waits for clarity, and facts are worked with."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m3l6",
@@ -1614,7 +2284,141 @@
       "ru": "Сегодня путь Дурака завершается — и финал состоит из двух шагов: зова и танца.\n\nСуд, двадцатая карта. Архангел трубит в трубу, и из открытых гробниц поднимаются люди с раскрытыми в изумлении руками. Пусть сюжет вас не пугает: по Уэйту, труба звучит не столько снаружи, сколько внутри нас. Это карта пробуждения и итога: прошлый этап завершён, и вас зовут на новый уровень — переоценить жизнь, принять важное решение, использовать второй шанс. Ключевые слова: пробуждение, переоценка, призвание, второй шанс. Суд просит честно подвести итоги — без самобичевания, но и без иллюзий — и откликнуться на то, что давно вас зовёт.\n\nМир, двадцать первая карта, — последняя в Старших арканах. Танцующая фигура в овальном венке, а по углам — ангел, орёл, телец и лев: те же четверо, что были на Колесе Фортуны. Там они держали книги и учились — теперь просто присутствуют: всё сошлось. Цикл завершён, цель достигнута; у Уэйта это «уверенный успех» и целостность. Ключевые слова: завершение цикла, целостность, достижение, путешествие. Мир напоминает: отпраздновать результат — тоже искусство, и только после этого начинается новое.\n\nА теперь оглянитесь на всю историю. Дурак шагнул с обрыва; встретил учителей — от Мага до Колесницы; прошёл внутренние испытания — приручил льва, выдержал паузу и завершение, снял цепи, пережил Башню; сквозь ночь Луны дошёл до Солнца — и услышал зов. Мир — это тот же ноль, но пройденный: круг замкнулся, чтобы начаться заново, уже на новой высоте. Каждая ваша карта дня — чей-то шаг этого пути.\n\nПопробуйте сегодня: найдите себя на этой карте пути. Какая из 22 карт больше всего похожа на ваш нынешний этап? Откройте её страницу в справочнике — теперь вы прочтёте её не как отдельное слово, а как главу собственной истории.",
       "en": "Today the Fool's journey comes to its end — and the finale takes two steps: a call and a dance.\n\nThe Last Judgment, card twenty. An archangel sounds a trumpet, and people rise from open tombs, arms open in wonder. Don't let the scene alarm you: as Waite saw it, the trumpet sounds not so much outside as within us. This is the card of awakening and summing up: the past stage is complete, and you are called to a new level — to reappraise your life, make a major decision, take a second chance. Keywords: awakening, reckoning, calling, second chance. The card asks you to take honest stock — without self-flagellation, but without illusions — and to answer what has long been calling you.\n\nThe World, card twenty-one, is the last of the Major Arcana. A dancing figure in an oval wreath, and in the corners — the angel, the eagle, the bull and the lion: the same four we met on the Wheel Of Fortune. There they held books and studied; now they simply are: everything has come together. The cycle is complete, the goal is reached; for Waite this is \"assured success\" and wholeness. Keywords: completion, wholeness, achievement, travel. The World reminds us that celebrating a result is an art too — and only after that does the new begin.\n\nNow look back at the whole story. The Fool stepped off the cliff; met his teachers, from the Magician to the Chariot; passed the inner trials — tamed the lion, endured the pause and the ending, took off the chains, survived the Tower; walked through the Moon's night to the Sun — and heard the call. The World is the same zero, but a lived one: the circle closes so it can begin again, one turn higher. Every card of the day you draw is a step of this path.\n\nTry this today: find yourself on this map. Which of the 22 cards most resembles your current stage? Open its page in the guide — you will now read it not as a single word, but as a chapter of your own story.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Откуда, по Уэйту, звучит труба Суда?",
+        "en": "Where, in Waite's view, does the trumpet of The Last Judgment sound from?"
+       },
+       "options": [
+        {
+         "ru": "Не столько снаружи, сколько внутри нас",
+         "en": "Not so much outside as within us"
+        },
+        {
+         "ru": "Из прошлого: это голос старых ошибок",
+         "en": "From the past: it is the voice of old mistakes"
+        },
+        {
+         "ru": "От других людей: это их ожидания",
+         "en": "From other people: it is their expectations"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Зов этой карты — переоценка, важное решение, второй шанс; ответ на него рождается внутри.",
+        "en": "The card's call is a reappraisal, a major decision, a second chance; the answer to it is born within."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что советует Мир, когда цель достигнута?",
+        "en": "What does The World advise when the goal is reached?"
+       },
+       "options": [
+        {
+         "ru": "Сразу ставить новую цель, пока есть разгон",
+         "en": "Set a new goal at once, while you have momentum"
+        },
+        {
+         "ru": "Отпраздновать результат — и только потом начинать новое",
+         "en": "Celebrate the result — and only then begin the new"
+        },
+        {
+         "ru": "Проверить, не упущено ли что-нибудь",
+         "en": "Check whether anything was missed"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Завершение — тоже искусство: цикл нужно замкнуть, иначе новое начнётся с чувства недоделанного.",
+        "en": "Completion is an art too: the cycle needs to be closed, or the new begins with a sense of unfinished business."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Танцующая фигура в овальном венке, по углам — четверо с Колеса Фортуны. Какая это карта?",
+        "en": "A dancing figure in an oval wreath, with the four figures from Wheel Of Fortune in the corners. Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Колесо Фортуны",
+         "en": "Wheel Of Fortune"
+        },
+        {
+         "ru": "Солнце",
+         "en": "The Sun"
+        },
+        {
+         "ru": "Мир",
+         "en": "The World"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Венок замыкает цикл, а четыре фигуры больше не учатся по книгам — всё сошлось, это целостность.",
+        "en": "The wreath closes the cycle, and the four figures no longer study their books — everything has come together: wholeness."
+       },
+       "cardId": "world"
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "На Колесе Фортуны четыре фигуры по углам держали книги, на Мире — уже нет. Что это значит?",
+        "en": "On Wheel Of Fortune the four corner figures held books; on The World they no longer do. What does it mean?"
+       },
+       "options": [
+        {
+         "ru": "Учение завершено: то, что изучалось, стало жизнью",
+         "en": "The study is complete: what was learned has become life"
+        },
+        {
+         "ru": "Знания оказались ненужными",
+         "en": "The knowledge turned out to be useless"
+        },
+        {
+         "ru": "Это разные фигуры, совпадение случайно",
+         "en": "They are different figures; the match is a coincidence"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Колесо заставало героя посреди движения и учёбы; Мир — итог, где урок пройден и присвоен.",
+        "en": "The Wheel caught the hero mid-motion and mid-study; The World is the summing up, where the lesson has been learned and made one's own."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Почему Мир называют «тем же нолём, но пройденным»?",
+        "en": "Why is The World called “the same zero, but a lived one”?"
+       },
+       "options": [
+        {
+         "ru": "Потому что в конце пути герой теряет всё",
+         "en": "Because at the end of the road the hero loses everything"
+        },
+        {
+         "ru": "Потому что путь Дурака был ошибкой",
+         "en": "Because the Fool's journey was a mistake"
+        },
+        {
+         "ru": "Потому что круг замыкается, чтобы начаться заново — на новой высоте",
+         "en": "Because the circle closes to begin again — one turn higher"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "История 22 карт циклична: за Миром снова шаг Дурака, но это уже другой Дурак — с пройденным путём за плечами.",
+        "en": "The story of the 22 cards is a cycle: after The World comes the Fool's step again — but a different Fool, with the road behind him."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     }
    ]
   },
