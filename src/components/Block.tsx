@@ -25,6 +25,11 @@ interface BlockProps {
   star?: boolean;
 }
 
+// стиль абзаца значения (Cormorant 16/24) — второе появление на экране «О приложении» (спека 12),
+// где блок «О приложении» несёт ДВА абзаца разного цвета и не может обойтись пропом `text`
+// (он один и одноцветный) — оба берут этот стиль вместо копии
+export const paragraphStyle = { fontFamily: fonts.display, fontSize: 16, lineHeight: 24 } as const;
+
 export function Block({ title, text, children, todo, contentStyle, accentBorder, star }: BlockProps) {
   const t = useTheme();
   // 'transparent' в градиенте на iOS даёт серый ореол, поэтому гасим через альфу самого цвета
@@ -53,6 +58,6 @@ const st = StyleSheet.create({
   title: { fontSize: 9, letterSpacing: 2.5 },
   star: { fontSize: 9.5 },
   tail: { flex: 1, height: 1 },
-  text: { fontFamily: fonts.display, fontSize: 16, lineHeight: 24, marginTop: 7 },
+  text: { ...paragraphStyle, marginTop: 7 },
   textTodo: { fontStyle: 'italic' },
 });

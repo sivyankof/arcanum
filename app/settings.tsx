@@ -2,7 +2,7 @@
  *  остался «путём» — уровень, статистика, дневник. Вход — шестерёнка в правом верхнем углу профиля.
  *  Порядок строк по спеке: Тема · Язык · напоминания · рефлексия · экспорт/импорт (уже здесь,
  *  задача 11); имя и «о приложении» остаются на очереди — задачи 12 и 13. */
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, Platform, ScrollView, StyleSheet, View } from 'react-native';
@@ -34,6 +34,7 @@ import {
   sendTestPush,
   type PermissionState,
 } from '../src/lib/pushes';
+import { appVersion } from '../src/lib/appInfo';
 import { timeLabel } from '../src/lib/settings';
 import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
@@ -317,6 +318,17 @@ export default function SettingsScreen() {
         </FadeUp>
         <FadeUp index={6}>
           <SettingsRow icon="folder-open-outline" label={tr('settings.importData')} value="" onPress={onImport} />
+        </FadeUp>
+        {/* «О приложении» (спека 12): версия — та же appVersion(), что читает и сам экран,
+            чтобы значение в строке и на экране никогда не разошлось. Место — перед DEV-строками:
+            «Обратная связь» (задача 13) встанет следующей в этом же промежутке */}
+        <FadeUp index={7}>
+          <SettingsRow
+            icon="information-circle-outline"
+            label={tr('settings.about')}
+            value={`v${appVersion()}`}
+            onPress={() => router.push('/about')}
+          />
         </FadeUp>
         {__DEV__ && (
           <>
