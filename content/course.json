@@ -642,8 +642,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Ноль — это чистый лист: ещё ничего не решено, и всё впереди.",
-        "en": "That's right! Zero is a blank page: nothing is decided yet, and everything lies ahead."
+        "ru": "Ноль — это чистый лист: ещё ничего не решено, и всё впереди.",
+        "en": "Zero is a blank page: nothing is decided yet, and everything lies ahead."
        }
       },
       {
@@ -668,8 +668,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Именно так! Маг напоминает: все инструменты для мечты уже в ваших руках.",
-        "en": "Exactly! The Magician reminds you: every tool for your dream is already in your hands."
+        "ru": "Маг напоминает: все инструменты для мечты уже в ваших руках.",
+        "en": "The Magician reminds you: every tool for your dream is already in your hands."
        }
       },
       {
@@ -694,8 +694,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Да! Доверие к жизни прекрасно, но смотреть под ноги всё же стоит.",
-        "en": "Yes! Trusting life is beautiful, but it's still worth watching your step."
+        "ru": "Доверие к жизни прекрасно, но смотреть под ноги всё же стоит.",
+        "en": "Trusting life is beautiful, but it's still worth watching your step."
        }
       },
       {
@@ -720,8 +720,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Верно! Одна рука Мага к небу, другая к земле: мечта превращается в план.",
-        "en": "Correct! One of the Magician's hands points to the sky, the other to the earth: a dream becomes a plan."
+        "ru": "Одна рука Мага к небу, другая к земле: мечта превращается в план.",
+        "en": "One of the Magician's hands points to the sky, the other to the earth: a dream becomes a plan."
        },
        "cardId": "magician"
       },
@@ -747,8 +747,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Точно! Сначала захотеть и шагнуть, потом собрать мечту в конкретный план.",
-        "en": "Exactly! First dare to want it and step forward, then shape the dream into a concrete plan."
+        "ru": "Сначала захотеть и шагнуть, потом собрать мечту в конкретный план.",
+        "en": "First dare to want it and step forward, then shape the dream into a concrete plan."
        }
       }
      ],
@@ -792,8 +792,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Это внутренний голос Жрицы — его стоит дослушать до конца.",
-        "en": "Right! That's the High Priestess's inner voice — it deserves to be heard to the end."
+        "ru": "Это внутренний голос Жрицы — его стоит дослушать до конца.",
+        "en": "That's the High Priestess's inner voice — it deserves to be heard to the end."
        }
       },
       {
@@ -818,8 +818,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Да! Жрица хранит тайну: не все ответы приходят сразу, некоторые ждут тишины.",
-        "en": "Yes! The High Priestess keeps a mystery: not all answers come at once — some wait for stillness."
+        "ru": "Жрица хранит тайну: не все ответы приходят сразу, некоторые ждут тишины.",
+        "en": "The High Priestess keeps a mystery: not all answers come at once — some wait for stillness."
        }
       },
       {
@@ -844,8 +844,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Верно! Императрица — тёплая энергия, которая выращивает всё живое.",
-        "en": "Correct! The Empress is the warm energy that helps everything alive grow."
+        "ru": "Императрица — тёплая энергия, которая выращивает всё живое.",
+        "en": "The Empress is the warm energy that helps everything alive grow."
        },
        "cardId": "empress"
       },
@@ -871,8 +871,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Именно! Сначала услышать, чего хочется по-настоящему, потом терпеливо это вырастить.",
-        "en": "Exactly! First hear what you truly want, then patiently grow it."
+        "ru": "Сначала услышать, чего хочется по-настоящему, потом терпеливо это вырастить.",
+        "en": "First hear what you truly want, then patiently grow it."
        }
       },
       {
@@ -897,8 +897,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Да! Иногда лучший ход — пауза и тишина без телефона.",
-        "en": "Yes! Sometimes the best move is a pause and some quiet time away from your phone."
+        "ru": "Иногда лучший ход — пауза и тишина без телефона.",
+        "en": "Sometimes the best move is a pause and some quiet time away from your phone."
        }
       }
      ],
@@ -942,8 +942,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Верно! Когда финансы посчитаны и границы отстроены, приходит спокойствие.",
-        "en": "Right! When your finances are counted and boundaries are set, calm settles in."
+        "ru": "Когда финансы посчитаны и границы отстроены, приходит спокойствие.",
+        "en": "When your finances are counted and boundaries are set, calm settles in."
        }
       },
       {
@@ -968,8 +968,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Да! Иерофант передаёт знания, которые бережно идут от человека к человеку.",
-        "en": "Yes! The Hierophant passes on knowledge carried gently from person to person."
+        "ru": "Иерофант передаёт знания, которые бережно идут от человека к человеку.",
+        "en": "The Hierophant passes on knowledge carried gently from person to person."
        },
        "cardId": "hierophant"
       },
@@ -995,8 +995,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Точно! «Я так решил» — Император; «так делали до нас, и это работает» — Иерофант.",
-        "en": "Exactly! \"I decided so\" is the Emperor; \"it was done before us, and it works\" is the Hierophant."
+        "ru": "«Я так решил» — Император; «так делали до нас, и это работает» — Иерофант.",
+        "en": "\"I decided so\" is the Emperor; \"it was done before us, and it works\" is the Hierophant."
        }
       },
       {
@@ -1021,8 +1021,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Традиция жива, пока мы помним её смысл, а не следуем по привычке.",
-        "en": "Right! A tradition stays alive while we remember its meaning, not just follow it out of habit."
+        "ru": "Традиция жива, пока мы помним её смысл, а не следуем по привычке.",
+        "en": "A tradition stays alive while we remember its meaning, not just follow it out of habit."
        }
       },
       {
@@ -1047,8 +1047,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Да! Границы и порядок — это и есть забота Императора о вашем спокойствии.",
-        "en": "Yes! Boundaries and structure are exactly how the Emperor takes care of your peace of mind."
+        "ru": "Границы и порядок — это и есть забота Императора о вашем спокойствии.",
+        "en": "Boundaries and structure are exactly how the Emperor takes care of your peace of mind."
        }
       }
      ],
@@ -1092,8 +1092,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Влюблённые — про решения сердца, совпадающие с вашими ценностями.",
-        "en": "Right! The Lovers are about decisions of the heart that align with your values."
+        "ru": "Влюблённые — про решения сердца, совпадающие с вашими ценностями.",
+        "en": "The Lovers are about decisions of the heart that align with your values."
        }
       },
       {
@@ -1118,8 +1118,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Да! Колесница — это внутренняя решимость, которая держит курс без поводьев.",
-        "en": "Yes! The Chariot is inner determination that holds the course without reins."
+        "ru": "Колесница — это внутренняя решимость, которая держит курс без поводьев.",
+        "en": "The Chariot is inner determination that holds the course without reins."
        }
       },
       {
@@ -1144,8 +1144,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Точно! «Хочу спать» и «надо на тренировку» — знакомые сфинксы, правда?",
-        "en": "Exactly! \"I want to sleep\" vs \"I should work out\" — familiar sphinxes, right?"
+        "ru": "«Хочу спать» и «надо на тренировку» — знакомые сфинксы, правда?",
+        "en": "\"I want to sleep\" vs \"I should work out\" — familiar sphinxes, right?"
        }
       },
       {
@@ -1170,8 +1170,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Колесница — первая победа воли, когда все силы везут в одну сторону.",
-        "en": "Correct! The Chariot is the will's first victory, when all your forces pull in one direction."
+        "ru": "Колесница — первая победа воли, когда все силы везут в одну сторону.",
+        "en": "The Chariot is the will's first victory, when all your forces pull in one direction."
        },
        "cardId": "chariot"
       },
@@ -1197,8 +1197,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Да! Выбор без движения — мечта, движение без выбора — суета.",
-        "en": "Yes! Choice without movement stays a dream; movement without choice is just busyness."
+        "ru": "Выбор без движения — мечта, движение без выбора — суета.",
+        "en": "Choice without movement stays a dream; movement without choice is just busyness."
        }
       }
      ],
@@ -1248,8 +1248,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Эта арка повторяется в любом деле — от новой работы до нового хобби.",
-        "en": "Right! This arc repeats in any endeavor — from a new job to a new hobby."
+        "ru": "Эта арка повторяется в любом деле — от новой работы до нового хобби.",
+        "en": "This arc repeats in any endeavor — from a new job to a new hobby."
        }
       },
       {
@@ -1274,8 +1274,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Да! Иерофант — хранитель традиции и бережно переданных знаний.",
-        "en": "Yes! The Hierophant is the keeper of tradition and carefully passed-down knowledge."
+        "ru": "Иерофант — хранитель традиции и бережно переданных знаний.",
+        "en": "The Hierophant is the keeper of tradition and carefully passed-down knowledge."
        },
        "cardId": "hierophant"
       },
@@ -1301,8 +1301,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Верно! Колесница — первая победа героя, седьмая ступень пути.",
-        "en": "Correct! The Chariot is the hero's first victory, the seventh step of the path."
+        "ru": "Колесница — первая победа героя, седьмая ступень пути.",
+        "en": "The Chariot is the hero's first victory, the seventh step of the path."
        },
        "cardId": "chariot"
       },
@@ -1328,8 +1328,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Именно! История взросления героя хранит значения лучше любого словарика.",
-        "en": "Exactly! The hero's coming-of-age story holds the meanings better than any glossary."
+        "ru": "История взросления героя хранит значения лучше любого словарика.",
+        "en": "The hero's coming-of-age story holds the meanings better than any glossary."
        }
       },
       {
@@ -1354,8 +1354,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Верно! После инструментов Мага герой учится слушать себя — это Жрица, номер два.",
-        "en": "Right! After the Magician's tools, the hero learns to listen inward — that's the High Priestess, number two."
+        "ru": "После инструментов Мага герой учится слушать себя — это Жрица, номер два.",
+        "en": "After the Magician's tools, the hero learns to listen inward — that's the High Priestess, number two."
        }
       }
      ],
@@ -1396,8 +1396,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Верно! Одна карта — слово, две карты с мостиком — уже фраза.",
-        "en": "Right! One card is a word; two cards with a bridge become a phrase."
+        "ru": "Одна карта — слово, две карты с мостиком — уже фраза.",
+        "en": "One card is a word; two cards with a bridge become a phrase."
        }
       },
       {
@@ -1422,8 +1422,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Да! И ответ обычно «и то и другое»: сперва пауза Жрицы, потом действие Мага.",
-        "en": "Yes! And the answer is usually \"both, each in turn\": first the Priestess's pause, then the Magician's action."
+        "ru": "Ответ обычно «и то и другое»: сперва пауза Жрицы, потом действие Мага.",
+        "en": "The answer is usually \"both, each in turn\": first the Priestess's pause, then the Magician's action."
        }
       },
       {
@@ -1448,8 +1448,8 @@
        ],
        "correct": 2,
        "explain": {
-        "ru": "Точно! Влюблённые → Колесница и Колесница → Влюблённые — две разные истории.",
-        "en": "Exactly! Lovers → Chariot and Chariot → Lovers tell two different stories."
+        "ru": "Влюблённые → Колесница и Колесница → Влюблённые — две разные истории.",
+        "en": "Lovers → Chariot and Chariot → Lovers tell two different stories."
        }
       },
       {
@@ -1474,8 +1474,8 @@
        ],
        "correct": 1,
        "explain": {
-        "ru": "Верно! Императрица наполняет ресурсом, а Колесница превращает его в движение.",
-        "en": "Correct! The Empress fills you with resources, and the Chariot turns them into motion."
+        "ru": "Императрица наполняет ресурсом, а Колесница превращает его в движение.",
+        "en": "The Empress fills you with resources, and the Chariot turns them into motion."
        },
        "cardId": "empress"
       },
@@ -1501,8 +1501,8 @@
        ],
        "correct": 0,
        "explain": {
-        "ru": "Да! Интуиция Жрицы — лучший советчик перед большим выбором Влюблённых.",
-        "en": "Yes! The Priestess's intuition is the best advisor before the Lovers' big choice."
+        "ru": "Интуиция Жрицы — лучший советчик перед большим выбором Влюблённых.",
+        "en": "The Priestess's intuition is the best advisor before the Lovers' big choice."
        }
       }
      ],
