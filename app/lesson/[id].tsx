@@ -258,7 +258,20 @@ export default function LessonScreen() {
                     );
                   })}
                   {answered && (
-                    <Txt style={[st.explain, { color: t.text }]}>{step.question.explain[lang]}</Txt>
+                    <Txt style={[st.explain, { color: t.text }]}>
+                      <Txt
+                        style={[
+                          st.explain,
+                          {
+                            color: picked === step.question.correct ? t.success : t.danger,
+                            fontWeight: '600',
+                          },
+                        ]}
+                      >
+                        {tr(picked === step.question.correct ? 'lesson.explainRight' : 'lesson.explainWrong')}
+                      </Txt>
+                      {` ${step.question.explain[lang]}`}
+                    </Txt>
                   )}
                 </View>
               )}
