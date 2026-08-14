@@ -230,7 +230,13 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
 
 const st = StyleSheet.create({
   stage: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  card: { width: CARD_W, height: CARD_H },
+  // pointerEvents 'none' — только веб-причина (фикс-раунд 1): у <img> в браузере включён
+  // нативный drag-and-drop, и mousedown на картинке запускает перетаскивание её «призрака»
+  // раньше, чем RNGH успевает распознать pan. Жест всё равно ловится: GestureDetector висит
+  // на родительской сцене st.stage, а не на самой карте, поэтому клик «проваливается» сквозь
+  // непрозрачную для указателя карту прямо на сцену — тапы и pan продолжают работать.
+  // На устройстве (touch) этого механизма нет, это не дефект жестов, а веб-плоскости.
+  card: { width: CARD_W, height: CARD_H, pointerEvents: 'none' as const },
   face: {
     ...StyleSheet.absoluteFillObject,
     borderRadius: radius.l, borderWidth: 1, overflow: 'hidden',
