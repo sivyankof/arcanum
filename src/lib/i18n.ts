@@ -138,6 +138,8 @@ export const resources = {
         queuedCount: "В очереди системы: {{count}}",
         close: "Закрыть",
         ok: "Готово",
+        feedback: "Обратная связь и ошибки",
+        feedbackValue: "Написать нам",
         about: "О приложении",
       },
       // экран «О приложении» (спека 12): версия, дисклеймер, атрибуция колоды и источников.
@@ -154,6 +156,17 @@ export const resources = {
         dataText: "Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов и серверов: ничего не отправляется в интернет и не передаётся третьим лицам.\n\nРезервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.",
         sourcesTitle: "Источники",
         sourcesText: "Названия и изображения карт подготовлены на основе открытого проекта tarot-api (лицензия MIT).",
+      },
+      // обратная связь (спека 13): mailto-письмо с автоблоком диагностики.
+      // «Записей истории: N» — форма без склонений, плюрализация не нужна (урок hf-02)
+      feedback: {
+        subject: "Arcanum: отзыв",
+        body: "Опишите, что случилось или что хотелось бы улучшить:\n\n\n\n— данные для диагностики (можно удалить) —\nПриложение: {{version}}\nСистема: {{os}}\nЯзык: {{lang}} · Тема: {{theme}}\nЗаписей истории: {{history}}",
+        noMailTitle: "Почта не настроена",
+        noMailText: "Напишите нам на адрес:\n{{email}}",
+        copy: "Скопировать адрес",
+        copiedTitle: "Адрес скопирован",
+        copiedText: "Вставьте его в любом почтовом приложении.",
       },
       // заголовки баннеров: тело пуша берётся из content/phrases.json (правило вариативности),
       // а заголовок — короткая метка типа. Числительное — плюрализацией, иначе «Серия 3 дней»
@@ -322,6 +335,8 @@ export const resources = {
         queuedCount: "Queued with the system: {{count}}",
         close: "Close",
         ok: "Done",
+        feedback: "Feedback & issues",
+        feedbackValue: "Write to us",
         about: "About",
       },
       about: {
@@ -336,6 +351,15 @@ export const resources = {
         dataText: "All your data — journal, streak, course progress, and settings — is stored only on this device. The app has no accounts and no servers: nothing is sent to the internet or shared with anyone.\n\nYou create backups yourself — with “Export data” in Settings — and keep them wherever you like. Deleting the app deletes all its data from the device.",
         sourcesTitle: "Sources",
         sourcesText: "Card names and images are based on the open-source tarot-api project (MIT license).",
+      },
+      feedback: {
+        subject: "Arcanum: feedback",
+        body: "Tell us what happened or what could be better:\n\n\n\n— diagnostics (feel free to remove) —\nApp: {{version}}\nSystem: {{os}}\nLanguage: {{lang}} · Theme: {{theme}}\nHistory entries: {{history}}",
+        noMailTitle: "Mail is not set up",
+        noMailText: "Write to us at:\n{{email}}",
+        copy: "Copy address",
+        copiedTitle: "Address copied",
+        copiedText: "Paste it in any mail app.",
       },
       push: {
         titleMorning: "Card of the day ✦",
