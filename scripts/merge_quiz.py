@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Сливает черновики викторин content/quiz-m1-m2.json в content/course.json (спека 08).
+Сливает черновики викторин content/quiz-*.json в content/course.json (спеки 08 и 26).
 
-Правило то же, что у build_cards.py: слияние, не перезапись — у урока обновляются только
-quiz и quizStatus, всё остальное (theory, title, cards) не трогается. Скрипт идемпотентен:
-правки редактора вносим в quiz-файл и перезапускаем.
+Staging-файлов несколько — по одному на порцию контента (quiz-m1-m2.json, quiz-m3.json…),
+потому что статус у файла ОДИН на все его уроки: живи М1–М2 и М3 в одном файле, прогон
+слияния откатывал бы reviewed обратно в draft. Правило то же, что у build_cards.py:
+слияние, не перезапись — у урока обновляются только quiz и quizStatus, всё остальное
+(theory, title, cards) не трогается. Скрипт идемпотентен: правки редактора вносим
+в quiz-файл и перезапускаем.
 """
 import json
 import sys
@@ -12,7 +15,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 COURSE = ROOT / "content" / "course.json"
-QUIZ = ROOT / "content" / "quiz-m1-m2.json"
 CARDS = ROOT / "content" / "cards.json"
 
 
@@ -29,16 +31,13 @@ def req(d: dict, key: str, where: str):
     return d[key]
 
 
-def main() -> None:
-    course = json.loads(COURSE.read_text(encoding="utf-8"))
-    quiz = json.loads(QUIZ.read_text(encoding="utf-8"))
-    card_ids = {c["id"] for c in json.loads(CARDS.read_text(encoding="utf-8"))["cards"]}
-
-    lessons_by_id = {l["id"]: l for m in course["modules"] for l in m["lessons"]}
+def merge_file(quiz_path: Path, lessons_by_id: dict, card_ids: set) -> int:
+    """Сливает один staging-файл; возвращает число слитых вопросов."""
+    quiz = json.loads(quiz_path.read_text(encoding="utf-8"))
     status = quiz.get("status", "draft")
 
     for entry in quiz["lessons"]:
-        lid = req(entry, "lessonId", "запись в quiz-m1-m2.json")
+        lid = req(entry, "lessonId", f"запись в {quiz_path.name}")
         lesson = lessons_by_id.get(lid)
         if lesson is None:
             fail(f"урок {lid} не найден в course.json")
@@ -68,11 +67,26 @@ def main() -> None:
         lesson["quiz"] = questions
         lesson["quizStatus"] = status
 
+    total = sum(len(e["questions"]) for e in quiz["lessons"])
+    print(f"{quiz_path.name}: {total} вопросов в {len(quiz['lessons'])} уроков, статус {status}")
+    return total
+
+
+def main() -> None:
+    course = json.loads(COURSE.read_text(encoding="utf-8"))
+    card_ids = {c["id"] for c in json.loads(CARDS.read_text(encoding="utf-8"))["cards"]}
+    lessons_by_id = {l["id"]: l for m in course["modules"] for l in m["lessons"]}
+
+    quiz_files = sorted((ROOT / "content").glob("quiz-*.json"))
+    if not quiz_files:
+        fail("не найдено ни одного content/quiz-*.json")
+
+    grand_total = sum(merge_file(p, lessons_by_id, card_ids) for p in quiz_files)
+
     COURSE.write_text(
         json.dumps(course, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n"
     )
-    total = sum(len(e["questions"]) for e in quiz["lessons"])
-    print(f"OK: {total} вопросов слиты в {len(quiz['lessons'])} уроков, статус {status}")
+    print(f"OK: всего {grand_total} вопросов из {len(quiz_files)} файлов")
 
 
 if __name__ == "__main__":

@@ -12,7 +12,8 @@
     python scripts/set_status.py reviewed --dry-run    # показать, ничего не записывая
 
 Части контента (--only): cards — 8 блоков значений у каждой из 78 карт (cards.json);
-theory — тексты теории уроков (course.json); quiz — викторины (quiz-m1-m2.json + course.json).
+theory — тексты теории уроков (course.json); quiz — викторины (все content/quiz-*.json
++ course.json; статус у каждого staging-файла свой, двигается только совпавший с исходным).
 Формат файлов сохраняется тот же, что пишут build_cards.py и merge_quiz.py (indent=1, LF).
 """
 import argparse
@@ -23,7 +24,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CARDS = ROOT / "content" / "cards.json"
 COURSE = ROOT / "content" / "course.json"
-QUIZ = ROOT / "content" / "quiz-m1-m2.json"
 
 ORDER = ["todo", "draft", "reviewed", "final"]
 PARTS = ["cards", "theory", "quiz"]
@@ -76,12 +76,17 @@ def main() -> None:
                     theory["status"] = args.to
                     changed["theory"] += 1
 
+    changed_quiz_files: list[tuple[Path, object]] = []
     if "quiz" in parts:
         # у викторин статус хранится дважды: в черновике редактора и в собранном course.json.
         # Правим оба, иначе следующий прогон merge_quiz.py откатит course.json назад.
-        quiz = json.loads(QUIZ.read_text(encoding="utf-8"))
-        if quiz.get("status") == args.src:
-            quiz["status"] = args.to
+        # Staging-файлов несколько (по порции контента), у каждого статус свой — переписываем
+        # только те, чей статус совпал с исходным, остальные не трогаем даже форматированием.
+        for quiz_path in sorted((ROOT / "content").glob("quiz-*.json")):
+            quiz = json.loads(quiz_path.read_text(encoding="utf-8"))
+            if quiz.get("status") == args.src:
+                quiz["status"] = args.to
+                changed_quiz_files.append((quiz_path, quiz))
         for module in course["modules"]:
             for lesson in module["lessons"]:
                 if lesson.get("quizStatus") == args.src:
@@ -101,8 +106,8 @@ def main() -> None:
         dump(CARDS, cards)
     if "theory" in parts or "quiz" in parts:
         dump(COURSE, course)
-    if "quiz" in parts:
-        dump(QUIZ, quiz)
+    for quiz_path, quiz_data in changed_quiz_files:
+        dump(quiz_path, quiz_data)
 
     print(f"OK: {args.src} -> {args.to}, изменено {total} ({report})")
 
