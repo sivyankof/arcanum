@@ -1,3 +1,4 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useFocusEffect } from 'expo-router';
 import React from 'react';
@@ -32,6 +33,7 @@ import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import type { Outcome } from '../../src/lib/journal';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
+import { pickPhrase } from '../../src/lib/phrases';
 import { requestPermission } from '../../src/lib/pushes';
 import { reflectionVisible } from '../../src/lib/reflection';
 import { useAppActive } from '../../src/lib/useAppActive';
@@ -151,6 +153,7 @@ export default function TodayScreen() {
   const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
 
   const streak = useApp((s) => s.streak);
+  const freezeSpentDate = useApp((s) => s.freezeSpentDate);
   const xp = useApp((s) => s.xp);
   const lvl = levelFromXp(xp);
   const drawToday = useApp((s) => s.drawToday);
@@ -332,6 +335,18 @@ export default function TodayScreen() {
           <XpPill level={lvl.level} progress={lvl.progress} style={st.pillXp} />
         </FadeUp>
 
+        {/* строка «серию спасла заморозка» — весь день спасения (спека 10, решение 1).
+            Отдельный FadeUp с ТЕМ ЖЕ индексом, что у пилюль: появляются вместе, а внутрь
+            st.pills строку не положить — тот контейнер горизонтальный */}
+        {freezeSpentDate === todayISO && (
+          <FadeUp index={2} style={st.freezeRow}>
+            <Ionicons name="snow" size={12} color={t.accent} />
+            <Txt style={[st.freezeText, { color: t.muted }]}>
+              {pickPhrase('freeze.saved', todayISO, lang)}
+            </Txt>
+          </FadeUp>
+        )}
+
         {/* сцена с картой */}
         <FadeUp index={3}>
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
@@ -466,6 +481,9 @@ const st = StyleSheet.create({
   pills: { flexDirection: 'row', gap: 10, marginTop: 14 },
   pillStreak: { flex: 1 },
   pillXp: { flex: 1.5 },
+  // по образцу строки луны: по центру, muted; макета для строки нет — расхождение осознанное (спека 10)
+  freezeRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10 },
+  freezeText: { fontSize: 12 },
   // тёплое свечение вокруг карты дня — значение в FACE_SHADOW (см. константу выше),
   // задаётся инлайн через boxShadow, т.к. зависит от темы
   face: {

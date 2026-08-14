@@ -9,11 +9,11 @@
  *  только когда приложение открыли, значит сегодняшняя активность гарантирована. Правило
  *  «3+ дня тишины → один возвратный» получается из этого само.
  */
-import { localDateISO } from './dates';
+import { daysAgoISO, localDateISO } from './dates';
 import type { DailyDraw, Outcome } from './journal';
 import { parseHHMM, type AppSettings } from './settings';
 
-export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback';
+export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze';
 
 export interface PlannedPush {
   kind: PushKind;
@@ -25,7 +25,7 @@ export interface PlannedPush {
   phraseKey: string;
   /** Подстановка {card} у вечернего. */
   cardId?: string;
-  /** Подстановка {n} у спасения серии. */
+  /** Подстановка {n} у спасения серии; freeze-пуш несёт то же поле для {days} (push.freeze_saved). */
   n?: number;
 }
 
@@ -37,6 +37,10 @@ export interface PlanInput {
   /** 'HH:MM' */
   evening: string;
   streak: number;
+  /** Запас заморозок (logic-spec §2) — от него зависит freeze-пуш. */
+  freezes: number;
+  /** Дата последнего открытия карты — по ней считается день freeze-пуша. */
+  lastDrawDate: string | null;
   /** Карта дня открыта сегодня. */
   todayCardId?: string;
   /** Ответ вечерней рефлексии уже дан. */
@@ -54,13 +58,14 @@ export const STREAK_MIN = 3;
 export const MAX_PER_DAY = 2;
 
 /** Кого оставляем, когда на день претендует больше двух. */
-const PRIORITY: PushKind[] = ['streak', 'evening', 'morning', 'comeback'];
+const PRIORITY: PushKind[] = ['streak', 'evening', 'freeze', 'morning', 'comeback'];
 
 const PHRASE_KEY: Record<PushKind, string> = {
   morning: 'push.morning_card',
   evening: 'push.evening_reflect',
   streak: 'push.streak_save',
   comeback: 'push.winback',
+  freeze: 'push.freeze_saved',
 };
 
 /** Локальная дата через N суток. Конструктор Date сам нормализует переход через месяц и год. */
@@ -81,6 +86,8 @@ export function planInputFromStore(
   settings: AppSettings,
   streak: number,
   history: DailyDraw[],
+  freezes: number,
+  lastDrawDate: string | null,
   now: Date = new Date(),
 ): PlanInput {
   const today = history.find((h) => h.date === localDateISO(now));
@@ -90,6 +97,8 @@ export function planInputFromStore(
     morning: settings.pushMorning,
     evening: settings.pushEvening,
     streak,
+    freezes,
+    lastDrawDate,
     todayCardId: today?.cardId,
     todayOutcome: today?.outcome,
   };
@@ -132,9 +141,33 @@ export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
     });
   }
 
+  // «серию спасла заморозка» — утро дня после ПЕРВОГО полностью пропущенного дня (спека 10):
+  // замена обычного утреннего, не добавка. План строится под допущение «пользователь больше
+  // не откроет приложение»: карта сегодня открыта → первый пропуск завтра, пуш послезавтра;
+  // не открыта при вчерашнем открытии → пропуск сегодня, пуш завтра; открытие старше — к утру
+  // серию уже не спасти (пропуск 2+ дней заморозка не покрывает, logic-spec §2).
+  const freezeDay =
+    input.freezes > 0 && input.streak >= 1
+      ? drawn
+        ? 2
+        : input.lastDrawDate === daysAgoISO(1, now)
+          ? 1
+          : null
+      : null;
+
   // утренние вперёд, затем один возвратный — и тишина до возвращения
   for (let d = 1; d <= MORNING_AHEAD_DAYS; d++) {
-    out.push({ kind: 'morning', date: daysAheadISO(d, now), ...morning, phraseKey: PHRASE_KEY.morning });
+    if (d === freezeDay) {
+      out.push({
+        kind: 'freeze',
+        date: daysAheadISO(d, now),
+        ...morning,
+        phraseKey: PHRASE_KEY.freeze,
+        n: input.streak,
+      });
+    } else {
+      out.push({ kind: 'morning', date: daysAheadISO(d, now), ...morning, phraseKey: PHRASE_KEY.morning });
+    }
   }
   out.push({
     kind: 'comeback',

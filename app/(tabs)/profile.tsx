@@ -59,6 +59,7 @@ export default function ProfileScreen() {
 
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const freezes = useApp((s) => s.freezes);
   const xp = useApp((s) => s.xp);
   const name = useApp((s) => s.profile.name);
 
@@ -116,6 +117,10 @@ export default function ProfileScreen() {
             огоньком той же серии выглядел бы вторым, чужим (правка по лайв-проверке) */}
         <StatBox value={streak} label={tr('profile.streak')} icon="flame" />
         <StatBox value={history.length} label={tr('profile.cards')} />
+        {/* снежинка — иконкой, как огонёк: эмодзи ❄ из макета — указание на смысл,
+            не на способ рисования (правило задачи 16); цвет accent — холодный синий
+            в палитру «Небесного золота» не вводим (спека 10) */}
+        <StatBox value={freezes} label={tr('profile.freeze')} icon="snow" />
       </FadeUp>
 
       <FadeUp index={2} style={st.pad}>
@@ -226,7 +231,7 @@ const st = StyleSheet.create({
   overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' }, // `.date`
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 }, // `.h2`
   stats: { flexDirection: 'row', gap: 10, marginTop: 14 }, // `.statrow`
-  // сама коробка (`.statbox`) живёт в компоненте StatBox — их уже две, а задача 10 добавит третью
+  // сама коробка (`.statbox`) живёт в компоненте StatBox — коробок три, заморозку добавила задача 10
   gear: {
     position: 'absolute',
     right: spacing.xl,

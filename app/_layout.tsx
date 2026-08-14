@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import '../src/lib/i18n';
 import i18n from '../src/lib/i18n';
+import { useAppActive } from '../src/lib/useAppActive';
 import { usePushScheduler } from '../src/lib/usePushScheduler';
 import { useApp } from '../src/store/useApp';
 import { useTheme } from '../src/theme/useTheme';
@@ -54,6 +55,9 @@ export default function RootLayout() {
     Manrope_800ExtraBold,
   });
   usePushScheduler();
+  // смена месяца, пока приложение живёт в фоне: «1-е число» должно наступить и без перезапуска
+  // (тот же класс, что час рефлексии в 06а — всё временнóе слушает ещё и AppState)
+  useAppActive(() => useApp.getState().syncFreezeGrant());
 
   useEffect(() => {
     i18n.changeLanguage(lang);

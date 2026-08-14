@@ -15,6 +15,8 @@ export function usePushScheduler(): void {
   const settings = useApp((s) => s.settings);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const freezes = useApp((s) => s.freezes);
+  const lastDrawDate = useApp((s) => s.lastDrawDate);
   const lang = useApp((s) => s.lang);
 
   // возврат из фона состояние стора не меняет, а план устареть успел: наступил вечер,
@@ -24,7 +26,10 @@ export function usePushScheduler(): void {
 
   React.useEffect(() => {
     const now = new Date();
-    const plan = planPushes(planInputFromStore(settings, streak, history, now), now);
+    const plan = planPushes(
+      planInputFromStore(settings, streak, history, freezes, lastDrawDate, now),
+      now,
+    );
     // разрешения и API уведомлений умеют бросать (отказ пользователя, сбой канала и т.п.).
     // Без catch это необработанный reject где-то в микротаске: приложение не падает, но и
     // диагностики никакой — в проекте нет сервиса отчётов об ошибках, поэтому предупреждение
@@ -42,5 +47,5 @@ export function usePushScheduler(): void {
     // («Сегодня») — там флаг специально ставится уже ПОСЛЕ разрешения, чтобы смена `settings`
     // случилась, когда есть что планировать. Убрать `pushAsked` из настроек — значит вернуть баг
     // «пуши появляются только после следующего перезапуска» (пункт A финального ревью 06б).
-  }, [settings, streak, history, lang, tick]);
+  }, [settings, streak, history, freezes, lastDrawDate, lang, tick]);
 }

@@ -95,6 +95,7 @@ export const resources = {
         // огонёк у серии рисуется ИКОНКОЙ рядом с подписью (StatBox), а не эмодзи в строке:
         // на «Сегодня» та же серия уже иконочная, два разных огня выглядели бы небрежностью
         title: "Профиль", overline: "ВАШ ПУТЬ", streak: "СЕРИЯ", cards: "КАРТ ДНЯ",
+        freeze: "ЗАМОРОЗКА",
         arcana: "АРКАН РОЖДЕНИЯ", arcanaCta: "Указать дату рождения",
         // «XP» инвариант к числу — плюрализация не нужна (правило logic-spec §10 — про формы слов)
         xpOf: "{{xp}} / {{next}} XP",
@@ -104,6 +105,7 @@ export const resources = {
         language: "Язык", languageValue: "Русский", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
+        devSkipYesterday: "Пропустить вчера",
         pushes: "Напоминания",
         pushMorning: "Утреннее", pushEvening: "Вечернее", pushDenied: "Выключены в системе",
         // между тапом по тумблеру и ответом системного диалога тумблер ещё не включён —
@@ -131,6 +133,7 @@ export const resources = {
         titleStreak_few: "Серия {{count}} дня",
         titleStreak_many: "Серия {{count}} дней",
         titleComeback: "Давно не виделись",
+        titleFreeze: "Заморозка наготове ❄",
         // готовая форма «N дней» для подстановки {days} в push.streak_save (content/phrases.json):
         // сырая подстановка числа без плюрализации давала «Серия 3 дней» — заголовок пуша строкой
         // выше уже согласован числительным, а тело было рассинхронизировано (пункт C финального
@@ -250,6 +253,7 @@ export const resources = {
       },
       profile: {
         title: "Profile", overline: "YOUR PATH", streak: "STREAK", cards: "DAILY CARDS",
+        freeze: "FREEZE",
         arcana: "BIRTH ARCANA", arcanaCta: "Add your birth date",
         xpOf: "{{xp}} / {{next}} XP",
       },
@@ -258,6 +262,7 @@ export const resources = {
         language: "Language", languageValue: "English", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
+        devSkipYesterday: "Skip yesterday",
         pushes: "Reminders",
         pushMorning: "Morning", pushEvening: "Evening", pushDenied: "Off in system settings",
         pushRequesting: "Asking…",
@@ -279,6 +284,7 @@ export const resources = {
         titleStreak_one: "{{count}}-day streak",
         titleStreak_other: "{{count}}-day streak",
         titleComeback: "It's been a while",
+        titleFreeze: "Your freeze has you covered ❄",
         // не используется в англ. варианте фразы («{n}-day streak» уже корректно без плюрализации
         // слова «day»), но ключ должен существовать в обоих языках — правило проекта
         streakDays_one: "{{count}} day",
