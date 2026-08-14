@@ -40,6 +40,9 @@ export const JOURNAL_FILTERS: JournalFilter[] = ['all', 'yes', 'partly', 'no', '
 /** Предел длины заметки (logic-spec §3). */
 export const NOTE_MAX = 500;
 
+/** Предел истории карт дня (logic-spec §7): старые записи отрезаются. */
+export const HISTORY_MAX = 365;
+
 /** Сводка календарного месяца для карточки в шапке дневника. */
 export interface MonthSummary {
   count: number;              // записей за месяц
