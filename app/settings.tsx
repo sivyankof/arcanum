@@ -2,6 +2,7 @@
  *  остался «путём» — уровень, статистика, дневник. Вход — шестерёнка в правом верхнем углу профиля.
  *  Порядок строк по спеке: Тема · Язык · напоминания · рефлексия · экспорт/импорт (уже здесь,
  *  задача 11); имя и «о приложении» остаются на очереди — задачи 12 и 13. */
+import * as Clipboard from 'expo-clipboard';
 import { router, Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +27,7 @@ import { pickBackupText, shareBackup } from '../src/lib/backupIo';
 import { course } from '../src/lib/content';
 import { nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
+import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import {
   getPermission,
@@ -68,8 +70,9 @@ export default function SettingsScreen() {
   const pushEvening = useApp((s) => s.settings.pushEvening);
   const setPushesOn = useApp((s) => s.setPushesOn);
   const setPushTime = useApp((s) => s.setPushTime);
-  // весь settings/streak/history/freezes/lastDrawDate — только для DEV-строки «План пушей»
-  // (planInputFromStore хочет их целиком, а не по отдельному полю, как остальной экран)
+  // весь settings/streak/freezes/lastDrawDate — только для DEV-строки «План пушей»
+  // (planInputFromStore хочет их целиком, а не по отдельному полю, как остальной экран);
+  // history читает ещё и обратная связь — в письмо уходит только его ДЛИНА, не содержимое
   const settings = useApp((s) => s.settings);
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
@@ -93,6 +96,8 @@ export default function SettingsScreen() {
     { state: BackupState; entries: number; streak: number; dateISO: string } | null
   >(null);
   const [notice, setNotice] = React.useState<{ titleKey: string; textKey: string } | null>(null);
+  // fallback обратной связи: почтового клиента нет — показываем адрес с кнопкой копирования
+  const [mailHelp, setMailHelp] = React.useState(false);
 
   // читаемая расшифровка плана: две независимые вещи, путать нельзя.
   // 1) Строки «дата · время · вид» — то, что НАСЧИТАЛ planPushes с теми же входными данными,
@@ -170,6 +175,24 @@ export default function SettingsScreen() {
     } finally {
       busy.current = false;
     }
+  };
+
+  // обратная связь (спека 13): mailto без бэкенда. Диагностика — только безличные пять полей
+  // (версия, платформа+ОС, язык, тема, ЧИСЛО записей истории), ни заметок, ни имени, ни даты
+  // рождения. ⚠️ Linking.canOpenURL не используем: на iOS для mailto он требует
+  // LSApplicationQueriesSchemes в Info.plist и в Expo Go врёт — ловим reject самого openURL
+  const onFeedback = () => {
+    const body = tr('feedback.body', {
+      version: appVersion(),
+      // на вебе Platform.Version — бессмысленное «0.0.0», одного имени платформы достаточно
+      os: Platform.OS === 'web' ? 'web' : `${Platform.OS} ${Platform.Version}`,
+      lang,
+      theme: themeMode === 'dark' ? tr('settings.dark') : tr('settings.light'),
+      history: history.length,
+    });
+    Linking.openURL(buildMailto(SUPPORT_EMAIL, tr('feedback.subject'), body)).catch(() =>
+      setMailHelp(true),
+    );
   };
 
   // системное разрешение спрашиваем при входе на экран и при возврате из фона:
@@ -319,9 +342,16 @@ export default function SettingsScreen() {
         <FadeUp index={6}>
           <SettingsRow icon="folder-open-outline" label={tr('settings.importData')} value="" onPress={onImport} />
         </FadeUp>
+        <FadeUp index={7}>
+          <SettingsRow
+            icon="mail-outline"
+            label={tr('settings.feedback')}
+            value={tr('settings.feedbackValue')}
+            onPress={onFeedback}
+          />
+        </FadeUp>
         {/* «О приложении» (спека 12): версия — та же appVersion(), что читает и сам экран,
-            чтобы значение в строке и на экране никогда не разошлось. Место — перед DEV-строками:
-            «Обратная связь» (задача 13) встанет следующей в этом же промежутке */}
+            чтобы значение в строке и на экране никогда не разошлось */}
         <FadeUp index={7}>
           <SettingsRow
             icon="information-circle-outline"
@@ -463,6 +493,22 @@ export default function SettingsScreen() {
             setNotice({ titleKey: 'settings.importDoneTitle', textKey: 'settings.importDoneText' });
           }}
           onCancel={() => setImportAsk(null)}
+        />
+        <ConfirmDialog
+          visible={mailHelp}
+          title={tr('feedback.noMailTitle')}
+          message={tr('feedback.noMailText', { email: SUPPORT_EMAIL })}
+          confirmLabel={tr('feedback.copy')}
+          cancelLabel={tr('settings.close')}
+          confirmTone="accent"
+          onConfirm={() => {
+            // сбой копирования не должен молчать и не должен ронять экран (образец — onExport)
+            Clipboard.setStringAsync(SUPPORT_EMAIL)
+              .then(() => setNotice({ titleKey: 'feedback.copiedTitle', textKey: 'feedback.copiedText' }))
+              .catch((err) => console.warn('[feedback] не удалось скопировать адрес:', err));
+            setMailHelp(false);
+          }}
+          onCancel={() => setMailHelp(false)}
         />
         <ConfirmDialog
           visible={notice !== null}
