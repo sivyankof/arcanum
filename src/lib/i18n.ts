@@ -138,6 +138,22 @@ export const resources = {
         queuedCount: "В очереди системы: {{count}}",
         close: "Закрыть",
         ok: "Готово",
+        about: "О приложении",
+      },
+      // экран «О приложении» (спека 12): версия, дисклеймер, атрибуция колоды и источников.
+      // Заголовки блоков заданы обычным регистром — капсом их рисует сам `Block` (title.toUpperCase())
+      about: {
+        title: "О приложении",
+        version: "Версия {{v}}",
+        appTitle: "О приложении",
+        appText: "Arcanum — спутник в изучении таро: карта дня, курс, справочник всех 78 карт и дневник наблюдений.",
+        disclaimer: "Приложение создано для развлекательных и образовательных целей. Оно не предсказывает будущее и не заменяет профессиональную консультацию — медицинскую, юридическую, финансовую или психологическую.",
+        deckTitle: "О колоде",
+        deckText: "В приложении используется классическая колода Райдер–Уэйт. Рисунки карт выполнила художница Памела Колман Смит в 1909 году; сегодня они находятся в общественном достоянии.",
+        dataTitle: "Данные и конфиденциальность",
+        dataText: "Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов и серверов: ничего не отправляется в интернет и не передаётся третьим лицам.\n\nРезервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.",
+        sourcesTitle: "Источники",
+        sourcesText: "Названия и изображения карт подготовлены на основе открытого проекта tarot-api (лицензия MIT).",
       },
       // заголовки баннеров: тело пуша берётся из content/phrases.json (правило вариативности),
       // а заголовок — короткая метка типа. Числительное — плюрализацией, иначе «Серия 3 дней»
@@ -306,6 +322,20 @@ export const resources = {
         queuedCount: "Queued with the system: {{count}}",
         close: "Close",
         ok: "Done",
+        about: "About",
+      },
+      about: {
+        title: "About",
+        version: "Version {{v}}",
+        appTitle: "About the app",
+        appText: "Arcanum is a companion for learning tarot: a card of the day, a course, a reference of all 78 cards, and a journal.",
+        disclaimer: "The app is made for entertainment and educational purposes. It does not predict the future and is not a substitute for professional advice — medical, legal, financial, or psychological.",
+        deckTitle: "About the deck",
+        deckText: "The app uses the classic Rider–Waite deck. The card illustrations were created by artist Pamela Colman Smith in 1909 and are now in the public domain.",
+        dataTitle: "Data and privacy",
+        dataText: "All your data — journal, streak, course progress, and settings — is stored only on this device. The app has no accounts and no servers: nothing is sent to the internet or shared with anyone.\n\nYou create backups yourself — with “Export data” in Settings — and keep them wherever you like. Deleting the app deletes all its data from the device.",
+        sourcesTitle: "Sources",
+        sourcesText: "Card names and images are based on the open-source tarot-api project (MIT license).",
       },
       push: {
         titleMorning: "Card of the day ✦",
