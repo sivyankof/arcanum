@@ -112,7 +112,7 @@ export const resources = {
         reflectNow: "Рефлексия: показать сейчас",
         devSkipYesterday: "Пропустить вчера",
         pushes: "Напоминания",
-        pushMorning: "Утреннее", pushEvening: "Вечернее", pushDenied: "Выключены в системе",
+        pushMorning: "Утро · карта дня", pushEvening: "Вечер · как прошёл день", pushDenied: "Выключены в системе",
         // между тапом по тумблеру и ответом системного диалога тумблер ещё не включён —
         // строка обязана честно показывать это промежуточное состояние, а не заранее «Вкл»
         // (пункт 1 второй волны фиксов 06б)
@@ -316,7 +316,7 @@ export const resources = {
         reflectNow: "Reflection: show now",
         devSkipYesterday: "Skip yesterday",
         pushes: "Reminders",
-        pushMorning: "Morning", pushEvening: "Evening", pushDenied: "Off in system settings",
+        pushMorning: "Morning · card of the day", pushEvening: "Evening · how was your day", pushDenied: "Off in system settings",
         pushRequesting: "Asking…",
         pushHint: "We'll also nudge you if your streak is at risk, and once if you've been away",
         pickMorning: "Morning reminder time", pickEvening: "Evening reminder time",
