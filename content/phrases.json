@@ -21,7 +21,7 @@
     "en": "Good afternoon, {name}"
    },
    {
-    "ru": "Рада видеть вас, {name}",
+    "ru": "Рады видеть вас, {name}",
     "en": "Good to see you, {name}"
    }
   ],
@@ -112,7 +112,7 @@
   "freeze_saved": [
    {
     "ru": "Пропущенный день укроет заморозка — откройте карту сегодня, и серия {days} продолжится",
-    "en": "A freeze can cover the missed day — open today's card and your {days} streak goes on"
+    "en": "A freeze can cover the missed day — open today's card and your {n}-day streak goes on"
    },
    {
     "ru": "Заморозка прощает один пропуск. Карта уже ждёт ✦",
