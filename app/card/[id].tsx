@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   measure,
@@ -20,6 +20,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
+import { CardLightbox } from '../../src/components/CardLightbox';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
@@ -58,9 +59,24 @@ const SPHERES: { key: SphereKey; tabKey: string; blockKey: string }[] = [
 
 /** Изображение в шапке. Если экран открыт из сетки карт, картинка «перелетает»
  *  от своей ячейки на место (пункт 6 motion-spec); иначе появляется как обычно. */
-function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) {
+function HeroImage({
+  cardId,
+  origin,
+  onOpen,
+}: {
+  cardId: string;
+  origin: Rect | null;
+  onOpen: (r: Rect) => void;
+}) {
   const t = useTheme();
   const ref = useAnimatedRef<Animated.View>();
+  // отдельный обычный ref для полноэкранного просмотра (спека 14): useAnimatedRef выше занят
+  // перелётом из сетки, а measureInWindow нужен именно на живой позиции в момент тапа
+  const heroRef = React.useRef<View>(null);
+  const openLightbox = () => {
+    // позиция меряется в момент тапа — карта «парит» ±8px, полёт стартует из живой позиции
+    heroRef.current?.measureInWindow((x, y, w, h) => onOpen({ x, y, w, h }));
+  };
 
   const progress = useSharedValue(origin ? 0 : 1); // 0 — в позиции ячейки, 1 — на своём месте
   const dx = useSharedValue(0);
@@ -117,16 +133,22 @@ function HeroImage({ cardId, origin }: { cardId: string; origin: Rect | null }) 
   });
 
   return (
-    // тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень
-    <Animated.View
-      ref={ref}
-      onLayout={onLayout}
-      style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
-    >
-      <View style={[st.imClip, { borderColor: t.frame }]}>
-        <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
-      </View>
-    </Animated.View>
+    // heroRef — на новом обычном View вокруг героя (collapsable={false}, иначе Android
+    // схлопнёт узел и measureInWindow ничего не вернёт); Pressable — тап открывает лайтбокс
+    <View ref={heroRef} collapsable={false}>
+      <Pressable onPress={openLightbox}>
+        {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
+        <Animated.View
+          ref={ref}
+          onLayout={onLayout}
+          style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
+        >
+          <View style={[st.imClip, { borderColor: t.frame }]}>
+            <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
+          </View>
+        </Animated.View>
+      </Pressable>
+    </View>
   );
 }
 
@@ -140,6 +162,8 @@ export default function CardDetail() {
   const [origin] = React.useState(() => takeCardOrigin(id ?? ''));
   // активная вкладка сферы значения — не персистится, при каждом открытии страницы сброс на «Общее»
   const [sphere, setSphere] = React.useState<SphereKey>('general');
+  // позиция героя в момент тапа — открывает полноэкранный просмотр карты (спека 14)
+  const [lbOrigin, setLbOrigin] = React.useState<Rect | null>(null);
   const fade = useSharedValue(1);
   // Хуки должны вызываться до условного return, иначе нарушится их порядок между рендерами.
   // Селектор возвращает примитив (id карты, а не саму функцию todayDraw), иначе стор не
@@ -238,10 +262,10 @@ export default function CardDetail() {
       >
         <View style={st.hero}>
           {origin ? (
-            <HeroImage cardId={card.id} origin={origin} />
+            <HeroImage cardId={card.id} origin={origin} onOpen={setLbOrigin} />
           ) : (
             <FadeUp index={0}>
-              <HeroImage cardId={card.id} origin={null} />
+              <HeroImage cardId={card.id} origin={null} onOpen={setLbOrigin} />
             </FadeUp>
           )}
           <FadeUp index={0} style={{ flex: 1 }}>
@@ -331,6 +355,7 @@ export default function CardDetail() {
           </FadeUp>
         )}
       </ScrollView>
+      <CardLightbox cardId={card.id} origin={lbOrigin} onClose={() => setLbOrigin(null)} />
     </View>
   );
 }
