@@ -28,3 +28,6 @@ export const hapticWarning = () =>
 /** Ошибка: неверный ответ викторины (спека 08). */
 export const hapticError = () =>
   fire(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error));
+
+/** Мягкая посадка: карта легла в руки в просмотре (спека 14). */
+export const hapticSoft = () => fire(() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft));
