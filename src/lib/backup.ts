@@ -1,6 +1,7 @@
 /** Бэкап (спека 11): формат файла экспорта, дефолты персистуемой схемы и строгая
  *  валидация при импорте. Чистый модуль без импортов expo/react — целиком под юнит-тестами.
- *  Ошибки отдаются КОДАМИ (ключи i18n), а не готовым текстом — приём pushPlan.
+ *  Ошибки — КОДЫ (ParseError), а не готовый текст: отображение в тексты — карта ERR_TEXT
+ *  на экране настроек (тот же приём, что у pushPlan — план тоже отдаёт ключи, а не строки).
  *
  *  Здесь же живут SCHEMA_VERSION и PERSIST_DEFAULTS, которыми пользуется стор:
  *  версия схемы и дефолты лежат по одному разу, а бэкап по построению совпадает
@@ -9,12 +10,22 @@ import type { Profile } from './birthArcana';
 import { cardById } from './content';
 import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
-import { HISTORY_MAX, type DailyDraw, type Outcome } from './journal';
+import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
+// FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
+import { FREEZE_MAX } from './streak';
 import type { ThemeMode } from '../theme/theme';
 // type-only импорт стирается при компиляции — runtime-цикла со стором нет,
 // хотя стор импортирует этот модуль по-настоящему
 import type { Lang } from '../store/useApp';
+
+// потолки величин при импорте (волна фиксов финального ревью): без них абсурдное число
+// в битом/подделанном файле проходит структурную проверку типов и уезжает в персист —
+// например xp: 1e15 не ловится isCount (это просто целое ≥0), а levelFromXp линейным
+// while вешает КАЖДЫЙ рендер пилюли уровня; лечится только переустановкой
+const MAX_BACKUP_XP = 1_000_000;
+const MAX_BACKUP_STREAK = 36_500; // сто лет серии — дальше файл точно не настоящий
+const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на порядки меньше — подстраховка формата
 
 /** Версия персистуемой схемы (logic-spec §7). Единственный источник: стор берёт её отсюда.
  *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 8. */
@@ -38,8 +49,13 @@ export interface BackupState {
   profile: Profile;
 }
 
-/** Дефолты персистуемой схемы — на них стоит и стор, и доливка старых бэкапов. */
-export const PERSIST_DEFAULTS: BackupState = {
+/** Дефолты персистуемой схемы — на них стоит и стор, и доливка старых бэкапов.
+ *  Заморожены целиком, включая вложенные history/lessonsProgress/settings/profile: это
+ *  мутабельный синглтон, который уходит по ССЫЛКЕ и в стор (`...PERSIST_DEFAULTS` — спред
+ *  поверхностный, вложенные объекты не копируются), и в parseBackup при доливке старых
+ *  бэкапов — случайная мутация на месте в одном месте испортила бы дефолты всего процесса.
+ *  Существующий код мутаций на месте не делает (всюду спред), тест — весь npm test зелёный. */
+export const PERSIST_DEFAULTS: BackupState = Object.freeze({
   themeMode: 'dark',
   lang: 'ru',
   installSeed: 0,
@@ -48,12 +64,14 @@ export const PERSIST_DEFAULTS: BackupState = {
   freezes: 1,
   freezeMonth: null,
   freezeSpentDate: null,
-  history: [],
-  lessonsProgress: {},
+  // readonly-массив структурно несовместим с DailyDraw[] (методы мутации отсутствуют
+  // в типе) — двойной каст через unknown только для типов, где это бьёт компиляцию
+  history: Object.freeze([]) as unknown as DailyDraw[],
+  lessonsProgress: Object.freeze({}) as LessonProgressMap,
   xp: 0,
-  settings: DEFAULT_SETTINGS,
-  profile: { onboarded: false },
-};
+  settings: Object.freeze(DEFAULT_SETTINGS),
+  profile: Object.freeze({ onboarded: false }) as Profile,
+});
 
 export const BACKUP_KEYS = Object.keys(PERSIST_DEFAULTS) as (keyof BackupState)[];
 
@@ -103,9 +121,25 @@ const isStr = (v: unknown): v is string => typeof v === 'string';
 const isBool = (v: unknown): v is boolean => typeof v === 'boolean';
 const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const isCount = (v: unknown): v is number => isNum(v) && Number.isInteger(v) && v >= 0;
-const isISODay = (v: unknown): v is string => isStr(v) && /^\d{4}-\d{2}-\d{2}$/.test(v);
+// разбор групп, а не Date: Date.parse('2026-13-45') NaN, но '2026-02-30' Date молча
+// перекатывает на март — здесь нужна именно строгая проверка диапазона, не календаря
+const isISODay = (v: unknown): v is string => {
+  if (!isStr(v)) return false;
+  const m = /^\d{4}-(\d{2})-(\d{2})$/.exec(v);
+  if (!m) return false;
+  const month = Number(m[1]);
+  const day = Number(m[2]);
+  return month >= 1 && month <= 12 && day >= 1 && day <= 31;
+};
 const isMonth = (v: unknown): v is string => isStr(v) && /^\d{4}-\d{2}$/.test(v);
-const isHHMM = (v: unknown): v is string => isStr(v) && /^\d{1,2}:\d{2}$/.test(v);
+const isHHMM = (v: unknown): v is string => {
+  if (!isStr(v)) return false;
+  const m = /^(\d{1,2}):(\d{2})$/.exec(v);
+  if (!m) return false;
+  const hour = Number(m[1]);
+  const minute = Number(m[2]);
+  return hour <= 23 && minute <= 59;
+};
 const isOutcome = (v: unknown): v is Outcome => v === 'yes' || v === 'partly' || v === 'no';
 const orNull = (v: unknown, check: (x: unknown) => boolean) => v === null || check(v);
 const orAbsent = (v: unknown, check: (x: unknown) => boolean) => v === undefined || check(v);
@@ -115,7 +149,8 @@ const orAbsent = (v: unknown, check: (x: unknown) => boolean) => v === undefined
 // смены schemaVersion (М3–М6), и бэкап с новыми уроками обязан открываться старым контентом.
 const isDraw = (v: unknown): boolean =>
   isObj(v) && isISODay(v.date) && isStr(v.cardId) && cardById.has(v.cardId) &&
-  isBool(v.reversed) && orAbsent(v.outcome, isOutcome) && orAbsent(v.note, isStr);
+  isBool(v.reversed) && orAbsent(v.outcome, isOutcome) &&
+  orAbsent(v.note, (x) => isStr(x) && x.length <= NOTE_MAX);
 
 const isLesson = (v: unknown): boolean =>
   isObj(v) && isBool(v.done) && isCount(v.errors) && isNum(v.ts) && orAbsent(v.repeatDate, isISODay);
@@ -133,12 +168,14 @@ const isProfile = (v: unknown): boolean =>
 const validState = (s: BackupState): boolean =>
   (s.themeMode === 'dark' || s.themeMode === 'light') &&
   (s.lang === 'ru' || s.lang === 'en') &&
-  isCount(s.installSeed) && isCount(s.streak) &&
+  isCount(s.installSeed) && isCount(s.streak) && s.streak <= MAX_BACKUP_STREAK &&
   orNull(s.lastDrawDate, isISODay) &&
-  isCount(s.freezes) && orNull(s.freezeMonth, isMonth) && orNull(s.freezeSpentDate, isISODay) &&
+  isCount(s.freezes) && s.freezes <= FREEZE_MAX &&
+  orNull(s.freezeMonth, isMonth) && orNull(s.freezeSpentDate, isISODay) &&
   Array.isArray(s.history) && s.history.length <= HISTORY_MAX && s.history.every(isDraw) &&
-  isObj(s.lessonsProgress) && Object.values(s.lessonsProgress).every(isLesson) &&
-  isCount(s.xp) && isSettings(s.settings) && isProfile(s.profile);
+  isObj(s.lessonsProgress) && Object.keys(s.lessonsProgress).length <= MAX_BACKUP_LESSONS &&
+  Object.values(s.lessonsProgress).every(isLesson) &&
+  isCount(s.xp) && s.xp <= MAX_BACKUP_XP && isSettings(s.settings) && isProfile(s.profile);
 
 /** Разбор и валидация файла бэкапа (спека 11): строгая, «всё или ничего».
  *  Порядок: конверт → версия → доливка дефолтов (как у гидрации persist) → типы полей. */
@@ -160,6 +197,10 @@ export function parseBackup(text: string, currentVersion: number): ParsedBackup 
   if (raw.schemaVersion > currentVersion) return { ok: false, error: 'newerVersion' };
 
   const src = raw.state;
+  // settings не-объектом раньше молча подменялся дефолтами через mergeSettings(null) —
+  // противоречит решению спеки «всё или ничего»: чужой тип поля — признак битого файла,
+  // а не повод тихо долить дефолты вместо него
+  if (src.settings !== undefined && !isObj(src.settings)) return { ok: false, error: 'corrupt' };
   // доливка — ровно та же, что у гидрации persist: поверхностно по верхнему уровню…
   const state: BackupState = { ...PERSIST_DEFAULTS };
   for (const k of BACKUP_KEYS) {

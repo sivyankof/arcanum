@@ -1,7 +1,7 @@
 /** Экран «Настройки» (product-spec §5): всё утилитарное уехало сюда из профиля, чтобы профиль
  *  остался «путём» — уровень, статистика, дневник. Вход — шестерёнка в правом верхнем углу профиля.
- *  Порядок строк по спеке: Тема · Язык (напоминания, рефлексия, имя, экспорт и «о приложении»
- *  добавят задачи 06, 09, 11, 12). */
+ *  Порядок строк по спеке: Тема · Язык · напоминания · рефлексия · экспорт/импорт (уже здесь,
+ *  задача 11); имя и «о приложении» остаются на очереди — задачи 12 и 13. */
 import { Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -129,7 +129,15 @@ export default function SettingsScreen() {
     setPlanText(`${tr('settings.queuedCount', { count: queued })}\n\n${planLines}`);
   };
 
+  // общий busy-guard от двойного тапа на «Экспорт»/«Импорт» (волна фиксов финального ревью):
+  // параллельный второй вызов getDocumentAsync реджектит и рисует ложное «Файл повреждён»,
+  // второй shareAsync — ложное «Не удалось подготовить файл», плюс два Modal друг на друге.
+  // Образец защиты от повторного входа — requestingPerm ниже в этом же файле.
+  const busy = React.useRef(false);
+
   const onExport = async () => {
+    if (busy.current) return;
+    busy.current = true;
     try {
       const file = buildBackup(useApp.getState(), SCHEMA_VERSION, new Date().toISOString());
       await shareBackup(JSON.stringify(file, null, 2), backupFileName(localDateISO()));
@@ -137,10 +145,14 @@ export default function SettingsScreen() {
       // сбой записи или шаринга не должен молчать: иначе «поделился или нет» неотличимо
       console.warn('[backup] экспорт не удался:', err);
       setNotice({ titleKey: 'settings.errTitle', textKey: 'settings.exportErr' });
+    } finally {
+      busy.current = false;
     }
   };
 
   const onImport = async () => {
+    if (busy.current) return;
+    busy.current = true;
     try {
       const text = await pickBackupText();
       if (text === null) return; // передумал в системном пикере — это не ошибка, молчим
@@ -153,7 +165,9 @@ export default function SettingsScreen() {
     } catch (err) {
       // не прочитался сам файл (права, обрыв) — по смыслу для человека то же «повреждён»
       console.warn('[backup] импорт не удался:', err);
-      setNotice({ titleKey: 'settings.errTitle', textKey: 'settings.importErrCorrupt' });
+      setNotice({ titleKey: 'settings.errTitle', textKey: ERR_TEXT.corrupt });
+    } finally {
+      busy.current = false;
     }
   };
 
@@ -418,8 +432,21 @@ export default function SettingsScreen() {
           }
           confirmLabel={tr('settings.importConfirm')}
           cancelLabel={tr('settings.importCancel')}
-          onConfirm={() => {
-            if (importAsk) restoreBackup(importAsk.state);
+          onConfirm={async () => {
+            if (importAsk) {
+              // Новое устройство — новое разрешение (тот же класс бага, что уже чинили в 06б):
+              // бэкап несёт settings.pushAsked/pushesOn СО СТАРОГО телефона, а системное
+              // разрешение ОС новому телефону не передалось и на нём 'undetermined' — без
+              // сброса флага прелюдия больше никогда не спросит, тумблер будет врать «Вкл»,
+              // а план пушей не доедет до ОС. В вебе getPermission() тоже всегда отдаёт
+              // 'undetermined' (см. src/lib/pushes.ts) — сброс срабатывает и там, осознанно.
+              const permNow = await getPermission();
+              const state =
+                permNow === 'granted'
+                  ? importAsk.state
+                  : { ...importAsk.state, settings: { ...importAsk.state.settings, pushAsked: false } };
+              restoreBackup(state);
+            }
             setImportAsk(null);
             setNotice({ titleKey: 'settings.importDoneTitle', textKey: 'settings.importDoneText' });
           }}

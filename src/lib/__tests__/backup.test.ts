@@ -1,4 +1,5 @@
 import { localDateISO } from '../dates';
+import { NOTE_MAX } from '../journal';
 import {
   BACKUP_KEYS,
   backupFileName,
@@ -137,7 +138,38 @@ describe('parseBackup — битые данные → corrupt (всё или н�
     ['profile без onboarded', (s) => { s.profile = { name: 'Аня' }; }],
     ['настройки битых типов', (s) => { s.settings = { reflectionOn: 'да' }; }],
     ['freezeMonth не YYYY-MM', (s) => { s.freezeMonth = 'август'; }],
+    // волна фиксов финального ревью: потолки величин (B1) — без них огромный xp/streak/freezes
+    // проходит валидацию, а levelFromXp (линейный while) вешает каждый рендер пилюли уровня
+    ['xp за потолком', (s) => { s.xp = 1e15; }],
+    ['streak за потолком', (s) => { s.streak = 1e9; }],
+    ['freezes за потолком (больше FREEZE_MAX)', (s) => { s.freezes = 999; }],
+    ['заметка длиннее лимита', (s) => { s.history[0].note = 'а'.repeat(NOTE_MAX + 1); }],
+    ['lessonsProgress раздут сверх лимита', (s) => {
+      s.lessonsProgress = Object.fromEntries(
+        Array.from({ length: 1001 }, (_, i) => [`l${i}`, { done: true, errors: 0, ts: 1 }]),
+      );
+    }],
+    // B2: settings не-объектом раньше молча подменялся дефолтами — противоречит «всё или ничего»
+    ['settings не объект', (s) => { s.settings = 'строка'; }],
+    // B3: строже регулярки — числа вне диапазона, а не только форма строки
+    ['pushMorning вне диапазона часов/минут', (s) => { s.settings = { ...s.settings, pushMorning: '99:99' }; }],
+    ['freezeSpentDate — месяц/день вне диапазона', (s) => { s.freezeSpentDate = '2026-13-45'; }],
   ])('%s', (_name, patch) => {
     expect(parseBackup(broken(patch), SCHEMA_VERSION)).toEqual({ ok: false, error: 'corrupt' });
+  });
+});
+
+describe('parseBackup — реальная форма состояния (спека 11, B6)', () => {
+  it('разнородные id колоды (мажор и минор в history, birthArcanaId) проходят собственный parseBackup', () => {
+    const state: BackupState = {
+      ...VALID,
+      history: [
+        { date: '2026-08-14', cardId: 'hermit', reversed: false },
+        { date: '2026-08-13', cardId: 'c02', reversed: true },
+      ],
+      profile: { ...VALID.profile, birthArcanaId: 'hermit' },
+    };
+    const text = JSON.stringify(buildBackup(state, SCHEMA_VERSION, AT));
+    expect(parseBackup(text, SCHEMA_VERSION)).toEqual({ ok: true, state, exportedAt: AT });
   });
 });
