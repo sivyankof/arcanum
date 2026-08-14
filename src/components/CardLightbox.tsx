@@ -114,7 +114,9 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
       // появление — простым fade (I2), а не мгновенным прыжком withTiming(reduceMotion)
       prog.value = 1;
       fade.value = 0;
-      fade.value = withTiming(1, { duration: 200 }, (finished) => {
+      // reduceMotion: Never — fade САМ является заменой движению при reduce motion,
+      // глушить его системной настройкой (сделав мгновенным) нельзя
+      fade.value = withTiming(1, { duration: 200, reduceMotion: ReduceMotion.Never }, (finished) => {
         if (finished) runOnJS(hapticSoft)(); // Soft на посадке карты
       });
     } else {
@@ -161,7 +163,8 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
       // reduce motion: без полёта — простое исчезание (I2); onClose из колбэка fade,
       // а не closing (closing тут не анимируется, только флагом переключает режим стилей)
       closing.value = 1;
-      fade.value = withTiming(0, { duration: 200 }, (finished) => {
+      // reduceMotion: Never — та же причина, что и в эффекте открытия выше
+      fade.value = withTiming(0, { duration: 200, reduceMotion: ReduceMotion.Never }, (finished) => {
         if (finished) runOnJS(onClose)();
       });
       return;
@@ -274,7 +277,9 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
 
   // полёт: открытие тянет prog 0→1, закрытие поверх тянет closing 0→1 обратно к from
   const cardStyle = useAnimatedStyle(() => {
-    const k = (1 - prog.value) + closing.value; // 0 — центр, 1 — исходная позиция
+    // reduce motion: карта всегда стоит в центре (k=0) и просто гаснет фейдом (I2) — без этого
+    // close() ставит closing=1 мгновенно (без анимации) и карта телепортируется к герою ДО фейда
+    const k = reduceMotion ? 0 : (1 - prog.value) + closing.value; // 0 — центр, 1 — исходная позиция
     // оборот: открытие 360°→0 (полный, через рубашку), закрытие 0→180° (полуоборот)
     let spin = prog.value < 1 && closing.value === 0
       ? interpolate(prog.value, [0, 1], [360, 0])
@@ -322,9 +327,10 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
   }));
   const scrimStyle = useAnimatedStyle(() => {
     // скрим бледнеет вместе со свайпом — обратная связь «отпустишь — закроется»; множитель
-    // считаем только когда свайп-закрытие вообще возможно (I4, тот же гвард, что у rotZ) —
-    // иначе panY это панорамирование зумленной карты, и скрим не должен тускнеть от пана
-    const swipeFade = savedZoom.value === 1 && closing.value === 0
+    // считаем только когда карта не зумлена (I4) — при зуме panY это панорамирование, а не
+    // свайп. closing НЕ гвардим: panY при закрытии и так едет в 0 тем же CLOSE_ANIM, а гвард
+    // по closing давал скачок множителя 1 в начале close() — скрим дёргался ярче на старте полёта
+    const swipeFade = savedZoom.value === 1
       ? interpolate(panY.value, [0, 300], [1, 0.5], Extrapolation.CLAMP)
       : 1;
     return {
