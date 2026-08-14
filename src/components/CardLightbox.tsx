@@ -8,9 +8,10 @@ import { setStatusBarHidden } from 'expo-status-bar';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing, interpolate, ReduceMotion, runOnJS, useAnimatedStyle, useReducedMotion,
-  useSharedValue, withDelay, withTiming,
+  useSharedValue, withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardBack } from './CardBack';
@@ -18,7 +19,11 @@ import { Txt } from './Txt';
 import { cardImages } from '../lib/cardImages';
 import type { Rect } from '../lib/cardTransition';
 import { hapticSoft, hapticTap } from '../lib/haptics';
-import { fonts, radius } from '../theme/theme';
+import {
+  clampZoom, clampPan, panBounds, doubleTapTarget, focalTranslate,
+  swipeCloseAllowed, ZOOM_MIN, SWIPE_CLOSE_PX,
+} from '../lib/lightbox';
+import { radius } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 
 // геометрия и тайминги — .lightbox макета и motion-spec §15
@@ -78,6 +83,81 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     );
   }, [closing, onClose]);
 
+  // зум и пан — состояние жестов (спека 14, задача 5)
+  const zoom = useSharedValue(1);
+  const savedZoom = useSharedValue(1);
+  const panX = useSharedValue(0);
+  const panY = useSharedValue(0);
+  const savedPan = useSharedValue({ x: 0, y: 0 });
+
+  const pinch = Gesture.Pinch()
+    .onUpdate((e) => {
+      'worklet';
+      // упругое сопротивление за пределами: излишек входит в четверть силы
+      const raw = savedZoom.value * e.scale;
+      const clamped = clampZoom(raw);
+      zoom.value = clamped + (raw - clamped) * 0.25;
+    })
+    .onEnd(() => {
+      'worklet';
+      zoom.value = withTiming(clampZoom(zoom.value), { duration: 180 });
+      savedZoom.value = clampZoom(zoom.value);
+      const b = panBounds(savedZoom.value, CARD_W, CARD_H, viewW, viewH);
+      const p = clampPan(panX.value, panY.value, b);
+      panX.value = withTiming(p.x, { duration: 180 });
+      panY.value = withTiming(p.y, { duration: 180 });
+      savedPan.value = p;
+    });
+
+  const pan = Gesture.Pan()
+    .onUpdate((e) => {
+      'worklet';
+      if (!swipeCloseAllowed(savedZoom.value)) {
+        const b = panBounds(savedZoom.value, CARD_W, CARD_H, viewW, viewH);
+        const p = clampPan(savedPan.value.x + e.translationX, savedPan.value.y + e.translationY, b);
+        panX.value = p.x; panY.value = p.y;
+      } else {
+        // свайп-вниз при ×1 — Task 6 (карта следует за пальцем)
+        panY.value = Math.max(0, e.translationY);
+      }
+    })
+    .onEnd((e) => {
+      'worklet';
+      if (!swipeCloseAllowed(savedZoom.value)) {
+        savedPan.value = { x: panX.value, y: panY.value };
+      } else if (panY.value > SWIPE_CLOSE_PX) {
+        runOnJS(close)();
+      } else {
+        panY.value = withTiming(0, { duration: 180 });
+      }
+    });
+
+  const doubleTap = Gesture.Tap().numberOfTaps(2)
+    .onEnd((e) => {
+      'worklet';
+      const target = doubleTapTarget(savedZoom.value);
+      const b = panBounds(target, CARD_W, CARD_H, viewW, viewH);
+      // точка тапа в координатах карты относительно её центра (карта в центре экрана при ×1)
+      const p = target === ZOOM_MIN
+        ? { x: 0, y: 0 }
+        : focalTranslate(e.absoluteX - viewW / 2, e.absoluteY - viewH / 2, target, b);
+      zoom.value = withTiming(target, { duration: 220 });
+      panX.value = withTiming(p.x, { duration: 220 });
+      panY.value = withTiming(p.y, { duration: 220 });
+      savedZoom.value = target;
+      savedPan.value = p;
+    });
+
+  const singleTap = Gesture.Tap()
+    .onEnd(() => { 'worklet'; runOnJS(close)(); });
+
+  // pinch и pan живут одновременно (зумишь и ведёшь одним движением);
+  // Exclusive сам заставляет одиночный тап ждать провала двойного
+  const gestures = Gesture.Race(
+    Gesture.Simultaneous(pinch, pan),
+    Gesture.Exclusive(doubleTap, singleTap),
+  );
+
   // полёт: открытие тянет prog 0→1, закрытие поверх тянет closing 0→1 обратно к from
   const cardStyle = useAnimatedStyle(() => {
     const k = (1 - prog.value) + closing.value; // 0 — центр, 1 — исходная позиция
@@ -90,9 +170,11 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
       transform: [
         { translateX: from.dx * k },
         { translateY: from.dy * k },
+        { translateX: panX.value },
+        { translateY: panY.value },
         { perspective: 1200 },
         { rotateY: `${spin}deg` },
-        { scale: 1 + (from.scale - 1) * k },
+        { scale: (1 + (from.scale - 1) * k) * zoom.value },
       ],
     };
   });
@@ -112,17 +194,20 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
         <BlurView intensity={20} tint="dark" style={StyleSheet.absoluteFill} />
         <View style={[StyleSheet.absoluteFill, { backgroundColor: SCRIM }]} />
       </Animated.View>
-      {/* тап по фону/карте закрывает; в Task 5 сюда встанет GestureDetector */}
-      <Pressable style={st.stage} onPress={close}>
-        <Animated.View style={[st.card, cardStyle]}>
-          <Animated.View style={[st.face, frontStyle, { borderColor: t.frame, boxShadow: CARD_SHADOW }]}>
-            <Image source={cardImages[cardId]} style={st.im} contentFit="cover" cachePolicy="memory-disk" />
+      {/* pinch+pan одновременно (Simultaneous), одиночный тап закрывает и ждёт провала
+          двойного (Exclusive), оба режима гонятся Race — вся сцена под одним детектором */}
+      <GestureDetector gesture={gestures}>
+        <View style={st.stage}>
+          <Animated.View style={[st.card, cardStyle]}>
+            <Animated.View style={[st.face, frontStyle, { borderColor: t.frame, boxShadow: CARD_SHADOW }]}>
+              <Image source={cardImages[cardId]} style={st.im} contentFit="cover" cachePolicy="memory-disk" />
+            </Animated.View>
+            <Animated.View style={[st.face, backStyle, { borderColor: t.frame }]}>
+              <CardBack />
+            </Animated.View>
           </Animated.View>
-          <Animated.View style={[st.face, backStyle, { borderColor: t.frame }]}>
-            <CardBack />
-          </Animated.View>
-        </Animated.View>
-      </Pressable>
+        </View>
+      </GestureDetector>
       <Pressable onPress={close} style={[st.x, { top: Math.max(insets.top, 18), borderColor: t.line }]}>
         <Txt style={{ color: t.muted, fontSize: 14 }}>✕</Txt>
       </Pressable>
