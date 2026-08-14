@@ -4,6 +4,7 @@
  *  в обеих темах — константы макета .lightbox, не токены. */
 import { Image } from 'expo-image';
 import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
 import { setStatusBarHidden } from 'expo-status-bar';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,7 @@ import { Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-n
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   Easing, Extrapolation, interpolate, ReduceMotion, runOnJS, useAnimatedStyle, useReducedMotion,
-  useSharedValue, withTiming,
+  useSharedValue, withDelay, withRepeat, withSequence, withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardBack } from './CardBack';
@@ -23,6 +24,7 @@ import {
   clampZoom, clampPan, panBounds, doubleTapTarget, focalTranslate,
   swipeCloseAllowed, ZOOM_MIN, SWIPE_CLOSE_PX,
 } from '../lib/lightbox';
+import { useDeviceTilt } from '../lib/useDeviceTilt';
 import { radius } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 
@@ -34,6 +36,23 @@ const CLOSE_MS = 380;
 const OPEN_EASE = Easing.bezier(0.3, 0.7, 0.3, 1);
 const SCRIM = 'rgba(4,5,14,0.88)';
 const CARD_SHADOW = '0px 30px 80px rgba(0,0,0,0.65)';
+// закрытие делят panY и closing — оба ехали с одинаковым конфигом, дублировавшимся дважды (задача 6)
+const CLOSE_ANIM = { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System };
+
+// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare из «Сегодня»)
+const GLARE_DELAY = OPEN_MS + 120;
+const GLARE_MS = 900;
+const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
+const GLARE_COLORS = [
+  'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)',
+  'rgba(255,255,255,0)', 'rgba(255,255,255,0)',
+] as const;
+const GLARE_LOCATIONS = [0, 0.32, 0.48, 0.6, 1] as const;
+
+// параллакс/качание после посадки (motion-spec §15): на устройстве — наклон через useDeviceTilt,
+// на вебе/без сенсора — цикл sway 0..1..0 (.lbidle макета)
+const SWAY_DELAY = 800;
+const SWAY_MS = 2500;
 
 type Props = { cardId: string; origin: Rect | null; onClose: () => void };
 
@@ -50,6 +69,15 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
   const closing = useSharedValue(0);
 
   const open = origin !== null;
+
+  // наклон устройства (null на вебе/без сенсора — тогда включаем sway ниже); hasTilt как
+  // отдельный булев — сам объект пересоздаётся на каждый рендер, а эффекту нужна стабильная зависимость
+  const tilt = useDeviceTilt(open && !reduceMotion);
+  const hasTilt = tilt !== null;
+  // качание карты без сенсора (веб) — общий shared value 0..1, крутится только пока tilt === null
+  const sway = useSharedValue(0);
+  // однократный блик по лицу карты вскоре после посадки
+  const glare = useSharedValue(0);
 
   // смещение исходной позиции от центра экрана (куда лететь «обратно»)
   const from = React.useMemo(() => {
@@ -75,6 +103,30 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     return () => setStatusBarHidden(false, 'fade');
   }, [open, prog, closing]);
 
+  // качание камеры без сенсора: пока идёт наклон устройства (hasTilt) или включён reduce motion —
+  // не запускаем вовсе, эффекты параллакса/качания в этом случае не должны идти вовсе
+  React.useEffect(() => {
+    sway.value = 0;
+    if (!open || reduceMotion || hasTilt) return;
+    sway.value = withDelay(
+      SWAY_DELAY,
+      withRepeat(
+        withSequence(
+          withTiming(1, { duration: SWAY_MS, easing: Easing.inOut(Easing.ease) }),
+          withTiming(0, { duration: SWAY_MS, easing: Easing.inOut(Easing.ease) }),
+        ),
+        -1,
+      ),
+    );
+  }, [open, reduceMotion, hasTilt, sway]);
+
+  // блик по лицу карты — один проход, начинается сразу после посадки
+  React.useEffect(() => {
+    glare.value = 0;
+    if (!open) return;
+    glare.value = withDelay(GLARE_DELAY, withTiming(1, { duration: GLARE_MS }));
+  }, [open, glare]);
+
   // зум и пан — состояние жестов (спека 14, задача 5)
   const zoom = useSharedValue(1);
   const savedZoom = useSharedValue(1);
@@ -86,12 +138,8 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     // полёт стартует с текущего сдвига пальца (Task 6): panY едет в 0 тем же
     // таймингом, что и closing, — сложение с translateY(from.dy*k) даёт один плавный полёт,
     // а не рывок «сначала прыжок в центр, потом полёт».
-    panY.value = withTiming(0, { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System });
-    closing.value = withTiming(
-      1,
-      { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System },
-      (finished) => { if (finished) runOnJS(onClose)(); },
-    );
+    panY.value = withTiming(0, CLOSE_ANIM);
+    closing.value = withTiming(1, CLOSE_ANIM, (finished) => { if (finished) runOnJS(onClose)(); });
   }, [closing, panY, onClose]);
 
   const pinch = Gesture.Pinch()
@@ -175,6 +223,19 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     const rotZ = savedZoom.value === 1 && closing.value === 0
       ? interpolate(panY.value, [0, 300], [0, 2])
       : 0;
+    // параллакс/качание — только когда карта уже сидит в центре и не улетает обратно;
+    // при reduce motion не запускаем вовсе (ни наклон устройства, ни sway)
+    let tiltX = 0;
+    let tiltY = 0;
+    if (prog.value === 1 && closing.value === 0 && !reduceMotion) {
+      if (tilt) {
+        tiltX = -tilt.x.value;
+        tiltY = tilt.y.value;
+      } else {
+        tiltX = interpolate(sway.value, [0, 1], [1.5, -1.5]);
+        tiltY = interpolate(sway.value, [0, 1], [-2.5, 2.5]);
+      }
+    }
     return {
       transform: [
         { translateX: from.dx * k },
@@ -182,7 +243,8 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
         { translateX: panX.value },
         { translateY: panY.value },
         { perspective: 1200 },
-        { rotateY: `${spin}deg` },
+        { rotateX: `${tiltX}deg` },
+        { rotateY: `${spin + tiltY}deg` },
         { scale: (1 + (from.scale - 1) * k) * zoom.value },
         { rotateZ: `${rotZ}deg` },
       ],
@@ -197,6 +259,15 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     // скрим бледнеет вместе со свайпом — обратная связь «отпустишь — закроется»
     const fade = interpolate(panY.value, [0, 300], [1, 0.5], Extrapolation.CLAMP);
     return { opacity: Math.min(prog.value, 1 - closing.value) * fade };
+  });
+  const glareStyle = useAnimatedStyle(() => {
+    // противофаза наклону: блик идёт слегка навстречу качанию/наклону устройства
+    const driftX = tilt ? -tilt.y.value * 4 : 0;
+    return {
+      transform: [
+        { translateX: interpolate(glare.value, [0, 1], [-CARD_W * 1.4, CARD_W * 1.4]) + driftX },
+      ],
+    };
   });
 
   if (!open) return null;
@@ -213,6 +284,16 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
           <Animated.View style={[st.card, cardStyle]}>
             <Animated.View style={[st.face, frontStyle, { borderColor: t.frame, boxShadow: CARD_SHADOW }]}>
               <Image source={cardImages[cardId]} style={st.im} contentFit="cover" cachePolicy="memory-disk" />
+              {/* блик: один проход по лицу карты вскоре после посадки (motion-spec §15) */}
+              <Animated.View style={[StyleSheet.absoluteFill, st.glareLayer, glareStyle]}>
+                <LinearGradient
+                  colors={GLARE_COLORS}
+                  locations={GLARE_LOCATIONS}
+                  start={GLARE_ANGLE.start}
+                  end={GLARE_ANGLE.end}
+                  style={StyleSheet.absoluteFill}
+                />
+              </Animated.View>
             </Animated.View>
             <Animated.View style={[st.face, backStyle, { borderColor: t.frame }]}>
               <CardBack />
@@ -242,6 +323,7 @@ const st = StyleSheet.create({
     borderRadius: radius.l, borderWidth: 1, overflow: 'hidden',
   },
   im: { width: '100%', height: '100%' },
+  glareLayer: { pointerEvents: 'none' as const },
   x: {
     position: 'absolute', right: 18, width: 32, height: 32, borderRadius: 16,
     borderWidth: 1, alignItems: 'center', justifyContent: 'center',
