@@ -40,6 +40,7 @@ import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { levelFromXp } from '../../src/lib/xp';
 import { useApp } from '../../src/store/useApp';
+import { GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../../src/theme/glow';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { Txt } from '../../src/components/Txt';
@@ -54,12 +55,12 @@ const STREAK_MILESTONE = 7; // 7-й день серии — единственн
 const RING_A = CARD_W * 1.53;
 const RING_B = CARD_W * 1.75;
 
-// блик по лицу карты (.glare из эталона): диагональ 112°, ход ±140% ширины, задержка 500 мс, 1100 мс.
+// блик по лицу карты (.glare из эталона): ход ±140% ширины, задержка 500 мс, 1100 мс
+// (геометрия — GLARE_ANGLE/COLORS/LOCATIONS в theme/glow.ts, общая с CardLightbox).
 // Сверх эталона (motion-spec п.7): пока карта открыта, проход повторяется каждые ~7 с
 const GLARE_DELAY = 500;
 const GLARE_MS = 1100;
 const GLARE_PAUSE = 7000;
-const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
 
 // салют при перевороте (.spark эталона + stage.onclick): 18 искр, кегль 8–17, разлёт 85–180 px
 const SPARK_COUNT = 18;
@@ -367,8 +368,8 @@ export default function TodayScreen() {
                 {/* блик: проходит по лицу карты сразу после переворота */}
                 <Animated.View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }, glareStyle]}>
                   <LinearGradient
-                    colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']}
-                    locations={[0, 0.32, 0.48, 0.6, 1]}
+                    colors={GLARE_COLORS}
+                    locations={GLARE_LOCATIONS}
                     start={GLARE_ANGLE.start}
                     end={GLARE_ANGLE.end}
                     style={StyleSheet.absoluteFill}

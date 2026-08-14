@@ -25,6 +25,7 @@ import {
   swipeCloseAllowed, ZOOM_MIN, SWIPE_CLOSE_PX,
 } from '../lib/lightbox';
 import { useDeviceTilt } from '../lib/useDeviceTilt';
+import { GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../theme/glow';
 import { radius } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 
@@ -39,15 +40,10 @@ const CARD_SHADOW = '0px 30px 80px rgba(0,0,0,0.65)';
 // закрытие делят panY и closing — оба ехали с одинаковым конфигом, дублировавшимся дважды (задача 6)
 const CLOSE_ANIM = { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System };
 
-// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare из «Сегодня»)
+// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare из «Сегодня»;
+// геометрия GLARE_ANGLE/COLORS/LOCATIONS — общая с домашним экраном, theme/glow.ts)
 const GLARE_DELAY = OPEN_MS + 120;
 const GLARE_MS = 900;
-const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
-const GLARE_COLORS = [
-  'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0.3)',
-  'rgba(255,255,255,0)', 'rgba(255,255,255,0)',
-] as const;
-const GLARE_LOCATIONS = [0, 0.32, 0.48, 0.6, 1] as const;
 
 // параллакс/качание после посадки (motion-spec §15): на устройстве — наклон через useDeviceTilt,
 // на вебе/без сенсора — цикл sway 0..1..0 (.lbidle макета)
@@ -120,12 +116,13 @@ export function CardLightbox({ cardId, origin, onClose }: Props) {
     );
   }, [open, reduceMotion, hasTilt, sway]);
 
-  // блик по лицу карты — один проход, начинается сразу после посадки
+  // блик по лицу карты — один проход, начинается сразу после посадки; при reduce motion
+  // не запускаем вовсе (спека 14, «Reduce motion»: без глейра, без параллакса/качания)
   React.useEffect(() => {
     glare.value = 0;
-    if (!open) return;
+    if (!open || reduceMotion) return;
     glare.value = withDelay(GLARE_DELAY, withTiming(1, { duration: GLARE_MS }));
-  }, [open, glare]);
+  }, [open, reduceMotion, glare]);
 
   // зум и пан — состояние жестов (спека 14, задача 5)
   const zoom = useSharedValue(1);
