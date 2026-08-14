@@ -2,11 +2,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { PERSIST_DEFAULTS, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
-import { canEditEntry, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
-import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from '../lib/settings';
+import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
+import { mergeSettings, type AppSettings } from '../lib/settings';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
@@ -27,7 +28,7 @@ export type { LessonProgressMap };
 // профиль (имя, дата и аркан рождения) — тип живёт в src/lib/birthArcana.ts рядом с формулой
 export type { Profile };
 
-interface AppState {
+export interface AppState {
   themeMode: ThemeMode;
   lang: Lang;
   /** Личный сид для карты дня (0 — ещё не назначен, назначается один раз после первой гидрации). */
@@ -80,24 +81,17 @@ interface AppState {
   syncFreezeGrant: () => void;
   /** Только для разработки: симулирует пропущенный вчера день. */
   devSkipYesterday: () => void;
+  /** Импорт бэкапа (спека 11): полная замена персистуемых данных. Сюда приходит
+   *  УЖЕ валидированное состояние — файл разбирает parseBackup. */
+  restoreBackup: (s: BackupState) => void;
 }
 
 export const useApp = create<AppState>()(
   persist(
     (set, get) => ({
-      themeMode: 'dark',
-      lang: 'ru',
-      installSeed: 0,
-      streak: 0,
-      lastDrawDate: null,
-      freezes: 1,
-      freezeMonth: null,
-      freezeSpentDate: null,
-      history: [],
-      lessonsProgress: {},
-      xp: 0,
-      settings: DEFAULT_SETTINGS,
-      profile: { onboarded: false },
+      // дефолты персистуемой схемы лежат в backup.ts (PERSIST_DEFAULTS): бэкап по построению
+      // совпадает с тем, что персистится, и доливает старые файлы теми же значениями
+      ...PERSIST_DEFAULTS,
       devReflect: false,
 
       setThemeMode: (themeMode) => set({ themeMode }),
@@ -114,7 +108,7 @@ export const useApp = create<AppState>()(
           streak: adv.streak,
           freezes: adv.freezes,
           ...(adv.freezeSpent ? { freezeSpentDate: t } : {}),
-          history: [{ date: t, cardId, reversed }, ...history].slice(0, 365),
+          history: [{ date: t, cardId, reversed }, ...history].slice(0, HISTORY_MAX),
           // ритуал дня: +5 XP (logic-spec §4); повторное начисление отсекает проверка выше
           xp: xp + XP_DRAW,
         });
@@ -213,6 +207,22 @@ export const useApp = create<AppState>()(
         if (next.freezes !== freezes || next.freezeMonth !== freezeMonth) set(next);
       },
 
+      // Импорт бэкапа (спека 11): полная замена. Persist сам записывает новое состояние,
+      // план пушей пересчитывает подписка usePushScheduler, тему и язык применяют
+      // существующие подписки — здесь только сама замена и два шага гигиены.
+      restoreBackup: (s) => {
+        set({
+          ...s,
+          // очень старый или правленный руками файл мог прийти без сида —
+          // назначаем свежий, как это делает onRehydrateStorage после гидрации
+          ...(s.installSeed === 0
+            ? { installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)) }
+            : {}),
+        });
+        // бэкап прошлого месяца сразу доначисляет заморозку нового, не ожидая перезапуска
+        get().syncFreezeGrant();
+      },
+
       // Только для разработки: «вчера пропущен» — lastDrawDate уезжает на позавчера,
       // сегодняшняя запись стирается. Следующий переворот карты либо тратит заморозку,
       // либо (freezes === 0) сбрасывает серию — иначе механику не проверить, не ждя сутки.
@@ -277,7 +287,9 @@ export const useApp = create<AppState>()(
       // дефолты (1/null/null) доливаются поверхностным слиянием сами, ветка миграции не нужна.
       // Существующие пользователи получают freezes: 1 сразу (решение 2 спеки 10).
       // Следующая задача, меняющая схему, поднимает до 8.
-      version: 7,
+      // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
+      // файлы из более новых версий приложения. Поднимать — там.
+      version: SCHEMA_VERSION,
       // ⚠️ persist сливает состояние ПОВЕРХНОСТНО: сохранённый `settings` заменяет объект-дефолт
       // целиком, а не сливается с ним по ключам. Поэтому недостающие ключи дописываем здесь
       // руками — и следующая задача, добавляя поля в settings, обязана поднять версию и сделать
@@ -304,3 +316,14 @@ export const useApp = create<AppState>()(
     },
   ),
 );
+
+// Контроль полноты бэкапа на уровне типов (спека 11): каждое НЕ-функциональное поле
+// состояния обязано быть либо в белом списке бэкапа (BackupState), либо явно причислено
+// к dev-полям. Добавили поле в стор и не решили судьбу его бэкапа — не соберётся tsc,
+// а имя забытого поля будет прямо в тексте ошибки.
+type DataKeys = {
+  [K in keyof AppState]: AppState[K] extends (...args: never[]) => unknown ? never : K;
+}[keyof AppState];
+type OutsideBackup = Exclude<DataKeys, keyof BackupState | 'devReflect'>;
+const backupCovers: OutsideBackup extends never ? true : OutsideBackup = true;
+void backupCovers;
