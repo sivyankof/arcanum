@@ -4,6 +4,8 @@
  *  на вебе диалог не появился бы вовсе, а экран, задержанный на `beforeRemove`,
  *  вообще не закрылся бы. Свой диалог одинаково работает везде и держит стиль приложения.
  *  Тон кнопок — design-system §8: без «Ошибка!» и приказов.
+ *  Без cancelLabel — режим «сообщение» с одной кнопкой (диалоги исхода импорта, спека 11);
+ *  скрим тогда закрывает через onConfirm.
  */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -27,9 +29,9 @@ export function ConfirmDialog({
   title: string;
   message: string;
   confirmLabel: string;
-  cancelLabel: string;
+  cancelLabel?: string;
   onConfirm: () => void;
-  onCancel: () => void;
+  onCancel?: () => void;
   /** Тон кнопки подтверждения. 'danger' — «удалить / уйти без сохранения» (по умолчанию),
    *  'accent' — когда подтверждение не разрушительное (показ плана пушей, прелюдия разрешения). */
   confirmTone?: 'danger' | 'accent';
@@ -37,13 +39,15 @@ export function ConfirmDialog({
   const t = useTheme();
 
   return (
-    <ModalPanel visible={visible} onClose={onCancel}>
+    <ModalPanel visible={visible} onClose={onCancel ?? onConfirm}>
       <Txt style={[st.title, { color: t.head }]}>{title}</Txt>
       <Txt style={[st.msg, { color: t.muted }]}>{message}</Txt>
       <View style={st.row}>
-        <PressableScale onPress={onCancel} style={[st.btn, { borderColor: t.frame }]}>
-          <Txt style={[st.btnTxt, { color: t.accent }]}>{cancelLabel}</Txt>
-        </PressableScale>
+        {cancelLabel != null && (
+          <PressableScale onPress={onCancel} style={[st.btn, { borderColor: t.frame }]}>
+            <Txt style={[st.btnTxt, { color: t.accent }]}>{cancelLabel}</Txt>
+          </PressableScale>
+        )}
         <PressableScale
           onPress={onConfirm}
           style={[st.btn, { borderColor: confirmTone === 'accent' ? t.frame : t.line }]}
