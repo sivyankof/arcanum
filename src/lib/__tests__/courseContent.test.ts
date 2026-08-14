@@ -47,3 +47,17 @@ describe('контракт викторин М1–М2 (course.json)', () => {
     }
   });
 });
+
+// Викторины М3 — следующий шаг спеки 26; после их слияния блок ниже сливается с основным.
+const m3Lessons = course.filter((m) => m.id === 'm3').flatMap((m) => m.lessons);
+
+describe('контракт теории М3 (course.json, спека 26)', () => {
+  it('М3 — это 6 уроков', () => {
+    expect(m3Lessons).toHaveLength(6);
+  });
+
+  it.each(m3Lessons.map((l) => [l.id, l] as const))('%s: теория заполнена на обоих языках', (_id, l) => {
+    expect(l.theory?.ru).toBeTruthy();
+    expect(l.theory?.en).toBeTruthy();
+  });
+});
