@@ -1,6 +1,6 @@
 {
  "_comment": "Вопросы викторин М4, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
- "status": "draft",
+ "status": "reviewed",
  "lessons": [
   {
    "lessonId": "m4l1",
