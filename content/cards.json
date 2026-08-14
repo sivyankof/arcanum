@@ -203,7 +203,7 @@
     },
     "health": {
      "ru": "Для здоровья — ресурс и восстановление через осознанность: вы способны влиять на своё состояние режимом, движением, вниманием к телу. Хорошая карта для начала оздоровительных практик.",
-     "en": "For health — resourcefulness and recovery through awareness: your routine, movement and attention to the body genuinely shape how you feel. A good card for starting wellness practices.",
+     "en": "For health — resourcefulness and recovery through awareness: your routine, movement and attention to the body can genuinely shape how you feel. A good card for starting wellness practices.",
      "status": "reviewed"
     },
     "day_card": {
@@ -322,8 +322,8 @@
      "status": "reviewed"
     },
     "health": {
-     "ru": "Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. При неясных симптомах — обследование вместо догадок.",
-     "en": "For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. With unclear symptoms, choose examination over guessing.",
+     "ru": "Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. Доверяйте прямому ощущению больше, чем домыслам о нём.",
+     "en": "For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. Trust what you directly feel more than guesses about it.",
      "status": "reviewed"
     },
     "day_card": {
@@ -429,8 +429,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви Императрица — тепло, чувственность и глубокая близость. Отношения входят в плодородную фазу: больше нежности, доверия, общих планов. Одиноким карта обещает притяжение — вы сейчас особенно обаятельны, когда остаётесь собой. Иногда указывает на тему семьи и материнства.",
-     "en": "In love, the Empress means warmth, sensuality and deep closeness. The relationship enters a fertile phase: more tenderness, trust, shared plans. For singles, the card promises attraction — you are at your most magnetic when you are simply yourself. It can also touch on themes of family and motherhood.",
+     "ru": "В любви Императрица — тепло, чувственность и глубокая близость. Отношения входят в плодородную фазу: больше нежности, доверия, общих планов. Одиноким сейчас легче притягивать внимание — вы особенно обаятельны, когда остаётесь собой. Иногда указывает на тему семьи и материнства.",
+     "en": "In love, the Empress means warmth, sensuality and deep closeness. The relationship enters a fertile phase: more tenderness, trust, shared plans. For singles, this is a magnetic time — you draw people in most when you are simply yourself. It can also touch on themes of family and motherhood.",
      "status": "reviewed"
     },
     "career": {
@@ -885,9 +885,9 @@
      "achieving a goal",
      "overcoming",
      "discipline",
-     "self-discipline",
+     "willpower",
      "winning",
-     "forward motion"
+     "pushing through"
     ]
    },
    "image": "chariot.jpg",
@@ -1031,8 +1031,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви Сила — глубокая, живая привязанность, которую укрепляют терпение и принятие. Конфликты сейчас решаются не правотой, а теплом: обнимите первой, выслушайте до конца. Одиноким карта обещает притяжение, основанное на настоящей близости, а не на игре.",
-     "en": "In love, Fortitude is a deep, living bond made stronger by patience and acceptance. Right now conflicts are resolved not by being right, but by warmth: hug first, listen fully. For singles, the card promises attraction built on real closeness, not on games.",
+     "ru": "В любви Сила — глубокая, живая привязанность, которую укрепляют терпение и принятие. Конфликты сейчас решаются не правотой, а теплом: не ждите шага навстречу — обнимите сами, выслушайте до конца. Одиноким сейчас важнее настоящая близость, чем игра на публику.",
+     "en": "In love, Fortitude is a deep, living bond made stronger by patience and acceptance. Right now conflicts are resolved not by being right, but by warmth: hug first, listen fully. For singles, what draws people now is real closeness, not games.",
      "status": "reviewed"
     },
     "career": {
@@ -1151,8 +1151,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — период тишины: одному из партнёров нужно пространство, и это не отвержение. Не додумывайте за другого — спросите бережно. Одиноким карта говорит: сейчас важнее понять себя, чем искать пару; встреча случится, когда вы перестанете от неё убегать в суету.",
-     "en": "In love — a quiet spell: one partner needs space, and that isn't rejection. Don't fill the silence with assumptions — ask gently. For singles the card says: understanding yourself matters more right now than searching; the meeting will come once you stop escaping into busyness.",
+     "ru": "В любви — период тишины: одному из партнёров нужно пространство, и это не отвержение. Не додумывайте за другого — спросите бережно. Одиноким карта говорит: сейчас важнее понять себя, чем искать пару; важная встреча становится возможной, когда вы перестанете от неё убегать в суету.",
+     "en": "In love — a quiet spell: one partner needs space, and that isn't rejection. Don't fill the silence with assumptions — ask gently. For singles the card says: understanding yourself matters more right now than searching; a meaningful meeting becomes possible once you stop escaping into busyness.",
      "status": "reviewed"
     },
     "career": {
@@ -1406,7 +1406,7 @@
      "status": "reviewed"
     },
     "health": {
-     "ru": "Для самочувствия — тема баланса: тело честно отражает образ жизни. Обратите внимание, где нарушено равновесие — между работой и отдыхом, нагрузкой и восстановлением, отдачей и заботой о себе. Что вы задолжали самой себе в последнее время?",
+     "ru": "Для самочувствия — тема баланса: тело честно отражает образ жизни. Обратите внимание, где нарушено равновесие — между работой и отдыхом, нагрузкой и восстановлением, отдачей и заботой о себе. Что вы задолжали себе в последнее время?",
      "en": "For wellbeing — a theme of balance: the body honestly mirrors how you live. Notice where the scales have tipped — between work and rest, effort and recovery, giving and caring for yourself. What have you been owing yourself lately?",
      "status": "reviewed"
     },
@@ -1657,8 +1657,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "На карте Уэйта — не жнец с косой, а всадник в доспехах с чёрным знаменем, на котором белая роза: жизнь, продолжающаяся сквозь любые перемены. У него нет оружия — перемены приходят сами, без насилия. Перед ним король, ребёнок, девушка и епископ: переход касается всех, независимо от статуса. Вдали между двумя башнями встаёт солнце — обещание, что за каждым завершением есть рассвет.",
-     "en": "On Waite's card there is no reaper with a scythe, but an armoured rider with a black banner bearing a white rose: life continuing through every change. He carries no weapon — change arrives on its own, without violence. Before him stand a king, a child, a maiden and a bishop: transition comes to everyone, whatever their status. In the distance, the sun rises between two towers — a promise that behind every ending there is a dawn.",
+     "ru": "На карте Уэйта — не жнец с косой, а всадник в доспехах с чёрным знаменем, на котором белая роза: жизнь, продолжающаяся сквозь любые перемены. У него нет оружия — перемены приходят сами, без насилия. Перед ним король, ребёнок, девушка и епископ: переход касается всех, независимо от статуса. Вдали между двумя башнями встаёт солнце — знак, что за каждым завершением есть рассвет.",
+     "en": "On Waite's card there is no reaper with a scythe, but an armoured rider with a black banner bearing a white rose: life continuing through every change. He carries no weapon — change arrives on its own, without violence. Before him stand a king, a child, a maiden and a bishop: transition comes to everyone, whatever their status. In the distance, the sun rises between two towers — a sign that behind every ending there is a dawn.",
      "status": "reviewed"
     },
     "birth_path": {
@@ -1774,7 +1774,7 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня ищите середину. Не соглашайтесь на крайности — ни в делах, ни в разговорах, ни в тратах. Если назревает спор, станьте той, кто предлагает компромисс. Чередуйте напряжение и паузы: час работы — десять минут тишины. День наградит вас ровным, спокойным чувством «всё на своих местах».",
+     "ru": "Сегодня ищите середину. Не соглашайтесь на крайности — ни в делах, ни в разговорах, ни в тратах. Если назревает спор, предложите компромисс сами. Чередуйте напряжение и паузы: час работы — десять минут тишины. День наградит вас ровным, спокойным чувством «всё на своих местах».",
      "en": "Today, look for the middle path. Refuse extremes — in tasks, conversations and spending alike. If an argument is brewing, be the one who offers the compromise. Alternate effort with pauses: an hour of work, ten minutes of quiet. The day will reward you with a calm, steady sense that everything is in its place.",
      "status": "reviewed"
     },
@@ -2019,8 +2019,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Башня стоит на скале — конструкция, построенная гордыней на неподходящем основании. Молния сбивает корону с вершины: вспышка истины свергает ложную власть. Пламя вырывается из окон, и две фигуры падают вниз — старое понимание мира и его ложное толкование; падение здесь — освобождение из тюрьмы, которую принимали за крепость. Двадцать два язычка пламени — как арканы Таро: очищающий огонь духа.",
-     "en": "The Tower stands on a rock — a structure raised by pride on unsuitable ground. Lightning knocks the crown from its top: a flash of truth toppling false authority. Flames burst from the windows and two figures fall — the old picture of the world and its false interpretation; here, the fall is release from a prison mistaken for a fortress. The twenty-two tongues of flame echo the tarot's arcana: the purifying fire of spirit.",
+     "ru": "Башня стоит на скале — конструкция, построенная гордыней на неподходящем основании. Молния сбивает корону с вершины: вспышка истины свергает ложную власть. Пламя вырывается из окон, и две фигуры падают вниз — старое понимание мира и его ложное толкование; падение здесь — освобождение из тюрьмы, которую принимали за крепость. Языки пламени в форме буквы йод — очищающий огонь духа.",
+     "en": "The Tower stands on a rock — a structure raised by pride on unsuitable ground. Lightning knocks the crown from its top: a flash of truth toppling false authority. Flames burst from the windows and two figures fall — the old picture of the world and its false interpretation; here, the fall is release from a prison mistaken for a fortress. Tongues of flame shaped like the letter yod — the purifying fire of spirit.",
      "status": "reviewed"
     },
     "birth_path": {
@@ -2116,8 +2116,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — исцеление и искренность: после трудного периода приходит нежность без масок. Для пары — время открытых разговоров и восстановления доверия. Одиноким Звезда обещает: сердце оттаивает, и вы готовы к чувству — не из дефицита, а из внутренней наполненности.",
-     "en": "In love — healing and sincerity: after a difficult stretch comes tenderness without masks. For couples — a time for open conversations and rebuilt trust. For singles, the Star promises that the heart is thawing, and you are ready for love — not out of lack, but out of inner fullness.",
+     "ru": "В любви — исцеление и искренность: после трудного периода приходит нежность без масок. Для пары — время открытых разговоров и восстановления доверия. Одиноким Звезда подсказывает: сердце оттаивает, и вы готовы к чувству — не из дефицита, а из внутренней наполненности.",
+     "en": "In love — healing and sincerity: after a difficult stretch comes tenderness without masks. For couples — a time for open conversations and rebuilt trust. For singles, the Star suggests the heart is thawing, and you are ready for love — not out of lack, but out of inner fullness.",
      "status": "reviewed"
     },
     "career": {
@@ -2468,8 +2468,8 @@
    },
    "content": {
     "general": {
-     "ru": "Суд — карта пробуждения и итога. Прошлый этап завершён, и вас зовут на новый уровень: это может быть переоценка жизни, важное решение или шанс, который меняет положение дел. Уэйт подчёркивал: зов звучит извне, но ответ рождается внутри. Карта просит честно подвести итоги — без самобичевания, но и без иллюзий — и откликнуться на то, что давно зовёт вас.",
-     "en": "The Last Judgment is the card of awakening and reckoning. A chapter has ended, and you're being called to a new level: a life reassessment, a major decision, or a chance that changes your position. Waite stressed that the call comes from outside, but the answer rises from within. The card asks you to take honest stock — without self-blame, but without illusions — and to respond to what has been calling you for a long time.",
+     "ru": "Суд — карта пробуждения и итога. Прошлый этап завершён, и вас зовут на новый уровень: это может быть переоценка жизни, важное решение или шанс, который меняет положение дел. Уэйт подчёркивал: настоящий зов рождается внутри — труба лишь пробуждает то, что уже готово откликнуться. Карта просит честно подвести итоги — без самобичевания, но и без иллюзий — и откликнуться на то, что давно зовёт вас.",
+     "en": "The Last Judgment is the card of awakening and reckoning. A chapter has ended, and you're being called to a new level: a life reassessment, a major decision, or a chance that changes your position. Waite stressed that the true call sounds from within — the trumpet only wakes us to what is already there. The card asks you to take honest stock — without self-blame, but without illusions — and to respond to what has been calling you for a long time.",
      "status": "reviewed"
     },
     "reversed": {
@@ -2498,7 +2498,7 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня — день честных ответов. Закройте то, что давно висит: старый разговор, отложенное решение, неотправленное сообщение. Если внутри звучит зов попробовать что-то новое — не заглушайте его делами. Подведите итог дня вечером: что я понял(а) о себе?",
+     "ru": "Сегодня — день честных ответов. Закройте то, что давно висит: старый разговор, отложенное решение, неотправленное сообщение. Если внутри звучит зов попробовать что-то новое — не заглушайте его делами. Подведите итог дня вечером: что нового вы поняли о себе?",
      "en": "Today is a day for honest answers. Close what's been hanging over you: an old conversation, a postponed decision, an unsent message. If something inside is calling you to try the new — don't drown it out with busyness. At day's end, take stock: what did I learn about myself?",
      "status": "reviewed"
     },
@@ -2598,8 +2598,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви Мир — гармония и ощущение «мы дошли»: отношения, в которых оба чувствуют себя целыми. Для пар — новый виток: совместный переезд, свадьба, общие большие планы. Одиноким карта нередко обещает встречу в поездке или с человеком из другой среды.",
-     "en": "In love, the World is harmony and the feeling of 'we made it': a relationship where both people feel whole. For couples — a new turn: moving in together, marriage, big shared plans. If you're single, the card often promises a meeting while travelling or with someone from a different world.",
+     "ru": "В любви Мир — гармония и ощущение «мы дошли»: отношения, в которых оба чувствуют себя целыми. Для пар — новый виток: совместный переезд, свадьба, общие большие планы. Одиноким карта нередко указывает на встречу в поездке или с человеком из другой среды.",
+     "en": "In love, the World is harmony and the feeling of 'we made it': a relationship where both people feel whole. For couples — a new turn: moving in together, marriage, big shared plans. If you're single, the card often points to a meeting while travelling or with someone from a different world.",
      "status": "reviewed"
     },
     "career": {
