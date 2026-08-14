@@ -4,6 +4,7 @@ import {
   backupFileName,
   backupSummary,
   buildBackup,
+  parseBackup,
   PERSIST_DEFAULTS,
   SCHEMA_VERSION,
   type BackupState,
@@ -69,5 +70,74 @@ describe('имя файла и сводка', () => {
       streak: 5,
       dateISO: localDateISO(AT_DATE),
     });
+  });
+});
+
+const fileOf = (state: BackupState) => JSON.stringify(buildBackup(state, SCHEMA_VERSION, AT));
+
+describe('parseBackup — круговой (спека 11)', () => {
+  it('экспорт → импорт возвращает то же состояние', () => {
+    expect(parseBackup(fileOf(VALID), SCHEMA_VERSION)).toEqual({ ok: true, state: VALID, exportedAt: AT });
+  });
+});
+
+describe('parseBackup — отказы конверта', () => {
+  it.each([
+    ['не JSON', 'это не файл бэкапа'],
+    ['JSON без конверта', JSON.stringify({ hello: 1 })],
+    ['чужой kind', JSON.stringify({ app: 'arcanum', kind: 'export', schemaVersion: SCHEMA_VERSION, exportedAt: AT, state: {} })],
+    ['exportedAt не дата', JSON.stringify({ app: 'arcanum', kind: 'backup', schemaVersion: SCHEMA_VERSION, exportedAt: 'вчера', state: {} })],
+  ])('%s → notBackup', (_name, text) => {
+    expect(parseBackup(text, SCHEMA_VERSION)).toEqual({ ok: false, error: 'notBackup' });
+  });
+
+  it('schemaVersion новее текущей → newerVersion (схему из будущего не накатываем)', () => {
+    const f = { ...JSON.parse(fileOf(VALID)), schemaVersion: SCHEMA_VERSION + 1 };
+    expect(parseBackup(JSON.stringify(f), SCHEMA_VERSION)).toEqual({ ok: false, error: 'newerVersion' });
+  });
+});
+
+describe('parseBackup — доливка старых бэкапов (та же логика, что у гидрации persist)', () => {
+  it('бэкап без поздних ключей получает дефолты, настройки — через mergeSettings', () => {
+    const old = JSON.parse(fileOf(VALID));
+    delete old.state.xp;
+    delete old.state.freezes;
+    delete old.state.freezeMonth;
+    delete old.state.freezeSpentDate;
+    old.state.settings = { reflectionOn: false };
+    old.schemaVersion = 2;
+    const r = parseBackup(JSON.stringify(old), SCHEMA_VERSION);
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.state.xp).toBe(0);
+    expect(r.state.freezes).toBe(1);
+    expect(r.state.settings).toEqual({
+      reflectionOn: false, pushesOn: true, pushMorning: '09:00', pushEvening: '21:00', pushAsked: false,
+    });
+  });
+});
+
+describe('parseBackup — битые данные → corrupt (всё или ничего)', () => {
+  const broken = (patch: (s: Record<string, any>) => void) => {
+    const f = JSON.parse(fileOf(VALID));
+    patch(f.state);
+    return JSON.stringify(f);
+  };
+  it.each<[string, (s: Record<string, any>) => void]>([
+    ['дата записи не ISO', (s) => { s.history[0].date = '14.08.2026'; }],
+    ['неизвестная карта', (s) => { s.history[0].cardId = 'nope'; }],
+    ['reversed строкой', (s) => { s.history[0].reversed = 'yes'; }],
+    ['outcome вне тройки', (s) => { s.history[0].outcome = 'maybe'; }],
+    ['history длиннее лимита', (s) => {
+      s.history = Array.from({ length: 366 }, () => ({ date: '2026-01-01', cardId: 'fool', reversed: false }));
+    }],
+    ['streak строкой', (s) => { s.streak = '5'; }],
+    ['тема вне пары', (s) => { s.themeMode = 'blue'; }],
+    ['урок без done', (s) => { s.lessonsProgress = { m1l1: { errors: 0, ts: 1 } }; }],
+    ['profile без onboarded', (s) => { s.profile = { name: 'Аня' }; }],
+    ['настройки битых типов', (s) => { s.settings = { reflectionOn: 'да' }; }],
+    ['freezeMonth не YYYY-MM', (s) => { s.freezeMonth = 'август'; }],
+  ])('%s', (_name, patch) => {
+    expect(parseBackup(broken(patch), SCHEMA_VERSION)).toEqual({ ok: false, error: 'corrupt' });
   });
 });
