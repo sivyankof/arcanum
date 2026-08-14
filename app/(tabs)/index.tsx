@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   interpolate,
   ReduceMotion,
@@ -242,10 +243,19 @@ export default function TodayScreen() {
     glare.value = withDelay(GLARE_DELAY, sweepLoop(GLARE_MS, GLARE_PAUSE, EASE));
   }, [drawn, glare]);
 
-  // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона)
+  // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона).
+  // Хотфикс дефект 2 (спека 14): на время полноэкранного просмотра остановлено — иначе
+  // к посадке копии карты в лайтбоксе источник успевает сместиться покачиванием, и на экране
+  // на миг видны две карты со сдвигом. Заморозка ПЕРЕД замером происходит синхронно в onDraw
+  // (cancelAnimation до measureInWindow) — если положить её сюда, эффект сработал бы уже
+  // ПОСЛЕ замера (React перерисовывает по lbOrigin постфактум), а тут только перезапуск
   React.useEffect(() => {
+    if (lbOrigin !== null) {
+      cancelAnimation(bob);
+      return;
+    }
     bob.value = pingPong(-6, 2100);
-  }, [bob]);
+  }, [lbOrigin, bob]);
 
   const backStyle = useAnimatedStyle(() => ({
     transform: [
@@ -281,6 +291,10 @@ export default function TodayScreen() {
   const onDraw = () => {
     if (drawn) {
       // карта уже открыта — тап берёт её «в руки» (спека 14; до переворота тап открывает карту дня)
+      // хотфикс дефект 2: парение замирает СНАЧАЛА, замер — ПОТОМ (тот же приём, что у героя
+      // страницы карты) — иначе к посадке копии в лайтбоксе источник успеет сместиться
+      // покачиванием (см. эффект по lbOrigin ниже)
+      cancelAnimation(bob);
       sceneRef.current?.measureInWindow((x, y, w, h) => {
         lbOpenRef.current = true; // I6
         setLbCardId(card.id); // M2: фиксируем id на момент открытия
@@ -385,31 +399,36 @@ export default function TodayScreen() {
         <FadeUp index={3}>
         <Pressable onPress={onDraw} style={{ alignSelf: 'center', marginTop: spacing.xl }}>
           <View ref={sceneRef} collapsable={false} style={{ width: CARD_W, height: CARD_H }}>
-            {/* кольца позади карты */}
+            {/* кольца позади карты — на время просмотра НЕ прячутся (хотфикс дефект 2) */}
             <Ring size={RING_A} duration={70000} opacity={0.55} star="✦" starSize={8} />
             <Ring size={RING_B} duration={100000} reverse opacity={0.3} star="✧" starSize={6} />
-            {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
-            <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
-              <View style={[st.faceClip, { borderColor: t.frame }]}>
-                <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
-              </View>
-            </Animated.View>
-            {/* лицо */}
-            <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
-              <View style={[st.faceClip, { borderColor: t.frame }]}>
-                <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
-                {/* блик: проходит по лицу карты сразу после переворота */}
-                <Animated.View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }, glareStyle]}>
-                  <LinearGradient
-                    colors={GLARE_COLORS}
-                    locations={GLARE_LOCATIONS}
-                    start={GLARE_ANGLE.start}
-                    end={GLARE_ANGLE.end}
-                    style={StyleSheet.absoluteFill}
-                  />
-                </Animated.View>
-              </View>
-            </Animated.View>
+            {/* обе грани карты прячутся на время полноэкранного просмотра — копия летит
+                в лайтбоксе, живой источник (застывший, см. cancelAnimation выше) в это время
+                виден быть не должен (хотфикс дефект 2, спека 14) */}
+            <View style={[StyleSheet.absoluteFill, lbOrigin !== null && st.hidden]}>
+              {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
+              <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+                <View style={[st.faceClip, { borderColor: t.frame }]}>
+                  <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
+                </View>
+              </Animated.View>
+              {/* лицо */}
+              <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+                <View style={[st.faceClip, { borderColor: t.frame }]}>
+                  <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
+                  {/* блик: проходит по лицу карты сразу после переворота */}
+                  <Animated.View style={[StyleSheet.absoluteFill, { pointerEvents: 'none' }, glareStyle]}>
+                    <LinearGradient
+                      colors={GLARE_COLORS}
+                      locations={GLARE_LOCATIONS}
+                      start={GLARE_ANGLE.start}
+                      end={GLARE_ANGLE.end}
+                      style={StyleSheet.absoluteFill}
+                    />
+                  </Animated.View>
+                </View>
+              </Animated.View>
+            </View>
           </View>
           {/* салют поверх сцены; внутри Sparks стоит pointerEvents none, нажатию не мешает */}
           <Sparks
@@ -518,6 +537,8 @@ export default function TodayScreen() {
 }
 
 const st = StyleSheet.create({
+  // хотфикс дефект 2: прячет живые грани карты дня на время полноэкранного просмотра
+  hidden: { opacity: 0 },
   date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
   moon: { fontSize: 13, textAlign: 'center', marginTop: 12 },

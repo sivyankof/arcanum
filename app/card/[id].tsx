@@ -5,6 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   measure,
   ReduceMotion,
@@ -62,10 +63,12 @@ const SPHERES: { key: SphereKey; tabKey: string; blockKey: string }[] = [
 function HeroImage({
   cardId,
   origin,
+  hidden,
   onOpen,
 }: {
   cardId: string;
   origin: Rect | null;
+  hidden: boolean; // полноэкранный просмотр открыт — источник заморожен и спрятан (спека 14, хотфикс)
   onOpen: (r: Rect) => void;
 }) {
   const t = useTheme();
@@ -74,10 +77,6 @@ function HeroImage({
   // отдельный обычный ref для полноэкранного просмотра (спека 14): useAnimatedRef выше занят
   // перелётом из сетки, а measureInWindow нужен именно на живой позиции в момент тапа
   const heroRef = React.useRef<View>(null);
-  const openLightbox = () => {
-    // позиция меряется в момент тапа — карта «парит» ±8px, полёт стартует из живой позиции
-    heroRef.current?.measureInWindow((x, y, w, h) => onOpen({ x, y, w, h }));
-  };
 
   const progress = useSharedValue(origin ? 0 : 1); // 0 — в позиции ячейки, 1 — на своём месте
   const dx = useSharedValue(0);
@@ -86,20 +85,42 @@ function HeroImage({
   const shown = useSharedValue(origin ? 0 : 1); // до замера не показываем, иначе мигнёт на финальном месте
   const hover = useSharedValue(0); // парение героя (эталон .hero .im: hov 4.5s ease-in-out infinite)
 
-  // Парение стартует ПОСЛЕ «перелёта» из сетки (иначе смешается с ним и собьёт замер),
-  // а при обычном открытии карты — сразу
-  React.useEffect(() => {
-    hover.value = withDelay(
-      origin ? FLY_MS : 0,
-      withRepeat(
-        withSequence(
-          withTiming(-8, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
-          withTiming(0, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+  const openLightbox = () => {
+    // хотфикс дефект 2: парение замирает СНАЧАЛА, замер — ПОТОМ. Копия карты в лайтбоксе летит
+    // назад именно в эту, замеренную здесь позицию; если источник продолжит парить, к моменту
+    // посадки копии он сместится, и в конце полёта на экране на миг видны две карты со сдвигом
+    cancelAnimation(hover);
+    heroRef.current?.measureInWindow((x, y, w, h) => onOpen({ x, y, w, h }));
+  };
+
+  // Запуск/перезапуск цикла парения — общий код для монтирования и для закрытия просмотра
+  // (правило проекта «2+ раза → выносить»)
+  const startHover = React.useCallback(
+    (delayMs: number) => {
+      hover.value = withDelay(
+        delayMs,
+        withRepeat(
+          withSequence(
+            withTiming(-8, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+            withTiming(0, { duration: 2250, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+          ),
+          -1,
         ),
-        -1,
-      ),
-    );
-  }, [hover, origin]);
+      );
+    },
+    [hover],
+  );
+
+  // Парение стартует ПОСЛЕ «перелёта» из сетки при монтировании (иначе смешается с ним
+  // и собьёт замер), при обычном открытии карты — сразу; на время полноэкранного просмотра
+  // остановлено (cancelAnimation в openLightbox выше, ДО замера) и перезапускается, когда
+  // просмотр закрылся (hidden: true → false)
+  const everStarted = React.useRef(false);
+  React.useEffect(() => {
+    if (hidden) return; // уже заморожено синхронно в openLightbox
+    startHover(everStarted.current ? 0 : origin ? FLY_MS : 0);
+    everStarted.current = true;
+  }, [hidden, origin, startHover]);
 
   const onLayout = () => {
     if (!origin) return;
@@ -142,16 +163,22 @@ function HeroImage({
         accessibilityRole="imagebutton"
         accessibilityLabel={tr('card.viewerOpen')}
       >
-        {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
-        <Animated.View
-          ref={ref}
-          onLayout={onLayout}
-          style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
-        >
-          <View style={[st.imClip, { borderColor: t.frame }]}>
-            <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
-          </View>
-        </Animated.View>
+        {/* хотфикс дефект 2: на время просмотра источник прячется отдельной обёрткой-View,
+            а не полем fly-стиля — opacity внутри анимированного стиля уже занята значением
+            shown, и порядок слияния animated- и plain-стилей по одному ключу в одном массиве
+            не гарантирован. Копия карты в этот момент летит в модалке (CardLightbox) */}
+        <View style={hidden ? st.hidden : undefined}>
+          {/* тень и обрезка — на разных View: на iOS overflow:'hidden' срезает собственную тень */}
+          <Animated.View
+            ref={ref}
+            onLayout={onLayout}
+            style={[st.imShadow, { boxShadow: `0px 18px 40px ${t.glow}`, backgroundColor: t.bg }, fly]}
+          >
+            <View style={[st.imClip, { borderColor: t.frame }]}>
+              <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
+            </View>
+          </Animated.View>
+        </View>
       </Pressable>
     </View>
   );
@@ -267,10 +294,10 @@ export default function CardDetail() {
       >
         <View style={st.hero}>
           {origin ? (
-            <HeroImage cardId={card.id} origin={origin} onOpen={setLbOrigin} />
+            <HeroImage cardId={card.id} origin={origin} hidden={lbOrigin !== null} onOpen={setLbOrigin} />
           ) : (
             <FadeUp index={0}>
-              <HeroImage cardId={card.id} origin={null} onOpen={setLbOrigin} />
+              <HeroImage cardId={card.id} origin={null} hidden={lbOrigin !== null} onOpen={setLbOrigin} />
             </FadeUp>
           )}
           <FadeUp index={0} style={{ flex: 1 }}>
@@ -367,6 +394,8 @@ export default function CardDetail() {
 
 const st = StyleSheet.create({
   hero: { flexDirection: 'row', gap: spacing.l, alignItems: 'flex-start' },
+  // хотфикс дефект 2: прячет живой источник на время полноэкранного просмотра
+  hidden: { opacity: 0 },
   // виньетка = тёплое свечение вокруг карты; в эталоне `.hero .im`: box-shadow 0 18px 40px var(--glow).
   // Значение берём напрямую из CSS макета — boxShadow принимает ту же синтаксическую форму
   imShadow: {
