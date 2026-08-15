@@ -3,12 +3,12 @@
 import { cardById, course } from '../content';
 
 const lessons = course
-  .filter((m) => ['m1', 'm2', 'm3', 'm4', 'm5'].includes(m.id))
+  .filter((m) => ['m1', 'm2', 'm3', 'm4', 'm5', 'm6'].includes(m.id))
   .flatMap((m) => m.lessons);
 
-describe('контракт викторин М1–М5 (course.json)', () => {
-  it('М1–М5 — это 28 уроков', () => {
-    expect(lessons).toHaveLength(28);
+describe('контракт викторин М1–М6 (course.json)', () => {
+  it('М1–М6 — это 32 урока', () => {
+    expect(lessons).toHaveLength(32);
   });
 
   it.each(lessons.map((l) => [l.id, l] as const))('%s: теория заполнена на обоих языках', (_id, l) => {
@@ -46,4 +46,21 @@ describe('контракт викторин М1–М5 (course.json)', () => {
       expect(new Set(l.quiz!.map((q) => q.correct)).size).toBeGreaterThan(1);
     }
   });
+
+  // Верный ответ не должен угадываться по длине (задача 29): считаем single-вопросы, где верный
+  // вариант строго длиннее обоих неверных (по ru); порог — не больше 2 из 5 в уроке.
+  // card-вопросы вне правила: их варианты — имена карт, длину им не подобрать.
+  it.each(lessons.map((l) => [l.id, l] as const))(
+    '%s: верный вариант — самый длинный не более чем в 2 вопросах',
+    (_id, l) => {
+      const longest = l
+        .quiz!.filter((q) => q.type === 'single')
+        .filter((q) => {
+          const lens = q.options.map((o) => o.ru.length);
+          const max = Math.max(...lens);
+          return lens[q.correct] === max && lens.filter((n) => n === max).length === 1;
+        }).length;
+      expect(longest).toBeLessThanOrEqual(2);
+    },
+  );
 });

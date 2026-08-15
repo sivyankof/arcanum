@@ -4293,7 +4293,140 @@
       "ru": "Карта дня в приложении всегда приходит прямой — так задумано: сначала стоит крепко выучить прямые значения, прежде чем добавлять к ним ещё один слой смысла. А вот в раскладах карты ложатся как лягут, и рано или поздно вам попадётся перевёрнутая. Разберёмся, что с ней делать.\n\nПеревёрнутая карта — не «плохая» версия и не значение наоборот. Это та же самая энергия, только с ней что-то случилось: она застряла, перегнулась через край или ушла внутрь, спряталась. Поэтому читать перевёрнутую карту стоит в два шага: сначала назовите прямое значение своими словами, а потом спросите — что с ним произошло?\n\nВозьмём Дурака. Прямое значение — доверие к жизни и шаг в неизвестность. Перевёрнутый Дурак застревает на краю: шаг напрашивается, а человек стоит и не идёт, потому что боится оступиться. Иногда застревание работает наоборот: шагают не глядя, не отличая смелость от безрассудства.\n\nПаж Жезлов прямой — искра нового интереса: любопытство, первый импульс, готовность пробовать. Перевёрнутый — тот же интерес, но он не дошёл до конца: вспыхнули и остыли, начали и бросили, пообещали и не сделали. Энергия была настоящей, просто ей не хватило продолжения — карта как будто оборвалась на полуслове.\n\nКоролева Мечей прямая — ясный ум и честность без уклончивости: она называет вещи своими именами, но делает это с теплом. Перевёрнутая — та же ясность, только ушедшая внутрь и застывшая: холодность как броня, сарказм вместо разговора, дистанция там, где раньше была прямота. Сила прежняя, просто спряталась за стеной.\n\nЕсть и трудные случаи — например, перевёрнутая Башня. Прямая Башня рушит иллюзии сразу и без предупреждения; перевёрнутая — тот же кризис, только отложенный: трещины уже видны, но признать их страшно, а держать разваливающееся обычно тяжелее, чем его отпустить. Иногда ответ на вопрос «что случилось» другой: энергия отпускает — худшее позади. Так же читается перевёрнутая Луна: туман рассеивается.\n\nПопробуйте сегодня: возьмите любую карту из справочника приложения, откройте её блок «Перевёрнутая» и назовите своими словами, что случилось с энергией карты. Одной фразы достаточно: упражнение учит слышать перевёрнутые карты, а не бояться их.",
       "en": "In the app, the card of the day always arrives upright — that's by design: it's worth learning the upright meanings solidly before adding another layer of meaning on top. In spreads, though, cards fall however they fall, and sooner or later you'll draw a reversed one. Let's work out what to do with it.\n\nA reversed card isn't a 'bad' version of the card, and it isn't the meaning in reverse. It's the very same energy — only something has happened to it: it's got stuck, bent past its limit, or turned inward and hidden. So read a reversed card in two steps: first name the upright meaning in your own words, then ask — what happened to it?\n\nTake the Fool. Upright, it's trust in life and a step into the unknown. Reversed, the Fool gets stuck at the edge: the step is calling, but the person stands still, afraid of stumbling. Sometimes it runs the other way: someone leaps without looking, unable to tell courage from recklessness.\n\nThe Page of Wands upright is the spark of a new interest: curiosity, a first impulse, readiness to try. Reversed, it's the same interest that never reached the end: you flare up and cool down, start and abandon, promise and don't deliver. The energy was real — it just ran out of follow-through, as if the card broke off mid-sentence.\n\nThe Queen of Swords upright is a clear mind and honesty without evasion: she calls things by their names, but does it with warmth. Reversed, it's the same clarity, only turned inward and frozen: coldness worn as armour, sarcasm instead of conversation, distance where there used to be plain speech. The strength hasn't gone anywhere — it's just hiding behind a wall.\n\nSome cases are harder — the reversed Tower, for instance. Upright, the Tower shatters illusions at once, without warning; reversed, it's the same crisis, only postponed: the cracks already show, but admitting them feels frightening, and holding up what's collapsing usually costs more energy than letting it go. Sometimes the answer to 'what happened' is different: the energy lets go — the worst is already past. The reversed Moon reads this way too: the fog is lifting.\n\nTry this today: pick any card from the app's reference section, open its 'Reversed' block, and put into your own words what happened to the card's energy. One sentence is enough: the exercise trains you to listen to reversed cards, not fear them.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что вернее всего описывает перевёрнутую карту?",
+        "en": "Which of these best describes a reversed card?"
+       },
+       "options": [
+        {
+         "ru": "Полная противоположность прямого значения той же карты",
+         "en": "The complete opposite of the same card's upright meaning"
+        },
+        {
+         "ru": "Та же энергия карты, которой что-то помешало течь свободно",
+         "en": "The same card energy, just blocked from flowing freely"
+        },
+        {
+         "ru": "Отдельная карта с собственным, никак не связанным значением",
+         "en": "A separate card with a meaning of its own, unrelated to the upright one"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Перевёрнутое положение не отменяет значение карты и не меняет его на противоположное — оно показывает, что энергия карты застряла, перегнулась или ушла внутрь.",
+        "en": "A reversed position doesn't cancel a card's meaning or flip it into its opposite — it shows that the card's energy has got stuck, bent, or turned inward."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "С чего лучше начать чтение перевёрнутой карты?",
+        "en": "What's the best way to start reading a reversed card?"
+       },
+       "options": [
+        {
+         "ru": "Назвать прямое значение карты, а потом спросить: что с ним случилось",
+         "en": "Name the card's upright meaning, then ask what happened to it"
+        },
+        {
+         "ru": "Сразу искать значение в перевёрнутом виде, минуя прямое",
+         "en": "Look straight for the reversed meaning, skipping the upright one"
+        },
+        {
+         "ru": "Сравнить её с соседними картами расклада и забыть про прямое значение",
+         "en": "Compare it with the neighbouring cards in the spread and forget the upright meaning"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Прямое значение — это язык карты; спросив, что с ним случилось, вы переводите его на перевёрнутый лад, а не гадаете заново.",
+        "en": "The upright meaning is the card's language; asking what happened to it translates that language into the reversed key, instead of guessing from scratch."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Паж Жезлов выпал перевёрнутым. Какой из трёх случаев урока это описывает?",
+        "en": "The Page of Wands turns up reversed. Which of the lesson's three cases is this?"
+       },
+       "options": [
+        {
+         "ru": "Ушла внутрь: энергия спряталась и превратилась в холодность",
+         "en": "Turned inward: the energy hid and turned into coldness"
+        },
+        {
+         "ru": "Застряла: шаг напрашивается, а человек стоит на месте",
+         "en": "Got stuck: the step is calling, but the person stands still"
+        },
+        {
+         "ru": "Перегнула через край: интерес вспыхнул и погас, не дойдя до дела",
+         "en": "Bent past its limit: the interest flared up and faded before it led anywhere"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "У Пажа Жезлов энергия настоящая, просто ей не хватило продолжения — вспышка без второго дыхания.",
+        "en": "The Page of Wands' energy is real — it simply runs out of follow-through, a flare with no second wind."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Как в уроке объясняется перевёрнутая Королева Мечей?",
+        "en": "How does the lesson explain the reversed Queen of Swords?"
+       },
+       "options": [
+        {
+         "ru": "Как ясность, ушедшую внутрь и застывшую в холодность и броню",
+         "en": "As clarity that has turned inward and frozen into coldness and armour"
+        },
+        {
+         "ru": "Как противоположность честности — склонность обманывать",
+         "en": "As the opposite of honesty — a tendency to deceive"
+        },
+        {
+         "ru": "Как знак того, что рядом скоро появится лживый человек",
+         "en": "As a sign that a deceitful person is about to appear nearby"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Острый ум Королевы Мечей никуда не делся: перевёрнутая карта показывает, что он спрятался за стеной вместо разговора.",
+        "en": "The Queen of Swords' sharp mind hasn't gone anywhere: reversed, it shows that mind hiding behind a wall instead of a conversation."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "О чём говорит перевёрнутая Башня, если читать её честно?",
+        "en": "What does the reversed Tower honestly point to?"
+       },
+       "options": [
+        {
+         "ru": "Кризис уже точно не наступит, можно расслабиться",
+         "en": "The crisis definitely won't happen now, so you can relax"
+        },
+        {
+         "ru": "Трудность полностью выдумана и никакого кризиса на самом деле нет",
+         "en": "The difficulty is entirely imaginary, and there's no real crisis at all"
+        },
+        {
+         "ru": "Кризис откладывается: трещины видны, но признать их страшно",
+         "en": "The crisis is being postponed: the cracks already show, but admitting them feels frightening"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Честное чтение не сглаживает трудность и не пугает исходом — оно называет то, что уже происходит, и напоминает: держать рушащееся тяжелее, чем отпустить.",
+        "en": "An honest reading neither softens the difficulty nor frightens with an outcome — it names what's already happening and notes that holding up what's collapsing is harder than letting go."
+       }
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m6l2",
@@ -4306,7 +4439,141 @@
       "ru": "В модуле о Старших арканах вы уже соединяли две карты союзом — «потому что», «но», «чтобы» — и получали фразу. У таких фраз есть несколько узнаваемых типов связок: зная их, вы увидите в паре не случайное соседство, а понятную структуру.\n\nПервый тип — пара одной масти: две карты одной стихии, разных чисел, продолжают один сюжет. Двойка Кубков — встреча двух сердец, чувство только родилось. Шестёрка Кубков — уже не встреча, а память о ней: тепло детства, старой дружбы. Рядом карты читаются как путь чувства во времени: «было живое притяжение, а теперь осталась тёплая память» — или наоборот, если Шестёрка выпала раньше: «ностальгия привела к новой встрече».\n\nВторой тип — старший и младший вместе: старший задаёт тему, младший показывает, как она проживается. Отшельник и Восьмёрка Мечей выглядят похоже снаружи и противоположно изнутри: Отшельник уходит от шума осознанно, а Восьмёрка — про путы, которые держатся слабо: ловушка живёт в тревожных мыслях, а не в обстоятельствах. Императрица и Тройка Пентаклей звучат мягче: расцвет, которому дали созреть, оборачивается мастерством и трудом, который замечают.\n\nТретий тип — придворная карта рядом с числовой: придворная отвечает «кто», числовая — «что». Рыцарь Жезлов и Тройка Пентаклей вместе: «кто-то порывистый включается в дело, где ценят мастерство» — либо, если карта про вас, это ваша роль: смелый старт, доведённый до умения. Решайте по вопросу: про отношения с кем-то — человек, про решение — роль.\n\nЧетвёртый тип — когда карты тянут в разные стороны. Двойка Кубков — союз и желание остаться; Рыцарь Жезлов — рывок и нетерпение к переменам. Рядом они спорят: держаться или двигаться? Ответ редко «одна отменяет другую» — чаще «и то и другое, по очереди»: сначала побыть в союзе, а потом решиться на шаг.\n\nПопробуйте сегодня: вытяните две случайные карты — из своей колоды или два случайных открытия в справочнике приложения — и определите тип связки. Свяжите пару одним союзом: «потому что», «но» или «а потом». Запишите фразу в заметку к карте дня.",
       "en": "Back in the Major Arcana module you joined two cards with a connector — \"because\", \"but\", \"in order to\" — and got a sentence. Such sentences fall into a few recognisable types of combination: once you know them, a pair reads as a clear structure, not a random neighbour.\n\nThe first type is a same-suit pair: two cards of one element, different numbers, continuing one story. The Two of Cups is two hearts meeting, a feeling just born. The Six of Cups isn't a meeting anymore — it's the memory of one: the warmth of childhood, an old friendship. Together they trace a feeling's path through time: \"there was a living connection, and now what remains is its warm memory\" — or, if the Six comes first, \"nostalgia led to a new meeting.\"\n\nThe second type pairs a Major with a Minor: the Major sets the theme, the Minor shows how it plays out. The Hermit and the Eight of Swords look alike from outside and opposite from within: the Hermit steps away from the noise on purpose, while the Eight is about bindings that hold loosely — the trap lives in anxious thoughts, not in circumstances. The Empress and the Three of Pentacles read more gently: a blossoming given time to ripen turns into craftsmanship and shared work that gets noticed.\n\nThe third type sets a court card beside a number card: the court card answers \"who\", the number card answers \"what\". The Knight of Wands and the Three of Pentacles together: \"someone impulsive joins a shared effort where skill is valued\" — or, if the card is about you, it's your own role: a bold start carried through to real craft. Let the question decide: about someone — a person; about your own choice — a role.\n\nThe fourth type is a pull in opposite directions. The Two of Cups is union and the wish to stay; the Knight of Wands is a leap, impatience with staying put. Side by side they argue: hold on, or move? The answer is rarely \"one cancels the other\" — more often \"both, in their turn\": first stay within the bond, then take the step.\n\nTry this today: draw two random cards — from your own deck, or two random openings in the app's card catalogue — and decide which type of pair they form. Join them with one connector: \"because\", \"but\" or \"in order to\". Write the sentence in your card-of-the-day note.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Двойка и Шестёрка Кубков стоят рядом в раскладе. Что связывает эту пару?",
+        "en": "The Two and the Six of Cups fall next to each other. What connects this pair?"
+       },
+       "options": [
+        {
+         "ru": "Одна стихия, разные числа: пара показывает, как чувство меняется во времени",
+         "en": "One element, different numbers: the pair traces how a feeling changes over time"
+        },
+        {
+         "ru": "Ничего особенного — карты одной масти в любом раскладе всегда рассказывают разные, никак не связанные между собой истории",
+         "en": "Nothing in particular — cards of the same suit in any spread always tell entirely separate, unrelated stories"
+        },
+        {
+         "ru": "Карты спорят между собой: одна про начало отношений, другая — про их разрыв",
+         "en": "The cards argue with each other: one is about a new relationship, the other about its end"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Одна стихия и разные числа складываются в сюжет: карты одной масти часто показывают, как одна история меняется во времени.",
+        "en": "One element with different numbers adds up to a story: cards of the same suit often show how one situation changes over time."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В паре «старший + младший» какую роль обычно играет старший аркан?",
+        "en": "In a Major-and-Minor pair, what role does the Major card usually play?"
+       },
+       "options": [
+        {
+         "ru": "Полностью описывает ситуацию сам, а младший аркан только уточняет дату события",
+         "en": "It fully describes the situation on its own, and the Minor card only pins down a date"
+        },
+        {
+         "ru": "Отменяет значение младшего аркана, если они противоречат друг другу",
+         "en": "It cancels the Minor card's meaning whenever the two disagree"
+        },
+        {
+         "ru": "Задаёт общую тему, а младший аркан показывает, как именно она проживается в конкретной ситуации",
+         "en": "It sets the overall theme, while the Minor card shows how that theme actually plays out"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Старший аркан держит общую тему, а числовая карта конкретизирует её — так и работает пара «старший + младший».",
+        "en": "The Major card holds the overall theme, and the number card makes it concrete — that's how a Major-and-Minor pair works."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Отшельник и Восьмёрка Мечей внешне похожи — обе карты про уединение. В чём разница между ними?",
+        "en": "The Hermit and the Eight of Swords look alike on the surface — both are about being alone. What's the difference between them?"
+       },
+       "options": [
+        {
+         "ru": "Разницы нет совершенно никакой: обе карты в любом раскладе значат ровно одно и то же — нужно немедленно попросить о помощи",
+         "en": "There's no difference at all: in any spread both cards mean the same thing — you must ask for help immediately"
+        },
+        {
+         "ru": "Отшельник уходит от шума осознанно; Восьмёрка — ловушка, которую держат тревожные мысли, а не обстоятельства",
+         "en": "The Hermit steps away from the noise on purpose; the Eight is a trap held by anxious thoughts, not by circumstances"
+        },
+        {
+         "ru": "Отшельник всегда про человека рядом, а Восьмёрка Мечей — всегда про вашу собственную роль",
+         "en": "The Hermit is always about someone nearby, and the Eight of Swords is always about your own role"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Похожие снаружи карты могут значить противоположное изнутри: у Отшельника уединение выбрано, у Восьмёрки Мечей — это ловушка мыслей.",
+        "en": "Cards that look alike can mean opposite things underneath: the Hermit's solitude is chosen, the Eight of Swords is a trap made of anxious thoughts."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Рыцарь Жезлов оказался рядом с Тройкой Пентаклей. На какой вопрос отвечает каждая карта?",
+        "en": "The Knight of Wands turns up beside the Three of Pentacles. Which question does each card answer?"
+       },
+       "options": [
+        {
+         "ru": "Придворная карта — на вопрос «кто», числовая — на вопрос «что»: кто-то порывистый включается в общее дело, где ценят мастерство",
+         "en": "The court card answers 'who', the number card answers 'what': someone impulsive joins a shared effort where skill is valued"
+        },
+        {
+         "ru": "Обе карты отвечают на один и тот же вопрос «когда», поэтому пару читают как точную дату события",
+         "en": "Both cards answer the same question, 'when', so the pair is read as an exact date"
+        },
+        {
+         "ru": "Придворная карта отвечает на вопрос «что», а числовая — на вопрос «кто», в этом и заключается их связка",
+         "en": "The court card answers 'what' and the number card answers 'who' — that's the whole point of the combination"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Придворная карта подсказывает «кто», числовая — «что»: вместе они складывают персонажа и его дело.",
+        "en": "The court card points to 'who', the number card to 'what' — together they sketch a character and their task."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Эта карта выпала рядом с Рыцарем Жезлов. Как лучше прочитать пару?",
+        "en": "This card turns up beside the Knight of Wands. What's the best way to read the pair?"
+       },
+       "options": [
+        {
+         "ru": "Одна карта отменяет другую, поэтому расклад нужно перетасовать заново",
+         "en": "One card cancels the other, so the spread needs to be reshuffled"
+        },
+        {
+         "ru": "Карта Кубков полностью нейтрализует Рыцаря: спешить точно не стоит",
+         "en": "The Cups card fully neutralises the Knight: there's certainly no need to hurry"
+        },
+        {
+         "ru": "Обе карты правдивы одновременно: сначала бережно побыть в союзе, а потом действовать решительно, не разрушая то, что было настоящим",
+         "en": "Both are true at once: first stay gently within the bond, then act decisively, without breaking what was real"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Спор карт редко решается в пользу одной: чаще обе стороны верны по очереди, а не взаимоисключают друг друга.",
+        "en": "A disagreement between cards is rarely settled in favour of just one: more often both sides hold true, each in its turn."
+       },
+       "cardId": "c02"
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m6l3",
@@ -4319,7 +4586,141 @@
       "ru": "Вы уже знаете карты и умеете наводить между ними мостики. Сегодня соберём это в расклад «Три карты» из приложения: позиции «Прошлое», «Настоящее», «Будущее». Классика для любого вопроса — как ситуация развивалась, где она сейчас и куда движется, если ничего не менять. Разберём весь путь от вопроса до вывода на примере.\n\nНачните с вопроса — и произнесите его вслух, а не только в уме. Слабый вопрос — «да или нет»: он сужает расклад до монетки. Хороший вопрос открывает пространство: «что мне важно понять про эти отношения», «что стоит за моей усталостью на работе». Чем честнее вопрос, тем честнее выйдет ответ.\n\nДальше перетасуйте карты, ничего не ожидая, и откройте три по одной, называя прямое значение каждой. Полезно сначала пробежаться взглядом по всем трём — поймать общее впечатление, — а потом читать подробно. Главное впереди: наведите мостики между картами через «потому что», «чтобы», «но» — только так слова превращаются в рассказ.\n\nЕсть четыре правила из первоисточника этой колоды — книги, вышедшей вместе с ней в 1911 году. Первое: формулируйте вопрос ясно и вслух. Второе: во время тасовки старайтесь ни о чём не думать. Третье: отложите личные ожидания — иначе трактовка окрасится ими. Четвёртое: для постороннего читать легче, чем для себя или друга.\n\nОтсюда и правило этики: для других мы читаем только по их просьбе. А для себя особенно важна как раз третья мысль — заметить, чего вы ждёте услышать от расклада, и отложить это в сторону, прежде чем открывать карты.\n\nДопустим, вопрос: «что мне важно понять про эту рабочую нагрузку». Прошлое — Пятёрка Пентаклей: период нехватки, не на кого рассчитывать. Настоящее — Сила: вы справляетесь не рывком, а терпением, мягкостью вместо давления. Будущее — Шестёрка Кубков: движение к тёплому периоду при том же темпе. Мостик: «раньше получалось справиться и без опоры — значит, получится и сейчас, спокойно, а потом станет легче дышать».\n\nПопробуйте сегодня: сделайте свой первый расклад по этой схеме — на своей колоде или на трёх случайных картах из справочника приложения. Произнесите вопрос вслух, откройте три карты по очереди, наведите между ними мостик и запишите вывод в 2–3 предложения — в дневник приложения или на бумаге.",
       "en": "You already know individual cards and how to build bridges between them. Today we bring that together in the Three Cards spread from the app: the positions are Past, Present, Future. A classic for any question — how the situation arose, where it stands now, and where it's heading if nothing changes. Let's walk the whole path, from question to conclusion, through one example.\n\nStart with your question — and say it aloud, not just in your head. A weak question is a yes-or-no one: it narrows the spread down to a coin toss. A good question opens space: 'what do I need to understand about this relationship', 'what's behind my tiredness at work'. The more honest the question, the more honest the answer.\n\nNext, shuffle without expecting an outcome, then turn the three cards over one by one, naming the upright meaning of each. It helps to glance quickly across all three first, catching a general impression, and only then read them in detail. The real work comes next: build bridges between the cards with 'because', 'in order to', 'but' — only then do the words become a story.\n\nThere are four practical rules from the source this deck came with — the book published alongside it in 1911. First: phrase your question clearly and aloud. Second: keep your mind fairly blank while shuffling. Third: set aside personal bias, or your reading will be coloured by it. Fourth: it's easier to read correctly for a stranger than for yourself or a friend.\n\nHence the ethics rule: we read for others only at their request. And for ourselves, the third point matters most of all — notice what you're hoping to hear from the spread, and set it aside before you turn over a single card.\n\nSay the question is: 'what do I need to understand about this workload'. Past — the Five of Pentacles: a stretch of scarcity, no one to rely on. Present — Fortitude: managing through patience, gentleness instead of pressure. Future — the Six of Cups: heading toward something warmer, same steady pace. The bridge: 'I got through it alone, so I can hold this calmly too — and it will feel lighter again'.\n\nTry this today: make your own first spread using this pattern — your own deck, or three random cards from the app's reference. Say your question aloud, turn the three cards over in order, build a bridge between them, and write your conclusion in two or three sentences — in the app's journal, or on paper.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что означает позиция «Будущее» в раскладе «Три карты»?",
+        "en": "What does the 'Future' position mean in the Three Cards spread?"
+       },
+       "options": [
+        {
+         "ru": "Направление, куда движется ситуация, если ничего не менять",
+         "en": "The direction the situation is heading, if nothing changes"
+        },
+        {
+         "ru": "Точную дату, когда произойдёт событие",
+         "en": "The exact date when the event will happen"
+        },
+        {
+         "ru": "Список дел, которые нужно закрыть сегодня",
+         "en": "A list of tasks to finish today"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "«Будущее» показывает тенденцию при текущем курсе, а не готовый исход — этим рефлексия и отличается от предсказания.",
+        "en": "'Future' shows a trend under the current course, not a finished outcome — that's what separates reflection from prediction."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Какой из этих вопросов подходит для расклада лучше всего?",
+        "en": "Which of these questions suits the spread best?"
+       },
+       "options": [
+        {
+         "ru": "Уйдёт ли он от жены?",
+         "en": "Will he leave his wife?"
+        },
+        {
+         "ru": "Когда я наконец разбогатею?",
+         "en": "When will I finally get rich?"
+        },
+        {
+         "ru": "Что мне важно понять про эти отношения?",
+         "en": "What do I need to understand about this relationship?"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Открытый вопрос оставляет пространство для смысла, а закрытый сводит расклад к «да» или «нет».",
+        "en": "An open question leaves room for meaning; a closed one reduces the spread to a coin toss."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что помогает связать три карты в единый рассказ, а не оставить их тремя отдельными словами?",
+        "en": "What helps connect the three cards into one story instead of leaving them as separate words?"
+       },
+       "options": [
+        {
+         "ru": "Подсчёт числовых значений всех трёх карт",
+         "en": "Adding up the numeric value of all three cards"
+        },
+        {
+         "ru": "Мостик через союзы «потому что», «чтобы», «но»",
+         "en": "A bridge built with connectors like 'because', 'in order to', 'but'"
+        },
+        {
+         "ru": "Чтение карт в обратном порядке, от «Будущего» к «Прошлому»",
+         "en": "Reading the cards backwards, from 'Future' to 'Past'"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Союз превращает три отдельных значения в одну фразу — приём уже знаком по прошлому занятию.",
+        "en": "A connector turns three separate meanings into a single sentence — a technique already familiar from the last lesson."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Почему первоисточник колоды называет чтение для постороннего более лёгким, чем для себя?",
+        "en": "Why does the deck's original source call reading for a stranger easier than reading for yourself?"
+       },
+       "options": [
+        {
+         "ru": "Потому что для постороннего разрешено вытягивать больше карт",
+         "en": "Because more cards are allowed in a reading done for a stranger"
+        },
+        {
+         "ru": "Потому что для себя расклад «Три карты» вообще не подходит",
+         "en": "Because the Three Cards spread doesn't work for reading about yourself"
+        },
+        {
+         "ru": "Потому что для себя мешают личные ожидания и предубеждения",
+         "en": "Because personal expectations and bias get in the way when it's about you"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Личная заинтересованность окрашивает трактовку — для других мы поэтому читаем только по их просьбе, а для себя особенно бережны к предубеждениям.",
+        "en": "Personal stakes colour the reading — that's why we read for others only at their request, and for ourselves stay especially careful with bias."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "В позиции «Настоящее» выпала эта карта — что она подсказывает?",
+        "en": "This card turned up in the 'Present' position — what does it suggest?"
+       },
+       "options": [
+        {
+         "ru": "Внутреннего ресурса хватит, чтобы справиться мягко — терпением, а не напором",
+         "en": "You have enough inner resource to handle this gently — with patience, not force"
+        },
+        {
+         "ru": "Ситуация требует физической силы: нужно надавить решительнее",
+         "en": "The situation calls for physical strength: push harder and more decisively"
+        },
+        {
+         "ru": "Уже через неделю всё разрешится само собой, вмешиваться не нужно",
+         "en": "Everything will resolve on its own within a week — no need to act"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Карта говорит о мягкой смелости — приручить тревогу терпением, а не бороться с ней в лоб; конкретных сроков она не называет.",
+        "en": "The card speaks of gentle courage — taming the worry through patience rather than fighting it head-on; it names no specific timeline."
+       },
+       "cardId": "strength"
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m6l4",
@@ -4332,7 +4733,141 @@
       "ru": "Позади весь курс: Старшие и Младшие арканы, придворные карты, связки, перевёрнутые значения, первый расклад из трёх карт. Последний урок — не новая тема, а два чтения целиком, от вопроса до вывода, на гипотетических примерах: представьте, что кто-то задал такой вопрос.\n\nВопрос: «Что происходит с проектом, который завис уже который месяц, и куда двигаться дальше?» Раскладываем «Три карты»: «Прошлое» — Тройка Жезлов, «Настоящее» — перевёрнутая Луна, «Будущее» — Солнце. Общий взгляд сразу подсказывает: тревожная карта зажата между уверенным стартом и ясным финалом.\n\nТройка Жезлов в «Прошлом»: усилия были настоящими, а не наивной затеей — корабли уже в море, первые результаты в пути. В «Настоящем» — перевёрнутая Луна. Сначала прямое значение: Луна — неясность, факты скрыты, а воображение достраивает картину страхами.\n\nПо методу перевёрнутых спрашиваем, что случилось с этой энергией: туман рассеивается — застревание было временным, скрытое выходит на свет. В «Будущем» — Солнце, лёгкость, которая приходит естественно. Но это не обещание даты: «Будущее» — направление, а не готовый исход.\n\nВторой пример короче: карта дня — Королева Мечей, вопрос — как провести непростой разговор сегодня. Соблазн прочитать её как «рядом появится решительная женщина» — но карта дня всегда про вас. Как ваша роль она советует: назвать вещи своими именами, говорить прямо и обозначить границу.\n\nЗдесь чаще всего ошибаются: читают карты по одной, забыв мостик, — выходит список слов, а не история; теряют по дороге вопрос; предсказывают вместо того, чтобы наблюдать; видят в придворной только человека; тасуют снова, пока не выпадет ответ по душе — а правило: один вопрос, один расклад.\n\nКурс закончен, но чтение только начинается. Открывайте карту дня, пишите заметку — дневник хранит память о том, как вы менялись. Возвращайтесь в справочник из 78 карт и на страницы карт, которые хочется понять глубже. Урок стёрся из памяти — перечитайте его.\n\nПопробуйте сегодня: откройте свою первую запись в дневнике — или сделайте её прямо сейчас, если ещё не начинали. Найдите там карту, которую сегодня прочитали бы иначе, и допишите новую строку рядом со старой.",
       "en": "The whole course is behind you: the Major and Minor Arcana, court cards, combinations, reversed meanings, your first three-card spread. The last lesson isn't a new topic — it's two full readings, question to conclusion, on hypothetical examples: imagine someone asked this question.\n\nThe question: 'What's happening with the project that's stalled for months, and where is it heading?' You lay out Three Cards: Past holds the Three of Wands, Present the reversed Moon, Future the Sun. One glance already hints: the unsettled card sits between a confident start and a clear finish.\n\nThe Three of Wands in Past: the effort was real, not a naive leap — ships already at sea, early results on the way. In Present sits the reversed Moon. First, the upright meaning: the Moon is uncertainty, facts hidden, imagination filling the gaps with fear.\n\nNow, following the reversed-card method, ask what happened to that energy. The reversed passage answers: the fog is lifting — the stuck feeling was temporary, hidden things are surfacing. In Future sits the Sun: ease that arrives naturally. But it's no promised date — the Future position shows direction, not a finished outcome.\n\nThe second example is shorter: the card of the day is the Queen of Swords, alongside the question of handling a difficult conversation today. Tempting to read her as 'a decisive woman is about to show up' — but the card of the day is always about you. As your own role, she advises: call things by their names, speak plainly, set a boundary.\n\nThis is where mistakes happen most. Reading cards one at a time, without a bridge between them, turns a story into a list of words. Losing the question along the way and just describing pictures. Predicting instead of observing. Seeing a court card only as a person, forgetting the role. And reshuffling until an answer you like turns up — though the rule was one question, one spread.\n\nThe course is over, but reading is only beginning. Open the card of the day, write a note — the journal holds the record of how you've grown. Return to the 78-card reference and to the card pages you want to understand more deeply. If a lesson has faded, read it again.\n\nTry this today: open your very first journal entry — or write one right now, if you haven't yet. Find a card there you'd read differently now, and add a new line beside the old one.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Друг разложил три карты и читает каждую по отдельности, не связывая их друг с другом. Какой совет ему дать?",
+        "en": "A friend lays out three cards and reads each one separately, without connecting them. What advice would help most?"
+       },
+       "options": [
+        {
+         "ru": "Всё в порядке: связывать карты нужно только в раскладах для других людей",
+         "en": "Nothing's wrong: bridging the cards only matters in readings done for other people"
+        },
+        {
+         "ru": "Навести мостик между картами: тогда выйдет история, а не список слов",
+         "en": "Build a bridge between the cards: that turns them into a story, not a list of words"
+        },
+        {
+         "ru": "Стоит читать карты в обратном порядке — сначала «Будущее», потом «Прошлое»",
+         "en": "It helps to read the cards in reverse order — Future first, then Past"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Одна карта — слово, а мостик между картами превращает слова в историю: без него получается список значений, а не ответ на вопрос.",
+        "en": "One card is a word, and a bridge between cards turns words into a story: without it, you get a list of meanings instead of an answer."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "На середине расклада человек уже не помнит вопрос, с которым сел за карты, и просто описывает картинки одну за другой. В чём его ошибка?",
+        "en": "Halfway through a reading, someone can no longer recall the question they started with and is simply describing the pictures one by one. What's gone wrong?"
+       },
+       "options": [
+        {
+         "ru": "Он потерял вопрос, а без вопроса карты рассыпаются на общие слова",
+         "en": "They've lost the question, and without it the cards fall apart into vague generalities"
+        },
+        {
+         "ru": "Ему стоило выбрать расклад попроще, чем «Три карты»",
+         "en": "They should have picked a simpler spread than Three Cards"
+        },
+        {
+         "ru": "Ничего страшного: расклад одинаково работает и без исходного вопроса",
+         "en": "Nothing serious: a spread works just as well without the original question"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Вопрос держит расклад собранным: без него любая карта звучит правдоподобно, но ни одна не отвечает на то, ради чего вы сели за карты.",
+        "en": "The question keeps a reading focused: without it, every card sounds plausible, yet none of them answers what you actually sat down to ask."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В разборе примера «Будущее» — Солнце, и звучит это очень обнадёживающе. Как лучше понять эту позицию?",
+        "en": "In the example, the Future position holds the Sun, and it all sounds very reassuring. What's the right way to read that position?"
+       },
+       "options": [
+        {
+         "ru": "Как знак, что дальше расклад можно уже не разбирать",
+         "en": "As a sign that the rest of the spread no longer needs reading"
+        },
+        {
+         "ru": "Как гарантию, что всё случится именно так, если ничего не делать",
+         "en": "As a guarantee that things will turn out exactly this way if nothing is done"
+        },
+        {
+         "ru": "Как направление ситуации сейчас, а не обещанный результат",
+         "en": "As the situation's current direction, not a promised result"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "«Будущее» показывает, куда сейчас катится ситуация, а не выносит приговор: направление можно заметить и изменить, если оно вам не по душе.",
+        "en": "The Future position shows where the situation is currently rolling, not a verdict: you can notice the direction and change it, if it isn't the one you want."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В раскладе выпадает придворная карта, и первая мысль — конкретный человек из вашей жизни. Что стоит проверить, прежде чем решить, кто это?",
+        "en": "A court card turns up in a spread, and the first thought is a specific person in your life. What's worth checking before deciding who it is?"
+       },
+       "options": [
+        {
+         "ru": "Не подходит ли карта лучше как ваша роль в ситуации",
+         "en": "Whether the card fits better as your own role"
+        },
+        {
+         "ru": "Ничего: придворная карта — это всегда конкретный человек рядом",
+         "en": "Nothing: a court card always means a specific person nearby"
+        },
+        {
+         "ru": "Стоит пересдать карты, пока не выпадет кто-то более понятный",
+         "en": "It's best to reshuffle until a clearer person turns up"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Правило простое: сомневаетесь — читайте придворную карту как свою роль, это работает и в отношениях, и в решениях о себе.",
+        "en": "The rule is simple: when in doubt, read a court card as your own role — it works both for questions about relationships and about yourself."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "На сегодня выпала эта карта, а вопрос — как провести непростой разговор. Что она подсказывает, если прочитать её как вашу роль?",
+        "en": "This card is today's draw, alongside the question of how to handle a difficult conversation. What does it suggest, read as your own role?"
+       },
+       "options": [
+        {
+         "ru": "Рядом появится решительная женщина, которая всё расставит по местам",
+         "en": "A decisive woman is about to appear and set everything straight"
+        },
+        {
+         "ru": "Пора называть вещи своими именами и говорить прямо, без резкости",
+         "en": "It's time to call things by their names and speak plainly, without harshness"
+        },
+        {
+         "ru": "Разговор точно закончится в вашу пользу, если держаться твёрдо",
+         "en": "The conversation is sure to go your way if you hold firm"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Королева Мечей как ваша роль — про ясность и прямоту, а не про предсказание исхода. Вариант «точно в вашу пользу» — та самая ловушка предсказания, которой курс просил избегать.",
+        "en": "As your own role, the Queen of Swords is about clarity and plain speech, not about forecasting an outcome. The 'sure to go your way' option is exactly the prediction trap the course has asked you to avoid."
+       },
+       "cardId": "s13"
+      }
+     ],
+     "quizStatus": "draft"
     }
    ]
   }
