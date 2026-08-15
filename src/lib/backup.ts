@@ -109,6 +109,20 @@ export function backupSummary(p: { state: BackupState; exportedAt: string }): {
   };
 }
 
+/** Язык из файла бэкапа — восстанавливаемая настройка пользователя, такая же, как тема (спека 27,
+ *  волна фиксов финального ревью): человек переезжает на новый телефон, первая установка
+ *  определяет язык устройства, а восстановление бэкапа обязано вернуть ЕГО язык, иначе поверх
+ *  русского дневника окажется английский интерфейс. Ограничитель: файл может нести язык,
+ *  недоступного в ТЕКУЩЕЙ сборке (в релизе доступны только языки, у которых есть строки
+ *  интерфейса, — `available`, снимок AVAILABLE_LANGS на момент импорта) — тогда строка настроек
+ *  показала бы, например, «Español», а пункта под него в списке выбора не нашлось бы. В этом
+ *  случае оставляем язык, который уже действует на устройстве.
+ *  Чистая функция специально ради теста: раньше ни разу не проверялось не «файл валиден»
+ *  (это покрывал parseBackup), а «файл ПРИМЕНЁН» — в этом и была дыра дефекта. */
+export function resolveImportedLang(fileLang: Lang, currentLang: Lang, available: readonly Lang[]): Lang {
+  return available.includes(fileLang) ? fileLang : currentLang;
+}
+
 export type ParseError = 'notBackup' | 'newerVersion' | 'corrupt';
 export type ParsedBackup =
   | { ok: true; state: BackupState; exportedAt: string }

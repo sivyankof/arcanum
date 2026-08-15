@@ -7,6 +7,7 @@ import {
   buildBackup,
   parseBackup,
   PERSIST_DEFAULTS,
+  resolveImportedLang,
   SCHEMA_VERSION,
   type BackupState,
 } from '../backup';
@@ -184,5 +185,23 @@ describe('lang из четырёх языков (спека 27)', () => {
     const state = { ...VALID, lang } as BackupState;
     const text = JSON.stringify(buildBackup(state, SCHEMA_VERSION, AT));
     expect(parseBackup(text, SCHEMA_VERSION)).toEqual({ ok: true, state, exportedAt: AT });
+  });
+});
+
+// Корень дефекта, найденного финальным ревью: parseBackup проверял, что lang — валидный язык
+// (тесты выше), но ни один тест не проверял, что импортированный язык РЕАЛЬНО применяется —
+// дыра была между «файл валиден» и «файл применён». Правило вынесено в чистую функцию именно
+// затем, чтобы её можно было закрепить тестом без стора.
+describe('resolveImportedLang — язык бэкапа применяется с ограничителем по доступным языкам', () => {
+  it('язык файла доступен в текущей сборке — берём его', () => {
+    expect(resolveImportedLang('es', 'ru', ['ru', 'en', 'es', 'pt'])).toBe('es');
+  });
+
+  it('язык файла НЕдоступен в текущей сборке — остаётся текущий язык устройства', () => {
+    expect(resolveImportedLang('es', 'ru', ['ru', 'en'])).toBe('ru');
+  });
+
+  it('язык файла совпадает с текущим — результат тот же независимо от доступности', () => {
+    expect(resolveImportedLang('ru', 'ru', ['ru', 'en'])).toBe('ru');
   });
 });

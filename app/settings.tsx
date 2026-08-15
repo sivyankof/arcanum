@@ -95,8 +95,10 @@ export default function SettingsScreen() {
 
   const restoreBackup = useApp((s) => s.restoreBackup);
   // импорт: сначала подтверждение со сводкой файла, после — уведомление об исходе.
-  // В notice лежат КЛЮЧИ i18n, а не готовый текст: язык может смениться самим импортом,
-  // и уведомление обязано выйти уже на языке из бэкапа
+  // В notice лежат КЛЮЧИ i18n, а не готовый текст: язык может смениться самим импортом
+  // (restoreBackup применяет язык файла, если он доступен в сборке — иначе оставляет прежний,
+  // см. src/lib/backup.ts, resolveImportedLang), и уведомление обязано выйти уже на языке,
+  // который в итоге применён, а не на том, что просто лежал в файле
   const [importAsk, setImportAsk] = React.useState<
     { state: BackupState; entries: number; streak: number; dateISO: string } | null
   >(null);
@@ -215,6 +217,11 @@ export default function SettingsScreen() {
   // без отдельного состояния строка либо молчала бы про ожидание, либо (что хуже) показывала
   // «Вкл» до того, как разрешение реально получено
   const [requestingPerm, setRequestingPerm] = React.useState(false);
+
+  // DEV-строка «Язык устройства» ниже читала эти теги дважды в одном выражении (волна фиксов
+  // финального ревью спеки 27) — считаем один раз и переиспользуем в value/onPress; вне __DEV__
+  // строка не рисуется вовсе, поэтому и теги устройства там не читаем
+  const deviceTags = __DEV__ ? deviceLocaleTags() : [];
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -451,8 +458,8 @@ export default function SettingsScreen() {
                 label={tr('settings.devDeviceLang')}
                 // что видит детекция на ЭТОМ устройстве и что выбрала бы при первой установке;
                 // тап применяет — иначе пункт 6в по языку устройства требует переустановки
-                value={`${deviceLocaleTags()[0] ?? '—'} → ${detectLang(deviceLocaleTags(), AVAILABLE_LANGS)}`}
-                onPress={() => setLang(detectLang(deviceLocaleTags(), AVAILABLE_LANGS))}
+                value={`${deviceTags[0] ?? '—'} → ${detectLang(deviceTags, AVAILABLE_LANGS)}`}
+                onPress={() => setLang(detectLang(deviceTags, AVAILABLE_LANGS))}
               />
             </FadeUp>
           </>

@@ -2,7 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { PERSIST_DEFAULTS, SCHEMA_VERSION, type BackupState } from '../lib/backup';
+import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
@@ -212,11 +212,17 @@ export const useApp = create<AppState>()(
       },
 
       // Импорт бэкапа (спека 11): полная замена. Persist сам записывает новое состояние,
-      // план пушей пересчитывает подписка usePushScheduler, тему и язык применяют
-      // существующие подписки — здесь только сама замена и два шага гигиены.
+      // план пушей пересчитывает подписка usePushScheduler, тему применяют существующие
+      // подписки. Язык — тоже восстанавливаемая настройка, как тема (спека 27, волна фиксов
+      // финального ревью: раньше здесь стоял комментарий «язык не трогаем», спека и logic-spec
+      // §7 ему верили, а код уже применял язык из файла — прав оказался код, неправа спека),
+      // но с ограничителем: resolveImportedLang берёт язык файла, только если он есть среди
+      // AVAILABLE_LANGS текущей сборки, иначе оставляет язык, уже действующий на устройстве —
+      // здесь и два шага гигиены.
       restoreBackup: (s) => {
         set({
           ...s,
+          lang: resolveImportedLang(s.lang, get().lang, AVAILABLE_LANGS),
           // очень старый или правленный руками файл мог прийти без сида —
           // назначаем свежий, как это делает onRehydrateStorage после гидрации
           ...(s.installSeed === 0
@@ -307,9 +313,10 @@ export const useApp = create<AppState>()(
       // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.
       // Уже открытая сегодня карта не изменится — она читается из history, а не пересчитывается.
       // Здесь же — язык первой установки (спека 27): снимок с устройства среди доступных языков,
-      // дальше язык свой (пикер в настройках). Существующие установки сюда не попадают (сид уже
-      // есть), restoreBackup язык из файла не трогает. Дефолт `lang: 'ru'` в PERSIST_DEFAULTS —
-      // только доливка старого файла без поля, настоящий первый язык назначается тут.
+      // дальше язык свой (пикер в настройках, а также restoreBackup — с ограничителем по
+      // доступным языкам, см. комментарий там). Существующие установки сюда не попадают (сид
+      // уже есть). Дефолт `lang: 'ru'` в PERSIST_DEFAULTS — только доливка старого файла без
+      // поля, настоящий первый язык назначается тут.
       onRehydrateStorage: () => (state) => {
         if (state && state.installSeed === 0) {
           useApp.setState({

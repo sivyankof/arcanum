@@ -9,7 +9,7 @@
 import "intl-pluralrules";
 import i18n from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
-import { LANGS, toLang, type Lang } from "./lang";
+import { availableLangs, toLang, type Lang } from "./lang";
 
 // экспортируется ради тестов плюрализации: структурный тест и оракул обходят языки
 // по `Object.keys(resources)`, а не по литералам "ru"/"en" — иначе третий язык проехал бы мимо
@@ -472,8 +472,9 @@ export default i18n;
  *  язык устройства при первой установке. Язык «включается» появлением его UI-строк в `resources`
  *  (сессия L-0 плана локализации): до этого бета-тестер не увидит «Español», за которым скрывался бы
  *  английский. В dev — все четыре: проверка проводки (даты, плюрализация, фолбэк контента) не ждёт
- *  переводов. */
-export const AVAILABLE_LANGS: readonly Lang[] = LANGS.filter((l) => __DEV__ || l in resources);
+ *  переводов. Само решение — в чистой `availableLangs` (lang.ts, под тестами обоих режимов):
+ *  здесь только подстановка настоящих `__DEV__`/`resources`. */
+export const AVAILABLE_LANGS: readonly Lang[] = availableLangs(__DEV__, resources);
 
 /** Текущий язык приложения для экранов — вместо каста по префиксу (`startsWith('ru')` → ru, иначе en),
  *  который копировался в каждый новый экран и молча делал бы третий язык английским.

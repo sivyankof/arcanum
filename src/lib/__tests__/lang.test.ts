@@ -1,6 +1,7 @@
 /** Язык приложения (спека 27): список языков, нормализация тегов, детекция по предпочтениям
  *  устройства, доступ к многоязычной записи с фолбэком. Чистая логика — без React и expo. */
 import {
+  availableLangs,
   CONTENT_FALLBACK,
   detectLang,
   inLang,
@@ -75,6 +76,21 @@ describe('detectLang — язык устройства при первой ус�
   it('язык без UI-строк не выбирается: es-MX при доступных ru/en → en', () => {
     expect(detectLang(['es-MX'], ['ru', 'en'])).toBe('en');
     expect(detectLang(['es-MX', 'ru-RU'], ['ru', 'en'])).toBe('ru');
+  });
+});
+
+describe('availableLangs — какие языки видит пользователь (волна фиксов финального ревью спеки 27)', () => {
+  it('отладочная сборка — все четыре языка, даже без единого ресурса', () => {
+    expect(availableLangs(true, {})).toEqual(['ru', 'en', 'es', 'pt']);
+    expect(availableLangs(true, { ru: {}, en: {} })).toEqual(['ru', 'en', 'es', 'pt']);
+  });
+
+  it('релизная сборка — только языки со строками интерфейса, порядок LANGS', () => {
+    expect(availableLangs(false, { ru: {}, en: {} })).toEqual(['ru', 'en']);
+  });
+
+  it('язык появляется сам, как только у него есть ресурсы — без правки функции', () => {
+    expect(availableLangs(false, { ru: {}, en: {}, es: {} })).toEqual(['ru', 'en', 'es']);
   });
 });
 
