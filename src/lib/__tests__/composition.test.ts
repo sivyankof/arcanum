@@ -47,9 +47,14 @@ describe('analyzeSpread — правила состава (logic-spec §1б, с�
     ]);
   });
 
-  it('масть при ничьей лидеров не срабатывает; одна младшая карта — тоже нет', () => {
+  it('масть не срабатывает, когда лидер слабее половины младших или младшая карта одна', () => {
     expect(keys(analyzeSpread([c('c02'), c('s02'), c('fool'), c('sun'), c('w03')]))).not.toContain('suit.cups');
     expect(keys(analyzeSpread([c('c02'), c('fool'), c('sun')]))).not.toContain('suit.cups');
+  });
+
+  it('настоящая ничья лидеров (по 2 Кубка и Меча из 4 младших) → suit.* не срабатывает (спека 36: лидер должен быть единственным)', () => {
+    const obs = analyzeSpread([c('c02'), c('c05'), c('s02'), c('s05')]);
+    expect(keys(obs).some((k) => k.startsWith('suit.'))).toBe(false);
   });
 
   it('половина перевёрнутых при чётном числе карт срабатывает', () => {
