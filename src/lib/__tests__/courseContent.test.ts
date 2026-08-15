@@ -3,12 +3,12 @@
 import { cardById, course } from '../content';
 
 const lessons = course
-  .filter((m) => ['m1', 'm2', 'm3', 'm4'].includes(m.id))
+  .filter((m) => ['m1', 'm2', 'm3', 'm4', 'm5'].includes(m.id))
   .flatMap((m) => m.lessons);
 
-describe('контракт викторин М1–М4 (course.json)', () => {
-  it('М1–М4 — это 24 урока', () => {
-    expect(lessons).toHaveLength(24);
+describe('контракт викторин М1–М5 (course.json)', () => {
+  it('М1–М5 — это 28 уроков', () => {
+    expect(lessons).toHaveLength(28);
   });
 
   it.each(lessons.map((l) => [l.id, l] as const))('%s: теория заполнена на обоих языках', (_id, l) => {

@@ -3680,7 +3680,141 @@
       "ru": "В каждой масти четыре придворных карты — вы видели их в первом модуле, а стихии мастей — в прошлом. Ранги: Паж учится и приносит весть, Рыцарь действует, Королева владеет стихией внутри, Король распоряжается ею вовне. Сегодня — Пажи всех мастей.\n\nУ Уэйта Паж Жезлов возвещает новость — энергию девать некуда, а молчать не может. Как человек — энтузиаст: любопытный, легко загорается идеями, несёт вести. Как ваша сторона — первый импульс, проба сил. Сила — в готовности начать; риск — вспыхнуть и остыть.\n\nПаж Кубков разглядывает рыбу из кубка — так всплывают чувства и творческие идеи. Как человек — мечтательная, чувствительная натура с открытым сердцем. Как ваша сторона — нежное начало: чувство, идея, добрая весть. Сила — в искренности; риск — обидчивость и бегство в фантазии.\n\nПаж Мечей идёт по неровной земле с мечом, настороженно оглядываясь по сторонам. Как человек — наблюдательный ум, быстро схватывает и несёт новости. Как ваша сторона — любопытство ума и бдительность: узнавайте, проверяйте факты. Сила — в ясности; риск — сплетни и поспешные выводы.\n\nПаж Пентаклей разглядывает пентакль в поднятых руках, не замечая ничего вокруг. Как человек — прилежный ученик, мечтающий о конкретном: курсе, ремесле, первых деньгах. Как ваша сторона — новая цель и ученичество, медленный верный шаг. Сила — в терпении; риск — распылиться на планы.\n\nРазличить Пажей просто: Жезлов загорается, Кубков чувствует, Мечей спрашивает, Пентаклей учится. Карта про человека или про вашу роль? Про отношения с кем-то — скорее человек; про себя и решение — скорее роль. Сомневаетесь — читайте как роль: это полезно и никого не обвиняет.\n\nПопробуйте сегодня: выберите, какой из четырёх Пажей — это вы сегодня, и почему. Или заметьте в знакомом одну из ролей: кто-то загорелся идеей, кто-то говорит нежно, кто-то расспрашивает, кто-то тихо готовится к новому. Ученичество — не слабость, а начало мастерства.",
       "en": "Every suit has four court cards, seen in the first module; their elements came in the module before. The ranks: the Page studies and brings word, the Knight acts, the Queen owns her element within, the King directs it outward. Today: the Pages of every suit.\n\nIn Waite's image, the Page of Wands announces news, restless with energy he can't yet spend. As a person — an enthusiast: curious, quick to catch fire. As your own side — a first impulse, trying out your strength. The strength is readiness to begin; the risk is flaring up and cooling down.\n\nThe Page of Cups watches a fish peek from his cup — feelings and ideas surfacing. As a person — a dreamy, sensitive soul with an open heart. As your own side — a gentle beginning: a feeling, an idea, a welcome message. The strength is sincerity; the risk is touchiness and fantasy instead of talk.\n\nThe Page of Swords strides over rugged ground, sword in hand, glancing warily amid wild clouds. As a person — an observant mind, quick to grasp things, a bringer of news. As your own side — a curious mind and vigilance: find out, check facts. The strength is clarity; the risk is gossip and haste.\n\nThe Page of Pentacles studies a pentacle in his raised hands, oblivious to all around him. As a person — a diligent student dreaming in concrete terms: a course, first earnings. As your own side — a new goal and apprenticeship, a slow, steady step. The strength is patience; the risk is scattering across plans.\n\nTelling the Pages apart is simple: Wands catches fire, Cups feels, Swords asks, Pentacles studies. Does a card mean a person or your role? About someone specific, it's a person; about yourself and a decision, it's your role. When in doubt, read it as your role — always useful, blaming no one.\n\nTry this today: pick which of the four Pages you are today, and why. Or notice one of these roles in someone you know: catching fire with an idea, speaking gently, asking questions, quietly preparing for something new. Apprenticeship isn't weakness — it's where mastery begins.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что объединяет Пажей всех четырёх мастей?",
+        "en": "What do all four Pages have in common, across suits?"
+       },
+       "options": [
+        {
+         "ru": "Они распоряжаются своей стихией вовне, влияют на других",
+         "en": "They direct their element outward and influence others"
+        },
+        {
+         "ru": "Они действуют без промедления и уверенно двигаются к цели",
+         "en": "They act without hesitation and move confidently toward a goal"
+        },
+        {
+         "ru": "Они только начинают путь: учатся и приносят весть",
+         "en": "They're just starting out: they study and bring word"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Паж — самый юный ранг: он ещё не действует и не управляет, а учится, приглядывается и приносит новости.",
+        "en": "The Page is the youngest rank: not yet acting or directing, but studying, watching, and bringing news."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Как понять, о человеке или о вашей роли говорит придворная карта?",
+        "en": "How do you tell whether a court card means a person or your own role?"
+       },
+       "options": [
+        {
+         "ru": "Придворные карты рассказывают только про близких людей",
+         "en": "Court cards only ever describe people close to you"
+        },
+        {
+         "ru": "О конкретном человеке — скорее человек, о себе — скорее роль",
+         "en": "A question about a specific person points to a person; about yourself, to your role"
+        },
+        {
+         "ru": "Это решает исключительно масть: Кубки — про людей, Мечи — про роли",
+         "en": "It's decided purely by the suit: Cups mean people, Swords mean roles"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Отношения с конкретным человеком чаще указывают на него самого; вопрос о себе и решении — чаще про вашу роль.",
+        "en": "A question about a specific relationship usually points to that person; a question about yourself and a decision usually points to your role."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Каким обычно видят Пажа Кубков как человека?",
+        "en": "How is the Page of Cups usually seen as a person?"
+       },
+       "options": [
+        {
+         "ru": "Мечтательным и чувствительным, с открытым сердцем",
+         "en": "Dreamy and sensitive, with an open heart"
+        },
+        {
+         "ru": "Хладнокровным стратегом, который не показывает чувств",
+         "en": "A cool strategist who never shows feelings"
+        },
+        {
+         "ru": "Резким и прямолинейным критиком чужих слов",
+         "en": "A blunt, sharp-tongued critic of others' words"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "У Пажа Кубков открытое сердце и творческий взгляд — он мечтает и чувствует раньше, чем считает.",
+        "en": "The Page of Cups has an open heart and a creative eye — feeling and dreaming come before calculating."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что советует Паж Мечей, когда приходит новая идея или новость?",
+        "en": "What does the Page of Swords advise when a new idea or piece of news arrives?"
+       },
+       "options": [
+        {
+         "ru": "Сразу делать выводы и без промедления делиться ими со всеми",
+         "en": "Draw conclusions at once and share them with everyone right away"
+        },
+        {
+         "ru": "Проверять факты, а не спешить с выводами",
+         "en": "Check the facts and don't rush to conclusions"
+        },
+        {
+         "ru": "Не обращать внимания, пока новость не подтвердится дважды",
+         "en": "Ignore it until it's confirmed twice over by someone else"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Паж Мечей — про любопытство ума: собрать факты и не спешить с выводами, пока картина не прояснится.",
+        "en": "The Page of Swords is about a curious mind: gather the facts and hold off on conclusions until the picture is clear."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Какая это карта?",
+        "en": "Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Паж Мечей",
+         "en": "Page of Swords"
+        },
+        {
+         "ru": "Рыцарь Кубков",
+         "en": "Knight of Cups"
+        },
+        {
+         "ru": "Паж Кубков",
+         "en": "Page of Cups"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Юный паж рассматривает рыбу, выглянувшую из кубка, — чувства и творческие идеи, которые всплывают неожиданно.",
+        "en": "A young page watches a fish peek out of his cup — feelings and creative ideas surfacing unexpectedly."
+       },
+       "cardId": "c11"
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m5l2",
@@ -3698,7 +3832,141 @@
       "ru": "В каждой масти живут четыре персонажа. Паж учится и приносит весть, Рыцарь идёт дальше — превращает её в поступок. Рыцарь — карта действия и дороги, всадника на коне. У каждой масти путь свой: конь несёт седока сквозь стихию его масти.\n\nРыцарь Жезлов у Уэйта скачет мимо пирамид, уже сорвавшись с места. Как человек — страстный авантюрист: загорается первым, зовёт за собой, скучать не умеет. Как энергия — порыв, переезд, смелый старт. Риск — поспешность: огонь без узды сжигает планы.\n\nРыцарь Кубков у Уэйта едет медленно, держа кубок в руке, — вестник с даром чувств. Как человек — обаятельный мечтатель: красиво ухаживает, но слово с делом расходится. Как энергия — предложение, весть от сердца. Риск — за красивыми словами может не быть содержания.\n\nРыцарь Мечей у Уэйта мчится навстречу ветру, без единой заминки. Как человек — решительная прямолинейная натура: умная, убедительная, порой резкая. Как совет — действуйте быстро и прямо, но сверьте направление заранее. Риск — напор без руля: резкие слова, о которых потом жалеют.\n\nРыцарь Пентаклей у Уэйта сидит на тяжёлом коне и смотрит вдаль — самый надёжный: не мчится, но доезжает всегда. Как человек — верный труженик, на которого можно положиться. Как совет — рутина и маленькие шаги: медленно не значит плохо. Риск — застой: упорство превращается в упрямство.\n\nРазличить четверых просто по движению: Жезлы срываются с места, Кубки едут медленно и красиво, Мечи мчатся без остановки, Пентакли едут неспешно, но доезжают всегда. Понять, о ком карта, поможет правило: вопрос про отношения — скорее человек, вопрос про решение — скорее роль. Сомневаетесь — читайте как роль.\n\nПопробуйте сегодня: за пять минут выберите, какой из четырёх Рыцарей ближе вашему дню — Жезлов, Кубков, Мечей или Пентаклей — и назовите причину. Это не тест на характер, а способ заметить темп, в котором вы сейчас действительно двигаетесь.",
       "en": "Four characters live in every suit. The Page learns and brings news; the Knight goes further, turning it into action. The Knight is a card of motion and the road, a rider on a horse. Each suit rides its own road, since the horse carries the rider through its element.\n\nIn Waite's picture, the Knight of Wands rides past pyramids, already off at a gallop. As a person — a passionate adventurer: quick to catch fire, sweeping others along, never bored. As an energy — impulse, a move, a bold start. The risk is haste: unchecked fire burns through plans.\n\nWaite's Knight of Cups rides slowly, cup held out — a messenger with a gift of feeling. As a person — a charming dreamer: he courts beautifully, though words and deeds can part ways. As an energy — a proposal, news of the heart. The risk: behind beautiful words there may be nothing.\n\nWaite draws the Knight of Swords charging into the wind without a single hesitation. As a person — decisive and blunt: sharp-minded, persuasive, at times abrupt. As advice — move fast, speak plainly, but check your direction first. The risk is drive without a wheel: sharp words regretted later.\n\nThe Knight of Pentacles, in Waite's image, sits on a heavy horse and looks into the distance — the most reliable: he never gallops, yet always arrives. As a person — a loyal worker you can depend on. As advice — routine and small steps: slow doesn't mean bad. The risk is stagnation: persistence turns into stubbornness.\n\nTelling them apart is easy: Wands takes off at once, Cups rides slowly and gracefully, Swords charges without slowing, Pentacles rides unhurried but always arrives. To tell person from role, use one rule: a relationship question points to a person, a choice about yourself points to a role. Unsure — read it as your role.\n\nTry this today: take five minutes to decide which Knight feels closest to your day — Wands, Cups, Swords, or Pentacles — and name one reason why. It isn't a personality test, just a way to notice the pace you're actually moving at right now.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что означает ранг Рыцаря в системе придворных карт этого курса?",
+        "en": "What does the Knight's rank mean in this course's system of court cards?"
+       },
+       "options": [
+        {
+         "ru": "Учится новому и приносит первую весть",
+         "en": "Learns something new and brings the first news"
+        },
+        {
+         "ru": "Действует и движется — превращает намерение в поступок",
+         "en": "Acts and moves — turns intention into action"
+        },
+        {
+         "ru": "Владеет стихией внутри себя, без слов и суеты",
+         "en": "Masters the element inwardly, without words or fuss"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Паж только учится и передаёт весть, а Рыцарь берёт эту весть и делает первый шаг — превращает намерение в конкретное действие.",
+        "en": "The Page only learns and delivers news; the Knight takes that news and makes the first move — turning intention into concrete action."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чем Рыцарь Мечей отличается от Рыцаря Пентаклей?",
+        "en": "How does the Knight of Swords differ from the Knight of Pentacles?"
+       },
+       "options": [
+        {
+         "ru": "Мечи мчат, не сбавляя хода, а Пентакли едут неспешно, но доезжают всегда",
+         "en": "Swords race without ever slowing down, while Pentacles move unhurried but always arrive"
+        },
+        {
+         "ru": "Мечи двигаются ради чувства, а Пентакли — ради победы в споре",
+         "en": "Swords move for the sake of feeling, while Pentacles move to win an argument"
+        },
+        {
+         "ru": "Мечи откладывают решения, а Пентакли принимают их слишком быстро",
+         "en": "Swords delay their decisions, while Pentacles make theirs too quickly"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Скорость каждого Рыцаря идёт от его стихии: воздух Мечей не терпит промедления, а земля Пентаклей ценит выносливость больше рывка.",
+        "en": "Each Knight's speed comes from his element: the air of Swords tolerates no delay, while the earth of Pentacles values endurance over a sprint."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Как понять, о человеке говорит придворная карта или о вашей роли?",
+        "en": "How do you tell whether a court card means a person or your own role?"
+       },
+       "options": [
+        {
+         "ru": "Придворная карта описывает только реального человека рядом с вами и никогда — вас самих",
+         "en": "A court card always describes a real person near you, and never you yourself"
+        },
+        {
+         "ru": "Это решает не смысл вопроса, а то, прямая карта выпала или перевёрнутая",
+         "en": "It depends on whether the card came up upright or reversed, not on the question"
+        },
+        {
+         "ru": "Вопрос про отношения — скорее человек, вопрос про собственное решение — скорее роль",
+         "en": "A question about a relationship points more to a person; a question about your own choice points more to a role"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Правило простое: спросите, о чём вопрос — об отношениях с кем-то или о собственном выборе — и читайте карту в этом ключе.",
+        "en": "The rule is simple: ask what the question is really about — a relationship with someone, or your own choice — and read the card accordingly."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "На что стоит обратить внимание с предложением Рыцаря Кубков?",
+        "en": "What's worth watching for with the Knight of Cups' proposal?"
+       },
+       "options": [
+        {
+         "ru": "Соглашаться сразу, не откладывая ответ ни на день",
+         "en": "Agree right away, without delaying your answer by a single day"
+        },
+        {
+         "ru": "Проверять красивые слова делом — и свои, и чужие",
+         "en": "Test beautiful words by actions — your own and other people's"
+        },
+        {
+         "ru": "Требовать от партнёра письменных обещаний на будущее",
+         "en": "Demand written promises about the future from your partner"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Рыцарь Кубков красив в словах, но обещание должно подтвердиться поступком, иначе за красивым жестом может не оказаться содержания.",
+        "en": "The Knight of Cups is eloquent, but a promise needs to be backed by action, or the beautiful gesture may turn out to be empty."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Какая это карта?",
+        "en": "Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Рыцарь Мечей",
+         "en": "Knight of Swords"
+        },
+        {
+         "ru": "Рыцарь Жезлов",
+         "en": "Knight of Wands"
+        },
+        {
+         "ru": "Паж Мечей",
+         "en": "Page of Swords"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Всадник мчится во весь опор навстречу ветру, а птицы и бабочки на упряжи выдают стихию воздуха — это Рыцарь Мечей.",
+        "en": "A rider charges full-tilt into the wind, with birds and butterflies on the harness marking the element of air — this is the Knight of Swords."
+       },
+       "cardId": "s12"
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m5l3",
@@ -3716,7 +3984,141 @@
       "ru": "В каждой масти четыре персонажа: Паж учится, Рыцарь действует и движется к цели. Королева — следующая ступень: она владеет стихией изнутри, не подавляя её и не выплёскивая, а держит ровно.\n\nКоролева Жезлов у Уэйта — трон со львами и подсолнух в руке: огонь, ставший властью без жестокости. Как человек — харизматичная женщина-солнце, вдохновляющая одним присутствием. Как ваша сторона — уверенность и самостоятельность. Риск — ревность и желание всё контролировать, если сравниваете себя с другими.\n\nКоролева Кубков смотрит в закрытый кубок — единственный закрытый в колоде. Как человек — женщина глубокой эмпатии, ей доверяют самое сокровенное. Как ваша сторона — интуиция и душевная зрелость. Риск — отдавать так много, что забыть себя: воде тоже нужны берега.\n\nКоролева Мечей сидит в профиль, меч поднят вертикально: правда без уклончивости. Как человек — независимая женщина с острым умом: знала потери, но не ожесточилась, говорит прямо. Как ваша сторона — трезвая ясность и границы. Прямота — не холодность; риск начинается там, где ясность превращается в броню.\n\nКоролева Пентаклей сидит среди цветущей природы, глядя на пентакль в руках — изобилие, укоренённое в земле. Как человек — щедрая, земная женщина, которая соединяет дом и дело. Как ваша сторона — практичность и забота о теле, доме, близких. Риск — тянуть всё на себе, забыв о своих потребностях.\n\nРазличить четверых по глаголу: Жезлы вдохновляет, Кубки чувствует, Мечи называет вещи своими именами, Пентакли заботится. Один вопрос для каждой карты: человек рядом или ваша сторона? Отношения с кем-то — скорее человек; решение о себе — скорее роль; сомневаетесь — читайте как роль, это всегда полезно.\n\nПопробуйте сегодня: выберите одну из четырёх Королев и побудьте ею в одном сегодняшнем разговоре — вдохновите, выслушайте, скажите прямо или позаботьтесь о близких. Заметьте, какая роль ближе всего вам сегодня.",
       "en": "Four characters live in every suit: a Page learns, a Knight acts and moves toward a goal. The Queen is the next stage: she owns her element from the inside, neither suppressing it nor spilling it out, but holding it steady.\n\nThe Queen of Wands sits enthroned with lions, a sunflower open in her hand: fire become power without cruelty. As a person — a charismatic, sun-like woman who inspires simply by being there. As your side — confidence and self-reliance. The risk is jealousy and the urge to control everything, if you compare yourself to others.\n\nThe Queen of Cups gazes into a closed cup — the only closed one in the deck. As a person — a woman of deep empathy, trusted with people's secrets. As your side — intuition and emotional maturity. The risk is giving so much that you forget yourself: the water needs its banks too.\n\nThe Queen of Swords sits in profile, sword raised straight up: truth without evasion. As a person — an independent woman with a sharp mind: she has known loss, yet didn't harden, and speaks plainly. As your side — sober clarity and boundaries. Her directness is not coldness; the risk begins where clarity turns into armour.\n\nThe Queen of Pentacles sits amid blossoming nature, gazing at the pentacle in her hands — abundance rooted in the earth. As a person — a generous, down-to-earth woman who weaves home and work together. As your side — practicality and care for body, home, and loved ones. The risk is carrying everything alone and forgetting your own needs.\n\nTell the four apart by a verb: Wands inspires, Cups feels, Swords calls things by their names, Pentacles cares. One question for every court card: a person nearby, or your own side? A relationship with someone — likely a person; a decision about yourself — likely a role; when unsure, read it as a role.\n\nTry this today: pick one of the four Queens and be her in one conversation today — inspire, listen, speak plainly, or tend to those close to you. Notice which role feels closest to you today.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чем Королева отличается от Короля на оси зрелости роли?",
+        "en": "How does a Queen differ from a King on the rank axis?"
+       },
+       "options": [
+        {
+         "ru": "Королева только учится и переживает, а Король уже уверенно действует",
+         "en": "A Queen is still learning and feeling her way, while a King already acts with confidence"
+        },
+        {
+         "ru": "Королева владеет стихией изнутри, а Король распоряжается ею вовне",
+         "en": "A Queen owns the element from within, while a King directs it outward"
+        },
+        {
+         "ru": "Королева заботится о доме, а Король отвечает за общие дела и решения",
+         "en": "A Queen cares for the home, while a King is responsible for shared business and decisions"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Королева держит свою стихию ровно внутри себя, Король направляет её наружу, в мир и решения.",
+        "en": "A Queen holds her element steady inside herself; a King channels it outward, into the world and decisions."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что означает прямота Королевы Мечей?",
+        "en": "What does the Queen of Swords' directness mean?"
+       },
+       "options": [
+        {
+         "ru": "Она пережила потери, но не ожесточилась, а научилась видеть суть",
+         "en": "She has known loss, yet didn't harden, and learned to see the essence"
+        },
+        {
+         "ru": "Она держит всех на расстоянии и не подпускает никого близко",
+         "en": "She keeps everyone at a distance and lets no one get close"
+        },
+        {
+         "ru": "Она никогда не сталкивалась с трудностями и поэтому спокойна",
+         "en": "She has never faced hardship, which is why she stays calm"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Ясность и честность этой Королевы — не холодность: холодность как броня — уже риск карты, а не её сила.",
+        "en": "This Queen's clarity and honesty are not coldness: coldness worn as armour is the risk here, not her gift."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Как понять, о ком говорит придворная карта — о человеке или о вашей роли?",
+        "en": "How do you tell whether a court card points to a person or to your own role?"
+       },
+       "options": [
+        {
+         "ru": "Придворные карты всегда говорят только о конкретном человеке, стоящем рядом",
+         "en": "Court cards always point only to a specific person standing nearby"
+        },
+        {
+         "ru": "Это зависит только от того, мужская карта или женская по названию",
+         "en": "It depends only on whether the card's title is male or female"
+        },
+        {
+         "ru": "Вопрос про отношения — скорее человек, вопрос про решение — скорее роль",
+         "en": "A question about a relationship points to a person; a question about a decision points to a role"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Сомневаетесь — читайте карту как свою роль: это всегда полезно и никого не обвиняет.",
+        "en": "When unsure, read the card as your own role: it's always useful and blames no one."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "В чём риск Королевы Кубков, если чувствительность переливается через край?",
+        "en": "What is the Queen of Cups' risk when her sensitivity overflows?"
+       },
+       "options": [
+        {
+         "ru": "Излишняя холодность и полное безразличие к чувствам других",
+         "en": "Excessive coldness and total indifference to other people's feelings"
+        },
+        {
+         "ru": "Зависимость от чужих эмоций и потеря собственных границ",
+         "en": "Dependence on other people's emotions and losing your own boundaries"
+        },
+        {
+         "ru": "Внезапная тяга к спорам и конфликтам с близкими людьми",
+         "en": "A sudden urge to argue and conflict with loved ones"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Забота без границ превращается в зависимость — воде тоже нужны берега.",
+        "en": "Care without boundaries turns into dependence — even water needs its banks."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Какая это карта?",
+        "en": "Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Королева Мечей",
+         "en": "Queen of Swords"
+        },
+        {
+         "ru": "Королева Пентаклей",
+         "en": "Queen of Pentacles"
+        },
+        {
+         "ru": "Король Мечей",
+         "en": "King of Swords"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Меч поднят вертикально, ладонь раскрыта навстречу реальности, на троне и короне — бабочки: Королева Мечей приняла правду такой, какая есть.",
+        "en": "The sword stands straight up, her hand opens to meet reality, and butterflies mark the throne and crown: the Queen of Swords has accepted the truth as it is."
+       },
+       "cardId": "s13"
+      }
+     ],
+     "quizStatus": "draft"
     },
     {
      "id": "m5l4",
@@ -3734,7 +4136,141 @@
       "ru": "Мы прошли Пажей, Рыцарей и Королев — и добрались до Королей, последних жителей двора. В первом модуле говорилось: в каждой масти живут четыре персонажа, а прошлый разобрал их стихии. Король — вершина ранга: не владеет стихией внутри, как Королева, а распоряжается ею вовне.\n\nКороль Жезлов держит расцветший жезл, рядом лев и саламандры — власть, что даёт жизнь. Как человек — честный лидер: видит цель и ведёт за собой. Как ваша сторона — время взять руководство на себя. Риск — власть без тепла: требовать, не слушая.\n\nКороль Кубков сидит на троне среди бурного моря и остаётся невозмутим, кубок в одной руке. Как человек — добрый наставник: чувствует глубоко, но не отдаёт волнам штурвал. Риск — чувства под замком: холодность вместо разговора.\n\nКороль Мечей сидит лицом к нам с поднятым мечом — прямота суждения. Как человек — аналитик: судит по фактам. Как ваша сторона — решить по совести, отложив эмоции. Риск — ум без сердца: давление авторитетом, спор ради победы.\n\nКороль Пентаклей сидит на троне в винограде, рядом бычьи головы и замок за спиной. Как человек — надёжный хозяин дела; как ваша сторона — щедро делиться нажитым и строить надолго. Риск — материальное как самоцель: жадность и упрямство.\n\nТеперь двор виден целиком: по вертикали ранги (Паж учится, Рыцарь действует, Королева владеет стихией внутри, Король — вовне), по горизонтали стихии (огонь, вода, воздух, земля) — шестнадцать характеров. Среди Королей: Жезлы ведут, Кубки утешают, Мечи рассудят, Пентакли обеспечат. Правило по-старому: о ком-то рядом — читайте человека, о своём выборе — роль, а в сомнении берите роль.\n\nПопробуйте сегодня: вспомните человека, который сейчас ведёт, утешает, рассудит или обеспечивает рядом с вами, — и назовите, какой из четырёх Королей в нём говорит. Или спросите себя, какая роль вам ближе. Пять минут — и весь двор из шестнадцати карт станет знакомыми лицами.",
       "en": "We've met the Pages, Knights, and Queens — and now reach the Kings, the last residents of the court. The first module met four characters per suit; the previous one covered their elements. The King sits at the top of the rank: unlike the Queen, who holds the element within, he directs it outward.\n\nThe King of Wands holds a wand in leaf, a lion and salamanders beside him — power that gives life. As a person, he's an honest leader who sees the goal; as your own side, it's time to take charge. The risk is power without warmth: demanding instead of listening.\n\nThe King of Cups sits on a throne amid a restless sea, unmoved, a cup in one hand. As a person, he's a kind mentor: he feels deeply without handing the waves the helm. The risk is feeling locked away: coldness instead of honest talk.\n\nThe King of Swords faces us directly, sword raised — straightforward judgment. As a person, he's an analyst who judges by facts; as your own side, decide by conscience over emotion. The risk is intellect without heart: pressuring others, arguing just to win.\n\nThe King of Pentacles sits on a vine-wreathed throne, bull heads nearby and a castle at his back. As a person, he's a reliable owner of his craft, sharing what he's earned and building for the long term. The risk is treating the material as an end in itself: greed and stubbornness.\n\nNow the whole court is visible at once: ranks run one way (the Page learns, the Knight acts, the Queen holds the element within, the King directs it outward), suits run the other (fire, water, air, earth) — sixteen characters. Among the Kings: Wands lead, Cups console, Swords judge, Pentacles provide. The rule holds: someone near you — read the person; your own choice — read the role; unsure — choose the role.\n\nTry this today: think of someone who's leading, consoling, judging, or providing for you right now, and name which King's energy is speaking through them. Or ask yourself which role feels closest to you. Five minutes, and the whole court of sixteen cards becomes familiar faces.",
       "status": "draft"
-     }
+     },
+     "quiz": [
+      {
+       "type": "single",
+       "q": {
+        "ru": "Чем Король отличается от Королевы по оси ранга?",
+        "en": "How does the King differ from the Queen on the rank axis?"
+       },
+       "options": [
+        {
+         "ru": "Король владеет стихией внутри, Королева — снаружи",
+         "en": "The King holds the element within, the Queen holds it outward"
+        },
+        {
+         "ru": "Король распоряжается стихией вовне, Королева — владеет ею внутри",
+         "en": "The King directs the element outward, the Queen holds it within"
+        },
+        {
+         "ru": "Разницы нет, только разные картинки",
+         "en": "There's no real difference, just different pictures"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Королева обжила стихию внутри себя, а Король направляет её на других — ведёт, решает, отвечает.",
+        "en": "The Queen has made the element her own inner world; the King directs it toward others — leading, deciding, answering for them."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Как понять, читать придворную карту как человека или как вашу роль?",
+        "en": "How do you tell whether to read a court card as a person or as your own role?"
+       },
+       "options": [
+        {
+         "ru": "Если вопрос про отношения с кем-то — скорее человек; если про себя и решение — скорее роль",
+         "en": "If the question is about a relationship with someone, it's more likely a person; if it's about your own decision, it's more likely your role"
+        },
+        {
+         "ru": "Придворные карты всегда только про конкретных людей рядом",
+         "en": "Court cards are always only about specific people around you"
+        },
+        {
+         "ru": "Это зависит от того, прямая карта или перевёрнутая",
+         "en": "It depends on whether the card is upright or reversed"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Сомневаетесь — читайте как роль: это всегда полезно и никого не обвиняет.",
+        "en": "When in doubt, read it as your role — it's always useful and blames no one."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Что происходит с Королём Жезлов, когда его сила уходит в перекос?",
+        "en": "What happens to the King of Wands when his energy tips out of balance?"
+       },
+       "options": [
+        {
+         "ru": "Он теряет интерес к целям и предпочитает подождать, пока всё решится само",
+         "en": "He loses interest in goals and prefers to wait for things to sort themselves out"
+        },
+        {
+         "ru": "Он погружается в тревожные сомнения и без конца откладывает решение",
+         "en": "He sinks into anxious doubt and keeps putting off the decision"
+        },
+        {
+         "ru": "Он давит авторитетом и мало слушает, вместо того чтобы вести за собой",
+         "en": "He pushes his authority and barely listens, instead of leading the way"
+        }
+       ],
+       "correct": 2,
+       "explain": {
+        "ru": "Власть без тепла — авторитарность и позиция «я знаю лучше»: сила есть, а слушать уже некому.",
+        "en": "Power without warmth is authoritarian: an 'I know best' stance — the will is there, but no one is being heard."
+       }
+      },
+      {
+       "type": "single",
+       "q": {
+        "ru": "Какой совет даёт Король Мечей, когда нужно принять решение?",
+        "en": "What advice does the King of Swords give when a decision needs to be made?"
+       },
+       "options": [
+        {
+         "ru": "Довериться первому чувству, которое подскажет верное решение без долгих раздумий",
+         "en": "Trust the first feeling that suggests the right answer, without much deliberation"
+        },
+        {
+         "ru": "Отложить эмоции, взвесить факты и решить по совести",
+         "en": "Set emotions aside, weigh the facts, and decide by conscience"
+        },
+        {
+         "ru": "Посоветоваться со всеми, кого получится найти, и выбрать самый популярный вариант",
+         "en": "Consult everyone you can find and go with the most popular option"
+        }
+       ],
+       "correct": 1,
+       "explain": {
+        "ru": "Зрелый разум умеет быть беспристрастным — судить по фактам, а не по настроению.",
+        "en": "A mature mind can stay impartial — judging by facts rather than mood."
+       }
+      },
+      {
+       "type": "card",
+       "q": {
+        "ru": "Какая это карта?",
+        "en": "Which card is this?"
+       },
+       "options": [
+        {
+         "ru": "Король Кубков",
+         "en": "King of Cups"
+        },
+        {
+         "ru": "Король Мечей",
+         "en": "King of Swords"
+        },
+        {
+         "ru": "Королева Кубков",
+         "en": "Queen of Cups"
+        }
+       ],
+       "correct": 0,
+       "explain": {
+        "ru": "Трон стоит среди волнующегося моря, кубок в одной руке и скипетр в другой — это Король Кубков, а не Мечей или Королева той же масти.",
+        "en": "A throne set amid a restless sea, a cup in one hand and a sceptre in the other — this is the King of Cups, not the King of Swords or the Queen of the same suit."
+       },
+       "cardId": "c14"
+      }
+     ],
+     "quizStatus": "draft"
     }
    ]
   },
