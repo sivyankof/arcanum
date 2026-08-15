@@ -16,6 +16,7 @@
  *  Нативные `Platform.OS === 'web'`-проверки в `pushes.ts` остаются как есть (защита на случай,
  *  если платформенное разрешение когда-нибудь подведёт) — пункт H финального ревью 06б.
  */
+import type { Lang } from './lang';
 import { pushBody } from './pushBody';
 import type { PlannedPush } from './pushPlan';
 
@@ -41,7 +42,7 @@ export async function requestPermission(): Promise<PermissionState> {
 // поэтому его можно спокойно тянуть и в веб-бандл)
 export { pushBody };
 
-export function applyPlan(_plan: PlannedPush[], _lang: 'ru' | 'en'): Promise<void> {
+export function applyPlan(_plan: PlannedPush[], _lang: Lang): Promise<void> {
   return Promise.resolve();
 }
 
@@ -51,6 +52,6 @@ export async function listScheduled(): Promise<unknown[]> {
   return [];
 }
 
-export async function sendTestPush(_lang: 'ru' | 'en'): Promise<void> {
+export async function sendTestPush(_lang: Lang): Promise<void> {
   return Promise.resolve();
 }

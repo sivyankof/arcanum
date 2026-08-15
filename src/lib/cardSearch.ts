@@ -1,6 +1,7 @@
 /** Поиск и фильтрация справочника карт (спека 04).
  *  Чистые функции без React — чтобы покрыть тестами и переиспользовать (дневник, коллекция). */
 import type { Lang, TarotCard } from './content';
+import type { CanonLang } from './lang';
 
 /** Фильтр по аркану/масти: 'all' — вся колода. */
 export type CardFilter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
@@ -20,8 +21,9 @@ export function tokenize(s: string): string[] {
   return normalize(s).split(/[\s-]+/).filter(Boolean);
 }
 
-/** Окончания для отсечения, сначала длинные — иначе «деньгами» потеряет только «и». */
-const ENDINGS: Record<Lang, string[]> = {
+/** Окончания для отсечения, сначала длинные — иначе «деньгами» потеряет только «и».
+ *  Только ru/en: таблицы для es/pt появятся вместе с переводами (задача 28). */
+const ENDINGS: Record<CanonLang, string[]> = {
   ru: ['ами', 'ями', 'ого', 'его', 'ому', 'ему', 'ыми', 'ими', 'ах', 'ях', 'ов', 'ев', 'ей',
     'ой', 'ый', 'ий', 'ая', 'яя', 'ое', 'ее', 'ом', 'ем', 'ам', 'ям', 'ы', 'и', 'а', 'я',
     'е', 'у', 'ю', 'ь', 'о'],
@@ -38,7 +40,8 @@ export function stem(token: string, lang: Lang): string {
   // два прохода: «feelings» → «feeling» → «feel», иначе форма с двумя окончаниями
   // не сходится со словарной. MIN_STEM не даёт проходам съесть слово целиком.
   for (let pass = 0; pass < 2; pass++) {
-    const end = ENDINGS[lang].find(
+    // до es/pt таблиц окончаний нет — за пределами ru/en отсечения не будет (find на undefined)
+    const end = ENDINGS[lang as CanonLang]?.find(
       (e) => out.endsWith(e) && out.length - e.length >= MIN_STEM,
     );
     if (!end) break;

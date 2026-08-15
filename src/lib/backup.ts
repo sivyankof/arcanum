@@ -11,13 +11,11 @@ import { cardById } from './content';
 import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
 import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
+import type { Lang } from './lang';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
 import type { ThemeMode } from '../theme/theme';
-// type-only импорт стирается при компиляции — runtime-цикла со стором нет,
-// хотя стор импортирует этот модуль по-настоящему
-import type { Lang } from '../store/useApp';
 
 // потолки величин при импорте (волна фиксов финального ревью): без них абсурдное число
 // в битом/подделанном файле проходит структурную проверку типов и уезжает в персист —

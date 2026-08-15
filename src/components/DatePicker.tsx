@@ -5,7 +5,8 @@ import DateTimePicker, { type DateTimePickerEvent } from '@react-native-communit
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet } from 'react-native';
-import { localDateISO, localeTag, parseISODate } from '../lib/dates';
+import { localDateISO, parseISODate } from '../lib/dates';
+import { localeTag } from '../lib/lang';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { ModalPanel } from './ModalPanel';

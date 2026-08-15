@@ -2,8 +2,9 @@
 import cardsJson from "../../content/cards.json";
 import spreadsJson from "../../content/spreads.json";
 import courseJson from "../../content/course.json";
-
-export type Lang = "ru" | "en";
+import type { Lang } from "./lang";
+// тип языка живёт в src/lib/lang.ts; реэкспорт — чтобы cardSearch/lesson/компоненты не меняли импорт
+export type { Lang };
 export type BlockStatus = "todo" | "draft" | "reviewed" | "final";
 
 export interface CardContentBlock { ru: string; en: string; status: BlockStatus }

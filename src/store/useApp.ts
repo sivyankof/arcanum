@@ -7,12 +7,14 @@ import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
+import type { Lang } from '../lib/lang';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
-export type Lang = 'ru' | 'en';
+// тип языка живёт в src/lib/lang.ts рядом со словарями и детекцией; здесь — реэкспорт
+export type { Lang };
 
 // тип записи живёт в src/lib/journal.ts вместе с чистой арифметикой дневника,
 // здесь — только реэкспорт, чтобы экраны импортировали его привычным путём

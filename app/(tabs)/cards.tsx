@@ -18,6 +18,7 @@ import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/li
 import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
+import type { Lang } from '../../src/lib/lang';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
@@ -43,7 +44,7 @@ const AnimatedList = Animated.createAnimatedComponent(FlatList<TarotCard[]>);
 
 /** Ячейка сетки. Позицию картинки меряем на нажатии — с неё начнётся перелёт
  *  на страницу карты (пункт 6 motion-spec). */
-function Cell({ item, lang, learned }: { item: TarotCard; lang: 'ru' | 'en'; learned: boolean }) {
+function Cell({ item, lang, learned }: { item: TarotCard; lang: Lang; learned: boolean }) {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const imRef = React.useRef<View>(null);

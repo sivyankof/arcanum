@@ -28,6 +28,7 @@ import { Txt } from '../../src/components/Txt';
 import { cardById, cardImages, course, type CourseLesson, type CourseModule } from '../../src/lib/content';
 import { moduleProgress } from '../../src/lib/courseProgress';
 import { hapticError, hapticTap } from '../../src/lib/haptics';
+import type { Lang } from '../../src/lib/lang';
 import { lessonPlayable, lessonSteps, type LessonStep } from '../../src/lib/lesson';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -288,7 +289,7 @@ export default function LessonScreen() {
 }
 
 /** Шаг «разбор карты» — `.lcard` эталона: изображение + имя + 4 ключевых слова из cards.json. */
-function CardStep({ cardId, lang }: { cardId: string; lang: 'ru' | 'en' }) {
+function CardStep({ cardId, lang }: { cardId: string; lang: Lang }) {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const card = cardById.get(cardId);

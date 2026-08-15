@@ -9,12 +9,13 @@
  */
 import { cardById } from './content';
 import i18n from './i18n';
+import type { Lang } from './lang';
 import { pickPhrase } from './phrases';
 import type { PlannedPush } from './pushPlan';
 
 /** Тело пуша: вариант выбирается по дате самого пуша, поэтому текст стабилен в течение дня
  *  (logic-spec §9) и не меняется при каждом пересчёте плана. */
-export function pushBody(p: PlannedPush, lang: 'ru' | 'en'): string {
+export function pushBody(p: PlannedPush, lang: Lang): string {
   const card = p.cardId ? cardById.get(p.cardId) : undefined;
   const n = p.n ?? 0;
   return pickPhrase(p.phraseKey, p.date, lang, {

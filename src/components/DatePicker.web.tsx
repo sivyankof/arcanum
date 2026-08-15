@@ -4,7 +4,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
-import { localDateISO, localeTag, parseISODate } from '../lib/dates';
+import { localDateISO, parseISODate } from '../lib/dates';
+import { localeTag } from '../lib/lang';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { ModalPanel } from './ModalPanel';

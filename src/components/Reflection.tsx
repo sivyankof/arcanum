@@ -20,6 +20,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { hapticTap } from '../lib/haptics';
 import { OUTCOME_MARK, type Outcome } from '../lib/journal';
+import type { Lang } from '../lib/lang';
 import { pickPhrase } from '../lib/phrases';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -41,7 +42,7 @@ export function Reflection({
 }: {
   cardName: string;
   dateISO: string;
-  lang: 'ru' | 'en';
+  lang: Lang;
   outcome?: Outcome;
   onAnswer: (o: Outcome) => void;
 }) {

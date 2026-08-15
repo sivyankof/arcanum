@@ -6,6 +6,7 @@
  */
 import phrasesJson from '../../content/phrases.json';
 import { fnv1a32 } from './content';
+import type { CanonLang, Lang } from './lang';
 
 interface Phrase { ru: string; en: string }
 
@@ -25,12 +26,14 @@ function variantsAt(key: string): Phrase[] {
 export function pickPhrase(
   key: string,
   dateISO: string,
-  lang: 'ru' | 'en',
+  lang: Lang,
   vars: Record<string, string | number> = {},
 ): string {
   const variants = variantsAt(key);
   if (variants.length === 0) return '';
-  const text = variants[fnv1a32(`${dateISO}:${key}`) % variants.length][lang];
+  // Phrase хранит только ru/en (es/pt появятся с переводами, задача 28) — узкий индекс
+  // безопасен и сейчас: lang шире стал только на уровне сигнатуры (спека 27, задача 2)
+  const text = variants[fnv1a32(`${dateISO}:${key}`) % variants.length][lang as CanonLang];
   return text.replace(/\{(\w+)\}/g, (whole, name: string) =>
     name in vars ? String(vars[name]) : whole,
   );

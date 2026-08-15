@@ -6,7 +6,7 @@ import DateTimePicker, { type DateTimePickerEvent } from '@react-native-communit
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet } from 'react-native';
-import { localeTag } from '../lib/dates';
+import { localeTag } from '../lib/lang';
 import { formatHHMM, parseHHMM } from '../lib/settings';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';

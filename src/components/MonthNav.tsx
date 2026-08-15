@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { formatMonthTitle } from '../lib/dates';
 import { hapticTap } from '../lib/haptics';
+import type { Lang } from '../lib/lang';
 import { spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
@@ -40,7 +41,7 @@ export function MonthNav({
   onNext,
 }: {
   month: string; // YYYY-MM
-  lang: 'ru' | 'en';
+  lang: Lang;
   hasPrev: boolean; // есть месяц старше
   hasNext: boolean; // есть месяц свежее
   onPrev: () => void;
