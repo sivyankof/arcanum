@@ -5,6 +5,7 @@
  *  docs/logic-spec.md §3 (сбор и использование), §9 (никакого Math.random в выборе текста/карты).
  */
 import { localDateISO } from './dates';
+import type { SpreadDraw } from './spread';
 
 /** Ответ вечерней рефлексии (logic-spec §3). */
 export type Outcome = 'yes' | 'partly' | 'no';
@@ -96,11 +97,9 @@ function byDateDesc(a: DailyDraw, b: DailyDraw): number {
   return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
 }
 
-/** Месяцы, в которых есть записи, новые первыми: `['2026-08', '2026-07']`.
- *  Навигатор дневника листает только их — пустых месяцев в ленте не бывает. */
+/** Только дни (карточка месяца, тесты старых вызовов). */
 export function monthsWithEntries(history: DailyDraw[]): string[] {
-  const months = new Set(history.map((h) => monthOf(h.date)));
-  return [...months].sort().reverse();
+  return journalMonths(history, []);
 }
 
 /** Записи календарного месяца, новые сверху. */
@@ -156,20 +155,53 @@ export function outcomeStats(history: DailyDraw[], month: string): OutcomeStats 
   return { answered: yes + partly + no, resonated: yes + partly, yes, partly, no };
 }
 
-/** Записи, попавшие под фильтр ленты. */
-export function filterEntries(entries: DailyDraw[], filter: JournalFilter): DailyDraw[] {
+/** Запись единой ленты дневника (спека 36): карта дня или сохранённый расклад. */
+export type JournalEntry = { kind: 'day'; entry: DailyDraw } | { kind: 'spread'; entry: SpreadDraw };
+
+/** Ключ строки списка: дата у дня больше не уникальна (в день бывает несколько раскладов). */
+export function journalKey(e: JournalEntry): string {
+  return e.kind === 'day' ? `d:${e.entry.date}` : `s:${e.entry.ts}`;
+}
+
+/** Месяцы, в которых есть записи любого вида, новые первыми: `['2026-08', '2026-07']`.
+ *  Навигатор дневника листает только их — пустых месяцев в ленте не бывает. */
+export function journalMonths(history: DailyDraw[], spreads: SpreadDraw[]): string[] {
+  const months = new Set([...history, ...spreads].map((x) => monthOf(x.date)));
+  return [...months].sort().reverse();
+}
+
+/** Лента месяца: по дате убыв.; внутри одного дня — запись дня первой (утренний ритуал),
+ *  затем расклады по ts убыв. (свежий выше). */
+export function journalOfMonth(history: DailyDraw[], spreads: SpreadDraw[], month: string): JournalEntry[] {
+  const days: JournalEntry[] = entriesOfMonth(history, month).map((entry) => ({ kind: 'day', entry }));
+  const sp: JournalEntry[] = spreads
+    .filter((s) => monthOf(s.date) === month)
+    .map((entry) => ({ kind: 'spread', entry }));
+  return [...days, ...sp].sort((a, b) => {
+    if (a.entry.date !== b.entry.date) return a.entry.date < b.entry.date ? 1 : -1;
+    if (a.kind !== b.kind) return a.kind === 'day' ? -1 : 1;
+    if (a.kind === 'spread' && b.kind === 'spread') return b.entry.ts - a.entry.ts;
+    return 0;
+  });
+}
+
+/** Записи ленты под фильтром: ответы — только дни; «с заметкой» — день с заметкой или расклад,
+ *  где пользователь что-то написал (заметка ИЛИ вопрос). */
+export function filterJournal(entries: JournalEntry[], filter: JournalFilter): JournalEntry[] {
   if (filter === 'all') return entries;
-  if (filter === 'note') return entries.filter((e) => !!e.note);
-  return entries.filter((e) => e.outcome === filter);
+  if (filter === 'note') {
+    return entries.filter((e) => (e.kind === 'day' ? !!e.entry.note : !!(e.entry.note || e.entry.question)));
+  }
+  return entries.filter((e) => e.kind === 'day' && e.entry.outcome === filter);
 }
 
 /** Числа для чипов-фильтров. Чип с нулём не показывается, поэтому счёт нужен заранее. */
-export function filterCounts(entries: DailyDraw[]): Record<JournalFilter, number> {
+export function journalCounts(entries: JournalEntry[]): Record<JournalFilter, number> {
   return {
     all: entries.length,
-    yes: filterEntries(entries, 'yes').length,
-    partly: filterEntries(entries, 'partly').length,
-    no: filterEntries(entries, 'no').length,
-    note: filterEntries(entries, 'note').length,
+    yes: filterJournal(entries, 'yes').length,
+    partly: filterJournal(entries, 'partly').length,
+    no: filterJournal(entries, 'no').length,
+    note: filterJournal(entries, 'note').length,
   };
 }

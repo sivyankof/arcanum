@@ -29,8 +29,8 @@ import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import {
   entriesOfMonth,
-  filterCounts,
-  filterEntries,
+  filterJournal,
+  journalCounts,
   JOURNAL_FILTERS,
   monthsWithEntries,
   monthSummary,
@@ -78,7 +78,13 @@ export default function ProfileScreen() {
   // смена месяца сбрасывает фильтр: счётчики в чипах относятся к текущему месяцу
   React.useEffect(() => setFilter('all'), [month]);
 
-  const counts = React.useMemo(() => filterCounts(entries), [entries]);
+  // Временная заплата (спека 36, задача 5): journal.ts теперь работает с единой лентой
+  // JournalEntry (дни + расклады), а этот экран пока показывает только дни. Задача 13
+  // перепишет экран целиком на журнал раскладов — здесь только минимальная адаптация вызовов.
+  const counts = React.useMemo(
+    () => journalCounts(entries.map((entry) => ({ kind: 'day' as const, entry }))),
+    [entries],
+  );
   // чип с нулём не показываем — тап по нему вёл бы в пустоту; «Все» остаётся всегда
   const chips = React.useMemo(
     () => JOURNAL_FILTERS.filter((f) => f === 'all' || counts[f] > 0),
@@ -90,7 +96,14 @@ export default function ProfileScreen() {
     if (!chips.includes(filter)) setFilter('all');
   }, [chips, filter]);
 
-  const shown = React.useMemo(() => filterEntries(entries, filter), [entries, filter]);
+  // Та же временная заплата: узкий каст назад к DailyDraw[] сохраняет поведение экрана.
+  const shown = React.useMemo(
+    () =>
+      filterJournal(entries.map((entry) => ({ kind: 'day' as const, entry })), filter).map(
+        (e) => e.entry as DailyDraw,
+      ),
+    [entries, filter],
+  );
 
   // месяцы отсортированы от новых к старым: старший месяц лежит ДАЛЬШЕ по списку
   const index = month ? months.indexOf(month) : -1;
