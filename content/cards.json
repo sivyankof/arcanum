@@ -57,7 +57,7 @@
    },
    "content": {
     "general": {
-     "ru": "Дурак — карта начала пути. Она говорит о новом этапе, который требует доверия к жизни: вы стоите на краю неизвестного, и именно готовность шагнуть делает вас свободным. Это энергия чистого потенциала — без гарантий, но с огромными возможностями. Карта советует действовать с открытым сердцем, но не забывать смотреть под ноги.",
+     "ru": "Дурак — карта начала пути. Она говорит о новом этапе, который требует доверия к жизни: вы стоите на краю неизвестного, и именно готовность шагнуть даёт свободу. Это энергия чистого потенциала — без гарантий, но с огромными возможностями. Карта советует действовать с открытым сердцем, но не забывать смотреть под ноги.",
      "en": "The Fool is the card of beginnings. It speaks of a new chapter that asks you to trust life: you stand at the edge of the unknown, and the willingness to take the step is what sets you free. This is pure potential — no guarantees, but endless possibility. The card advises an open heart, while still minding where you step.",
      "status": "reviewed"
     },
@@ -1141,8 +1141,8 @@
    },
    "content": {
     "general": {
-     "ru": "Отшельник — карта осознанного уединения. Наступило время отойти от шума, чужих мнений и обязательной активности, чтобы услышать себя. Это не одиночество-наказание, а пауза для поиска смысла: чего вы на самом деле хотите, куда идёте. Ответы придут не извне, а из тишины. Возможна и встреча с мудрым человеком — наставником или тем, чей опыт сейчас важен.",
-     "en": "The Hermit is the card of chosen solitude. It's time to step away from noise, other people's opinions and constant activity in order to hear yourself. This isn't loneliness as punishment — it's a pause to find meaning: what you truly want, where you're going. The answers will come not from outside, but from stillness. A wise person may also appear — a mentor, or someone whose experience matters now.",
+     "ru": "Отшельник — карта осознанного уединения. Наступило время отойти от шума, чужих мнений и обязательной активности, чтобы услышать себя. Это не одиночество-наказание, а пауза для поиска смысла: чего вы на самом деле хотите, куда идёте. Ответы стоит искать не извне, а в тишине. Возможна и встреча с мудрым человеком — наставником или тем, чей опыт сейчас важен.",
+     "en": "The Hermit is the card of chosen solitude. It's time to step away from noise, other people's opinions and constant activity in order to hear yourself. This isn't loneliness as punishment — it's a pause to find meaning: what you truly want, where you're going. The answers are best sought not outside, but in stillness. A wise person may also appear — a mentor, or someone whose experience matters now.",
      "status": "reviewed"
     },
     "reversed": {
@@ -1532,8 +1532,8 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня не торопите события. Если что-то не движется — оставьте, вернётесь позже. Лучший ход дня — сменить угол зрения: пройдите другой дорогой, выслушайте противоположное мнение, задайте себе вопрос «а что, если всё наоборот?». Ответ придёт в спокойствии.",
-     "en": "Today, don't rush things. If something isn't moving, set it down — you'll come back to it. The day's best move is a change of angle: take a different route, hear out an opposing view, ask yourself 'what if it's the other way around?'. The answer will come in stillness.",
+     "ru": "Сегодня не торопите события. Если что-то не движется — оставьте, вернётесь позже. Лучший ход дня — сменить угол зрения: пройдите другой дорогой, выслушайте противоположное мнение, задайте себе вопрос «а что, если всё наоборот?». Ответ приходит в спокойствии.",
+     "en": "Today, don't rush things. If something isn't moving, set it down — you'll come back to it. The day's best move is a change of angle: take a different route, hear out an opposing view, ask yourself 'what if it's the other way around?'. The answer comes in stillness.",
      "status": "reviewed"
     },
     "symbolism": {
@@ -1984,8 +1984,8 @@
    },
    "content": {
     "general": {
-     "ru": "Башня — карта крушения иллюзий. Рушится не ваша жизнь, а конструкция, которая была построена на шатком основании: самообман, отношения «на честном слове», планы, не выдерживающие проверки реальностью. Да, это внезапно и неприятно. Но молния на карте — это вспышка правды: вы наконец видите, как всё обстоит на самом деле. То, что было настоящим, останется с вами. А на расчищенном месте вы построите прочнее — уже на правде.",
-     "en": "The Tower is the card of illusions collapsing. It is not your life falling apart, but a structure built on shaky ground: self-deception, a relationship held together by wishful thinking, plans that don't survive contact with reality. Yes, it is sudden and unpleasant. But the lightning on the card is a flash of truth: at last you see things as they really are. Whatever was genuine will remain with you. And on the cleared ground you will build something stronger — this time on truth.",
+     "ru": "Башня — карта крушения иллюзий. Рушится не ваша жизнь, а конструкция, которая была построена на шатком основании: самообман, отношения «на честном слове», планы, не выдерживающие проверки реальностью. Да, это внезапно и неприятно. Но молния на карте — это вспышка правды: вы наконец видите, как всё обстоит на самом деле. То, что было настоящим, останется с вами. А на расчищенном месте можно строить прочнее — уже на правде.",
+     "en": "The Tower is the card of illusions collapsing. It is not your life falling apart, but a structure built on shaky ground: self-deception, a relationship held together by wishful thinking, plans that don't survive contact with reality. Yes, it is sudden and unpleasant. But the lightning on the card is a flash of truth: at last you see things as they really are. Whatever was genuine will remain with you. And the cleared ground leaves room to build something stronger — this time on truth.",
      "status": "reviewed"
     },
     "reversed": {
@@ -2121,8 +2121,8 @@
      "status": "reviewed"
     },
     "career": {
-     "ru": "В работе — возвращение вдохновения и дальней цели: вы снова видите, ради чего всё это. Хорошее время для творческих проектов, обучения, публичных шагов — вас заметят. Результаты придут не мгновенно, но направление верное. Не разменивайте мечту на «так надо».",
-     "en": "At work — inspiration and long-term vision return: you can see again what it is all for. A good time for creative projects, learning and stepping into visibility — you will be noticed. Results won't be instant, but the direction is true. Don't trade your dream for 'that's just how it is'.",
+     "ru": "В работе — возвращение вдохновения и дальней цели: вы снова видите, ради чего всё это. Хорошее время для творческих проектов, обучения, публичных шагов — есть чем заявить о себе. Результаты редко бывают мгновенными, но направление верное. Не разменивайте мечту на «так надо».",
+     "en": "At work — inspiration and long-term vision return: you can see again what it is all for. A good time for creative projects, learning and stepping into visibility — you have something worth showing. Results won't be instant, but the direction is true. Don't trade your dream for 'that's just how it is'.",
      "status": "reviewed"
     },
     "finances": {
@@ -2348,8 +2348,8 @@
    },
    "content": {
     "general": {
-     "ru": "Солнце — одна из самых счастливых карт колоды. Ясность, тепло, успех, который не нужно выгрызать: всё складывается естественно. У Уэйта это «материальное счастье и довольство» — радость простая и настоящая. Тучи рассеялись, вы видите ситуацию как есть, и она хороша. Карта советует не искать подвох, а разрешить себе радоваться и делиться этим светом с другими.",
-     "en": "The Sun is one of the happiest cards in the deck. Clarity, warmth, success you don't have to fight for: things fall into place naturally. Waite calls it 'material happiness and contentment' — joy that is simple and real. The clouds have cleared, you see the situation as it is, and it's good. The card's advice: stop looking for a catch, let yourself enjoy this, and share the light with others.",
+     "ru": "Солнце — одна из самых счастливых карт колоды. Ясность, тепло, успех, который не нужно выгрызать: всё складывается естественно. Радость здесь простая и настоящая — из тех, что не нужно объяснять. Тучи рассеялись, вы видите ситуацию как есть, и она хороша. Карта советует не искать подвох, а разрешить себе радоваться и делиться этим светом с другими.",
+     "en": "The Sun is one of the happiest cards in the deck. Clarity, warmth, success you don't have to fight for: things fall into place naturally. The joy here is simple and real — the kind that needs no explaining. The clouds have cleared, you see the situation as it is, and it's good. The card's advice: stop looking for a catch, let yourself enjoy this, and share the light with others.",
      "status": "reviewed"
     },
     "reversed": {
@@ -2941,8 +2941,8 @@
    },
    "content": {
     "general": {
-     "ru": "Тройка Жезлов — ваши «корабли» уже в пути: усилия сделаны, и первые результаты приближаются. Это карта расширения горизонтов, дальновидности и спокойной уверенности. Вы стоите на твёрдой почве, и мир отвечает на вашу инициативу. Продолжайте смотреть вперёд: сейчас закладывается то, что принесёт плоды позже, и рядом могут появиться надёжные партнёры.",
-     "en": "The Three of Wands means your ships are already sailing: the effort is made, and the first results are on their way. It's a card of widening horizons, foresight and quiet confidence. You stand on solid ground, and the world is responding to your initiative. Keep looking ahead — what you set in motion now will bear fruit later, and reliable partners may appear.",
+     "ru": "Тройка Жезлов — ваши «корабли» уже в пути: усилия сделаны, дальше — терпение. Это карта расширения горизонтов, дальновидности и спокойной уверенности. Вы стоите на твёрдой почве, и мир отвечает на вашу инициативу. Продолжайте смотреть вперёд: сейчас закладывается то, что принесёт плоды позже, и рядом могут появиться надёжные партнёры.",
+     "en": "The Three of Wands means your ships are already sailing: the effort is made, and the rest is patience. It's a card of widening horizons, foresight and quiet confidence. You stand on solid ground, and the world is responding to your initiative. Keep looking ahead — what you set in motion now will bear fruit later, and reliable partners may appear.",
      "status": "reviewed"
     },
     "reversed": {
@@ -3862,13 +3862,13 @@
    },
    "content": {
     "general": {
-     "ru": "Паж Жезлов — искра нового интереса. Как человек это энергичный энтузиаст, часто молодой душой: любопытный, искренний, легко загорающийся идеями и приносящий новости. Как энергия — начало увлечения, первый импульс, вдохновляющее известие. Совет карты: позвольте себе быть новичком. Пробуйте, спрашивайте, играйте — сейчас важнее зажечься, чем всё просчитать.",
+     "ru": "Паж Жезлов — искра нового интереса. Как человек — это энергичный энтузиаст, часто молодой душой: любопытный, искренний, легко загорающийся идеями и приносящий новости. Как энергия — начало увлечения, первый импульс, вдохновляющее известие. Совет карты: позвольте себе быть новичком. Пробуйте, спрашивайте, играйте — сейчас важнее зажечься, чем всё просчитать.",
      "en": "The Page of Wands is the spark of a new interest. As a person, this is an energetic enthusiast, often young at heart: curious, sincere, quick to catch fire with ideas and to bring news. As an energy — the start of a passion, a first impulse, an inspiring message. The card's advice: allow yourself to be a beginner. Try, ask, play — right now catching fire matters more than calculating everything.",
      "status": "reviewed"
     },
     "reversed": {
      "ru": "Перевёрнутый Паж Жезлов — энтузиазм без продолжения: вспыхнули и остыли, начали и бросили. Как человек — тот, кто много обещает и мало делает, или вестник неприятных новостей. Возможна нерешительность: идея есть, а первого шага всё нет. Совет: выберите одно увлечение и дайте ему хотя бы месяц.",
-     "en": "Reversed, the Page of Wands is enthusiasm with no follow-through: you flare up and cool down, start and abandon. As a person — someone who promises much and delivers little, or a bearer of unwelcome news. Indecision lingers: the idea is there, the first step isn't. The advice: choose one pursuit and give it a month.",
+     "en": "Reversed, the Page of Wands is enthusiasm with no follow-through: you flare up and cool down, start and abandon. As a person — someone who promises much and delivers little, or a bearer of unwelcome news. Indecision is possible: the idea is there, the first step isn't. The advice: choose one pursuit and give it a month.",
      "status": "reviewed"
     },
     "love": {
@@ -3897,8 +3897,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Юноша в пустыне разглядывает жезл с зелёными листьями — восхищение самой возможностью роста: даже среди песков жизнь пробивается. Саламандры на его одежде — духи огня, символ неугасающего энтузиазма; их незамкнутые кольца — путь, который только начинается. Перо на шляпе — лёгкость и вдохновение. Пирамиды вдали — великие цели: пока далёкие, но уже увиденные.",
-     "en": "A young man in the desert gazes at a wand with green leaves — wonder at the possibility of growth: even among sands, life breaks through. The salamanders on his tunic are fire spirits of unquenchable enthusiasm; their unclosed circles mark a path just beginning. His feather — lightness and inspiration. The distant pyramids are great goals — far off, yet already seen.",
+     "ru": "Юноша в пустыне стоит с поднятым жезлом, будто готовясь объявить новость, и не сводит глаз с его зелёных побегов — даже среди песков жизнь пробивается. Саламандры на его одежде — духи огня, символ неугасающего энтузиазма; их незамкнутые кольца — путь, который только начинается. Перо на шляпе — лёгкость и вдохновение. Пирамиды вдали — великие цели: пока далёкие, но уже увиденные.",
+     "en": "A young man in the desert stands as if about to announce news, his eyes on the green shoots of his raised wand — even among sands, life breaks through. The salamanders on his tunic are fire spirits of unquenchable enthusiasm; their unclosed circles mark a path just beginning. His feather — lightness and inspiration. The distant pyramids are great goals — far off, yet already seen.",
      "status": "reviewed"
     },
     "love_reversed": {
@@ -3977,8 +3977,8 @@
    },
    "content": {
     "general": {
-     "ru": "Рыцарь Жезлов — энергия рывка. Как человек это страстный, обаятельный авантюрист: он быстро загорается, зовёт за собой и не выносит скуки, но может так же быстро исчезнуть. Как энергия — переезд, путешествие, смелый старт, события, которые срываются с места. Совет карты: действуйте решительно, пока горит огонь, — только пристегнитесь.",
-     "en": "The Knight of Wands is the energy of a leap. As a person, this is a passionate, charming adventurer: he catches fire quickly, sweeps others along and can't stand boredom — but he can vanish just as fast. As an energy — a move, a journey, a bold start, events suddenly taking off. The card's advice: act decisively while the fire burns — just fasten your seatbelt.",
+     "ru": "Рыцарь Жезлов — энергия рывка. Как человек — это страстный, обаятельный авантюрист: он быстро загорается, зовёт за собой и не выносит скуки, но может так же быстро исчезнуть. Как энергия — переезд, путешествие, смелый старт, события, которые срываются с места. Совет карты: действуйте решительно, пока горит огонь, — только держите поводья.",
+     "en": "The Knight of Wands is the energy of a leap. As a person, this is a passionate, charming adventurer: he catches fire quickly, sweeps others along and can't stand boredom — but he can vanish just as fast. As an energy — a move, a journey, a bold start, events suddenly taking off. The card's advice: act decisively while the fire burns — just keep hold of the reins.",
      "status": "reviewed"
     },
     "reversed": {
@@ -4092,7 +4092,7 @@
    },
    "content": {
     "general": {
-     "ru": "Королева Жезлов — тепло, харизма и уверенность. Как человек это женщина-солнце: гостеприимная, энергичная, она успевает всё и вдохновляет окружающих одним своим присутствием. Как энергия — период, когда вы в своей силе: привлекательны, заметны, самостоятельны. Совет карты: не приглушайте свой свет ради чужого комфорта — миру нужна именно ваша яркость.",
+     "ru": "Королева Жезлов — тепло, харизма и уверенность. Как человек — это женщина-солнце: гостеприимная, энергичная, она успевает всё и вдохновляет окружающих одним своим присутствием. Как энергия — период, когда вы в своей силе: привлекательны, заметны, самостоятельны. Совет карты: не приглушайте свой свет ради чужого комфорта — миру нужна именно ваша яркость.",
      "en": "The Queen of Wands is warmth, charisma and confidence. As a person, she is a sun-like woman: welcoming, energetic, managing everything and inspiring others simply by being in the room. As an energy — a period when you are in your power: attractive, visible, self-reliant. The card's advice: don't dim your light for anyone's comfort — the world needs your brightness exactly as it is.",
      "status": "reviewed"
     },
@@ -4208,8 +4208,8 @@
    },
    "content": {
     "general": {
-     "ru": "Король Жезлов — зрелый огонь: видение плюс воля. Как человек это прирождённый лидер — честный, великодушный, предприимчивый; он мыслит масштабно и заражает других верой в цель. Как энергия — время взять руководство на себя: у вас достаточно опыта и авторитета. Совет карты: думайте как стратег, действуйте как первопроходец — и не мельчите.",
-     "en": "The King of Wands is mature fire: vision plus will. As a person, he is a born leader — honest, generous, enterprising; he thinks big and infects others with belief in the goal. As an energy — it's time to take charge: you have experience and authority enough. The card's advice: think like a strategist, act like a pioneer — and don't play small.",
+     "ru": "Король Жезлов — зрелый огонь: видение плюс воля. Как человек — это прирождённый лидер, честный, великодушный, предприимчивый: он мыслит масштабно и умеет передать другим веру в цель. Как энергия — время взять руководство на себя: у вас достаточно опыта и авторитета. Совет карты: думайте как стратег, действуйте как первопроходец — и не мельчите.",
+     "en": "The King of Wands is mature fire: vision plus will. As a person, he is a born leader — honest, generous, enterprising; he thinks big and makes others believe in the goal. As an energy — it's time to take charge: you have experience and authority enough. The card's advice: think like a strategist, act like a pioneer — and don't play small.",
      "status": "reviewed"
     },
     "reversed": {
@@ -4439,8 +4439,8 @@
    },
    "content": {
     "general": {
-     "ru": "Двойка Кубков — карта встречи двух сердец. Это взаимность: чувства, которые вы отдаёте, возвращаются к вам. Речь не только о романтике — это и дружба, и партнёрство, и любое честное «мы», где оба слышат друг друга. Карта говорит о согласии, примирении и связи, в которой можно быть собой. Цените того, кто сейчас рядом.",
-     "en": "The Two of Cups is the card of two hearts meeting. It is mutuality: the feelings you give come back to you. It's not only about romance — it's friendship, partnership, any honest \"we\" where both people truly hear each other. The card speaks of harmony, reconciliation and a bond where you can be yourself. Value the person beside you now.",
+     "ru": "Двойка Кубков — карта встречи двух сердец. Это взаимность: чувства, которые вы отдаёте, возвращаются к вам. Речь не только о романтике — это и дружба, и партнёрство, и любое честное «мы», где оба слышат друг друга. Карта говорит о согласии, примирении и связи, в которой можно быть собой. Такая связь стоит того, чтобы её беречь.",
+     "en": "The Two of Cups is the card of two hearts meeting. It is mutuality: the feelings you give come back to you. It's not only about romance — it's friendship, partnership, any honest \"we\" where both people truly hear each other. The card speaks of harmony, reconciliation and a bond where you can be yourself. A bond like this is worth tending.",
      "status": "reviewed"
     },
     "reversed": {
@@ -4915,8 +4915,8 @@
      "status": "reviewed"
     },
     "career": {
-     "ru": "В работе — помощь придёт из прошлого: бывшие коллеги, старые связи, навык, который вы считали забытым. Возможно возвращение к прежнему проекту или сфере на новом уровне. Детская мечта «кем я стану, когда вырасту» может подсказать верное направление.",
-     "en": "At work — help arrives from the past: former colleagues, old connections, a skill you thought forgotten. You may return to a previous project or field at a new level. A childhood dream of \"what I wanted to be\" may point to the right direction.",
+     "ru": "В работе — опора может найтись в прошлом: бывшие коллеги, старые связи, навык, который вы считали забытым. Возможно возвращение к прежнему проекту или сфере на новом уровне. Детская мечта «кем я стану, когда вырасту» может подсказать верное направление.",
+     "en": "At work — support may be found in the past: former colleagues, old connections, a skill you thought forgotten. You may return to a previous project or field at a new level. A childhood dream of \"what I wanted to be\" may point to the right direction.",
      "status": "reviewed"
     },
     "finances": {
@@ -5475,13 +5475,13 @@
    },
    "content": {
     "general": {
-     "ru": "Паж Кубков — нежный вестник чувств. Как человек это романтичная творческая натура: мечтатель с открытым сердцем, порой наивный, но искренний. Как энергия — первое робкое чувство, творческий импульс, приятная новость: признание, приглашение, добрая весть. Совет карты: не отмахивайтесь от «детских» порывов сердца — в них сейчас спрятана подсказка. Разрешите себе удивляться.",
+     "ru": "Паж Кубков — нежный вестник чувств. Как человек — это романтичная творческая натура: мечтатель с открытым сердцем, порой наивный, но искренний. Как энергия — первое робкое чувство, творческий импульс, приятная новость: признание, приглашение, добрая весть. Совет карты: не отмахивайтесь от «детских» порывов сердца — в них сейчас спрятана подсказка. Разрешите себе удивляться.",
      "en": "The Page of Cups is a tender messenger of feeling. As a person — a romantic, creative soul: a dreamer with an open heart, naive at times but sincere. As an energy — a first shy feeling, a creative impulse, pleasant news: a confession, an invitation, glad tidings. The card's advice: don't dismiss the heart's 'childish' impulses — they carry a hint right now. Let yourself be amazed.",
      "status": "reviewed"
     },
     "reversed": {
      "ru": "Перевёрнутый Паж Кубков — обидчивость, капризы, бегство в фантазии от реальности. Возможно, кто-то рядом ведёт себя незрело — или вы сами ждёте, что ваши чувства угадают без слов. Ещё одно значение — задержка приятных новостей. Совет: скажите о чувствах прямо, по-взрослому.",
-     "en": "Reversed, the Page of Cups is touchiness, moodiness, escaping into fantasy from reality. Someone near you may be acting immaturely — or you expect your feelings to be guessed without words. It can also mean pleasant news delayed. The advice: speak your feelings directly, like an adult.",
+     "en": "Reversed, the Page of Cups is touchiness, moodiness, escaping from reality into fantasy. Someone near you may be acting immaturely — or you expect your feelings to be guessed without words. It can also mean pleasant news delayed. The advice: speak your feelings directly, like an adult.",
      "status": "reviewed"
     },
     "love": {
@@ -5705,7 +5705,7 @@
    },
    "content": {
     "general": {
-     "ru": "Королева Кубков — сердце, которое видит. Как человек это женщина глубокой эмпатии: она чувствует других без слов, умеет заботиться, ей доверяют самое сокровенное. Как энергия — развитая интуиция, эмоциональная зрелость, тихая душевная сила. Совет карты: доверьтесь внутреннему голосу — сейчас он точнее логики. И, заботясь о других, не растворяйтесь в них.",
+     "ru": "Королева Кубков — сердце, которое видит. Как человек — это женщина глубокой эмпатии: она чувствует других без слов, умеет заботиться, ей доверяют самое сокровенное. Как энергия — развитая интуиция, эмоциональная зрелость, тихая душевная сила. Совет карты: доверьтесь внутреннему голосу — сейчас он точнее логики. И, заботясь о других, не растворяйтесь в них.",
      "en": "The Queen of Cups is a heart that sees. As a person — a woman of deep empathy: she senses others without words, knows how to care, and people trust her with their secrets. As an energy — refined intuition, emotional maturity, quiet inner strength. The card's advice: trust your inner voice — right now it is more accurate than logic. And while caring for others, don't dissolve into them.",
      "status": "reviewed"
     },
@@ -5820,7 +5820,7 @@
    },
    "content": {
     "general": {
-     "ru": "Король Кубков — мастер чувств. Как человек это зрелый, надёжный мужчина или носитель такой энергии: добрый, дипломатичный, спокойный даже в бурю — врач, наставник, мудрый руководитель. Как энергия — эмоциональная зрелость: чувствовать глубоко, но не позволять волнам управлять собой. Совет карты: откликайтесь сердцем, а решения принимайте с ясной головой.",
+     "ru": "Король Кубков — мастер чувств. Как человек — это зрелый, надёжный мужчина или носитель такой энергии: добрый, дипломатичный, спокойный даже в бурю — врач, наставник, мудрый руководитель. Как энергия — эмоциональная зрелость: чувствовать глубоко, но не позволять волнам управлять собой. Совет карты: откликайтесь сердцем, а решения принимайте с ясной головой.",
      "en": "The King of Cups is a master of feeling. As a person — a mature, dependable man, or anyone carrying this energy: kind, diplomatic, calm even in a storm — a healer, a mentor, a wise leader. As an energy — emotional maturity: feeling deeply without letting the waves take the helm. The card's advice: respond with your heart, but decide with a clear head.",
      "status": "reviewed"
     },
@@ -6748,7 +6748,7 @@
     },
     "reversed": {
      "ru": "Перевёрнутая Восьмёрка Мечей — момент освобождения: повязка спадает, и вы наконец видите варианты, которых будто бы не было. Вы перестаёте верить страху на слово. Иногда карта указывает на обратное — привычку возвращаться в знакомую несвободу. Спросите себя: что я продолжаю терпеть просто по инерции?",
-     "en": "Reversed, the Eight of Swords is a moment of release: the blindfold slips, and you finally see options that weren't there before. You stop taking fear at its word. Sometimes the card points the other way — a habit of returning to a familiar cage. Ask yourself: what am I still tolerating out of sheer inertia?",
+     "en": "Reversed, the Eight of Swords is a moment of release: the blindfold slips, and you finally see options that only seemed not to exist. You stop taking fear at its word. Sometimes the card points the other way — a habit of returning to a familiar cage. Ask yourself: what am I still tolerating out of sheer inertia?",
      "status": "reviewed"
     },
     "love": {
@@ -7087,7 +7087,7 @@
    },
    "content": {
     "general": {
-     "ru": "Паж Мечей — энергия живого ума: любопытство, вопросы, свежие идеи и новости. Как человек это наблюдательная, остроумная натура — молодая душой, быстро схватывающая, иногда слишком прямая в словах. Как совет карта предлагает включить внутреннего исследователя: узнавайте, спрашивайте, проверяйте факты, учитесь новому. Только не спешите с выводами: информация — это ещё не вся правда.",
+     "ru": "Паж Мечей — энергия живого ума: любопытство, вопросы, свежие идеи и новости. Как человек — это наблюдательная, остроумная натура, молодая душой, быстро схватывающая, иногда слишком прямая в словах. Как совет карта предлагает включить внутреннего исследователя: узнавайте, спрашивайте, проверяйте факты, учитесь новому. Только не спешите с выводами: информация — это ещё не вся правда.",
      "en": "The Page of Swords is the energy of a lively mind: curiosity, questions, fresh ideas and news. As a person, this is an observant, witty character — young at heart, quick to grasp things, sometimes too blunt. As advice, the card invites you to switch on your inner explorer: find out, ask, check the facts, learn something new. Just don't rush to conclusions — information is not yet the whole truth.",
      "status": "reviewed"
     },
@@ -7122,8 +7122,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Юноша стоит на возвышении, держа меч обеими руками, и оглядывается по сторонам — ум насторожен и готов к новому. Ветер треплет волосы и деревья: воздух, стихия мысли, здесь в постоянном движении. Рваные облака — идеи и новости, сменяющие друг друга. Птицы в небе — лёгкость и скорость мысли, которой ещё предстоит найти направление.",
-     "en": "A youth stands on high ground, sword in both hands, glancing around — the mind alert and ready for what comes. Wind whips his hair and the trees: air, the element of thought, is in constant motion. The ragged clouds are ideas and news replacing one another. The birds overhead are the lightness and speed of a mind seeking its direction.",
+     "ru": "Юноша быстро идёт по неровной земле, держа меч обеими руками, и оглядывается по сторонам — ум насторожен и готов к новому. Ветер треплет волосы и деревья: воздух, стихия мысли, здесь в постоянном движении. Рваные облака — идеи и новости, сменяющие друг друга. Птицы в небе — лёгкость и скорость мысли, которой ещё предстоит найти направление.",
+     "en": "A youth strides briskly over rough ground, sword in both hands, glancing around — the mind alert and ready for what comes. Wind whips his hair and the trees: air, the element of thought, is in constant motion. The ragged clouds are ideas and news replacing one another. The birds overhead are the lightness and speed of a mind seeking its direction.",
      "status": "reviewed"
     },
     "love_reversed": {
@@ -7202,7 +7202,7 @@
    },
    "content": {
     "general": {
-     "ru": "Рыцарь Мечей — стремительное действие: решение принято, и вы летите к цели, не замечая препятствий. Как человек это решительная, прямолинейная натура — умная, убедительная, но порой резкая и нетерпеливая. Как совет карта говорит: пришло время действовать быстро и говорить прямо. Только проверьте направление до старта — на такой скорости сложно поворачивать.",
+     "ru": "Рыцарь Мечей — стремительное действие: решение принято, и вы летите к цели, не замечая препятствий. Как человек — это решительная, прямолинейная натура, умная, убедительная, но порой резкая и нетерпеливая. Как совет карта говорит: пришло время действовать быстро и говорить прямо. Только проверьте направление до старта — на такой скорости сложно поворачивать.",
      "en": "The Knight of Swords is swift action: the decision is made, and you are flying toward the goal, barely noticing obstacles. As a person, this is a decisive, straight-talking character — intelligent and persuasive, but at times abrupt and impatient. As advice, the card says: it's time to move fast and speak plainly. Just check your direction before you launch — at this speed, turning is hard.",
      "status": "reviewed"
     },
@@ -7317,8 +7317,8 @@
    },
    "content": {
     "general": {
-     "ru": "Королева Мечей — ясность, честность и достоинство. Как человек это независимая женщина с острым умом и жизненным опытом: она знала потери, но не ожесточилась, а научилась видеть суть. Говорит прямо, ценит правду, не терпит манипуляций. Как совет карта предлагает включить трезвость: назовите вещи своими именами, обозначьте границы и решайте головой — сердце скажет спасибо позже.",
-     "en": "The Queen of Swords is clarity, honesty and dignity. As a person, she is an independent woman with a sharp mind and life experience: she has known loss, yet didn't harden, learning to see the essence. She speaks plainly, values truth, has no patience for manipulation. As advice, the card calls for sober clarity: call things by their names, set boundaries, decide with your head — your heart will thank you.",
+     "ru": "Королева Мечей — ясность, честность и достоинство. Как человек — это независимая женщина с острым умом и жизненным опытом: она знала потери, но не ожесточилась, а научилась видеть суть. Говорит прямо, ценит правду, не терпит манипуляций — и при этом её прямота не бьёт наотмашь. Как совет карта предлагает включить трезвость: назовите вещи своими именами, обозначьте границы и решайте головой, не отключая сердце.",
+     "en": "The Queen of Swords is clarity, honesty and dignity. As a person, she is an independent woman with a sharp mind and life experience: she has known loss, yet didn't harden, learning to see the essence. She speaks plainly, values truth, has no patience for manipulation — and her directness never strikes to wound. As advice, the card calls for sober clarity: call things by their names, set boundaries, decide with your head without switching off the heart.",
      "status": "reviewed"
     },
     "reversed": {
@@ -7432,7 +7432,7 @@
    },
    "content": {
     "general": {
-     "ru": "Король Мечей — зрелый разум и справедливость. Как человек это интеллектуал с сильным характером: аналитик, юрист, руководитель — тот, кто судит по фактам и держит слово. Он может казаться суховатым, но на него можно опереться. Как совет карта говорит: отложите эмоции, взвесьте факты, примите решение по совести и по правилам — и будьте готовы за него отвечать.",
+     "ru": "Король Мечей — зрелый разум и справедливость. Как человек — это интеллектуал с сильным характером: аналитик, юрист, руководитель — тот, кто судит по фактам и держит слово. Он может казаться суховатым, но на него можно опереться. Как совет карта говорит: отложите эмоции, взвесьте факты, примите решение по совести и по правилам — и будьте готовы за него отвечать.",
      "en": "The King of Swords is mature intellect and fairness. As a person, he is a strong-minded thinker: an analyst, a lawyer, a leader — someone who judges by facts and keeps his word. He may seem a little dry, but you can lean on him. As advice, the card says: set emotions aside, weigh the facts, decide by conscience and by the rules — and be ready to stand behind your decision.",
      "status": "reviewed"
     },
@@ -7467,8 +7467,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Король сидит лицом к нам с поднятым мечом — прямота суждения и готовность отвечать за решения. Меч слегка наклонён: даже строгий суд оставляет место милосердию. Бабочки на троне — преображение, полумесяцы — интуиция за спиной логики. Синие одежды — глубина ума, а две птицы в небе — мысль, свободная и точная, как его слово.",
-     "en": "The King faces us directly, sword raised — straightforward judgment and readiness to answer for his decisions. The blade tilts slightly: even strict justice leaves room for mercy. Butterflies on the throne stand for transformation, the crescents for intuition behind the logic. The blue robes are depth of mind; the two birds overhead are thought — free and precise, like his word.",
+     "ru": "Король сидит лицом к нам с поднятым мечом — прямота суждения и готовность отвечать за решения. Меч слегка наклонён: это власть решать, данная должностью, а не личной неприязнью. Бабочки на троне — преображение, полумесяцы — интуиция за спиной логики. Синие одежды — глубина ума, а две птицы в небе — мысль, свободная и точная, как его слово.",
+     "en": "The King faces us directly, sword raised — straightforward judgment and readiness to answer for his decisions. The blade tilts slightly: this is the authority to decide that comes with the office, not personal ill will. Butterflies on the throne stand for transformation, the crescents for intuition behind the logic. The blue robes are depth of mind; the two birds overhead are thought — free and precise, like his word.",
      "status": "reviewed"
     },
     "love_reversed": {
@@ -8018,8 +8018,8 @@
      "status": "reviewed"
     },
     "reversed": {
-     "ru": "Перевёрнутая Пятёрка Пентаклей — конец трудной полосы: возвращаются силы, доход, вера в себя. Дверь, мимо которой вы ходили, наконец открылась. Иногда карта просит пересмотреть отношение к себе в кризисе: вы сделали больше, чем себе засчитали. Принимайте помощь без чувства вины.",
-     "en": "Reversed, the Five of Pentacles marks the end of the hard stretch: strength, income and self-belief return. The door you kept walking past has finally opened. Sometimes the card asks you to rethink how you judged yourself in the crisis: you did more than you gave yourself credit for. Accept help without guilt.",
+     "ru": "Перевёрнутая Пятёрка Пентаклей — о конце трудной полосы: возвращаются силы и вера в себя, а нужда отступает. Дверь, мимо которой вы ходили, оказывается открытой. Иногда карта просит пересмотреть отношение к себе в кризисе: вы сделали больше, чем себе засчитали. Принимайте помощь без чувства вины.",
+     "en": "Reversed, the Five of Pentacles is about the end of that hard stretch: strength and self-belief return, and need stops being the main theme. The door you kept walking past turns out to be open. Sometimes the card asks you to rethink how you judged yourself in the crisis: you did more than you gave yourself credit for. Accept help without guilt.",
      "status": "reviewed"
     },
     "love": {
@@ -8484,7 +8484,7 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо и без пары; любовь придёт к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.",
+     "ru": "В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо и без пары; любовь приходит к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.",
      "en": "In love, this card reminds you: wholeness first, partnership second. Your self-sufficiency is attractive — don't dissolve into a partner. If you are single, this is a season when being on your own feels good; love comes to a full life, not to an empty one. In a couple, honour each other's personal space.",
      "status": "reviewed"
     },
@@ -8740,8 +8740,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Юноша, заворожённо глядящий на пентакль в поднятых руках, — сосредоточенность на цели и уважение к материальному. Вспаханное поле рядом — готовность к посеву: идеи требуют почвы и труда. Зелёный луг и роща — рост, который только начинается. Медленный шаг Пажа — обстоятельность: он не бежит, он изучает дорогу.",
-     "en": "The youth gazing raptly at the pentacle in his raised hands shows focus and respect for the material world. The ploughed field nearby means readiness for sowing: ideas need soil and labour. The green meadow and grove are growth that is only beginning. The Page's slow step is thoroughness: he doesn't run, he studies the road.",
+     "ru": "Юноша, заворожённо глядящий на пентакль, который парит над его поднятыми ладонями, — сосредоточенность на цели и уважение к материальному. Вспаханное поле рядом — готовность к посеву: идеи требуют почвы и труда. Зелёный луг и роща — рост, который только начинается. Медленный шаг Пажа — обстоятельность: он не бежит, он изучает дорогу.",
+     "en": "The youth gazing raptly at the pentacle hovering above his raised hands shows focus and respect for the material world. The ploughed field nearby means readiness for sowing: ideas need soil and labour. The green meadow and grove are growth that is only beginning. The Page's slow step is thoroughness: he doesn't run, he studies the road.",
      "status": "reviewed"
     },
     "love_reversed": {
@@ -8835,7 +8835,7 @@
      "status": "reviewed"
     },
     "career": {
-     "ru": "Карта стабильной, добросовестной работы: проекты, требующие выдержки, дедлайны, которые вы закрываете без шума. Ваша репутация надёжного человека — это капитал. Не ждите мгновенного признания: оно придёт с накопленным результатом. Продолжайте — система бьёт вдохновение на длинной дистанции.",
+     "ru": "Карта стабильной, добросовестной работы: проекты, требующие выдержки, дедлайны, которые вы закрываете без шума. Ваша репутация надёжного человека — это капитал. Не ждите мгновенного признания: оно приходит с накопленным результатом. Продолжайте — система бьёт вдохновение на длинной дистанции.",
      "en": "The card of steady, conscientious work: projects that demand stamina, deadlines you meet without fuss. Your reputation as a dependable person is capital. Don't expect instant recognition: it comes with accumulated results. Keep going — over the long run, consistency beats inspiration.",
      "status": "reviewed"
     },
@@ -8855,8 +8855,8 @@
      "status": "reviewed"
     },
     "symbolism": {
-     "ru": "Тяжёлый вороной конь стоит неподвижно — сила, поставленная на службу терпению. Рыцарь держит пентакль, но смотрит вдаль поверх него — цель важнее награды. Вспаханное поле вокруг — уже вложенный труд, ожидающий всходов. Дубовые листья на шлеме — выносливость и верность. Это единственный рыцарь Таро, который никуда не спешит.",
-     "en": "The heavy black horse stands motionless — strength in the service of patience. The Knight holds the pentacle but looks beyond it: the goal matters more than the prize. The ploughed field is labour already invested, waiting to sprout. The oak leaves on his helmet mean endurance and loyalty. He is the only knight in the Tarot who never hurries.",
+     "ru": "Тяжёлый вороной конь идёт медленно и без устали — сила, поставленная на службу терпению. Рыцарь держит пентакль, но смотрит вдаль поверх него — цель важнее награды. Вспаханное поле вокруг — уже вложенный труд, ожидающий всходов. Дубовые листья на шлеме — выносливость и верность. Это единственный рыцарь Таро, который никуда не спешит.",
+     "en": "The heavy black horse moves at a slow, tireless pace — strength in the service of patience. The Knight holds the pentacle but looks beyond it: the goal matters more than the prize. The ploughed field is labour already invested, waiting to sprout. The oak leaves on his helmet mean endurance and loyalty. He is the only knight in the Tarot who never hurries.",
      "status": "reviewed"
     },
     "love_reversed": {
@@ -9050,13 +9050,13 @@
    },
    "content": {
     "general": {
-     "ru": "Король Пентаклей — человек, который построил своё благополучие и щедро им делится. Как человек — состоявшийся, надёжный, практичный лидер: хозяин своего дела и своего слова. Как совет — действуйте по-хозяйски: берите ответственность, стройте долгосрочно, опирайтесь на реальные цифры и проверенных людей. Успех — это система, а не удача.",
-     "en": "The King of Pentacles is someone who has built his prosperity and shares it generously. As a person, he is an accomplished, reliable, practical leader — master of his business and of his word. As advice — think like an owner: take responsibility, build for the long term, rely on real numbers and proven people. Success is a system, not luck.",
+     "ru": "Король Пентаклей — человек, который построил своё благополучие и щедро им делится. Как человек — состоявшийся, надёжный, практичный лидер: хозяин своего дела и своего слова. Как совет — действуйте по-хозяйски: берите ответственность, стройте долгосрочно, опирайтесь на реальные цифры и проверенных людей. Его достаток вырос из системы, а не из удачи.",
+     "en": "The King of Pentacles is someone who has built his prosperity and shares it generously. As a person, he is an accomplished, reliable, practical leader — master of his business and of his word. As advice — think like an owner: take responsibility, build for the long term, rely on real numbers and proven people. His wealth grew out of a system, not out of luck.",
      "status": "reviewed"
     },
     "reversed": {
      "ru": "Перевёрнутый Король Пентаклей предупреждает: материальное стало самоцелью. Возможны жадность, упрямство, попытки всё контролировать деньгами — ваши или человека рядом. Иногда это страх потерять статус и накопленное. Спросите себя: чем владеете вы — и что уже владеет вами?",
-     "en": "Reversed, the King of Pentacles warns that the material has become an end in itself. Greed, stubbornness, or attempts to control everything through money are possible — yours or a loved one's. Sometimes it is fear of losing status and what has been built. Ask yourself: what do you own — and what already owns you?",
+     "en": "Reversed, the King of Pentacles warns that the material has become an end in itself. Greed, stubbornness, or attempts to control everything through money are possible — yours or those of someone close. Sometimes it is fear of losing status and what has been built. Ask yourself: what do you own — and what already owns you?",
      "status": "reviewed"
     },
     "love": {
