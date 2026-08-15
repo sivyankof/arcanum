@@ -28,6 +28,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "content" / "cards.json"
+COURSE_PATH = ROOT / "content" / "course.json"
 PHRASES_PATH = ROOT / "content" / "phrases.json"
 
 # --- пороги и словари (docs/content-guide.md) ---------------------------------
@@ -172,8 +173,11 @@ SEARCH_SPREAD_MAX = 8      # слово, подходящее больше че�
 OPENING_MIN_REPEAT = 3     # порог однообразия зачинов (задача 25)
 TIC_MIN_COUNT = 15         # оборот-тик по корпусу
 TIC_CLUSTER_MIN = 3        # редкий оборот: кучность внутри карты имеет смысл считать от него
+QUIZ_SPREAD_MAX = 0.33     # допустимый разброс длин вариантов внутри вопроса (задача 29)
+QUIZ_LONGEST_PER_LESSON = 2  # сколько вопросов урока могут иметь самый длинный верный вариант
 CLUSTER_BLOCKS = 3         # в скольких блоках одной карты оборот считается тиком автора
 LEN_RATIO_TOLERANCE = 0.45 # допуск отклонения отношения длин en/ru от медианы корпуса
+MIN_LEN_FOR_RATIO = 25     # короче этого отношение длин не информативно
 
 LANGS = ("ru", "en")
 
@@ -183,6 +187,47 @@ LANGS = ("ru", "en")
 def load_cards() -> list[dict]:
     data = json.loads(CARDS_PATH.read_text(encoding="utf-8"))
     return data["cards"] if isinstance(data, dict) else data
+
+
+def load_course_units() -> list[dict]:
+    """Уроки курса в форме «псевдокарт», чтобы текстовые проверки работали как есть.
+
+    Курс и карты — разный контент, но проверяются одними правилами: рамка предсказания,
+    род читателя, жаргон, глоссарий, однообразие зачинов. Приводим форму, а не копируем
+    проверки — иначе они разъедутся при первой же правке (правило «повторяется 2+ раза»).
+    """
+    data = json.loads(COURSE_PATH.read_text(encoding="utf-8"))
+    units = []
+    for module in data["modules"]:
+        for lesson in module["lessons"]:
+            content: dict[str, dict[str, str]] = {}
+            theory = lesson.get("theory")
+            if theory:
+                content["theory"] = theory
+            for i, item in enumerate(lesson.get("quiz") or [], start=1):
+                content[f"q{i}"] = item["q"]
+                if item.get("explain"):
+                    content[f"q{i}_explain"] = item["explain"]
+                for j, option in enumerate(item["options"], start=1):
+                    # ⚠️ Неверные варианты нарочно содержат то, что редполитика запрещает
+                    # («точное предсказание», «higher powers») — в этом и состоит дидактика
+                    # вопроса. Помечаем их, чтобы проверки тона и предсказания их пропускали.
+                    wrong = "" if j - 1 == item["correct"] else "_wrong"
+                    content[f"q{i}_opt{j}{wrong}"] = option
+            if content:
+                units.append({"id": lesson["id"], "name": lesson["title"], "content": content})
+    return units
+
+
+def load_quizzes() -> list[tuple[str, int, dict]]:
+    """(id урока, номер вопроса, вопрос) по всем собранным викторинам курса."""
+    data = json.loads(COURSE_PATH.read_text(encoding="utf-8"))
+    out = []
+    for module in data["modules"]:
+        for lesson in module["lessons"]:
+            for i, item in enumerate(lesson.get("quiz") or [], start=1):
+                out.append((lesson["id"], i, item))
+    return out
 
 
 def words(text: str) -> list[str]:
@@ -276,14 +321,23 @@ def _regex_check(cards: list[dict], patterns: dict[str, str], only_blocks=None) 
     return out
 
 
+def _without_distractors(cards: list[dict]) -> list[dict]:
+    """Копия без неверных вариантов викторины: в них запрещённая лексика — приём, а не дефект."""
+    out = []
+    for card in cards:
+        content = {k: v for k, v in (card.get("content") or {}).items() if not k.endswith("_wrong")}
+        out.append({**card, "content": content})
+    return out
+
+
 def check_2_prediction(cards: list[dict]) -> list[str]:
     """Рамка предсказания: «сбудется», «обещает», «вас ждёт»."""
-    return _regex_check(cards, PREDICTION)
+    return _regex_check(_without_distractors(cards), PREDICTION)
 
 
 def check_3_jargon(cards: list[dict]) -> list[str]:
     """Эзотерический жаргон, запрещённый тоном."""
-    return _regex_check(cards, JARGON)
+    return _regex_check(_without_distractors(cards), JARGON)
 
 
 def check_4_medicine(cards: list[dict]) -> list[str]:
@@ -398,7 +452,9 @@ def check_9_ru_en(cards: list[dict]) -> list[str]:
     for card in cards:
         for name, block in (card.get("content") or {}).items():
             ru, en = (block.get("ru") or "").strip(), (block.get("en") or "").strip()
-            if ru and en:
+            # На коротких строках («Да» → «Yes») отношение длин ничего не значит: три знака
+            # против восьми дают «расхождение 267%», хотя перевод точен.
+            if ru and en and len(ru) >= MIN_LEN_FOR_RATIO:
                 ratios.append(len(en) / len(ru))
                 pairs.append((card, name, ru, en))
     if not ratios:
@@ -451,39 +507,80 @@ def check_10_words(cards: list[dict]) -> list[str]:
     return out
 
 
+def check_11_quiz_options(_units: list[dict]) -> list[str]:
+    """Длина вариантов викторины: верный не должен быть самым длинным (задача 29).
+
+    Ученик, не знающий материала, выбирает самый развёрнутый вариант и попадает —
+    вопрос перестаёт проверять знание. Порог: не больше 2 таких вопросов из 5 в уроке.
+    """
+    out = []
+    per_lesson: dict[str, list[int]] = defaultdict(list)
+    for lesson_id, number, item in load_quizzes():
+        for lang in LANGS:
+            lengths = [len(o[lang]) for o in item["options"]]
+            correct = item["correct"]
+            if lengths.index(max(lengths)) == correct and lengths.count(max(lengths)) == 1:
+                if lang == "ru":
+                    per_lesson[lesson_id].append(number)
+                spread = (max(lengths) - min(lengths)) / max(lengths)
+                if spread > QUIZ_SPREAD_MAX:
+                    out.append(f"{lesson_id} в{number}.{lang}: верный самый длинный, "
+                               f"разброс {spread:.0%} ({min(lengths)}→{max(lengths)} знаков)")
+        texts = [o["ru"].strip().lower() for o in item["options"]]
+        if len(set(texts)) != len(texts):
+            out.append(f"{lesson_id} в{number}: варианты повторяются дословно")
+    for lesson_id, numbers in sorted(per_lesson.items()):
+        if len(numbers) > QUIZ_LONGEST_PER_LESSON:
+            out.append(f"[урок] {lesson_id}: верный самый длинный в {len(numbers)} вопросах "
+                       f"из 5 (порог {QUIZ_LONGEST_PER_LESSON}) — вопросы {numbers}")
+    return out
+
+
 CHECKS = [
-    (1, "Лимиты длины блоков", check_1_limits),
-    (2, "Рамка предсказания", check_2_prediction),
-    (3, "Эзотерический жаргон", check_3_jargon),
-    (4, "Медицина в блоках здоровья", check_4_medicine),
-    (5, "Женский род читателя", check_5_gender),
-    (6, "Канонический глоссарий", check_6_glossary),
-    (7, "Однообразие зачинов", check_7_openings),
-    (8, "Обороты-тики и кучность", check_8_tics),
-    (9, "Рассинхрон ru↔en", check_9_ru_en),
-    (10, "Наборы слов", check_10_words),
+    (1, "Лимиты длины блоков", check_1_limits, False),
+    (2, "Рамка предсказания", check_2_prediction, True),
+    (3, "Эзотерический жаргон", check_3_jargon, True),
+    (4, "Медицина в блоках здоровья", check_4_medicine, False),
+    (5, "Женский род читателя", check_5_gender, True),
+    (6, "Канонический глоссарий", check_6_glossary, True),
+    (7, "Однообразие зачинов", check_7_openings, True),
+    (8, "Обороты-тики и кучность", check_8_tics, True),
+    (9, "Рассинхрон ru↔en", check_9_ru_en, True),
+    (10, "Наборы слов", check_10_words, False),
+    (11, "Длина вариантов викторины", check_11_quiz_options, True),
 ]
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Корпусная проверка контента карт (спека 31)")
+    parser = argparse.ArgumentParser(description="Корпусная проверка контента (спека 31)")
     parser.add_argument("--only", nargs="*", type=int, help="номера проверок")
+    parser.add_argument("--scope", choices=("cards", "course"), default="cards",
+                        help="что проверять: корпус карт или тексты курса")
     parser.add_argument("--list", action="store_true", help="показать список проверок")
     args = parser.parse_args()
 
     if args.list:
-        for number, title, _ in CHECKS:
-            print(f"{number:>2}. {title}")
+        for number, title, _, in_course in CHECKS:
+            mark = "карты + курс" if in_course else "только карты"
+            print(f"{number:>2}. {title} ({mark})")
         return 0
 
-    cards = load_cards()
-    print(f"Корпус: {len(cards)} карт, {CARDS_PATH.relative_to(ROOT)}\n")
+    if args.scope == "course":
+        units = load_course_units()
+        print(f"Курс: {len(units)} уроков с текстами, {COURSE_PATH.relative_to(ROOT)}\n")
+    else:
+        units = load_cards()
+        print(f"Корпус: {len(units)} карт, {CARDS_PATH.relative_to(ROOT)}\n")
 
     total = 0
-    for number, title, func in CHECKS:
+    for number, title, func, in_course in CHECKS:
         if args.only and number not in args.only:
             continue
-        findings = func(cards)
+        if args.scope == "course" and not in_course:
+            continue
+        if args.scope == "cards" and number == 11:
+            continue
+        findings = func(units)
         # Справочные строки (медиана длин) находками не считаются.
         real = [f for f in findings if not f.startswith("[справка]")]
         total += len(real)
