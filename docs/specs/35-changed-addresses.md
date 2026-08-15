@@ -11,7 +11,7 @@
 
 ## c03.reversed.ru
 - было: В перевёрнутом положении праздник теряет вкус: за улыбками — усталость, в компании — одиночество. Возможны сплетни, зависть в окружении или излишества, после которых пусто. Карта советует пересмотреть круг общения: выбирайте тех, рядом с кем можно не подстраиваться.
-- стало: В перевёрнутом положении праздник теряет вкус: за улыбками — усталость, в компании — одиночество. Возможны сплетни, зависть в окружении или излишества, после которых пусто. Карта советует пересмотреть круг общения: выбирайте тех, с кем можно быть собой, а не удобной версией себя.
+- стало: В перевёрнутом положении праздник теряет вкус: за улыбками — усталость, в компании — одиночество. Возможны сплетни, зависть в окружении или излишества, после которых пусто. Карта советует пересмотреть круг общения: выбирайте тех, рядом с кем можно быть собой, а не удобной версией себя.
 
 ## c06.career.ru
 - было: В работе — помощь придёт из прошлого: бывшие коллеги, старые связи, навык, который вы считали забытым. Возможно возвращение к прежнему проекту или сфере на новом уровне. Детская мечта о том, кем стать, может подсказать верное направление.
@@ -43,11 +43,11 @@
 
 ## high-priestess.health.en
 - было: For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. Trust what you directly feel more than guesses about it.
-- стало: For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. Set the guessing aside and simply notice what you feel.
+- стало: For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. An answer rarely comes on demand — give it time to surface on its own.
 
 ## high-priestess.health.ru
 - было: Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. Доверяйте прямому ощущению больше, чем домыслам о нём.
-- стало: Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. Не спешите объяснять то, что чувствуете, — просто понаблюдайте.
+- стало: Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. Ответ редко приходит по требованию — дайте ему время созреть.
 
 ## judgement.general.en
 - было: The Last Judgment is the card of awakening and reckoning. A chapter has ended, and you're being called to a new level: a life reassessment, a major decision, or a chance that changes your position. Waite stressed that the true call sounds from within — the trumpet only wakes us to what is already there. The card asks you to take honest stock — without self-blame, but without illusions — and to respond to what has been calling you for a long time.
@@ -63,7 +63,7 @@
 
 ## p09.love.ru
 - было: В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо в одиночестве; любовь придёт к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.
-- стало: В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо и наедине с собой; любовь придёт к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.
+- стало: В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо и без пары; любовь придёт к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.
 
 ## p11.finances.en
 - было: A time for financial literacy: learn, count, plan. First savings, a first investment, a new source of income — start modestly but regularly. Good news about money may arrive. Small sums invested wisely are a habit worth building.
