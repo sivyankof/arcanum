@@ -18,19 +18,30 @@ function variantsAt(key: string): Localized[] {
   return Array.isArray(node) ? (node as Localized[]) : [];
 }
 
-/** Плейсхолдеры {card}, {name}, {n} подставляются ПОСЛЕ выбора варианта (logic-spec §9).
- *  Неизвестный плейсхолдер остаётся в тексте как есть — это заметно при вычитке,
- *  в отличие от тихой подстановки «undefined». */
+/** Выбор варианта из готового списка: hash(seedKey) % число вариантов, плейсхолдеры {card},
+ *  {name}, {n}, {x}, {rank} подставляются ПОСЛЕ выбора (logic-spec §9). Неизвестный плейсхолдер
+ *  остаётся в тексте как есть — это заметно при вычитке, в отличие от тихого «undefined».
+ *  Общий для phrases.json (pickPhrase) и composition.json (composition.ts, спека 36). */
+export function pickVariant(
+  variants: Localized[],
+  seedKey: string,
+  lang: Lang,
+  vars: Record<string, string | number> = {},
+): string {
+  if (variants.length === 0) return '';
+  const text = inLang(variants[fnv1a32(seedKey) % variants.length], lang);
+  return text.replace(/\{(\w+)\}/g, (whole, name: string) =>
+    name in vars ? String(vars[name]) : whole,
+  );
+}
+
+/** Вариант системной фразы по ключу phrases.json: сид — дата и ключ, поэтому в течение дня
+ *  формулировка стабильна, назавтра, как правило, другая. */
 export function pickPhrase(
   key: string,
   dateISO: string,
   lang: Lang,
   vars: Record<string, string | number> = {},
 ): string {
-  const variants = variantsAt(key);
-  if (variants.length === 0) return '';
-  const text = inLang(variants[fnv1a32(`${dateISO}:${key}`) % variants.length], lang);
-  return text.replace(/\{(\w+)\}/g, (whole, name: string) =>
-    name in vars ? String(vars[name]) : whole,
-  );
+  return pickVariant(variantsAt(key), `${dateISO}:${key}`, lang, vars);
 }
