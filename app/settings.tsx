@@ -28,6 +28,7 @@ import { course } from '../src/lib/content';
 import { nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
 import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
+import { LANG_NAMES } from '../src/lib/lang';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import {
   getPermission,
@@ -236,7 +237,7 @@ export default function SettingsScreen() {
           <SettingsRow
             icon="language"
             label={tr('settings.language')}
-            value={tr('settings.languageValue')}
+            value={LANG_NAMES[lang]}
             onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
           />
         </FadeUp>
