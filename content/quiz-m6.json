@@ -1,6 +1,6 @@
 {
  "_comment": "Вопросы викторин M6, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
- "status": "draft",
+ "status": "reviewed",
  "lessons": [
   {
    "lessonId": "m6l1",
@@ -17,11 +17,11 @@
        "en": "The complete opposite of the same card's upright meaning"
       },
       {
-       "ru": "Та же энергия карты, которой что-то помешало течь свободно",
-       "en": "The same card energy, just blocked from flowing freely"
+       "ru": "Та же энергия карты, с которой что-то случилось",
+       "en": "The same card energy, with something having happened to it"
       },
       {
-       "ru": "Отдельная карта с собственным, никак не связанным значением",
+       "ru": "Отдельная карта с собственным, никак не связанным с прямым значением",
        "en": "A separate card with a meaning of its own, unrelated to the upright one"
       }
      ],
@@ -60,21 +60,21 @@
     {
      "type": "single",
      "q": {
-      "ru": "Паж Жезлов выпал перевёрнутым. Какой из трёх случаев урока это описывает?",
-      "en": "The Page of Wands turns up reversed. Which of the lesson's three cases is this?"
+      "ru": "Паж Жезлов выпал перевёрнутым. Какой из случаев урока это описывает?",
+      "en": "The Page of Wands turns up reversed. Which of the lesson's cases is this?"
      },
      "options": [
       {
        "ru": "Ушла внутрь: энергия спряталась и превратилась в холодность и броню",
-       "en": "Turned inward: the energy hid and hardened into coldness and armour"
+       "en": "Turned inward: the energy hid and hardened into coldness and armour indoors"
       },
       {
        "ru": "Застряла: шаг напрашивается, а человек стоит на месте",
        "en": "Got stuck: the step is calling, but the person stands still"
       },
       {
-       "ru": "Перегнула через край: интерес вспыхнул и погас, не дойдя до дела",
-       "en": "Bent past its limit: the interest flared and faded before acting"
+       "ru": "Оборвалась на полпути: интерес вспыхнул и погас, не дойдя до дела",
+       "en": "Broke off midway: the interest flared and faded before it reached anything"
       }
      ],
      "correct": 2,
@@ -112,8 +112,8 @@
     {
      "type": "single",
      "q": {
-      "ru": "О чём говорит перевёрнутая Башня, если читать её честно?",
-      "en": "What does the reversed Tower honestly point to?"
+      "ru": "Перевёрнутая Башня выпала там, где трещины уже видны. Как прочитать её честно?",
+      "en": "The reversed Tower falls where the cracks already show. How do you read it honestly?"
      },
      "options": [
       {
@@ -122,11 +122,11 @@
       },
       {
        "ru": "Трудность полностью выдумана и никакого кризиса на самом деле нет",
-       "en": "The difficulty is entirely imaginary, and there's no real crisis at all"
+       "en": "The difficulty is entirely imaginary, and there's no real crisis here at all"
       },
       {
        "ru": "Кризис откладывается: трещины видны, но признать их страшно",
-       "en": "The crisis is postponed: the cracks show, admitting them feels hard"
+       "en": "The crisis is postponed: the cracks show, admitting them feels frightening"
       }
      ],
      "correct": 2,
@@ -152,8 +152,8 @@
        "en": "One element, different numbers: the pair traces how a feeling changes over time"
       },
       {
-       "ru": "Ничего особенного — карты одной масти в любом раскладе всегда рассказывают разные, никак не связанные между собой истории",
-       "en": "Nothing in particular — cards of the same suit in any spread always tell entirely separate, unrelated stories"
+       "ru": "Ничего особенного: карты одной масти рядом не связаны между собой",
+       "en": "Nothing in particular: same-suit cards side by side aren't connected"
       },
       {
        "ru": "Карты спорят между собой: одна про начало отношений, другая — про их разрыв",
@@ -200,15 +200,15 @@
      },
      "options": [
       {
-       "ru": "Разницы нет совершенно никакой: обе карты в любом раскладе значат ровно одно и то же — нужно немедленно попросить о помощи",
-       "en": "There's no difference at all: in any spread both cards mean the same thing — you must ask for help immediately"
+       "ru": "Разницы нет: обе карты про одиночество, которого не выбирали",
+       "en": "No difference: both are about loneliness you didn't choose"
       },
       {
-       "ru": "Отшельник уходит от шума осознанно; Восьмёрка — ловушка, которую держат тревожные мысли, а не обстоятельства",
+       "ru": "Отшельник уходит от шума сам; Восьмёрка — ловушка тревожных мыслей, а не обстоятельств",
        "en": "The Hermit steps away from the noise on purpose; the Eight is a trap held by anxious thoughts"
       },
       {
-       "ru": "Отшельник всегда про человека рядом, а Восьмёрка Мечей — всегда про вашу собственную роль",
+       "ru": "Отшельник всегда про человека рядом, а Восьмёрка Мечей — всегда про вашу собственную роль в этом",
        "en": "The Hermit is always about someone nearby, and the Eight of Swords is always about your own role"
       }
      ],
@@ -266,7 +266,7 @@
      ],
      "correct": 2,
      "explain": {
-      "ru": "Спор карт редко решается в пользу одной: чаще обе стороны верны по очереди, а не взаимоисключают друг друга.",
+      "ru": "Спор карт редко решается в пользу одной: чаще обе стороны верны по очереди, а не отменяют одна другую.",
       "en": "A disagreement between cards is rarely settled in favour of just one: more often both sides hold true, each in its turn."
      },
      "cardId": "c02"
@@ -324,8 +324,8 @@
      ],
      "correct": 2,
      "explain": {
-      "ru": "Открытый вопрос оставляет пространство для смысла, а закрытый сводит расклад к «да» или «нет».",
-      "en": "An open question leaves room for meaning; a closed one reduces the spread to a coin toss."
+      "ru": "Открытый вопрос оставляет пространство для смысла. «Да или нет» сводит расклад к монетке, «когда именно» — к дате, а про чужую жизнь мы не спрашиваем без просьбы.",
+      "en": "An open question leaves room for meaning. 'Yes or no' reduces the spread to a coin toss, 'when exactly' to a date — and we don't ask about someone else's life uninvited."
      }
     },
     {
@@ -376,8 +376,8 @@
      ],
      "correct": 2,
      "explain": {
-      "ru": "Личная заинтересованность окрашивает трактовку — для других мы поэтому читаем только по их просьбе, а для себя особенно бережны к предубеждениям.",
-      "en": "Personal stakes colour the reading — that's why we read for others only at their request, and for ourselves stay especially careful with bias."
+      "ru": "Личная заинтересованность окрашивает трактовку — поэтому для себя мы особенно бережны к ожиданиям. А для других читаем только по их просьбе: это правило этики из первого модуля.",
+      "en": "Personal stakes colour the reading — so for ourselves we stay especially careful with expectations. And we read for others only at their request: that's the ethics rule from the first module."
      }
     },
     {
@@ -476,8 +476,8 @@
        "en": "As a sign that the rest of the spread no longer needs reading"
       },
       {
-       "ru": "Как гарантию, что всё случится именно так, если ничего не делать",
-       "en": "As a guarantee that things will turn out exactly this way if nothing is done"
+       "ru": "Как обещание: раз выпало Солнце, всё точно закончится хорошо",
+       "en": "As a promise: the Sun turned up, so it is bound to end well"
       },
       {
        "ru": "Как направление ситуации сейчас, а не обещанный результат",
@@ -486,8 +486,8 @@
      ],
      "correct": 2,
      "explain": {
-      "ru": "«Будущее» показывает, куда сейчас катится ситуация, а не выносит приговор: направление можно заметить и изменить, если оно вам не по душе.",
-      "en": "The Future position shows where the situation is currently rolling, not a verdict: you can notice the direction and change it, if it isn't the one you want."
+      "ru": "«Будущее» показывает, куда сейчас движется ситуация, а не выносит приговор: направление можно заметить и изменить, если оно вам не по душе.",
+      "en": "The Future position shows where the situation is currently headed, not a verdict: you can notice the direction and change it, if it isn't the one you want."
      }
     },
     {

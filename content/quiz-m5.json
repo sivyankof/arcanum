@@ -1,6 +1,6 @@
 {
  "_comment": "Вопросы викторин M5, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
- "status": "draft",
+ "status": "reviewed",
  "lessons": [
   {
    "lessonId": "m5l1",
@@ -39,16 +39,16 @@
      },
      "options": [
       {
-       "ru": "Придворные карты рассказывают только про близких людей",
-       "en": "Court cards only ever describe people close to you"
+       "ru": "Придворные карты рассказывают только про близких вам людей",
+       "en": "Court cards only ever describe people who are close to you"
       },
       {
-       "ru": "О конкретном человеке — скорее человек, о себе — скорее роль",
-       "en": "About someone else — a person; about yourself — your own role."
+       "ru": "Вопрос про отношения — скорее человек, вопрос про решение — скорее роль",
+       "en": "A relationship question — usually a person; a decision question — your role"
       },
       {
-       "ru": "Это решает исключительно масть: Кубки — про людей, Мечи — про роли",
-       "en": "It's decided purely by the suit: Cups mean people, Swords mean roles"
+       "ru": "Это решает исключительно масть карты: Кубки — про людей, Мечи — про роли",
+       "en": "It's decided purely by the card's suit: Cups mean people, Swords mean roles"
       }
      ],
      "correct": 1,
@@ -100,7 +100,7 @@
       },
       {
        "ru": "Не обращать внимания, пока новость не подтвердится дважды",
-       "en": "Ignore it until it's confirmed twice over by someone else"
+       "en": "Ignore it until it has been confirmed twice"
       }
      ],
      "correct": 1,
@@ -235,8 +235,8 @@
        "en": "Test beautiful words by actions — your own and other people's"
       },
       {
-       "ru": "Требовать от партнёра письменных обещаний на будущее",
-       "en": "Demand written promises about the future from your partner"
+       "ru": "Ждать, пока чувства подтвердит кто-то со стороны",
+       "en": "Wait for someone else to confirm the feeling for you"
       }
      ],
      "correct": 1,
@@ -267,8 +267,8 @@
      ],
      "correct": 0,
      "explain": {
-      "ru": "Всадник мчится во весь опор навстречу ветру, а птицы и бабочки на упряжи выдают стихию воздуха — это Рыцарь Мечей.",
-      "en": "A rider charges full-tilt into the wind, with birds and butterflies on the harness marking the element of air — this is the Knight of Swords."
+      "ru": "Всадник мчится во весь опор навстречу ветру, не сбавляя хода, — так скачет только Рыцарь Мечей.",
+      "en": "A rider charges full-tilt into the wind without slowing — only the Knight of Swords rides like this."
      },
      "cardId": "s12"
     }
@@ -337,8 +337,8 @@
      },
      "options": [
       {
-       "ru": "Она держится в стороне от дел и доверяет решения другим",
-       "en": "She stays out of practical matters and leaves decisions to others"
+       "ru": "Она заботится о доме, а рабочие решения оставляет другим",
+       "en": "She tends the home and leaves work decisions to others"
       },
       {
        "ru": "Она живёт идеями и вдохновляет, не касаясь быта",
@@ -422,7 +422,7 @@
      "options": [
       {
        "ru": "Король владеет стихией внутри себя, а Королева — снаружи",
-       "en": "The King holds the element within, the Queen holds it outward"
+       "en": "The King holds the element within; the Queen directs it outward"
       },
       {
        "ru": "Король распоряжается стихией вовне, Королева — внутри",
@@ -456,7 +456,7 @@
       },
       {
        "ru": "Ранг — сила карты, масть — её место в раскладе и порядок чтения",
-       "en": "Rank is the card's power; the suit fixes its place in the spread"
+       "en": "Rank is the card's power; the suit fixes its place and reading order"
       }
      ],
      "correct": 0,
@@ -468,7 +468,7 @@
     {
      "type": "single",
      "q": {
-      "ru": "Что происходит с Королём Жезлов, когда его сила уходит в перекос?",
+      "ru": "Что происходит с Королём Жезлов, когда его сила выходит из равновесия?",
       "en": "What happens to the King of Wands when his energy tips out of balance?"
      },
      "options": [
@@ -487,7 +487,7 @@
      ],
      "correct": 2,
      "explain": {
-      "ru": "Власть без тепла — авторитарность и позиция «я знаю лучше»: сила есть, а слушать уже некому.",
+      "ru": "Власть без тепла — авторитарность и позиция «я знаю лучше»: сила есть, а слышать других уже не получается.",
       "en": "Power without warmth is authoritarian: an 'I know best' stance — the will is there, but no one is being heard."
      }
     },
@@ -499,16 +499,16 @@
      },
      "options": [
       {
-       "ru": "Довериться первому чувству, которое подскажет верное решение без долгих раздумий",
-       "en": "Trust the first feeling that suggests the right answer, without much deliberation"
+       "ru": "Довериться первому чувству и решить сразу",
+       "en": "Trust the first feeling that comes and decide on the spot"
       },
       {
        "ru": "Отложить эмоции, взвесить факты и решить по совести",
-       "en": "Set emotions aside, weigh the facts, and decide by conscience"
+       "en": "Set emotions aside, weigh the facts, decide by conscience"
       },
       {
-       "ru": "Посоветоваться со всеми, кого получится найти, и выбрать самый популярный вариант",
-       "en": "Consult everyone you can find and go with the most popular option"
+       "ru": "Спросить всех вокруг и выбрать самый популярный вариант",
+       "en": "Ask everyone around you and go with the most popular option"
       }
      ],
      "correct": 1,
@@ -539,7 +539,7 @@
      ],
      "correct": 0,
      "explain": {
-      "ru": "Трон стоит среди волнующегося моря, кубок в одной руке и скипетр в другой — это Король Кубков, а не Мечей или Королева той же масти.",
+      "ru": "Трон стоит среди волнующегося моря, кубок в одной руке и скипетр в другой — это Король Кубков, а не Король Мечей и не Королева той же масти.",
       "en": "A throne set amid a restless sea, a cup in one hand and a sceptre in the other — this is the King of Cups, not the King of Swords or the Queen of the same suit."
      },
      "cardId": "c14"
