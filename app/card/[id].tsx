@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -22,6 +22,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
 import { CardLightbox } from '../../src/components/CardLightbox';
+import { CornerBadge } from '../../src/components/CornerBadge';
 import { FadeUp } from '../../src/components/FadeUp';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
@@ -178,6 +179,9 @@ function HeroImage({
           >
             <View style={[st.imClip, { borderColor: t.frame }]}>
               <Image source={cardImages[cardId]} style={st.im} contentFit="cover" transition={200} cachePolicy="memory-disk" />
+              {/* ярлычок «можно увеличить» (спека 39): внутри обрезки — летит из сетки
+                  вместе с героем, парит с ним и прячется с ним на время просмотра */}
+              <CornerBadge icon="expand-outline" />
             </View>
           </Animated.View>
         </View>
@@ -265,14 +269,16 @@ export default function CardDetail() {
 
   const activeSphere = SPHERES.find((s) => s.key === sphere)!;
   const sphereBlock = blockOf(sphere);
-  // перевёрнутая приписка внутри сферы (спека 25): у «Общего» такого понятия нет
-  const sphereReversed = sphere === 'general' ? null : blockOf(`${sphere}_reversed`);
-  const reversed = blockOf('reversed');
+  const isGeneral = sphere === 'general';
+  // перевёрнутая ровно той вкладки, что открыта (спека 39): на «Общем» — общая,
+  // на сфере — приписка сферы отдельной панелью. Заголовок один и тот же:
+  // сфера ясна из активной вкладки
+  const reversed = blockOf(isGeneral ? 'reversed' : `${sphere}_reversed`);
   const dayCard = blockOf('day_card');
   const symbolism = blockOf('symbolism');
 
   // индексы каскада FadeUp: контекстный блок «как карта дня» встаёт перед вкладками
-  // и сдвигает всё, что идёт следом, на один шаг; символика всегда последняя (5)
+  // и сдвигает всё, что идёт следом, на один шаг
   const idxTabs = isTodayCard ? 2 : 1;
   const idxSphere = isTodayCard ? 3 : 2;
   const idxReversed = isTodayCard ? 4 : 3;
@@ -364,39 +370,29 @@ export default function CardDetail() {
           })}
         </FadeUp>
 
-        {/* блок активной сферы: заголовок и текст гаснут/проявляются при смене вкладки.
-            Перевёрнутая приписка (спека 25) — children, попадает под тот же fade бесплатно */}
-        <FadeUp index={idxSphere}>
-          <Block title={tr(activeSphere.blockKey)} text={sphereBlock.text} todo={sphereBlock.todo} contentStyle={fadeStyle}>
-            {sphereReversed && !sphereReversed.todo && (
-              <>
-                <View style={[st.reversedDivider, { backgroundColor: t.line }]} />
-                <Txt style={[st.reversedLabel, { color: t.muted }]}>{tr('card.reversed').toUpperCase()}</Txt>
-                <Text style={[st.reversedText, { color: t.text }]}>{sphereReversed.text}</Text>
-              </>
+        {/* тело вкладки (спека 39): гаснет и проявляется ЦЕЛИКОМ при смене вкладки
+            (130 мс out → подмена → 350 мс in) — число панелей на вкладках разное,
+            и они появляются/исчезают в момент нулевой прозрачности */}
+        <Animated.View style={fadeStyle}>
+          <FadeUp index={idxSphere}>
+            <Block title={tr(activeSphere.blockKey)} text={sphereBlock.text} todo={sphereBlock.todo} />
+          </FadeUp>
+          {/* d5 макета: всё, что ниже значения, появляется одним шагом. Обёрток FadeUp тут
+              ровно две и обе смонтированы всегда — заверни карту дня, символику и историю
+              каждую в свою, и при возврате на «Общее» они всплывали бы мини-каскадом */}
+          <FadeUp index={idxReversed}>
+            <Block title={tr('card.reversed')} text={reversed.text} todo={reversed.todo} />
+            {/* дальше — только на «Общем»: это блоки про карту целиком, а не про сферу */}
+            {isGeneral && !isTodayCard && (
+              <Block title={tr('card.day_card')} text={dayCard.text} todo={dayCard.todo} />
             )}
-          </Block>
-        </FadeUp>
-
-        {/* постоянные блоки — всегда видны, порядок по product-spec §3 */}
-        <FadeUp index={idxReversed}>
-          <Block title={tr('card.reversed')} text={reversed.text} todo={reversed.todo} />
-        </FadeUp>
-        {!isTodayCard && (
-          <FadeUp index={4}>
-            <Block title={tr('card.day_card')} text={dayCard.text} todo={dayCard.todo} />
+            {isGeneral && <Block title={tr('card.symbolism')} text={symbolism.text} todo={symbolism.todo} />}
+            {/* личная история карты (logic-spec §3): только если карта уже выпадала */}
+            {isGeneral && personal.times > 0 && (
+              <Block title={tr('journal.cardHistory').toUpperCase()} text={personalText} accentBorder />
+            )}
           </FadeUp>
-        )}
-        <FadeUp index={5}>
-          <Block title={tr('card.symbolism')} text={symbolism.text} todo={symbolism.todo} />
-        </FadeUp>
-
-        {/* личная история карты (logic-spec §3): только если карта уже выпадала */}
-        {personal.times > 0 && (
-          <FadeUp index={5}>
-            <Block title={tr('journal.cardHistory').toUpperCase()} text={personalText} accentBorder />
-          </FadeUp>
-        )}
+        </Animated.View>
       </ScrollView>
       <CardLightbox cardId={card.id} origin={lbOrigin} onClose={() => setLbOrigin(null)} />
     </View>
@@ -436,11 +432,4 @@ const st = StyleSheet.create({
   // Подложка-фон под тень (как раньше требовали старые shadow*-пропы) больше не нужна
   tabFill: { ...StyleSheet.absoluteFillObject, borderRadius: 11, overflow: 'hidden' },
   tabLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 0.4, textAlign: 'center' },
-  // приписка «Перевёрнутая» внутри сферы (спека 25): разделитель + мини-заголовок + текст.
-  // Текст цветом `text`, а не `muted`: на светлой теме muted даёт контраст 2.88:1 при
-  // норме 4.5 для 15px (замер веб-проверки) — второстепенность держат разделитель,
-  // подпись и кегль на пункт меньше основного
-  reversedDivider: { height: 1, marginTop: 12 },
-  reversedLabel: { fontSize: 9, letterSpacing: 2.5, marginTop: 10 },
-  reversedText: { fontFamily: fonts.display, fontSize: 15, lineHeight: 22, marginTop: 6 },
 });

@@ -20,6 +20,7 @@ import { Block } from '../../src/components/Block';
 import { CardBack } from '../../src/components/CardBack';
 import { CardLightbox } from '../../src/components/CardLightbox';
 import { ConfirmDialog } from '../../src/components/ConfirmDialog';
+import { CornerBadge } from '../../src/components/CornerBadge';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
 import { NotePlate } from '../../src/components/NotePlate';
@@ -426,6 +427,10 @@ export default function TodayScreen() {
                       style={StyleSheet.absoluteFill}
                     />
                   </Animated.View>
+                  {/* ярлычок «можно увеличить» (спека 39) — поверх блика, чтобы скрим
+                      не «зажигался». Условие по drawn не нужно: до переворота грань
+                      повёрнута на 180° с backfaceVisibility hidden и не видна */}
+                  <CornerBadge icon="expand-outline" />
                 </View>
               </Animated.View>
             </View>
