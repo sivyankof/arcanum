@@ -140,7 +140,9 @@ export function detectLang(tags: readonly string[], available: readonly Lang[]):
 
 - `Lang` — реэкспорт из `lang.ts` (`export type { Lang } from '../lib/lang'`).
 - `onRehydrateStorage`: при `installSeed === 0` (первая гидрация) вместе с сидом пишется
-  `lang: detectLang(deviceLocaleTags(), AVAILABLE_LANGS)`. `restoreBackup` язык не трогает.
+  `lang: detectLang(deviceLocaleTags(), AVAILABLE_LANGS)`. ⚠️ Здесь первая редакция спеки писала
+  «`restoreBackup` язык не трогает» — **отменено** волной фиксов финального ревью: язык из бэкапа
+  ПРИМЕНЯЕТСЯ (`resolveImportedLang`, ограничитель по `AVAILABLE_LANGS`), обоснование — решение 5.
 - `backup.ts`: `SCHEMA_VERSION = 8`; `validState` — `isLang(s.lang)` вместо `'ru' || 'en'`;
   `PERSIST_DEFAULTS.lang` остаётся `'ru'` (это дефолт доливки старого файла, у которого поля нет,
   — такого файла не существует; настоящее значение первой установки назначает гидрация).
