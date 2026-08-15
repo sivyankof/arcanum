@@ -5,6 +5,12 @@
 
 Всего 110 адресов в 50 картах.
 
+⚠️ **30 из этих адресов позже поправлены задачей 35** (перечитка этих же 50 карт, спека
+`docs/specs/35-changed-cards-reread.md`): часть правок, перечисленных ниже, ухудшила текст —
+тавтология, повтор с соседним блоком, уехавший смысл, парный язык, оставшийся со старой мыслью.
+Актуальный текст этих 30 адресов — в `docs/specs/35-changed-addresses.md`; здесь колонка
+«стало» показывает промежуточное состояние, а не то, что стоит в корпусе сейчас.
+
 ## c02.career.en
 - было: At work — a fortunate partnership: a reliable ally, a joint project, an agreement that benefits both sides. Common ground is easy to find in a team now, and conflicts resolve peacefully. If you're seeking collaboration, reach out — the answer will be yes.
 - стало: At work — a fortunate partnership: a reliable ally, a joint project, an agreement that benefits both sides. Common ground is easy to find in a team now, and conflicts resolve peacefully. If you're seeking collaboration, reach out — you're likely to get a warm response.

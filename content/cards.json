@@ -322,8 +322,8 @@
      "status": "reviewed"
     },
     "health": {
-     "ru": "Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. Доверяйте прямому ощущению больше, чем домыслам о нём.",
-     "en": "For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. Trust what you directly feel more than guesses about it.",
+     "ru": "Для здоровья — прислушайтесь к телу: оно раньше ума знает, что ему нужно. Полезны сон, вода, практики тишины. Не спешите объяснять то, что чувствуете, — просто понаблюдайте.",
+     "en": "For health — listen to the body: it knows before the mind does. Sleep, water and quiet practices help. Set the guessing aside and simply notice what you feel.",
      "status": "reviewed"
     },
     "day_card": {
@@ -1031,7 +1031,7 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви Сила — глубокая, живая привязанность, которую укрепляют терпение и принятие. Конфликты сейчас решаются не правотой, а теплом: не ждите шага навстречу — обнимите сами, выслушайте до конца. Одиноким сейчас важнее настоящая близость, чем игра на публику.",
+     "ru": "В любви Сила — глубокая, живая привязанность, которую укрепляют терпение и принятие. Конфликты сейчас решаются не правотой, а теплом: не ждите шага навстречу — обнимите сами, выслушайте до конца. Одиноким притяжение даёт настоящая близость, а не игра.",
      "en": "In love, Fortitude is a deep, living bond made stronger by patience and acceptance. Right now conflicts are resolved not by being right, but by warmth: hug first, listen fully. For singles, what draws people now is real closeness, not games.",
      "status": "reviewed"
     },
@@ -1151,7 +1151,7 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — период тишины: одному из партнёров нужно пространство, и это не отвержение. Не додумывайте за другого — спросите бережно. Одиноким карта говорит: сейчас важнее понять себя, чем искать пару; важная встреча становится возможной, когда вы перестанете от неё убегать в суету.",
+     "ru": "В любви — период тишины: одному из партнёров нужно пространство, и это не отвержение. Не додумывайте за другого — спросите бережно. Одиноким карта говорит: сейчас важнее понять себя, чем искать пару; значимая встреча становится возможной, когда вы перестанете от неё убегать в суету.",
      "en": "In love — a quiet spell: one partner needs space, and that isn't rejection. Don't fill the silence with assumptions — ask gently. For singles the card says: understanding yourself matters more right now than searching; a meaningful meeting becomes possible once you stop escaping into busyness.",
      "status": "reviewed"
     },
@@ -2009,7 +2009,7 @@
      "status": "reviewed"
     },
     "health": {
-     "ru": "Для самочувствия — сигнал, что напряжение искало выход: тело и психика больше не могут работать на пределе. Если вас «выбило» — это не слабость, а требование пересмотреть нагрузку. Спросите себя: какие сигналы я слишком долго пропускаю мимо? Сейчас важны опора, отдых и поддержка близких.",
+     "ru": "Для самочувствия — сигнал, что напряжение искало выход: тело и психика больше не могут работать на пределе. Если вас «выбило» — это не слабость, а требование пересмотреть нагрузку. Спросите себя: какие сигналы я давно не замечаю? Сейчас важны отдых и поддержка близких.",
      "en": "For wellbeing — a sign that built-up tension has been looking for a way out: body and mind can no longer run at the limit. If something knocked you off your feet, it is not weakness but a demand to rethink the load. Ask yourself: which signals have I been ignoring? What matters now is grounding, rest and the support of people close to you.",
      "status": "reviewed"
     },
@@ -2468,8 +2468,8 @@
    },
    "content": {
     "general": {
-     "ru": "Суд — карта пробуждения и итога. Прошлый этап завершён, и вас зовут на новый уровень: это может быть переоценка жизни, важное решение или шанс, который меняет положение дел. Уэйт подчёркивал: настоящий зов рождается внутри — труба лишь пробуждает то, что уже готово откликнуться. Карта просит честно подвести итоги — без самобичевания, но и без иллюзий — и откликнуться на то, что давно зовёт вас.",
-     "en": "The Last Judgment is the card of awakening and reckoning. A chapter has ended, and you're being called to a new level: a life reassessment, a major decision, or a chance that changes your position. Waite stressed that the true call sounds from within — the trumpet only wakes us to what is already there. The card asks you to take honest stock — without self-blame, but without illusions — and to respond to what has been calling you for a long time.",
+     "ru": "Суд — карта пробуждения и итога. Прошлый этап завершён, и вас зовут на новый уровень: это может быть переоценка жизни, важное решение или шанс, который меняет положение дел. Уэйт подчёркивал: настоящий зов рождается внутри, а не приходит извне. Карта просит честно подвести итоги — без самобичевания, но и без иллюзий — и откликнуться на то, что давно зовёт вас.",
+     "en": "The Last Judgment is the card of awakening and reckoning. A chapter has ended, and you're being called to a new level: a life reassessment, a major decision, or a chance that changes your position. Waite stressed that the true call sounds from within, not from outside. The card asks you to take honest stock — without self-blame, but without illusions — and to respond to what has been calling you for a long time.",
      "status": "reviewed"
     },
     "reversed": {
@@ -3087,7 +3087,7 @@
     },
     "day_card": {
      "ru": "Сегодня создайте маленький праздник. Позовите близких на ужин, украсьте дом, отметьте даже небольшую победу. День благоприятен для семейных дел, встреч и всего, что даёт чувство «мы вместе». Тепло, которым вы поделитесь, имеет свойство возвращаться.",
-     "en": "Create a small celebration today. Invite people over for dinner, decorate your space, toast even a modest win. The day favours family matters, gatherings and everything that gives you the feeling of \"us\". The warmth you share will come back to you.",
+     "en": "Create a small celebration today. Invite people over for dinner, decorate your space, toast even a modest win. The day favours family matters, gatherings and everything that gives you the feeling of \"us\". The warmth you share has a way of coming back.",
      "status": "reviewed"
     },
     "symbolism": {
@@ -3296,8 +3296,8 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви — период, когда парой можно гордиться: вы красиво смотритесь вместе, чувства на подъёме, возможен публичный шаг — знакомство с близкими, открытое признание. Одиноким сейчас везёт на внимание: вас замечают, и восхищение приходит само. Позвольте себе сиять.",
-     "en": "In love — a season to be proud of your couple: you look good together, feelings are riding high, and a public step is possible — meeting family, an open declaration. If you're single, this is a season when attention and admiration come easily: you're being noticed. Let yourself shine.",
+     "ru": "В любви — период, когда парой можно гордиться: вы красиво смотритесь вместе, чувства на подъёме, возможен публичный шаг — знакомство с близкими, открытое признание. Одиноким сейчас несложно привлечь внимание: вас замечают и восхищаются. Позвольте себе сиять.",
+     "en": "In love — a season to be proud of your couple: you look good together, feelings are riding high, and a public step is possible — meeting family, an open declaration. If you're single, attention and admiration come easily right now: you're being noticed. Let yourself shine.",
      "status": "reviewed"
     },
     "career": {
@@ -3892,7 +3892,7 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня будьте Пажом: любопытны, легки на подъём, готовы удивляться. Скажите «да» неожиданному предложению, задайте вопрос, который стеснялись задать, начните то, что давно манит. Хорошие новости сегодня приходят к тем, кто открыт. Не ждите умения — вход только через «попробую».",
+     "ru": "Сегодня будьте как Паж: любопытны, легки на подъём, готовы удивляться. Скажите «да» неожиданному предложению, задайте вопрос, который стеснялись задать, начните то, что давно манит. Хорошие новости сегодня приходят к тем, кто открыт. Не ждите умения — вход только через «попробую».",
      "en": "Today, be the Page: curious, light, ready to be surprised. Say yes to an unexpected offer, ask the question you've been shy about, start the thing that's been calling you. Good news today comes to those who stay open. Don't wait until you're skilled — the only way in is 'let me try'.",
      "status": "reviewed"
     },
@@ -4102,7 +4102,7 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви Королева — магнетизм и страсть в сочетании с верностью: рядом с ней тепло, но она никому не принадлежит без остатка. В паре — время проявлять желание и открытость: звать, а не ждать. Одиноким совет: вас выбирают, когда вы заняты собственной интересной жизнью.",
+     "ru": "В любви Королева — магнетизм и страсть в сочетании с верностью: рядом с ней тепло, но она никому не принадлежит без остатка. В паре — время притяжения и открытости: звать, а не ждать. Одиноким совет: вас выбирают, когда вы заняты собственной интересной жизнью.",
      "en": "In love, the Queen is magnetism and passion combined with loyalty: it's warm beside her, yet she belongs entirely to no one. For couples — a time to be desired and open: to invite rather than wait. For singles, the advice is simple: people choose you when you're busy living your own interesting life.",
      "status": "reviewed"
     },
@@ -4454,7 +4454,7 @@
      "status": "reviewed"
     },
     "career": {
-     "ru": "В работе — удачное партнёрство: надёжный союзник, совместный проект, договорённость, выгодная обеим сторонам. Сейчас в команде легко находить общий язык, а старые конфликты решаются мирно и без лишних усилий. Если вы ищете сотрудничества — смело предлагайте: вам ответят взаимностью.",
+     "ru": "В работе — удачное партнёрство: надёжный союзник, совместный проект, договорённость, выгодная обеим сторонам. Сейчас в команде легко находить общий язык, а старые конфликты решаются мирно и без лишних усилий. Если вы ищете сотрудничества — смело предлагайте: скорее всего, отклик будет тёплым.",
      "en": "At work — a fortunate partnership: a reliable ally, a joint project, an agreement that benefits both sides. Common ground is easy to find in a team now, and conflicts resolve peacefully. If you're seeking collaboration, reach out — you're likely to get a warm response.",
      "status": "reviewed"
     },
@@ -4560,7 +4560,7 @@
      "status": "reviewed"
     },
     "reversed": {
-     "ru": "В перевёрнутом положении праздник теряет вкус: за улыбками — усталость, в компании — одиночество. Возможны сплетни, зависть в окружении или излишества, после которых пусто. Карта советует пересмотреть круг общения: выбирайте тех, рядом с кем можно не подстраиваться.",
+     "ru": "В перевёрнутом положении праздник теряет вкус: за улыбками — усталость, в компании — одиночество. Возможны сплетни, зависть в окружении или излишества, после которых пусто. Карта советует пересмотреть круг общения: выбирайте тех, с кем можно быть собой, а не удобной версией себя.",
      "en": "Reversed, the party loses its flavour: fatigue hides behind the smiles, loneliness inside the crowd. There may be gossip, envy in your circle, or excess that leaves you empty. The card suggests reviewing your company: choose those with whom you can be real, not merely convenient.",
      "status": "reviewed"
     },
@@ -4915,7 +4915,7 @@
      "status": "reviewed"
     },
     "career": {
-     "ru": "В работе — помощь придёт из прошлого: бывшие коллеги, старые связи, навык, который вы считали забытым. Возможно возвращение к прежнему проекту или сфере на новом уровне. Детская мечта о том, кем стать, может подсказать верное направление.",
+     "ru": "В работе — помощь придёт из прошлого: бывшие коллеги, старые связи, навык, который вы считали забытым. Возможно возвращение к прежнему проекту или сфере на новом уровне. Детская мечта «кем я стану, когда вырасту» может подсказать верное направление.",
      "en": "At work — help arrives from the past: former colleagues, old connections, a skill you thought forgotten. You may return to a previous project or field at a new level. A childhood dream of \"what I wanted to be\" may point to the right direction.",
      "status": "reviewed"
     },
@@ -5150,8 +5150,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах — готовность отказаться от источника дохода ради смысла или душевного покоя. Пересмотрите траты на то, что уже не радует: подписки, статусные вещи. Финансовая сторона обычно налаживается следом, когда вы идёте за собой.",
-     "en": "Financially — a readiness to give up an income source for the sake of meaning or peace of mind. Review what you spend on things that no longer bring joy: subscriptions, status buys. The financial side tends to settle in time, once you follow your own path.",
+     "ru": "В финансах — готовность отказаться от источника дохода ради смысла или душевного покоя. Пересмотрите траты на то, что уже не радует: подписки, статусные вещи. Деньги обычно подтягиваются позже, когда вы идёте за собой.",
+     "en": "Financially — a readiness to give up an income source for the sake of meaning or peace of mind. Review what you spend on things that no longer bring joy: subscriptions, status buys. Money tends to catch up in time, once you follow your own path.",
      "status": "reviewed"
     },
     "health": {
@@ -5610,8 +5610,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах — тяга к тратам, которые выглядят красиво, но не всегда обоснованы. Возможны траты на романтику и красоту — это нормально, если в разумных рамках. Не давайте в долг под обаяние.",
-     "en": "Financially — a pull toward spending that looks lovely but isn't always justified. Spending on romance and beauty is fine within reason. Just don't lend money to charm alone.",
+     "ru": "В финансах — соблазн эффектного предложения: считайте цифры, а не впечатление. Возможны траты на романтику и красоту — это нормально, если в разумных рамках. Не давайте в долг под обаяние.",
+     "en": "Financially — the pull of an offer that looks impressive: count the numbers, not the presentation. Spending on romance and beauty is fine within reason. Just don't lend money to charm alone.",
      "status": "reviewed"
     },
     "health": {
@@ -5735,7 +5735,7 @@
      "status": "reviewed"
     },
     "day_card": {
-     "ru": "Сегодня главный инструмент — чуткость. Прислушивайтесь к интуиции: первое ощущение о человеке или ситуации окажется верным. Кому-то рядом может понадобиться ваше тепло — подарите его, но без самопожертвования. Вечером спросите себя: что я сегодня чувствую и о чём это говорит?",
+     "ru": "Сегодня главный инструмент — чуткость. Прислушивайтесь к интуиции: первое ощущение о человеке или ситуации окажется верным. Кому-то рядом может понадобиться ваше тепло — подарите его, но без самопожертвования. Вечером спросите себя: какие чувства были сегодня и о чём они говорят?",
      "en": "Today your main instrument is sensitivity. Listen to your intuition: the first impression of a person or situation will prove right. Someone near you may need your warmth — offer it, but without self-sacrifice. In the evening ask yourself: what did I feel today, and what is it telling me?",
      "status": "reviewed"
     },
@@ -7337,8 +7337,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах Королева советует смотреть на цифры без сантиментов: составьте честный бюджет, откажитесь от трат, которые оправдываете эмоциями, а не пользой. Решения принимайте головой, а не из чувства неловкости перед тем, кто просит в долг.",
-     "en": "Financially, the Queen counsels looking at the numbers without sentiment: draw up an honest budget and drop the spending you justify with feelings rather than use. Decide with your head, not out of awkwardness toward whoever is asking for a loan.",
+     "ru": "В финансах Королева советует смотреть на цифры без сантиментов: составьте честный бюджет, откажитесь от трат, которые оправдываете эмоциями, а не пользой. Решайте трезво, а не из чувства неловкости перед тем, кто просит в долг.",
+     "en": "Financially, the Queen counsels looking at the numbers without sentiment: draw up an honest budget and drop the spending you justify with feelings rather than use. Decide soberly, not out of awkwardness toward whoever is asking for a loan.",
      "status": "reviewed"
     },
     "health": {
@@ -7452,7 +7452,7 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "В финансах Король советует крупный план: не тратьте на сиюминутное, откладывайте на цель, считайте на годы вперёд, а не на месяц. Решения принимайте на основе цифр, а не обещаний.",
+     "ru": "В финансах Король советует смотреть далеко вперёд: не тратьте на сиюминутное, откладывайте на цель, считайте на годы, а не на месяц. Решения принимайте на основе цифр, а не обещаний.",
      "en": "Financially, the King advises thinking big: skip the spur-of-the-moment spending, save toward a goal, count in years rather than months. Base your decisions on numbers, not on promises.",
      "status": "reviewed"
     },
@@ -8379,7 +8379,7 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "Доход растёт вместе с навыком. Сейчас выгоднее вкладывать в своё обучение и рабочие инструменты, чем искать быстрые деньги. Стабильный заработок приходит через профессионализм. Гонорары и повышение приходят следом за ростом — если вы продолжаете расти.",
+     "ru": "Доход растёт вместе с навыком. Сейчас выгоднее вкладывать в своё обучение и рабочие инструменты, чем искать быстрые деньги. Стабильный заработок приходит через профессионализм. Гонорары и повышение подтягиваются следом — если вы продолжаете расти.",
      "en": "Income grows along with skill. Right now it pays more to invest in your training and tools than to hunt for fast money. Steady earnings come through professionalism. Better fees and a raise tend to follow that growth, as long as you keep at it.",
      "status": "reviewed"
     },
@@ -8484,7 +8484,7 @@
      "status": "reviewed"
     },
     "love": {
-     "ru": "В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо в одиночестве; любовь придёт к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.",
+     "ru": "В любви карта напоминает: сначала целостность, потом союз. Вы привлекательны своей самодостаточностью — не растворяйтесь в партнёре. Для одиноких — период, когда хорошо и наедине с собой; любовь придёт к наполненной жизни, а не в пустоту. В паре цените личное пространство друг друга.",
      "en": "In love, this card reminds you: wholeness first, partnership second. Your self-sufficiency is attractive — don't dissolve into a partner. If you are single, this is a season when being on your own feels good; love comes to a full life, not to an empty one. In a couple, honour each other's personal space.",
      "status": "reviewed"
     },
@@ -8725,8 +8725,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "Время финансовой грамотности: изучайте, считайте, планируйте. Первые накопления, первая инвестиция, новый источник дохода — начинайте скромно, но регулярно. Возможны хорошие новости о деньгах. Маленькие суммы, вложенные с умом, — хорошая привычка на будущее.",
-     "en": "A time for financial literacy: learn, count, plan. First savings, a first investment, a new source of income — start modestly but regularly. Good news about money may arrive. Small sums invested wisely are a habit worth building.",
+     "ru": "Время финансовой грамотности: изучайте, считайте, планируйте. Первые накопления, первая инвестиция, новый источник дохода — начинайте скромно, но регулярно. Возможны хорошие новости о деньгах. Вкладывать маленькие суммы с умом — полезная привычка на будущее.",
+     "en": "A time for financial literacy: learn, count, plan. First savings, a first investment, a new source of income — start modestly but regularly. Good news about money may arrive. Investing small sums wisely is a habit worth building.",
      "status": "reviewed"
     },
     "health": {
@@ -8840,8 +8840,8 @@
      "status": "reviewed"
     },
     "finances": {
-     "ru": "Финансовая дисциплина: регулярные накопления, взвешенные решения, никаких авантюр. Доход растёт медленно, но устойчиво. Хорошее время для бюджета, автоматических отчислений на сбережения и долгосрочных планов. Здесь дисциплина ценится не меньше, чем сумма на счету.",
-     "en": "Financial discipline: regular savings, measured decisions, no gambles. Income grows slowly but steadily. A good time for a budget, automatic transfers into savings, and long-term plans. Here, quiet discipline matters as much as the sum in your account.",
+     "ru": "Финансовая дисциплина: регулярные накопления, взвешенные решения, никаких авантюр. Доход растёт медленно, но устойчиво. Хорошее время для бюджета, автоматических отчислений на сбережения и долгосрочных планов. Здесь терпение ценится не меньше, чем сумма на счету.",
+     "en": "Financial discipline: regular savings, measured decisions, no gambles. Income grows slowly but steadily. A good time for a budget, automatic transfers into savings, and long-term plans. Here, patience matters as much as the sum in your account.",
      "status": "reviewed"
     },
     "health": {
@@ -8935,7 +8935,7 @@
    },
    "content": {
     "general": {
-     "ru": "Королева Пентаклей — воплощение тёплой практичности: она умеет заботиться так, что рядом с ней сытно, спокойно и надёжно. Как человек — щедрая, земная, хозяйственная женщина, которая умело соединяет дом и дело. Как совет — позаботьтесь о базе: тело, дом, деньги, близкие. Забота о других начинается с наполненности себя.",
+     "ru": "Королева Пентаклей — воплощение тёплой практичности: она умеет заботиться так, что рядом с ней сытно, спокойно и надёжно. Как человек — щедрая, земная, хозяйственная женщина, которая умело соединяет дом и дело. Как совет — позаботьтесь о базе: тело, дом, деньги, близкие. Забота о других начинается с собственной наполненности.",
      "en": "The Queen of Pentacles is warm practicality embodied: her care makes everyone around her feel fed, calm, and safe. As a person, she is a generous, down-to-earth, capable woman who skilfully weaves home and work together. As advice — tend to your base: body, home, money, loved ones. Caring for others begins with keeping yourself replenished.",
      "status": "reviewed"
     },

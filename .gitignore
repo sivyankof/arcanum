@@ -46,3 +46,7 @@ yarn-error.*
 
 # визуальный компаньон брейншторма (superpowers)
 .superpowers/
+
+# Python-кэш скриптов контент-конвейера
+__pycache__/
+*.pyc
