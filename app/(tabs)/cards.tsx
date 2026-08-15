@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CornerBadge } from '../../src/components/CornerBadge';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
@@ -71,11 +72,7 @@ function Cell({ item, lang, learned }: { item: TarotCard; lang: Lang; learned: b
           onLoad={() => setLoaded(true)}
         />
         {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
-        {learned && (
-          <View style={st.learned}>
-            <Txt style={[st.learnedTxt, { color: t.accent2 }]}>{tr('cards.learned')}</Txt>
-          </View>
-        )}
+        {learned && <CornerBadge label={tr('cards.learned')} />}
       </View>
       <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
         {inLang(item.name, lang)}
@@ -253,17 +250,7 @@ const st = StyleSheet.create({
     boxShadow: '0px 8px 20px rgba(0,0,0,0.28)',
   },
   im: { width: '100%', height: '100%' },
-  // .st2 эталона: скрим-подложка литералом — как тень imWrap (не тема: затемнение поверх фото)
-  learned: {
-    position: 'absolute',
-    top: 6,
-    right: 6,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    borderRadius: radius.s,
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-  },
-  learnedTxt: { fontSize: 8, letterSpacing: 0.5, fontWeight: '700' },
+  // бейдж «ИЗУЧЕНО ✓» — общий CornerBadge (эталон `.st2`, design-system §5)
   name: { fontSize: 9.5, textAlign: 'center', marginTop: 5, fontWeight: '600', letterSpacing: 0.3, lineHeight: 12 },
   empty: { fontSize: 12.5, textAlign: 'center', marginTop: 40, paddingHorizontal: spacing.xl },
 });

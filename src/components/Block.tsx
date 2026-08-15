@@ -1,12 +1,11 @@
 /** Универсальная панель со значением карты — блок `.block` из эталона
  *  (docs/design-reference.html): заголовок-Overline с линией-хвостом + текст ниже.
- *  Используется на странице карты (общее значение, перевёрнутая, как карта дня, символика);
- *  дальше пригодится дневнику. Панель не анимируется (высота меняется без анимации),
- *  анимируется только контент внутри — через `contentStyle` (fade при смене вкладки сферы). */
+ *  Используется на странице карты (общее значение, перевёрнутая, как карта дня, символика),
+ *  в дневнике и на «О приложении». Панель не анимируется — точка: fade при смене вкладки
+ *  сферы отыгрывает всё тело вкладки целиком, снаружи панелей (спека 39). */
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleSheet, Text, View } from 'react-native';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { Txt } from './Txt';
@@ -17,7 +16,6 @@ interface BlockProps {
   text?: string;
   children?: React.ReactNode;
   todo?: boolean;
-  contentStyle?: StyleProp<ViewStyle>;
   // Контекстный блок «ваша карта сегодня» (product-spec §3): золотая рамка вместо обычной...
   accentBorder?: boolean;
   // ...и звёздочка ✦ перед заголовком. ✦ отсутствует в Manrope, поэтому рисуется обычным
@@ -30,24 +28,22 @@ interface BlockProps {
 // (он один и одноцветный) — оба берут этот стиль вместо копии
 export const paragraphStyle = { fontFamily: fonts.display, fontSize: 16, lineHeight: 24 } as const;
 
-export function Block({ title, text, children, todo, contentStyle, accentBorder, star }: BlockProps) {
+export function Block({ title, text, children, todo, accentBorder, star }: BlockProps) {
   const t = useTheme();
   // 'transparent' в градиенте на iOS даёт серый ореол, поэтому гасим через альфу самого цвета
   const clear = `${t.line}00`;
 
   return (
     <View style={[st.panel, { backgroundColor: t.panel, borderColor: accentBorder ? t.frame : t.line }]}>
-      <Animated.View style={contentStyle}>
-        <View style={st.titleRow}>
-          {star && <Text style={[st.star, { color: t.accent }]}>✦</Text>}
-          <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
-          <LinearGradient colors={[t.line, clear]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={st.tail} />
-        </View>
-        {text !== undefined && (
-          <Text style={[st.text, { color: todo ? t.muted : t.text }, todo && st.textTodo]}>{text}</Text>
-        )}
-        {children}
-      </Animated.View>
+      <View style={st.titleRow}>
+        {star && <Text style={[st.star, { color: t.accent }]}>✦</Text>}
+        <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
+        <LinearGradient colors={[t.line, clear]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={st.tail} />
+      </View>
+      {text !== undefined && (
+        <Text style={[st.text, { color: todo ? t.muted : t.text }, todo && st.textTodo]}>{text}</Text>
+      )}
+      {children}
     </View>
   );
 }
