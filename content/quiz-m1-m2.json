@@ -13,16 +13,16 @@
      },
      "options": [
       {
-       "ru": "Она передаёт послание извне — от высших сил",
-       "en": "It delivers a message from beyond — from higher powers"
+       "ru": "Она передаёт вам прямое послание извне — точное предсказание судьбы от высших сил",
+       "en": "It sends you a direct, unmistakable message from beyond — a precise prophecy from higher powers"
       },
       {
        "ru": "Картинка запускает проекцию: наружу выходит ваш собственный ответ, который уже зрел внутри",
        "en": "The image sparks projection: it draws out your own answer, the one already forming inside"
       },
       {
-       "ru": "У каждой карты есть одно точное предсказание — его нужно просто узнать",
-       "en": "Each card holds one fixed prediction you just need to look up"
+       "ru": "У каждой карты есть только одно точное предсказание судьбы, и его достаточно заранее узнать",
+       "en": "Each card holds exactly one fixed prediction, and all you need to do is look it up"
       }
      ],
      "correct": 1,
@@ -65,12 +65,12 @@
      },
      "options": [
       {
-       "ru": "Показать, чем всё закончится, если согласиться",
-       "en": "Show how things will end if you say yes"
+       "ru": "Точно показать вам, чем всё закончится, если вы согласитесь на эту работу",
+       "en": "Show you exactly how everything will end if you say yes to this job"
       },
       {
-       "ru": "Принять решение за вас, чтобы не мучиться",
-       "en": "Make the decision for you, so you can stop agonising"
+       "ru": "Принять решение за вас, чтобы вы наконец перестали мучиться сомнениями",
+       "en": "Make the decision for you, so you never have to agonise over it ever again"
       },
       {
        "ru": "Помочь сформулировать то, что вы уже чувствуете, но не проговаривали",
@@ -91,16 +91,16 @@
      },
      "options": [
       {
-       "ru": "«Стоит ли мне увольняться?»",
-       "en": "\"Should I quit my job?\""
+       "ru": "Стоит ли мне увольняться с этой опостылевшей работы?",
+       "en": "Should I quit this job I'm sick of already?"
       },
       {
-       "ru": "«Что мне важно понять про мою работу?»",
-       "en": "\"What do I need to understand about my job?\""
+       "ru": "Что мне важно понять про мою работу?",
+       "en": "What do I need to understand about my job?"
       },
       {
-       "ru": "«Уволюсь ли я в этом году?»",
-       "en": "\"Will I quit this year?\""
+       "ru": "Уволюсь ли я в итоге в этом году или нет?",
+       "en": "Will I actually quit my job this year or not?"
       }
      ],
      "correct": 1,
@@ -195,8 +195,8 @@
     {
      "type": "single",
      "q": {
-      "ru": "Подруга переживает из-за ссоры с любимым. Какая масть чаще всего говорит о чувствах и отношениях?",
-      "en": "Your friend is upset after a fight with her partner. Which suit usually speaks about feelings and relationships?"
+      "ru": "Друг переживает из-за ссоры с любимым человеком. Какая масть чаще всего говорит о чувствах и отношениях?",
+      "en": "Your friend is upset after a fight with their partner. Which suit usually speaks about feelings and relationships?"
      },
      "options": [
       {
@@ -283,16 +283,16 @@
      },
      "options": [
       {
-       "ru": "«Что мне сегодня важно заметить?»",
-       "en": "\"What do I need to notice today?\""
+       "ru": "Что мне сегодня важно заметить?",
+       "en": "What do I need to notice today?"
       },
       {
-       "ru": "«Что плохого случится со мной сегодня?»",
-       "en": "\"What bad thing will happen to me today?\""
+       "ru": "Что плохого случится со мной сегодня?",
+       "en": "What bad thing will happen to me today?"
       },
       {
-       "ru": "«Что мне сегодня делать?»",
-       "en": "\"What should I do today?\""
+       "ru": "Что мне сегодня обязательно нужно сделать?",
+       "en": "What exactly should I go and do today?"
       }
      ],
      "correct": 0,
@@ -310,11 +310,11 @@
      "options": [
       {
        "ru": "Перетянуть, пока не выпадет что-то доброе",
-       "en": "Redraw until something kinder shows up"
+       "en": "Redraw the cards again and again until something kinder shows up"
       },
       {
        "ru": "Отложить колоду и пропустить этот день",
-       "en": "Put the deck away and skip the day"
+       "en": "Put the whole deck away and skip today's card entirely"
       },
       {
        "ru": "Оставить её: неудобные карты учат лучше всего",
@@ -365,12 +365,12 @@
        "en": "No: the morning card simply tuned your attention, like glasses with a new filter"
       },
       {
-       "ru": "Да: карта управляет событиями дня",
-       "en": "Yes: the card steers the day's events"
+       "ru": "Да: карта заранее управляет всеми событиями вашего дня безо всяких исключений",
+       "en": "Yes: the card quietly steers absolutely every single event of your day, no matter what"
       },
       {
-       "ru": "Это чистая случайность, и замечать её не стоит",
-       "en": "Pure chance — not worth noticing"
+       "ru": "Это чистая случайность, и обращать на неё внимание совершенно не стоит",
+       "en": "It's pure chance, and it's really not worth paying it any attention at all"
       }
      ],
      "correct": 0,
@@ -387,12 +387,12 @@
      },
      "options": [
       {
-       "ru": "Колода «выдаёт» только одну правдивую карту в сутки",
-       "en": "The deck only gives one truthful card per day"
+       "ru": "Колода каждый раз «выдаёт» только одну-единственную правдивую карту в сутки",
+       "en": "The deck only ever hands you just one single truthful card the entire day"
       },
       {
-       "ru": "Больше одного значения в день запомнить невозможно",
-       "en": "It's impossible to memorise more than one meaning a day"
+       "ru": "Больше одного значения карты в день человеческий мозг запомнить попросту не в силах",
+       "en": "It's simply impossible for anyone to memorise more than one card meaning a day"
       },
       {
        "ru": "Маленькая, но регулярная практика — как ежедневный урок в языковом приложении",
@@ -418,16 +418,16 @@
      },
      "options": [
       {
-       "ru": "Ответ нужно было проверить ещё одним раскладом",
-       "en": "The answer should have been double-checked with another spread"
+       "ru": "Такой ответ обязательно нужно было ещё раз внимательно перепроверить совсем другим раскладом",
+       "en": "That answer really should have been carefully double-checked with yet another separate spread"
       },
       {
        "ru": "Выбор всегда остаётся за вами — карты лишь помогают увидеть ситуацию объёмнее",
        "en": "The choice is always yours — cards only help you see the situation from more angles"
       },
       {
-       "ru": "Про отношения у карт вообще не спрашивают",
-       "en": "You should never ask the cards about relationships"
+       "ru": "Про отношения с другими людьми у карт вообще никогда не спрашивают",
+       "en": "You should never, under any circumstances, ask the cards about relationships"
       }
      ],
      "correct": 1,
@@ -439,17 +439,17 @@
     {
      "type": "single",
      "q": {
-      "ru": "Очень хочется узнать, что думает о вас бывший. Как поступить этично?",
-      "en": "You're dying to know what your ex thinks of you. What's the ethical move?"
+      "ru": "Очень хочется узнать, что думает о вас бывший партнёр. Как поступить этично?",
+      "en": "You're dying to know what your ex-partner thinks of you. What's the ethical move?"
      },
      "options": [
       {
-       "ru": "Сделать расклад, но никому о нём не рассказывать",
-       "en": "Do the spread, just keep it to yourself"
+       "ru": "Сделать расклад тайно и никому потом о нём не рассказывать",
+       "en": "Do the spread in secret, and just keep it to yourself afterward"
       },
       {
-       "ru": "Гадать можно, если намерения добрые",
-       "en": "Reading on him is fine, as long as your intentions are kind"
+       "ru": "Гадать на других людей можно всегда, если у вас добрые намерения",
+       "en": "It's always fine to read about someone else, as long as your intentions are good"
       },
       {
        "ru": "Спросить о себе: «Что мне важно понять в этих отношениях?»",
@@ -465,8 +465,8 @@
     {
      "type": "single",
      "q": {
-      "ru": "Подруга просит расклад о своём здоровье и диагнозе. Что ответить?",
-      "en": "A friend asks for a reading about her health and a diagnosis. What do you say?"
+      "ru": "Друг просит расклад о своём здоровье и диагнозе. Что ответить?",
+      "en": "A friend asks for a reading about their health and a diagnosis. What do you say?"
      },
      "options": [
       {
@@ -474,12 +474,12 @@
        "en": "Diagnoses belong to doctors; the cards can offer support: \"How can I care for myself right now?\""
       },
       {
-       "ru": "Сделать расклад, но очень аккуратно подбирать слова",
-       "en": "Do the reading, just choose your words very carefully"
+       "ru": "Сделать расклад для друга, но при этом крайне осторожно подбирать каждое произнесённое слово",
+       "en": "Do the reading for them, but choose every single word extremely carefully indeed"
       },
       {
-       "ru": "В трудные периоды таро лучше вообще не трогать",
-       "en": "In hard times it's better not to touch tarot at all"
+       "ru": "В такие особенно трудные периоды таро лучше вообще не трогать никогда и никому",
+       "en": "In hard times like these, it's always better not to touch tarot at all, not ever, for anyone involved"
       }
      ],
      "correct": 0,
@@ -553,16 +553,16 @@
      },
      "options": [
       {
-       "ru": "Один — первый шаг уже сделан",
-       "en": "One — the first step is already taken"
+       "ru": "Один — первый шаг уже сделан, дороги назад нет",
+       "en": "One — the first step is already taken, there's no going back"
       },
       {
        "ru": "Ноль — чистый потенциал, всё возможно",
        "en": "Zero — pure potential, anything is possible"
       },
       {
-       "ru": "Семь — завершение пути",
-       "en": "Seven — the journey's completion"
+       "ru": "Семь — путь героя уже подошёл к концу",
+       "en": "Seven — the hero's journey has already come to an end"
       }
      ],
      "correct": 1,
@@ -583,12 +583,12 @@
        "en": "You already have everything you need — they symbolize the four suits"
       },
       {
-       "ru": "Подарки, которые Маг приготовил Дураку",
-       "en": "Gifts the Magician prepared for the Fool"
+       "ru": "Подарки, которые Маг заранее приготовил специально для Дурака",
+       "en": "Gifts that the Magician prepared in advance especially for the Fool"
       },
       {
-       "ru": "Награды за четыре прошлые победы Мага",
-       "en": "Trophies from the Magician's four past victories"
+       "ru": "Награды, которые Маг получил за четыре прошлые важные победы",
+       "en": "Trophies the Magician earned for four important past victories"
       }
      ],
      "correct": 0,
@@ -605,12 +605,12 @@
      },
      "options": [
       {
-       "ru": "Излишняя строгость к себе",
-       "en": "Being too strict with yourself"
+       "ru": "Излишняя строгость к себе и вечное недовольство собой",
+       "en": "Being too strict with yourself and endlessly dissatisfied"
       },
       {
-       "ru": "Страх перед любым новым делом",
-       "en": "Fear of anything new"
+       "ru": "Страх перед любым новым делом и постоянные сомнения",
+       "en": "Fear of anything new and constant hesitation about it"
       },
       {
        "ru": "Беспечность — обрыв под ногами настоящий",
@@ -667,7 +667,7 @@
       },
       {
        "ru": "Достаточно одной лишь веры Дурака",
-       "en": "The Fool's faith alone is enough"
+       "en": "The Fool's faith alone is truly enough on its own"
       }
      ],
      "correct": 0,
@@ -697,8 +697,8 @@
        "en": "The High Priestess — intuition and inner knowing"
       },
       {
-       "ru": "Мага — воля к действию",
-       "en": "The Magician — the will to act"
+       "ru": "Мага — воля к действию и выбор цели",
+       "en": "The Magician — the will to act and choose a goal"
       }
      ],
      "correct": 1,
@@ -715,12 +715,12 @@
      },
      "options": [
       {
-       "ru": "Цветущий сад Императрицы",
-       "en": "The Empress's blooming garden"
+       "ru": "Цветущий сад, где живёт сама Императрица",
+       "en": "The Empress's own blooming garden where she lives"
       },
       {
-       "ru": "Трон Императора",
-       "en": "The Emperor's throne"
+       "ru": "Трон Императора среди суровых гор",
+       "en": "The Emperor's throne among the stern mountains"
       },
       {
        "ru": "Тайну — знание, открытое не сразу",
@@ -772,12 +772,12 @@
        "en": "The High Priestess receives and listens, the Empress gives and grows"
       },
       {
-       "ru": "Обе карты учат только молчанию",
-       "en": "Both cards teach silence only"
+       "ru": "Обе карты учат нас только молчанию и терпению без действий",
+       "en": "Both cards only teach silence and patience, never action"
       },
       {
-       "ru": "Императрица слушает, а Жрица действует",
-       "en": "The Empress listens while the High Priestess acts"
+       "ru": "Императрица слушает тишину, а Жрица действует немедленно",
+       "en": "The Empress listens for silence while the High Priestess acts immediately"
       }
      ],
      "correct": 0,
@@ -798,8 +798,8 @@
        "en": "Act immediately while you have the chance"
       },
       {
-       "ru": "Спроси совета у старших",
-       "en": "Ask your elders for advice"
+       "ru": "Спроси совета у старших и опытных людей",
+       "en": "Ask your elders and more experienced people for advice"
       },
       {
        "ru": "Не спеши, помолчи — ответ уже внутри",
@@ -829,12 +829,12 @@
        "en": "Within reliable walls of order, you can finally relax"
       },
       {
-       "ru": "Он избавляет от всех правил",
-       "en": "He frees you from all rules"
+       "ru": "Он избавляет вас от всех правил и обязательств",
+       "en": "He frees you completely from every rule and obligation"
       },
       {
-       "ru": "Он дарит вдохновение и спонтанность",
-       "en": "He grants inspiration and spontaneity"
+       "ru": "Он дарит вам вдохновение и внезапную спонтанность",
+       "en": "He grants you inspiration and sudden spontaneity"
       }
      ],
      "correct": 0,
@@ -878,16 +878,16 @@
      },
      "options": [
       {
-       "ru": "Император следует традиции, Иерофант создаёт свои правила",
-       "en": "The Emperor follows tradition, the Hierophant makes his own rules"
+       "ru": "Император следует традиции, а Иерофант создаёт свои правила",
+       "en": "The Emperor follows tradition, while the Hierophant makes his own rules"
       },
       {
-       "ru": "Они ничем не отличаются",
-       "en": "There is no difference between them"
+       "ru": "Они ничем не отличаются, оба просто наводят порядок",
+       "en": "There is no difference between them, both simply bring order"
       },
       {
-       "ru": "Император строит порядок своей волей, Иерофант передаёт проверенный поколениями",
-       "en": "The Emperor builds order by his own will, the Hierophant passes down order proven by generations"
+       "ru": "Император строит порядок своей волей, Иерофант — проверенным поколениями",
+       "en": "The Emperor builds order by his own will, the Hierophant by generations before him"
       }
      ],
      "correct": 2,
@@ -904,16 +904,16 @@
      },
      "options": [
       {
-       "ru": "Излишняя мечтательность",
-       "en": "Excessive daydreaming"
+       "ru": "Излишняя мечтательность и оторванность от жизни",
+       "en": "Excessive daydreaming and being disconnected from real life"
       },
       {
        "ru": "Слепое «так принято» — правило без смысла",
        "en": "Blind \"that's how it's done\" — a rule kept without meaning"
       },
       {
-       "ru": "Страх перед любым порядком",
-       "en": "Fear of any kind of order"
+       "ru": "Страх перед любым порядком и стабильностью",
+       "en": "Fear of any kind of order or stability at all"
       }
      ],
      "correct": 1,
@@ -934,12 +934,12 @@
        "en": "A calm \"no\" to a colleague and a counted budget"
       },
       {
-       "ru": "Пять минут тишины без телефона",
-       "en": "Five minutes of silence without your phone"
+       "ru": "Пять минут тишины без телефона перед сном",
+       "en": "Five minutes of silence without your phone before bed"
       },
       {
-       "ru": "Семейный рецепт от бабушки",
-       "en": "A family recipe from grandma"
+       "ru": "Семейный рецепт борща, который передала бабушка",
+       "en": "Grandma's borscht recipe, passed down through the family"
       }
      ],
      "correct": 0,
@@ -961,16 +961,16 @@
      },
      "options": [
       {
-       "ru": "Победа над соперниками",
-       "en": "Victory over rivals"
+       "ru": "Победа над соперниками в борьбе за сердце",
+       "en": "Victory over rivals for someone's heart"
       },
       {
        "ru": "Выбор, который определяет, кем вы станете",
        "en": "A choice that defines who you will become"
       },
       {
-       "ru": "Богатство и изобилие",
-       "en": "Wealth and abundance"
+       "ru": "Богатство, изобилие и материальный успех",
+       "en": "Wealth, abundance and material success"
       }
      ],
      "correct": 1,
@@ -987,16 +987,16 @@
      },
      "options": [
       {
-       "ru": "Силой воли",
-       "en": "By willpower"
+       "ru": "Только силой воли, безо всякой узды",
+       "en": "By willpower alone, without any reins at all"
       },
       {
-       "ru": "Громким приказом",
-       "en": "With a loud command"
+       "ru": "Громким приказом, который сфинксы вынуждены слушать",
+       "en": "With a loud command that the sphinxes must obey"
       },
       {
-       "ru": "Он просто отпускает их куда угодно",
-       "en": "He simply lets them wander anywhere"
+       "ru": "Он просто отпускает их идти куда угодно",
+       "en": "He simply lets them wander off anywhere they like"
       }
      ],
      "correct": 0,
@@ -1013,12 +1013,12 @@
      },
      "options": [
       {
-       "ru": "День и ночь в пути героя",
-       "en": "Day and night on the hero's journey"
+       "ru": "День и ночь, что сменяют друг друга в пути героя",
+       "en": "Day and night that follow each other on the hero's journey"
       },
       {
-       "ru": "Двух верных друзей воина",
-       "en": "The warrior's two loyal friends"
+       "ru": "Двух верных друзей и надёжных спутников воина в пути",
+       "en": "The warrior's two loyal friends and constant companions on the road"
       },
       {
        "ru": "Внутренние противоречия, тянущие в разные стороны",
@@ -1071,7 +1071,7 @@
       },
       {
        "ru": "Выбор и движение не связаны между собой",
-       "en": "Choice and movement are unrelated"
+       "en": "Choice and movement have nothing to do with each other"
       },
       {
        "ru": "Выбрать направление сердцем — и доехать туда волей",
@@ -1097,16 +1097,16 @@
      },
      "options": [
       {
-       "ru": "Структура → импульс → выбор → рост",
-       "en": "Structure → impulse → choice → growth"
+       "ru": "Структура и знания → рост → импульс и инструменты → зрелый выбор и достижение",
+       "en": "Structure and knowledge → growth → impulse and tools → mature choice and achievement"
       },
       {
        "ru": "Импульс и инструменты → рост → структура и знания → зрелый выбор и достижение",
        "en": "Impulse and tools → growth → structure and knowledge → mature choice and achievement"
       },
       {
-       "ru": "Выбор → знания → импульс → победа",
-       "en": "Choice → knowledge → impulse → victory"
+       "ru": "Зрелый выбор и достижение → структура и знания → рост → импульс и инструменты",
+       "en": "Mature choice and achievement → structure and knowledge → growth → impulse and tools"
       }
      ],
      "correct": 1,
@@ -1177,16 +1177,16 @@
      },
      "options": [
       {
-       "ru": "Сюжет короче списка",
-       "en": "A story is shorter than a list"
+       "ru": "Сюжет всегда короче и проще любого списка значений",
+       "en": "A story is always so much shorter and simpler than any list of meanings to learn"
       },
       {
        "ru": "Забыли карту — вспомните этап героя, и значение вернётся само",
-       "en": "Forget a card — recall the hero's stage, and the meaning comes back on its own"
+       "en": "Forget a card — recall the hero's stage, the meaning returns on its own"
       },
       {
-       "ru": "Список значений выучить невозможно",
-       "en": "A list of meanings is impossible to memorize"
+       "ru": "Список значений просто невозможно выучить наизусть",
+       "en": "A full list of meanings is simply impossible to memorize by heart"
       }
      ],
      "correct": 1,
@@ -1204,11 +1204,11 @@
      "options": [
       {
        "ru": "Императрица — забота и терпение",
-       "en": "The Empress — nurturing and patience"
+       "en": "The Empress — nurturing, patience and warmth"
       },
       {
        "ru": "Император — порядок и опора",
-       "en": "The Emperor — order and support"
+       "en": "The Emperor — order and steady support"
       },
       {
        "ru": "Жрица — интуиция и пауза",
@@ -1238,12 +1238,12 @@
        "en": "Build a bridge — link the meanings with \"because,\" \"so that,\" or \"but\""
       },
       {
-       "ru": "Читать каждую карту отдельно по словарику",
-       "en": "Read each card separately from a glossary"
+       "ru": "Читать каждую карту отдельно по словарику, не связывая их",
+       "en": "Read each card separately from a glossary, without linking them"
       },
       {
-       "ru": "Выбрать только ту карту, что нравится больше",
-       "en": "Pick only the card you like more"
+       "ru": "Выбрать только ту карту, что нравится больше остальных",
+       "en": "Pick only the card that you personally like more than the rest"
       }
      ],
      "correct": 0,
@@ -1260,12 +1260,12 @@
      },
      "options": [
       {
-       "ru": "Мягкость или дисциплина",
-       "en": "Softness or discipline"
+       "ru": "Мягкость или твёрдая дисциплина",
+       "en": "Softness or firm discipline"
       },
       {
        "ru": "Действовать или подождать",
-       "en": "To act or to wait"
+       "en": "Whether to act or to wait"
       },
       {
        "ru": "Своё или чужое мнение",
@@ -1343,12 +1343,12 @@
        "en": "Don't rush the choice — listen to yourself first"
       },
       {
-       "ru": "Выбирай как можно быстрее",
-       "en": "Choose as quickly as possible"
+       "ru": "Выбирай как можно быстрее, не откладывая ни на день",
+       "en": "Choose as quickly as possible, without waiting a single day"
       },
       {
-       "ru": "Доверь выбор кому-то другому",
-       "en": "Let someone else choose for you"
+       "ru": "Доверь выбор кому-то другому, кто лучше знает",
+       "en": "Let someone else make the choice for you instead"
       }
      ],
      "correct": 0,

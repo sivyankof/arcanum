@@ -13,15 +13,15 @@
      },
      "options": [
       {
-       "ru": "В умении подавить чувства усилием воли",
-       "en": "The will to suppress your feelings"
+       "ru": "В умении подавить чувства и порывы одним усилием воли",
+       "en": "The will to suppress your feelings and impulses by sheer force"
       },
       {
        "ru": "В терпении и доброте, которые приручают собственные страхи и порывы",
        "en": "Patience and kindness that tame your own fears and impulses"
       },
       {
-       "ru": "В способности одолеть противника напором",
+       "ru": "В способности одолеть любого противника одним открытым напором",
        "en": "The power to overwhelm an opponent by force"
       }
      ],
@@ -66,8 +66,8 @@
      },
      "options": [
       {
-       "ru": "Ничем: карта предупреждает об изоляции",
-       "en": "It isn't: the card warns of isolation"
+       "ru": "Ничем: карта якобы предупреждает об опасной изоляции",
+       "en": "It isn't: the card simply warns you about isolation"
       },
       {
        "ru": "Отшельник прячется от мира, который его разочаровал",
@@ -96,12 +96,12 @@
        "en": "Mistaking gentleness for indulgence and pretending the lion isn't there"
       },
       {
-       "ru": "Стать слишком жёсткой и растерять доброту",
-       "en": "Becoming too harsh and losing kindness"
+       "ru": "Стать слишком жёсткой и постепенно растерять всю свою доброту",
+       "en": "Becoming too harsh and gradually losing all your kindness"
       },
       {
-       "ru": "Отдать все силы другим и забыть о себе",
-       "en": "Giving all your strength to others and forgetting yourself"
+       "ru": "Отдать все свои силы без остатка другим людям и полностью забыть о себе",
+       "en": "Giving all your strength away to others and completely forgetting about yourself"
       }
      ],
      "correct": 0,
@@ -118,16 +118,16 @@
      },
      "options": [
       {
-       "ru": "Действовать сразу, пока эмоции дают энергию",
-       "en": "Act at once, while emotions give you energy"
+       "ru": "Действовать сразу и резко, пока эмоции ещё дают вам много энергии",
+       "en": "Act at once and decisively, while your emotions still give you plenty of energy"
       },
       {
        "ru": "Сначала успокоить бурю, потом в тишине расслышать, чего вы хотите",
        "en": "First calm the storm, then listen in the quiet for what you want"
       },
       {
-       "ru": "Переждать, ничего не меняя: само уляжется",
-       "en": "Wait it out and change nothing: it will settle itself"
+       "ru": "Переждать молча, ничего не меняя: всё как-нибудь само собой уляжется",
+       "en": "Wait it out calmly and change nothing: it will settle itself in time"
       }
      ],
      "correct": 1,
@@ -150,11 +150,11 @@
      "options": [
       {
        "ru": "Контроля: удержать всё в своих руках",
-       "en": "Control: keep everything in your hands"
+       "en": "Control: keep everything firmly in your own two hands"
       },
       {
        "ru": "Смирения: от нас всё равно ничего не зависит",
-       "en": "Resignation: nothing depends on us anyway"
+       "en": "Resignation: nothing depends on us anyway, so why even try at all"
       },
       {
        "ru": "Гибкости: заметить открывшуюся дверь и войти",
@@ -163,8 +163,8 @@
      ],
      "correct": 2,
      "explain": {
-      "ru": "Колесо вертится само, но подъём им же и обещан: за спадом идёт рост, и важно не проспать поворот.",
-      "en": "The wheel turns on its own, but the rise is its promise too: decline is followed by growth, and the turn is not to be slept through."
+      "ru": "Колесо вертится само, но за спадом обычно идёт подъём — так устроен цикл, и важно не проспать поворот.",
+      "en": "The wheel turns on its own, but decline is typically followed by a rise — that's how the cycle works, and the turn is not to be slept through."
      }
     },
     {
@@ -232,7 +232,7 @@
        "en": "Life is unfair and must be accepted"
       },
       {
-       "ru": "Каждому достаётся случайная доля удачи",
+       "ru": "Каждому в жизни достаётся случайная доля удачи",
        "en": "Everyone gets a random share of luck"
       },
       {
@@ -254,19 +254,19 @@
      },
      "options": [
       {
+       "ru": "Что в этой ситуации было вам приятно, а что оказалось неприятно и вызвало досаду",
+       "en": "What in the situation felt pleasant to you, and what felt unpleasant and left you upset"
+      },
+      {
+       "ru": "Что в ней случилось раньше по времени, а что случилось намного позже, под конец",
+       "en": "What in it happened first, and what happened much later, closer to the very end"
+      },
+      {
        "ru": "Что в ней от Колеса (не зависело от вас) и что от Справедливости (ваши выборы)",
        "en": "What in it belongs to the Wheel (was never up to you) and what to Justice (your choices)"
-      },
-      {
-       "ru": "Что в ней приятно и что неприятно",
-       "en": "What in it is pleasant and what is not"
-      },
-      {
-       "ru": "Что было раньше и что случилось потом",
-       "en": "What came first and what happened later"
       }
      ],
-     "correct": 0,
+     "correct": 2,
      "explain": {
       "ru": "Разделение возвращает ясность: не корить себя за повороты Колеса и не списывать на судьбу собственные решения.",
       "en": "The split restores clarity: don't blame yourself for the Wheel's turns, and don't blame fate for your own decisions."
@@ -293,7 +293,7 @@
        "en": "A literal danger to prevent"
       },
       {
-       "ru": "О чужом дурном влиянии",
+       "ru": "О чужом дурном влиянии, от которого стоит защититься",
        "en": "Someone else's bad influence"
       }
      ],
@@ -338,16 +338,16 @@
      },
      "options": [
       {
-       "ru": "Ничего: это потерянное время",
-       "en": "Nothing: it is lost time"
+       "ru": "Ничего: это просто потерянное впустую время",
+       "en": "Nothing at all: it is simply lost and wasted time"
       },
       {
        "ru": "Снаружи ничего не движется, а внутри зреет новый взгляд",
        "en": "Nothing moves outside, while a new way of seeing ripens within"
       },
       {
-       "ru": "Копятся силы для решающего рывка",
-       "en": "Energy builds up for a decisive push"
+       "ru": "Копятся силы и решимость для одного решающего рывка",
+       "en": "Energy quietly builds up for one decisive push"
       }
      ],
      "correct": 1,
@@ -368,12 +368,12 @@
        "en": "Fine-tunes the new life: drop by drop, without extremes or jolts"
       },
       {
-       "ru": "Строгим самоограничением во всём",
-       "en": "Imposes strict self-denial in everything"
+       "ru": "Строгим самоограничением и запретами почти во всём сразу, без пощады к себе",
+       "en": "Imposes strict self-denial in almost everything at once, with no mercy for yourself"
       },
       {
-       "ru": "Быстрым стартом с чистого листа",
-       "en": "Makes a fast start from a clean slate"
+       "ru": "Быстрым и решительным стартом с чистого листа, без оглядки на прошлое",
+       "en": "Makes a fast, decisive start from a clean slate, with no glance back at the past"
       }
      ],
      "correct": 0,
@@ -447,12 +447,12 @@
      },
      "options": [
       {
-       "ru": "Всю жизнь без разбора",
-       "en": "Your whole life, indiscriminately"
+       "ru": "Всю вашу жизнь целиком, без разбора и без всякой видимой причины",
+       "en": "Your whole life, indiscriminately and without any visible reason"
       },
       {
-       "ru": "Планы, которые были слишком смелыми",
-       "en": "Plans that were too bold"
+       "ru": "Планы, которые изначально были слишком смелыми и потому обречены",
+       "en": "Plans that were simply too bold from the start and doomed to fail"
       },
       {
        "ru": "Конструкцию на шатком основании: самообман и иллюзии",
@@ -531,11 +531,11 @@
       },
       {
        "ru": "Обе карты предупреждают об одном и том же наказании",
-       "en": "Both cards warn of the same punishment"
+       "en": "Both cards warn of the same punishment, just in different form"
       },
       {
        "ru": "Башня строит то, что Дьявол разрушил",
-       "en": "The Tower builds what The Devil destroyed"
+       "en": "The Tower builds up what The Devil had destroyed before it"
       }
      ],
      "correct": 0,
@@ -557,11 +557,11 @@
      },
      "options": [
       {
-       "ru": "Довериться первому впечатлению: оно самое верное",
+       "ru": "Довериться первому впечатлению: оно всегда самое верное",
        "en": "Trust your first impression: it is the truest"
       },
       {
-       "ru": "Отложить все дела до новолуния",
+       "ru": "Отложить абсолютно все дела до самого новолуния",
        "en": "Put everything off until the new moon"
       },
       {
@@ -614,12 +614,12 @@
        "en": "It is direct, not reflected: the situation is seen as it is"
       },
       {
-       "ru": "Он ярче, но быстрее гаснет",
-       "en": "It is brighter but fades faster"
+       "ru": "Он ярче обычного, но при этом гораздо быстрее гаснет",
+       "en": "It is brighter, but it fades much faster than usual"
       },
       {
-       "ru": "Ничем: обе карты про ясность",
-       "en": "Nothing: both cards mean clarity"
+       "ru": "Ничем: обе карты в этом уроке ровно про одну и ту же ясность",
+       "en": "Nothing at all: both cards in this lesson mean the very same clarity"
       }
      ],
      "correct": 0,
@@ -636,12 +636,12 @@
      },
      "options": [
       {
-       "ru": "Откат назад: надежда была ложной",
-       "en": "A rollback: the hope was false"
+       "ru": "Откат назад: значит, надежда Звезды с самого начала была ложной",
+       "en": "A rollback: it means the Star's hope was false from the start"
       },
       {
-       "ru": "Расплата за поспешность",
-       "en": "A penalty for haste"
+       "ru": "Расплата за спешку и за нетерпеливость на предыдущем шаге",
+       "en": "A penalty for haste and impatience on the previous step"
       },
       {
        "ru": "Предрассветный час: последние страхи перед ясностью",
@@ -662,16 +662,16 @@
      },
      "options": [
       {
-       "ru": "«Кто в этом виноват?»",
-       "en": "“Who is to blame for this?”"
+       "ru": "«Кто вообще во всём этом виноват?»",
+       "en": "\"Who is to blame for this?\""
       },
       {
        "ru": "«Это факт — или додумано?»",
-       "en": "“Is this a fact — or filled in?”"
+       "en": "\"Is this a fact — or filled in?\""
       },
       {
        "ru": "«Что самое худшее может случиться?»",
-       "en": "“What is the worst that could happen?”"
+       "en": "\"What is the worst that could happen?\""
       }
      ],
      "correct": 1,
@@ -719,16 +719,16 @@
      },
      "options": [
       {
-       "ru": "Сразу ставить новую цель, пока есть разгон",
-       "en": "Set a new goal at once, while you have momentum"
+       "ru": "Сразу ставить перед собой новую цель, пока есть разгон",
+       "en": "Set a brand new goal at once, while you still have momentum"
       },
       {
        "ru": "Отпраздновать результат — и только потом начинать новое",
        "en": "Celebrate the result — and only then begin the new"
       },
       {
-       "ru": "Проверить, не упущено ли что-нибудь",
-       "en": "Check whether anything was missed"
+       "ru": "Проверить заново, не упущено ли в дороге что-нибудь важное",
+       "en": "Check carefully whether anything important was missed"
       }
      ],
      "correct": 1,
@@ -776,11 +776,11 @@
        "en": "The study is complete: what was learned has become life"
       },
       {
-       "ru": "Знания оказались ненужными",
+       "ru": "Знания в итоге оказались никому не нужными и были забыты",
        "en": "The knowledge turned out to be useless"
       },
       {
-       "ru": "Это разные фигуры, совпадение случайно",
+       "ru": "Это разные фигуры, и их совпадение случайно",
        "en": "They are different figures; the match is a coincidence"
       }
      ],
@@ -798,12 +798,12 @@
      },
      "options": [
       {
-       "ru": "Потому что в конце пути герой теряет всё",
-       "en": "Because at the end of the road the hero loses everything"
+       "ru": "Потому что в конце долгого пути герой теряет всё, что успел приобрести",
+       "en": "Because at the very end of the road the hero loses everything"
       },
       {
-       "ru": "Потому что путь Дурака был ошибкой",
-       "en": "Because the Fool's journey was a mistake"
+       "ru": "Потому что весь путь Дурака с самого начала был одной большой ошибкой",
+       "en": "Because the Fool's whole journey was a mistake from the start"
       },
       {
        "ru": "Потому что круг замыкается, чтобы начаться заново — на новой высоте",
