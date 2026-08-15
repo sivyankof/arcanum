@@ -1,0 +1,268 @@
+# Спека 27 · Инфраструктура 4 языков (CC-L1 плана локализации)
+
+Дата: 15.08.2026. Статус: спека согласована Артёмом 15.08 (дизайн — в чате, три развилки приняты
+по рекомендации). Реализация — Opus 5 по детальному плану `docs/plans/27-lang-infra.md`;
+код внутри — sonnet/haiku-сабагентами. Ветка `feat/27-lang-infra`.
+
+## Цель
+
+Приложение готово принять испанский и португальский (решение 12.08: v1 на RU+EN+ES+PT) БЕЗ
+единой строки перевода в этой задаче: тип языка один и на 4 значения, язык читается одним хуком,
+контент отдаётся с фолбэком, переключатель показывает 4 языка, при первой установке язык берётся
+с устройства, плюрализация es/pt проверяется тестами. Каждый новый экран после этой задачи —
+четырёхъязычный сам по себе. Переводы (UI-строки — L-0, контент — задача 28) приходят позже
+и подхватываются без правок кода.
+
+Объединяет заведённый в бэклоге хелпер `useLang()` (те же файлы, тот же заход).
+
+## Разведка: что есть сейчас (ничего из этого заново не пишем)
+
+- **Тип языка объявлен трижды**: `src/lib/content.ts:6` (`export type Lang`), `src/store/useApp.ts:15`
+  (`export type Lang`), `src/lib/dates.ts:31` (локальный `type Lang`). Плюс инлайн-юнион
+  `'ru' | 'en'` в: `backup.ts` (через импорт из стора), `BirthArcanaCard`, `MonthNav`, `MonthCard`,
+  `JournalRow`, `Reflection`, `pushBody.ts`, `pushes.ts` (×3), `pushes.web.ts` (×2), `phrases.ts`,
+  `app/(tabs)/cards.tsx` (`Cell`), `app/lesson/[id].tsx` (`CardStep`).
+- **Каст языка** `(i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en'` — в 11 файлах:
+  `app/(tabs)/{index,course,cards,spreads,profile}.tsx`, `app/settings.tsx`, `app/onboarding.tsx`,
+  `app/lesson/[id].tsx`, `app/note/[date].tsx`, `app/card/[id].tsx`, `src/components/StreakPill.tsx`;
+  та же конструкция без каста — в `DatePicker.tsx`, `DatePicker.web.tsx`, `TimePicker.tsx`
+  (`localeTag(i18n.language.startsWith('ru') ? 'ru' : 'en')`). `export const lang = …` в конце
+  `src/lib/i18n.ts` — мёртвый код (не импортируется нигде).
+- **Источник правды языка — стор** (`lang`, персист, `PERSIST_DEFAULTS.lang = 'ru'`); i18n — зеркало:
+  `app/_layout.tsx` эффектом зовёт `i18n.changeLanguage(lang)`. Экраны читают зеркало
+  (`i18n.language`), чтобы кадр был согласован с `t()`. `usePushScheduler` и `_layout` читают стор.
+  ⚠️ Между гидрацией и эффектом есть ОДИН кадр со старым языком i18n (сегодня незаметен: дефолт `ru`
+  совпадает с языком единственных пользователей; с определением языка устройства это стал бы
+  первым кадром каждого нерусского новичка).
+- **Контент индексируется напрямую** `x.name[lang]`, `block[lang]`, `keywords[lang]` — ~25 мест
+  в `app/` и `src/` (`card/[id]`, `(tabs)/index|cards|spreads`, `lesson/[id]`, `note/[date]`,
+  `onboarding`, `BirthArcanaCard`, `CoursePath`, `ModuleHeader`, `MonthCard`, `lesson.ts`,
+  `cardSearch.ts:64`, `pushBody.ts`, `phrases.ts`). При типе на 4 языка и JSON на 2 это `undefined`
+  и падение справочника (`cardSearch.ts:64` — уже записано в бэклоге).
+- **Тесты плюрализации** (`i18nPlurals.test.ts`) ходят по `Object.keys(resources)` — язык с ресурсами
+  подхватывается сам; оракул сравнивает `intl-pluralrules` с ICU по этим же языкам. Пакет
+  `intl-pluralrules` несёт CLDR целиком — es/pt в нём есть.
+- **`i18next` без ресурсов языка**: `changeLanguage('es')` при отсутствии `resources.es` всё равно
+  ставит `i18n.language = 'es'` (`getBestMatchFromCodes` без `supportedLngs` принимает любой код),
+  а `t()` идёт по цепочке `['es', 'en']` → английский. Проверено чтением `node_modules/i18next/dist/cjs/i18next.js`
+  (`changeLanguage` → `setLng`); `loadResources` с inline-ресурсами зовёт колбэк синхронно —
+  смена языка синхронна.
+- **Макет** `design-reference.html:749` — строка «Язык · Русский», пикера нет.
+- **`expo-localization`** `~17.0.9` в `bundledNativeModules.json` SDK 54 (в Expo Go есть). JS/веб-реализация
+  SSR-безопасна: `Platform.isDOMAvailable ? navigator.languages : Intl.DateTimeFormat().resolvedOptions().locale`
+  (прочитано в исходнике пакета `src/ExpoLocalization.ts`). Ни один тест стор не импортирует
+  (`grep store/useApp src/lib/__tests__` — пусто), `i18n.ts` импортирует только `i18nPlurals.test.ts`.
+- **Второе появление «список-модалка на `ModalPanel`»**: `TimePicker.web.tsx` (список часов с ✓) —
+  пикер языка повторил бы его разметку один в один → выносится в общий компонент (правило 2+).
+
+## Решения брейншторма (рассмотрено и выбрано)
+
+1. **Один модуль про язык — `src/lib/lang.ts`** (чистый: без expo/react, под юнит-тестами).
+   Альтернатива «оставить `Lang` в `content.ts`» отвергнута: язык — не про контент, а про приложение
+   (стор, даты, пикеры, пуши); `content.ts` и `useApp.ts` реэкспортируют тип, чтобы существующие
+   импорты не менялись (так стор уже делает с `DailyDraw`/`AppSettings`/`Profile`).
+2. **`useLang()` читает `i18n.language`, а не стор.** Экраны сегодня читают именно i18n; стор остаётся
+   источником (персист), i18n — зеркалом. Читать стор из хука значило бы получить кадр, где `lang`
+   уже новый, а `t()` ещё старый. Третьего источника правды не заводим (предупреждение бэклога).
+3. **Контент — тип `Localized<T>` + доступ `inLang(rec, lang)`** с фолбэком на `en`: `ru`/`en`
+   обязательны (канон), `es`/`pt` опциональны. Индекс `rec[lang]` по опциональному ключу даёт
+   `T | undefined` — компилятор сам подсветит каждое из ~25 мест. Альтернатива «две переменные —
+   язык UI и язык контента» отвергнута: во время переходного периода они различаются, после
+   задачи 28 совпадают, а экраны с двумя `lang` не читаются.
+4. **Переключатель — модальный список** из эндонимов с ✓ (общий `OptionPicker`, вынесенный из
+   `TimePicker.web.tsx`), а не тап-по-кругу из 4 значений (неудобно) и не системный ActionSheet
+   (нет в вебе → 6а невозможна). Макета нет → пункт 9 в задачу «Макет: правки дорисовок».
+5. **Язык — снимок при первой установке** (в `onRehydrateStorage`, там же, где назначается
+   `installSeed` — это и есть «первая гидрация»), дальше своё. Альтернатива «следовать устройству,
+   пока не выбрал сам» (`lang: null` в схеме) честнее по iOS-конвенции, но это ещё один nullable
+   по всему коду и не про v1. `restoreBackup` язык из файла НЕ трогает.
+6. **`es`/`pt` появляются в пикере и в детекции только когда есть их UI-строки**:
+   `AVAILABLE_LANGS = LANGS.filter(l => __DEV__ || l in resources)`. В dev — все 4 (проверка проводки),
+   в релизе «Español» возникает сам, как только L-0 положит `resources.es`. Альтернатива «всегда 4»:
+   бета-тестер выбирает Español и получает английский.
+7. **`SCHEMA_VERSION` → 8**: домен значения `lang` расширяется, файл v8 с `lang: 'es'` ридер v7
+   отверг бы как «повреждён» — «обновите приложение» честнее. Ветки миграции нет: форма не менялась.
+8. **Кадр со старым языком** закрывается заменой `useEffect` → `useLayoutEffect` в `_layout`
+   (смена языка i18next синхронна, см. разведку; setState из layout-эффекта отрабатывает до отрисовки).
+9. **Локали для системных компонентов и дат**: `ru-RU`, `en-US`, `es-MX`, `pt-BR`. Любой
+   латиноамериканский тег даёт те же имена месяцев/дней; `es-MX` выбран как самый широко
+   поддерживаемый движками (тег `es-419` местами не распознаётся и молча падает в дефолт локали).
+10. **Определение языка** — по всему списку предпочтений устройства, а не по первому: `[de-DE, es-ES]`
+    → `es`. Не нашли ничего из доступных → `en`.
+
+## Что делаем
+
+### А. `src/lib/lang.ts` — новый чистый модуль
+
+```ts
+export const LANGS = ['ru', 'en', 'es', 'pt'] as const;
+export type Lang = (typeof LANGS)[number];
+/** Языки, на которых написан канон контента, — обязательные ключи каждой записи. */
+export type CanonLang = 'ru' | 'en';
+/** Язык, на который падает контент, пока перевода нет (задача 28 доливает es/pt). */
+export const CONTENT_FALLBACK: Lang = 'en';
+export type Localized<T = string> = Record<CanonLang, T> & Partial<Record<Lang, T>>;
+export function presentLang<T>(rec: Localized<T>, lang: Lang): Lang;  // язык, на котором запись реально есть: lang либо CONTENT_FALLBACK
+export function inLang<T>(rec: Localized<T>, lang: Lang): T;          // rec[presentLang(rec, lang)]
+export function isLang(x: unknown): x is Lang;
+export const LANG_NAMES: Record<Lang, string>;   // Русский · English · Español · Português (эндонимы, не переводятся)
+export const LOCALES: Record<Lang, string>;      // ru-RU · en-US · es-MX · pt-BR
+export function localeTag(lang: Lang): string;   // переезжает из dates.ts (пикеры, даты)
+export function primarySubtag(tag: string): string;   // 'es-MX' → 'es', 'PT_br' → 'pt', '' → ''
+export function toLang(code: string): Lang;      // известный субтег → он, иначе 'en'
+export function detectLang(tags: readonly string[], available: readonly Lang[]): Lang;
+```
+`inLang` не считает пустую строку отсутствием: полноту es/pt следят контракт-тесты задачи 28.
+
+### Б. `src/lib/i18n.ts`
+
+- `export const AVAILABLE_LANGS: readonly Lang[] = LANGS.filter((l) => __DEV__ || l in resources)`.
+- `export function useLang(): Lang` — `toLang(useTranslation().i18n.language)`.
+- Мёртвый `export const lang = …` удаляется.
+- Ключ `settings.languageValue` удаляется из обоих языков (название языка — эндоним, не переводится).
+- Новый ключ `settings.devDeviceLang` («Язык устройства» / «Device language») — подпись DEV-строки.
+
+### В. `src/lib/deviceLang.ts` — адаптер (единственный файл, знающий `expo-localization`)
+
+`export function deviceLocaleTags(): string[]` → `getLocales().map((l) => l.languageTag)`.
+Пакет: `npx expo install expo-localization` (меняется `package.json` → **нужен `npm install`
+и перезапуск `npx expo start --tunnel`**).
+
+### Г. Стор `src/store/useApp.ts` и `src/lib/backup.ts`
+
+- `Lang` — реэкспорт из `lang.ts` (`export type { Lang } from '../lib/lang'`).
+- `onRehydrateStorage`: при `installSeed === 0` (первая гидрация) вместе с сидом пишется
+  `lang: detectLang(deviceLocaleTags(), AVAILABLE_LANGS)`. `restoreBackup` язык не трогает.
+- `backup.ts`: `SCHEMA_VERSION = 8`; `validState` — `isLang(s.lang)` вместо `'ru' || 'en'`;
+  `PERSIST_DEFAULTS.lang` остаётся `'ru'` (это дефолт доливки старого файла, у которого поля нет,
+  — такого файла не существует; настоящее значение первой установки назначает гидрация).
+  Комментарий над `SCHEMA_VERSION` и в опциях persist: «v7 → v8: `lang` принимает es/pt».
+
+### Д. Контент: `src/lib/content.ts`, `phrases.ts`, `cardSearch.ts`, `lesson.ts`, `pushBody.ts`
+
+- `content.ts`: `export type { Lang }` из `lang.ts`; `name/keywords/search/q/options/explain/title` →
+  `Localized` / `Localized<string[]>`; `interface CardContentBlock extends Localized { status }`.
+- Все прямые индексы `x[lang]` по контенту → `inLang(x, lang)` (список мест — в разведке; компилятор
+  покажет их все: после смены типа `tsc` краснеет ровно на них).
+- `cardSearch.ts`: `ENDINGS: Partial<Record<Lang, string[]>>` (`stem` берёт `ENDINGS[lang] ?? []`);
+  в `matchesQuery` язык, на котором текст РЕАЛЬНО есть у карты (`presentLang(card.name, lang)`),
+  используется и для выбора текстов, и для стемминга — иначе английский фолбэк резался бы
+  испанскими окончаниями, которых пока и нет. Окончания es/pt — задача 28 (когда появится, что искать).
+- `phrases.ts`: `interface Phrase` → `Localized`; `pickPhrase(…, lang: Lang, …)` через `inLang`.
+- `lesson.ts`: `theory?.[lang]` → `inLang`; проверка наличия теории по `theory.ru` остаётся (канон).
+- `pushBody.ts`, `pushes.ts`, `pushes.web.ts`: `lang: Lang`.
+
+### Е. Экраны и компоненты
+
+- 11 кастов → `const lang = useLang();` (импорт из `../src/lib/i18n` / `../lib/i18n`);
+  `DatePicker.tsx`, `DatePicker.web.tsx`, `TimePicker.tsx` → `localeTag(useLang())`
+  (импорт `localeTag` теперь из `../lib/lang`).
+- Инлайн-юнионы `'ru' | 'en'` в пропсах компонентов → `Lang` (сами пропсы остаются: их снятие —
+  не в этой задаче).
+- `dates.ts`: локальный тип и `LOCALES`/`localeTag` уходят в `lang.ts`; функции форматирования
+  импортируют `Lang`, `LOCALES` оттуда. `formatFullDate`: ветка `lang === 'en'` (формат с запятой)
+  остаётся; для `es`/`pt` работает общая ветка «день месяц + год» (`15 de agosto 1994` — год
+  без предлога, как и в ru; правильный «de 1994» — вопрос вычитки L-0, не этой задачи).
+- `app/_layout.tsx`: `useEffect` → `useLayoutEffect` для `i18n.changeLanguage(lang)`.
+- `src/components/OptionPicker.tsx` — общий список-модалка на `ModalPanel`
+  (`visible, title, options: readonly {key: K; label: string}[], value: K, onPick(key: K), onClose`;
+  тап по уже выбранному = закрыть без изменений — та же семантика, что у часа в `TimePicker.web`).
+  `TimePicker.web.tsx` становится тонкой обёрткой над ним (часы → options); стили — те же значения,
+  что были в `TimePicker.web` (см. «Значения» ниже), визуально ничего не меняется.
+- `app/settings.tsx`: строка «Язык» — `value={LANG_NAMES[lang]}`, тап открывает `OptionPicker`
+  с `AVAILABLE_LANGS` (`options = AVAILABLE_LANGS.map(l => ({ key: l, label: LANG_NAMES[l] }))`,
+  `onPick={setLang}`). DEV-строка «Язык устройства»: `value` = `"<первый тег> → <детект>"`
+  (`deviceLocaleTags()[0]` и `detectLang(deviceLocaleTags(), AVAILABLE_LANGS)`), тап = `setLang(детект)` —
+  без неё 6в по детекции требует переустановки.
+
+### З. Хардкод-тернары `lang === 'ru' ? … : …` → ключи i18n
+
+Разведка нашла 9 строк UI мимо i18n (те самые «8 хардкод-строк вне экрана раскладов» из бэклога
+hf-02) и одну копию словаря локалей: `app/(tabs)/index.tsx:346` (`lang === 'ru' ? 'ru-RU' : 'en-US'`
+→ `localeTag(lang)`), `:412` («НАЖМИ, ЧТОБЫ ОТКРЫТЬ»), `:454–455` («СТАРШИЙ/МЛАДШИЙ АРКАН»),
+`:462` («ЗНАЧЕНИЕ ДНЯ»), `:468` («ПРОДОЛЖИТЬ ПУТЬ →»); `app/card/[id].tsx:222` («СТАРШИЙ АРКАН»);
+`app/(tabs)/cards.tsx:174` («СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909»); `src/components/StreakPill.tsx:52,54`
+(«дн.»/«days», «СЕРИЯ»). При 4 языках такой тернар отдаёт es/pt английский навсегда — L-0
+переводит `i18n.ts`, а не экраны. Ключи: `today.tapToReveal`, `today.meaning`, `today.continue`,
+`card.majorArcana`, `card.minorArcana`, `cards.subtitle`, `streak.days` (плюрализованное семейство:
+ru `дн.` во всех формах, en `day/days`), `streak.label`. Тексты — ровно те, что стоят сейчас.
+
+### Ж. Тесты
+
+- Новый сьют `src/lib/__tests__/lang.test.ts`: `primarySubtag`, `toLang`, `detectLang`
+  (`['es-MX']→es`, `['pt-BR']→pt`, `['de-DE','es-ES']→es`, `['ru-RU']→ru`, `['de']→en`, `[]→en`,
+  `['es-MX']` при `available=['ru','en']` → `en`, регистр `'PT_br'`), `inLang` (es есть → es;
+  es нет → en; массивы; `ru` никогда не фолбэк), `isLang`, `LANG_NAMES`/`LOCALES` — ключи = `LANGS`.
+- Новый сьют `src/lib/__tests__/i18nLangs.test.ts`: `AVAILABLE_LANGS` ⊆ `LANGS` и содержит `ru`, `en`;
+  `changeLanguage('es')` без ресурсов → `i18n.language === 'es'`, `t('tabs.today') === 'Today'`
+  (закрепляет поведение i18next, на которое опирается фолбэк); контракт-тест исходников: в `app/`
+  и `src/` (кроме тестов) нет строк `startsWith('ru')` и юниона `'ru' | 'en'` (страж от копипасты
+  каста в новый экран — тот же приём, что worklet-тест задачи 14).
+- `i18nPlurals.test.ts`: оракул ходит по `LANGS` из `lang.ts` (все 4), структурные тесты —
+  по `Object.keys(resources)` как сейчас (язык без ресурсов проверять нечего).
+- `backup.test.ts`: подпись «схема v7» → v8; `lang: 'es'` валиден, `lang: 'de'` → `corrupt`.
+- Ожидаемо: 574 → ~600 тестов, 23 → 25 сьютов.
+
+## Что НЕ делаем
+
+- Переводы: UI-строки es/pt (Cowork L-0), контент (задача 28), эндонимы — единственные новые
+  «тексты», и они не переводятся.
+- Пер-языковый статус блоков контента, глоссарий, обратный перевод — задача «подготовка
+  к многоязычию» / план локализации.
+- RTL, шрифты для не-латинских языков, `I18nManager`.
+- Снятие пропсов `lang` у компонентов (только их тип).
+- «Следовать устройству, пока не выбрал сам» — решение 5.
+- Окончания es/pt в стеммере поиска — когда появится контент (28).
+- Макет пикера — задача дорисовок (пункт 9).
+
+## Значения из design-system (ничего нового)
+
+`OptionPicker` наследует `TimePicker.web`: заголовок 10/ls 2 цветом `accent` капсом, ряд
+`borderRadius: radius.m`, `paddingVertical: 11`, `paddingHorizontal: spacing.m`, `marginBottom: 5`,
+выбранный — `backgroundColor: t.chipBg`, `borderColor: t.frame`, текст 15.5 (`t.head` у выбранного,
+`t.text` у остальных), галочка `✓` 13 цветом `accent`, `ScrollView maxHeight: 260`; панель — `ModalPanel`.
+Строка настроек — `SettingsRow` с иконкой `language` как сейчас.
+
+## Критерии приёмки («готово, когда…»)
+
+- [ ] `grep -rn "'ru' | 'en'\|startsWith('ru')" app src --include=*.ts --include=*.tsx | grep -v __tests__` — пусто;
+      `type Lang` объявлен ровно один раз (`src/lib/lang.ts`), остальное — реэкспорты.
+- [ ] `useLang()` используется во всех 11 бывших местах каста + трёх пикерах; `export const lang` в `i18n.ts` удалён.
+- [ ] `grep -rn "lang === 'ru' ?" app src` — пусто: 9 хардкод-строк ушли в i18n (раздел З), словарь локалей один (`localeTag`).
+- [ ] Прямых индексов контента по языку нет: `grep -n "\[lang\]" app src --include=*.ts --include=*.tsx | grep -v __tests__` пуст
+      (кроме `LOCALES[lang]`, `ENDINGS[lang]`, `LANG_NAMES[lang]` — это словари, не контент, —
+      и самого `src/lib/lang.ts`, где фолбэк и живёт).
+- [ ] Настройки: строка «Язык · Русский» → тап → список 4 эндонимов с ✓ на текущем → выбор меняет язык
+      мгновенно (таб-бар, экраны), тап по текущему закрывает без изменений, тап по скриму закрывает.
+- [ ] Выбор `es`/`pt`: интерфейс на английском (фолбэк), названия карт/тексты — английские, даты
+      дневника и заголовок месяца — на испанском/португальском (`toLocaleDateString` с `es-MX`/`pt-BR`),
+      колесо даты рождения (iPhone) говорит по-испански/португальски, справочник не падает и ищет
+      по английским словам; консоль без ошибок.
+- [ ] Первая установка (веб: очистить site data и перезагрузить): язык = язык браузера, если он из
+      доступных (в dev — любой из 4), иначе `en`; ⚠️ это не баг веб-проверки, а поведение —
+      Chrome на английском даст английский старт.
+- [ ] Существующая установка (стор с `lang`) язык не меняет; DEV «Пройти онбординг заново» — тоже.
+- [ ] Импорт бэкапа с `lang: 'es'` проходит; с `lang: 'de'` — «Файл повреждён»; файл v8 в приложении v7
+      получил бы «более новая версия» (проверяется тестом `newerVersion`).
+- [ ] Первый кадр после гидрации уже на языке стора (проверка: в вебе включить `en`, перезагрузить —
+      без русской вспышки таб-бара; на iPhone то же).
+- [ ] DEV-строка «Язык устройства · es-MX → es» показывает теги устройства и результат; тап применяет.
+- [ ] `npx tsc --noEmit` чистый; `npm test` зелёный: новые сьюты `lang`, `i18nLangs`; оракул
+      плюрализации проходит по 4 языкам; контракт-тест на отсутствие копий каста зелёный.
+- [ ] Веб-проверка 6а/6б: скриншоты настроек с открытым пикером в обеих темах и «Сегодня»/«Карты»
+      после переключения на `es` — `docs/screenshots/27/`; лайв-проверка Артёма на iPhone (пикер,
+      колесо даты по-испански, DEV-строка детекции, переключение туда-обратно, пуш после смены языка).
+- [ ] Доки: product-spec §6 (4 языка, выбор списком, определение при первом запуске, фолбэк `en`),
+      logic-spec §7 (v8, домен `lang`, правило детекции), AGENTS.md (абзац i18n: 4 языка, `useLang`,
+      `Localized`/`inLang`, `deviceLang.ts`; счётчик тестов), CLAUDE.md «Статус», backlog (27 → [~]/[x],
+      пункт `useLang()` закрыт в составе 27, пункт 9 в «Макет: правки дорисовок» — пикер языка),
+      localization-plan (CC-L1 сделан, `AVAILABLE_LANGS` — как L-0 «включает» язык), testing-strategy
+      (`lang.ts` в списке модулей).
+
+## Открытые вопросы (не блокируют)
+
+- `formatFullDate` для es/pt отдаёт «15 de agosto 1994» без «de» перед годом — правка формата
+  вместе с вычиткой L-0, когда будет носитель-агент; здесь фиксируем как известное.
+- Гейт `AVAILABLE_LANGS` держится на `__DEV__ || l in resources`: когда L-0 добавит `resources.es`
+  с ЧАСТИЧНЫМ переводом, язык уже «включится». Полноту следят структурные тесты плюрализации и
+  приёмка CC-L2 (тест «нет ключа без 4 языков» — там же).
