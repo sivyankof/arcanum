@@ -9,7 +9,7 @@
  */
 import { cardById } from './content';
 import i18n from './i18n';
-import type { Lang } from './lang';
+import { inLang, type Lang } from './lang';
 import { pickPhrase } from './phrases';
 import type { PlannedPush } from './pushPlan';
 
@@ -19,7 +19,7 @@ export function pushBody(p: PlannedPush, lang: Lang): string {
   const card = p.cardId ? cardById.get(p.cardId) : undefined;
   const n = p.n ?? 0;
   return pickPhrase(p.phraseKey, p.date, lang, {
-    card: card ? card.name[lang] : '',
+    card: card ? inLang(card.name, lang) : '',
     n,
     // готовая плюрализованная форма для {days} у push.streak_save («Серия {days}» вместо
     // «Серия {n} дней» — «Серия 3 дней» было согласованием только для одного числа, см. пункт C

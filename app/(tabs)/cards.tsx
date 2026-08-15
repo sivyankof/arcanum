@@ -18,7 +18,7 @@ import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/li
 import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
-import type { Lang } from '../../src/lib/lang';
+import { inLang, type Lang } from '../../src/lib/lang';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
@@ -77,7 +77,7 @@ function Cell({ item, lang, learned }: { item: TarotCard; lang: Lang; learned: b
         )}
       </View>
       <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
-        {item.name[lang]}
+        {inLang(item.name, lang)}
       </Txt>
     </PressableScale>
   );

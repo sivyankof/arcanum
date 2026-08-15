@@ -20,6 +20,7 @@ import { cardImages } from '../../src/lib/cardImages';
 import { formatEntryDate } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { canEditEntry, normalizeNote, NOTE_MAX } from '../../src/lib/journal';
+import { inLang } from '../../src/lib/lang';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -91,7 +92,7 @@ export default function NoteScreen() {
               <View style={[st.thumbClip, { borderColor: t.frame }]}>
                 <Image source={cardImages[card.id]} style={st.thumb} contentFit="cover" cachePolicy="memory-disk" />
               </View>
-              <Txt style={[st.cardName, { color: t.head }]}>{card.name[lang]}</Txt>
+              <Txt style={[st.cardName, { color: t.head }]}>{inLang(card.name, lang)}</Txt>
             </View>
           )}
 

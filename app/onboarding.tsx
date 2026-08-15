@@ -28,6 +28,7 @@ import { birthArcanaId } from '../src/lib/birthArcana';
 import { cardById, cardImages } from '../src/lib/content';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticSuccess, hapticTap } from '../src/lib/haptics';
+import { inLang } from '../src/lib/lang';
 import { pingPong, startSpin } from '../src/lib/loops';
 import { useApp } from '../src/store/useApp';
 import { glowShadow } from '../src/theme/glow';
@@ -194,11 +195,11 @@ export default function Onboarding() {
                   </Animated.View>
                 </FadeUp>
                 <FadeUp index={2}>
-                  <Txt style={[st.cardName, { color: t.head }]}>{arcana.name[lang]}</Txt>
+                  <Txt style={[st.cardName, { color: t.head }]}>{inLang(arcana.name, lang)}</Txt>
                 </FadeUp>
                 <FadeUp index={3}>
                   <Txt style={[st.lead, { color: t.muted }]}>
-                    {arcana.content['birth_path']?.[lang] ?? ''}
+                    {arcana.content['birth_path'] ? inLang(arcana.content['birth_path'], lang) : ''}
                   </Txt>
                 </FadeUp>
                 <FadeUp index={4} style={st.ctaWrap}>

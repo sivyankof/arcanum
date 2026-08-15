@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import type { CourseModule, Lang } from '../lib/content';
 import { moduleCardCount, moduleProgress, type LessonProgressMap } from '../lib/courseProgress';
+import { inLang } from '../lib/lang';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { Txt } from './Txt';
@@ -43,7 +44,7 @@ export function ModuleHeader({
           </Txt>
           {!mod.free && <Ionicons name="lock-closed" size={12} color={t.muted} />}
         </View>
-        <Txt style={[st.title, { color: t.head }]}>{mod.title[lang]}</Txt>
+        <Txt style={[st.title, { color: t.head }]}>{inLang(mod.title, lang)}</Txt>
         <Txt style={[st.counters, { color: t.muted }]}>{counters}</Txt>
       </View>
       <Txt style={[st.pct, { color: t.accent }]}>{pct}%</Txt>

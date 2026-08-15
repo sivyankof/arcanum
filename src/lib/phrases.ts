@@ -6,18 +6,16 @@
  */
 import phrasesJson from '../../content/phrases.json';
 import { fnv1a32 } from './content';
-import type { CanonLang, Lang } from './lang';
-
-interface Phrase { ru: string; en: string }
+import { inLang, type Lang, type Localized } from './lang';
 
 /** Список вариантов по пути через точку: 'reflect.question', 'empty.filter'. */
-function variantsAt(key: string): Phrase[] {
+function variantsAt(key: string): Localized[] {
   let node: unknown = phrasesJson;
   for (const part of key.split('.')) {
     if (node === null || typeof node !== 'object') return [];
     node = (node as Record<string, unknown>)[part];
   }
-  return Array.isArray(node) ? (node as Phrase[]) : [];
+  return Array.isArray(node) ? (node as Localized[]) : [];
 }
 
 /** Плейсхолдеры {card}, {name}, {n} подставляются ПОСЛЕ выбора варианта (logic-spec §9).
@@ -31,9 +29,7 @@ export function pickPhrase(
 ): string {
   const variants = variantsAt(key);
   if (variants.length === 0) return '';
-  // Phrase хранит только ru/en (es/pt появятся с переводами, задача 28) — узкий индекс
-  // безопасен и сейчас: lang шире стал только на уровне сигнатуры (спека 27, задача 2)
-  const text = variants[fnv1a32(`${dateISO}:${key}`) % variants.length][lang as CanonLang];
+  const text = inLang(variants[fnv1a32(`${dateISO}:${key}`) % variants.length], lang);
   return text.replace(/\{(\w+)\}/g, (whole, name: string) =>
     name in vars ? String(vars[name]) : whole,
   );

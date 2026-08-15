@@ -2,7 +2,7 @@
  *  импортов react/expo — целиком под юнит-тестами. Состояние прохождения (текущий шаг, ошибки)
  *  живёт в экране: product-spec §2 — выход из урока прогресс шага не сохраняет. */
 import type { CourseLesson, Lang, QuizQuestion } from './content';
-import type { CanonLang } from './lang';
+import { inLang } from './lang';
 
 export type LessonStep =
   | { kind: 'theory'; text: string }
@@ -59,7 +59,7 @@ export function lessonPlayable(lesson: CourseLesson): boolean {
 export function lessonSteps(lesson: CourseLesson, lang: Lang, rng: Rng): LessonStep[] {
   const steps: LessonStep[] = [];
   // theory — CardContentBlock, хранит только ru/en (es/pt появятся с переводами, задача 28)
-  for (const text of theoryPages(lesson.theory?.[lang as CanonLang] ?? '')) steps.push({ kind: 'theory', text });
+  for (const text of theoryPages(lesson.theory ? inLang(lesson.theory, lang) : '')) steps.push({ kind: 'theory', text });
   for (const cardId of lesson.cards) steps.push({ kind: 'card', cardId });
   for (const q of lesson.quiz ?? []) steps.push({ kind: 'quiz', question: shuffleOptions(q, rng) });
   return steps;

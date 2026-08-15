@@ -1,4 +1,4 @@
-import type { CourseModule, Lang } from '../content';
+import type { CourseModule } from '../content';
 import { course } from '../content';
 import {
   completeLessonProgress,
@@ -12,14 +12,13 @@ import {
 } from '../courseProgress';
 
 // Фабрика модулей: fx('a', 2) — модуль "a" с уроками a1, a2; cardsPerLesson РАЗНЫХ карт в каждом.
-// title несёт только ru/en (es/pt появятся с переводами, задача 28) — приводим к Record<Lang,...>
 const fx = (id: string, lessons: number, cardsPerLesson = 0): CourseModule => ({
   id,
   free: true,
-  title: { ru: id, en: id } as Record<Lang, string>,
+  title: { ru: id, en: id },
   lessons: Array.from({ length: lessons }, (_, i) => ({
     id: `${id}${i + 1}`,
-    title: { ru: `${id}${i + 1}`, en: `${id}${i + 1}` } as Record<Lang, string>,
+    title: { ru: `${id}${i + 1}`, en: `${id}${i + 1}` },
     cards: Array.from({ length: cardsPerLesson }, (_, c) => `${id}${i + 1}-card-${c}`),
   })),
 });
@@ -121,7 +120,7 @@ describe('moduleCardCount — РАЗНЫЕ карты модуля', () => {
     const mod = fx('c', 2, 2);
     mod.lessons.push({
       id: 'c3',
-      title: { ru: 'Повторение', en: 'Review' } as Record<Lang, string>,
+      title: { ru: 'Повторение', en: 'Review' },
       cards: [...mod.lessons[0].cards, ...mod.lessons[1].cards],
     });
     expect(moduleCardCount(mod)).toBe(4);

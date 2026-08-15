@@ -32,6 +32,7 @@ import { cardById, cardNumeral } from '../../src/lib/content';
 import { formatDayMonth } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { cardHistory } from '../../src/lib/journal';
+import { inLang } from '../../src/lib/lang';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
@@ -227,7 +228,7 @@ export default function CardDetail() {
   const blockOf = (key: string): { text: string; todo: boolean } => {
     const block = card.content[key];
     if (!block || block.status === 'todo') return { text: tr('card.soon'), todo: true };
-    return { text: block[lang], todo: false };
+    return { text: inLang(block, lang), todo: false };
   };
 
   const applySphere = (key: SphereKey) => {
@@ -305,7 +306,7 @@ export default function CardDetail() {
           <FadeUp index={0} style={{ flex: 1 }}>
             <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
             <View style={st.nameRow}>
-              <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
+              <Txt style={[st.name, { color: t.head }]}>{inLang(card.name, lang)}</Txt>
               {isBirthArcana && (
                 <View style={[st.birthChip, { backgroundColor: t.chipBg, borderColor: t.frame }]}>
                   <Txt style={[st.birthChipTxt, { color: t.accent }]}>
@@ -315,7 +316,7 @@ export default function CardDetail() {
               )}
             </View>
             <View style={st.kws}>
-              {card.keywords[lang].map((k) => (
+              {inLang(card.keywords, lang).map((k) => (
                 <View key={k} style={[st.kw, { backgroundColor: t.chipBg, borderColor: t.line }]}>
                   <Txt style={{ color: t.accent, fontSize: 10, fontWeight: '600' }}>{k}</Txt>
                 </View>

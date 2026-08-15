@@ -34,6 +34,7 @@ import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/cont
 import { daysAgoISO, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import type { Outcome } from '../../src/lib/journal';
+import { inLang } from '../../src/lib/lang';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
 import { moonInfo } from '../../src/lib/moon';
 import { pickPhrase } from '../../src/lib/phrases';
@@ -339,8 +340,9 @@ export default function TodayScreen() {
     }
   };
 
-  const dayText = card.content.day_card?.[lang];
-  const hasText = dayText && card.content.day_card.status !== 'todo';
+  const dayBlock = card.content.day_card;
+  const dayText = dayBlock ? inLang(dayBlock, lang) : undefined;
+  const hasText = dayText && dayBlock.status !== 'todo';
 
   // дата как в эталоне: «Пятница · 1 августа» (в стиле .date стоит верхний регистр)
   const locale = lang === 'ru' ? 'ru-RU' : 'en-US';
@@ -447,7 +449,7 @@ export default function TodayScreen() {
         {drawn && (
           <>
             <Animated.View style={plateStyle}>
-              <Txt style={[st.cardName, { color: t.head }]}>{card.name[lang].toUpperCase()}</Txt>
+              <Txt style={[st.cardName, { color: t.head }]}>{inLang(card.name, lang).toUpperCase()}</Txt>
               <Txt style={[st.cardSub, { color: t.muted }]}>
                 {cardNumeral(card)} ·{' '}
                 {card.arcana === 'major'
@@ -474,7 +476,7 @@ export default function TodayScreen() {
               <Block title={showReflection ? tr('reflect.title') : tr('note.title')}>
                 {showReflection && (
                   <Reflection
-                    cardName={card.name[lang]}
+                    cardName={inLang(card.name, lang)}
                     dateISO={todayISO}
                     lang={lang}
                     outcome={drawn?.outcome}

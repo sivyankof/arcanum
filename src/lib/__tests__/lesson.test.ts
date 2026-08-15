@@ -1,22 +1,21 @@
-import type { CourseLesson, Lang, QuizQuestion } from '../content';
+import type { CourseLesson, QuizQuestion } from '../content';
 import { lessonPlayable, lessonSteps, shuffleOptions, theoryPages } from '../lesson';
 
-// фикстуры несут только ru/en (es/pt появятся с переводами, задача 28) — приводим к Record<Lang,...>
 const q = (correct: number): QuizQuestion => ({
   type: 'single',
-  q: { ru: 'вопрос', en: 'q' } as Record<Lang, string>,
+  q: { ru: 'вопрос', en: 'q' },
   options: [
-    { ru: 'а', en: 'a' } as Record<Lang, string>,
-    { ru: 'б', en: 'b' } as Record<Lang, string>,
-    { ru: 'в', en: 'c' } as Record<Lang, string>,
+    { ru: 'а', en: 'a' },
+    { ru: 'б', en: 'b' },
+    { ru: 'в', en: 'c' },
   ],
   correct,
-  explain: { ru: 'пояснение', en: 'explain' } as Record<Lang, string>,
+  explain: { ru: 'пояснение', en: 'explain' },
 });
 
 const lesson = (over: Partial<CourseLesson> = {}): CourseLesson => ({
   id: 'x1',
-  title: { ru: 'Урок', en: 'Lesson' } as Record<Lang, string>,
+  title: { ru: 'Урок', en: 'Lesson' },
   cards: [],
   theory: { ru: 'абзац', en: 'para', status: 'draft' },
   quiz: [q(0)],
