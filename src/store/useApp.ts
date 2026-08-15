@@ -6,8 +6,10 @@ import { PERSIST_DEFAULTS, SCHEMA_VERSION, type BackupState } from '../lib/backu
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
+import { deviceLocaleTags } from '../lib/deviceLang';
+import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
-import type { Lang } from '../lib/lang';
+import { detectLang, type Lang } from '../lib/lang';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW } from '../lib/xp';
@@ -303,9 +305,16 @@ export const useApp = create<AppState>()(
       // После гидрации назначаем личный сид карты дня, если он ещё не назначен (installSeed === 0):
       // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.
       // Уже открытая сегодня карта не изменится — она читается из history, а не пересчитывается.
+      // Здесь же — язык первой установки (спека 27): снимок с устройства среди доступных языков,
+      // дальше язык свой (пикер в настройках). Существующие установки сюда не попадают (сид уже
+      // есть), restoreBackup язык из файла не трогает. Дефолт `lang: 'ru'` в PERSIST_DEFAULTS —
+      // только доливка старого файла без поля, настоящий первый язык назначается тут.
       onRehydrateStorage: () => (state) => {
         if (state && state.installSeed === 0) {
-          useApp.setState({ installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)) });
+          useApp.setState({
+            installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)),
+            lang: detectLang(deviceLocaleTags(), AVAILABLE_LANGS),
+          });
         }
         // холодный старт в новом месяце — момент «1-го числа» для начисления заморозки;
         // возврат из фона ловит useAppActive в app/_layout.tsx.
