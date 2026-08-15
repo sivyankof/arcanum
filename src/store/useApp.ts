@@ -11,8 +11,9 @@ import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { detectLang, type Lang } from '../lib/lang';
 import { mergeSettings, type AppSettings } from '../lib/settings';
+import { SPREADS_MAX, type SpreadDraw } from '../lib/spread';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
-import { reflectXp, XP_DRAW } from '../lib/xp';
+import { reflectXp, XP_DRAW, XP_SPREAD } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
 // тип языка живёт в src/lib/lang.ts рядом со словарями и детекцией; здесь — реэкспорт
@@ -46,6 +47,9 @@ export interface AppState {
   freezeMonth: string | null;
   freezeSpentDate: string | null;
   history: DailyDraw[];
+  /** Сохранённые расклады (спека 36, logic-spec §7): новые сверху, не больше SPREADS_MAX.
+   *  Несохранённый черновик сюда не попадает никогда — он живёт только в состоянии экрана. */
+  spreadsHistory: SpreadDraw[];
   /** Прогресс уроков курса по id урока (logic-spec §7). В 07 читается для состояний
    *  узлов пути; пишут только DEV-строки настроек — настоящая запись в задаче 08. */
   lessonsProgress: LessonProgressMap;
@@ -64,6 +68,8 @@ export interface AppState {
   todayDraw: () => DailyDraw | undefined;
   setNote: (date: string, text: string) => void;
   setOutcome: (date: string, outcome: Outcome) => void;
+  /** Сохранение расклада в дневник (спека 36): +5 XP; повтор того же ts ничего не пишет. */
+  saveSpread: (draw: SpreadDraw) => number;
   setLessonDone: (lessonId: string, done: boolean) => void;
   /** Завершение урока движком (спека 08). Возвращает начисленный XP для экрана результата. */
   completeLesson: (lessonId: string, errors: number) => number;
@@ -145,6 +151,15 @@ export const useApp = create<AppState>()(
           history: get().history.map((h) => (h.date === date ? { ...h, outcome } : h)),
           xp: get().xp + reflectXp(entry.outcome),
         });
+      },
+
+      // Сохранение расклада (спека 36). Идемпотентно по ts: двойной тап по «Сохранить» и повторный
+      // вызов из-за перерисовки не должны дублировать запись и XP. Срез до SPREADS_MAX — как history.
+      saveSpread: (draw) => {
+        const { spreadsHistory, xp } = get();
+        if (spreadsHistory.some((s) => s.ts === draw.ts)) return 0;
+        set({ spreadsHistory: [draw, ...spreadsHistory].slice(0, SPREADS_MAX), xp: xp + XP_SPREAD });
+        return XP_SPREAD;
       },
 
       // Прогресс урока. До движка урока (08) сюда пишут только DEV-строки настроек;
@@ -297,7 +312,9 @@ export const useApp = create<AppState>()(
       // дефолты (1/null/null) доливаются поверхностным слиянием сами, ветка миграции не нужна.
       // Существующие пользователи получают freezes: 1 сразу (решение 2 спеки 10).
       // v7 → v8: домен `lang` расширен до ru/en/es/pt (спека 27) — форма не менялась, миграции нет.
-      // Следующая задача, меняющая схему, поднимает до 9.
+      // v8 → v9: spreadsHistory (спека 36) — ключ ВЕРХНЕГО уровня, дефолт [] доливается
+      // поверхностным слиянием, ветка миграции не нужна. Следующая задача, меняющая схему,
+      // поднимает до 10.
       // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
       // файлы из более новых версий приложения. Поднимать — там.
       version: SCHEMA_VERSION,

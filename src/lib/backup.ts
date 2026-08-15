@@ -7,12 +7,13 @@
  *  версия схемы и дефолты лежат по одному разу, а бэкап по построению совпадает
  *  с тем, что реально персистится. */
 import type { Profile } from './birthArcana';
-import { cardById } from './content';
+import { cardById, spreadById } from './content';
 import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
 import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
 import { isLang, type Lang } from './lang';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
+import { QUESTION_MAX, SPREADS_MAX, type SpreadDraw } from './spread';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
 import type { ThemeMode } from '../theme/theme';
@@ -26,10 +27,9 @@ const MAX_BACKUP_STREAK = 36_500; // сто лет серии — дальше �
 const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на порядки меньше — подстраховка формата
 
 /** Версия персистуемой схемы (logic-spec §7). Единственный источник: стор берёт её отсюда.
- *  v7 → v8 (спека 27): `lang` принимает es/pt — форма прежняя, ветки миграции нет; поднято, чтобы
- *  файл с `lang: 'es'` старый ридер отверг как «более новая версия», а не как «повреждён».
- *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 9. */
-export const SCHEMA_VERSION = 8;
+ *  v8 → v9 (спека 36): `spreadsHistory` — ключ верхнего уровня, дефолт `[]` доливается сам.
+ *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 10. */
+export const SCHEMA_VERSION = 9;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */
@@ -43,6 +43,7 @@ export interface BackupState {
   freezeMonth: string | null;
   freezeSpentDate: string | null;
   history: DailyDraw[];
+  spreadsHistory: SpreadDraw[];
   lessonsProgress: LessonProgressMap;
   xp: number;
   settings: AppSettings;
@@ -67,6 +68,7 @@ export const PERSIST_DEFAULTS: BackupState = Object.freeze({
   // readonly-массив структурно несовместим с DailyDraw[] (методы мутации отсутствуют
   // в типе) — двойной каст через unknown только для типов, где это бьёт компиляцию
   history: Object.freeze([]) as unknown as DailyDraw[],
+  spreadsHistory: Object.freeze([]) as unknown as SpreadDraw[],
   lessonsProgress: Object.freeze({}) as LessonProgressMap,
   xp: 0,
   settings: Object.freeze(DEFAULT_SETTINGS),
@@ -166,6 +168,23 @@ const isDraw = (v: unknown): boolean =>
   isBool(v.reversed) && orAbsent(v.outcome, isOutcome) &&
   orAbsent(v.note, (x) => isStr(x) && x.length <= NOTE_MAX);
 
+const isDrawnCard = (v: unknown): boolean =>
+  isObj(v) && isStr(v.cardId) && cardById.has(v.cardId) && isBool(v.reversed);
+
+// расклад сверяем с каталогом: чужой spreadId или число карт не по раскладу — чужой/битый файл;
+// дубль карты внутри расклада невозможен по построению (Фишер–Йетс, logic-spec §1а)
+const isSpreadDraw = (v: unknown): boolean => {
+  if (!isObj(v) || !isCount(v.ts) || !isISODay(v.date) || !isStr(v.spreadId)) return false;
+  const spread = spreadById.get(v.spreadId);
+  if (!spread || !Array.isArray(v.cards) || v.cards.length !== spread.cards || !v.cards.every(isDrawnCard)) return false;
+  const ids = new Set((v.cards as { cardId: string }[]).map((c) => c.cardId));
+  return (
+    ids.size === v.cards.length &&
+    orAbsent(v.question, (x) => isStr(x) && x.length <= QUESTION_MAX) &&
+    orAbsent(v.note, (x) => isStr(x) && x.length <= NOTE_MAX)
+  );
+};
+
 const isLesson = (v: unknown): boolean =>
   isObj(v) && isBool(v.done) && isCount(v.errors) && isNum(v.ts) && orAbsent(v.repeatDate, isISODay);
 
@@ -187,6 +206,7 @@ const validState = (s: BackupState): boolean =>
   isCount(s.freezes) && s.freezes <= FREEZE_MAX &&
   orNull(s.freezeMonth, isMonth) && orNull(s.freezeSpentDate, isISODay) &&
   Array.isArray(s.history) && s.history.length <= HISTORY_MAX && s.history.every(isDraw) &&
+  Array.isArray(s.spreadsHistory) && s.spreadsHistory.length <= SPREADS_MAX && s.spreadsHistory.every(isSpreadDraw) &&
   isObj(s.lessonsProgress) && Object.keys(s.lessonsProgress).length <= MAX_BACKUP_LESSONS &&
   Object.values(s.lessonsProgress).every(isLesson) &&
   isCount(s.xp) && s.xp <= MAX_BACKUP_XP && isSettings(s.settings) && isProfile(s.profile);

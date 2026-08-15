@@ -7,6 +7,7 @@ import {
   REPEAT_XP,
   XP_DRAW,
   XP_REFLECT,
+  XP_SPREAD,
 } from '../xp';
 
 describe('lessonXp — 10 − 2×ошибки, минимум 4 (logic-spec §4)', () => {
@@ -49,6 +50,7 @@ describe('levelFromXp — пороги 0/50/150/300/500, дальше +250', () 
     expect(XP_DRAW).toBe(5);
     expect(XP_REFLECT).toBe(3);
     expect(REPEAT_XP).toBe(2);
+    expect(XP_SPREAD).toBe(5);
   });
 });
 
