@@ -74,9 +74,15 @@ export function canEditEntry(date: string, today: string = localDateISO()): bool
   return date === today;
 }
 
-/** Заметка перед записью в стор: пробелы по краям срезаем, лишнее сверх лимита отбрасываем. */
+/** Текст перед записью в стор: пробелы по краям срезаем, лишнее сверх лимита отбрасываем.
+ *  Общий для заметки дня, заметки и вопроса расклада (спека 36). */
+export function normalizeText(text: string, max: number): string {
+  return text.trim().slice(0, max);
+}
+
+/** Заметка карты дня — normalizeText с лимитом NOTE_MAX. */
 export function normalizeNote(text: string): string {
-  return text.trim().slice(0, NOTE_MAX);
+  return normalizeText(text, NOTE_MAX);
 }
 
 /** Месяц записи в формате YYYY-MM. */
