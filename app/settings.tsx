@@ -10,6 +10,7 @@ import { Linking, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ConfirmDialog } from '../src/components/ConfirmDialog';
 import { FadeUp } from '../src/components/FadeUp';
+import { OptionPicker } from '../src/components/OptionPicker';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
 import { TimePicker } from '../src/components/TimePicker';
@@ -27,9 +28,10 @@ import { pickBackupText, shareBackup } from '../src/lib/backupIo';
 import { course } from '../src/lib/content';
 import { nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
+import { deviceLocaleTags } from '../src/lib/deviceLang';
 import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
-import { useLang } from '../src/lib/i18n';
-import { LANG_NAMES } from '../src/lib/lang';
+import { AVAILABLE_LANGS, useLang } from '../src/lib/i18n';
+import { detectLang, LANG_NAMES } from '../src/lib/lang';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import {
   getPermission,
@@ -87,6 +89,7 @@ export default function SettingsScreen() {
 
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
+  const [langPicker, setLangPicker] = React.useState(false);
 
   const [planText, setPlanText] = React.useState<string | null>(null);
 
@@ -239,7 +242,7 @@ export default function SettingsScreen() {
             icon="language"
             label={tr('settings.language')}
             value={LANG_NAMES[lang]}
-            onPress={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+            onPress={() => setLangPicker(true)}
           />
         </FadeUp>
         <FadeUp index={2}>
@@ -442,6 +445,16 @@ export default function SettingsScreen() {
                 onPress={resetOnboarding}
               />
             </FadeUp>
+            <FadeUp index={13}>
+              <SettingsRow
+                icon="globe-outline"
+                label={tr('settings.devDeviceLang')}
+                // что видит детекция на ЭТОМ устройстве и что выбрала бы при первой установке;
+                // тап применяет — иначе пункт 6в по языку устройства требует переустановки
+                value={`${deviceLocaleTags()[0] ?? '—'} → ${detectLang(deviceLocaleTags(), AVAILABLE_LANGS)}`}
+                onPress={() => setLang(detectLang(deviceLocaleTags(), AVAILABLE_LANGS))}
+              />
+            </FadeUp>
           </>
         )}
         <TimePicker
@@ -451,6 +464,16 @@ export default function SettingsScreen() {
           hours={picker === 'evening' ? [19, 20, 21, 22, 23] : [7, 8, 9, 10, 11]}
           onPick={(hhmm) => picker && setPushTime(picker, hhmm)}
           onClose={() => setPicker(null)}
+        />
+        {/* выбор языка списком: четыре позиции по кругу не тапаются, макета пикера нет —
+            дорисовка записана в задачу «Макет: правки дорисовок» (спека 27) */}
+        <OptionPicker
+          visible={langPicker}
+          title={tr('settings.language')}
+          options={AVAILABLE_LANGS.map((l) => ({ key: l, label: LANG_NAMES[l] }))}
+          value={lang}
+          onPick={setLang}
+          onClose={() => setLangPicker(false)}
         />
         <ConfirmDialog
           visible={planText !== null}

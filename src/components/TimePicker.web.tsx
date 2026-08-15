@@ -4,14 +4,14 @@
  *  «Настройки» нечем прокликать в браузере — то есть шаг 6а процесса по этой задаче
  *  выполнить было бы невозможно. Минуты в вебе не выбираются: там проверяется поведение
  *  экрана, а точное время — на устройстве.
+ *
+ *  Тап по уже выбранному (подсвеченному) часу — «закрыть без изменений», а не команда стереть
+ *  минуты (OptionPicker не зовёт onPick для текущего значения): хранимое значение может нести
+ *  реальные минуты — на телефоне их выбирает системный пикер, веб их только показывает.
  */
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { formatHHMM, parseHHMM } from '../lib/settings';
-import { radius, spacing } from '../theme/theme';
-import { useTheme } from '../theme/useTheme';
-import { ModalPanel } from './ModalPanel';
-import { Txt } from './Txt';
+import { OptionPicker } from './OptionPicker';
 
 export function TimePicker({
   visible,
@@ -28,54 +28,15 @@ export function TimePicker({
   onPick: (hhmm: string) => void;
   onClose: () => void;
 }) {
-  const t = useTheme();
-  const current = parseHHMM(value, hours[0]).hour;
-
+  const current = String(parseHHMM(value, hours[0]).hour);
   return (
-    <ModalPanel visible={visible} onClose={onClose}>
-      <Txt style={[st.title, { color: t.accent }]}>{title.toUpperCase()}</Txt>
-      <ScrollView style={{ maxHeight: 260 }}>
-        {hours.map((h) => {
-          const selected = h === current;
-          return (
-            <Pressable
-              key={h}
-              onPress={() => {
-                // Тап по уже выбранному (подсвеченному) часу — это «закрыть без изменений»,
-                // а не команда стереть минуты. Хранимое значение может нести реальные минуты
-                // (на телефоне их выбирает системный пикер, веб их только показывает и не трогает),
-                // и повторное нажатие на тот же час не должно занулять их до :00.
-                if (selected) {
-                  onClose();
-                  return;
-                }
-                onPick(formatHHMM(h, 0));
-                onClose();
-              }}
-              style={[st.row, selected && { backgroundColor: t.chipBg, borderColor: t.frame }]}
-            >
-              <Txt style={{ color: selected ? t.head : t.text, fontSize: 15.5, flex: 1 }}>
-                {`${h}:00`}
-              </Txt>
-              {selected && <Txt style={{ color: t.accent, fontSize: 13 }}>✓</Txt>}
-            </Pressable>
-          );
-        })}
-      </ScrollView>
-    </ModalPanel>
+    <OptionPicker
+      visible={visible}
+      title={title}
+      options={hours.map((h) => ({ key: String(h), label: `${h}:00` }))}
+      value={current}
+      onPick={(key) => onPick(formatHHMM(Number(key), 0))}
+      onClose={onClose}
+    />
   );
 }
-
-const st = StyleSheet.create({
-  title: { fontSize: 10, letterSpacing: 2, textAlign: 'center', marginBottom: spacing.m },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'transparent',
-    borderRadius: radius.m,
-    paddingVertical: 11,
-    paddingHorizontal: spacing.m,
-    marginBottom: 5,
-  },
-});
