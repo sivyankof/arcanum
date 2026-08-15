@@ -11,13 +11,11 @@ import { cardById } from './content';
 import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
 import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
+import { isLang, type Lang } from './lang';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
 import type { ThemeMode } from '../theme/theme';
-// type-only импорт стирается при компиляции — runtime-цикла со стором нет,
-// хотя стор импортирует этот модуль по-настоящему
-import type { Lang } from '../store/useApp';
 
 // потолки величин при импорте (волна фиксов финального ревью): без них абсурдное число
 // в битом/подделанном файле проходит структурную проверку типов и уезжает в персист —
@@ -28,8 +26,10 @@ const MAX_BACKUP_STREAK = 36_500; // сто лет серии — дальше �
 const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на порядки меньше — подстраховка формата
 
 /** Версия персистуемой схемы (logic-spec §7). Единственный источник: стор берёт её отсюда.
- *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 8. */
-export const SCHEMA_VERSION = 7;
+ *  v7 → v8 (спека 27): `lang` принимает es/pt — форма прежняя, ветки миграции нет; поднято, чтобы
+ *  файл с `lang: 'es'` старый ридер отверг как «более новая версия», а не как «повреждён».
+ *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 9. */
+export const SCHEMA_VERSION = 8;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */
@@ -109,6 +109,20 @@ export function backupSummary(p: { state: BackupState; exportedAt: string }): {
   };
 }
 
+/** Язык из файла бэкапа — восстанавливаемая настройка пользователя, такая же, как тема (спека 27,
+ *  волна фиксов финального ревью): человек переезжает на новый телефон, первая установка
+ *  определяет язык устройства, а восстановление бэкапа обязано вернуть ЕГО язык, иначе поверх
+ *  русского дневника окажется английский интерфейс. Ограничитель: файл может нести язык,
+ *  недоступного в ТЕКУЩЕЙ сборке (в релизе доступны только языки, у которых есть строки
+ *  интерфейса, — `available`, снимок AVAILABLE_LANGS на момент импорта) — тогда строка настроек
+ *  показала бы, например, «Español», а пункта под него в списке выбора не нашлось бы. В этом
+ *  случае оставляем язык, который уже действует на устройстве.
+ *  Чистая функция специально ради теста: раньше ни разу не проверялось не «файл валиден»
+ *  (это покрывал parseBackup), а «файл ПРИМЕНЁН» — в этом и была дыра дефекта. */
+export function resolveImportedLang(fileLang: Lang, currentLang: Lang, available: readonly Lang[]): Lang {
+  return available.includes(fileLang) ? fileLang : currentLang;
+}
+
 export type ParseError = 'notBackup' | 'newerVersion' | 'corrupt';
 export type ParsedBackup =
   | { ok: true; state: BackupState; exportedAt: string }
@@ -167,7 +181,7 @@ const isProfile = (v: unknown): boolean =>
 
 const validState = (s: BackupState): boolean =>
   (s.themeMode === 'dark' || s.themeMode === 'light') &&
-  (s.lang === 'ru' || s.lang === 'en') &&
+  isLang(s.lang) &&
   isCount(s.installSeed) && isCount(s.streak) && s.streak <= MAX_BACKUP_STREAK &&
   orNull(s.lastDrawDate, isISODay) &&
   isCount(s.freezes) && s.freezes <= FREEZE_MAX &&

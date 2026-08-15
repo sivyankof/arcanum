@@ -28,6 +28,8 @@ import { birthArcanaId } from '../src/lib/birthArcana';
 import { cardById, cardImages } from '../src/lib/content';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticSuccess, hapticTap } from '../src/lib/haptics';
+import { useLang } from '../src/lib/i18n';
+import { inLang } from '../src/lib/lang';
 import { pingPong, startSpin } from '../src/lib/loops';
 import { useApp } from '../src/store/useApp';
 import { glowShadow } from '../src/theme/glow';
@@ -40,8 +42,8 @@ const CARD_HEIGHT = Math.round((CARD_WIDTH * 518) / 300); // пропорция 
 
 export default function Onboarding() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const { t: tr } = useTranslation();
+  const lang = useLang();
   const insets = useSafeAreaInsets();
   const completeOnboarding = useApp((s) => s.completeOnboarding);
 
@@ -194,11 +196,11 @@ export default function Onboarding() {
                   </Animated.View>
                 </FadeUp>
                 <FadeUp index={2}>
-                  <Txt style={[st.cardName, { color: t.head }]}>{arcana.name[lang]}</Txt>
+                  <Txt style={[st.cardName, { color: t.head }]}>{inLang(arcana.name, lang)}</Txt>
                 </FadeUp>
                 <FadeUp index={3}>
                   <Txt style={[st.lead, { color: t.muted }]}>
-                    {arcana.content['birth_path']?.[lang] ?? ''}
+                    {arcana.content['birth_path'] ? inLang(arcana.content['birth_path'], lang) : ''}
                   </Txt>
                 </FadeUp>
                 <FadeUp index={4} style={st.ctaWrap}>

@@ -2,17 +2,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { PERSIST_DEFAULTS, SCHEMA_VERSION, type BackupState } from '../lib/backup';
+import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO } from '../lib/dates';
+import { deviceLocaleTags } from '../lib/deviceLang';
+import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
+import { detectLang, type Lang } from '../lib/lang';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
-export type Lang = 'ru' | 'en';
+// тип языка живёт в src/lib/lang.ts рядом со словарями и детекцией; здесь — реэкспорт
+export type { Lang };
 
 // тип записи живёт в src/lib/journal.ts вместе с чистой арифметикой дневника,
 // здесь — только реэкспорт, чтобы экраны импортировали его привычным путём
@@ -208,11 +212,17 @@ export const useApp = create<AppState>()(
       },
 
       // Импорт бэкапа (спека 11): полная замена. Persist сам записывает новое состояние,
-      // план пушей пересчитывает подписка usePushScheduler, тему и язык применяют
-      // существующие подписки — здесь только сама замена и два шага гигиены.
+      // план пушей пересчитывает подписка usePushScheduler, тему применяют существующие
+      // подписки. Язык — тоже восстанавливаемая настройка, как тема (спека 27, волна фиксов
+      // финального ревью: раньше здесь стоял комментарий «язык не трогаем», спека и logic-spec
+      // §7 ему верили, а код уже применял язык из файла — прав оказался код, неправа спека),
+      // но с ограничителем: resolveImportedLang берёт язык файла, только если он есть среди
+      // AVAILABLE_LANGS текущей сборки, иначе оставляет язык, уже действующий на устройстве —
+      // здесь и два шага гигиены.
       restoreBackup: (s) => {
         set({
           ...s,
+          lang: resolveImportedLang(s.lang, get().lang, AVAILABLE_LANGS),
           // очень старый или правленный руками файл мог прийти без сида —
           // назначаем свежий, как это делает onRehydrateStorage после гидрации
           ...(s.installSeed === 0
@@ -286,7 +296,8 @@ export const useApp = create<AppState>()(
       // v6 → v7: freezes/freezeMonth/freezeSpentDate (спека 10) — снова ключи ВЕРХНЕГО уровня,
       // дефолты (1/null/null) доливаются поверхностным слиянием сами, ветка миграции не нужна.
       // Существующие пользователи получают freezes: 1 сразу (решение 2 спеки 10).
-      // Следующая задача, меняющая схему, поднимает до 8.
+      // v7 → v8: домен `lang` расширен до ru/en/es/pt (спека 27) — форма не менялась, миграции нет.
+      // Следующая задача, меняющая схему, поднимает до 9.
       // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
       // файлы из более новых версий приложения. Поднимать — там.
       version: SCHEMA_VERSION,
@@ -301,9 +312,17 @@ export const useApp = create<AppState>()(
       // После гидрации назначаем личный сид карты дня, если он ещё не назначен (installSeed === 0):
       // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.
       // Уже открытая сегодня карта не изменится — она читается из history, а не пересчитывается.
+      // Здесь же — язык первой установки (спека 27): снимок с устройства среди доступных языков,
+      // дальше язык свой (пикер в настройках, а также restoreBackup — с ограничителем по
+      // доступным языкам, см. комментарий там). Существующие установки сюда не попадают (сид
+      // уже есть). Дефолт `lang: 'ru'` в PERSIST_DEFAULTS — только доливка старого файла без
+      // поля, настоящий первый язык назначается тут.
       onRehydrateStorage: () => (state) => {
         if (state && state.installSeed === 0) {
-          useApp.setState({ installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)) });
+          useApp.setState({
+            installSeed: 1 + Math.floor(Math.random() * (2 ** 31 - 1)),
+            lang: detectLang(deviceLocaleTags(), AVAILABLE_LANGS),
+          });
         }
         // холодный старт в новом месяце — момент «1-го числа» для начисления заморозки;
         // возврат из фона ловит useAppActive в app/_layout.tsx.

@@ -9,6 +9,7 @@ import { cardImages } from '../lib/cardImages';
 import { formatEntryDate } from '../lib/dates';
 import { hapticTap } from '../lib/haptics';
 import { OUTCOME_COLOR, OUTCOME_MARK, type DailyDraw } from '../lib/journal';
+import type { Lang } from '../lib/lang';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
@@ -21,7 +22,7 @@ export function JournalRow({
   onEdit,
 }: {
   entry: DailyDraw;
-  lang: 'ru' | 'en';
+  lang: Lang;
   onPress: () => void;
   /** Не задан — запись прошлых дней, правка запрещена. */
   onEdit?: () => void;

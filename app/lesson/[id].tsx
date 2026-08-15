@@ -28,6 +28,8 @@ import { Txt } from '../../src/components/Txt';
 import { cardById, cardImages, course, type CourseLesson, type CourseModule } from '../../src/lib/content';
 import { moduleProgress } from '../../src/lib/courseProgress';
 import { hapticError, hapticTap } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
+import { inLang, type Lang } from '../../src/lib/lang';
 import { lessonPlayable, lessonSteps, type LessonStep } from '../../src/lib/lesson';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -57,9 +59,9 @@ type OptState = 'idle' | 'ok' | 'no';
 
 export default function LessonScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   const { id } = useLocalSearchParams<{ id: string }>();
 
   // вибрация на уходе с экрана — общий хук (как card/[id])
@@ -183,7 +185,7 @@ export default function LessonScreen() {
             <Txt style={[st.overline, { color: t.muted }]}>
               {tr('course.lessonOverline', { m: found.mi + 1, l: found.li + 1 })}
             </Txt>
-            <Txt style={[st.title, { color: t.head }]}>{found.lesson.title[lang]}</Txt>
+            <Txt style={[st.title, { color: t.head }]}>{inLang(found.lesson.title, lang)}</Txt>
             {steps.length > 0 && (
               <View style={st.progRow}>
                 <ProgressBar progress={prog} radius={4} style={st.progTrack} />
@@ -238,7 +240,7 @@ export default function LessonScreen() {
                       />
                     </View>
                   )}
-                  <Txt style={[st.q, { color: t.head }]}>{step.question.q[lang]}</Txt>
+                  <Txt style={[st.q, { color: t.head }]}>{inLang(step.question.q, lang)}</Txt>
                   {step.question.options.map((o, i) => {
                     const state = optState(i);
                     return (
@@ -253,7 +255,7 @@ export default function LessonScreen() {
                           state === 'no' && { borderColor: t.danger, opacity: 0.6 },
                         ]}
                       >
-                        <Txt style={[st.optTxt, { color: t.text }]}>{o[lang]}</Txt>
+                        <Txt style={[st.optTxt, { color: t.text }]}>{inLang(o, lang)}</Txt>
                       </PressableScale>
                     );
                   })}
@@ -270,7 +272,7 @@ export default function LessonScreen() {
                       >
                         {tr(picked === step.question.correct ? 'lesson.explainRight' : 'lesson.explainWrong')}
                       </Txt>
-                      {` ${step.question.explain[lang]}`}
+                      {` ${inLang(step.question.explain, lang)}`}
                     </Txt>
                   )}
                 </View>
@@ -288,7 +290,7 @@ export default function LessonScreen() {
 }
 
 /** Шаг «разбор карты» — `.lcard` эталона: изображение + имя + 4 ключевых слова из cards.json. */
-function CardStep({ cardId, lang }: { cardId: string; lang: 'ru' | 'en' }) {
+function CardStep({ cardId, lang }: { cardId: string; lang: Lang }) {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const card = cardById.get(cardId);
@@ -300,8 +302,8 @@ function CardStep({ cardId, lang }: { cardId: string; lang: 'ru' | 'en' }) {
       </View>
       <View style={st.lcardCol}>
         <Txt style={[st.lcardOverline, { color: t.accent }]}>{tr('lesson.cardStep')}</Txt>
-        <Txt style={[st.lcardName, { color: t.head }]}>{card.name[lang]}</Txt>
-        <Txt style={[st.lcardKw, { color: t.muted }]}>{`✦ ${card.keywords[lang].join(' · ')}`}</Txt>
+        <Txt style={[st.lcardName, { color: t.head }]}>{inLang(card.name, lang)}</Txt>
+        <Txt style={[st.lcardKw, { color: t.muted }]}>{`✦ ${inLang(card.keywords, lang).join(' · ')}`}</Txt>
       </View>
     </View>
   );

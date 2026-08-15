@@ -18,6 +18,7 @@
  */
 import type { TFunction } from 'i18next';
 import { resources } from '../i18n';
+import { LANGS } from '../lang';
 
 /** Прогон блока кода в среде без `Intl.PluralRules` — как на устройстве.
  *  Модуль переводов загружается свежим внутри блока: правила выбираются в момент `t()`,
@@ -73,6 +74,8 @@ const CASES: Array<[string, Record<string, number>, string]> = [
   ['spreads.cards', { count: 3 }, '3 карты'],
   ['spreads.cards', { count: 10 }, '10 карт'],
   ['spreads.cards', { count: 1 }, '1 карта'],
+  // плашка серии на «Сегодня»: «дн.» не склоняется, но семейство обязано быть полным (спека 27)
+  ['today.streakDays', { count: 3 }, '3 дн.'],
 ];
 
 describe('русские числительные без Intl.PluralRules (как на iPhone)', () => {
@@ -116,10 +119,10 @@ function withPolyfilledRules<T>(fn: (Ctor: typeof Intl.PluralRules) => T): T {
 const NUMBERS = Array.from({ length: 2001 }, (_, n) => n);
 const FRACTIONS = [0.5, 1.1, 1.5, 2.5, 10.7, 21.3];
 
-/** Языки берутся из самих ресурсов, а НЕ из литералов 'ru'/'en': иначе обещание «добавил язык —
- *  тест сам проверит» ложное, а третьим языком в master-plan стоит PT-BR, у которого правила
- *  расходятся с английскими уже на нуле. */
-const LANGS = Object.keys(resources);
+/** Оракул — по ВСЕМ языкам приложения (`LANGS` из lang.ts), включая те, чьих UI-строк ещё нет:
+ *  плюрализация es/pt должна быть верной ДО переводов. Структурные тесты ниже — по `resources`:
+ *  у языка без строк проверять нечего. */
+const RESOURCE_LANGS = Object.keys(resources);
 
 describe('оракул: полифилл считает категории так же, как настоящий ICU', () => {
   /** Оракул имеет смысл, только если сравниваются ДВА РАЗНЫХ механизма. Пакет подменяет собой
@@ -171,7 +174,7 @@ function integerCategories(lng: string): string[] {
 const COUNT_WITHOUT_FORMS = new Set(['settings.queuedCount', 'journal.withNote']);
 
 describe('структура ключей: числительные не забыты', () => {
-  it.each(LANGS)('%s — у каждого семейства есть все формы своего языка', (lng) => {
+  it.each(RESOURCE_LANGS)('%s — у каждого семейства есть все формы своего языка', (lng) => {
     const flat = flatten((resources as Record<string, { translation: unknown }>)[lng].translation);
     const families = new Map<string, Set<string>>();
     for (const key of Object.keys(flat)) {
@@ -190,7 +193,7 @@ describe('структура ключей: числительные не заб�
 
   /** Ловит более вероятную человеческую ошибку — «плюрализацию забыли совсем», а не «часть форм
    *  забыли». Ключ с {{count}} и без форм на устройстве покажется по-английски. */
-  it.each(LANGS)('%s — ключи с {{count}} без форм только из белого списка', (lng) => {
+  it.each(RESOURCE_LANGS)('%s — ключи с {{count}} без форм только из белого списка', (lng) => {
     const flat = flatten((resources as Record<string, { translation: unknown }>)[lng].translation);
     const suspicious = Object.entries(flat)
       .filter(([key, value]) => !SUFFIX.test(key) && value.includes('{{count}}'))
@@ -202,7 +205,7 @@ describe('структура ключей: числительные не заб�
   /** UI-строка обязана существовать в обоих языках (правило проекта): ключ, забытый в одном
    *  из них, на устройстве молча уедет в фолбэк — тот же симптом, что чинит hf-02. */
   it('набор ключей совпадает во всех языках', () => {
-    const bases = LANGS.map((lng) => {
+    const bases = RESOURCE_LANGS.map((lng) => {
       const flat = flatten((resources as Record<string, { translation: unknown }>)[lng].translation);
       return new Set(Object.keys(flat).map((key) => key.replace(SUFFIX, '')));
     });
@@ -210,7 +213,7 @@ describe('структура ключей: числительные не заб�
     for (let i = 0; i < rest.length; i++) {
       const missing = [...first].filter((key) => !rest[i].has(key));
       const extra = [...rest[i]].filter((key) => !first.has(key));
-      expect({ lang: LANGS[i + 1], missing, extra }).toEqual({ lang: LANGS[i + 1], missing: [], extra: [] });
+      expect({ lang: RESOURCE_LANGS[i + 1], missing, extra }).toEqual({ lang: RESOURCE_LANGS[i + 1], missing: [], extra: [] });
     }
   });
 });

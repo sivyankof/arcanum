@@ -5,6 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { spreads } from '../../src/lib/content';
+import { useLang } from '../../src/lib/i18n';
+import { inLang } from '../../src/lib/lang';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -13,9 +15,9 @@ import { Txt } from '../../src/components/Txt';
 /** Каталог раскладов — v0: список. Этап 5 плана: режим «разложить» с сохранением в дневник. */
 export default function SpreadsScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
 
   return (
@@ -38,9 +40,9 @@ export default function SpreadsScreen() {
         {spreads.map((s: any, si: number) => (
           <FadeUp key={s.id} index={1 + si} style={[st.item, { backgroundColor: t.panel, borderColor: t.line }]}>
             <View style={{ flex: 1 }}>
-              <Txt style={[st.name, { color: t.head }]}>{s.name[lang]}</Txt>
+              <Txt style={[st.name, { color: t.head }]}>{inLang(s.name, lang)}</Txt>
               <Txt style={[st.desc, { color: t.muted }]}>
-                {tr('spreads.cards', { count: s.cards })} · {s.description[lang]}
+                {tr('spreads.cards', { count: s.cards })} · {inLang(s.description, lang)}
               </Txt>
             </View>
             {!s.free && (

@@ -7,6 +7,7 @@ import { View, type LayoutChangeEvent } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import type { CourseLesson, CourseModule, Lang } from '../lib/content';
 import { nodeXs, type LessonState } from '../lib/courseProgress';
+import { inLang } from '../lib/lang';
 import { useTheme } from '../theme/useTheme';
 import { NODE_SIZE, PathNode } from './PathNode';
 
@@ -74,7 +75,7 @@ export function CoursePath({
             >
               <PathNode
                 state={states[l.id] ?? 'locked'}
-                title={l.title[lang]}
+                title={inLang(l.title, lang)}
                 chipLabel={chipLabel}
                 onPress={() => onLessonPress(l)}
               />

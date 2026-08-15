@@ -197,3 +197,19 @@ describe('toRows', () => {
     expect(toRows([], 3)).toEqual([]);
   });
 });
+
+describe('язык без переводов контента (es/pt до задачи 28) — спека 27', () => {
+  it('ищет по английским словам и стеммит английскими окончаниями, а не падает', () => {
+    // у карты нет name.es → текст берётся из en, окончания — английские
+    expect(matchesQuery(fool, 'fool', 'es')).toBe(true);
+    // поисковое слово en «risk» находится по форме «risks» ТОЛЬКО английским стеммингом
+    // (русские окончания «s» не срежут, префикс тоже не совпадёт) — так проверяется, что
+    // окончания берутся по языку текста, а не по выбранному языку
+    expect(matchesQuery(fool, 'risks', 'pt')).toBe(true);
+    expect(matchesQuery(fool, 'дурак', 'es')).toBe(false);
+  });
+
+  it('фильтрация всей колоды на pt не бросает и что-то находит', () => {
+    expect(filterCards(cards, { query: 'sword', filter: 'all', lang: 'pt' }).length).toBeGreaterThan(0);
+  });
+});

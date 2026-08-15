@@ -19,7 +19,9 @@ import { cardById } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { formatEntryDate } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
 import { canEditEntry, normalizeNote, NOTE_MAX } from '../../src/lib/journal';
+import { inLang } from '../../src/lib/lang';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -30,8 +32,8 @@ const COUNTER_WARN = 450;
 export default function NoteScreen() {
   const { date } = useLocalSearchParams<{ date: string }>();
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const { t: tr } = useTranslation();
+  const lang = useLang();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
@@ -91,7 +93,7 @@ export default function NoteScreen() {
               <View style={[st.thumbClip, { borderColor: t.frame }]}>
                 <Image source={cardImages[card.id]} style={st.thumb} contentFit="cover" cachePolicy="memory-disk" />
               </View>
-              <Txt style={[st.cardName, { color: t.head }]}>{card.name[lang]}</Txt>
+              <Txt style={[st.cardName, { color: t.head }]}>{inLang(card.name, lang)}</Txt>
             </View>
           )}
 

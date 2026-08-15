@@ -6,7 +6,8 @@ import DateTimePicker, { type DateTimePickerEvent } from '@react-native-communit
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Pressable, StyleSheet } from 'react-native';
-import { localeTag } from '../lib/dates';
+import { useLang } from '../lib/i18n';
+import { localeTag } from '../lib/lang';
 import { formatHHMM, parseHHMM } from '../lib/settings';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -30,8 +31,8 @@ export function TimePicker({
   onClose: () => void;
 }) {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
-  const locale = localeTag(i18n.language.startsWith('ru') ? 'ru' : 'en');
+  const { t: tr } = useTranslation();
+  const locale = localeTag(useLang());
   const { hour, minute } = parseHHMM(value, 9);
   const date = React.useMemo(() => {
     const d = new Date();

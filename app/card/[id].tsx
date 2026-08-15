@@ -31,7 +31,9 @@ import { cardImages } from '../../src/lib/cardImages';
 import { cardById, cardNumeral } from '../../src/lib/content';
 import { formatDayMonth } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
 import { cardHistory } from '../../src/lib/journal';
+import { inLang } from '../../src/lib/lang';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
@@ -187,9 +189,9 @@ function HeroImage({
 export default function CardDetail() {
   const { id, from } = useLocalSearchParams<{ id: string; from?: string }>();
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   // позицию ячейки забираем один раз при монтировании
   const [origin] = React.useState(() => takeCardOrigin(id ?? ''));
   // активная вкладка сферы значения — не персистится, при каждом открытии страницы сброс на «Общее»
@@ -218,16 +220,14 @@ export default function CardDetail() {
 
   const num = cardNumeral(card);
   const arcanaLabel =
-    card.arcana === 'major'
-      ? lang === 'ru' ? 'СТАРШИЙ АРКАН' : 'MAJOR ARCANA'
-      : `${tr(`cards.${card.suit}`)}`.toUpperCase();
+    card.arcana === 'major' ? tr('card.majorArcana') : `${tr(`cards.${card.suit}`)}`.toUpperCase();
 
   // текст и статус блока контента по ключу — общая логика для вкладки сферы
   // и для постоянных блоков ниже (перевёрнутая / как карта дня / символика)
   const blockOf = (key: string): { text: string; todo: boolean } => {
     const block = card.content[key];
     if (!block || block.status === 'todo') return { text: tr('card.soon'), todo: true };
-    return { text: block[lang], todo: false };
+    return { text: inLang(block, lang), todo: false };
   };
 
   const applySphere = (key: SphereKey) => {
@@ -305,7 +305,7 @@ export default function CardDetail() {
           <FadeUp index={0} style={{ flex: 1 }}>
             <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
             <View style={st.nameRow}>
-              <Txt style={[st.name, { color: t.head }]}>{card.name[lang]}</Txt>
+              <Txt style={[st.name, { color: t.head }]}>{inLang(card.name, lang)}</Txt>
               {isBirthArcana && (
                 <View style={[st.birthChip, { backgroundColor: t.chipBg, borderColor: t.frame }]}>
                   <Txt style={[st.birthChipTxt, { color: t.accent }]}>
@@ -315,7 +315,7 @@ export default function CardDetail() {
               )}
             </View>
             <View style={st.kws}>
-              {card.keywords[lang].map((k) => (
+              {inLang(card.keywords, lang).map((k) => (
                 <View key={k} style={[st.kw, { backgroundColor: t.chipBg, borderColor: t.line }]}>
                   <Txt style={{ color: t.accent, fontSize: 10, fontWeight: '600' }}>{k}</Txt>
                 </View>

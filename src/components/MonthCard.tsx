@@ -8,6 +8,7 @@ import { StyleSheet, View } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { cardById } from '../lib/content';
 import { OUTCOME_COLOR, type MonthSummary, type OutcomeStats } from '../lib/journal';
+import { inLang, type Lang } from '../lib/lang';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
@@ -21,7 +22,7 @@ export function MonthCard({
 }: {
   summary: MonthSummary;
   stats: OutcomeStats | null;
-  lang: 'ru' | 'en';
+  lang: Lang;
   onPress: (cardId: string) => void;
 }) {
   const t = useTheme();
@@ -58,7 +59,7 @@ export function MonthCard({
           <>
             <Txt style={[st.overline, { color: t.accent }]}>{tr('journal.monthCard').toUpperCase()}</Txt>
             <Txt style={[st.name, { color: t.head }]}>
-              {`${card.name[lang]} · ${tr('journal.times', { count: summary.topCount })}`}
+              {`${inLang(card.name, lang)} · ${tr('journal.times', { count: summary.topCount })}`}
             </Txt>
           </>
         )}

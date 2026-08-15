@@ -1,6 +1,7 @@
 /** Поиск и фильтрация справочника карт (спека 04).
  *  Чистые функции без React — чтобы покрыть тестами и переиспользовать (дневник, коллекция). */
 import type { Lang, TarotCard } from './content';
+import { inLang, presentLang } from './lang';
 
 /** Фильтр по аркану/масти: 'all' — вся колода. */
 export type CardFilter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
@@ -20,8 +21,10 @@ export function tokenize(s: string): string[] {
   return normalize(s).split(/[\s-]+/).filter(Boolean);
 }
 
-/** Окончания для отсечения, сначала длинные — иначе «деньгами» потеряет только «и». */
-const ENDINGS: Record<Lang, string[]> = {
+/** Окончания для отсечения, сначала длинные — иначе «деньгами» потеряет только «и».
+ *  es/pt появятся вместе с контентом на этих языках (задача 28) — пока их тексты английские
+ *  и режутся английскими окончаниями (см. matchesQuery). */
+const ENDINGS: Partial<Record<Lang, string[]>> = {
   ru: ['ами', 'ями', 'ого', 'его', 'ому', 'ему', 'ыми', 'ими', 'ах', 'ях', 'ов', 'ев', 'ей',
     'ой', 'ый', 'ий', 'ая', 'яя', 'ое', 'ее', 'ом', 'ем', 'ам', 'ям', 'ы', 'и', 'а', 'я',
     'е', 'у', 'ю', 'ь', 'о'],
@@ -38,7 +41,8 @@ export function stem(token: string, lang: Lang): string {
   // два прохода: «feelings» → «feeling» → «feel», иначе форма с двумя окончаниями
   // не сходится со словарной. MIN_STEM не даёт проходам съесть слово целиком.
   for (let pass = 0; pass < 2; pass++) {
-    const end = ENDINGS[lang].find(
+    // до es/pt таблиц окончаний нет — за пределами ru/en отсечения не будет (find на undefined)
+    const end = (ENDINGS[lang] ?? []).find(
       (e) => out.endsWith(e) && out.length - e.length >= MIN_STEM,
     );
     if (!end) break;
@@ -56,14 +60,23 @@ function tokenMatches(word: string, queryToken: string, lang: Lang): boolean {
 /** Совпадает ли карта с запросом: сравниваются слова названия, ключевых слов и поисковых
  *  синонимов (текущий язык) — с учётом словоформ, спека 04з. Пустой запрос совпадает со всем.
  *  Каждый токен запроса обязан найти пару: «мир в семье» требует все три слова.
- *  `search` — скрытый слой (спека 04г): новичок ищет «расставание», а не «Тройку Мечей».
- *  `?? []` — защита границы данных: JSON приходит из бандла и типом не проверяется. */
+ *  `search` — скрытый слой (спека 04г): новичок ищет «расставание», а не «Тройку Мечей». */
 export function matchesQuery(card: TarotCard, query: string, lang: Lang): boolean {
   const queryTokens = tokenize(query);
   if (!queryTokens.length) return true;
-  const source = [card.name[lang], ...(card.keywords[lang] ?? []), ...(card.search?.[lang] ?? [])];
+  // язык, на котором тексты карты РЕАЛЬНО есть: до переводов es/pt это en, и стеммить
+  // английский текст надо английскими окончаниями, а не окончаниями выбранного языка
+  const src = presentLang(card.name, lang);
+  // ⚠️ `card.search` проверяется на существование ПОЛЯ, а не языка: JSON приходит из бандла
+  // и типом не проверяется (защита границы данных стояла тут и до задачи 27). У `keywords`
+  // такой проверки не было и не нужно — отсутствие ЯЗЫКА закрывает сам `inLang`
+  const source = [
+    inLang(card.name, src),
+    ...inLang(card.keywords, src),
+    ...(card.search ? inLang(card.search, src) : []),
+  ];
   const words = source.flatMap(tokenize);
-  return queryTokens.every((q) => words.some((w) => tokenMatches(w, q, lang)));
+  return queryTokens.every((q) => words.some((w) => tokenMatches(w, q, src)));
 }
 
 /** Отбор карт: сначала аркан/масть, затем текстовый запрос.

@@ -4,7 +4,11 @@ import { lessonPlayable, lessonSteps, shuffleOptions, theoryPages } from '../les
 const q = (correct: number): QuizQuestion => ({
   type: 'single',
   q: { ru: 'вопрос', en: 'q' },
-  options: [{ ru: 'а', en: 'a' }, { ru: 'б', en: 'b' }, { ru: 'в', en: 'c' }],
+  options: [
+    { ru: 'а', en: 'a' },
+    { ru: 'б', en: 'b' },
+    { ru: 'в', en: 'c' },
+  ],
   correct,
   explain: { ru: 'пояснение', en: 'explain' },
 });

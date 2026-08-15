@@ -8,6 +8,7 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { localDateISO } from './dates';
 import i18n from './i18n';
+import type { Lang } from './lang';
 import { pickPhrase } from './phrases';
 import { pushBody } from './pushBody';
 import type { PlannedPush, PushKind } from './pushPlan';
@@ -119,7 +120,7 @@ let applyChain: Promise<void> = Promise.resolve();
 
 /** Снимает всё запланированное и ставит план заново. Другого способа выразить условные
  *  правила logic-spec §8 нет: система условий не проверяет, она просто шлёт в срок. */
-export function applyPlan(plan: PlannedPush[], lang: 'ru' | 'en'): Promise<void> {
+export function applyPlan(plan: PlannedPush[], lang: Lang): Promise<void> {
   if (WEB) return Promise.resolve();
   const mySeq = ++planSeq;
   const run = applyChain.then(() => applyPlanImpl(plan, lang, mySeq));
@@ -130,7 +131,7 @@ export function applyPlan(plan: PlannedPush[], lang: 'ru' | 'en'): Promise<void>
   return run;
 }
 
-async function applyPlanImpl(plan: PlannedPush[], lang: 'ru' | 'en', mySeq: number): Promise<void> {
+async function applyPlanImpl(plan: PlannedPush[], lang: Lang, mySeq: number): Promise<void> {
   // нас обогнали, пока мы ждали своей очереди в цепочке — писать устаревший план не нужно
   if (mySeq !== planSeq) return;
 
@@ -169,7 +170,7 @@ export async function listScheduled(): Promise<Notifications.NotificationRequest
 }
 
 /** DEV: пуш через 10 секунд — успеть свернуть приложение и увидеть настоящий баннер. */
-export async function sendTestPush(lang: 'ru' | 'en'): Promise<void> {
+export async function sendTestPush(lang: Lang): Promise<void> {
   if (WEB) return;
   await initPushes();
   const status = (await getPermission()) === 'granted' ? 'granted' : await requestPermission();

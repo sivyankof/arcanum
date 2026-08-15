@@ -18,6 +18,8 @@ import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/li
 import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
+import { useLang } from '../../src/lib/i18n';
+import { inLang, type Lang } from '../../src/lib/lang';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
@@ -43,7 +45,7 @@ const AnimatedList = Animated.createAnimatedComponent(FlatList<TarotCard[]>);
 
 /** Ячейка сетки. Позицию картинки меряем на нажатии — с неё начнётся перелёт
  *  на страницу карты (пункт 6 motion-spec). */
-function Cell({ item, lang, learned }: { item: TarotCard; lang: 'ru' | 'en'; learned: boolean }) {
+function Cell({ item, lang, learned }: { item: TarotCard; lang: Lang; learned: boolean }) {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const imRef = React.useRef<View>(null);
@@ -76,7 +78,7 @@ function Cell({ item, lang, learned }: { item: TarotCard; lang: 'ru' | 'en'; lea
         )}
       </View>
       <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
-        {item.name[lang]}
+        {inLang(item.name, lang)}
       </Txt>
     </PressableScale>
   );
@@ -122,9 +124,9 @@ function Filters({ query, onQuery, filter, onFilter, compact, onFocus, onBlur }:
 
 export default function CardsScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   const [filter, setFilter] = useState<CardFilter>('all');
   const [query, setQuery] = useState('');
 
@@ -170,9 +172,7 @@ export default function CardsScreen() {
         ListHeaderComponent={
           <>
             <FadeUp index={0} style={st.pad}>
-              <Txt style={[st.sub, { color: t.muted }]}>
-                {lang === 'ru' ? 'СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909' : 'REFERENCE · RIDER–WAITE 1909'}
-              </Txt>
+              <Txt style={[st.sub, { color: t.muted }]}>{tr('cards.subtitle')}</Txt>
               <Txt style={[st.title, { color: t.head }]}>{tr('cards.title')}</Txt>
             </FadeUp>
             {/* поиск и чипы БЕЗ внешнего паддинга: отступы они задают себе сами, поэтому

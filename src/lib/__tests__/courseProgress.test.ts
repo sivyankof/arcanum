@@ -11,7 +11,7 @@ import {
   type LessonProgressMap,
 } from '../courseProgress';
 
-// Фабрика модулей: fx('a', 2) — модуль "a" с уроками a1, a2; cardsPerLesson РАЗНЫХ карт в каждом
+// Фабрика модулей: fx('a', 2) — модуль "a" с уроками a1, a2; cardsPerLesson РАЗНЫХ карт в каждом.
 const fx = (id: string, lessons: number, cardsPerLesson = 0): CourseModule => ({
   id,
   free: true,

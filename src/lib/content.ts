@@ -2,22 +2,23 @@
 import cardsJson from "../../content/cards.json";
 import spreadsJson from "../../content/spreads.json";
 import courseJson from "../../content/course.json";
-
-export type Lang = "ru" | "en";
+import type { Lang, Localized } from "./lang";
+// тип языка живёт в src/lib/lang.ts; реэкспорт — чтобы cardSearch/lesson/компоненты не меняли импорт
+export type { Lang };
 export type BlockStatus = "todo" | "draft" | "reviewed" | "final";
 
-export interface CardContentBlock { ru: string; en: string; status: BlockStatus }
+export interface CardContentBlock extends Localized { status: BlockStatus }
 export interface TarotCard {
   id: string;
   arcana: "major" | "minor";
   suit: "wands" | "cups" | "swords" | "pentacles" | null;
   number: number;
-  name: Record<Lang, string>;
+  name: Localized;
   /** Витрина: 4 канонических слова, показываются чипами под названием карты. */
-  keywords: Record<Lang, string[]>;
+  keywords: Localized<string[]>;
   /** Только для поиска: житейские формулировки и смыслы перевёрнутой карты (спека 04г).
    *  В интерфейсе не показывается никогда — иначе «расставание» и «долги» лезут в чипы. */
-  search: Record<Lang, string[]>;
+  search: Localized<string[]>;
   image: string;
   content: Record<string, CardContentBlock>;
 }
@@ -26,12 +27,12 @@ export interface TarotCard {
 export type QuizType = "single" | "card";
 export interface QuizQuestion {
   type: QuizType;
-  q: Record<Lang, string>;
+  q: Localized;
   /** ровно 3 варианта; порядок в контенте фиксированный, перемешивает движок (lesson.ts) */
-  options: Record<Lang, string>[];
+  options: Localized[];
   correct: number;
   /** пояснение, появляется после ответа */
-  explain: Record<Lang, string>;
+  explain: Localized;
   /** только у type: "card" */
   cardId?: string;
 }
@@ -40,7 +41,7 @@ export interface QuizQuestion {
  *  форма блока та же, что у блоков карты ({ru, en, status}), поэтому тип переиспользуем. */
 export interface CourseLesson {
   id: string; // "m1l1"
-  title: Record<Lang, string>;
+  title: Localized;
   /** id карт, разбираемых в уроке; пустой у вводных и практических уроков */
   cards: string[];
   theory?: CardContentBlock;
@@ -54,7 +55,7 @@ export interface CourseModule {
   id: string; // "m1"
   /** freemium-флаг: false = премиальный модуль (М3+). В v1 не блокирует — только замок в шапке */
   free: boolean;
-  title: Record<Lang, string>;
+  title: Localized;
   lessons: CourseLesson[];
 }
 

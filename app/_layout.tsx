@@ -13,7 +13,7 @@ import {
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import '../src/lib/i18n';
@@ -60,7 +60,10 @@ export default function RootLayout() {
   // (тот же класс, что час рефлексии в 06а — всё временнóе слушает ещё и AppState)
   useAppActive(() => useApp.getState().syncFreezeGrant());
 
-  useEffect(() => {
+  // layout-эффект, а не обычный: смена языка i18next с inline-ресурсами синхронна, а setState
+  // из layout-эффекта отрабатывает ДО отрисовки кадра — иначе первый кадр после гидрации
+  // (и первый экран нерусского новичка) на один кадр показывался бы на языке дефолта стора
+  useLayoutEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
 

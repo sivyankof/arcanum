@@ -5,6 +5,7 @@
  *  «вчера»: карта дня не менялась вовремя, а серия (streak) рвалась, хотя человек открывал
  *  карту каждый день. Здесь — только локальные компоненты даты устройства.
  */
+import { LOCALES, type Lang } from './lang';
 
 /** Дата в формате YYYY-MM-DD из ЛОКАЛЬНЫХ компонентов даты (getFullYear/getMonth/getDate). */
 export function localDateISO(d: Date = new Date()): string {
@@ -25,21 +26,6 @@ export function daysAgoISO(n: number, from: Date = new Date()): string {
 export function parseISODate(iso: string): Date {
   const [y, m, d] = iso.split('-').map(Number);
   return new Date(y, m - 1, d);
-}
-
-const LOCALES: Record<Lang, string> = { ru: 'ru-RU', en: 'en-US' };
-type Lang = 'ru' | 'en';
-
-/** Тег локали (BCP-47) по языку приложения.
- *
- *  ⚠️ Нужен там, где строку форматирует НЕ наш код, а системный компонент. Язык приложения —
- *  наша собственная настройка в сторе, и он не обязан совпадать ни с языком устройства, ни с тем,
- *  что готова показать система: iOS локализует системные виджеты по списку языков приложения-хоста,
- *  а хост в разработке — Expo Go, чей список мы не контролируем. Поэтому локаль таким компонентам
- *  передаём явно, а не надеемся на окружение (найдено Артёмом 13.08: колесо даты говорило
- *  по-английски при русских и приложении, и телефоне). */
-export function localeTag(lang: Lang): string {
-  return LOCALES[lang];
 }
 
 /** «пн · 11 августа» (weekday 'long' → «понедельник · 11 августа»).

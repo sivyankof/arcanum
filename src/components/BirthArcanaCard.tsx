@@ -12,6 +12,7 @@ import { StyleSheet, View } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { cardById, cardNumeral } from '../lib/content';
 import { hapticTap } from '../lib/haptics';
+import { inLang, type Lang } from '../lib/lang';
 import { useApp } from '../store/useApp';
 import { fonts, radius } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -19,7 +20,7 @@ import { DatePicker } from './DatePicker';
 import { PressableScale } from './PressableScale';
 import { Txt } from './Txt';
 
-export function BirthArcanaCard({ lang }: { lang: 'ru' | 'en' }) {
+export function BirthArcanaCard({ lang }: { lang: Lang }) {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const arcanaId = useApp((s) => s.profile.birthArcanaId);
@@ -71,7 +72,7 @@ export function BirthArcanaCard({ lang }: { lang: 'ru' | 'en' }) {
       </View>
       <View style={st.texts}>
         <Txt style={[st.overline, { color: t.accent }]}>{tr('profile.arcana')}</Txt>
-        <Txt style={[st.name, { color: t.head }]}>{`${cardNumeral(card)} · ${card.name[lang]}`}</Txt>
+        <Txt style={[st.name, { color: t.head }]}>{`${cardNumeral(card)} · ${inLang(card.name, lang)}`}</Txt>
       </View>
     </PressableScale>
   );

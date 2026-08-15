@@ -8,7 +8,8 @@
 // Разбор: docs/specs/hf-02-plurals-research.md, решение: docs/specs/hf-02-hermes-plurals.md
 import "intl-pluralrules";
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
+import { availableLangs, toLang, type Lang } from "./lang";
 
 // экспортируется ради тестов плюрализации: структурный тест и оракул обходят языки
 // по `Object.keys(resources)`, а не по литералам "ru"/"en" — иначе третий язык проехал бы мимо
@@ -16,7 +17,15 @@ export const resources = {
   ru: {
     translation: {
       tabs: { today: "Сегодня", course: "Курс", cards: "Карты", spreads: "Расклады", profile: "Профиль" },
-      today: { title: "Карта дня", draw: "Вытянуть карту", drawn: "Ваша карта на сегодня" },
+      today: {
+        title: "Карта дня", draw: "Вытянуть карту", drawn: "Ваша карта на сегодня",
+        // подписи «Сегодня», раньше стоявшие тернаром lang === 'ru' мимо i18n (спека 27, раздел З)
+        tapToReveal: "НАЖМИ, ЧТОБЫ ОТКРЫТЬ",
+        meaning: "ЗНАЧЕНИЕ ДНЯ",
+        continue: "ПРОДОЛЖИТЬ ПУТЬ →",
+        // «дн.» не склоняется, но семейство держим полным — структурный тест требует все формы языка
+        streakDays_one: "{{count}} дн.", streakDays_few: "{{count}} дн.", streakDays_many: "{{count}} дн.",
+      },
       // фазы луны и лунный день — строка под разделителем на «Сегодня» (logic-spec §6)
       moon: {
         new: "Новолуние", waxing: "Растущая луна", full: "Полнолуние", waning: "Убывающая луна",
@@ -33,6 +42,7 @@ export const resources = {
         title: "78 карт", major: "Старшие", wands: "Жезлы", cups: "Кубки", swords: "Мечи", pentacles: "Пентакли",
         all: "Все", searchPlaceholder: "Найти карту…", empty: "Такой карты нет — проверьте написание",
         learned: "ИЗУЧЕНО ✓",
+        subtitle: "СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909",
       },
       card: {
         general: "Общее значение", reversed: "Перевёрнутая", love: "Любовь", career: "Работа",
@@ -42,6 +52,7 @@ export const resources = {
         tabGeneral: "Общее", sphereLove: "В любви", sphereCareer: "В работе", sphereFinances: "В финансах", sphereHealth: "Для здоровья",
         resonated: "отзывалась {{n}}", tapToClose: "НАЖМИТЕ, ЧТОБЫ ЗАКРЫТЬ",
         viewerClose: "Закрыть просмотр", viewerOpen: "Рассмотреть карту",
+        majorArcana: "СТАРШИЙ АРКАН", minorArcana: "МЛАДШИЙ АРКАН",
       },
       // экран курса — «путь» (спека 07); числительные плюрализацией, иначе «1 УРОКОВ»
       course: {
@@ -107,7 +118,7 @@ export const resources = {
       },
       settings: {
         title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая",
-        language: "Язык", languageValue: "Русский", resetToday: "Сбросить карту дня",
+        language: "Язык", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
         devSkipYesterday: "Пропустить вчера",
@@ -124,6 +135,7 @@ export const resources = {
         devLessonDone: "Пройти следующий урок",
         devCourseReset: "Сбросить прогресс курса",
         devOnboarding: "Пройти онбординг заново",
+        devDeviceLang: "Язык устройства",
         // бэкап (спека 11); тон — design-system §8: без «Ошибка!» и приказов
         exportData: "Экспорт данных",
         importData: "Импорт из файла",
@@ -236,7 +248,13 @@ export const resources = {
   en: {
     translation: {
       tabs: { today: "Today", course: "Course", cards: "Cards", spreads: "Spreads", profile: "Profile" },
-      today: { title: "Card of the Day", draw: "Draw a card", drawn: "Your card for today" },
+      today: {
+        title: "Card of the Day", draw: "Draw a card", drawn: "Your card for today",
+        tapToReveal: "TAP TO REVEAL",
+        meaning: "TODAY'S MEANING",
+        continue: "CONTINUE YOUR PATH →",
+        streakDays_one: "{{count}} day", streakDays_other: "{{count}} days",
+      },
       moon: {
         new: "New moon", waxing: "Waxing moon", full: "Full moon", waning: "Waning moon",
         day: "lunar day {{n}}",
@@ -250,6 +268,7 @@ export const resources = {
         title: "78 cards", major: "Major", wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pentacles",
         all: "All", searchPlaceholder: "Find a card…", empty: "No such card — check the spelling",
         learned: "LEARNED ✓",
+        subtitle: "REFERENCE · RIDER–WAITE 1909",
       },
       card: {
         general: "General meaning", reversed: "Reversed", love: "Love", career: "Career",
@@ -259,6 +278,7 @@ export const resources = {
         tabGeneral: "General", sphereLove: "In love", sphereCareer: "At work", sphereFinances: "In finances", sphereHealth: "For health",
         resonated: "resonated {{n}}", tapToClose: "TAP TO CLOSE",
         viewerClose: "Close viewer", viewerOpen: "View card",
+        majorArcana: "MAJOR ARCANA", minorArcana: "MINOR ARCANA",
       },
       course: {
         title: "Course",
@@ -311,7 +331,7 @@ export const resources = {
       },
       settings: {
         title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
-        language: "Language", languageValue: "English", resetToday: "Reset daily card",
+        language: "Language", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
         devSkipYesterday: "Skip yesterday",
@@ -325,6 +345,7 @@ export const resources = {
         devLessonDone: "Complete next lesson",
         devCourseReset: "Reset course progress",
         devOnboarding: "Replay onboarding",
+        devDeviceLang: "Device language",
         // бэкап (спека 11)
         exportData: "Export data",
         importData: "Import from file",
@@ -446,4 +467,22 @@ if (__DEV__) {
 }
 
 export default i18n;
-export const lang = () => (i18n.language.startsWith("ru") ? "ru" : "en") as "ru" | "en";
+
+/** Языки, доступные пользователю: список в пикере настроек и множество, среди которого ищется
+ *  язык устройства при первой установке. Язык «включается» появлением его UI-строк в `resources`
+ *  (сессия L-0 плана локализации): до этого бета-тестер не увидит «Español», за которым скрывался бы
+ *  английский. В dev — все четыре: проверка проводки (даты, плюрализация, фолбэк контента) не ждёт
+ *  переводов. Само решение — в чистой `availableLangs` (lang.ts, под тестами обоих режимов):
+ *  здесь только подстановка настоящих `__DEV__`/`resources`. */
+export const AVAILABLE_LANGS: readonly Lang[] = availableLangs(__DEV__, resources);
+
+/** Текущий язык приложения для экранов — вместо каста по префиксу (`startsWith('ru')` → ru, иначе en),
+ *  который копировался в каждый новый экран и молча делал бы третий язык английским.
+ *  Читает ЗЕРКАЛО i18n, а не стор: экран, взявший язык из стора, на один кадр разошёлся бы с `t()`
+ *  (стор уже новый, i18n ещё старый). Источник правды — стор (персист), синхронизирует
+ *  `app/_layout.tsx`. `useTranslation` подписывает компонент на смену языка — как и раньше.
+ *  ⚠️ В комментариях этого файла не писать сам старый каст буквально: контракт-тест
+ *  `langSources.test.ts` ищет его по всем исходникам, включая комментарии. */
+export function useLang(): Lang {
+  return toLang(useTranslation().i18n.language);
+}
