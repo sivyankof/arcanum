@@ -48,7 +48,7 @@ describe('buildBackup — сборка файла (спека 11)', () => {
 });
 
 describe('белый список и дефолты', () => {
-  it('ключи бэкапа = персистуемая схема v7 — новое поле стора требует осознанного решения здесь', () => {
+  it('ключи бэкапа = персистуемая схема v8 — новое поле стора требует осознанного решения здесь', () => {
     expect([...BACKUP_KEYS].sort()).toEqual([
       'freezeMonth', 'freezeSpentDate', 'freezes', 'history', 'installSeed', 'lang',
       'lastDrawDate', 'lessonsProgress', 'profile', 'settings', 'streak', 'themeMode', 'xp',
@@ -58,6 +58,9 @@ describe('белый список и дефолты', () => {
     expect(PERSIST_DEFAULTS.freezes).toBe(1);
     expect(PERSIST_DEFAULTS.settings.pushMorning).toBe('09:00');
     expect(PERSIST_DEFAULTS.profile).toEqual({ onboarded: false });
+  });
+  it('версия схемы 8: lang принимает es/pt — файл v8 старому ридеру откажет как «новее», а не «повреждён»', () => {
+    expect(SCHEMA_VERSION).toBe(8);
   });
 });
 
@@ -154,6 +157,8 @@ describe('parseBackup — битые данные → corrupt (всё или н�
     // B3: строже регулярки — числа вне диапазона, а не только форма строки
     ['pushMorning вне диапазона часов/минут', (s) => { s.settings = { ...s.settings, pushMorning: '99:99' }; }],
     ['freezeSpentDate — месяц/день вне диапазона', (s) => { s.freezeSpentDate = '2026-13-45'; }],
+    // спека 27: домен lang — четыре языка приложения, чужой код — чужой файл
+    ['язык вне четвёрки', (s) => { s.lang = 'de'; }],
   ])('%s', (_name, patch) => {
     expect(parseBackup(broken(patch), SCHEMA_VERSION)).toEqual({ ok: false, error: 'corrupt' });
   });
@@ -169,6 +174,14 @@ describe('parseBackup — реальная форма состояния (спе
       ],
       profile: { ...VALID.profile, birthArcanaId: 'hermit' },
     };
+    const text = JSON.stringify(buildBackup(state, SCHEMA_VERSION, AT));
+    expect(parseBackup(text, SCHEMA_VERSION)).toEqual({ ok: true, state, exportedAt: AT });
+  });
+});
+
+describe('lang из четырёх языков (спека 27)', () => {
+  it.each(['ru', 'en', 'es', 'pt'])('%s проходит валидацию', (lang) => {
+    const state = { ...VALID, lang } as BackupState;
     const text = JSON.stringify(buildBackup(state, SCHEMA_VERSION, AT));
     expect(parseBackup(text, SCHEMA_VERSION)).toEqual({ ok: true, state, exportedAt: AT });
   });

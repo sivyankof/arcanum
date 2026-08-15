@@ -11,7 +11,7 @@ import { cardById } from './content';
 import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
 import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
-import type { Lang } from './lang';
+import { isLang, type Lang } from './lang';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
@@ -26,8 +26,10 @@ const MAX_BACKUP_STREAK = 36_500; // сто лет серии — дальше �
 const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на порядки меньше — подстраховка формата
 
 /** Версия персистуемой схемы (logic-spec §7). Единственный источник: стор берёт её отсюда.
- *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 8. */
-export const SCHEMA_VERSION = 7;
+ *  v7 → v8 (спека 27): `lang` принимает es/pt — форма прежняя, ветки миграции нет; поднято, чтобы
+ *  файл с `lang: 'es'` старый ридер отверг как «более новая версия», а не как «повреждён».
+ *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 9. */
+export const SCHEMA_VERSION = 8;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */
@@ -165,7 +167,7 @@ const isProfile = (v: unknown): boolean =>
 
 const validState = (s: BackupState): boolean =>
   (s.themeMode === 'dark' || s.themeMode === 'light') &&
-  (s.lang === 'ru' || s.lang === 'en') &&
+  isLang(s.lang) &&
   isCount(s.installSeed) && isCount(s.streak) && s.streak <= MAX_BACKUP_STREAK &&
   orNull(s.lastDrawDate, isISODay) &&
   isCount(s.freezes) && s.freezes <= FREEZE_MAX &&
