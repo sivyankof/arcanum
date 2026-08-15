@@ -53,8 +53,8 @@
      ],
      "correct": 0,
      "explain": {
-      "ru": "Прямое значение — это язык карты; спросив, что с ним случилось, вы переводите его на перевёрнутый лад, а не гадаете заново.",
-      "en": "The upright meaning is the card's language; asking what happened to it translates that language into the reversed key, instead of guessing from scratch."
+      "ru": "Прямое значение — это язык карты; спросив, что с ним стало, вы переводите его на перевёрнутый лад, а не гадаете заново.",
+      "en": "The upright meaning is the card's language; asking what became of it translates that language into the reversed key, instead of guessing from scratch."
      }
     },
     {
@@ -65,8 +65,8 @@
      },
      "options": [
       {
-       "ru": "Ушла внутрь: энергия спряталась и превратилась в холодность",
-       "en": "Turned inward: the energy hid and turned into coldness"
+       "ru": "Ушла внутрь: энергия спряталась и превратилась в холодность и броню",
+       "en": "Turned inward: the energy hid and hardened into coldness and armour"
       },
       {
        "ru": "Застряла: шаг напрашивается, а человек стоит на месте",
@@ -74,7 +74,7 @@
       },
       {
        "ru": "Перегнула через край: интерес вспыхнул и погас, не дойдя до дела",
-       "en": "Bent past its limit: the interest flared up and faded before it led anywhere"
+       "en": "Bent past its limit: the interest flared and faded before acting"
       }
      ],
      "correct": 2,
@@ -95,8 +95,8 @@
        "en": "As clarity that has turned inward and frozen into coldness and armour"
       },
       {
-       "ru": "Как противоположность честности — склонность обманывать",
-       "en": "As the opposite of honesty — a tendency to deceive"
+       "ru": "Как противоположность честности — склонность лукавить и обманывать",
+       "en": "As the opposite of honesty — a growing tendency to mislead and deceive"
       },
       {
        "ru": "Как знак того, что рядом скоро появится лживый человек",
@@ -126,7 +126,7 @@
       },
       {
        "ru": "Кризис откладывается: трещины видны, но признать их страшно",
-       "en": "The crisis is being postponed: the cracks already show, but admitting them feels frightening"
+       "en": "The crisis is postponed: the cracks show, admitting them feels hard"
       }
      ],
      "correct": 2,
@@ -182,8 +182,8 @@
        "en": "It cancels the Minor card's meaning whenever the two disagree"
       },
       {
-       "ru": "Задаёт общую тему, а младший аркан показывает, как именно она проживается в конкретной ситуации",
-       "en": "It sets the overall theme, while the Minor card shows how that theme actually plays out"
+       "ru": "Задаёт общую тему, а младший показывает, как она проживается в жизни",
+       "en": "It sets the overall theme, while the Minor shows how that theme plays out"
       }
      ],
      "correct": 2,
@@ -205,7 +205,7 @@
       },
       {
        "ru": "Отшельник уходит от шума осознанно; Восьмёрка — ловушка, которую держат тревожные мысли, а не обстоятельства",
-       "en": "The Hermit steps away from the noise on purpose; the Eight is a trap held by anxious thoughts, not by circumstances"
+       "en": "The Hermit steps away from the noise on purpose; the Eight is a trap held by anxious thoughts"
       },
       {
        "ru": "Отшельник всегда про человека рядом, а Восьмёрка Мечей — всегда про вашу собственную роль",
@@ -226,8 +226,8 @@
      },
      "options": [
       {
-       "ru": "Придворная карта — на вопрос «кто», числовая — на вопрос «что»: кто-то порывистый включается в общее дело, где ценят мастерство",
-       "en": "The court card answers 'who', the number card answers 'what': someone impulsive joins a shared effort where skill is valued"
+       "ru": "Придворная — на вопрос «кто», числовая — на «что»: порывистый человек в деле, где ценят мастерство",
+       "en": "The court card answers 'who', the number card 'what': someone impulsive in work where skill is valued"
       },
       {
        "ru": "Обе карты отвечают на один и тот же вопрос «когда», поэтому пару читают как точную дату события",
@@ -235,7 +235,7 @@
       },
       {
        "ru": "Придворная карта отвечает на вопрос «что», а числовая — на вопрос «кто», в этом и заключается их связка",
-       "en": "The court card answers 'what' and the number card answers 'who' — that's the whole point of the combination"
+       "en": "The court card stands for 'what' and the number card for 'who' — that's the whole point of the combination"
       }
      ],
      "correct": 0,
@@ -256,12 +256,12 @@
        "en": "One card cancels the other, so the spread needs to be reshuffled"
       },
       {
-       "ru": "Карта Кубков полностью нейтрализует Рыцаря: спешить точно не стоит",
-       "en": "The Cups card fully neutralises the Knight: there's certainly no need to hurry"
+       "ru": "Карта Кубков полностью нейтрализует Рыцаря: спешить в этой ситуации не стоит",
+       "en": "The Cups card fully neutralises the Knight: there's no need to hurry here"
       },
       {
-       "ru": "Обе карты правдивы одновременно: сначала бережно побыть в союзе, а потом действовать решительно, не разрушая то, что было настоящим",
-       "en": "Both are true at once: first stay gently within the bond, then act decisively, without breaking what was real"
+       "ru": "Обе правдивы сразу: сначала побыть в союзе, потом действовать решительно",
+       "en": "Both are true at once: first stay within the bond, then act decisively"
       }
      ],
      "correct": 2,
@@ -280,7 +280,7 @@
      "type": "single",
      "q": {
       "ru": "Что означает позиция «Будущее» в раскладе «Три карты»?",
-      "en": "What does the 'Future' position mean in the Three Cards spread?"
+      "en": "What is meant by the 'Future' position in the Three Cards spread?"
      },
      "options": [
       {
@@ -288,12 +288,12 @@
        "en": "The direction the situation is heading, if nothing changes"
       },
       {
-       "ru": "Точную дату, когда произойдёт событие",
-       "en": "The exact date when the event will happen"
+       "ru": "Точную дату события, к которой стоит начинать готовиться заранее",
+       "en": "The exact date of the event you should start preparing for now"
       },
       {
-       "ru": "Список дел, которые нужно закрыть сегодня",
-       "en": "A list of tasks to finish today"
+       "ru": "Список дел, которые нужно закрыть в ближайшие дни",
+       "en": "A list of tasks to finish over the next few days"
       }
      ],
      "correct": 0,
@@ -310,12 +310,12 @@
      },
      "options": [
       {
-       "ru": "Уйдёт ли он от жены?",
-       "en": "Will he leave his wife?"
+       "ru": "Уйдёт ли он от жены до конца этого года?",
+       "en": "Will he leave his wife before the end of this year?"
       },
       {
-       "ru": "Когда я наконец разбогатею?",
-       "en": "When will I finally get rich?"
+       "ru": "Когда я наконец разбогатею и смогу не работать?",
+       "en": "When will I finally get rich and stop working for good?"
       },
       {
        "ru": "Что мне важно понять про эти отношения?",
@@ -337,15 +337,15 @@
      "options": [
       {
        "ru": "Подсчёт числовых значений всех трёх карт",
-       "en": "Adding up the numeric value of all three cards"
+       "en": "Adding up the numeric value of all three cards drawn"
       },
       {
        "ru": "Мостик через союзы «потому что», «чтобы», «но»",
-       "en": "A bridge built with connectors like 'because', 'in order to', 'but'"
+       "en": "A bridge built with 'because', 'in order to', 'but'"
       },
       {
        "ru": "Чтение карт в обратном порядке, от «Будущего» к «Прошлому»",
-       "en": "Reading the cards backwards, from 'Future' to 'Past'"
+       "en": "Reading the cards backwards, from 'Future' through to 'Past'"
       }
      ],
      "correct": 1,
@@ -366,12 +366,12 @@
        "en": "Because more cards are allowed in a reading done for a stranger"
       },
       {
-       "ru": "Потому что для себя расклад «Три карты» вообще не подходит",
+       "ru": "Потому что расклад «Три карты» вообще не подходит для себя",
        "en": "Because the Three Cards spread doesn't work for reading about yourself"
       },
       {
        "ru": "Потому что для себя мешают личные ожидания и предубеждения",
-       "en": "Because personal expectations and bias get in the way when it's about you"
+       "en": "Because personal expectations and bias get in the way"
       }
      ],
      "correct": 2,
@@ -384,16 +384,16 @@
      "type": "card",
      "q": {
       "ru": "В позиции «Настоящее» выпала эта карта — что она подсказывает?",
-      "en": "This card turned up in the 'Present' position — what does it suggest?"
+      "en": "In the 'Present' position, this card turned up — what does it suggest?"
      },
      "options": [
       {
        "ru": "Внутреннего ресурса хватит, чтобы справиться мягко — терпением, а не напором",
-       "en": "You have enough inner resource to handle this gently — with patience, not force"
+       "en": "You have enough inner resource to handle this gently — with patience"
       },
       {
-       "ru": "Ситуация требует физической силы: нужно надавить решительнее",
-       "en": "The situation calls for physical strength: push harder and more decisively"
+       "ru": "Ситуация требует физической силы: нужно надавить решительнее и быстрее",
+       "en": "The situation calls for physical strength: push harder and more quickly now"
       },
       {
        "ru": "Уже через неделю всё разрешится само собой, вмешиваться не нужно",
@@ -425,7 +425,7 @@
       },
       {
        "ru": "Навести мостик между картами: тогда выйдет история, а не список слов",
-       "en": "Build a bridge between the cards: that turns them into a story, not a list of words"
+       "en": "Build a bridge between the cards: that turns them into a story, not a list"
       },
       {
        "ru": "Стоит читать карты в обратном порядке — сначала «Будущее», потом «Прошлое»",
@@ -447,7 +447,7 @@
      "options": [
       {
        "ru": "Он потерял вопрос, а без вопроса карты рассыпаются на общие слова",
-       "en": "They've lost the question, and without it the cards fall apart into vague generalities"
+       "en": "They've lost the question, and the cards fall apart into vague generalities"
       },
       {
        "ru": "Ему стоило выбрать расклад попроще, чем «Три карты»",
@@ -455,7 +455,7 @@
       },
       {
        "ru": "Ничего страшного: расклад одинаково работает и без исходного вопроса",
-       "en": "Nothing serious: a spread works just as well without the original question"
+       "en": "Nothing serious: a spread works just as well without the original question in mind"
       }
      ],
      "correct": 0,
@@ -520,7 +520,7 @@
      "type": "card",
      "q": {
       "ru": "На сегодня выпала эта карта, а вопрос — как провести непростой разговор. Что она подсказывает, если прочитать её как вашу роль?",
-      "en": "This card is today's draw, alongside the question of how to handle a difficult conversation. What does it suggest, read as your own role?"
+      "en": "Today's draw is this card, alongside the question of how to handle a difficult conversation. What does it suggest, read as your own role?"
      },
      "options": [
       {
@@ -539,7 +539,7 @@
      "correct": 1,
      "explain": {
       "ru": "Королева Мечей как ваша роль — про ясность и прямоту, а не про предсказание исхода. Вариант «точно в вашу пользу» — та самая ловушка предсказания, которой курс просил избегать.",
-      "en": "As your own role, the Queen of Swords is about clarity and plain speech, not about forecasting an outcome. The 'sure to go your way' option is exactly the prediction trap the course has asked you to avoid."
+      "en": "Here the Queen of Swords is about clarity and plain speech, not about forecasting an outcome. The 'sure to go your way' option is exactly the prediction trap the course has asked you to avoid."
      },
      "cardId": "s13"
     }
