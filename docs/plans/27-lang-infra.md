@@ -458,17 +458,19 @@ import type { Lang, TarotCard } from './content';
 import { inLang, presentLang } from './lang';
 ```
 
-`ENDINGS` (строки 24–29): тип `Record<Lang, string[]>` → `Partial<Record<Lang, string[]>>`, содержимое
-не менять; над таблицей добавить строку комментария:
+`ENDINGS`: тип (задача 2 временно поставила `Record<CanonLang, string[]>`) → `Partial<Record<Lang, string[]>>`,
+содержимое не менять; импорт `CanonLang` из `./lang` в этом файле после правки не нужен — снять.
+Комментарий над таблицей:
 ```ts
 /** Окончания для отсечения, сначала длинные — иначе «деньгами» потеряет только «и».
  *  es/pt появятся вместе с контентом на этих языках (задача 28) — пока их тексты английские
  *  и режутся английскими окончаниями (см. matchesQuery). */
 ```
 
-`stem` (строка 41): `const end = ENDINGS[lang].find(` → `const end = (ENDINGS[lang] ?? []).find(`.
+`stem`: `const end = ENDINGS[lang as CanonLang]?.find(` → `const end = (ENDINGS[lang] ?? []).find(`
+(переходный каст задачи 2 уходит вместе со строкой).
 
-`matchesQuery` (строки 61–67) заменить целиком:
+`matchesQuery` заменить целиком:
 ```ts
 export function matchesQuery(card: TarotCard, query: string, lang: Lang): boolean {
   const queryTokens = tokenize(query);
@@ -476,7 +478,14 @@ export function matchesQuery(card: TarotCard, query: string, lang: Lang): boolea
   // язык, на котором тексты карты РЕАЛЬНО есть: до переводов es/pt это en, и стеммить
   // английский текст надо английскими окончаниями, а не окончаниями выбранного языка
   const src = presentLang(card.name, lang);
-  const source = [inLang(card.name, src), ...(inLang(card.keywords, src) ?? []), ...(inLang(card.search, src) ?? [])];
+  // ⚠️ `card.search` проверяется на существование ПОЛЯ, а не языка: JSON приходит из бандла
+  // и типом не проверяется (защита границы данных стояла тут и до задачи 27). У `keywords`
+  // такой проверки не было и не нужно — отсутствие ЯЗЫКА закрывает сам `inLang`
+  const source = [
+    inLang(card.name, src),
+    ...inLang(card.keywords, src),
+    ...(card.search ? inLang(card.search, src) : []),
+  ];
   const words = source.flatMap(tokenize);
   return queryTokens.every((q) => words.some((w) => tokenMatches(w, q, src)));
 }
@@ -486,16 +495,22 @@ Run: `npx jest src/lib/__tests__/cardSearch.test.ts` — Ожидание: PASS 
 
 - [ ] **Шаг 3.3: `inLang` в остальных чистых модулях**
 
-`src/lib/lesson.ts:60`: `theoryPages(lesson.theory?.[lang] ?? '')` → `theoryPages(lesson.theory ? inLang(lesson.theory, lang) : '')`;
-импорт: `import { inLang } from './lang';` (проверка `lessonPlayable` по `theory?.ru` — оставить: канон).
+`src/lib/lesson.ts`: `theoryPages(lesson.theory?.[lang as CanonLang] ?? '')` → `theoryPages(lesson.theory ? inLang(lesson.theory, lang) : '')`;
+импорт: `import { inLang } from './lang';` вместо `import type { CanonLang } from './lang';`
+(проверка `lessonPlayable` по `theory?.ru` — оставить: канон).
 
 `src/lib/pushBody.ts:21`: `card: card ? card.name[lang] : '',` → `card: card ? inLang(card.name, lang) : '',`;
 импорт: `import { inLang, type Lang } from './lang';` (заменить type-only импорт из задачи 2).
 
-`src/lib/phrases.ts`: `interface Phrase { ru: string; en: string }` (строка 10) → удалить; в `variantsAt`
-`(node as Phrase[])` → `(node as Localized[])`, возвращаемый тип `Localized[]`; строка 33
-`…% variants.length][lang]` → `inLang(variants[fnv1a32(\`${dateISO}:${key}\`) % variants.length], lang)`;
-импорт: `import { inLang, type Lang, type Localized } from './lang';`.
+`src/lib/phrases.ts`: `interface Phrase { ru: string; en: string }` → удалить; в `variantsAt`
+`(node as Phrase[])` → `(node as Localized[])`, возвращаемый тип `Localized[]`; строку выбора варианта
+`…% variants.length][lang as CanonLang]` → `inLang(variants[fnv1a32(\`${dateISO}:${key}\`) % variants.length], lang)`
+вместе с временным комментарием задачи 2 про узкий индекс;
+импорт: `import { inLang, type Lang, type Localized } from './lang';` (без `CanonLang`).
+⚠️ Это САМЫЙ ВАЖНЫЙ каст из снимаемых: `pickPhrase` — единственное место, где переходный
+`as CanonLang` не защищён ни `?.`, ни `?? ''`, и при lang='es' вернул бы `undefined`
+с падением на `.replace`. Пути выполнения к es/pt сегодня нет (язык появится только в задаче 6),
+но снять каст обязана именно эта задача.
 
 - [ ] **Шаг 3.4: `inLang` в компонентах и экранах**
 
@@ -571,11 +586,29 @@ export interface CourseModule { … title: Localized; … }
 (комментарии у полей сохранить как были; меняется только `Record<Lang, …>` → `Localized<…>`,
 а `{ ru: string; en: string; status }` → `extends Localized`).
 
+- [ ] **Шаг 3.5а: снять переходные касты задачи 2 в тестовых фикстурах**
+
+Задача 2 расширила `Lang` до четырёх значений раньше, чем сузила тип записи, и её фикстуры пришлось
+подпереть кастами. После шага 3.5 литерал `{ ru, en }` удовлетворяет `Localized` сам по себе,
+и касты обязаны уйти — иначе останутся вечным следом обхода, который никто уже не объяснит:
+
+- `src/lib/__tests__/lesson.test.ts` — снять все `as Record<Lang, string>` (у `q`, `options` ×3,
+  `explain`, `title`) вместе с комментарием «фикстуры несут только ru/en…»; импорт `Lang` в файле
+  после этого не нужен — вернуть `import type { CourseLesson, QuizQuestion } from '../content';`.
+- `src/lib/__tests__/courseProgress.test.ts` — снять все `as Record<Lang, string>` (в `fx` два места
+  и в тесте `moduleCardCount`) вместе с комментарием про приведение; импорт вернуть к
+  `import type { CourseModule } from '../content';`.
+
 - [ ] **Шаг 3.6: проверка**
 
 Run: `npx tsc --noEmit`
 Ожидание: чисто. Если tsc ругается «Type 'string | undefined' is not assignable» — это пропущенный
 прямой индекс `[lang]`, перевести его на `inLang` (список выше неполон только если код менялся после 15.08).
+
+Run: `grep -rn "as CanonLang\|as Record<Lang" src app`
+Ожидание: **пусто**. Это главная проверка задачи: все переходные касты задачи 2 сняты
+(`cardSearch.ts`, `lesson.ts`, `phrases.ts`, два тестовых файла). Оставшийся каст = скрытый баг
+для es/pt, который не увидит ни один сегодняшний тест.
 
 Run: `grep -n "\[lang\]" app src --include=*.ts --include=*.tsx | grep -v __tests__`
 Ожидание: только `src/lib/lang.ts` (сам фолбэк), `src/lib/dates.ts` (`LOCALES[lang]`), `src/lib/cardSearch.ts` (`ENDINGS[lang]`).
