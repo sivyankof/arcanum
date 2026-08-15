@@ -35,9 +35,29 @@ export const SPREAD_LAYOUTS: Record<string, Pt[]> = {
 export const MINI = { cellW: 13, cellH: 20, stepX: 19, stepY: 22, boxW: 52, boxH: 64 } as const;
 
 export function miniCells(spreadId: string): { left: number; top: number }[] {
-  return (SPREAD_LAYOUTS[spreadId] ?? []).map((p) => ({
-    left: Math.round(p.x * MINI.stepX),
-    top: Math.round(p.y * MINI.stepY),
+  const pts = SPREAD_LAYOUTS[spreadId] ?? [];
+  const maxX = Math.max(0, ...pts.map((p) => p.x));
+  const maxY = Math.max(0, ...pts.map((p) => p.y));
+  // Многорядные схемы (дуга подковы, крест «На отношения», кельтский крест) в макете нарочно
+  // выходят за рамку коробки .diag — координаты те же, что и раньше, центрировать нечего.
+  if (maxY !== 0) {
+    return pts.map((p) => ({
+      left: Math.round(p.x * MINI.stepX),
+      top: Math.round(p.y * MINI.stepY),
+    }));
+  }
+  // Однорядная схема в макете всегда целиком внутри коробки и стоит по центру: у «На месяц»
+  // (4 карты) штатный шаг 19 не влезает (0..57 при ширине коробки 52) — шаг колонки сжимается
+  // ровно настолько, чтобы последняя ячейка легла вплотную к правому краю, а вся лента ещё
+  // и сдвигается по x, чтобы поля слева и справа совпали (при 2–3 картах сжимать не нужно —
+  // min() отдаёт штатный шаг 19, как и раньше).
+  const stepX = maxX > 0 ? Math.min(MINI.stepX, Math.floor((MINI.boxW - MINI.cellW) / maxX)) : MINI.stepX;
+  const rowWidth = maxX * stepX + MINI.cellW;
+  const offX = Math.max(0, Math.floor((MINI.boxW - rowWidth) / 2));
+  const offY = Math.max(0, Math.floor((MINI.boxH - MINI.cellH) / 2));
+  return pts.map((p) => ({
+    left: offX + Math.round(p.x * stepX),
+    top: offY,
   }));
 }
 

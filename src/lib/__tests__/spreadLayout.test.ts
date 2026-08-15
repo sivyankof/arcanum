@@ -8,8 +8,16 @@ describe('SPREAD_LAYOUTS — контракт с spreads.json', () => {
 });
 
 describe('miniCells — мини-схема списка (макет .diag, ячейка 13×20)', () => {
-  it('три карты — ряд 0/19/38, как в макете', () => {
-    expect(miniCells('three-card')).toEqual([{ left: 0, top: 0 }, { left: 19, top: 0 }, { left: 38, top: 0 }]);
+  it('«Карта дня» — одна ячейка по центру коробки (макет SPS, pos [19,22])', () => {
+    expect(miniCells('card-of-day')).toEqual([{ left: 19, top: 22 }]);
+  });
+  it('три карты — ряд по центру коробки, top 22 (макет SPS, pos [0,22][19,22][38,22])', () => {
+    expect(miniCells('three-card')).toEqual([{ left: 0, top: 22 }, { left: 19, top: 22 }, { left: 38, top: 22 }]);
+  });
+  it('«На месяц» — четыре ячейки, шаг сжат до 13, чтобы влезть в коробку (макет SPS, pos [0,22]…[39,22])', () => {
+    expect(miniCells('month-ahead')).toEqual([
+      { left: 0, top: 22 }, { left: 13, top: 22 }, { left: 26, top: 22 }, { left: 39, top: 22 },
+    ]);
   });
   it('«На отношения» — крест макета: боковые между рядами (y 0.5 → 11), центр колонки 19', () => {
     expect(miniCells('relationship')).toEqual([
@@ -32,6 +40,17 @@ describe('miniCells — мини-схема списка (макет .diag, яч
   it('коробка макета 52×64', () => {
     expect(MINI.boxW).toBe(52);
     expect(MINI.boxH).toBe(64);
+  });
+  it('инвариант: у однорядных раскладок вся мини-схема влезает в коробку', () => {
+    for (const [id, pts] of Object.entries(SPREAD_LAYOUTS)) {
+      const maxY = Math.max(0, ...pts.map((p) => p.y));
+      if (maxY !== 0) continue; // многорядные (подкова, крест, кельт) нарочно шире коробки
+      const cells = miniCells(id);
+      const maxLeft = Math.max(...cells.map((c) => c.left));
+      const maxTop = Math.max(...cells.map((c) => c.top));
+      expect(maxLeft + MINI.cellW).toBeLessThanOrEqual(MINI.boxW);
+      expect(maxTop + MINI.cellH).toBeLessThanOrEqual(MINI.boxH);
+    }
   });
 });
 
