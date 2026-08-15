@@ -119,8 +119,8 @@
       "cards": 10,
       "name": { "ru": "Кельтский крест", "en": "Celtic Cross" },
       "description": {
-        "ru": "Самый известный большой расклад — глубокий разбор одной ситуации. Описан А. Э. Уэйтом в 1911 году.",
-        "en": "The most famous full spread — a deep dive into one situation. Described by A. E. Waite in 1911."
+        "ru": "Самый известный большой расклад — глубокий разбор одной ситуации. На основе метода А. Э. Уэйта (1911).",
+        "en": "The most famous full spread — a deep dive into one situation. Based on A. E. Waite's method (1911)."
       },
       "positions": [
         { "ru": "Суть ситуации", "en": "The heart of the matter" },
