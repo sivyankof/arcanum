@@ -19,6 +19,7 @@ import { cardById } from '../../src/lib/content';
 import { cardImages } from '../../src/lib/cardImages';
 import { formatEntryDate } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
 import { canEditEntry, normalizeNote, NOTE_MAX } from '../../src/lib/journal';
 import { inLang } from '../../src/lib/lang';
 import { useApp } from '../../src/store/useApp';
@@ -31,8 +32,8 @@ const COUNTER_WARN = 450;
 export default function NoteScreen() {
   const { date } = useLocalSearchParams<{ date: string }>();
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const { t: tr } = useTranslation();
+  const lang = useLang();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 

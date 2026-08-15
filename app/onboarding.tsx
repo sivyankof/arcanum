@@ -28,6 +28,7 @@ import { birthArcanaId } from '../src/lib/birthArcana';
 import { cardById, cardImages } from '../src/lib/content';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticSuccess, hapticTap } from '../src/lib/haptics';
+import { useLang } from '../src/lib/i18n';
 import { inLang } from '../src/lib/lang';
 import { pingPong, startSpin } from '../src/lib/loops';
 import { useApp } from '../src/store/useApp';
@@ -41,8 +42,8 @@ const CARD_HEIGHT = Math.round((CARD_WIDTH * 518) / 300); // пропорция 
 
 export default function Onboarding() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const { t: tr } = useTranslation();
+  const lang = useLang();
   const insets = useSafeAreaInsets();
   const completeOnboarding = useApp((s) => s.completeOnboarding);
 

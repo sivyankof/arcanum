@@ -23,8 +23,7 @@ export function StreakPill({
   style?: StyleProp<ViewStyle>;
 }) {
   const t = useTheme();
-  const { i18n } = useTranslation();
-  const lang = i18n.language.startsWith('ru') ? 'ru' : 'en';
+  const { t: tr } = useTranslation();
 
   const breath = useSharedValue(0);
 
@@ -48,10 +47,9 @@ export function StreakPill({
       {/* счёт и подпись стоят друг под другом (.pill .tx эталона: b — блочный):
           в ряду из двух пилюль на строку они уже не помещаются */}
       <View style={st.tx}>
-        <Txt style={[st.count, { color: t.head }]}>
-          {streak} {lang === 'ru' ? 'дн.' : 'days'}
-        </Txt>
-        <Txt style={[st.label, { color: t.muted }]}>{lang === 'ru' ? 'СЕРИЯ' : 'STREAK'}</Txt>
+        <Txt style={[st.count, { color: t.head }]}>{tr('today.streakDays', { count: streak })}</Txt>
+        {/* «СЕРИЯ» — тот же ключ, что у статы профиля: одно слово, один перевод */}
+        <Txt style={[st.label, { color: t.muted }]}>{tr('profile.streak')}</Txt>
       </View>
     </Pill>
   );

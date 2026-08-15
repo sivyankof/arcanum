@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../src/components/FadeUp';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { spreads } from '../../src/lib/content';
+import { useLang } from '../../src/lib/i18n';
 import { inLang } from '../../src/lib/lang';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { fonts, radius, spacing } from '../../src/theme/theme';
@@ -14,9 +15,9 @@ import { Txt } from '../../src/components/Txt';
 /** Каталог раскладов — v0: список. Этап 5 плана: режим «разложить» с сохранением в дневник. */
 export default function SpreadsScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
 
   return (

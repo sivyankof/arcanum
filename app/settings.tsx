@@ -28,6 +28,7 @@ import { course } from '../src/lib/content';
 import { nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
 import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
+import { useLang } from '../src/lib/i18n';
 import { LANG_NAMES } from '../src/lib/lang';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import {
@@ -53,9 +54,9 @@ const ERR_TEXT: Record<ParseError, string> = {
 
 export default function SettingsScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
 
   const themeMode = useApp((s) => s.themeMode);
   const setThemeMode = useApp((s) => s.setThemeMode);

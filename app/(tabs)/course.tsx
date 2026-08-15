@@ -13,6 +13,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { course, type CourseLesson } from '../../src/lib/content';
 import { lessonStates } from '../../src/lib/courseProgress';
+import { useLang } from '../../src/lib/i18n';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, spacing } from '../../src/theme/theme';
@@ -20,9 +21,9 @@ import { useTheme } from '../../src/theme/useTheme';
 
 export default function CourseScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
   const lessonsProgress = useApp((s) => s.lessonsProgress);
 

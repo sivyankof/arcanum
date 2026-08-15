@@ -28,6 +28,7 @@ import { Txt } from '../../src/components/Txt';
 import { cardById, cardImages, course, type CourseLesson, type CourseModule } from '../../src/lib/content';
 import { moduleProgress } from '../../src/lib/courseProgress';
 import { hapticError, hapticTap } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
 import { inLang, type Lang } from '../../src/lib/lang';
 import { lessonPlayable, lessonSteps, type LessonStep } from '../../src/lib/lesson';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
@@ -58,9 +59,9 @@ type OptState = 'idle' | 'ok' | 'no';
 
 export default function LessonScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
   const { id } = useLocalSearchParams<{ id: string }>();
 
   // вибрация на уходе с экрана — общий хук (как card/[id])

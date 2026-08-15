@@ -26,6 +26,7 @@ import { StatBox } from '../../src/components/StatBox';
 import { Txt } from '../../src/components/Txt';
 import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
 import {
   entriesOfMonth,
   filterCounts,
@@ -51,9 +52,9 @@ const BODY_STEP = 4;
 
 export default function ProfileScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
 
   const listRef = useTabTopRef<FlatList<DailyDraw>>();
 

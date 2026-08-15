@@ -31,8 +31,9 @@ import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
 import type { Rect } from '../../src/lib/cardTransition';
 import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
-import { daysAgoISO, localDateISO } from '../../src/lib/dates';
+import { daysAgoISO, formatEntryDate, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
+import { useLang } from '../../src/lib/i18n';
 import type { Outcome } from '../../src/lib/journal';
 import { inLang } from '../../src/lib/lang';
 import { pingPong, startSpin, sweepLoop } from '../../src/lib/loops';
@@ -153,9 +154,9 @@ function Ring({
 
 export default function TodayScreen() {
   const t = useTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
-  const lang = (i18n.language.startsWith('ru') ? 'ru' : 'en') as 'ru' | 'en';
+  const lang = useLang();
 
   const streak = useApp((s) => s.streak);
   const freezeSpentDate = useApp((s) => s.freezeSpentDate);
@@ -344,13 +345,10 @@ export default function TodayScreen() {
   const dayText = dayBlock ? inLang(dayBlock, lang) : undefined;
   const hasText = dayText && dayBlock.status !== 'todo';
 
-  // дата как в эталоне: «Пятница · 1 августа» (в стиле .date стоит верхний регистр)
-  const locale = lang === 'ru' ? 'ru-RU' : 'en-US';
   const now = new Date();
-  const dateStr = `${now.toLocaleDateString(locale, { weekday: 'long' })} · ${now.toLocaleDateString(locale, {
-    day: 'numeric',
-    month: 'long',
-  })}`;
+  // «Пятница · 1 августа» — та же сборка, что строка записи дневника (formatEntryDate, weekday long);
+  // регистр — в стиле .date
+  const dateStr = formatEntryDate(localDateISO(now), lang, 'long');
 
   // фаза луны считается локально от текущего момента (logic-spec §6)
   const moon = moonInfo(now);
@@ -411,7 +409,7 @@ export default function TodayScreen() {
               {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
               <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
                 <View style={[st.faceClip, { borderColor: t.frame }]}>
-                  <CardBack hint={drawn ? undefined : lang === 'ru' ? 'НАЖМИ, ЧТОБЫ ОТКРЫТЬ' : 'TAP TO REVEAL'} />
+                  <CardBack hint={drawn ? undefined : tr('today.tapToReveal')} />
                 </View>
               </Animated.View>
               {/* лицо */}
@@ -452,22 +450,18 @@ export default function TodayScreen() {
               <Txt style={[st.cardName, { color: t.head }]}>{inLang(card.name, lang).toUpperCase()}</Txt>
               <Txt style={[st.cardSub, { color: t.muted }]}>
                 {cardNumeral(card)} ·{' '}
-                {card.arcana === 'major'
-                  ? lang === 'ru' ? 'СТАРШИЙ АРКАН' : 'MAJOR ARCANA'
-                  : lang === 'ru' ? 'МЛАДШИЙ АРКАН' : 'MINOR ARCANA'}
+                {card.arcana === 'major' ? tr('card.majorArcana') : tr('card.minorArcana')}
               </Txt>
             </Animated.View>
             {/* кнопка живёт внутри блока значения — как .cta внутри .mean в эталоне */}
             <Animated.View style={meanStyle}>
               <View style={[st.meanBox, { backgroundColor: t.panel, borderColor: t.line }]}>
-                <Txt style={[st.meanLbl, { color: t.accent }]}>
-                  {lang === 'ru' ? 'ЗНАЧЕНИЕ ДНЯ' : "TODAY'S MEANING"}
-                </Txt>
+                <Txt style={[st.meanLbl, { color: t.accent }]}>{tr('today.meaning')}</Txt>
                 <Txt style={[st.meanTxt, { color: t.text }]}>
                   {hasText ? dayText : tr('card.soon')}
                 </Txt>
                 <CtaButton
-                  label={lang === 'ru' ? 'ПРОДОЛЖИТЬ ПУТЬ →' : 'CONTINUE YOUR PATH →'}
+                  label={tr('today.continue')}
                   onPress={() => router.push(`/card/${card.id}?from=today`)}
                 />
               </View>
