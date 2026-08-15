@@ -10,18 +10,25 @@ import React from 'react';
 type TabNavigation = {
   addListener: (event: 'tabPress', cb: () => void) => () => void;
   isFocused: () => boolean;
+  getParent: () => TabNavigation | undefined;
 };
 
 export function useTabScrollToTop(scrollToTop: () => void) {
   const nav = useNavigation() as unknown as TabNavigation;
 
-  React.useEffect(
-    () =>
-      nav.addListener('tabPress', () => {
-        if (nav.isFocused()) scrollToTop();
-      }),
-    [nav, scrollToTop],
-  );
+  // `tabPress` эмитит таб-навигатор на СВОЙ маршрут; экран внутри вложенного стека (список
+  // раскладов, спека 36) получает навигацию стека, поэтому подписываемся по всей цепочке
+  // родителей — как useScrollToTop React Navigation. Фокус проверяем у самого экрана: при
+  // открытом раскладе список не сфокусирован и к началу не едет
+  React.useEffect(() => {
+    const unsubscribes: (() => void)[] = [];
+    let current: TabNavigation | undefined = nav;
+    while (current) {
+      unsubscribes.push(current.addListener('tabPress', () => { if (nav.isFocused()) scrollToTop(); }));
+      current = current.getParent();
+    }
+    return () => unsubscribes.forEach((u) => u());
+  }, [nav, scrollToTop]);
 }
 
 /** То, что умеет прокручиваться к началу: у списков это `scrollToOffset`, у ScrollView — `scrollTo`. */

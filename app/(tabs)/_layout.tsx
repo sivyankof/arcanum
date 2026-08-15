@@ -28,6 +28,12 @@ const ROUTES: { path: string; icon: TabIconName }[] = [
   { path: '/profile', icon: 'profile' },
 ];
 
+/** Активна ли вкладка для текущего пути: сам маршрут таба или экран, вложенный в него
+ *  (`/spreads/three-card` — по-прежнему «Расклады», спека 36); «/» — только точное совпадение. */
+function tabActive(pathname: string, path: string): boolean {
+  return pathname === path || (path !== '/' && pathname.startsWith(`${path}/`));
+}
+
 const MARK_W = 26; // .nav>div.on::before из эталона: полоска 26×2
 
 /** Иконка таба: при активации подпрыгивает 1 → 1.25 → 1 (пункт 14 motion-spec).
@@ -36,7 +42,7 @@ const MARK_W = 26; // .nav>div.on::before из эталона: полоска 26
  *  экземпляра `focused` неизменен. Поэтому прыжок вешаем на смену текущего маршрута. */
 function TabIcon({ name, color, focused, path }: { name: TabIconName; color: ColorValue; focused: boolean; path: string }) {
   const t = useTheme();
-  const active = usePathname() === path;
+  const active = tabActive(usePathname(), path);
   const scale = useSharedValue(1);
   const wasActive = React.useRef(active);
 
@@ -79,7 +85,7 @@ function TabBarBackground() {
   // хук вызываем строго один раз: внутри колбэка findIndex он давал бы разное число
   // вызовов на разных вкладках, а React требует одинаковое от рендера к рендеру
   const pathname = usePathname();
-  const idx = Math.max(0, ROUTES.findIndex((r) => r.path === pathname));
+  const idx = Math.max(0, ROUTES.findIndex((r) => tabActive(pathname, r.path)));
 
   return (
     <View style={StyleSheet.absoluteFill}>
