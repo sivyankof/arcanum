@@ -38,26 +38,20 @@ export function miniCells(spreadId: string): { left: number; top: number }[] {
   const pts = SPREAD_LAYOUTS[spreadId] ?? [];
   const maxX = Math.max(0, ...pts.map((p) => p.x));
   const maxY = Math.max(0, ...pts.map((p) => p.y));
-  // Многорядные схемы (дуга подковы, крест «На отношения», кельтский крест) в макете нарочно
-  // выходят за рамку коробки .diag — координаты те же, что и раньше, центрировать нечего.
-  if (maxY !== 0) {
-    return pts.map((p) => ({
-      left: Math.round(p.x * MINI.stepX),
-      top: Math.round(p.y * MINI.stepY),
-    }));
-  }
-  // Однорядная схема в макете всегда целиком внутри коробки и стоит по центру: у «На месяц»
-  // (4 карты) штатный шаг 19 не влезает (0..57 при ширине коробки 52) — шаг колонки сжимается
-  // ровно настолько, чтобы последняя ячейка легла вплотную к правому краю, а вся лента ещё
-  // и сдвигается по x, чтобы поля слева и справа совпали (при 2–3 картах сжимать не нужно —
-  // min() отдаёт штатный шаг 19, как и раньше).
+  // Правило одно для ЛЮБОЙ раскладки (однорядной и многорядной): вся мини-схема обязана влезать
+  // в коробку .diag и стоять по центру — решение владельца от 16.08, важнее композиции макета
+  // (там подкова и кельтский крест вылезают за рамку и налезают на название расклада, правило 6а-0).
+  // Шаг колонки/ряда сжимается, только если штатный шаг не влезает (у «На месяц» 4 карты — не
+  // влезает 0..57 при ширине коробки 52; у подковы и кельта сжимается и шаг колонки, и шаг ряда).
+  // Смещение центрирует ленту по обеим осям — при 2–3 картах в ряд или при ровно совпадающей
+  // высоте (как у «На отношения») сжатие/смещение не нужно, min()/max(0, …) отдают 0 сами.
   const stepX = maxX > 0 ? Math.min(MINI.stepX, Math.floor((MINI.boxW - MINI.cellW) / maxX)) : MINI.stepX;
-  const rowWidth = maxX * stepX + MINI.cellW;
-  const offX = Math.max(0, Math.floor((MINI.boxW - rowWidth) / 2));
-  const offY = Math.max(0, Math.floor((MINI.boxH - MINI.cellH) / 2));
+  const stepY = maxY > 0 ? Math.min(MINI.stepY, Math.floor((MINI.boxH - MINI.cellH) / maxY)) : MINI.stepY;
+  const offX = Math.max(0, Math.floor((MINI.boxW - (maxX * stepX + MINI.cellW)) / 2));
+  const offY = Math.max(0, Math.floor((MINI.boxH - (maxY * stepY + MINI.cellH)) / 2));
   return pts.map((p) => ({
     left: offX + Math.round(p.x * stepX),
-    top: offY,
+    top: offY + Math.round(p.y * stepY),
   }));
 }
 

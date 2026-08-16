@@ -24,27 +24,25 @@ describe('miniCells — мини-схема списка (макет .diag, яч
       { left: 0, top: 11 }, { left: 38, top: 11 }, { left: 19, top: 0 }, { left: 19, top: 22 }, { left: 19, top: 44 },
     ]);
   });
-  it('кельтский крест — координаты макета (пересекающая карта смещена на 6px)', () => {
+  it('кельтский крест — сжат и центрирован, влезает в коробку (решение владельца 16.08, было по макету 14/16)', () => {
     const cells = miniCells('celtic-cross');
-    expect(cells[0]).toEqual({ left: 14, top: 16 });
-    expect(cells[1]).toEqual({ left: 20, top: 16 });
-    expect(cells[4]).toEqual({ left: 0, top: 16 });
-    expect(cells[9]).toEqual({ left: 44, top: 36 });
+    expect(cells[0]).toEqual({ left: 12, top: 20 });
+    expect(cells[1]).toEqual({ left: 17, top: 20 });
+    expect(cells[4]).toEqual({ left: 0, top: 20 });
+    expect(cells[9]).toEqual({ left: 37, top: 40 });
   });
-  it('подкова — дуга макета', () => {
+  it('подкова — сжата и центрирована, влезает в коробку (решение владельца 16.08, было по макету — вылезала вправо)', () => {
     expect(miniCells('horseshoe')).toEqual([
-      { left: 0, top: 0 }, { left: 6, top: 20 }, { left: 16, top: 32 }, { left: 28, top: 36 },
-      { left: 40, top: 32 }, { left: 50, top: 20 }, { left: 56, top: 0 },
+      { left: 0, top: 4 }, { left: 4, top: 24 }, { left: 11, top: 36 }, { left: 19, top: 40 },
+      { left: 27, top: 36 }, { left: 34, top: 24 }, { left: 38, top: 4 },
     ]);
   });
   it('коробка макета 52×64', () => {
     expect(MINI.boxW).toBe(52);
     expect(MINI.boxH).toBe(64);
   });
-  it('инвариант: у однорядных раскладок вся мини-схема влезает в коробку', () => {
-    for (const [id, pts] of Object.entries(SPREAD_LAYOUTS)) {
-      const maxY = Math.max(0, ...pts.map((p) => p.y));
-      if (maxY !== 0) continue; // многорядные (подкова, крест, кельт) нарочно шире коробки
+  it('инвариант: ЛЮБАЯ мини-схема каталога влезает в коробку и центрирована (правило одно, без исключений)', () => {
+    for (const id of Object.keys(SPREAD_LAYOUTS)) {
       const cells = miniCells(id);
       const maxLeft = Math.max(...cells.map((c) => c.left));
       const maxTop = Math.max(...cells.map((c) => c.top));
