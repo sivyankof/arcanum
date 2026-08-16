@@ -142,6 +142,18 @@ export default function RootLayout() {
               headerTintColor: t.accent,
             }}
           />
+          {/* просмотр сохранённого расклада (спека 36): корневой стек поверх любого таба, та же
+              прозрачная шапка, что у страницы карты; объявлен здесь, чтобы не пройти мимо гарда */}
+          <Stack.Screen
+            name="spread/[ts]"
+            options={{
+              title: '',
+              headerTransparent: true,
+              headerStyle: { backgroundColor: 'transparent' },
+              headerShadowVisible: false,
+              headerTintColor: t.accent,
+            }}
+          />
         </Stack.Protected>
       </Stack>
     </GestureHandlerRootView>

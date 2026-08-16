@@ -42,11 +42,13 @@ import { useTheme } from '../../src/theme/useTheme';
 
 const FLY_MS = 350;
 
-/** Подпись нативной кнопки «назад» по источнику перехода (параметр from). */
+/** Подпись нативной кнопки «назад» по источнику перехода (параметр from):
+ *  со страницы расклада — «Расклад». */
 const BACK_TITLES: Record<string, string> = {
   today: 'card.backToday',
   journal: 'card.backProfile',
   profile: 'card.backProfile',
+  spread: 'card.backSpread',
 };
 
 /** Ключ сферы значения — вкладки под героем страницы карты. Строгий порядок эталона.

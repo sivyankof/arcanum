@@ -14,10 +14,10 @@ const fire = (run: () => Promise<void>) => {
 /** Лёгкое касание: смена таба, фильтра, сегмента. */
 export const hapticTap = () => fire(() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light));
 
-/** Сильный отклик: только момент переворота карты дня. */
+/** Сильный отклик: переворот карты дня и тасование расклада. */
 export const hapticReveal = () => fire(() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy));
 
-/** Успех: завершённый урок, 7-й день серии. */
+/** Успех: завершённый урок, 7-й день серии и сохранение расклада в дневник. */
 export const hapticSuccess = () =>
   fire(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success));
 

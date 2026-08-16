@@ -1,0 +1,271 @@
+/** Экран расклада (спека 36, product-spec §4) — один компонент на два маршрута:
+ *  play — app/(tabs)/spreads/[id] (вложенный стек таба: таб-бар виден, черновик = состояние экрана,
+ *  ничего не персистится, закрыл приложение — пропал), view — app/spread/[ts] (просмотр сохранённого
+ *  из дневника: всё открыто, только чтение). Стадии play: setup (вопрос + CTA «Разложить») → dealt
+ *  (открываем тапом в любом порядке) → все открыты (состав + заметка + «Сохранить») → saved
+ *  («Сохранено ✓» + «Разложить заново»). Гейт ухода — beforeRemove, как у заметки дня. */
+import { router, Stack, useNavigation } from 'expo-router';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { analyzeSpread, compositionTexts } from '../lib/composition';
+import { cardById, type Spread } from '../lib/content';
+import { formatDayMonth, localDateISO } from '../lib/dates';
+import { hapticReveal, hapticSuccess, hapticTap } from '../lib/haptics';
+import { useLang } from '../lib/i18n';
+import { normalizeNote } from '../lib/journal';
+import { inLang } from '../lib/lang';
+import { cardMeaning, dealSpread, normalizeQuestion, type DrawnCard, type SpreadDraw } from '../lib/spread';
+import { isBoard } from '../lib/spreadLayout';
+import { useApp } from '../store/useApp';
+import { fonts, spacing } from '../theme/theme';
+import { useTheme } from '../theme/useTheme';
+import { ConfirmDialog } from './ConfirmDialog';
+import { CtaButton } from './CtaButton';
+import { FadeUp } from './FadeUp';
+import { Rule } from './Rule';
+import { ScreenBg } from './ScreenBg';
+import { SpreadBoard } from './SpreadBoard';
+import { SpreadCells } from './SpreadCells';
+import { NotePanel, QuestionField } from './SpreadFields';
+import { MeaningPanel } from './SpreadMeaning';
+import { SpreadRow } from './SpreadRow';
+import { Txt } from './Txt';
+
+export function SpreadScreen({
+  spread,
+  mode,
+  saved,
+}: {
+  spread: Spread;
+  mode: 'play' | 'view';
+  /** сохранённый расклад — только для mode='view' */
+  saved?: SpreadDraw;
+}) {
+  const t = useTheme();
+  const { t: tr } = useTranslation();
+  const lang = useLang();
+  const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
+  const saveSpread = useApp((s) => s.saveSpread);
+
+  const view = mode === 'view';
+  const n = spread.cards;
+  const [question, setQuestion] = React.useState(saved?.question ?? '');
+  const [draw, setDraw] = React.useState<SpreadDraw | null>(saved ?? null);
+  const [opened, setOpened] = React.useState<boolean[]>(() => (saved ? Array(n).fill(true) : []));
+  // порядок открытия: блоки значений на доске идут в нём (макет appendChild); в view — по позициям
+  const [order, setOrder] = React.useState<number[]>(() => (saved ? Array.from({ length: n }, (_, i) => i) : []));
+  const [note, setNote] = React.useState(saved?.note ?? '');
+  const [isSaved, setSaved] = React.useState(view);
+  const [asking, setAsking] = React.useState(false);
+  // действие навигации, задержанное вопросом «уйти без сохранения?»
+  const pending = React.useRef<Parameters<typeof navigation.dispatch>[0] | null>(null);
+  const leaving = React.useRef(false);
+
+  const dealt = draw !== null;
+  const openedCount = opened.filter(Boolean).length;
+  const allOpen = dealt && openedCount === n;
+  // гейт ухода: открыта хотя бы одна карта и расклад не сохранён; setup, ноль открытых, saved — свободно
+  const dirty = !view && dealt && openedCount >= 1 && !isSaved;
+
+  // перехватываем кнопку «назад», свайп и popToTop по повторному тапу на таб (спека 36)
+  React.useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        if (!dirty || leaving.current) return;
+        e.preventDefault();
+        pending.current = e.data.action;
+        setAsking(true);
+      }),
+    [navigation, dirty],
+  );
+
+  const composition = React.useMemo(
+    () => (draw && allOpen ? compositionTexts(analyzeSpread(draw.cards), draw.date, lang) : []),
+    [draw, allOpen, lang],
+  );
+
+  const onDeal = () => {
+    hapticReveal();
+    setQuestion(normalizeQuestion(question)); // вопрос фиксируется ДО карт — расклад честный
+    setDraw({ ts: Date.now(), date: localDateISO(), spreadId: spread.id, cards: dealSpread(n) });
+    setOpened(Array(n).fill(false));
+    setOrder([]);
+  };
+  const onOpen = (i: number) => {
+    if (opened[i]) return;
+    hapticTap();
+    setOpened((prev) => prev.map((o, k) => k === i || o));
+    setOrder((prev) => [...prev, i]);
+  };
+  const onCard = (cardId: string) => router.push({ pathname: '/card/[id]', params: { id: cardId, from: 'spread' } });
+  const onSave = () => {
+    if (!draw || isSaved) return;
+    hapticSuccess();
+    const q = normalizeQuestion(question);
+    const nt = normalizeNote(note);
+    saveSpread({ ...draw, ...(q ? { question: q } : {}), ...(nt ? { note: nt } : {}) });
+    setSaved(true);
+  };
+  // «Разложить заново» — чистый лист, включая вопрос (тот же вопрос заново = тасовать до ответа)
+  const onAgain = () => {
+    hapticTap();
+    setDraw(null);
+    setOpened([]);
+    setOrder([]);
+    setQuestion('');
+    setNote('');
+    setSaved(false);
+  };
+
+  const nameOf = (c: DrawnCard) => {
+    const card = cardById.get(c.cardId);
+    const nm = card ? inLang(card.name, lang) : c.cardId;
+    return c.reversed ? tr('spread.reversedName', { name: nm }) : nm;
+  };
+  const positionOf = (i: number) => inLang(spread.positions[i], lang);
+
+  const overline = [
+    tr('spread.overline'),
+    tr('spreads.cards', { count: n }).toUpperCase(),
+    ...(view && draw ? [formatDayMonth(draw.date, lang).toUpperCase()] : []),
+  ].join(' · ');
+  const board = isBoard(n);
+  // после тасования пустое поле вопроса прячется: писать уже нельзя, показывать нечего
+  const showQuestion = !dealt || question.length > 0;
+
+  return (
+    <View style={{ flex: 1, backgroundColor: t.bg }}>
+      <Stack.Screen options={{ headerBackTitle: tr(view ? 'card.backProfile' : 'spreads.title') }} />
+      <ScreenBg />
+      <ScrollView
+        contentContainerStyle={{
+          // insets.top + высота прозрачной системной шапки (64), как на странице карты
+          paddingTop: insets.top + 64,
+          paddingHorizontal: spacing.xl,
+          paddingBottom: view ? 60 : 120, // в play под экраном таб-бар
+        }}
+        keyboardShouldPersistTaps="handled"
+        automaticallyAdjustKeyboardInsets
+        showsVerticalScrollIndicator={false}
+      >
+        <FadeUp index={0}>
+          <Txt style={[st.overline, { color: t.muted }]}>{overline}</Txt>
+          <Txt style={[st.title, { color: t.head }]}>{inLang(spread.name, lang)}</Txt>
+          <Rule />
+        </FadeUp>
+
+        {!view && (!dealt || board) && (
+          <FadeUp index={1}>
+            <Txt style={[st.hint, { color: t.muted }]}>{tr('spread.hint')}</Txt>
+          </FadeUp>
+        )}
+
+        {showQuestion && (
+          <FadeUp index={1}>
+            <QuestionField value={question} onChange={setQuestion} editable={!dealt} />
+          </FadeUp>
+        )}
+
+        {!dealt && (
+          <FadeUp index={2}>
+            <CtaButton label={tr('spread.deal')} onPress={onDeal} />
+          </FadeUp>
+        )}
+
+        {draw && board && (
+          <>
+            <SpreadBoard
+              spread={spread}
+              draw={draw}
+              opened={opened}
+              lang={lang}
+              onOpen={onOpen}
+              onPressCard={onCard}
+              animateFlip={!view}
+            />
+            {order.map((i) => {
+              const c = draw.cards[i];
+              const m = cardMeaning(c.cardId, c.reversed, lang);
+              return (
+                <MeaningPanel
+                  key={i}
+                  title={`${positionOf(i)} · ${nameOf(c)}`.toUpperCase()}
+                  paragraphs={[m.todo ? tr('card.soon') : m.text]}
+                  todo={m.todo}
+                />
+              );
+            })}
+          </>
+        )}
+
+        {draw && !board && (
+          <>
+            <FadeUp index={1}>
+              <SpreadCells total={n} opened={opened} />
+              {!view && (
+                <Txt style={[st.progress, { color: t.muted }]}>
+                  {tr('spread.progress', { done: openedCount, total: n })}
+                </Txt>
+              )}
+            </FadeUp>
+            {/* строки входят одним блоком: >8 элементов каскадом не оживляем (motion-spec §4) */}
+            <FadeUp index={2}>
+              {draw.cards.map((c, i) => (
+                <SpreadRow
+                  key={i}
+                  index={i}
+                  position={positionOf(i)}
+                  card={c}
+                  open={!!opened[i]}
+                  lang={lang}
+                  onOpen={() => onOpen(i)}
+                  onPress={() => onCard(c.cardId)}
+                />
+              ))}
+            </FadeUp>
+          </>
+        )}
+
+        {draw && allOpen && (
+          <>
+            <MeaningPanel title={tr('spread.composition')} paragraphs={composition} accentBorder style={st.composition} />
+            <NotePanel
+              value={note}
+              onChange={setNote}
+              editable={!isSaved}
+              showActions={!view}
+              saved={isSaved}
+              onSave={onSave}
+              onAgain={onAgain}
+            />
+          </>
+        )}
+      </ScrollView>
+
+      <ConfirmDialog
+        visible={asking}
+        title={tr('spread.leaveTitle')}
+        message={tr('spread.leaveText')}
+        confirmLabel={tr('spread.leave')}
+        cancelLabel={tr('spread.stay')}
+        onCancel={() => setAsking(false)}
+        onConfirm={() => {
+          setAsking(false);
+          leaving.current = true;
+          if (pending.current) navigation.dispatch(pending.current);
+        }}
+      />
+    </View>
+  );
+}
+
+const st = StyleSheet.create({
+  overline: { fontSize: 9.5, letterSpacing: 3, textAlign: 'center' }, // `.date`
+  title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 }, // `.h2`
+  hint: { fontSize: 12, textAlign: 'center', marginTop: 6 },
+  progress: { fontSize: 10.5, textAlign: 'center', marginTop: 8 },
+  composition: { marginTop: 14 },
+});
