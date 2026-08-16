@@ -19,7 +19,15 @@ export function CardBackSurface() {
   const t = useTheme();
   const [from, to] = BACK_COLORS[t.mode];
   return (
-    <Svg style={StyleSheet.absoluteFill}>
+    // width/height="100%" — ОБЯЗАТЕЛЬНЫ явно, `StyleSheet.absoluteFill` в style задаёт только
+    // CSS-позиционирование (position:absolute; inset:0), а не размер вьюпорта самого SVG.
+    // Без них react-native-svg на вебе рендерит голый <svg> с браузерным дефолтом 300×150 —
+    // <Rect width="100%"> считает проценты от НЕГО, а не от карты, и градиент обрывается
+    // на 150px высоты (на светлой теме это видно как ровная граница на рубашке). Проверено
+    // по исходнику react-native-svg 15.12.1: на нативе Svg сам подставляет '100%', когда оба
+    // пропа не заданы (`elements/Svg.tsx`), а веб-реализация (`elements.web.ts`, просто <svg>)
+    // этого дефолта не делает — поэтому здесь пропы обязаны быть проставлены руками.
+    <Svg width="100%" height="100%" style={StyleSheet.absoluteFill}>
       <Defs>
         <RadialGradient id={GRAD_ID} cx="50%" cy="28%" rx="95%" ry="95%">
           <Stop offset="0" stopColor={from} />
