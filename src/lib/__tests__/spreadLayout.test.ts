@@ -24,6 +24,14 @@ describe('miniCells — мини-схема списка (макет .diag, яч
       { left: 0, top: 11 }, { left: 38, top: 11 }, { left: 19, top: 0 }, { left: 19, top: 22 }, { left: 19, top: 44 },
     ]);
   });
+  it('«Выбор из двух» — центрируется по ФАКТИЧЕСКОМУ размаху (minX=0.2), а не «от нуля»', () => {
+    // До правки minX считался неявно нулём — размах завышался на 0.2·19≈4px, лента уезжала вправо:
+    // поля выходили 6/3 вместо честных 4/5 (хуже композиции, чем до правки формулы центровки —
+    // регрессия найдена на живой сверке 16.08, не в тестах).
+    expect(miniCells('choice')).toEqual([
+      { left: 19, top: 44 }, { left: 4, top: 0 }, { left: 4, top: 22 }, { left: 34, top: 0 }, { left: 34, top: 22 },
+    ]);
+  });
   it('кельтский крест — сжат и центрирован, влезает в коробку (решение владельца 16.08, было по макету 14/16)', () => {
     const cells = miniCells('celtic-cross');
     expect(cells[0]).toEqual({ left: 12, top: 20 });
@@ -48,6 +56,25 @@ describe('miniCells — мини-схема списка (макет .diag, яч
       const maxTop = Math.max(...cells.map((c) => c.top));
       expect(maxLeft + MINI.cellW).toBeLessThanOrEqual(MINI.boxW);
       expect(maxTop + MINI.cellH).toBeLessThanOrEqual(MINI.boxH);
+    }
+  });
+  it('инвариант: мини-схема отцентрирована — поля слева/справа и сверху/снизу не расходятся сильнее округления формулы', () => {
+    // Порог 2px — не «на глаз», а верхняя граница самой формулы `miniCells`: offX/offY считаются
+    // через `Math.floor(slack / 2)`, и когда размах·шаг — не целое число (кельтский крест:
+    // 2.316·16 = 37.056), дробный остаток слака достаётся флором целиком одной стороне — поля
+    // получаются 0/2, это НЕ регрессия и владелец уже принял такую мини-схему на живой сверке
+    // 16.08. Задача проверки — ловить содержательный перекос вроде бага «Выбора из двух»
+    // (там разница полей была 3, а не 1–2 от округления), а не гонять формулу за пикселем,
+    // которого она математически не обещает.
+    const MAX_CENTER_DRIFT = 2;
+    for (const id of Object.keys(SPREAD_LAYOUTS)) {
+      const cells = miniCells(id);
+      const left = Math.min(...cells.map((c) => c.left));
+      const right = MINI.boxW - (Math.max(...cells.map((c) => c.left)) + MINI.cellW);
+      const top = Math.min(...cells.map((c) => c.top));
+      const bottom = MINI.boxH - (Math.max(...cells.map((c) => c.top)) + MINI.cellH);
+      expect(Math.abs(left - right)).toBeLessThanOrEqual(MAX_CENTER_DRIFT);
+      expect(Math.abs(top - bottom)).toBeLessThanOrEqual(MAX_CENTER_DRIFT);
     }
   });
 });

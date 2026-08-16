@@ -36,22 +36,31 @@ export const MINI = { cellW: 13, cellH: 20, stepX: 19, stepY: 22, boxW: 52, boxH
 
 export function miniCells(spreadId: string): { left: number; top: number }[] {
   const pts = SPREAD_LAYOUTS[spreadId] ?? [];
-  const maxX = Math.max(0, ...pts.map((p) => p.x));
-  const maxY = Math.max(0, ...pts.map((p) => p.y));
+  const xs = pts.map((p) => p.x);
+  const ys = pts.map((p) => p.y);
+  const minX = xs.length ? Math.min(...xs) : 0;
+  const maxX = xs.length ? Math.max(...xs) : 0;
+  const minY = ys.length ? Math.min(...ys) : 0;
+  const maxY = ys.length ? Math.max(...ys) : 0;
   // Правило одно для ЛЮБОЙ раскладки (однорядной и многорядной): вся мини-схема обязана влезать
   // в коробку .diag и стоять по центру — решение владельца от 16.08, важнее композиции макета
   // (там подкова и кельтский крест вылезают за рамку и налезают на название расклада, правило 6а-0).
-  // Шаг колонки/ряда сжимается, только если штатный шаг не влезает (у «На месяц» 4 карты — не
-  // влезает 0..57 при ширине коробки 52; у подковы и кельта сжимается и шаг колонки, и шаг ряда).
-  // Смещение центрирует ленту по обеим осям — при 2–3 картах в ряд или при ровно совпадающей
-  // высоте (как у «На отношения») сжатие/смещение не нужно, min()/max(0, …) отдают 0 сами.
-  const stepX = maxX > 0 ? Math.min(MINI.stepX, Math.floor((MINI.boxW - MINI.cellW) / maxX)) : MINI.stepX;
-  const stepY = maxY > 0 ? Math.min(MINI.stepY, Math.floor((MINI.boxH - MINI.cellH) / maxY)) : MINI.stepY;
-  const offX = Math.max(0, Math.floor((MINI.boxW - (maxX * stepX + MINI.cellW)) / 2));
-  const offY = Math.max(0, Math.floor((MINI.boxH - (maxY * stepY + MINI.cellH)) / 2));
+  // Центрируется ФАКТИЧЕСКИЙ размах раскладки (maxX−minX / maxY−minY), а не размах «от нуля»:
+  // у «Выбора из двух» minX = 0.2 (SPREAD_LAYOUTS.choice), и счёт от нуля завышал бы ширину на
+  // 0.2·stepX ≈ 4px, сдвигая контент вправо и делая поля НЕсимметричными (найдено на живой
+  // сверке 16.08 — поля стали 6/3 вместо прежних 4/5, хуже макета). Шаг колонки/ряда сжимается,
+  // только если размах при штатном шаге не влезает («На месяц» 4 карты — 0..57 при коробке 52;
+  // у подковы и кельта сжимается и шаг колонки, и шаг ряда). Смещение центрирует остаток размаха
+  // по обеим осям — когда размах уже укладывается в коробку, min()/max(0, …) отдают 0 сами.
+  const spanX = maxX - minX;
+  const spanY = maxY - minY;
+  const stepX = spanX > 0 ? Math.min(MINI.stepX, Math.floor((MINI.boxW - MINI.cellW) / spanX)) : MINI.stepX;
+  const stepY = spanY > 0 ? Math.min(MINI.stepY, Math.floor((MINI.boxH - MINI.cellH) / spanY)) : MINI.stepY;
+  const offX = Math.max(0, Math.floor((MINI.boxW - (spanX * stepX + MINI.cellW)) / 2));
+  const offY = Math.max(0, Math.floor((MINI.boxH - (spanY * stepY + MINI.cellH)) / 2));
   return pts.map((p) => ({
-    left: offX + Math.round(p.x * stepX),
-    top: offY + Math.round(p.y * stepY),
+    left: offX + Math.round((p.x - minX) * stepX),
+    top: offY + Math.round((p.y - minY) * stepY),
   }));
 }
 
