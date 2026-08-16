@@ -31,10 +31,19 @@ export const SPREAD_LAYOUTS: Record<string, Pt[]> = {
   ],
 };
 
-/** Мини-схема списка: ячейка и шаги из макета `.sp .diag` / `.ccmap`. */
+/** Мини-схема списка: ячейка и шаги из макета `.sp .diag` / `.ccmap`. Это БАЗОВЫЕ (масштаб 1)
+ *  значения — у раскладок с размахом больше коробки `miniCells` возвращает уменьшенные `cellW`/`cellH`,
+ *  сама константа не меняется. */
 export const MINI = { cellW: 13, cellH: 20, stepX: 19, stepY: 22, boxW: 52, boxH: 64 } as const;
 
-export function miniCells(spreadId: string): { left: number; top: number }[] {
+export interface MiniLayout {
+  cells: { left: number; top: number }[];
+  /** Размер ячейки ПОСЛЕ масштабирования (может быть меньше MINI.cellW/cellH — см. `scale` ниже). */
+  cellW: number;
+  cellH: number;
+}
+
+export function miniCells(spreadId: string): MiniLayout {
   const pts = SPREAD_LAYOUTS[spreadId] ?? [];
   const xs = pts.map((p) => p.x);
   const ys = pts.map((p) => p.y);
@@ -46,22 +55,35 @@ export function miniCells(spreadId: string): { left: number; top: number }[] {
   // в коробку .diag и стоять по центру — решение владельца от 16.08, важнее композиции макета
   // (там подкова и кельтский крест вылезают за рамку и налезают на название расклада, правило 6а-0).
   // Центрируется ФАКТИЧЕСКИЙ размах раскладки (maxX−minX / maxY−minY), а не размах «от нуля»:
-  // у «Выбора из двух» minX = 0.2 (SPREAD_LAYOUTS.choice), и счёт от нуля завышал бы ширину на
-  // 0.2·stepX ≈ 4px, сдвигая контент вправо и делая поля НЕсимметричными (найдено на живой
-  // сверке 16.08 — поля стали 6/3 вместо прежних 4/5, хуже макета). Шаг колонки/ряда сжимается,
-  // только если размах при штатном шаге не влезает («На месяц» 4 карты — 0..57 при коробке 52;
-  // у подковы и кельта сжимается и шаг колонки, и шаг ряда). Смещение центрирует остаток размаха
-  // по обеим осям — когда размах уже укладывается в коробку, min()/max(0, …) отдают 0 сами.
+  // у «Выбора из двух» minX = 0.2 (SPREAD_LAYOUTS.choice), счёт от нуля завышал бы ширину и уводил
+  // контент вправо (регрессия найдена на живой сверке 16.08, поля были 6/3 вместо честных 4/5).
+  //
+  // Не влезает — масштабируется ЦЕЛИКОМ ОДНИМ коэффициентом: и шаги, и ячейка, а не только шаг
+  // (первая версия этого правила сжимала только шаг, ячейка оставалась 13×20 — у подковы шаг ужался
+  // до 13 при интервале между соседними точками дуги ~4px, ячейки наехали друг на друга на 9px
+  // и вместо веера получился комок; найдено на живой сверке 16.08). Один `scale` на ОБЕ оси —
+  // иначе схема исказится по пропорциям (то же ревью). `scale` берётся от БАЗОВОГО контента
+  // (раскладка шагом/ячейкой 19×22/13×20), не превышает 1 — раскладкам, которые и так влезают,
+  // сжатие не нужно вовсе.
   const spanX = maxX - minX;
   const spanY = maxY - minY;
-  const stepX = spanX > 0 ? Math.min(MINI.stepX, Math.floor((MINI.boxW - MINI.cellW) / spanX)) : MINI.stepX;
-  const stepY = spanY > 0 ? Math.min(MINI.stepY, Math.floor((MINI.boxH - MINI.cellH) / spanY)) : MINI.stepY;
-  const offX = Math.max(0, Math.floor((MINI.boxW - (spanX * stepX + MINI.cellW)) / 2));
-  const offY = Math.max(0, Math.floor((MINI.boxH - (spanY * stepY + MINI.cellH)) / 2));
-  return pts.map((p) => ({
-    left: offX + Math.round((p.x - minX) * stepX),
-    top: offY + Math.round((p.y - minY) * stepY),
-  }));
+  const contentW = spanX * MINI.stepX + MINI.cellW;
+  const contentH = spanY * MINI.stepY + MINI.cellH;
+  const scale = Math.min(1, MINI.boxW / contentW, MINI.boxH / contentH);
+  const stepX = MINI.stepX * scale;
+  const stepY = MINI.stepY * scale;
+  const cellW = MINI.cellW * scale;
+  const cellH = MINI.cellH * scale;
+  const offX = Math.max(0, Math.floor((MINI.boxW - (spanX * stepX + cellW)) / 2));
+  const offY = Math.max(0, Math.floor((MINI.boxH - (spanY * stepY + cellH)) / 2));
+  return {
+    cells: pts.map((p) => ({
+      left: offX + Math.round((p.x - minX) * stepX),
+      top: offY + Math.round((p.y - minY) * stepY),
+    })),
+    cellW: Math.round(cellW),
+    cellH: Math.round(cellH),
+  };
 }
 
 /** Доска на экране: карта `.s3card` 88×150, зазор `.s3row` 10, полоса подписи под картой

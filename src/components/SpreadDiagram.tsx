@@ -7,10 +7,17 @@ import { useTheme } from '../theme/useTheme';
 
 export function SpreadDiagram({ spreadId }: { spreadId: string }) {
   const t = useTheme();
+  // Раскладка, не влезающая в коробку базовым шагом (подкова, кельтский крест, «На месяц»),
+  // масштабируется целиком — ячейка тогда МЕНЬШЕ MINI.cellW/cellH, размер берём из layout,
+  // а не из константы (спека 36, доводка 16.08).
+  const { cells, cellW, cellH } = miniCells(spreadId);
   return (
     <View style={st.box}>
-      {miniCells(spreadId).map((c, i) => (
-        <View key={i} style={[st.cell, { left: c.left, top: c.top, borderColor: t.frame, backgroundColor: t.chipBg }]} />
+      {cells.map((c, i) => (
+        <View
+          key={i}
+          style={[st.cell, { left: c.left, top: c.top, width: cellW, height: cellH, borderColor: t.frame, backgroundColor: t.chipBg }]}
+        />
       ))}
     </View>
   );
@@ -18,5 +25,7 @@ export function SpreadDiagram({ spreadId }: { spreadId: string }) {
 
 const st = StyleSheet.create({
   box: { width: MINI.boxW, height: MINI.boxH },
-  cell: { position: 'absolute', width: MINI.cellW, height: MINI.cellH, borderWidth: 1, borderRadius: 3 },
+  // radius 3 — фиксирован, не масштабируется (решение владельца 16.08: сжатая ячейка со
+  // скруглением «как у большой» читается аккуратнее, чем пропорционально уменьшенное 2px).
+  cell: { position: 'absolute', borderWidth: 1, borderRadius: 3 },
 });
