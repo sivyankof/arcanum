@@ -68,8 +68,11 @@ export interface AppState {
   todayDraw: () => DailyDraw | undefined;
   setNote: (date: string, text: string) => void;
   setOutcome: (date: string, outcome: Outcome) => void;
-  /** Сохранение расклада в дневник (спека 36): +5 XP; повтор того же ts ничего не пишет. */
-  saveSpread: (draw: SpreadDraw) => number;
+  /** Сохранение расклада в дневник (спека 36): +5 XP; повтор того же ts ничего не пишет.
+   *  Возвращает void, а не начисленный XP (как completeLesson): у экрана расклада нет своего
+   *  «результата» вроде LessonResult — единственный вызов результат не читает, а идемпотентность
+   *  живёт внутри самого экшена (проверка spreadsHistory по ts), звать наружу её незачем. */
+  saveSpread: (draw: SpreadDraw) => void;
   setLessonDone: (lessonId: string, done: boolean) => void;
   /** Завершение урока движком (спека 08). Возвращает начисленный XP для экрана результата. */
   completeLesson: (lessonId: string, errors: number) => number;
@@ -157,9 +160,8 @@ export const useApp = create<AppState>()(
       // вызов из-за перерисовки не должны дублировать запись и XP. Срез до SPREADS_MAX — как history.
       saveSpread: (draw) => {
         const { spreadsHistory, xp } = get();
-        if (spreadsHistory.some((s) => s.ts === draw.ts)) return 0;
+        if (spreadsHistory.some((s) => s.ts === draw.ts)) return;
         set({ spreadsHistory: [draw, ...spreadsHistory].slice(0, SPREADS_MAX), xp: xp + XP_SPREAD });
-        return XP_SPREAD;
       },
 
       // Прогресс урока. До движка урока (08) сюда пишут только DEV-строки настроек;

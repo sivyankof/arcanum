@@ -1,6 +1,16 @@
 import { cardById, spreads } from '../content';
+import { inLang } from '../lang';
 import { NOTE_MAX, normalizeText } from '../journal';
-import { cardMeaning, dealSpread, normalizeQuestion, QUESTION_MAX, REVERSED_P, SPREADS_MAX } from '../spread';
+import {
+  cardMeaning,
+  dealSpread,
+  drawnCardLabel,
+  normalizeQuestion,
+  QUESTION_MAX,
+  REVERSED_P,
+  spreadMeaningText,
+  SPREADS_MAX,
+} from '../spread';
 
 /** Линейный конгруэнтный генератор — детерминированный rng для тестов вместо Math.random. */
 const lcg = (seed: number) => {
@@ -66,5 +76,40 @@ describe('cardMeaning — текст значения для позиции', ()
     // испанского текста нет — фолбэк на английский (inLang)
     expect(cardMeaning('fool', false, 'es').text).toBe(fool.content.general.en);
     expect(cardMeaning('нет-такой', false, 'ru')).toEqual({ text: '', todo: true });
+  });
+});
+
+// оракул тот же, что реально стоит в i18n.ts: 'spread.reversedName' подставляет один параметр
+// name, 'card.soon' зовётся без параметров — переводчик передан параметром намеренно (правка 1
+// финального ревью 36: имя карты и текст значения считались трижды по копии на компонент)
+const tr = (key: string, options?: { name?: string }) =>
+  key === 'spread.reversedName' ? `${options?.name} (перевёрнутая)` : 'Текст готовится';
+
+describe('drawnCardLabel — подпись выпавшей карты (правка 1 финального ревью 36)', () => {
+  it('прямая карта — просто имя на языке', () => {
+    const fool = cardById.get('fool')!;
+    expect(drawnCardLabel('fool', false, 'ru', tr)).toBe(inLang(fool.name, 'ru'));
+    expect(drawnCardLabel('fool', false, 'en', tr)).toBe(inLang(fool.name, 'en'));
+  });
+
+  it('перевёрнутая карта — имя обёрнуто в spread.reversedName', () => {
+    const fool = cardById.get('fool')!;
+    expect(drawnCardLabel('fool', true, 'ru', tr)).toBe(`${inLang(fool.name, 'ru')} (перевёрнутая)`);
+  });
+
+  it('неизвестный cardId — сам id вместо имени (та же защита, что у cardMeaning)', () => {
+    expect(drawnCardLabel('нет-такой', false, 'ru', tr)).toBe('нет-такой');
+    expect(drawnCardLabel('нет-такой', true, 'ru', tr)).toBe('нет-такой (перевёрнутая)');
+  });
+});
+
+describe('spreadMeaningText — готовый текст значения с признаком todo', () => {
+  it('обычный блок — текст cardMeaning как есть, todo: false', () => {
+    const fool = cardById.get('fool')!;
+    expect(spreadMeaningText('fool', false, 'ru', tr)).toEqual({ text: fool.content.general.ru, todo: false });
+  });
+
+  it('todo-блок (неизвестная карта) — подставляется card.soon, todo: true', () => {
+    expect(spreadMeaningText('нет-такой', false, 'ru', tr)).toEqual({ text: 'Текст готовится', todo: true });
   });
 });

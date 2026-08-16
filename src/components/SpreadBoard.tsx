@@ -4,9 +4,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
-import { cardById, type Spread } from '../lib/content';
+import type { Spread } from '../lib/content';
 import { inLang, type Lang } from '../lib/lang';
-import type { SpreadDraw } from '../lib/spread';
+import { drawnCardLabel, type SpreadDraw } from '../lib/spread';
 import { boardLayout } from '../lib/spreadLayout';
 import { spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -40,8 +40,10 @@ export function SpreadBoard({
     <View style={[st.board, { width: lay.width, height: lay.height }]}>
       {lay.cells.map((cell, i) => {
         const c = draw.cards[i];
-        const card = cardById.get(c.cardId);
-        const name = card ? inLang(card.name, lang) : c.cardId;
+        // защита от рассинхрона (правка 2, ревью): у сохранённого расклада может быть меньше карт,
+        // чем ячеек в ТЕКУЩЕЙ раскладке, если у расклада однажды поменяют число карт — пропускаем
+        // ячейку, а не роняем экран (удаления записей дневника нет, вернуться было бы неоткуда)
+        if (!c) return null;
         return (
           // подпись обязана быть шириной с карту: собственная обёртка нужной ширины
           // с alignItems center (правило обёрток design-system §5)
@@ -60,7 +62,7 @@ export function SpreadBoard({
             </Txt>
             {opened[i] && (
               <Txt numberOfLines={1} style={[st.name, { color: t.head }]}>
-                {c.reversed ? tr('spread.reversedName', { name }) : name}
+                {drawnCardLabel(c.cardId, c.reversed, lang, tr)}
               </Txt>
             )}
           </FadeUp>

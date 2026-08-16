@@ -51,3 +51,28 @@ export function cardMeaning(cardId: string, reversed: boolean, lang: Lang): { te
   if (!block || block.status === 'todo') return { text: '', todo: true };
   return { text: inLang(block, lang), todo: false };
 }
+
+/** Часть react-i18next `t`, нужная этому модулю: один параметр `name` у ключа
+ *  `spread.reversedName`, без параметров у `card.soon`. Берём как аргумент функции, а не
+ *  импортируем react-i18next — модуль обязан остаться чистым от react (см. шапку файла). */
+type Translate = (key: string, options?: { name?: string }) => string;
+
+/** Готовая ПОДПИСЬ выпавшей карты (не просто имя): имя на языке пользователя — или сам `cardId`,
+ *  если карты почему-то нет в каталоге (та же защита, что у cardMeaning) — и, для перевёрнутой
+ *  карты, обёртка в `spread.reversedName`. Вынесена сюда, потому что одну и ту же карту в одном
+ *  кадре считали трижды: подпись под картой на доске (SpreadBoard), в строке ленты (SpreadRow)
+ *  и заголовок панели значения под доской (SpreadScreen) — три копии одной и той же логики. */
+export function drawnCardLabel(cardId: string, reversed: boolean, lang: Lang, tr: Translate): string {
+  const card = cardById.get(cardId);
+  const name = card ? inLang(card.name, lang) : cardId;
+  return reversed ? tr('spread.reversedName', { name }) : name;
+}
+
+/** Готовый текст значения ВМЕСТЕ с признаком todo: блок ещё не написан → текст `card.soon`
+ *  («Текст готовится»), иначе — сам текст cardMeaning. Признак todo отдаём и дальше — вызывающие
+ *  красят текст в muted и курсив (design-system §5). Ветка «todo → card.soon, иначе текст» была
+ *  продублирована в SpreadScreen и SpreadRow — второй слой того же дубля, что и drawnCardLabel. */
+export function spreadMeaningText(cardId: string, reversed: boolean, lang: Lang, tr: Translate): { text: string; todo: boolean } {
+  const m = cardMeaning(cardId, reversed, lang);
+  return { text: m.todo ? tr('card.soon') : m.text, todo: m.todo };
+}

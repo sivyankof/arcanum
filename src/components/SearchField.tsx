@@ -6,6 +6,7 @@ import { Pressable, StyleSheet, TextInput, View, type StyleProp, type ViewStyle 
 import { hapticTap } from '../lib/haptics';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { noOutline } from '../theme/webInput';
 
 export function SearchField({
   value,
@@ -36,13 +37,10 @@ export function SearchField({
         onBlur={onBlur}
         placeholder={placeholder}
         placeholderTextColor={t.muted}
-        style={[st.input, { color: t.text }]}
+        style={[st.input, { color: t.text }, noOutline]}
         returnKeyType="search"
         autoCorrect={false}
         autoCapitalize="none"
-        // на вебе рамка фокуса рисуется поверх нашей — она тут лишняя
-        // @ts-expect-error outlineStyle — стиль только для react-native-web
-        outlineStyle="none"
       />
       {value.length > 0 && (
         <Pressable

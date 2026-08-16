@@ -9,7 +9,6 @@ import {
   journalMonths,
   journalOfMonth,
   monthSummary,
-  monthsWithEntries,
   normalizeNote,
   NOTE_MAX,
   outcomeStats,
@@ -45,22 +44,6 @@ const sp = (ts: number, date: string, question?: string, note?: string): SpreadD
 const asDay = (e: DailyDraw): JournalEntry => ({ kind: 'day', entry: e });
 /** cardId записи дня; для записи расклада — undefined (сужение типа без каста). */
 const dayCardId = (e: JournalEntry): string | undefined => (e.kind === 'day' ? e.entry.cardId : undefined);
-
-describe('monthsWithEntries', () => {
-  it('пустая история не даёт месяцев', () => {
-    expect(monthsWithEntries([])).toEqual([]);
-  });
-
-  it('месяцы идут от новых к старым, дубли схлопываются', () => {
-    const history = [d('2026-08-11', 'moon'), d('2026-08-01', 'sun'), d('2026-07-30', 'star')];
-    expect(monthsWithEntries(history)).toEqual(['2026-08', '2026-07']);
-  });
-
-  it('порядок записей в сторе не влияет на порядок месяцев', () => {
-    const history = [d('2026-07-30', 'star'), d('2026-08-11', 'moon'), d('2025-12-31', 'sun')];
-    expect(monthsWithEntries(history)).toEqual(['2026-08', '2026-07', '2025-12']);
-  });
-});
 
 describe('entriesOfMonth', () => {
   it('соседние месяцы не попадают в выборку', () => {

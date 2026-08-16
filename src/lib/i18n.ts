@@ -106,7 +106,8 @@ export const resources = {
         notePlaceholder: "+ Что откликнулось…",
         save: "СОХРАНИТЬ В ДНЕВНИК",
         savedBtn: "СОХРАНЕНО В ДНЕВНИК ✓",
-        again: "↺ РАЗЛОЖИТЬ ЗАНОВО",
+        // без глифа ↺: его в Manrope нет (как ✦/✶), рисуется отдельным Text рядом (SpreadFields)
+        again: "РАЗЛОЖИТЬ ЗАНОВО",
         leaveTitle: "Уйти без сохранения?",
         leaveText: "Расклад исчезнет",
         leave: "Уйти", stay: "Остаться",
@@ -342,7 +343,7 @@ export const resources = {
         notePlaceholder: "+ What resonated…",
         save: "SAVE TO JOURNAL",
         savedBtn: "SAVED TO JOURNAL ✓",
-        again: "↺ LAY OUT AGAIN",
+        again: "LAY OUT AGAIN",
         leaveTitle: "Leave without saving?",
         leaveText: "The spread will disappear",
         leave: "Leave", stay: "Stay",

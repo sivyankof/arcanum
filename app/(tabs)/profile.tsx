@@ -28,7 +28,6 @@ import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import {
-  entriesOfMonth,
   filterJournal,
   journalCounts,
   journalKey,
@@ -73,7 +72,6 @@ export default function ProfileScreen() {
   // возвращаемся к самому свежему месяцу вместо пустого экрана
   const month = picked && months.includes(picked) ? picked : months[0];
 
-  const entries = React.useMemo(() => (month ? entriesOfMonth(history, month) : []), [history, month]);
   const summary = React.useMemo(() => (month ? monthSummary(history, month) : null), [history, month]);
   const stats = React.useMemo(() => (month ? outcomeStats(history, month) : null), [history, month]);
 

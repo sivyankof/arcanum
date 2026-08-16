@@ -4,17 +4,15 @@
  *  клавиатуру отодвигает ScrollView (automaticallyAdjustKeyboardInsets). */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { NOTE_MAX } from '../lib/journal';
 import { QUESTION_MAX } from '../lib/spread';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { noOutline } from '../theme/webInput';
 import { CtaButton } from './CtaButton';
 import { Txt } from './Txt';
-
-// в браузере сфокусированное поле получает системную обводку — рядом с рамкой панели она читается второй
-const noOutline = Platform.OS === 'web' ? ({ outlineStyle: 'none' } as object) : null;
 
 export function QuestionField({
   value,
@@ -97,8 +95,15 @@ export function NotePanel({
       {showActions && <CtaButton label={saved ? tr('spread.savedBtn') : tr('spread.save')} onPress={onSave} disabled={saved} />}
       {showActions && saved && (
         <Pressable onPress={onAgain} style={st.againWrap} hitSlop={8}>
-          {/* пунктирное подчёркивание frame — как «изменить можно до полуночи» в Reflection */}
-          <Txt style={[st.again, { color: t.accent, borderBottomColor: t.frame }]}>{tr('spread.again')}</Txt>
+          {/* пунктирное подчёркивание frame — как «изменить можно до полуночи» в Reflection.
+              Держим его на строке-обёртке: сам глиф ↺ и перевод — два разных Text-узла */}
+          <View style={[st.againLine, { borderBottomColor: t.frame }]}>
+            {/* ↺ отсутствует в Manrope — обычный Text без fontFamily, тот же приём, что у ✦/✶
+                (JournalRow, SpreadCard/SpreadRow, правило Txt.tsx): на устройстве шрифт подменялся
+                бы системным, на Android вплоть до пустого прямоугольника, а веб это не показывает */}
+            <Text style={[st.againGlyph, { color: t.accent }]}>{'↺ '}</Text>
+            <Txt style={[st.again, { color: t.accent }]}>{tr('spread.again')}</Txt>
+          </View>
         </Pressable>
       )}
     </Animated.View>
@@ -118,5 +123,8 @@ const st = StyleSheet.create({
   input: { fontFamily: fonts.sans, fontSize: 11.5, lineHeight: 16, padding: 0, minHeight: 32 },
   text: { fontSize: 11.5, lineHeight: 16 },
   againWrap: { alignSelf: 'center', marginTop: 10 },
-  again: { fontSize: 11.5, letterSpacing: 1, borderBottomWidth: 1, borderStyle: 'dashed' },
+  // подчёркивание переехало с текста на строку: раньше его нёс единственный Txt с «↺ …» внутри
+  againLine: { flexDirection: 'row', borderBottomWidth: 1, borderStyle: 'dashed' },
+  againGlyph: { fontSize: 11.5 },
+  again: { fontSize: 11.5, letterSpacing: 1 },
 });

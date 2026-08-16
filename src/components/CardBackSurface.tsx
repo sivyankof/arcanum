@@ -8,7 +8,7 @@ import Svg, { Defs, RadialGradient, Rect, Stop } from 'react-native-svg';
 import { useTheme } from '../theme/useTheme';
 
 /** Цвета рубашки из `.backpat` эталона. Не токены дизайн-системы, а два оттенка одной поверхности. */
-export const BACK_COLORS = {
+const BACK_COLORS = {
   dark: ['#1d2752', '#0c1130'],
   light: ['#f4ead0', '#e4d6b0'],
 } as const;

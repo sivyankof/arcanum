@@ -10,7 +10,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-na
 import { cardImages } from '../lib/cardImages';
 import { cardById } from '../lib/content';
 import { inLang, type Lang } from '../lib/lang';
-import { cardMeaning, type DrawnCard } from '../lib/spread';
+import { drawnCardLabel, spreadMeaningText, type DrawnCard } from '../lib/spread';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { CardBackSurface } from './CardBackSurface';
@@ -37,10 +37,9 @@ export function SpreadRow({
   const t = useTheme();
   const { t: tr } = useTranslation();
   const data = cardById.get(card.cardId);
-  const name = data ? inLang(data.name, lang) : card.cardId;
-  const shownName = card.reversed ? tr('spread.reversedName', { name }) : name;
+  const shownName = drawnCardLabel(card.cardId, card.reversed, lang, tr);
   const keywords = data ? inLang(data.keywords, lang).join(' · ') : '';
-  const meaning = cardMeaning(card.cardId, card.reversed, lang);
+  const meaning = spreadMeaningText(card.cardId, card.reversed, lang, tr);
 
   const v = useSharedValue(1);
   React.useEffect(() => {
@@ -78,7 +77,7 @@ export function SpreadRow({
         </View>
         {open && (
           <Txt style={[st.meaning, { color: meaning.todo ? t.muted : t.text }, meaning.todo && st.todo]}>
-            {meaning.todo ? tr('card.soon') : meaning.text}
+            {meaning.text}
           </Txt>
         )}
       </Animated.View>

@@ -1,8 +1,11 @@
-/** Дневник: группировка истории карт дня по месяцам, сводки месяца и личная история карты.
+/** Дневник: группировка истории карт дня по месяцам, сводки месяца и личная история карты;
+ *  единая лента месяца из двух видов записи — карта дня и сохранённый расклад (JournalEntry,
+ *  спека 36) — тоже здесь.
  *
  *  Чистые функции без React — на них живут дневник в профиле, блок «Ваша история с картой»
  *  и проверки заметки в сторе. Правила и тест-кейсы: docs/specs/05-journal-part1.md,
- *  docs/logic-spec.md §3 (сбор и использование), §9 (никакого Math.random в выборе текста/карты).
+ *  docs/specs/36-spreads.md (единая лента), docs/logic-spec.md §3 (сбор и использование),
+ *  §9 (никакого Math.random в выборе текста/карты).
  */
 import { localDateISO } from './dates';
 import type { SpreadDraw } from './spread';
@@ -95,11 +98,6 @@ function monthOf(date: string): string {
  *  сброс карты дня и будущий импорт дневника (задача 11), поэтому сортируем сами. */
 function byDateDesc(a: DailyDraw, b: DailyDraw): number {
   return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
-}
-
-/** Только дни (карточка месяца, тесты старых вызовов). */
-export function monthsWithEntries(history: DailyDraw[]): string[] {
-  return journalMonths(history, []);
 }
 
 /** Записи календарного месяца, новые сверху. */

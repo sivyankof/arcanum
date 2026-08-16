@@ -26,6 +26,7 @@ import { useLeaveGuard } from '../../src/lib/useLeaveGuard';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { noOutline } from '../../src/theme/webInput';
 
 /** С какой длины счётчик подсвечивается: дальше видно, что предел близко. */
 const COUNTER_WARN = 450;
@@ -92,13 +93,7 @@ export default function NoteScreen() {
             placeholder={tr('note.placeholder')}
             placeholderTextColor={t.muted}
             textAlignVertical="top"
-            style={[
-              st.input,
-              { backgroundColor: t.panel, borderColor: t.line, color: t.text },
-              // в браузере сфокусированное поле получает системную обводку — на устройстве
-              // её нет, и рядом с макетом она читается как вторая рамка
-              Platform.OS === 'web' && ({ outlineStyle: 'none' } as object),
-            ]}
+            style={[st.input, { backgroundColor: t.panel, borderColor: t.line, color: t.text }, noOutline]}
           />
           <Txt style={[st.counter, { color: text.length >= COUNTER_WARN ? t.accent : t.muted }]}>
             {`${text.length} / ${NOTE_MAX}`}

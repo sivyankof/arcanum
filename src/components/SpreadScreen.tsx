@@ -10,13 +10,13 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { analyzeSpread, compositionTexts } from '../lib/composition';
-import { cardById, type Spread } from '../lib/content';
+import type { Spread } from '../lib/content';
 import { formatDayMonth, localDateISO } from '../lib/dates';
 import { hapticReveal, hapticSuccess, hapticTap } from '../lib/haptics';
 import { useLang } from '../lib/i18n';
 import { normalizeNote } from '../lib/journal';
 import { inLang } from '../lib/lang';
-import { cardMeaning, dealSpread, normalizeQuestion, type DrawnCard, type SpreadDraw } from '../lib/spread';
+import { dealSpread, drawnCardLabel, normalizeQuestion, spreadMeaningText, type SpreadDraw } from '../lib/spread';
 import { isBoard } from '../lib/spreadLayout';
 import { useLeaveGuard } from '../lib/useLeaveGuard';
 import { useApp } from '../store/useApp';
@@ -108,12 +108,11 @@ export function SpreadScreen({
     setSaved(false);
   };
 
-  const nameOf = (c: DrawnCard) => {
-    const card = cardById.get(c.cardId);
-    const nm = card ? inLang(card.name, lang) : c.cardId;
-    return c.reversed ? tr('spread.reversedName', { name: nm }) : nm;
-  };
-  const positionOf = (i: number) => inLang(spread.positions[i], lang);
+  // защита от рассинхрона (правка 2, ревью): у сохранённого расклада может быть больше карт,
+  // чем позиций в ТЕКУЩЕМ spreads.json, если у расклада однажды поменяют число карт — тихая
+  // деградация (пустая строка) лучше падения экрана, из которого нет пути назад (удаления
+  // записей дневника нет)
+  const positionOf = (i: number) => (spread.positions[i] ? inLang(spread.positions[i], lang) : '');
 
   const overline = [
     tr('spread.overline'),
@@ -176,12 +175,16 @@ export function SpreadScreen({
             />
             {order.map((i) => {
               const c = draw.cards[i];
-              const m = cardMeaning(c.cardId, c.reversed, lang);
+              // тот же рассинхрон, что и в SpreadBoard (правка 2): в режиме просмотра opened/order
+              // заводятся по ТЕКУЩЕМУ spread.cards, а не по длине сохранённого draw.cards.length —
+              // пропускаем панель, если старой записи не хватает карт на этот индекс
+              if (!c) return null;
+              const m = spreadMeaningText(c.cardId, c.reversed, lang, tr);
               return (
                 <MeaningPanel
                   key={i}
-                  title={`${positionOf(i)} · ${nameOf(c)}`.toUpperCase()}
-                  paragraphs={[m.todo ? tr('card.soon') : m.text]}
+                  title={`${positionOf(i)} · ${drawnCardLabel(c.cardId, c.reversed, lang, tr)}`.toUpperCase()}
+                  paragraphs={[m.text]}
                   todo={m.todo}
                 />
               );
