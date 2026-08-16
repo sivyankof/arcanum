@@ -11,9 +11,13 @@ export default function SpreadViewRoute() {
   const saved = useApp((s) => s.spreadsHistory.find((d) => d.ts === Number(ts)));
   const spread = saved ? spreadById.get(saved.spreadId) : undefined;
 
-  // записи нет (уехала за лимит 100 или сменилась импортом, пока экран был в стеке) — назад без диалогов
+  // записи нет (уехала за лимит 100 или сменилась импортом, пока экран был в стеке) — назад без
+  // диалогов; но при прямом заходе по адресу (веб-проверка, перезагрузка вкладки) стек пуст —
+  // возвращаться некуда, и router.back() молча ничего не сделал бы, оставив пустой экран навсегда
   React.useEffect(() => {
-    if (!saved || !spread) router.back();
+    if (saved && spread) return;
+    if (router.canGoBack()) router.back();
+    else router.replace('/profile');
   }, [saved, spread]);
 
   if (!saved || !spread) return null;

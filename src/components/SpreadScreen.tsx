@@ -4,7 +4,7 @@
  *  из дневника: всё открыто, только чтение). Стадии play: setup (вопрос + CTA «Разложить») → dealt
  *  (открываем тапом в любом порядке) → все открыты (состав + заметка + «Сохранить») → saved
  *  («Сохранено ✓» + «Разложить заново»). Гейт ухода — beforeRemove, как у заметки дня. */
-import { router, Stack, useNavigation } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -18,6 +18,7 @@ import { normalizeNote } from '../lib/journal';
 import { inLang } from '../lib/lang';
 import { cardMeaning, dealSpread, normalizeQuestion, type DrawnCard, type SpreadDraw } from '../lib/spread';
 import { isBoard } from '../lib/spreadLayout';
+import { useLeaveGuard } from '../lib/useLeaveGuard';
 import { useApp } from '../store/useApp';
 import { fonts, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
@@ -47,7 +48,6 @@ export function SpreadScreen({
   const { t: tr } = useTranslation();
   const lang = useLang();
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
   const saveSpread = useApp((s) => s.saveSpread);
 
   const view = mode === 'view';
@@ -59,28 +59,14 @@ export function SpreadScreen({
   const [order, setOrder] = React.useState<number[]>(() => (saved ? Array.from({ length: n }, (_, i) => i) : []));
   const [note, setNote] = React.useState(saved?.note ?? '');
   const [isSaved, setSaved] = React.useState(view);
-  const [asking, setAsking] = React.useState(false);
-  // действие навигации, задержанное вопросом «уйти без сохранения?»
-  const pending = React.useRef<Parameters<typeof navigation.dispatch>[0] | null>(null);
-  const leaving = React.useRef(false);
 
   const dealt = draw !== null;
   const openedCount = opened.filter(Boolean).length;
   const allOpen = dealt && openedCount === n;
   // гейт ухода: открыта хотя бы одна карта и расклад не сохранён; setup, ноль открытых, saved — свободно
   const dirty = !view && dealt && openedCount >= 1 && !isSaved;
-
-  // перехватываем кнопку «назад», свайп и popToTop по повторному тапу на таб (спека 36)
-  React.useEffect(
-    () =>
-      navigation.addListener('beforeRemove', (e) => {
-        if (!dirty || leaving.current) return;
-        e.preventDefault();
-        pending.current = e.data.action;
-        setAsking(true);
-      }),
-    [navigation, dirty],
-  );
+  // перехватывает кнопку «назад», свайп и popToTop по повторному тапу на таб (спека 36)
+  const { asking, onCancel, onConfirm } = useLeaveGuard(dirty);
 
   const composition = React.useMemo(
     () => (draw && allOpen ? compositionTexts(analyzeSpread(draw.cards), draw.date, lang) : []),
@@ -98,7 +84,9 @@ export function SpreadScreen({
     if (opened[i]) return;
     hapticTap();
     setOpened((prev) => prev.map((o, k) => k === i || o));
-    setOrder((prev) => [...prev, i]);
+    // дедуп: два тапа по одной карте в одном тике видят один и тот же opened[i] === false
+    // (стейт из замыкания рендера ещё не обновился) — без проверки индекс попал бы в order дважды
+    setOrder((prev) => (prev.includes(i) ? prev : [...prev, i]));
   };
   const onCard = (cardId: string) => router.push({ pathname: '/card/[id]', params: { id: cardId, from: 'spread' } });
   const onSave = () => {
@@ -251,12 +239,8 @@ export function SpreadScreen({
         message={tr('spread.leaveText')}
         confirmLabel={tr('spread.leave')}
         cancelLabel={tr('spread.stay')}
-        onCancel={() => setAsking(false)}
-        onConfirm={() => {
-          setAsking(false);
-          leaving.current = true;
-          if (pending.current) navigation.dispatch(pending.current);
-        }}
+        onCancel={onCancel}
+        onConfirm={onConfirm}
       />
     </View>
   );
