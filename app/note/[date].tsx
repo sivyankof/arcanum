@@ -60,7 +60,11 @@ export default function NoteScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ title: tr('note.title') }} />
+      {/* headerBackButtonMenuEnabled: false — тот же гейт useLeaveGuard, что у расклада: модалка
+          презентуется поверх ТОГО ЖЕ стека (previousDescriptor у неё есть — «Сегодня»/карточка/
+          дневник), поэтому у неё тоже есть нативная кнопка «назад», и долгий тап по ней так же
+          открыл бы меню с прыжком через несколько экранов мимо гейта */}
+      <Stack.Screen options={{ title: tr('note.title'), headerBackButtonMenuEnabled: false }} />
       <ScreenBg />
       <KeyboardAvoidingView
         style={{ flex: 1 }}

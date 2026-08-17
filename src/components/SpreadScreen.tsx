@@ -125,7 +125,15 @@ export function SpreadScreen({
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr(view ? 'card.backProfile' : 'spreads.title') }} />
+      {/* headerBackButtonMenuEnabled: false — без него долгий тап по кнопке «назад» на iOS открывает
+          системное меню и пускает прыгнуть через несколько экранов сразу мимо гейта useLeaveGuard
+          (сама React Navigation советует это в тексте ошибки про usePreventRemove) */}
+      <Stack.Screen
+        options={{
+          headerBackTitle: tr(view ? 'card.backProfile' : 'spreads.title'),
+          headerBackButtonMenuEnabled: false,
+        }}
+      />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{

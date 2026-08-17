@@ -57,7 +57,10 @@ export function SpreadBoard({
               animateFlip={animateFlip}
               onPress={() => (opened[i] ? onPressCard(c.cardId) : onOpen(i))}
             />
-            <Txt numberOfLines={2} style={[st.label, { color: t.muted }]}>
+            {/* до 3 строк вместо 2 (решение владельца 16.08) — у «На отношения» три подписи из пяти
+                не влезали в две строки (17–25 знаков при ~24 на строку); полоса BOARD.labelH
+                посчитана под этот же максимум, см. spreadLayout.ts */}
+            <Txt numberOfLines={3} style={[st.label, { color: t.muted }]}>
               {inLang(spread.positions[i], lang).toUpperCase()}
             </Txt>
             {opened[i] && (
