@@ -135,6 +135,14 @@ def main():
         prev = existing.get(card["id"])
         if prev:
             card["keywords"] = prev.get("keywords", card["keywords"])
+            # ⚠️ name пересобирается ИЗ ИСТОЧНИКА (ru — из таблиц скрипта, en — из tarot-api),
+            # поэтому переводы названий надо перенести руками: источник про es/pt не знает.
+            # Без этого прогон стирал бы name.es, оставляя keywords.es, search.es и
+            # wordsStatus.es: «атомарная» единица name+keywords+search разваливалась бы на две
+            # трети, и у карты со «своим» испанским поиском пропал бы испанский заголовок
+            # (решение 4а спеки 28а).
+            for lang, value in (prev.get("name") or {}).items():
+                card["name"].setdefault(lang, value)
         card["search"] = (prev or {}).get("search", {"ru": [], "en": []})
         # статус слов переносится вместе с самими словами — они одно целое (решение 4а спеки 28а)
         card["wordsStatus"] = (prev or {}).get("wordsStatus", {})

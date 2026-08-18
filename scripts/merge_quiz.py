@@ -37,6 +37,13 @@ def merge_file(quiz_path: Path, lessons_by_id: dict, card_ids: set) -> int:
     # статус файла — словарь по языкам (спека 28а). Файла без статуса быть не должно, но если он
     # есть — это «не готово ни на одном языке», то есть пустой словарь, а не draft на всех сразу.
     status = quiz.get("status") or {}
+    # ⚠️ Строковый статус — форма ДО спеки 28а. Пропустить его молча нельзя: он доехал бы
+    # до course.json и откатил схему у всех уроков файла (та самая ловушка двойного хранения),
+    # а падать сырым AttributeError на sorted(status.items()) файл, который придирчиво
+    # валидирует каждое поле вопроса, не имеет права.
+    if not isinstance(status, dict):
+        fail(f"{quiz_path.name}: статус старой формы {status!r} — ожидается словарь по языкам, "
+             f"например {{\"ru\": \"reviewed\"}}; почини python scripts/migrate_status_lang.py")
 
     for entry in quiz["lessons"]:
         lid = req(entry, "lessonId", f"запись в {quiz_path.name}")

@@ -47,26 +47,55 @@ describe('контракт пер-языкового статуса (cards.json,
   // английский», а «испанский есть, и он пустой»: пользователь увидел бы пустое место вместо
   // готового английского текста. Заглушек у неканоничных языков быть не должно вовсе.
   it.each(cards.map((c) => [c.id, c] as const))(
-    '%s: неканоничный язык либо отсутствует, либо полноценен',
+    '%s: у неканоничного языка текст и статус согласованы в ОБЕ стороны',
     (_id, card) => {
       for (const [key, block] of Object.entries(card.content)) {
         for (const lang of EXTRA) {
           const text = block[lang];
-          if (text === undefined) continue;
-          expect(`${key}.${lang}: пусто=${text.trim() === ''}`).toBe(`${key}.${lang}: пусто=false`);
-          expect(`${key}.${lang}: статус=${statusOf(block.status, lang)}`).not.toBe(
-            `${key}.${lang}: статус=todo`,
-          );
+          const status = statusOf(block.status, lang);
+          expect(VALID_STATUSES).toContain(status);
+          // Эквивалентность, а не импликация. Первая версия теста проверяла только сторону
+          // «есть текст ⇒ статус не todo» и пропускала обратную: `set_status.py --lang es`
+          // на непереведённом корпусе проставлял статус всем 958 блокам, отчёт готовности
+          // рапортовал «es готово 100%» при нуле испанских знаков, и все тесты были зелёные
+          // (находка финального ревью ветки 19.08).
+          const has = text !== undefined && text.trim() !== '';
+          expect(`${key}.${lang}: текст=${has}`).toBe(`${key}.${lang}: текст=${status !== 'todo'}`);
+          // отдельно: пустая строка — не «нет языка». presentLang считает такой язык
+          // присутствующим и покажет пустоту вместо готового английского (решение 2б спеки)
+          if (text !== undefined) {
+            expect(`${key}.${lang}: пусто=${text.trim() === ''}`).toBe(`${key}.${lang}: пусто=false`);
+          }
         }
       }
     },
   );
 
-  it.each(cards.map((c) => [c.id, c] as const))('%s: wordsStatus заведён на канон', (_id, card) => {
-    for (const lang of CANON) {
+  // Решение 4а спеки объявляет name + keywords + search ОДНОЙ единицей перевода: схема обязана
+  // не допускать состояния «название переведено, слова нет». До волны фиксов финального ревью
+  // (19.08) это было только обещанием в комментарии — тест проверял у wordsStatus лишь канон,
+  // и карта с `name.es` без `search.es` проходила все 1085 тестов. Цена такого состояния
+  // реальна: `presentLang(card.name, lang)` в cardSearch.ts выбирает язык источника ПО
+  // НАЗВАНИЮ, поэтому испанское имя при английских словах даёт поиск на смешанном языке,
+  // который вдобавок режется испанскими окончаниями (ENDINGS['es']).
+  it.each(cards.map((c) => [c.id, c] as const))('%s: слова карты переведены атомарно', (_id, card) => {
+    for (const lang of LANGS) {
       const status = statusOf(card.wordsStatus, lang);
       expect(VALID_STATUSES).toContain(status);
-      expect(`wordsStatus.${lang}=${status}`).not.toBe(`wordsStatus.${lang}=todo`);
+      const parts = {
+        name: (card.name[lang] ?? '').trim() !== '',
+        keywords: (card.keywords[lang] ?? []).length > 0,
+        search: (card.search[lang] ?? []).length > 0,
+      };
+      const filled = Object.values(parts).filter(Boolean).length;
+      // либо все три поля есть, либо ни одного — «две трети перевода» не бывает
+      expect(`${lang}: заполнено ${filled} из 3 (${JSON.stringify(parts)})`).toBe(
+        `${lang}: заполнено ${filled === 0 ? 0 : 3} из 3 (${JSON.stringify(parts)})`,
+      );
+      // и статус обязан описывать ровно это состояние, а не жить своей жизнью
+      expect(`wordsStatus.${lang}: готов=${status !== 'todo'}`).toBe(
+        `wordsStatus.${lang}: готов=${filled === 3}`,
+      );
     }
   });
 });

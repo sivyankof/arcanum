@@ -21,10 +21,23 @@ ORDER = ("final", "reviewed", "draft", "todo")
 PARTS = ("значения карт", "слова карт", "теория", "викторины")
 
 
-def add(counts: dict, part: str, status_map: dict | None) -> None:
-    """Считает одну единицу контента по каждому языку. Нет ключа языка — значит todo."""
+# адреса единиц со статусом СТАРОЙ, доязыковой формы (строка вместо словаря)
+legacy: list[str] = []
+
+
+def add(counts: dict, part: str, status_map, where: str) -> None:
+    """Считает одну единицу контента по каждому языку. Нет ключа языка — значит todo.
+
+    ⚠️ Статус старой формы (строка) не пропускаем молча и не падаем трейсбеком: считаем такую
+    единицу невычитанной ни на одном языке и жалуемся адресами в конце отчёта. Промолчать нельзя —
+    отчёт готовности единственный, кто отвечает на вопрос «сколько готово», и он обязан
+    отличать «не готово» от «я не понял, что тут написано»."""
+    if not isinstance(status_map, dict):
+        if status_map is not None:
+            legacy.append(where)
+        status_map = {}
     for lang in LANGS:
-        counts[part][lang][(status_map or {}).get(lang, "todo")] += 1
+        counts[part][lang][status_map.get(lang, "todo")] += 1
 
 
 def main() -> None:
@@ -32,17 +45,17 @@ def main() -> None:
 
     cards = json.loads((ROOT / "content/cards.json").read_text(encoding="utf-8"))["cards"]
     for card in cards:
-        for block in card["content"].values():
-            add(counts, "значения карт", block.get("status"))
-        add(counts, "слова карт", card.get("wordsStatus"))
+        for key, block in card["content"].items():
+            add(counts, "значения карт", block.get("status"), f"{card['id']}.{key}")
+        add(counts, "слова карт", card.get("wordsStatus"), f"{card['id']}.wordsStatus")
 
     course = json.loads((ROOT / "content/course.json").read_text(encoding="utf-8"))
     for module in course["modules"]:
         for lesson in module["lessons"]:
             if lesson.get("theory"):
-                add(counts, "теория", lesson["theory"].get("status"))
+                add(counts, "теория", lesson["theory"].get("status"), f"{lesson['id']}.theory")
             if lesson.get("quizStatus") is not None:
-                add(counts, "викторины", lesson["quizStatus"])
+                add(counts, "викторины", lesson["quizStatus"], f"{lesson['id']}.quizStatus")
 
     for part in PARTS:
         per_lang = counts[part]
@@ -54,13 +67,30 @@ def main() -> None:
         for lang in LANGS:
             row = "  ".join(f"{s}: {per_lang[lang].get(s, 0):4d}" for s in ORDER)
             ready = per_lang[lang].get("reviewed", 0) + per_lang[lang].get("final", 0)
-            print(f"  {lang}:  {row}   готово {ready / total:.0%}")
+            # ⚠️ Округление вниз, а не по правилам: обычное :.0% печатало «готово 100%» уже
+            # при 954 из 958, и приёмка по Definition of Done («100% блоков имеют es/pt»)
+            # прошла бы с четырьмя недописанными блоками. 100% печатается, только когда 100%.
+            pct = 100 if ready == total else int(ready * 100 // total)
+            # неизвестный статус (опечатка при ручной правке) не попадает ни в один столбец
+            # ORDER, но остаётся в знаменателе — столбцы молча перестают сходиться с total
+            other = total - sum(per_lang[lang].get(s, 0) for s in ORDER)
+            tail = f"   ⚠️ вне workflow: {other}" if other else ""
+            print(f"  {lang}:  {row}   готово {pct}%{tail}")
 
     print("\nStaging-викторины (статус файла):")
     for path in sorted((ROOT / "content").glob("quiz-*.json")):
         status = json.loads(path.read_text(encoding="utf-8")).get("status") or {}
-        line = ", ".join(f"{k}: {v}" for k, v in sorted(status.items())) or "нет статуса"
+        if not isinstance(status, dict):
+            legacy.append(f"{path.name} (статус файла)")
+            line = f"СТАРАЯ ФОРМА: {status!r}"
+        else:
+            line = ", ".join(f"{k}: {v}" for k, v in sorted(status.items())) or "нет статуса"
         print(f"  {path.name:18s} {line}")
+
+    if legacy:
+        print(f"\n⚠️ Статус СТАРОЙ формы (строка вместо словаря) у {len(legacy)} единиц: "
+              f"{', '.join(legacy[:5])}{' …' if len(legacy) > 5 else ''}")
+        print("   Они посчитаны как todo. Почини: python scripts/migrate_status_lang.py")
 
     print("\nКарты с недописанным каноном:")
     unfinished = []
@@ -69,7 +99,8 @@ def main() -> None:
             f"{key}.{lang}"
             for key, block in card["content"].items()
             for lang in ("ru", "en")
-            if (block.get("status") or {}).get(lang, "todo") == "todo"
+            if (block["status"] if isinstance(block.get("status"), dict) else {})
+            .get(lang, "todo") == "todo"
         ]
         if gaps:
             unfinished.append((card["id"], card["name"]["ru"], len(gaps)))

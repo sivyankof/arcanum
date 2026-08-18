@@ -1,6 +1,7 @@
 /** Контракт контента викторин (спека 08): опечатка после вычитки редактора должна валить
  *  npm test, а не всплывать у пользователя. Проверяем собранный course.json, не черновик. */
-import { cardById, course } from '../content';
+import { cardById, course, type BlockStatus, type StatusMap } from '../content';
+import { LANGS, type CanonLang, type Lang } from '../lang';
 
 const lessons = course
   .filter((m) => ['m1', 'm2', 'm3', 'm4', 'm5', 'm6'].includes(m.id))
@@ -61,6 +62,72 @@ describe('контракт викторин М1–М6 (course.json)', () => {
           return lens[q.correct] === max && lens.filter((n) => n === max).length === 1;
         }).length;
       expect(longest).toBeLessThanOrEqual(2);
+    },
+  );
+});
+
+// Пер-языковый статус курса (спека 28а). До волны фиксов финального ревью ветки (19.08) статусы
+// course.json не проверял НИ ОДИН тест: контракт был написан только для cards.json. Проверено
+// экспериментом — возврат theory.status и quizStatus к старой строковой форме (то есть ровно
+// та регрессия, которую отчёт спеки называет главной: merge_quiz.py переносит статус staging-файла
+// в course.json целиком) оставлял npm test полностью зелёным.
+const CANON: CanonLang[] = ['ru', 'en'];
+const EXTRA: Lang[] = LANGS.filter((l): l is Lang => !CANON.includes(l as CanonLang));
+const VALID: BlockStatus[] = ['todo', 'draft', 'reviewed', 'final'];
+const statusOf = (map: StatusMap | undefined, lang: Lang): BlockStatus => map?.[lang] ?? 'todo';
+
+/** Написан ли язык у викторины целиком: у каждого вопроса — сам вопрос, все варианты, пояснение.
+ *  Половина переведённой викторины викториной не является. Та же мера, что в set_status.py. */
+const quizWritten = (l: (typeof lessons)[number], lang: Lang): boolean =>
+  !!l.quiz?.length &&
+  l.quiz.every(
+    (q) =>
+      (q.q[lang] ?? '').trim() !== '' &&
+      (q.explain[lang] ?? '').trim() !== '' &&
+      q.options.every((o) => (o[lang] ?? '').trim() !== ''),
+  );
+
+describe('контракт пер-языкового статуса курса (course.json, спека 28а)', () => {
+  it.each(lessons.map((l) => [l.id, l] as const))(
+    '%s: статус — словарь по языкам, а не строка старой формы',
+    (_id, l) => {
+      // typeof строкой: именно возврат к строке и есть та регрессия, которую ловим
+      expect(`theory.status: ${typeof l.theory?.status}`).toBe('theory.status: object');
+      expect(`quizStatus: ${typeof l.quizStatus}`).toBe('quizStatus: object');
+    },
+  );
+
+  it.each(lessons.map((l) => [l.id, l] as const))(
+    '%s: канон вычитан, значения статусов валидны',
+    (_id, l) => {
+      for (const lang of CANON) {
+        const theory = statusOf(l.theory?.status, lang);
+        const quiz = statusOf(l.quizStatus, lang);
+        expect(VALID).toContain(theory);
+        expect(VALID).toContain(quiz);
+        expect(`${l.id} theory.${lang}=${theory}`).not.toBe(`${l.id} theory.${lang}=todo`);
+        expect(`${l.id} quiz.${lang}=${quiz}`).not.toBe(`${l.id} quiz.${lang}=todo`);
+      }
+    },
+  );
+
+  it.each(lessons.map((l) => [l.id, l] as const))(
+    '%s: у неканоничного языка статус и текст согласованы в обе стороны',
+    (_id, l) => {
+      for (const lang of EXTRA) {
+        const theoryStatus = statusOf(l.theory?.status, lang);
+        expect(VALID).toContain(theoryStatus);
+        const theoryWritten = (l.theory?.[lang] ?? '').trim() !== '';
+        expect(`${l.id} theory.${lang}: текст=${theoryWritten}`).toBe(
+          `${l.id} theory.${lang}: текст=${theoryStatus !== 'todo'}`,
+        );
+
+        const quizStatus = statusOf(l.quizStatus, lang);
+        expect(VALID).toContain(quizStatus);
+        expect(`${l.id} quiz.${lang}: написана=${quizWritten(l, lang)}`).toBe(
+          `${l.id} quiz.${lang}: написана=${quizStatus !== 'todo'}`,
+        );
+      }
     },
   );
 });
