@@ -50,3 +50,6 @@ yarn-error.*
 # Python-кэш скриптов контент-конвейера
 __pycache__/
 *.pyc
+
+# кэш оригиналов сканов Commons (scripts/fetch_card_scans.py, спека 42) — 70 МБ, в репо не нужны
+.cache/

@@ -18,6 +18,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block } from '../../src/components/Block';
 import { CardBack } from '../../src/components/CardBack';
+import { CardCorners } from '../../src/components/CardCorners';
 import { CardLightbox } from '../../src/components/CardLightbox';
 import { ConfirmDialog } from '../../src/components/ConfirmDialog';
 import { CornerBadge } from '../../src/components/CornerBadge';
@@ -56,6 +57,10 @@ const CARD_W = Math.min(W * 0.56, 230);
 const CARD_H = CARD_W * 1.72;
 const FLIP_MS = 850;
 const STREAK_MILESTONE = 7; // 7-й день серии — единственная «победа» на этом экране
+
+// ярлычок «увеличить» на лице карты дня стоит ВНУТРИ правого верхнего уголка (задача 40): инсет 9
+// вместо 6/6 остальных мест — уголок 20×20 с инсетом 4 «держит» его с двух сторон
+const BADGE_INSET_IN_CORNER = 9;
 
 // пропорции колец из эталона: карта 216 → кольца 330 и 378
 const RING_A = CARD_W * 1.53;
@@ -222,6 +227,12 @@ export default function TodayScreen() {
   const [burst, setBurst] = React.useState(0); // счётчик салютов у огонька серии
   const [cardBurst, setCardBurst] = React.useState(0); // салют вокруг карты при перевороте
   const flip = useSharedValue(drawn ? 1 : 0);
+  // доехал ли переворот (спека 42, приём SpreadCard): после него воркл frontStyle снимает с лица
+  // 3D-пропы тем же каналом, которым их наложил. Стартуем «доехавшими», если карта уже открыта:
+  // flip=1 без этого держал бы лицо в 3D-контексте с первого кадра — то же мыло, только без
+  // анимации перед ним. Убрать стиль недостаточно — reanimated накладывает свойства императивно
+  // со стороны UI-потока, и не переданный стиль их не отменяет (лайв-проверка задачи 36)
+  const settledSV = useSharedValue(!!drawn);
   const bob = useSharedValue(0);
   const glare = useSharedValue(0);
   // видимость текста под картой. При входе на таб с уже открытой картой стартуем сразу с 1 —
@@ -233,10 +244,11 @@ export default function TodayScreen() {
   React.useEffect(() => {
     if (!drawn) {
       flip.value = 0;
+      settledSV.value = false; // рубашка снова впереди, лицу вернуть 3D-переворот
       plateIn.value = 0;
       meanIn.value = 0;
     }
-  }, [drawn, flip, plateIn, meanIn]);
+  }, [drawn, flip, settledSV, plateIn, meanIn]);
 
   // блик живёт, пока карта открыта: первый проход через 500 мс, дальше цикл с паузой.
   // Держим его в эффекте, а не в onDraw, — иначе при возврате на таб блик бы не запускался
@@ -260,22 +272,42 @@ export default function TodayScreen() {
     bob.value = pingPong(-6, 2100);
   }, [lbOrigin, bob]);
 
-  const backStyle = useAnimatedStyle(() => ({
-    transform: [
-      { translateY: bob.value },
-      { perspective: 1100 },
-      { rotateY: `${interpolate(flip.value, [0, 1], [0, 180])}deg` },
-    ],
-    backfaceVisibility: 'hidden' as const,
-  }));
-  const frontStyle = useAnimatedStyle(() => ({
-    transform: [
-      { translateY: bob.value },
-      { perspective: 1100 },
-      { rotateY: `${interpolate(flip.value, [0, 1], [180, 360])}deg` },
-    ],
-    backfaceVisibility: 'hidden' as const,
-  }));
+  // Рубашка лежит в том же 3D-контексте, что и лицо, — просто на ней это было не видно, пока
+  // на ней не появились волосяные линии уголков (задача 40): рубашка стоит на rotateY 0, а слой
+  // с perspective всё равно растрируется через offscreen-текстуру. Поэтому в ПОКОЕ (карта ещё
+  // не открыта, flip ровно 0) отдаём те же нейтральные значения, что и лицу после переворота.
+  // Отдельный флаг не нужен: покой рубашки — это буквально flip.value === 0
+  const backStyle = useAnimatedStyle(() => {
+    if (flip.value === 0) {
+      return { transform: [{ translateY: bob.value }], backfaceVisibility: 'visible' as const };
+    }
+    return {
+      transform: [
+        { translateY: bob.value },
+        { perspective: 1100 },
+        { rotateY: `${interpolate(flip.value, [0, 1], [0, 180])}deg` },
+      ],
+      backfaceVisibility: 'hidden' as const,
+    };
+  });
+  // Стиль отдаётся ВСЕГДА (и до, и после переворота): после settled воркл ЯВНО возвращает
+  // нейтральные 3D-пропы вместо того, чтобы пропасть из массива стилей, — иначе perspective/rotateY
+  // остаются сиротами на слое, лицо живёт в 3D-контексте и рисуется через offscreen-текстуру (мыло).
+  // Покачивание остаётся: 2D-сдвиг 3D-контекст не создаёт. Скачка нет: на flip=1 rotateY стоит
+  // на 360°, что визуально identity
+  const frontStyle = useAnimatedStyle(() => {
+    if (settledSV.value) {
+      return { transform: [{ translateY: bob.value }], backfaceVisibility: 'visible' as const };
+    }
+    return {
+      transform: [
+        { translateY: bob.value },
+        { perspective: 1100 },
+        { rotateY: `${interpolate(flip.value, [0, 1], [180, 360])}deg` },
+      ],
+      backfaceVisibility: 'hidden' as const,
+    };
+  });
   const glareStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: interpolate(glare.value, [0, 1], [-CARD_W * 1.4, CARD_W * 1.4]) }],
   }));
@@ -307,7 +339,10 @@ export default function TodayScreen() {
     }
     const prevStreak = streak;
     hapticReveal();
-    flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) });
+    settledSV.value = false;
+    flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) }, (finished) => {
+      if (finished) settledSV.value = true; // UI-поток: воркл frontStyle тут же снимает 3D-пропы
+    });
     plateIn.value = reveal(PLATE_DELAY);
     meanIn.value = reveal(MEAN_DELAY);
     setCardBurst((b) => b + 1); // искры — в момент нажатия, вместе с хаптикой
@@ -410,7 +445,7 @@ export default function TodayScreen() {
               {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
               <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
                 <View style={[st.faceClip, { borderColor: t.frame }]}>
-                  <CardBack hint={drawn ? undefined : tr('today.tapToReveal')} />
+                  <CardBack corners hint={drawn ? undefined : tr('today.tapToReveal')} />
                 </View>
               </Animated.View>
               {/* лицо */}
@@ -427,10 +462,13 @@ export default function TodayScreen() {
                       style={StyleSheet.absoluteFill}
                     />
                   </Animated.View>
+                  {/* уголки — поверх картинки и блика, под ярлычком (порядок слоёв .cnr → .st2 эталона) */}
+                  <CardCorners />
                   {/* ярлычок «можно увеличить» (спека 39) — поверх блика, чтобы скрим
                       не «зажигался». Условие по drawn не нужно: до переворота грань
-                      повёрнута на 180° с backfaceVisibility hidden и не видна */}
-                  <CornerBadge icon="expand-outline" />
+                      повёрнута на 180° с backfaceVisibility hidden и не видна.
+                      Инсет 9/9 — внутри уголка (задача 40) */}
+                  <CornerBadge icon="expand-outline" style={st.badgeInCorner} />
                 </View>
               </Animated.View>
             </View>
@@ -565,6 +603,7 @@ const st = StyleSheet.create({
     borderWidth: 1,
     overflow: 'hidden',
   },
+  badgeInCorner: { top: BADGE_INSET_IN_CORNER, right: BADGE_INSET_IN_CORNER },
   // искры уводим над картой: на Android грани карты подняты elevation, иначе салют уйдёт под них
   sparkLayer: { zIndex: 2, elevation: 20 },
   cardName: { fontFamily: fonts.display, fontSize: 22, letterSpacing: 3, textAlign: 'center', marginTop: spacing.xl },
