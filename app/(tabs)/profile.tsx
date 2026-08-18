@@ -28,15 +28,16 @@ import { localDateISO } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import {
-  entriesOfMonth,
-  filterCounts,
-  filterEntries,
+  filterJournal,
+  journalCounts,
+  journalKey,
+  journalMonths,
+  journalOfMonth,
   JOURNAL_FILTERS,
-  monthsWithEntries,
   monthSummary,
   OUTCOME_MARK,
   outcomeStats,
-  type DailyDraw,
+  type JournalEntry,
   type JournalFilter,
 } from '../../src/lib/journal';
 import { pickPhrase } from '../../src/lib/phrases';
@@ -56,21 +57,21 @@ export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const lang = useLang();
 
-  const listRef = useTabTopRef<FlatList<DailyDraw>>();
+  const listRef = useTabTopRef<FlatList<JournalEntry>>();
 
   const streak = useApp((s) => s.streak);
   const history = useApp((s) => s.history);
+  const spreadsHistory = useApp((s) => s.spreadsHistory);
   const freezes = useApp((s) => s.freezes);
   const xp = useApp((s) => s.xp);
   const name = useApp((s) => s.profile.name);
 
-  const months = React.useMemo(() => monthsWithEntries(history), [history]);
+  const months = React.useMemo(() => journalMonths(history, spreadsHistory), [history, spreadsHistory]);
   const [picked, setPicked] = React.useState<string | null>(null);
   // выбранный месяц держим «мягко»: если записи появились или уехали (сброс карты дня),
   // возвращаемся к самому свежему месяцу вместо пустого экрана
   const month = picked && months.includes(picked) ? picked : months[0];
 
-  const entries = React.useMemo(() => (month ? entriesOfMonth(history, month) : []), [history, month]);
   const summary = React.useMemo(() => (month ? monthSummary(history, month) : null), [history, month]);
   const stats = React.useMemo(() => (month ? outcomeStats(history, month) : null), [history, month]);
 
@@ -78,7 +79,11 @@ export default function ProfileScreen() {
   // смена месяца сбрасывает фильтр: счётчики в чипах относятся к текущему месяцу
   React.useEffect(() => setFilter('all'), [month]);
 
-  const counts = React.useMemo(() => filterCounts(entries), [entries]);
+  const items = React.useMemo(
+    () => (month ? journalOfMonth(history, spreadsHistory, month) : []),
+    [history, spreadsHistory, month],
+  );
+  const counts = React.useMemo(() => journalCounts(items), [items]);
   // чип с нулём не показываем — тап по нему вёл бы в пустоту; «Все» остаётся всегда
   const chips = React.useMemo(
     () => JOURNAL_FILTERS.filter((f) => f === 'all' || counts[f] > 0),
@@ -90,7 +95,7 @@ export default function ProfileScreen() {
     if (!chips.includes(filter)) setFilter('all');
   }, [chips, filter]);
 
-  const shown = React.useMemo(() => filterEntries(entries, filter), [entries, filter]);
+  const shown = React.useMemo(() => filterJournal(items, filter), [items, filter]);
 
   // месяцы отсортированы от новых к старым: старший месяц лежит ДАЛЬШЕ по списку
   const index = month ? months.indexOf(month) : -1;
@@ -99,6 +104,7 @@ export default function ProfileScreen() {
 
   const today = localDateISO();
   const openCard = (id: string) => router.push({ pathname: '/card/[id]', params: { id, from: 'journal' } });
+  const openSpread = (ts: number) => router.push({ pathname: '/spread/[ts]', params: { ts: String(ts) } });
 
   const header = (
     <>
@@ -168,17 +174,17 @@ export default function ProfileScreen() {
       <FlatList
         ref={listRef}
         data={shown}
-        keyExtractor={(e) => e.date}
+        keyExtractor={journalKey}
         renderItem={({ item, index }) => {
           const row = (
             <JournalRow
-              entry={item}
+              item={item}
               lang={lang}
-              onPress={() => openCard(item.cardId)}
-              // правится только сегодняшняя запись (logic-spec §3)
+              onPress={() => (item.kind === 'day' ? openCard(item.entry.cardId) : openSpread(item.entry.ts))}
+              // правится только сегодняшняя запись дня (logic-spec §3); у раскладов правки нет
               onEdit={
-                item.date === today
-                  ? () => router.push({ pathname: '/note/[date]', params: { date: item.date } })
+                item.kind === 'day' && item.entry.date === today
+                  ? () => router.push({ pathname: '/note/[date]', params: { date: item.entry.date } })
                   : undefined
               }
             />
@@ -196,7 +202,7 @@ export default function ProfileScreen() {
           <View style={st.pad}>
             <EmptyState
               text={
-                entries.length === 0
+                items.length === 0
                   ? pickPhrase('empty.journal', today, lang)
                   : pickPhrase('empty.filter', today, lang)
               }

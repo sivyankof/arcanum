@@ -15,15 +15,21 @@ export function CtaButton({
   label,
   onPress,
   style,
+  disabled,
 }: {
   label: string;
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
+  disabled?: boolean;
 }) {
   const t = useTheme();
 
   return (
-    <PressableScale onPress={onPress} style={[st.cta, { boxShadow: `0px 12px 30px ${t.glow}` }, style]}>
+    <PressableScale
+      onPress={onPress}
+      disabled={disabled}
+      style={[st.cta, { boxShadow: `0px 12px 30px ${t.glow}` }, style, disabled && st.disabled]}
+    >
       <View style={st.clip}>
         <LinearGradient colors={gold.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0.6 }} style={st.grad}>
           {/* inset 0 1px 0 rgba(255,255,255,.5) из эталона — блик по верхней кромке */}
@@ -41,4 +47,6 @@ const st = StyleSheet.create({
   grad: { paddingVertical: 15, alignItems: 'center' },
   gloss: { position: 'absolute', top: 0, left: 0, right: 0, height: 1, backgroundColor: 'rgba(255,255,255,0.5)' },
   txt: { color: gold.text, fontWeight: '800', fontSize: 13, letterSpacing: 1.5 },
+  // `s3saved`: opacity .75 — кнопка после сохранения гаснет и перестаёт нажиматься
+  disabled: { opacity: 0.75 },
 });

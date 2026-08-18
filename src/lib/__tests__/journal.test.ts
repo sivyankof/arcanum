@@ -3,16 +3,20 @@ import {
   canEditEntry,
   cardHistory,
   entriesOfMonth,
-  filterCounts,
-  filterEntries,
+  filterJournal,
+  journalCounts,
+  journalKey,
+  journalMonths,
+  journalOfMonth,
   monthSummary,
-  monthsWithEntries,
   normalizeNote,
   NOTE_MAX,
   outcomeStats,
   type DailyDraw,
+  type JournalEntry,
   type Outcome,
 } from '../journal';
+import type { SpreadDraw } from '../spread';
 
 /** Короткая запись: дата, карта и (необязательно) заметка. */
 const d = (date: string, cardId: string, note?: string): DailyDraw => ({
@@ -28,21 +32,18 @@ const o = (date: string, cardId: string, outcome: Outcome, note?: string): Daily
   outcome,
 });
 
-describe('monthsWithEntries', () => {
-  it('пустая история не даёт месяцев', () => {
-    expect(monthsWithEntries([])).toEqual([]);
-  });
-
-  it('месяцы идут от новых к старым, дубли схлопываются', () => {
-    const history = [d('2026-08-11', 'moon'), d('2026-08-01', 'sun'), d('2026-07-30', 'star')];
-    expect(monthsWithEntries(history)).toEqual(['2026-08', '2026-07']);
-  });
-
-  it('порядок записей в сторе не влияет на порядок месяцев', () => {
-    const history = [d('2026-07-30', 'star'), d('2026-08-11', 'moon'), d('2025-12-31', 'sun')];
-    expect(monthsWithEntries(history)).toEqual(['2026-08', '2026-07', '2025-12']);
-  });
+/** Сохранённый расклад — короткая запись для тестов ленты. */
+const sp = (ts: number, date: string, question?: string, note?: string): SpreadDraw => ({
+  ts,
+  date,
+  spreadId: 'three-card',
+  cards: [{ cardId: 'fool', reversed: false }, { cardId: 'sun', reversed: true }, { cardId: 'moon', reversed: false }],
+  ...(question ? { question } : {}),
+  ...(note ? { note } : {}),
 });
+const asDay = (e: DailyDraw): JournalEntry => ({ kind: 'day', entry: e });
+/** cardId записи дня; для записи расклада — undefined (сужение типа без каста). */
+const dayCardId = (e: JournalEntry): string | undefined => (e.kind === 'day' ? e.entry.cardId : undefined);
 
 describe('entriesOfMonth', () => {
   it('соседние месяцы не попадают в выборку', () => {
@@ -189,37 +190,76 @@ describe('outcomeStats', () => {
   });
 });
 
-describe('filterEntries', () => {
+describe('filterJournal (дни)', () => {
   const entries = [
     o('2026-08-11', 'moon', 'yes', 'с заметкой'),
     o('2026-08-10', 'sun', 'partly'),
     o('2026-08-09', 'star', 'no'),
     d('2026-08-08', 'tower', 'только заметка'),
-  ];
+  ].map(asDay);
 
   it('«все» отдаёт список как есть', () => {
-    expect(filterEntries(entries, 'all')).toHaveLength(4);
+    expect(filterJournal(entries, 'all')).toHaveLength(4);
   });
 
   it('фильтр по ответу', () => {
-    expect(filterEntries(entries, 'yes').map((e) => e.cardId)).toEqual(['moon']);
-    expect(filterEntries(entries, 'partly').map((e) => e.cardId)).toEqual(['sun']);
-    expect(filterEntries(entries, 'no').map((e) => e.cardId)).toEqual(['star']);
+    expect(filterJournal(entries, 'yes').map(dayCardId)).toEqual(['moon']);
+    expect(filterJournal(entries, 'partly').map(dayCardId)).toEqual(['sun']);
+    expect(filterJournal(entries, 'no').map(dayCardId)).toEqual(['star']);
   });
 
   it('«с заметкой» не зависит от ответа', () => {
-    expect(filterEntries(entries, 'note').map((e) => e.cardId)).toEqual(['moon', 'tower']);
+    expect(filterJournal(entries, 'note').map(dayCardId)).toEqual(['moon', 'tower']);
   });
 });
 
-describe('filterCounts', () => {
+describe('journalCounts (дни)', () => {
   it('даёт число для каждого чипа', () => {
     const entries = [
       o('2026-08-11', 'moon', 'yes', 'с заметкой'),
       o('2026-08-10', 'sun', 'yes'),
       d('2026-08-09', 'star'),
-    ];
-    expect(filterCounts(entries)).toEqual({ all: 3, yes: 2, partly: 0, no: 0, note: 1 });
+    ].map(asDay);
+    expect(journalCounts(entries)).toEqual({ all: 3, yes: 2, partly: 0, no: 0, note: 1 });
+  });
+});
+
+describe('единая лента дня и расклада (спека 36)', () => {
+  const history = [d('2026-08-14', 'fool', 'заметка дня'), o('2026-08-13', 'sun', 'no')];
+  const spreads = [sp(2, '2026-08-14', 'вопрос'), sp(1, '2026-08-14'), sp(3, '2026-07-02', undefined, 'заметка')];
+
+  it('journalMonths: месяцы обеих историй, новые первыми, без дублей', () => {
+    expect(journalMonths(history, spreads)).toEqual(['2026-08', '2026-07']);
+    expect(journalMonths([], [sp(9, '2026-06-01')])).toEqual(['2026-06']);
+  });
+
+  it('journalOfMonth: по дате убыв., внутри дня запись дня первой, расклады по ts убыв.', () => {
+    const items = journalOfMonth(history, spreads, '2026-08');
+    expect(items.map(journalKey)).toEqual(['d:2026-08-14', 's:2', 's:1', 'd:2026-08-13']);
+  });
+
+  it('filterJournal: ответы — только дни; «с заметкой» — день с заметкой или расклад с заметкой/вопросом', () => {
+    const items = journalOfMonth(history, spreads, '2026-08');
+    expect(filterJournal(items, 'no').map(journalKey)).toEqual(['d:2026-08-13']);
+    expect(filterJournal(items, 'note').map(journalKey)).toEqual(['d:2026-08-14', 's:2']);
+    expect(filterJournal(items, 'all')).toBe(items);
+  });
+
+  it('journalCounts: «Все» считает и расклады', () => {
+    const items = journalOfMonth(history, spreads, '2026-08');
+    expect(journalCounts(items)).toEqual({ all: 4, yes: 0, partly: 0, no: 1, note: 2 });
+  });
+
+  it('journalKey уникален у двух раскладов одного дня', () => {
+    expect(journalKey({ kind: 'spread', entry: sp(1, '2026-08-14') })).not.toBe(
+      journalKey({ kind: 'spread', entry: sp(2, '2026-08-14') }),
+    );
+  });
+
+  it('старые вызовы фильтров переписаны на ленту: тот же ответ по дням', () => {
+    const items = history.map(asDay);
+    expect(filterJournal(items, 'note').map(journalKey)).toEqual(['d:2026-08-14']);
+    expect(journalCounts(items).all).toBe(2);
   });
 });
 

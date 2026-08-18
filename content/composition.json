@@ -1,5 +1,5 @@
 {
- "_comment": "Шаблоны «Состава расклада» (logic-spec §1б). Вариант выбирается детерминированно: hash(дата расклада + правило) % число вариантов — чтобы при повторном открытии из дневника текст не менялся. Формула фразы: наблюдение + вопрос. Без советов, предсказаний, здоровья и денег.",
+ "_comment": "Шаблоны «Состава расклада» (logic-spec §1б). Вариант выбирается детерминированно: hash(дата расклада + правило) % число вариантов — чтобы при повторном открытии из дневника текст не менялся. Формула фразы: наблюдение + вопрос. Без советов, предсказаний, здоровья и денег. Числительные: {x} у aces/tens/generic не больше 4 (в колоде 4 туза, 4 десятки, 4 карты номинала), у courts — до 10, поэтому фраза courts не ставит число перед склоняемым словом.",
  "majors": {
   "variants": [
    {
@@ -60,7 +60,7 @@
      "en": "Pentacles prevail — this spread is about foundations and the material world. What gives you solid ground?"
     },
     {
-     "ru": "Пентаклей больше половины: разговор о устойчивости и плодах труда. Какой ваш труд ждёт признания?",
+     "ru": "Пентаклей больше половины: разговор об устойчивости и плодах труда. Какой ваш труд ждёт признания?",
      "en": "More than half are Pentacles: a conversation about stability and the fruits of work. Which of your efforts awaits recognition?"
     }
    ]
@@ -84,21 +84,47 @@
  },
  "ranks": {
   "aces": {
-   "ru": "В раскладе {x} туза — сразу несколько начал. Какое из них ваше?",
-   "en": "{x} Aces in this spread — several beginnings at once. Which one is yours?"
+   "variants": [
+    {
+     "ru": "В раскладе {x} туза — сразу несколько начал. Какое из них ваше?",
+     "en": "{x} Aces in this spread — several beginnings at once. Which one is yours?"
+    }
+   ]
   },
   "tens": {
-   "ru": "{x} десятки — несколько историй подходят к завершению. Какую пора отпустить с благодарностью?",
-   "en": "{x} Tens — several stories are reaching completion. Which one is ready to be released with gratitude?"
+   "variants": [
+    {
+     "ru": "{x} десятки — несколько историй подходят к завершению. Какую пора отпустить с благодарностью?",
+     "en": "{x} Tens — several stories are reaching completion. Which one is ready to be released with gratitude?"
+    }
+   ]
   },
   "courts": {
-   "ru": "В раскладе {x} придворные карты — вокруг вашего вопроса много людей и ролей. Чья роль здесь главная?",
-   "en": "{x} court cards — many people and roles surround your question. Whose role matters most here?"
+   "variants": [
+    {
+     "ru": "Придворных карт в раскладе — {x}: вокруг вашего вопроса много людей и ролей. Чья роль здесь главная?",
+     "en": "{x} court cards — many people and roles surround your question. Whose role matters most here?"
+    }
+   ]
   },
   "generic": {
-   "ru": "Номинал «{rank}» повторяется {x} раза — тема настойчиво возвращается. Что она хочет от вас?",
-   "en": "The rank “{rank}” repeats {x} times — the theme keeps returning. What does it want from you?"
+   "variants": [
+    {
+     "ru": "Номинал «{rank}» повторяется {x} раза — тема настойчиво возвращается. Что она хочет от вас?",
+     "en": "The rank “{rank}” repeats {x} times — the theme keeps returning. What does it want from you?"
+    }
+   ]
   }
+ },
+ "rankNames": {
+  "2": { "ru": "Двойка", "en": "Two" },
+  "3": { "ru": "Тройка", "en": "Three" },
+  "4": { "ru": "Четвёрка", "en": "Four" },
+  "5": { "ru": "Пятёрка", "en": "Five" },
+  "6": { "ru": "Шестёрка", "en": "Six" },
+  "7": { "ru": "Семёрка", "en": "Seven" },
+  "8": { "ru": "Восьмёрка", "en": "Eight" },
+  "9": { "ru": "Девятка", "en": "Nine" }
  },
  "neutral": {
   "variants": [

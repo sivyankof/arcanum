@@ -59,11 +59,24 @@ export interface CourseModule {
   lessons: CourseLesson[];
 }
 
+/** Расклад каталога (content/spreads.json, спека 36): позиции — в порядке открытия/сохранения,
+ *  их ровно `cards`; геометрия на экране живёт не здесь, а в src/lib/spreadLayout.ts. */
+export interface Spread {
+  id: string;
+  /** freemium-флаг: false = PREMIUM-бейдж в списке; в v1 не блокирует (product-spec §4) */
+  free: boolean;
+  cards: number;
+  name: Localized;
+  description: Localized;
+  positions: Localized[];
+}
+
 export const cards = (cardsJson as any).cards as TarotCard[];
-export const spreads = (spreadsJson as any).spreads as any[];
+export const spreads = (spreadsJson as any).spreads as Spread[];
 export const course = (courseJson as any).modules as CourseModule[];
 
 export const cardById = new Map(cards.map((c) => [c.id, c]));
+export const spreadById = new Map(spreads.map((s) => [s.id, s]));
 
 /** FNV-1a, 32-bit — быстрый некриптографический хеш строки в целое число [0, 2^32). */
 export function fnv1a32(s: string): number {

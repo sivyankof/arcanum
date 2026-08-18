@@ -21,6 +21,7 @@ import i18n from '../src/lib/i18n';
 import { useAppActive } from '../src/lib/useAppActive';
 import { usePushScheduler } from '../src/lib/usePushScheduler';
 import { useApp } from '../src/store/useApp';
+import { transparentHeader } from '../src/theme/navHeader';
 import { useTheme } from '../src/theme/useTheme';
 
 export { ErrorBoundary } from 'expo-router';
@@ -112,14 +113,10 @@ export default function RootLayout() {
             options={{
               // шапка системная (нативная кнопка «назад»), но прозрачная: своего заголовка не нужно —
               // название карты уже есть в теле экрана. Подпись кнопки задаётся на самом экране
-              // (зависит от источника перехода, см. Stack.Screen внутри card/[id].tsx)
-              title: '',
-              headerTransparent: true,
-              // без явного сброса фон наследуется из screenOptions.headerStyle.backgroundColor выше
-              // и рисует непрозрачную полосу поверх контента — это уже случалось
-              headerStyle: { backgroundColor: 'transparent' },
-              headerShadowVisible: false,
-              headerTintColor: t.accent,
+              // (зависит от источника перехода, см. Stack.Screen внутри card/[id].tsx). Без явного
+              // сброса фона он наследовался бы из screenOptions.headerStyle.backgroundColor выше
+              // и рисовал непрозрачную полосу поверх контента — это уже случалось
+              ...transparentHeader(t),
               // экран проявляется на месте — «переезд» отыгрывает перелетающая картинка (пункт 6 motion-spec)
               animation: 'fade',
             }}
@@ -132,16 +129,10 @@ export default function RootLayout() {
           />
           {/* заглушка урока (спека 07): обычный push с прозрачной шапкой — движок урока (08)
               наполнит экран, маршрут и навигация уже настоящие */}
-          <Stack.Screen
-            name="lesson/[id]"
-            options={{
-              title: '',
-              headerTransparent: true,
-              headerStyle: { backgroundColor: 'transparent' },
-              headerShadowVisible: false,
-              headerTintColor: t.accent,
-            }}
-          />
+          <Stack.Screen name="lesson/[id]" options={transparentHeader(t)} />
+          {/* просмотр сохранённого расклада (спека 36): корневой стек поверх любого таба, та же
+              прозрачная шапка, что у страницы карты; объявлен здесь, чтобы не пройти мимо гарда */}
+          <Stack.Screen name="spread/[ts]" options={transparentHeader(t)} />
         </Stack.Protected>
       </Stack>
     </GestureHandlerRootView>

@@ -1,5 +1,6 @@
 import { localDateISO } from '../dates';
 import { NOTE_MAX } from '../journal';
+import { QUESTION_MAX, SPREADS_MAX } from '../spread';
 import {
   BACKUP_KEYS,
   backupFileName,
@@ -34,6 +35,16 @@ export const VALID: BackupState = {
   xp: 42,
   settings: { reflectionOn: false, pushesOn: true, pushMorning: '08:00', pushEvening: '22:00', pushAsked: true },
   profile: { name: 'Аня', birthDate: '1993-03-09', birthArcanaId: 'high-priestess', onboarded: true },
+  spreadsHistory: [
+    {
+      ts: 1755100000000,
+      date: '2026-08-14',
+      spreadId: 'three-card',
+      cards: [{ cardId: 'fool', reversed: false }, { cardId: 'magician', reversed: true }, { cardId: 'sun', reversed: false }],
+      question: 'Стоит ли менять работу?',
+      note: 'Колесо в настоящем',
+    },
+  ],
 };
 
 describe('buildBackup — сборка файла (спека 11)', () => {
@@ -49,10 +60,11 @@ describe('buildBackup — сборка файла (спека 11)', () => {
 });
 
 describe('белый список и дефолты', () => {
-  it('ключи бэкапа = персистуемая схема v8 — новое поле стора требует осознанного решения здесь', () => {
+  it('ключи бэкапа = персистуемая схема v9 (спека 36: + spreadsHistory) — новое поле стора требует осознанного решения здесь', () => {
     expect([...BACKUP_KEYS].sort()).toEqual([
       'freezeMonth', 'freezeSpentDate', 'freezes', 'history', 'installSeed', 'lang',
-      'lastDrawDate', 'lessonsProgress', 'profile', 'settings', 'streak', 'themeMode', 'xp',
+      'lastDrawDate', 'lessonsProgress', 'profile', 'settings', 'spreadsHistory', 'streak',
+      'themeMode', 'xp',
     ]);
   });
   it('дефолты совпадают с дефолтами стора до задачи 11', () => {
@@ -60,8 +72,8 @@ describe('белый список и дефолты', () => {
     expect(PERSIST_DEFAULTS.settings.pushMorning).toBe('09:00');
     expect(PERSIST_DEFAULTS.profile).toEqual({ onboarded: false });
   });
-  it('версия схемы 8: lang принимает es/pt — файл v8 старому ридеру откажет как «новее», а не «повреждён»', () => {
-    expect(SCHEMA_VERSION).toBe(8);
+  it('версия схемы 9: spreadsHistory (спека 36) — файл v9 старому ридеру откажет как «новее», а не «повреждён»', () => {
+    expect(SCHEMA_VERSION).toBe(9);
   });
 });
 
@@ -203,5 +215,42 @@ describe('resolveImportedLang — язык бэкапа применяется �
 
   it('язык файла совпадает с текущим — результат тот же независимо от доступности', () => {
     expect(resolveImportedLang('ru', 'ru', ['ru', 'en'])).toBe('ru');
+  });
+});
+
+describe('parseBackup — расклады (спека 36)', () => {
+  const withSpreads = (spreadsHistory: unknown) =>
+    parseBackup(JSON.stringify({ ...buildBackup(VALID, SCHEMA_VERSION, AT), state: { ...VALID, spreadsHistory } }), SCHEMA_VERSION);
+
+  it('валидный расклад проходит и сохраняется', () => {
+    const r = withSpreads(VALID.spreadsHistory);
+    expect(r.ok && r.state.spreadsHistory).toEqual(VALID.spreadsHistory);
+  });
+
+  it('файл v8 без spreadsHistory доливается пустым списком', () => {
+    const { spreadsHistory: _drop, ...old } = VALID;
+    const raw = { ...buildBackup(VALID, 8, AT), schemaVersion: 8, state: old };
+    const r = parseBackup(JSON.stringify(raw), SCHEMA_VERSION);
+    expect(r.ok && r.state.spreadsHistory).toEqual([]);
+  });
+
+  const base = VALID.spreadsHistory[0];
+  it.each([
+    ['чужой spreadId', { ...base, spreadId: 'nope' }],
+    ['число карт не совпадает с раскладом', { ...base, cards: base.cards.slice(0, 2) }],
+    ['дубль карты внутри расклада', { ...base, cards: [base.cards[0], base.cards[0], base.cards[2]] }],
+    ['чужой cardId', { ...base, cards: [{ cardId: 'нет', reversed: false }, base.cards[1], base.cards[2]] }],
+    ['reversed не boolean', { ...base, cards: [{ cardId: 'fool', reversed: 1 }, base.cards[1], base.cards[2]] }],
+    ['ts не число', { ...base, ts: '1' }],
+    ['дата не ISO', { ...base, date: '14.08.2026' }],
+    ['вопрос длиннее QUESTION_MAX', { ...base, question: 'в'.repeat(QUESTION_MAX + 1) }],
+    ['заметка длиннее NOTE_MAX', { ...base, note: 'з'.repeat(NOTE_MAX + 1) }],
+  ])('битый расклад: %s → corrupt', (_name, draw) => {
+    expect(withSpreads([draw])).toEqual({ ok: false, error: 'corrupt' });
+  });
+
+  it('больше SPREADS_MAX раскладов → corrupt', () => {
+    const many = Array.from({ length: SPREADS_MAX + 1 }, (_, i) => ({ ...base, ts: base.ts + i }));
+    expect(withSpreads(many)).toEqual({ ok: false, error: 'corrupt' });
   });
 });

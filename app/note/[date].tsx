@@ -6,7 +6,7 @@
  *  дат экран открывается в режиме чтения — страховка от прямой ссылки и от долгого тапа.
  */
 import { Image } from 'expo-image';
-import { router, Stack, useLocalSearchParams, useNavigation } from 'expo-router';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';
@@ -22,9 +22,11 @@ import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import { canEditEntry, normalizeNote, NOTE_MAX } from '../../src/lib/journal';
 import { inLang } from '../../src/lib/lang';
+import { useLeaveGuard } from '../../src/lib/useLeaveGuard';
 import { useApp } from '../../src/store/useApp';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
+import { noOutline } from '../../src/theme/webInput';
 
 /** С какой длины счётчик подсвечивается: дальше видно, что предел близко. */
 const COUNTER_WARN = 450;
@@ -35,37 +37,21 @@ export default function NoteScreen() {
   const { t: tr } = useTranslation();
   const lang = useLang();
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
 
   const entry = useApp((s) => s.history.find((h) => h.date === date));
   const setNote = useApp((s) => s.setNote);
 
   const saved = entry?.note ?? '';
   const [text, setText] = React.useState(saved);
-  const [asking, setAsking] = React.useState(false);
-  // действие навигации, задержанное вопросом «уйти без сохранения?»
-  const pending = React.useRef<Parameters<typeof navigation.dispatch>[0] | null>(null);
-  // после сохранения уход разрешён без вопросов
-  const leaving = React.useRef(false);
 
   const editable = !!entry && canEditEntry(date ?? '');
   const dirty = editable && normalizeNote(text) !== saved;
-
-  // перехватываем и кнопку «назад», и свайп-жест закрытия модалки
-  React.useEffect(
-    () =>
-      navigation.addListener('beforeRemove', (e) => {
-        if (!dirty || leaving.current) return;
-        e.preventDefault();
-        pending.current = e.data.action;
-        setAsking(true);
-      }),
-    [navigation, dirty],
-  );
+  // перехватывает и кнопку «назад», и свайп-жест закрытия модалки
+  const { asking, onCancel, onConfirm, markLeaving } = useLeaveGuard(dirty);
 
   const onSave = () => {
     hapticTap();
-    leaving.current = true;
+    markLeaving();
     setNote(date ?? '', text);
     router.back();
   };
@@ -74,7 +60,11 @@ export default function NoteScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ title: tr('note.title') }} />
+      {/* headerBackButtonMenuEnabled: false — тот же гейт useLeaveGuard, что у расклада: модалка
+          презентуется поверх ТОГО ЖЕ стека (previousDescriptor у неё есть — «Сегодня»/карточка/
+          дневник), поэтому у неё тоже есть нативная кнопка «назад», и долгий тап по ней так же
+          открыл бы меню с прыжком через несколько экранов мимо гейта */}
+      <Stack.Screen options={{ title: tr('note.title'), headerBackButtonMenuEnabled: false }} />
       <ScreenBg />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -107,13 +97,7 @@ export default function NoteScreen() {
             placeholder={tr('note.placeholder')}
             placeholderTextColor={t.muted}
             textAlignVertical="top"
-            style={[
-              st.input,
-              { backgroundColor: t.panel, borderColor: t.line, color: t.text },
-              // в браузере сфокусированное поле получает системную обводку — на устройстве
-              // её нет, и рядом с макетом она читается как вторая рамка
-              Platform.OS === 'web' && ({ outlineStyle: 'none' } as object),
-            ]}
+            style={[st.input, { backgroundColor: t.panel, borderColor: t.line, color: t.text }, noOutline]}
           />
           <Txt style={[st.counter, { color: text.length >= COUNTER_WARN ? t.accent : t.muted }]}>
             {`${text.length} / ${NOTE_MAX}`}
@@ -129,12 +113,8 @@ export default function NoteScreen() {
         message={tr('note.leaveText')}
         confirmLabel={tr('note.leave')}
         cancelLabel={tr('note.stay')}
-        onCancel={() => setAsking(false)}
-        onConfirm={() => {
-          setAsking(false);
-          leaving.current = true;
-          if (pending.current) navigation.dispatch(pending.current);
-        }}
+        onCancel={onCancel}
+        onConfirm={onConfirm}
       />
     </View>
   );
