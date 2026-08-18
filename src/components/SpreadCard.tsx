@@ -8,13 +8,27 @@
  *  ⚠️ Дефект с лайв-проверки: `rotateY: 360deg` — НЕ то же самое для компоновщика iOS, что
  *  отсутствие поворота. Слой с 3D-трансформом (perspective/rotateY/backfaceVisibility) навсегда
  *  остаётся в 3D-контексте и рисуется через offscreen-текстуру — растрируется мимо натива экрана,
- *  карта выглядит замыленной; открытие следующей карты освобождает текстуру этой, и мыло
- *  «перескакивает». Лечение: как только переворот ДОЕХАЛ (флаг `settled` — из колбэка `withTiming`
- *  через `runOnJS`, не таймером, чтобы не разъехаться с анимацией), лицо рисуется обычным `View` без
- *  единого 3D-пропа, а рубашка не рендерится вовсе (она больше не нужна и это лишний SVG на карту).
+ *  карта выглядит замыленной.
+ *  Первая попытка чинить это (просто перестать передавать `frontStyle` в массив стилей, когда
+ *  переворот доехал) не сработала: reanimated применяет свойства к нативному представлению
+ *  ИМПЕРАТИВНО, со стороны UI-потока — это не то же самое, что обычный React-проп. Убрать стиль
+ *  из массива значит просто перестать его ПЕРЕДАВАТЬ; ранее наложенные `transform`/
+ *  `backfaceVisibility` от этого никуда не деваются — они остаются осиротевшими на слое, и слой
+ *  продолжает жить в 3D-контексте. Мыло «перескакивало» только при следующем рендере (открытие
+ *  соседней карты, возврат на экран), потому что тогда представление пересобиралось заново.
+ *  Лечение — не переставать слать стиль, а ЯВНО ПЕРЕЗАПИСАТЬ его дефолтами: как только переворот
+ *  ДОЕХАЛ (`settledSV` — shared value, выставляется прямо в колбэке `withTiming` на UI-потоке,
+ *  без раунд-трипа через JS), воркл `frontStyle` возвращает пустой `transform` и
+ *  `backfaceVisibility: 'visible'` — те же самые свойства, что раньше держали слой в 3D, теперь
+ *  явно снимаются через тот же канал, которым были наложены. Скачка при этом не будет: на
+ *  `flip.value === 1` `rotateY` уже стоит на 360°, что для компоновщика визуально совпадает
+ *  с identity-поворотом (sin 360° = sin 0°), — перезапись убирает только остаточный 3D-слой,
+ *  а не видимое положение карты. Параллельно (JS-состояние `settled`, из того же колбэка через
+ *  `runOnJS`) рубашка перестаёт рендериться вовсе — она больше не нужна и это лишний SVG на карту.
  *  В просмотре сохранённого (animateFlip=false) карта обязана быть «доехавшей» сразу — без кадра
- *  с трансформацией. При возврате `open` в false флаг сбрасывается — иначе повторное тасование
- *  (карта переиспользуется по `key`, см. SpreadScreen.onAgain) покажет лицо без переворота. */
+ *  с трансформацией: оба флага стартуют уже в состоянии settled. При возврате `open` в false оба
+ *  флага сбрасываются — иначе повторное тасование (карта переиспользуется по `key`, см.
+ *  SpreadScreen.onAgain) покажет лицо без переворота. */
 import { Image } from 'expo-image';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
@@ -52,34 +66,51 @@ export function SpreadCard({
 }) {
   const t = useTheme();
   const flip = useSharedValue(open ? 1 : 0);
-  // переворот доехал — лицо переходит на обычный слой без 3D (см. комментарий к файлу)
+  // доехал ли переворот — держим ОБА представления. settledSV (shared value) читает воркл
+  // frontStyle прямо на UI-потоке и там же перезаписывает 3D-пропы дефолтом; settled (React-
+  // состояние) убирает рубашку из дерева на JS-потоке (см. комментарий к файлу)
+  const settledSV = useSharedValue(open && !animateFlip);
   const [settled, setSettled] = React.useState(open && !animateFlip);
 
   React.useEffect(() => {
     if (!open) {
       flip.value = 0;
+      settledSV.value = false;
       setSettled(false);
       return;
     }
     if (!animateFlip) {
       flip.value = 1;
+      settledSV.value = true;
       setSettled(true);
       return;
     }
+    settledSV.value = false;
     setSettled(false);
     flip.value = withTiming(1, { duration: FLIP_MS, easing: Easing.out(Easing.cubic) }, (finished) => {
-      if (finished) runOnJS(setSettled)(true);
+      if (finished) {
+        settledSV.value = true; // UI-поток: воркл ниже тут же перекрывает 3D-пропы дефолтом
+        runOnJS(setSettled)(true); // JS-поток: прячет рубашку
+      }
     });
-  }, [open, animateFlip, flip]);
+  }, [open, animateFlip, flip, settledSV]);
 
   const backStyle = useAnimatedStyle(() => ({
     transform: [{ perspective: 1100 }, { rotateY: `${interpolate(flip.value, [0, 1], [0, 180])}deg` }],
     backfaceVisibility: 'hidden' as const,
   }));
-  const frontStyle = useAnimatedStyle(() => ({
-    transform: [{ perspective: 1100 }, { rotateY: `${interpolate(flip.value, [0, 1], [180, 360])}deg` }],
-    backfaceVisibility: 'hidden' as const,
-  }));
+  // Стиль отдаётся ВСЕГДА (и до, и после settled) — это единственный способ гарантированно
+  // перезаписать 3D-пропы, а не просто перестать их слать (см. комментарий к файлу). После
+  // settled воркл явно возвращает дефолты вместо того, чтобы пропасть из массива стилей.
+  const frontStyle = useAnimatedStyle(() => {
+    if (settledSV.value) {
+      return { transform: [], backfaceVisibility: 'visible' as const };
+    }
+    return {
+      transform: [{ perspective: 1100 }, { rotateY: `${interpolate(flip.value, [0, 1], [180, 360])}deg` }],
+      backfaceVisibility: 'hidden' as const,
+    };
+  });
 
   return (
     <PressableScale onPress={onPress} style={[st.wrap, { width, height, boxShadow: `0px 10px 26px ${t.glow}` }]}>
@@ -90,7 +121,7 @@ export function SpreadCard({
           <Text style={[st.star, { color: t.accent }]}>✶</Text>
         </Animated.View>
       )}
-      <Animated.View style={[st.face, { borderColor: t.frame }, !settled && frontStyle]}>
+      <Animated.View style={[st.face, { borderColor: t.frame }, frontStyle]}>
         <Image
           source={cardImages[cardId]}
           style={[st.img, reversed && st.reversed]}
