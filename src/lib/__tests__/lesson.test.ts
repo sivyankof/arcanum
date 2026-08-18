@@ -17,9 +17,9 @@ const lesson = (over: Partial<CourseLesson> = {}): CourseLesson => ({
   id: 'x1',
   title: { ru: 'Урок', en: 'Lesson' },
   cards: [],
-  theory: { ru: 'абзац', en: 'para', status: 'draft' },
+  theory: { ru: 'абзац', en: 'para', status: { ru: 'draft', en: 'draft' } },
   quiz: [q(0)],
-  quizStatus: 'draft',
+  quizStatus: { ru: 'draft', en: 'draft' },
   ...over,
 });
 

@@ -29,7 +29,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardImages } from '../../src/lib/cardImages';
-import { cardById, cardNumeral } from '../../src/lib/content';
+import { blockText, cardById, cardNumeral } from '../../src/lib/content';
 import { formatDayMonth } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
@@ -231,9 +231,8 @@ export default function CardDetail() {
   // текст и статус блока контента по ключу — общая логика для вкладки сферы
   // и для постоянных блоков ниже (перевёрнутая / как карта дня / символика)
   const blockOf = (key: string): { text: string; todo: boolean } => {
-    const block = card.content[key];
-    if (!block || block.status === 'todo') return { text: tr('card.soon'), todo: true };
-    return { text: inLang(block, lang), todo: false };
+    const { text, todo } = blockText(card.content[key], lang);
+    return todo ? { text: tr('card.soon'), todo: true } : { text, todo: false };
   };
 
   const applySphere = (key: SphereKey) => {

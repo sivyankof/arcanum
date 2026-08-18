@@ -20,7 +20,10 @@
      "theory": {
       "ru": "Забудьте всё, что вы видели в кино: таро — это не предсказание судьбы и не «магический шар». Это колода из 78 картинок, которая помогает разговаривать с собой честнее, чем обычно.\n\nКак это работает? Каждая карта — маленькая история в образах: путник на краю обрыва, женщина в саду, воин на колеснице. Когда вы вытягиваете карту с вопросом в голове, вы смотрите на картинку — и мозг сам начинает достраивать связи. Это похоже на то, как в случайном облаке мы вдруг видим фигуру, а в песне — историю про себя. Психологи называют это проекцией, и именно она делает таро таким полезным инструментом: карта не сообщает вам чужой ответ, она вытаскивает наружу ваш собственный, который уже зрел где-то внутри.\n\nПростой пример из жизни. Вы неделю не можете решить, соглашаться ли на новую работу. Вытягиваете карту, видите на ней человека, который крепко держится за свои сундуки, — и ловите себя на мысли: «Я ведь держусь за старое место только из страха». Карта не решила за вас. Она просто дала повод сформулировать то, что вы уже чувствовали.\n\nПоэтому в этом курсе мы будем относиться к таро как к зеркалу и собеседнику, а не как к оракулу. Вам не нужны особые способности, «дар» или ритуалы посвящения — нужны только любопытство и немного практики каждый день. Значения карт мы будем учить маленькими порциями, как слова нового языка: сначала простые, потом сочетания, потом целые «фразы» из нескольких карт.\n\nПопробуйте сегодня: ещё до знакомства с колодой потренируйте главный навык таролога — задавать хорошие вопросы. Возьмите ситуацию, которая вас сейчас занимает, и переформулируйте вопрос из закрытого в открытый. Не «Стоит ли мне увольняться?», а «Что мне важно понять про мою работу?». Запишите свой открытый вопрос — он пригодится уже в третьем уроке.",
       "en": "Forget everything the movies taught you: tarot is not fortune-telling, and it is not a crystal ball. It is a deck of 78 pictures that helps you talk to yourself more honestly than you usually do.\n\nHow does it work? Every card is a tiny story told in images: a traveller at the edge of a cliff, a woman in a garden, a warrior in a chariot. When you draw a card while holding a question in mind, you look at the picture — and your brain starts building connections on its own. It is a bit like spotting a familiar shape in a passing cloud, or hearing a random song and feeling it is somehow about you. Psychologists call this projection, and it is exactly what makes tarot such a useful tool: the card does not hand you someone else's answer, it draws out your own — the one that was already forming somewhere inside.\n\nA simple real-life example. For a week you cannot decide whether to accept a new job. You draw a card, see a figure clutching their treasure chests, and suddenly catch yourself thinking: \"I'm only holding on to my old job out of fear.\" The card did not decide for you. It simply gave you a way to say out loud what you already felt.\n\nSo throughout this course we will treat tarot as a mirror and a conversation partner, not an oracle. You do not need special powers, a \"gift\", or initiation rituals — just curiosity and a little daily practice. We will learn the cards in small portions, like words of a new language: simple words first, then combinations, then whole \"sentences\" made of several cards.\n\nTry this today: before you even touch a deck, practise the tarot reader's core skill — asking good questions. Take a situation that is on your mind and turn a closed question into an open one. Not \"Should I quit?\" but \"What do I need to understand about my job?\" Write your open question down — you will use it in lesson three.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -154,7 +157,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m1l2",
@@ -166,7 +172,10 @@
      "theory": {
       "ru": "Семьдесят восемь карт звучит пугающе — как выучить их все? Хорошая новость: колода устроена очень логично, и когда вы увидите её «скелет», объём перестанет пугать.\n\nПредставьте колоду как большую книгу о жизни. В ней два раздела. Первый — 22 Старших аркана: Дурак, Маг, Императрица, Колесо Фортуны и другие «крупные» карты. Это главные главы книги — большие темы и поворотные моменты: влюблённость, кризис, переезд, взросление. Когда в раскладе много Старших арканов, речь идёт о чём-то действительно важном для вас.\n\nВторой раздел — 56 Младших арканов. Это повседневность: рабочие письма, ссоры и примирения, деньги, усталость, маленькие радости. Младшие делятся на четыре масти, как обычные игральные карты, — и это не совпадение: игральная колода произошла от таро. Жезлы отвечают за энергию, действие и азарт; Кубки — за чувства и отношения; Мечи — за мысли, слова и конфликты; Пентакли — за деньги, тело и всё материальное. В каждой масти есть числовые карты от Туза до Десятки — они показывают развитие сюжета от начала до итога.\n\nИ ещё в каждой масти живут четыре «персонажа» — придворные карты: Паж, Рыцарь, Королева и Король. Чаще всего они описывают людей или роли: Паж — ученик и новичок, Рыцарь — энергия в движении, Королева и Король — зрелость и мастерство. Например, Королева Кубков — это может быть чуткий друг, а может быть ваша собственная эмпатичная сторона.\n\nУчить все 78 карт подряд мы не будем — пойдём маленькими шагами: сначала Старшие арканы, потом масть за мастью.\n\nПопробуйте сегодня: возьмите колоду и просто рассортируйте её. Отложите 22 Старших аркана в одну стопку, а Младшие разложите по четырём мастям. Не вчитывайтесь в значения — просто рассматривайте картинки и заметьте, какая стопка притягивает вас больше всего. Это уже знакомство.",
       "en": "Seventy-eight cards sounds intimidating — how could anyone learn them all? Here is the good news: the deck has a very logical skeleton, and once you see it, the number stops being scary.\n\nThink of the deck as a big book about life, with two sections. The first is the 22 Major Arcana: the Fool, the Magician, the Empress, the Wheel of Fortune and other \"headline\" cards. These are the book's main chapters — big themes and turning points: falling in love, a crisis, a move, growing up. When a reading is full of Majors, something genuinely important is at play for you.\n\nThe second section is the 56 Minor Arcana. This is everyday life: work emails, arguments and reconciliations, money, tiredness, small joys. The Minors split into four suits, just like regular playing cards — and that is no coincidence: playing cards actually descend from tarot. Wands stand for energy, action and drive; Cups for feelings and relationships; Swords for thoughts, words and conflict; Pentacles for money, the body and everything material. Each suit runs from Ace to Ten, telling a story from a fresh start to its outcome.\n\nEach suit is also home to four \"characters\" — the court cards: Page, Knight, Queen and King. They usually describe people or roles: the Page is a student and beginner, the Knight is energy in motion, the Queen and King are two flavours of mastery. The Queen of Cups, for instance, might be your most empathetic friend — or your own caring, intuitive side.\n\nWe will not memorise all 78 in a row. We will go step by step: Major Arcana first, then one suit at a time.\n\nTry this today: take your deck and simply sort it. Set the 22 Major Arcana in one pile, then split the Minors into their four suits. Don't study meanings yet — just look at the pictures and notice which pile draws you in most. That is already the beginning of your acquaintance.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -300,7 +309,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m1l3",
@@ -312,7 +324,10 @@
      "theory": {
       "ru": "Лучший способ выучить таро — не зубрёжка, а одна карта в день. Пять минут утром — и через пару месяцев вы будете знать колоду так, будто дружите с ней много лет.\n\nРитуал «карта дня» — это как ежедневный урок в языковом приложении: маленький, но регулярный. Работает он просто. Утром, пока чай ещё горячий, перемешайте колоду и задайте один и тот же вопрос: «Что мне сегодня важно заметить?» Вытяните одну карту. Рассмотрите её без спешки: кто на ней изображён, что он делает, какое у картинки настроение? Потом загляните в значение — в приложении или в книжке — и выберите из него одну мысль, которая откликается именно сегодня. Запишите пару строк: название карты, ваша мысль, ваше настроение.\n\nА вечером — самое интересное. Вернитесь к записи и спросите себя: где эта карта «проявилась» за день? Утром выпала Колесница — а днём вы наконец взяли себя в руки и доделали отчёт, который откладывали неделю? Выпала Жрица — и вы вовремя промолчали в споре, о котором пожалели бы? Такие совпадения не мистика: карта с утра просто настраивает внимание, как очки с новым фильтром. Но именно через эти маленькие истории значения карт перестают быть абстракцией и становятся вашим личным опытом.\n\nДва важных правила. Первое: одна карта в день, не больше. Соблазн перетянуть «неудачную» карту велик, но именно неудобные карты учат лучше всего. Второе: не бойтесь «плохих» карт. Карта дня — не приговор на сутки, а тема для наблюдения.\n\nПопробуйте сегодня: вытяните свою первую карту дня прямо сейчас, даже если уже вечер. Запишите три вещи: название карты, что происходит на картинке вашими словами и одно предположение, о чём она может быть для вас. Завтра утром повторите — и привычка начнёт складываться.",
       "en": "The best way to learn tarot is not cramming — it is one card a day. Five minutes each morning, and within a couple of months you will know the deck as if you had been friends for years.\n\nThe card-of-the-day ritual is like a daily lesson in a language app: small but consistent. Here is how it works. In the morning, while your tea is still hot, shuffle the deck and ask the same question every time: \"What do I need to notice today?\" Draw one card. Look at it unhurriedly: who is in the picture, what are they doing, what is the mood? Then check the meaning — in the app or a book — and pick the single idea that resonates most today. Jot down a few lines: the card's name, your thought, your mood.\n\nThe evening is where it gets interesting. Return to your note and ask yourself: where did this card show up during the day? You drew the Chariot in the morning — and by afternoon you finally pulled yourself together and finished the report you had been postponing for a week? You drew the High Priestess — and you wisely stayed silent in an argument you would have regretted? These are not mystical coincidences: a morning card simply tunes your attention, like glasses with a new filter. But it is exactly through these small stories that card meanings stop being abstract and become your lived experience.\n\nTwo important rules. First: one card a day, no more. The temptation to redraw an \"unlucky\" card is real, but the uncomfortable cards are the best teachers. Second: don't fear \"bad\" cards. A card of the day is not a verdict — it is a theme to observe.\n\nTry this today: draw your first card of the day right now, even if it is already evening. Write down three things: the card's name, what is happening in the picture in your own words, and one guess about what it might mean for you. Repeat tomorrow morning — and the habit will begin to take root.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -446,7 +461,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m1l4",
@@ -458,7 +476,10 @@
      "theory": {
       "ru": "У хорошего таролога, как у хорошего врача, есть своё «не навреди». Прежде чем читать карты — себе или друзьям, — давайте договоримся о правилах, которые сделают практику безопасной и приятной.\n\nПравило первое: карты не решают за вас. Таро помогает увидеть ситуацию объёмнее, но выбор всегда остаётся вашим. «Карты сказали расстаться» — так это не работает. Работает так: «Карты помогли мне признать: эти отношения давно не приносят мне счастья». Чувствуете разницу? Ответственность за решения — лучшая защита от зависимости от раскладов.\n\nПравило второе: не гадайте на других без их согласия. Заглянуть в карты «что думает обо мне бывший партнёр» или «не изменяет ли партнёр друга» — соблазнительно, но это как читать чужие переписки. Во-первых, неэтично. Во-вторых, бесполезно: карты в таком раскладе покажут лишь ваши собственные тревоги и фантазии. Спрашивайте о себе: «Что мне важно понять в этих отношениях?» — такой вопрос и честнее, и полезнее.\n\nПравило третье: есть темы не для карт. Диагнозы и лечение — к врачу, юридические вопросы — к юристу, острые состояния — к психотерапевту. Таро может поддержать («Как мне позаботиться о себе в этот период?»), но не заменяет специалистов. И осторожнее с вопросами «когда я умру» и подобными — они не дают ничего, кроме тревоги.\n\nПравило четвёртое: не перетягивайте. Если ответ не понравился, десятый расклад на тот же вопрос не даст ясности — только кашу. Один вопрос — один расклад, а дальше время и действия.\n\nЭти границы — не скучные запреты, а забота о себе. Внутри них таро остаётся тем, чем и должно быть: добрым инструментом для размышлений.\n\nПопробуйте сегодня: составьте личный кодекс из трёх пунктов — три правила, которые вы обещаете себе соблюдать в практике. Запишите их на первой странице тетради для карты дня. Свои правила соблюдать легче, чем чужие.",
       "en": "A good tarot reader, like a good doctor, has their own \"do no harm\". Before you start reading — for yourself or for friends — let's agree on a few rules that keep the practice safe and enjoyable.\n\nRule one: the cards do not decide for you. Tarot helps you see a situation from more angles, but the choice is always yours. \"The cards told me to break up\" — that is not how it works. This is how it works: \"The cards helped me admit this relationship hasn't made me happy for a long time.\" Feel the difference? Owning your decisions is the best protection against becoming dependent on readings.\n\nRule two: do not read about other people without their consent. Peeking at \"what my ex-partner thinks of me\" or \"is my friend's partner cheating\" is tempting, but it is like reading someone's private messages. First, it is not ethical. Second, it is useless: such a spread will only show you your own worries and fantasies. Ask about yourself instead: \"What do I need to understand about this relationship?\" That question is both more honest and more helpful.\n\nRule three: some topics are not for cards. Diagnoses and treatment belong to doctors, legal questions to lawyers, acute distress to therapists. Tarot can offer support (\"How can I take care of myself right now?\"), but it never replaces professionals. And be careful with questions like \"when will I die\" — they bring nothing but anxiety.\n\nRule four: no redraws. If you dislike an answer, a tenth spread on the same question will not bring clarity — only noise. One question, one spread; after that, time and action.\n\nThese boundaries are not dull restrictions — they are self-care. Within them, tarot stays what it should be: a kind tool for reflection.\n\nTry this today: write your personal code — three rules you promise to follow in your practice. Put them on the first page of your card-of-the-day journal. Your own rules are easier to keep than anyone else's.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -592,7 +613,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     }
    ]
   },
@@ -617,7 +641,10 @@
      "theory": {
       "ru": "Все 22 Старших аркана — это одна большая история: путешествие героя по имени Дурак. Сегодня она начинается: герой делает первый шаг — и тут же встречает первого учителя.\n\nДурак — карта номер ноль. На классической картинке Уэйта юноша с лёгкой походкой стоит на краю обрыва: за плечом узелок со всем нажитым, в руке белая роза, рядом прыгает пёс. Он смотрит не под ноги, а в небо — и совсем не боится. Ноль — это чистый потенциал: ещё ничего не решено, всё возможно. Дурак — это вы в первый день новой работы, в первом путешествии в одиночку, на первом уроке таро. Его ключевые слова: новое начало, спонтанность, вера в жизнь, свобода. Его сила — доверие; его риск — беспечность: обрыв под ногами всё-таки настоящий.\n\nИ вот первый шаг сделан — Дурак встречает Мага, карту номер один. Контраст разительный. Дурак парит, Маг — стоит твёрдо. Одна его рука поднята к небу, другая указывает на землю: «задумай — и воплоти». На столе перед ним четыре предмета — жезл, кубок, меч и пентакль, символы всех мастей колоды. Это значит: всё необходимое у тебя уже есть. Маг — про волю, мастерство и умение собрать мечту в конкретный план. Дурак говорит: «Ах, как было бы чудесно печь торты!» Маг отвечает: «Вот духовка, вот рецепт, вот три часа в субботу — начинаем».\n\nВместе эти карты — формула любого начинания: сначала смелость Дурака, чтобы захотеть и шагнуть, затем собранность Мага, чтобы сделать. Одна без другой не работает: без Дурака Маг скучает без мечты, без Мага Дурак так и остаётся мечтателем на краю обрыва.\n\nПопробуйте сегодня: выберите одно желание, которое давно откладываете. Сделайте шаг Дурака — разрешите себе захотеть всерьёз и скажите желание вслух. А потом шаг Мага: выпишите четыре ресурса, которые для этого уже есть — время, навык, человек, вещь.",
       "en": "All 22 Major Arcana tell one big story: the journey of a hero called the Fool. Today it begins — the hero takes his first step and immediately meets his first teacher.\n\nThe Fool is card number zero. In Waite's classic image, a young man with a light step stands at the edge of a cliff: a small bundle of belongings over his shoulder, a white rose in his hand, a dog bounding at his feet. He looks at the sky, not at the ground — and he is not afraid at all. Zero is pure potential: nothing is decided yet, everything is possible. The Fool is you on your first day at a new job, on your first solo trip, in your first tarot lesson. His keywords: new beginnings, spontaneity, trust in life, freedom. His strength is faith; his risk is carelessness — the cliff under his feet is, after all, real.\n\nThe first step is taken — and the Fool meets the Magician, card number one. The contrast is striking. The Fool floats; the Magician stands firm. One of his hands points to the sky, the other to the earth: \"conceive it — then make it real.\" On his table lie four objects — a wand, a cup, a sword and a pentacle, symbols of all four suits. The message: you already have everything you need. The Magician is about will, skill and turning a dream into a concrete plan. The Fool says, \"How wonderful it would be to bake cakes!\" The Magician replies, \"Here's the oven, here's the recipe, here are three free hours on Saturday — let's begin.\"\n\nTogether these cards are the formula for any beginning: first the Fool's courage to want and to leap, then the Magician's focus to act. Neither works alone: without the Fool, the Magician has no dream; without the Magician, the Fool remains a dreamer at the edge of the cliff.\n\nTry this today: pick one wish you keep postponing. Take the Fool's step — allow yourself to truly want it, and say it out loud. Then the Magician's step: write down four resources you already have for it — time, a skill, a person, a thing.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -752,7 +779,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m2l2",
@@ -767,7 +797,10 @@
      "theory": {
       "ru": "Научившись действовать, наш герой Дурак встречает двух великих учительниц. Одна учит слушать себя, другая — заботиться и создавать. Знакомьтесь: Жрица и Императрица.\n\nВерховная Жрица — карта номер два. На картинке Уэйта она сидит между двумя колоннами, чёрной и белой, у входа в храм; за её спиной — завеса с гранатами, скрывающая тайну, в руках — свиток знаний, у ног — лунный серп. Жрица — это ваш внутренний голос: интуиция, тайна, знание без объяснений, пауза. Она о тех моментах, когда вы говорите: «Не могу объяснить почему, но чувствую — не надо». Помните случай, когда вы проигнорировали такое чувство и потом жалели? Это и была Жрица, которую не дослушали. Её совет прост: не спеши, помолчи, ответ уже внутри.\n\nИмператрица — карта номер три — полная противоположность по настроению. Она сидит в цветущем саду на мягких подушках, вокруг спелая пшеница, у ног — знак Венеры. Если Жрица — тишина храма, то Императрица — тёплая кухня, где пахнет пирогом. Её темы: изобилие, забота, творчество, природа. Это энергия, которая выращивает: детей, проекты, отношения, цветы на подоконнике. Императрица в вашей жизни — это когда вы готовите ужин для любимых, доводите до ума творческий проект или наконец разрешаете себе отдых и удовольствие без чувства вины.\n\nКонтраст этой пары — вдох и выдох. Жрица принимает: слушает, чувствует, созерцает. Императрица отдаёт: растит, кормит, создаёт. Дурак учится у них по очереди: сначала услышать, чего по-настоящему хочется, потом терпеливо это вырастить. Забота без чуткости становится навязчивой, а интуиция без действия остаётся красивым сном — потому эти двое и идут в колоде рядом.\n\nПопробуйте сегодня: устройте день двух учительниц. Утром — пять минут Жрицы: тишина без телефона и вопрос себе: «Что я сейчас чувствую на самом деле?» Вечером — один жест Императрицы: приготовьте что-то вкусное, полейте цветы, обнимите близкого человека.",
       "en": "Now that our hero the Fool has learned to act, he meets two great teachers. One teaches him to listen inward, the other — to nurture and create. Meet the High Priestess and the Empress.\n\nThe High Priestess is card number two. In Waite's image she sits between two pillars, one black and one white, at the entrance to a temple; behind her hangs a veil of pomegranates hiding a mystery, a scroll of knowledge rests in her hands, a crescent moon lies at her feet. The Priestess is your inner voice: intuition, mystery, knowing without explaining, the pause. She lives in those moments when you say, \"I can't explain why, but I feel this isn't right.\" Remember a time you ignored that feeling and regretted it later? That was the Priestess you didn't listen to. Her advice is simple: don't rush, be quiet, the answer is already inside.\n\nThe Empress, card number three, is her complete opposite in mood. She reclines on soft cushions in a blossoming garden, ripe wheat all around, the sign of Venus at her feet. If the Priestess is the silence of a temple, the Empress is a warm kitchen that smells of fresh pie. Her themes: abundance, care, creativity, nature. Hers is the energy that grows things: children, projects, relationships, plants on a windowsill. The Empress shows up when you cook dinner for people you love, polish a creative project, or finally allow yourself rest and pleasure without guilt.\n\nThe contrast in this pair is an inhale and an exhale. The Priestess receives: she listens, senses, contemplates. The Empress gives: she grows, feeds, creates. The Fool learns from them in turn: first hear what you truly want, then patiently grow it. Care without sensitivity turns pushy, and intuition without action stays a lovely dream — that is why these two stand side by side in the deck.\n\nTry this today: hold a day of two teachers. In the morning, five Priestess minutes: silence, no phone, one question — \"What am I really feeling right now?\" In the evening, one Empress gesture: cook something delicious, water your plants, hug someone you love.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -902,7 +935,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m2l3",
@@ -917,7 +953,10 @@
      "theory": {
       "ru": "После материнской мягкости Императрицы наш Дурак попадает в мир структуры и правил. Его новые учителя — Император и Иерофант: один показывает, как строить своё, другой — как учиться у тех, кто шёл до нас.\n\nИмператор — карта номер четыре. Седобородый правитель сидит на каменном троне, украшенном головами баранов; в руках держава и скипетр, за спиной — суровые горы. Ни намёка на сад Императрицы: здесь всё про порядок, власть, стабильность и границы. Император в вашей жизни — это будильник, который вы не переставляете «ещё на пять минут», бюджет на месяц, спокойное «нет» коллеге, который в третий раз просит поработать за него. Звучит скучновато? А теперь вспомните, как спокойно живётся, когда финансы посчитаны, планы записаны, а личные границы отстроены. Это и есть подарок Императора: внутри надёжных стен можно расслабиться.\n\nИерофант — карта номер пять. Духовный наставник сидит между двух колонн (вспомните Жрицу!), но не молчит, а учит: перед ним склонились два ученика, в руке — тройной крест, ключи у ног. Его темы: традиция, обучение, наставник, правила сообщества. Иерофант — это ваш любимый преподаватель, семейные рецепты от бабушки, свадебные обряды, да и сам этот курс: знания, которые бережно передаются от человека к человеку. Его тень — слепое «так принято», когда правило соблюдают, забыв его смысл.\n\nКонтраст пары тонкий, но важный. Император строит порядок своей волей: «я так решил». Иерофант передаёт порядок, проверенный поколениями: «так делали до нас — и это работает». Дураку нужны оба урока: одни правила стоит создать самой, другие — с благодарностью взять готовыми, а третьи — вежливо пересмотреть.\n\nПопробуйте сегодня: сделайте по одному жесту каждого учителя. Жест Императора — наведите порядок в одной маленькой зоне: сумке, папке «Загрузки», расписании на завтра. Жест Иерофанта — вспомните одно семейное правило или традицию и спросите себя: она мне помогает или я следую ей по привычке?",
       "en": "After the Empress's motherly warmth, our Fool enters the world of structure and rules. His new teachers are the Emperor and the Hierophant: one shows how to build your own order, the other — how to learn from those who walked before us.\n\nThe Emperor is card number four. A grey-bearded ruler sits on a stone throne decorated with rams' heads, orb and sceptre in hand, stern mountains behind him. Not a trace of the Empress's garden: everything here is about order, authority, stability and boundaries. In your life, the Emperor is the alarm you do not snooze \"just five more minutes\", the monthly budget, the calm \"no\" to a colleague asking you to cover for them a third time. Sounds dull? Now remember how peaceful life feels when your finances are counted, plans are written down and personal boundaries hold. That is the Emperor's gift: inside solid walls, you can finally relax.\n\nThe Hierophant is card number five. A spiritual teacher sits between two pillars (remember the High Priestess?), but he is not silent — he teaches: two students bow before him, a triple cross in his hand, keys at his feet. His themes: tradition, learning, mentorship, the rules of a community. The Hierophant is your favourite teacher, your grandmother's recipes, wedding customs — and this very course: knowledge passed carefully from person to person. His shadow is the blind \"that's how it's done\", when a rule outlives its meaning.\n\nThe contrast in this pair is subtle but important. The Emperor builds order by his own will: \"I have decided.\" The Hierophant hands down order tested by generations: \"this is how it was done before us — and it works.\" The Fool needs both lessons: some rules you create yourself, some you gratefully accept ready-made, and some you politely revise.\n\nTry this today: make one gesture for each teacher. The Emperor's gesture — bring order to one small zone: your bag, your Downloads folder, tomorrow's schedule. The Hierophant's gesture — recall one family rule or tradition and ask yourself: does it help me, or do I follow it purely out of habit?",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1052,7 +1091,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m2l4",
@@ -1067,7 +1109,10 @@
      "theory": {
       "ru": "Наш Дурак повзрослел: учителя дали ему всё, что могли. Впереди два испытания зрелости — первый большой выбор сердца и первая победа воли. Встречайте Влюблённых и Колесницу.\n\nВлюблённые — карта номер шесть. Под сияющим ангелом стоят мужчина и женщина, за ними — два дерева, цветущее и с плодами. Первый пласт очевиден: любовь, союз, притяжение. Но у Уэйта в этой карте спрятано большее — выбор. Не мелкий, вроде «капучино или раф», а выбор, который определяет, кем вы станете: с кем строить жизнь, оставаться в городе или уезжать, чем заниматься по-настоящему. Ключ к таким решениям — ценности. Когда выбор совпадает с тем, что для вас свято, приходит удивительная цельность: голова, сердце и тело наконец говорят хором. Помните решение, о котором вы ни разу не пожалели, хотя все отговаривали? Это были ваши Влюблённые.\n\nКолесница — карта номер семь и финал первой части пути. Молодой воин в доспехах стоит в колеснице, которую везут два сфинкса — чёрный и белый. Поводьев нет: он управляет ими силой воли. Сфинксы тянут в разные стороны — как ваши «хочу спать» и «надо на тренировку», страх и амбиции, лень и мечта. Победа Колесницы не в том, чтобы избавиться от внутренних противоречий, а в том, чтобы заставить их везти вас в одну сторону. Это энергия «собраться и сделать»: сдать проект, пробежать первые пять километров, переехать в новый город.\n\nВместе карты складываются в важную формулу: сначала Влюблённые — выбрать направление сердцем, потом Колесница — доехать туда волей. Выбор без движения остаётся мечтой, движение без выбора — суетой.\n\nПопробуйте сегодня: примите одно небольшое решение «по-влюблённому»: перед выбором спросите себя не «как удобнее?», а «что ближе моим ценностям?». А потом подключите Колесницу — сделайте первый конкретный шаг в выбранную сторону в течение часа, пока сфинксы не передумали.",
       "en": "Our Fool has grown up: his teachers have given him everything they could. Ahead lie two tests of maturity — the first great choice of the heart and the first victory of the will. Meet the Lovers and the Chariot.\n\nThe Lovers is card number six. Beneath a radiant angel stand a man and a woman; behind them, two trees — one in blossom, one bearing fruit. The first layer is obvious: love, union, attraction. But Waite hid something bigger in this card — choice. Not the small kind, like \"cappuccino or flat white\", but the kind that defines who you become: whom to build a life with, whether to stay or move away, what to truly do with your days. The key to such decisions is values. When a choice aligns with what is sacred to you, a remarkable wholeness appears: head, heart and body finally speak in unison. Remember a decision you never once regretted, even though everyone tried to talk you out of it? That was your Lovers moment.\n\nThe Chariot is card number seven and the finale of the journey's first act. A young warrior in armour stands in a chariot drawn by two sphinxes, one black and one white. There are no reins: he steers them with willpower alone. The sphinxes pull in different directions — like your \"I want to sleep in\" and \"I should go train\", your fear and your ambition, your laziness and your dream. The Chariot's victory is not about eliminating inner contradictions, but about making them pull you the same way. It is the energy of \"pulled myself together and did it\": shipped the project, ran your first five kilometres, moved to a new city.\n\nTogether the cards form a vital formula: first the Lovers — choose your direction with the heart; then the Chariot — get there with the will. Choice without motion stays a dream; motion without choice is mere busyness.\n\nTry this today: make one small decision \"the Lovers' way\": before choosing, ask not \"what is more convenient?\" but \"what is closer to my values?\" Then summon the Chariot — take the first concrete step in that direction within the hour, before the sphinxes change their minds.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1202,7 +1247,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m2l5",
@@ -1223,7 +1271,10 @@
      "theory": {
       "ru": "Восемь карт позади — и это уже целая история. Прежде чем идти дальше, давайте оглянемся: путь Дурака от нуля до семёрки — это, по сути, история любого взросления. Может быть, и вашего.\n\nВспомним сюжет. Дурак (0) стоит на краю обрыва: чистый потенциал, вера в жизнь, готовность шагнуть в неизвестное. Маг (1) показывает: у тебя уже есть все инструменты — воля превращает мечту в план. Жрица (2) добавляет: не всё решается действием, научись слушать интуицию и выдерживать паузу. Императрица (3) учит заботе и терпению: всё живое растёт медленно и требует тепла. Император (4) даёт опору: порядок, границы, стабильность. Иерофант (5) передаёт традицию: не изобретай всё с нуля, учись у тех, кто шёл раньше. Влюблённые (6) ставят перед выбором: реши сердцем, каким ценностям служить. И наконец Колесница (7) — первая победа: воля собирает всё выученное и привозит к цели.\n\nЗаметили закономерность? Сначала импульс и инструменты (Дурак, Маг), потом внутренний и внешний рост (Жрица, Императрица), затем структура и знания (Император, Иерофант), и в финале — зрелый выбор и достижение (Влюблённые, Колесница). Эта арка повторяется в любом деле. Новая работа: воодушевление первого дня, освоение инструментов, период сомнений, врастание в коллектив, принятие правил, обучение у старших, момент «моё или не моё» — и первый серьёзный успех.\n\nИменно поэтому Старшие арканы легче учить как сюжет, а не как список значений: забыли карту — вспомните, что происходит с героем на этом этапе, и значение вернётся само.\n\nПопробуйте сегодня: выложите восемь карт в ряд от Дурака до Колесницы и расскажите историю вслух — своими словами, как пересказывают любимую сказку. А потом выберите одну сферу своей жизни и спросите: на какой из восьми ступеней я сейчас? Эта карта — ваша подсказка на неделю.",
       "en": "Eight cards behind us — and that is already a whole story. Before moving on, let's look back: the Fool's journey from zero to seven is, at heart, the story of any coming-of-age. Perhaps of yours, too.\n\nLet's replay the plot. The Fool (0) stands at the cliff's edge: pure potential, trust in life, readiness to step into the unknown. The Magician (1) shows him: you already hold all the tools — will turns a dream into a plan. The High Priestess (2) adds: not everything is solved by action; learn to hear your intuition and to hold a pause. The Empress (3) teaches care and patience: everything alive grows slowly and needs warmth. The Emperor (4) provides a backbone: order, boundaries, stability. The Hierophant (5) passes down tradition: don't reinvent everything — learn from those who walked before. The Lovers (6) pose the great question: decide with your heart which values to serve. And finally the Chariot (7) — the first victory: willpower gathers everything learned and drives it home.\n\nNotice the pattern? First impulse and tools (Fool, Magician), then inner and outer growth (Priestess, Empress), then structure and knowledge (Emperor, Hierophant), and at the finale — mature choice and achievement (Lovers, Chariot). This arc repeats in any endeavour. A new job: the thrill of day one, mastering the tools, a stretch of self-doubt, settling into the team, accepting the rules, learning from seniors, the \"is this really mine?\" moment — and the first real win.\n\nThis is exactly why the Major Arcana are easier to learn as a plot than as a list of meanings: forget a card, and you can simply recall what happens to the hero at that stage — the meaning comes back on its own.\n\nTry this today: lay the eight cards in a row from the Fool to the Chariot and tell the story out loud — in your own words, like a fairy tale for a friend. Then pick one area of your life and ask: which of the eight steps am I on right now? That card is your hint for the week.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1359,7 +1410,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m2l6",
@@ -1371,7 +1425,10 @@
      "theory": {
       "ru": "Одна карта — это слово. Две карты рядом — уже фраза. Сегодня вы сделаете то, что отличает человека «со словариком» от настоящего таролога: начнёте читать карты в связке.\n\nГлавный секрет: между двумя картами нужно построить мостик. Проще всего — соединить их значения союзом. Возьмите пару и проговорите: «...потому что...», «...чтобы...», «...но...». Смотрите, как меняется смысл. Дурак и Император: «Хочу начать новое (Дурак), но мне нужен план и опора (Император)» — или «Начну с чистого листа, чтобы построить свой порядок». Императрица и Колесница: «Забота о себе даёт силы для рывка». Жрица и Влюблённые: «Не торопись с выбором — сначала прислушайся к себе».\n\nВторой приём — заметить, о чём «спорят» карты. У каждой пары есть напряжение, и именно в нём — самое интересное. Маг и Жрица: действовать или подождать? Императрица и Император: мягкость или дисциплина? Если в раскладе встретились «спорщики», ответ обычно звучит как «и то и другое, но в свою очередь»: сперва пауза Жрицы, потом действие Мага.\n\nТретий приём — общий сюжет. Спросите себя: если это два кадра одного фильма, что происходит между ними? Влюблённые, а следом Колесница — выбор сделан, и вперёд идёт решительный рывок. Колесница, а за ней Влюблённые — сначала полная скорость, а потом жизнь останавливает перед развилкой. Да, порядок карт меняет историю — как порядок слов меняет фразу.\n\nНе бойтесь «неправильных» прочтений: на этом этапе любое связное прочтение — правильное. Вы учитесь говорить на новом языке, а в живой речи важнее смысл, чем идеальная грамматика.\n\nПопробуйте сегодня: возьмите восемь изученных карт, перемешайте и вытяните две. Составьте три разные фразы: с «потому что», с «чтобы» и с «но». А потом выберите ту, что больше всего похожа на вашу сегодняшнюю жизнь, — и запишите её в дневник.",
       "en": "One card is a word. Two cards side by side are already a sentence. Today you will do the thing that separates a person \"with a glossary\" from a real tarot reader: you will start reading cards in combination.\n\nThe main secret: build a bridge between the two cards. The easiest way is to join their meanings with a connector. Take a pair and say out loud: \"...because...\", \"...in order to...\", \"...but...\". Watch the meaning shift. The Fool and the Emperor: \"I want to start something new (Fool), but I need a plan and solid ground (Emperor)\" — or \"I'll start from a clean slate in order to build my own order.\" The Empress and the Chariot: \"Taking care of myself gives me the strength for a breakthrough.\" The High Priestess and the Lovers: \"Don't rush the choice — listen to yourself first.\"\n\nThe second technique: notice what the cards are \"arguing\" about. Every pair holds a tension, and that is where the interesting part lives. The Magician and the Priestess: act or wait? The Empress and the Emperor: softness or discipline? When two \"debaters\" meet in a spread, the answer usually sounds like \"both, but each in its turn\": first the Priestess's pause, then the Magician's move.\n\nThe third technique: find the shared plot. Ask yourself: if these are two frames of one film, what happened between them? The Lovers followed by the Chariot — the choice is made, and the surge forward follows. The Chariot followed by the Lovers — full speed ahead, until life stops everything at a crossroads. Yes, the order of cards changes the story — just as word order changes a sentence.\n\nDon't be afraid of \"wrong\" readings: at this stage, any coherent reading is a right one. You are learning to speak a new language, and in real speech meaning matters more than perfect grammar.\n\nTry this today: take the eight cards you have learned, shuffle them and draw two. Build three different sentences: one with \"because\", one with \"in order to\", one with \"but\". Then pick the sentence that sounds most like your life today — and write it in your journal.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1506,7 +1563,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     }
    ]
   },
@@ -1531,7 +1591,10 @@
      "theory": {
       "ru": "В прошлом модуле герой мчался вперёд: Колесница — карта победы через напор и контроль. И вот первое открытие новой части пути: есть сила, которой не нужны поводья.\n\nСила — восьмая карта. На картинке Уэйта нет ни битвы, ни оружия: женщина в белом спокойно закрывает пасть льву, а тот и не сопротивляется — на его шее гирлянда цветов вместо цепи. Лев — это наши собственные страхи, гнев и порывы; их не нужно убивать, только приручить. Над головой женщины — знак бесконечности, тот же, что у Мага: терпение и доброта неисчерпаемы. Ключевые слова: внутренняя сила, мягкость, терпение, смелость. Сила знает: то, что кажется неукротимым, поддаётся доброте быстрее, чем напору. Её риск — перепутать мягкость с попустительством: приручить льва не значит делать вид, что его нет.\n\nПриручив льва, герой замечает, как снаружи стало тихо, — и уходит туда, где тихо по-настоящему. Отшельник, девятая карта, стоит на снежной вершине с фонарём, в котором горит звезда. Он не сбежал от людей — он поднялся выше шума, чтобы услышать себя. Его фонарь поднят для других: «где я, там можешь быть и ты». Ключевые слова: поиск себя, уединение, мудрость, внутренний свет. Отшельник — это пауза для смысла: чего вы на самом деле хотите, куда идёте? Ответы придут не извне, а из тишины.\n\nВместе эти карты — первый урок внутренней части пути: сначала успокоить бурю в себе, потом расслышать в тишине своё. Пока лев рычит, никакой фонарь не поможет — а без фонаря даже укрощённая тишина остаётся пустой.\n\nПопробуйте сегодня: заметьте момент, когда захочется ответить резко или всё бросить, — и сделайте шаг Силы: три спокойных вдоха вместо рывка. А вечером шаг Отшельника: десять минут без телефона и людей, один вопрос — «чего я сейчас хочу на самом деле?»",
       "en": "In the last module the hero raced ahead: the Chariot is a card of victory through drive and control. The new part of the journey opens with a discovery: there is a strength that needs no reins.\n\nFortitude is card eight. In Waite's image there is no battle and no weapon: a woman in white calmly closes a lion's mouth, and the lion does not resist — a garland of flowers lies on his neck instead of a chain. The lion is our own fears, anger and impulses; they don't need to be killed, only tamed. Above the woman's head is the infinity sign, the same one the Magician has: patience and kindness never run out. Keywords: inner strength, gentleness, patience, courage. Fortitude knows that what seems untamable yields to kindness faster than to force. Her risk is mistaking gentleness for indulgence: taming the lion doesn't mean pretending it isn't there.\n\nOnce the lion is calm, the hero notices how quiet it has become — and goes where the quiet is real. The Hermit, card nine, stands on a snowy peak holding a lantern with a star burning inside. He hasn't run away from people — he has climbed above the noise to hear himself. His lantern is raised for others: \"where I stand, you can stand too.\" Keywords: soul-searching, solitude, wisdom, inner guidance. The Hermit is a pause for meaning: what do you really want, where are you going? The answers come not from outside but from silence.\n\nTogether these cards are the first lesson of the inner path: first calm the storm within, then listen for your own voice in the quiet. While the lion roars, no lantern will help — and without a lantern, even a tamed silence stays empty.\n\nTry this today: catch the moment you want to snap back or drop everything — and take Fortitude's step: three slow breaths instead of a lunge. In the evening, the Hermit's step: ten minutes without your phone or people, with one question — \"what do I actually want right now?\"",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1666,7 +1729,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m3l2",
@@ -1681,7 +1747,10 @@
      "theory": {
       "ru": "Есть вещи, которые мы выбираем, и вещи, которые случаются сами. Сегодняшняя пара карт — об этих двух силах и о том, как они уживаются в одной жизни.\n\nКолесо Фортуны, десятая карта, — единственная в колоде, где нет человека. Огромное колесо висит в небе, по ободу движутся фигуры: змей Тифон скользит вниз, Анубис поднимается, а на вершине сидит невозмутимый сфинкс. Это сама жизнь в движении: обстоятельства меняются без нашего участия, и за спадом идёт подъём. Ключевые слова: перемены, циклы, обстоятельства, поворот. Колесо не спрашивает разрешения — оно просит гибкости: заметить открывшуюся дверь и войти. Его риск — пассивность: «всё решит судьба» — не вывод из этой карты, а её ловушка.\n\nА рядом — ответ на вопрос «что же зависит от меня?». Справедливость, одиннадцатая карта: фигура между двух колонн, в правой руке поднятый меч, в левой — весы. И никакой повязки на глазах: правде она не нужна. Это карта причины и следствия: усилия вознаграждаются, а срезанные углы дают о себе знать. Ключевые слова: справедливость, правда, причина и следствие, баланс. Справедливость просит честности — прежде всего с собой — и решений ясной головой: по фактам, а не по эмоциям.\n\nВместе они — формула зрелости. Колесо крутит то, что нам неподвластно; Справедливость взвешивает то, что мы выбрали сами. Мудрость — не путать одно с другим: не корить себя за повороты Колеса и не списывать на судьбу собственные решения.\n\nПопробуйте сегодня: вспомните ситуацию, которая вас беспокоит, и разделите лист надвое. Слева — что в ней от Колеса (не зависело от вас), справа — что от Справедливости (ваши выборы). Часто уже само это разделение приносит облегчение: становится видно, где стараться, а где — отпустить.",
       "en": "Some things we choose; others simply happen to us. Today's pair of cards is about these two forces and how they share one life.\n\nWheel Of Fortune, card ten, is the only card in the deck with no human on it. A great wheel hangs in the sky with figures moving along its rim: the serpent Typhon slides down, Anubis rises, and on top sits an unmoved sphinx. This is life itself in motion: circumstances change without our participation, and every decline is followed by a rise. Keywords: change, cycles, circumstance, turning point. The Wheel doesn't ask permission — it asks for flexibility: notice the door that has opened and step through. Its risk is passivity: \"fate will decide\" is not this card's lesson but its trap.\n\nBeside it stands the answer to \"so what does depend on me?\" Justice, card eleven: a figure between two pillars, a raised sword in the right hand, scales in the left. And no blindfold — truth doesn't need one. This is the card of cause and effect: effort pays off, and cut corners come back around. Keywords: justice, truth, cause and effect, balance. Justice asks for honesty — first of all with yourself — and for decisions made with a clear head: on facts, not emotions.\n\nTogether they form a formula of maturity. The Wheel turns what is beyond our control; Justice weighs what we chose ourselves. Wisdom is not confusing the two: don't blame yourself for the Wheel's turns, and don't blame fate for your own decisions.\n\nTry this today: think of a situation that worries you and divide a page in two. On the left, what in it belongs to the Wheel (was never up to you); on the right, what belongs to Justice (your choices). Often the sorting alone brings relief: you can see where to keep trying — and where to let go.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1816,7 +1885,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m3l3",
@@ -1832,7 +1904,10 @@
      "theory": {
       "ru": "Сегодня — самая глубокая часть пути: три карты о том, как проживаются настоящие перемены. Сначала пауза, потом завершение, потом — тонкая настройка новой жизни.\n\nПовешенный, двенадцатая карта, выглядит странно: юноша висит вниз головой на живом дереве — но лицо его спокойно, а вокруг головы сияние. Это не казнь, а добровольная остановка: жизнь подвесила ситуацию, и торопить её бесполезно. Зато, перевернувшись, видишь то, чего не разглядеть на бегу. Ключевые слова: пауза, новый взгляд, жертва, отпускание. Иногда нужно отпустить контроль и чем-то поступиться, чтобы получить более важное.\n\nЗа паузой приходит Смерть — тринадцатая карта и, пожалуй, самая оболганная в колоде. Она почти никогда не о буквальной смерти. У Уэйта это всадник с белой розой на чёрном знамени — и у него даже нет оружия: перемены приходят сами. Что-то исчерпало себя — этап, роль, привычный способ жить. Грусть здесь уместна, цепляться — нет: вдали, между двумя башнями, уже встаёт солнце. Ключевые слова: завершение, трансформация, переход, обновление.\n\nА после любого завершения нужна Умеренность, четырнадцатая карта: ангел переливает воду из чаши в чашу, одна нога на земле, другая — в воде. Это настройка новой жизни без крайностей и рывков, умение соединять противоположное: работу и отдых, чувства и разум. Всё складывается — не мгновенно, но верно. Ключевые слова: умеренность, баланс, терпение, синтез.\n\nВтроём эти карты — календарь любой большой перемены: остановиться и увидеть (Повешенный), с уважением попрощаться с отжившим (Смерть), собрать новую жизнь по капле (Умеренность).\n\nПопробуйте сегодня: вспомните одну перемену, которую вы уже прожили, — переезд, смену работы, конец отношений. Найдите в ней все три шага: где была пауза? что завершилось? как настраивалась новая жизнь? Прожитое однажды — лучший учебник для перемен, которые ещё впереди.",
       "en": "Today is the deepest part of the journey: three cards about how real change is lived through. First a pause, then an ending, then the fine-tuning of a new life.\n\nThe Hanged Man, card twelve, looks strange: a young man hangs upside down from a living tree — yet his face is calm, and there is a glow around his head. This is not an execution but a voluntary stop: life has suspended the situation, and rushing it is useless. But once you turn upside down, you see what can't be seen on the run. Keywords: pause, new perspective, surrender, letting go. Sometimes you must release control and give something up to receive something more important.\n\nAfter the pause comes Death — card thirteen and perhaps the most slandered card in the deck. It is almost never about literal death. In Waite's image it is a rider with a white rose on a black banner — he carries no weapon at all: change arrives on its own. Something has run its course — a stage, a role, a habitual way of living. Sadness is appropriate here; clinging is not: in the distance, between two towers, the sun is already rising. Keywords: endings, transformation, transition, renewal.\n\nAnd after any ending comes Temperance, card fourteen: an angel pours water from cup to cup, one foot on the earth, the other in the water. This is the tuning of a new life without extremes or jolts — the art of blending opposites: work and rest, feeling and reason. Everything comes together — not instantly, but surely. Keywords: moderation, balance, patience, blending.\n\nTogether the three are the calendar of any great change: stop and see (the Hanged Man), say a respectful goodbye to what is over (Death), assemble the new life drop by drop (Temperance).\n\nTry this today: recall one change you have already lived through — a move, a job change, the end of a relationship. Find all three steps in it: where was the pause? what ended? how did the new life find its measure? A change you once survived is the best textbook for the ones still ahead.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -1967,7 +2042,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m3l4",
@@ -1982,7 +2060,10 @@
      "theory": {
       "ru": "Сегодня — две карты, которых новички боятся больше всего. Спокойно: обе они не про наказание, а про освобождение. Просто освобождение редко выглядит нарядно.\n\nДьявол, пятнадцатая карта, — искажённое зеркало Иерофанта: рогатая фигура на постаменте, внизу двое в цепях — как Влюблённые, потерявшие свободу. Это карта несвободы, которую мы часто выбираем сами: зависимость от человека, привычки, работы, чужого одобрения. Что-то держит — и одновременно даёт иллюзию комфорта. А теперь главная деталь картинки: цепи на шеях висят свободно. Их можно снять. Ключевые слова: зависимость, привязанность, теневая сторона, искушение. Увидеть свою несвободу честно, без стыда, — уже половина выхода; вторая половина — решить, что вы достойны большего.\n\nБашня, шестнадцатая карта: молния бьёт в каменную башню, корона слетает с вершины, две фигуры падают. Страшно? Присмотритесь: рушится не жизнь, а конструкция на шатком основании — самообман, планы «на честном слове». Молния — вспышка правды: вы наконец видите, как всё обстоит на самом деле. То, что было настоящим, останется с вами, а на расчищенном месте строят прочнее — уже на правде. Ключевые слова: внезапные перемены, разрушение, откровение, освобождение.\n\nПара работает в связке: Дьявол показывает клетку, которую мы обжили и обставили, Башня её ломает. Неприятно — но после Башни дышится легче, чем в самой уютной клетке.\n\nПопробуйте сегодня — только шаг Дьявола, мягкий. Заметьте одну привычку, к которой тянетесь «на автомате»: лента, сладкое, вечное «да» на чужие просьбы. Не нужно бросать её сегодня. Просто в момент, когда рука уже потянулась, скажите про себя: «это цепь, и она висит свободно». Осознание — начало выхода.",
       "en": "Today, the two cards beginners fear most. Breathe: neither is about punishment — both are about liberation. Liberation just rarely looks pretty.\n\nThe Devil, card fifteen, is a distorted mirror of the Hierophant: a horned figure on a pedestal, and below, two chained figures — like the Lovers after losing their freedom. This is the card of unfreedom we often choose ourselves: dependence on a person, a habit, a job, others' approval. Something holds you — and at the same time offers an illusion of comfort. Now the key detail of the image: the chains hang loose around their necks. They can be taken off. Keywords: attachment, addiction, shadow self, temptation. Seeing your unfreedom honestly, without shame, is half the way out; the other half is deciding you deserve more.\n\nThe Tower, card sixteen: lightning strikes a stone tower, the crown flies off the top, two figures fall. Frightening? Look closer: it is not your life that collapses but a structure built on shaky ground — self-deception, plans held together by wishful thinking. The lightning is a flash of truth: you finally see how things really are. What was real will stay with you, and on the cleared ground people build stronger — this time on truth. Keywords: sudden change, upheaval, revelation, liberation.\n\nThe pair works as one: the Devil shows the cage we have furnished and grown used to, the Tower breaks it. Unpleasant — but after the Tower you breathe easier than in the coziest cage.\n\nTry this today — only the Devil's step, a gentle one. Notice one habit you reach for on autopilot: the feed, the sweets, the automatic \"yes\" to every request. No need to quit it today. Just at the moment your hand reaches out, say to yourself: \"this is a chain, and it hangs loose.\" Awareness is the beginning of the way out.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -2117,7 +2198,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m3l5",
@@ -2133,7 +2217,10 @@
      "theory": {
       "ru": "После грозы Башни небо расчищается — и на пути героя одна за другой встают три небесные карты. Их общий сюжет — дорога от надежды к ясности, и она не прямая.\n\nЗвезда, семнадцатая карта, — первая тишина после бури. Женщина у воды льёт воду из двух кувшинов — на землю и в озеро, и поток не иссякает. Ей нечего скрывать и нечего бояться: худшее позади. Это не мгновенное чудо, а ровный внутренний свет: раны затягиваются, силы возвращаются, впереди появляется ориентир. Ключевые слова: надежда, вдохновение, исцеление, вера.\n\nНо между надеждой и солнцем лежит ночь. Луна, восемнадцатая карта: пёс и волк воют на неверный свет, из воды выползает рак, тропа уходит между двумя башнями в темноту. Это карта неясности: вы видите не всю картину, и воображение охотно подсовывает страхи вместо фактов. Луна не пугает — она просит не принимать важных решений вслепую и прислушаться к интуиции: та часто знает то, что разум ещё не сформулировал. Ключевые слова: иллюзии, страхи, подсознание, неясность.\n\nИ наконец — Солнце, девятнадцатая карта, одна из самых счастливых в колоде. Ребёнок на белом коне выезжает из-за садовой стены, над ним огромное солнце, рядом подсолнухи. Этот свет прямой, а не отражённый: тучи рассеялись, вы видите ситуацию как есть — и она хороша. Ключевые слова: радость, успех, ясность, жизненная сила.\n\nВтроём эти карты честны про то, как возвращается свет: сначала вера (Звезда), потом последние страхи (Луна), потом ясность (Солнце). Если у вас сейчас «лунный» этап — это не откат назад, а предрассветный час.\n\nПопробуйте сегодня: поймайте одну тревожную мысль и задайте ей лунный вопрос: «это факт — или додумано?» Если додумано — отложите решение до ясности. А перед сном сделайте шаг Звезды: назовите три вещи, которые сегодня были по-настоящему хороши.",
       "en": "After the Tower's storm the sky clears — and three celestial cards rise on the hero's path, one after another. Their shared story is the road from hope to clarity, and it is not a straight one.\n\nThe Star, card seventeen, is the first quiet after the storm. A woman by the water pours from two jugs — onto the land and into the pool — and the stream never runs dry. She has nothing to hide and nothing to fear: the worst is behind. This is no instant miracle but a steady inner light: wounds close, strength returns, a guiding point appears ahead. Keywords: hope, inspiration, healing, faith.\n\nBut between hope and sunlight lies a night. The Moon, card eighteen: a dog and a wolf howl at the unsteady light, a crayfish crawls out of the water, a path leads between two towers into the dark. This is the card of uncertainty: you are not seeing the whole picture, and imagination eagerly serves up fears instead of facts. The Moon does not frighten — it asks you not to make big decisions blindly and to listen to your intuition: it often knows what the mind hasn't yet put into words. Keywords: illusion, fear, subconscious, uncertainty.\n\nAnd then — The Sun, card nineteen, one of the happiest cards in the deck. A child on a white horse rides out from behind a garden wall, a huge sun above, sunflowers nearby. This light is direct, not reflected: the clouds have parted, you see the situation as it is — and it is good. Keywords: joy, success, clarity, vitality.\n\nTogether the three are honest about how light returns: first faith (the Star), then the last fears (the Moon), then clarity (the Sun). If you are in a \"moon\" stretch right now, it isn't a step back — it's the hour before dawn.\n\nTry this today: catch one anxious thought and ask it the Moon's question: \"is this a fact — or did I fill it in?\" If it's filled in, postpone the decision until things clear. And before sleep, take the Star's step: name three things that were genuinely good today.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -2268,7 +2355,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m3l6",
@@ -2283,7 +2373,10 @@
      "theory": {
       "ru": "Сегодня путь Дурака завершается — и финал состоит из двух шагов: зова и танца.\n\nСуд, двадцатая карта. Архангел трубит в трубу, и из открытых гробниц поднимаются люди с раскрытыми в изумлении руками. Пусть сюжет вас не пугает: по Уэйту, труба звучит не столько снаружи, сколько внутри нас. Это карта пробуждения и итога: прошлый этап завершён, и вас зовут на новый уровень — переоценить жизнь, принять важное решение, использовать второй шанс. Ключевые слова: пробуждение, переоценка, призвание, второй шанс. Суд просит честно подвести итоги — без самобичевания, но и без иллюзий — и откликнуться на то, что давно вас зовёт.\n\nМир, двадцать первая карта, — последняя в Старших арканах. Танцующая фигура в овальном венке, а по углам — ангел, орёл, телец и лев: те же четверо, что были на Колесе Фортуны. Там они держали книги и учились — теперь просто присутствуют: всё сошлось. Цикл завершён, цель достигнута; у Уэйта это «уверенный успех» и целостность. Ключевые слова: завершение цикла, целостность, достижение, путешествие. Мир напоминает: отпраздновать результат — тоже искусство, и только после этого начинается новое.\n\nА теперь оглянитесь на всю историю. Дурак шагнул с обрыва; встретил учителей — от Мага до Колесницы; прошёл внутренние испытания — приручил льва, выдержал паузу и завершение, снял цепи, пережил Башню; сквозь ночь Луны дошёл до Солнца — и услышал зов. Мир — это тот же ноль, но пройденный: круг замкнулся, чтобы начаться заново, уже на новой высоте. Каждая ваша карта дня — чей-то шаг этого пути.\n\nПопробуйте сегодня: найдите себя на этой карте пути. Какая из 22 карт больше всего похожа на ваш нынешний этап? Откройте её страницу в справочнике — теперь вы прочтёте её не как отдельное слово, а как главу собственной истории.",
       "en": "Today the Fool's journey comes to its end — and the finale takes two steps: a call and a dance.\n\nThe Last Judgment, card twenty. An archangel sounds a trumpet, and people rise from open tombs, arms open in wonder. Don't let the scene alarm you: as Waite saw it, the trumpet sounds not so much outside as within us. This is the card of awakening and summing up: the past stage is complete, and you are called to a new level — to reappraise your life, make a major decision, take a second chance. Keywords: awakening, reckoning, calling, second chance. The card asks you to take honest stock — without self-flagellation, but without illusions — and to answer what has long been calling you.\n\nThe World, card twenty-one, is the last of the Major Arcana. A dancing figure in an oval wreath, and in the corners — the angel, the eagle, the bull and the lion: the same four we met on the Wheel Of Fortune. There they held books and studied; now they simply are: everything has come together. The cycle is complete, the goal is reached; for Waite this is \"assured success\" and wholeness. Keywords: completion, wholeness, achievement, travel. The World reminds us that celebrating a result is an art too — and only after that does the new begin.\n\nNow look back at the whole story. The Fool stepped off the cliff; met his teachers, from the Magician to the Chariot; passed the inner trials — tamed the lion, endured the pause and the ending, took off the chains, survived the Tower; walked through the Moon's night to the Sun — and heard the call. The World is the same zero, but a lived one: the circle closes so it can begin again, one turn higher. Every card of the day you draw is a step of this path.\n\nTry this today: find yourself on this map. Which of the 22 cards most resembles your current stage? Open its page in the guide — you will now read it not as a single word, but as a chapter of your own story.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -2418,7 +2511,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     }
    ]
   },
@@ -2446,7 +2542,10 @@
      "theory": {
       "ru": "Круг Старших арканов завершён: Дурак прошёл путь от наивности до мудрости. Но бо́льшая часть жизни — не повороты судьбы, а будни: работа, деньги, усталость, маленькие победы. Здесь начинаются Младшие арканы, и первая масть — Жезлы.\n\nЖезлы — стихия огня: воля, замысел, действие, азарт. У всех четырёх мастей одна числовая лестница: от Туза до Десятки — от искры к итогу. Туз — семя стихии, Пятёрка — её первое испытание, Десятка — предел цикла; одно число в разных мастях означает одну ступень, окрашенную своей стихией. Пять карт урока — начало этого пути: от потенциала к первому испытанию.\n\nТуз Жезлов: рука из облака протягивает жезл с живыми листьями — искра вдохновения, ещё ни на что не потраченная: энергия уже с вами, но разгорается только в деле. Двойка Жезлов: человек на крепостной стене держит глобус и смотрит на море — первый успех есть, пора выбирать дорогу дальше.\n\nТройка Жезлов: человек на возвышении смотрит, как плывут его корабли, а три жезла стоят у него за спиной, — усилия сделаны, результаты в пути. Держите курс: рядом могут появиться партнёры. Четвёрка Жезлов: четыре жезла, увитые цветами и плодами, образуют праздничную арку — важный этап завершён, стоит отметить его с близкими. Пятёрка Жезлов: пятеро юношей размахивают жезлами, но никто не ранен — тренировочный бой, а не война: каждый тянет своё, и это первое испытание. Отстаивайте своё — но помните, что цель важнее победы в каждой мелкой стычке.\n\nВместе пять карт — история одного замысла: искра, выбор пути, выход вовне, пауза для радости и первое трение с миром. Дальше сложнее, но огонь Жезлов не гаснет — он находит выход.\n\nПопробуйте сегодня: вспомните идею, которая давно ждёт первого шага, — не грандиозного, совсем маленького. Сделайте его сегодня: напишите письмо, откройте документ, наберите номер. Жезлы учат: искра становится огнём только в действии, а не в ожидании удобного момента.",
       "en": "The Major Arcana's circle is complete — the Fool has walked from innocence to wisdom. But most of life isn't fateful turns: it's workdays, money, tiredness, small wins. That's the territory of the Minor Arcana, and Wands open the door.\n\nWands are the element of fire: will, intention, action, excitement. All four suits climb the same numbered ladder: from Ace to Ten, a spark becomes an outcome. The Ace is the seed of the element, the Five is its first trial, the Ten is the cycle's limit; the same number in different suits marks the same stage, coloured by its element. These five cards start that arc: from potential to the first test.\n\nThe Ace of Wands: a hand from a cloud offers a wand with fresh leaves — a spark of inspiration, not yet spent. The energy is already yours; it catches fire through doing. The Two of Wands: a figure on a castle wall holds a globe and looks out to sea — the first success is behind you; now comes the choice of where to go next.\n\nThe Three of Wands: a figure on a height watches his ships, three wands planted behind him — the effort is made, results are on the way. Hold your course — reliable partners may appear. The Four of Wands: four wands wound with flowers and fruit form a festive arch — an important stage is done, worth marking with those close to you. The Five of Wands: five youths swing their wands, yet no one is hurt — sparring, not war: everyone pulls their own way, the first test. Hold your ground — but the goal matters more than any skirmish.\n\nTogether these cards tell one story: a spark, a choice of direction, a reach outward, a pause to celebrate, and first friction with the world. It only gets harder from here — but the fire of Wands never goes out — it finds its way through.\n\nTry this today: pick an idea that's waiting for its first step — not a grand one, just a small one. Take it today: write the email, open the document, make the call. Wands teach that a spark becomes fire only through action, not by waiting for the perfect moment.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -2581,7 +2680,10 @@
        "cardId": "w03"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l2",
@@ -2599,7 +2701,10 @@
      "theory": {
       "ru": "Пятёрка Жезлов оставила нас в шуме спора — стихия огня показала трудную сторону. Хорошая новость: спор был испытанием, а не приговором. Числовая лестница та же, что и в других мастях: ступени 6–10 ведут от выхода из испытания через проверку в одиночку и сосредоточенное движение к цене пути и пределу цикла. У Жезлов они горят по-своему: движение восьмёрки — это резкое ускорение, а цена девятки — усталость на последнем рубеже.\n\nШестёрка Жезлов: всадник на белом коне возвращается с лавровым венком на голове, рядом идут соратники — успех замечен, его можно принять без ложной скромности. Семёрка Жезлов: человек на вершине холма отбивается от шести жезлов, поднятых снизу — один против многих, но позиция выше даёт преимущество; защищайте своё спокойно и твёрдо. Восьмёрка Жезлов: восемь жезлов летят над простором — единственная карта масти без людей — то, что стояло на месте, вдруг набирает скорость. Отвечайте быстро, попутный ветер редко ждёт.\n\nДевятка Жезлов: мужчина с перевязанной головой стоит между жезлами, как в проходе, — устал и ранен, но держит рубеж. Стойкость почти у цели — и повод проверить, не обороняетесь ли вы там, где никто не нападает. Десятка Жезлов: человек несёт все десять жезлов, прижав к груди, и за ними не видит дороги — успех есть, но обернулся тяжестью. Это честно трудная карта: дом уже близко, и часть ноши можно отдать, отложить или отпустить — и это не слабость.\n\nВместе пять карт этого урока — история после победы: признание (Шестёрка), защита своего (Семёрка), рывок вперёд (Восьмёрка), стойкость на пределе (Девятка) и честный вопрос о ноше (Десятка). Дальше та же лестница начнётся заново — с Туза другой масти.\n\nПопробуйте сегодня: составьте список того, что вы сейчас «несёте», — дела, обещания, чужие ожидания. Отметьте одно, что можно отдать, отложить или прямо сегодня попросить о помощи с ним. Небольшое облегчение ноши — тоже победа, просто тихая.",
       "en": "The Five of Wands left us in a noisy argument — fire showed its harder side. The good news: it was a test, not a verdict. The same numbered ladder runs here: steps six to ten lead from the way out of a trial, through a test faced alone and focused motion, to the price of the road and the cycle's limit. In Wands they burn in their own way: the Eight's motion is a sudden burst of speed, and the Nine's price is exhaustion at the last stand.\n\nThe Six of Wands: a rider on a white horse returns crowned with a laurel wreath, companions alongside — success has been noticed, and you can accept it without false modesty. The Seven of Wands: a figure on a hilltop fends off six wands raised from below — one against many, but higher ground gives the edge; defend what matters calmly. The Eight of Wands: eight wands fly over open country — the only card of the suit with no people in it — and what stood still for ages picks up speed. Answer quickly; a tailwind rarely waits.\n\nThe Nine of Wands: a man with a bandaged head stands among the wands as if in a gateway — tired and wounded, still holding the line. It's resilience near the end, and a good moment to check you're not guarding against an attack that isn't coming. The Ten of Wands: a man carries all ten wands pressed to his chest, unable to see the road past them — the success is real, but it has turned into weight. This is honestly a hard card: the house is close, and part of the load can be handed off, postponed or set down — that isn't weakness.\n\nTogether, this lesson's five cards are the story after a win: recognition (Six), defending your ground (Seven), a burst forward (Eight), resilience at the limit (Nine), and an honest question about the load (Ten). From here the same ladder starts again — with the Ace of another suit.\n\nTry this today: list what you're currently 'carrying' — tasks, promises, other people's expectations. Mark one thing you could hand off, postpone, or ask for help with today. Lightening the load, even a little, is a win too — just a quieter one.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -2734,7 +2839,10 @@
        "cardId": "w10"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l3",
@@ -2752,7 +2860,10 @@
      "theory": {
       "ru": "У Жезлов путь горел огнём — азарт, воля, рывок вперёд. Кубки ведут по тем же ступеням, но их стихия — вода: чувства, привязанности, связи между людьми. Здесь важен не результат, а то, что происходит внутри, пока он складывается.\n\nЧисловая лестница та же, что у Жезлов, и у Кубков её ступени такие: дар, пара, выход к людям, пауза, испытание. Первая половина масти ведёт от переполненного сердца к первой настоящей потере — и показывает, что полнота чувства возможна на любом отрезке пути.\n\nТуз Кубков — чаша, льющаяся сама собой: рука из облака протягивает её, а голубь опускает в неё облатку. Это новое чувство без всякой причины — просто откройте сердце и примите его. Двойка сводит двоих: юноша и девушка меняются кубками под кадуцеем — равный обмен, взаимность вместо расчёта. Тройка выводит радость наружу: три подруги поднимают чаши в саду, полном плодов, — праздник, который сильнее всего в кругу своих.\n\nЧетвёрка — застывший взгляд: юноша сидит под деревом, скрестив руки, три чаши перед ним уже приелись, а четвёртую, протянутую из облака, он просто не замечает. Пятёрка — самая трудная карта урока: фигура в чёрном плаще стоит над тремя опрокинутыми чашами, и горе здесь настоящее, его не нужно торопить. Но за спиной остались две полные чаши — есть на что опереться, даже когда больно.\n\nВместе эти пять карт — история о том, как обращаться с чувствами: принимать дар, делиться им, не застревать в привычном и, встретив потерю, горевать честно, не забывая обернуться на то, что осталось целым.\n\nПопробуйте сегодня: выберите один момент дня, когда почувствуете что-то заметное — радость, раздражение, нежность, — и просто назовите это чувство про себя одним словом, не оценивая его. Вечером вспомните этот момент и сделайте то, к чему зовёт Пятёрка: что рядом с этим чувством осталось целым?",
       "en": "Wands burned with fire — drive, will, a push forward. Cups climb the same ladder, but their element is water: feelings, attachments, the bonds between people. Here what matters isn't the result but what happens inside while it takes shape.\n\nThe numbered ladder is the one you know from Wands; in Cups its steps are these: a gift, a pair, joy shared outward, a pause, a trial. This first half of the suit runs from an overflowing heart to a real first loss, showing that feeling fully is possible at every point along the way.\n\nThe Ace of Cups is a chalice pouring itself: a hand from a cloud offers it, and a dove lowers a wafer into it. It's a new feeling with no particular cause — just open your heart and receive it. The Two brings two people together: a young man and woman trade cups beneath a caduceus — an equal exchange, mutuality instead of calculation. The Three carries joy outward: three friends raise their cups in a garden full of fruit — a celebration that is strongest among your own people.\n\nThe Four is a frozen gaze: a young man sits under a tree, arms crossed, the three cups before him already stale, while a fourth is offered from a cloud and he simply doesn't notice it. The Five is the hardest card in this lesson: a figure in a black cloak stands over three spilled cups, and the grief here is real — it shouldn't be rushed. But two full cups remain behind him — something to lean on, even while it hurts.\n\nTogether these five cards teach how to handle feeling: accept the gift, share it, don't get stuck in the familiar, and when loss comes, grieve honestly — without forgetting to turn and see what's still whole.\n\nTry this today: choose one moment when you notice a feeling clearly — joy, irritation, tenderness — and just name it to yourself in one word, without judging it. In the evening, recall that moment and do what the Five of Cups asks: what stayed whole right beside that feeling?",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -2887,7 +2998,10 @@
        "cardId": "c05"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l4",
@@ -2905,7 +3019,10 @@
      "theory": {
       "ru": "Разлитые чаши Пятёрки остались позади, а две целые — при вас: есть на что опереться. Вторая половина масти продолжает путь: боль отступает, а чувства текут через тепло памяти к настоящему счастью.\n\nТа же числовая лестница: Шестёрка — тепло, Семёрка — соблазн, Восьмёрка — уход, Девятка — довольство, Десятка — полнота.\n\nШестёрка Кубков — тёплое воспоминание: дети играют в старом саду, мальчик протягивает девочке цветок в чаше. Прошлое возвращается погреть, а не заменить настоящее. Семёрка — облако из семи чаш: лицо, замок, драгоценности, венок, дракон, змея — соблазны на любой вкус, а настоящий лишь силуэт под покрывалом. Пока вы перебираете фантазии, жизнь стоит на месте — пора выбрать одну чашу, свою.\n\nВосьмёрка Кубков — осознанный уход: путник в красном плаще оставляет восемь составленных чаш и поднимается в горы за тем, что действительно наполняет, даже если со стороны всё в порядке. Хозяин Девятки сидит перед аркой из девяти золотых чаш, скрестив руки, — это довольство и умение замечать хорошее, а не обещание чуда извне. Разделите это довольство с кем-то — и радость станет полнее.\n\nДесятка Кубков завершает историю: радуга из десяти чаш над парой с поднятыми руками и танцующими детьми у дома на холме — счастье, сложенное из ежедневной заботы друг о друге, а не подарок судьбы. Пять карт второй половины ведут чувства от памяти через выбор и уход к разделённой полноте — и показывают, что у честно прожитой боли есть продолжение.\n\nПопробуйте сегодня: сделайте шаг Десятки — назовите вслух или запишите одну вещь в жизни, которая уже сложилась, и скажите спасибо тому, кто в этом участвует. Не ждите повода: счастье Кубков не падает готовым, оно собирается из таких маленьких «спасибо».",
       "en": "The spilled cups of the Five are behind us now — but the two that stayed whole are still there to lean on. The second half of the suit picks up from there: pain eases, and feeling flows through the warmth of memory toward real happiness.\n\nThe same numbered ladder: the Six is warmth, the Seven temptation, the Eight departure, the Nine contentment, the Ten fullness.\n\nThe Six of Cups is a warm memory: children play in an old garden, a boy hands a girl a flower in a cup. The past returns to warm you, not to live in. The Seven is a cloud of seven cups: a face, a castle, jewels, a wreath, a dragon, a snake — temptations for every taste, though only the veiled silhouette is real. While you sort through fantasies, life stands still — time to choose one cup, your own.\n\nThe Eight of Cups is a conscious departure: a traveller in a red cloak leaves eight stacked cups and climbs into the mountains for what truly fills him, even if it all looked fine from outside. The man of the Nine sits before an arch of nine golden cups, arms crossed — contentment, the skill of noticing the good already there, not a promise of a miracle. Share that contentment with someone, and the joy grows.\n\nThe Ten of Cups closes the story: a rainbow of ten cups over a couple with raised arms and dancing children by a hilltop home — happiness built through daily care, not a gift from fate. Together these five cards trace feeling from memory through choice and departure to shared fullness — and show that grief lived through honestly is not the end of the road.\n\nTry this today: take the Ten's step — name out loud, or write down, one thing in your life that's already working, and thank the person behind it. Don't wait for an occasion: Cups happiness never arrives ready-made — it's built from small thank-yous like this one.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3040,7 +3157,10 @@
        "cardId": "c10"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l5",
@@ -3058,7 +3178,10 @@
      "theory": {
       "ru": "Огонь и вода уже позади: Жезлы учили действовать, Кубки — чувствовать. Мечи — третья стихия курса, самая холодная на ощупь: воздух не греет, а проясняет. Про мысли, слова и конфликты вы уже слышали — сегодня разберём, чем эта холодность полезна на деле.\n\nВоздух — стихия мысли: ясность, слово и цена, которую разум платит за ясность. Здесь та же лестница чисел, что у Жезлов и Кубков, только раскрашенная воздухом: от дара Туза до испытания Пятёрки.\n\nТуз Мечей — вспышка ясности: рука из облака держит меч, увенчанный короной, разум вдруг видит суть после путаницы. Двойка Мечей — пауза перед выбором: женщина с завязанными глазами держит два скрещённых меча, не желая видеть ни факты, ни чувства. Тройка Мечей — сердце, пронзённое тремя мечами под дождём: боль здесь прямая и настоящая, и первое, что делает карта, — признаёт её. Дождь на картинке — слёзы, которые очищают: прожитая боль постепенно отпускает.\n\nЧетвёрка Мечей — карта передышки: рыцарь лежит на надгробии со сложенными руками, но это не смерть, а покой между битвами — разуму нужно право на паузу. Пятёрка Мечей — самая трудная ступень этой половины: победитель с усмешкой собирает мечи побеждённых, а двое уходят, опустив головы, — поле боя за ним, но он на нём один. Спросите себя, чего стоила такая победа: иногда зрелее выйти из борьбы, сохранив то, что дорого.\n\nВместе пять карт — путь мысли от вспышки к уроку смирения: ясность Туза требует выбора Двойки, за выбором приходит боль Тройки — не как расплата, а как часть пути, — и нужна пауза Четвёрки; без паузы разговор легко срывается в конфликт Пятёрки. Разум силён, но без честности к себе легко принять потерю за победу.\n\nПопробуйте сегодня: поймайте один спор, внутренний или внешний, и спросите честно: я отстаиваю правду или хочу победы? Если тянет побеждать любой ценой, вспомните Пятёрку Мечей и выберите другой ход: промолчать там, где раньше ответили бы резко.",
       "en": "Fire and water are behind us: Wands taught you to act, Cups taught you to feel. Swords are the third element of the course, the coolest to the touch: air doesn't warm, it clears. You've already heard that this suit is about thoughts, words and conflict — today we look at what that coolness is for.\n\nAir is the element of the mind: clarity, words — and the price reason pays for that clarity. The same ladder runs here as through Wands and Cups, coloured by air — from the Ace's gift to the Five's trial.\n\nThe Ace of Swords is a flash of clarity: a hand from a cloud holds a crowned sword, and the mind suddenly sees the point. The Two of Swords is the pause before a choice: a blindfolded woman holds two crossed swords, refusing to see the facts or her feelings. The Three of Swords is a heart pierced by three swords in the rain: the pain is direct and real, and the first thing the card does is name it. The rain is tears that cleanse: pain lived through gradually lets go.\n\nThe Four of Swords is a card of respite: a knight lies on a tomb with folded hands, not dead but resting between battles — the mind needs permission to pause. The Five of Swords is the hardest rung of this half of the suit: a smirking winner gathers the swords of the defeated while two others walk away, heads bowed — the field is his, but he stands on it alone. Ask what this win cost: the wiser move is often to step out and keep what matters.\n\nTogether these cards trace the mind's path from a spark to a lesson in humility: the Ace's clarity demands the Two's choice, the choice is followed by the Three's pain — not as payback, but as part of the road — and after it comes the Four's pause; without it a conversation slips into the Five's conflict. Reason is strong, but without honesty with yourself it's easy to mistake a loss for a win.\n\nTry this today: notice one argument, inner or outer, and ask: am I defending the truth, or just trying to win? If winning at any cost tempts you, remember the Five of Swords: stay quiet where you'd normally answer sharply.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3193,7 +3316,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l6",
@@ -3211,7 +3337,10 @@
      "theory": {
       "ru": "Пятёрка Мечей оставила тяжёлый воздух: спор выигран, но легче не стало. Шестёрка начинает его разгонять — дальше пять карт ведут разум от переправы к настоящему дну и обратно к рассвету.\n\nСтупени 6–10 ведут от выхода из испытания к итогу цикла: помощь, проверка в одиночку, сосредоточенное движение, цена пути, предел. У Мечей семёрка проходит одиночную проверку не в открытую, а в обход, а восьмёрка — не рывок вперёд, а застревание в собственной голове: заметьте это заранее.\n\nШестёрка Мечей — переправа: лодочник везёт женщину с ребёнком к спокойному берегу, буря остаётся позади, а грусть, если она есть, едет с ними в лодке. Семёрка Мечей — хитрость: мужчина на цыпочках уносит из лагеря чужие мечи, оглядываясь через плечо, — обходной путь кажется удачным, но забрать удалось не всё.\n\nВосьмёрка Мечей — женщина стоит связанная, с повязкой на глазах, среди восьми мечей, похожих на ограду; но путы свободны, и впереди остаётся проход — тюрьма чаще в мыслях, а не в обстоятельствах. Девятка Мечей — женщина сидит на постели, закрыв лицо руками: час, когда мысли звучат громче реальности. Но мечи висят на стене и не касаются её — страх реален как переживание, а не как приговор.\n\nДесятка Мечей — фигура лежит под мечами, их больше, чем нужно: что-то действительно закончилось, и разум вдобавок склонен преувеличивать поражение. Позвольте себе отгоревать — и посмотрите на горизонт: небо там уже золотится, рассвет приходит сразу за самой тёмной точкой ночи. Вместе пять карт урока — про то, что дно не бесконечно: разум умеет и заводить в ловушку, и выводить из неё, а рассвет начинается ровно там, где к тяжести уже нечего добавить.\n\nПопробуйте сегодня: если крутится тяжёлая мысль, не носите её в одиночку весь день, как героиня Девятки Мечей, — скажите её одному человеку или запишите как есть. И вспомните Десятку: даже у самого трудного дня есть горизонт, а значит, и рассвет.",
       "en": "The Five of Swords left the air heavy: the argument was won, but nothing got lighter. The Six begins to clear it — the next five cards carry the mind from the crossing to a real rock bottom and back up to dawn.\n\nSteps six to ten lead from the way out of the trial to the close of the cycle: help, a test faced alone, focused motion, the price of the road, and the limit. In Swords the seventh step takes its solitary test in a roundabout way, and the eighth is not a rush forward but getting stuck inside your own head — worth noticing in advance.\n\nThe Six of Swords is a crossing: a ferryman carries a woman and child toward a calm shore, the storm behind them, and whatever sadness there is rides along in the boat. The Seven of Swords is cunning: a man tiptoes from a camp with swords that aren't his, glancing over his shoulder — the roundabout way looks successful, but he couldn't take everything.\n\nThe Eight of Swords shows a bound, blindfolded woman among eight swords like a fence; yet the ropes are loose and a path stays open — the prison is more often in the mind than in circumstance. The Nine of Swords shows a woman sitting up in bed, face in her hands: the hour when thoughts sound louder than reality. But the swords hang on the wall and never touch her — fear is real as a feeling, not as a verdict.\n\nThe Ten of Swords: a figure lies beneath more swords than the scene needs — something has truly ended, and the mind tends to exaggerate the defeat on top of that. Let yourself grieve, then look at the horizon: it is already turning gold, and dawn follows the darkest point of night. Together, this lesson's cards say that rock bottom is not endless: the mind can both build the trap and walk you out of it, and dawn begins where nothing more can be added to the weight.\n\nTry this today: if a heavy thought is circling, don't carry it alone all day the way the Nine of Swords does — say it out loud to one person, or write it down as it is, with no softening. And remember the Ten: even the hardest day has a horizon, and so a dawn.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3346,7 +3475,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l7",
@@ -3364,7 +3496,10 @@
      "theory": {
       "ru": "Три стихии уже пройдены: Жезлы, Кубки и Мечи. Осталась последняя, самая осязаемая: земля Пентаклей — то, что можно взвесить, потратить и построить своими руками.\n\nПентакли — про деньги, тело, работу и дом: всё, что имеет вес и форму. Та же числовая лестница, что и в других мастях, здесь окрашена землёй: Туз — ещё не проросшее семя достатка, Двойка — баланс нескольких дел сразу, Тройка — труд, который заметили, Четвёрка — устойчивость, которая переходит в хватку, Пятёрка — испытание нуждой.\n\nТуз Пентаклей — рука из облака протягивает вам вещественный подарок: новую возможность в деньгах или работе. Семя уже в ладони, но нужна почва — конкретные шаги, а не только надежды. Двойка Пентаклей жонглирует работой и домом сразу: пока вы двигаетесь и сохраняете гибкость, всё удаётся удержать в воздухе. Тройка Пентаклей — мастер на возвышении, чью работу оценили заказчики: умение подняло его над учеником, а дело складывается потому, что каждый внёс своё.\n\nЧетвёрка Пентаклей сжимает монету у груди: удержать нажитое — не порок, но сжатые руки не могут принять ничего нового. Пятёрка Пентаклей — самое трудное место масти: двое бредут по снегу, потеряв опору, а рядом светится витражное окно, мимо которого они идут, привыкнув справляться сами. Помощь здесь ближе, чем кажется — её нужно позволить себе заметить.\n\nВместе эти пять карт — история о том, как достаток рождается, удерживается и проверяется на прочность: сначала дар, потом баланс, потом труд, потом искушение сжать кулак, потом — урок, что опору иногда нужно просто заметить и принять.\n\nПопробуйте сегодня: посчитайте, сколько раз за день вы откажетесь от помощи, хотя могли бы её принять — донести сумку, разделить счёт, попросить совет. В каждый такой момент задайте себе вопрос Пятёрки: это правда моя ноша — или просто привычка справляться в одиночку?",
       "en": "Three suits are behind us: Wands, Cups and Swords. One element remains, the most tangible of all: the earth of Pentacles — what you can weigh, spend and build with your own hands.\n\nPentacles are about money, the body, work and home — everything with weight and shape. The same number ladder runs through this suit, coloured by earth: the Ace is a seed not yet sprouted, the Two is balancing several things at once, the Three is work that gets noticed, the Four is stability that tips into clinging, the Five is the trial of hardship.\n\nThe Ace of Pentacles is a hand from a cloud, offering a tangible gift: a fresh opportunity in money or work. The seed is already in your palm, but it needs soil — concrete steps, not just hope. The Two of Pentacles juggles work and home at once: as long as you keep moving and stay flexible, everything stays in the air. The Three of Pentacles is a craftsman on a raised bench whose work his patrons have come to value: skill has raised him above the apprentice, and the work comes together because everyone contributed their part.\n\nThe Four of Pentacles is a crowned figure clutching a coin to his chest: holding on to what you've earned isn't a flaw, but clenched hands can't receive anything new. The Five of Pentacles is the suit's hardest spot: two figures trudge through snow, their support gone, while a lit stained-glass window glows right beside them, and they walk on past it, used to coping alone. Help here is closer than it looks — you just need to let yourself see it.\n\nTogether these five cards trace how prosperity is born, held onto and tested: first a gift, then balance, then labour, then the temptation to clench a fist, then a lesson that support sometimes just needs to be noticed and accepted.\n\nTry this today: count how many times in a day you turn down help you could actually accept — carrying a bag, splitting a bill, asking for advice. Each time, ask yourself the Five's question: is this truly my burden — or just a habit of coping alone?",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3499,7 +3634,10 @@
        "cardId": "p05"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m4l8",
@@ -3517,7 +3655,10 @@
      "theory": {
       "ru": "У витражного окна Пятёрки свет горел, но остался незамеченным. Шестёрка отвечает: то, что казалось недоступным за стеклом, здесь переходит из рук в руки — обмен возобновляется, и помощь можно и получить, и дать самому.\n\nВторая половина лестницы масти: Шестёрка — выход из нужды через щедрость, Семёрка — проверка терпением, Восьмёрка — сосредоточенный труд, Девятка — вкус уже заслуженного результата, Десятка — предел цикла, где достаток становится наследием.\n\nШестёрка Пентаклей — купец с весами делится монетами с теми, кто просит: щедрость честная, без унижения и скрытого долга. Семёрка Пентаклей — задумчивый садовник опирается на мотыгу и смотрит на куст, увешанный монетами: труд вложен, урожай ещё зреет, и сейчас время трезвой оценки, а не рывка. Восьмёрка Пентаклей — мастер за верстаком высекает монету за монетой: не ради быстрого результата, а ради качества, из которого со временем и вырастает мастерство.\n\nДевятка Пентаклей — женщина в своём саду с соколом на руке: благополучие, выращенное своим трудом, и право не спешить, получая от него удовольствие. Десятка Пентаклей — три поколения под одной аркой: то, что строится не только для себя, но и для тех, кто придёт после, — дом, традиции, ощущение «я на своём месте».\n\nВместе эти пять карт ведут от нужды к наследию: щедрость возвращает силы, терпение и труд превращают их в мастерство, а мастерство однажды становится домом, который переживёт своего мастера. Все четыре стихии курса шли по одному и тому же счёту: огонь Жезлов замышлял, вода Кубков чувствовала, воздух Мечей осмыслял, земля Пентаклей воплощала. Один порядок чисел, четыре языка одного пути.\n\nПопробуйте сегодня: возьмите одно дело, в котором хотите стать лучше, и дайте ему двадцать минут без спешки — это шаг Восьмёрки. А вечером вспомните то, что вы уже заслужили своим трудом, и разрешите себе просто этим насладиться, без чувства вины, — это шаг Девятки.",
       "en": "At the Five's stained-glass window the light was on, but no one noticed it. The Six answers: what seemed shut away behind the glass now passes from hand to hand — exchange starts moving again, and help can be received as well as given.\n\nThe second half of the suit's ladder: the Six is escape from hardship through generosity, the Seven is a test of patience, the Eight is focused labour, the Nine is the taste of an already-earned result, the Ten is the cycle's limit, where prosperity becomes legacy.\n\nThe Six of Pentacles is a merchant with scales, sharing coins with those who ask: the generosity is honest, with no humiliation and no hidden debt. The Seven of Pentacles is a pensive gardener leaning on his hoe, looking at a bush hung with coins: the labour is done, the harvest still ripens, and now is the time for a sober look, not for pulling plants up early. The Eight of Pentacles is a craftsman at a workbench, carving coin after coin: not for a quick result, but for the quality that, repeated long enough, turns into mastery.\n\nThe Nine of Pentacles is a woman in her garden with a falcon on her wrist: prosperity grown by her own labour, and every right to slow down and enjoy it. The Ten of Pentacles is three generations under one archway: built not only for yourself but for those who come after — home, tradition, a sense of belonging.\n\nTogether these cards move from hardship to legacy: generosity restores strength, patience and labour turn it into mastery, and mastery becomes a home that outlasts the one who built it. All four elements of the course climbed the same run of numbers: the fire of Wands conceived the idea, the water of Cups felt it, the air of Swords thought it through, the earth of Pentacles built it. The same numbers, four languages for one journey.\n\nTry this today: take one thing you want to get better at and give it twenty unhurried minutes — that's the Eight's step. In the evening, recall something you've earned through your own work, and let yourself enjoy it, without guilt — that's the Nine's step.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3652,7 +3793,10 @@
        "cardId": "p09"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     }
    ]
   },
@@ -3679,7 +3823,10 @@
      "theory": {
       "ru": "В каждой масти четыре придворных карты — вы видели их в первом модуле, а стихии мастей — в прошлом. Ранги: Паж учится и приносит весть, Рыцарь действует и движется, Королева владеет стихией внутри, Король распоряжается ею вовне. Сегодня — Пажи всех мастей.\n\nУ Уэйта Паж Жезлов возвещает новость. Энергию девать некуда, а молчать не может. Как человек — энтузиаст: любопытный, легко загорающийся, всегда с новостью. Как ваша роль — первый импульс, проба сил. Сила — в готовности начать; риск — вспыхнуть и остыть.\n\nПаж Кубков разглядывает рыбу из кубка — так всплывают чувства и творческие идеи. Как человек — мечтательная, чувствительная натура с открытым сердцем. Как ваша роль — нежное начало: первое чувство, творческая идея. Сила — в искренности; риск — обидчивость и бегство в фантазии.\n\nПаж Мечей идёт по неровной земле с мечом, настороженно оглядываясь. Как человек — наблюдательный ум, быстро схватывает и несёт новости. Как ваша роль — любопытство ума и бдительность: узнавайте, проверяйте факты. Сила — в ясности; риск — сплетни и поспешные выводы.\n\nПаж Пентаклей разглядывает пентакль, парящий над ладонями, не замечая ничего вокруг. Как человек — прилежный ученик, мечтающий о конкретном: курсе, ремесле, первых деньгах. Как ваша роль — новая цель и ученичество, медленный верный шаг. Сила — в терпении; риск — распылиться на планы.\n\nРазличить Пажей просто по стихии: Жезлов (огонь) загорается, Кубков (вода) чувствует, Мечей (воздух) спрашивает, Пентаклей (земля) учится. Человек или ваша роль? Про отношения с кем-то — скорее человек; про себя и решение — скорее роль. Сомневаетесь — читайте как роль: это никого не обвиняет.\n\nПопробуйте сегодня: выберите, какой из четырёх Пажей ближе вам, и почему. Или заметьте одну из ролей в знакомом: кто-то загорелся идеей, кто-то говорит нежно, кто-то расспрашивает, кто-то тихо готовится. Ученичество — не слабость, а начало мастерства.",
       "en": "Every suit has four court cards, seen in the first module; their elements came in the previous one. The ranks: the Page studies and brings word, the Knight acts and moves, the Queen owns her element within, the King directs it outward. Today: the Pages of every suit.\n\nIn Waite's image, the Page of Wands announces news, restless with energy he can't yet spend. As a person — an enthusiast: curious, quick to catch fire. As your own role — a first impulse, trying out your strength. The strength is readiness to begin; the risk is flaring up and cooling down.\n\nThe Page of Cups watches a fish peek from his cup — feelings and ideas surfacing. As a person — a dreamy, sensitive soul with an open heart. As your own role — a gentle beginning: a first feeling, a creative idea. The strength is sincerity; the risk is touchiness and retreating into daydreams.\n\nThe Page of Swords strides over rugged ground, sword in hand, glancing warily this way and that. As a person — an observant mind, quick to grasp, a bringer of news. As your own role — a curious mind and vigilance: find out, check facts. The strength is clarity; the risk is gossip and haste.\n\nThe Page of Pentacles studies a pentacle hovering above his raised hands, oblivious to all around. As a person — a diligent student with concrete dreams: a course, a craft, first earnings. As your own role — a new goal and apprenticeship, a slow, steady step. The strength is patience; the risk is scattering across plans.\n\nTelling the Pages apart: Wands (fire) flares up, Cups (water) feels, Swords (air) asks, Pentacles (earth) studies. Does a card mean a person or your role? About someone specific, it's usually a person; about yourself and a decision, usually your role. When in doubt, read it as your role — it blames no one.\n\nTry this today: pick which of the four Pages feels closest right now, and why. Or notice one of these roles in someone you know: catching fire, speaking gently, asking questions, quietly preparing. Apprenticeship isn't weakness — it's where mastery begins.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3814,7 +3961,10 @@
        "cardId": "c11"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m5l2",
@@ -3831,7 +3981,10 @@
      "theory": {
       "ru": "Паж принёс весть — Рыцарь превращает её в поступок. Это следующая ступень двора: карта действия и дороги, всадник на коне. Все четыре всадника — с рисунков Уэйта. У каждой масти путь свой: конь несёт седока сквозь стихию его масти.\n\nРыцарь Жезлов скачет мимо пирамид, уже сорвавшись с места. Как человек — страстный авантюрист: загорается первым, зовёт за собой, скучать не умеет. Как ваша роль — порыв, переезд, смелый старт. Сила — в решимости стартовать; риск — поспешность: огонь без узды сжигает планы.\n\nРыцарь Кубков едет медленно, держа кубок в руке, — вестник с даром чувств. Как человек — обаятельный мечтатель: красиво ухаживает, хотя между словом и делом бывает дистанция. Как ваша роль — предложение, весть от сердца. Сила — в искренности жеста; риск — за красивыми словами может не быть содержания.\n\nРыцарь Мечей мчится навстречу ветру, без единой заминки. Как человек — решительная прямолинейная натура: умная, убедительная, порой резкая. Как ваша роль — действовать быстро и прямо, сверив направление. Сила — в скорости и прямоте; риск — напор без руля: резкие слова, о которых потом жалеют.\n\nРыцарь Пентаклей едет на тяжёлом выносливом коне, не поднимая его в галоп, — самый надёжный: не мчится, но доезжает всегда. Как человек — верный труженик, на которого можно положиться. Как ваша роль — рутина и маленькие шаги. Сила — в выносливости; риск — застой: упорство превращается в упрямство.\n\nРазличить четверых просто по движению: Жезлы срываются с места, Кубки едут медленно и красиво, Мечи мчатся без остановки, Пентакли едут неспешно, но доезжают всегда. Правило прежнее: сомневаетесь, человек это или роль, — читайте как роль.\n\nПопробуйте сегодня: вспомните дело, которое откладываете, и решите, чей темп сдвинет его с места: рывок Жезлов, тёплое слово Кубков, прямой разговор Мечей или один маленький шаг Пентаклей.",
       "en": "The Page brought word; the Knight turns it into action. This is the next step at court: a card of motion and the road, a rider on a horse. All four riders come from Waite's drawings. Each suit rides its own road: the horse carries its rider through the element of the suit.\n\nThe Knight of Wands rides past pyramids, already off at a gallop. As a person — a passionate adventurer: quick to catch fire, sweeping others along, never bored. As your own role — impulse, a move, a bold start. The strength is the nerve to start; the risk is haste: unchecked fire burns through plans.\n\nThe Knight of Cups rides slowly, cup held out — a messenger with a gift of feeling. As a person — a charming dreamer: he courts beautifully, though words and deeds can part ways. As your own role — a proposal, news of the heart. The strength is a sincere gesture; the risk is that behind beautiful words there may be nothing.\n\nThe Knight of Swords charges into the wind without a single hesitation. As a person — decisive and blunt: sharp-minded, persuasive, at times abrupt. As your own role — move fast and speak plainly, having checked your direction. The strength is speed and directness; the risk is drive with no steering: sharp words regretted later.\n\nThe Knight of Pentacles rides a slow, enduring, heavy horse — the most reliable: he never gallops, yet always arrives. As a person — a loyal worker you can depend on. As your own role — routine and small steps. The strength is endurance; the risk is stagnation: persistence turns into stubbornness.\n\nTelling them apart is easy: Wands takes off at once, Cups rides slowly and gracefully, Swords charges without slowing, Pentacles rides unhurried but always arrives. The rule is the same as before: unsure whether it's a person or a role — read it as your role.\n\nTry this today: pick something you keep putting off, and decide whose pace would get it moving: the rush of Wands, the warm word of Cups, the plain talk of Swords, or one small step of Pentacles.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -3966,7 +4119,10 @@
        "cardId": "s12"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m5l3",
@@ -3983,7 +4139,10 @@
      "theory": {
       "ru": "Королева — третья ступень двора. Она владеет стихией внутри: не подавляет её и не выплёскивает, а держит ровно — и потому на неё опираются.\n\nКоролева Жезлов на карте — трон со львами и подсолнух в руке: огонь, ставший властью без жестокости. Как человек — харизматичная женщина-солнце, вдохновляющая одним присутствием. Как ваша роль — уверенность и самостоятельность. Риск — ревность и желание всё контролировать, если сравниваете себя с другими.\n\nКоролева Кубков смотрит в закрытый кубок — единственный закрытый в колоде. Как человек — женщина глубокой эмпатии, ей доверяют самое сокровенное. Как ваша роль — интуиция и душевная зрелость: из тихого наблюдения рождается решение. Риск — отдавать так много, что забыть о себе: воде тоже нужны берега.\n\nКоролева Мечей сидит в профиль, меч поднят вертикально: правда без уклончивости. Как человек — независимая женщина с острым умом: знала потери, но не ожесточилась, говорит прямо. Как ваша роль — трезвая ясность и границы. Прямота — не холодность; риск начинается там, где ясность превращается в броню.\n\nКоролева Пентаклей сидит среди цветущей природы, глядя на пентакль в руках — изобилие, укоренённое в земле. Как человек — щедрая, земная женщина, которая соединяет дом и дело. Как ваша роль — практичность и забота о теле, доме, близких. Риск — тянуть всё на себе, забыв о своих потребностях.\n\nРазличить четверых по глаголу: Жезлов вдохновляет, Кубков вмещает чужие чувства, Мечей называет вещи своими именами, Пентаклей заботится. Один вопрос для каждой придворной карты: человек рядом или ваша роль? Отношения с кем-то — скорее человек; решение о себе — скорее роль; сомневаетесь — читайте как роль.\n\nПопробуйте сегодня: выберите одну из четырёх Королев и побудьте в её роли в одном сегодняшнем разговоре — вдохновите, выслушайте, скажите прямо или позаботьтесь о близких. Заметьте, какая роль ближе всего вам сегодня.",
       "en": "The Queen is the third step at court. She owns her element within: neither suppressing it nor spilling it out, but holding it steady — which is why others lean on her.\n\nThe Queen of Wands sits enthroned with lions, a sunflower open in her hand: fire become power without cruelty. As a person — a charismatic, sun-like woman who inspires simply by being there. As your own role — confidence and self-reliance. The risk is jealousy and the urge to control everything, if you compare yourself to others.\n\nThe Queen of Cups gazes into a closed cup — the only closed one in the deck. As a person — a woman of deep empathy, trusted with people's secrets. As your own role — intuition and emotional maturity: a decision grows out of quiet watching. The risk is giving so much that you forget yourself: the water needs its banks too.\n\nThe Queen of Swords sits in profile, sword raised straight up: truth without evasion. As a person — an independent woman with a sharp mind: she has known loss, yet didn't harden, and speaks plainly. As your own role — sober clarity and boundaries. Her directness is not coldness; the risk begins where clarity turns into armour.\n\nThe Queen of Pentacles sits amid blossoming nature, gazing at the pentacle in her hands — abundance rooted in the earth. As a person — a generous, down-to-earth woman who weaves home and work together. As your own role — practicality and care for body, home, and loved ones. The risk is carrying everything alone and forgetting your own needs.\n\nTell the four apart by a verb: Wands inspires, Cups holds what others feel, Swords calls things by their names, Pentacles cares. One question for every court card: a person nearby, or your own role? A relationship with someone — likely a person; a decision about yourself — likely a role; when unsure, read it as a role.\n\nTry this today: pick one of the four Queens and step into her role in one conversation today — inspire, listen, speak plainly, or tend to those close to you. Notice which role feels closest to you today.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -4118,7 +4277,10 @@
        "cardId": "s13"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m5l4",
@@ -4135,7 +4297,10 @@
      "theory": {
       "ru": "Мы прошли Пажей, Рыцарей и Королев — и добрались до Королей, последних жителей двора. Король — вершина ранга: Королева владеет стихией внутри, а он распоряжается ею вовне.\n\nКороль Жезлов держит расцветший жезл, на троне лев и саламандры — власть, что даёт жизнь. Как человек — честный лидер: видит цель и ведёт за собой. Как ваша роль — время взять руководство на себя. Риск — власть без тепла: требовать, не слушая.\n\nКороль Кубков сидит на троне среди волнующегося моря и остаётся невозмутим, кубок в одной руке. Как человек — добрый наставник: чувствует глубоко, но не отдаёт волнам штурвал. Как ваша роль — держать штурвал, когда штормит. Риск — чувства под замком: холодность вместо разговора.\n\nКороль Мечей сидит лицом к нам с поднятым мечом — прямота суждения. Как человек — аналитик: судит по фактам. Как ваша роль — решить по совести, отложив эмоции. Риск — ум без сердца: давление авторитетом, спор ради победы.\n\nКороль Пентаклей сидит на троне, увитом виноградом, бычьи головы на троне, замок за спиной. Как человек — надёжный хозяин дела. Как ваша роль — щедро делиться нажитым и строить надолго. Риск — материальное как самоцель: жадность и упрямство.\n\nТеперь двор виден целиком: по вертикали ранги (Паж учится, Рыцарь действует, Королева владеет стихией внутри, Король — вовне), по горизонтали стихии (огонь, вода, воздух, земля) — шестнадцать характеров. Пересечение читается буквально: Королева Мечей — воздух внутри, Король Мечей — тот же воздух вовне, в решении. Правило то же: о ком-то рядом — читайте карту как человека, о своём выборе — как роль, а в сомнении берите роль.\n\nПопробуйте сегодня: вспомните, кто рядом с вами сейчас ведёт, утешает, судит или обеспечивает, — и назовите, какой из четырёх Королей в нём говорит. Так, по одному живому лицу за раз, двор из шестнадцати карт постепенно станет знакомым.",
       "en": "We've met the Pages, Knights, and Queens — and now reach the Kings, the last residents of the court. The King sits at the top of the rank: unlike the Queen, who holds the element within, he directs it outward.\n\nThe King of Wands holds a wand in leaf, a lion and salamanders on his throne — power that gives life. As a person, he's an honest leader who sees the goal and leads others; as your own side, it's time to take charge. The risk is power without warmth: demanding instead of listening.\n\nThe King of Cups sits on a throne amid a restless sea, unmoved, a cup in one hand. As a person, he's a kind mentor: he feels deeply without handing the waves the helm. As your own role — hold the helm when it storms. The risk is feeling locked away: coldness instead of honest talk.\n\nThe King of Swords faces us directly, sword raised — straightforward judgment. As a person, he's an analyst who judges by facts; as your own side, decide by conscience over emotion. The risk is intellect without heart: pressuring others, arguing just to win.\n\nThe King of Pentacles sits on a vine-wreathed throne carved with bull heads, a castle at his back. As a person, he's a reliable master of his trade; as your own role — share what you've earned and build for the long term. The risk is treating the material as an end in itself: greed and stubbornness.\n\nNow the whole court is visible at once: ranks run one way (the Page learns, the Knight acts, the Queen holds the element within, the King directs it outward), suits run the other (fire, water, air, earth) — sixteen characters. The crossing reads literally: the Queen of Swords is air held within; the King of Swords, the same air turned outward. The rule holds: someone near you — read the person; your own choice — read the role; unsure — choose the role.\n\nTry this today: think of someone who's leading, consoling, judging, or providing for you right now, and name which of the four Kings speaks in them. That's how the sixteen court cards turn into familiar faces — one living example at a time.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -4270,7 +4435,10 @@
        "cardId": "c14"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     }
    ]
   },
@@ -4292,7 +4460,10 @@
      "theory": {
       "ru": "Карта дня в приложении всегда приходит прямой — так задумано: сначала стоит крепко выучить прямые значения, прежде чем добавлять к ним ещё один слой смысла. А когда вы раскладываете карты сами, они ложатся как лягут, и рано или поздно попадётся перевёрнутая. Разберёмся, что с ней делать.\n\nПеревёрнутая карта — не «плохая» версия и не значение наоборот. Это та же самая энергия, только с ней что-то случилось: она застряла, перегнулась через край, оборвалась на полпути или ушла внутрь; а иногда, наоборот, отпускает. Поэтому читать перевёрнутую карту стоит в два шага: сначала назовите прямое значение своими словами, а потом спросите — что с ним произошло?\n\nВозьмём Дурака. Прямое значение — доверие к жизни и шаг в неизвестность. Перевёрнутый Дурак застревает на краю: шаг напрашивается, а человек стоит и не идёт, потому что боится оступиться. Иногда с той же энергией случается обратное: шагают не глядя, не отличая смелость от безрассудства.\n\nПаж Жезлов прямой — искра нового интереса: любопытство, первый импульс, готовность пробовать. Перевёрнутый — тот же интерес, но он не дошёл до конца: вспыхнули и остыли, начали и отложили. Энергия была настоящей, просто ей не хватило продолжения — карта как будто оборвалась на полуслове.\n\nКоролева Мечей прямая — ясный ум и честность без уклончивости: она называет вещи своими именами, но не для того, чтобы ранить. Перевёрнутая — та же ясность, только ушедшая внутрь и застывшая: холодность как броня, сарказм вместо разговора, дистанция там, где раньше была прямота. Сила прежняя, просто спряталась за стеной.\n\nЕсть и трудные случаи — например, перевёрнутая Башня. Прямая Башня рушит иллюзии сразу; перевёрнутая — тот же кризис, только отложенный: трещины видны, но признать их страшно, а держать разваливающееся тяжелее, чем отпустить. Иногда ответ на вопрос «что случилось» другой: энергия отпускает — худшее позади. Так же читается перевёрнутая Луна: туман рассеивается.\n\nПопробуйте сегодня: возьмите любую карту из справочника приложения, откройте её блок «Перевёрнутая» и назовите своими словами, что случилось с энергией карты. Одной фразы достаточно: упражнение учит слышать перевёрнутые карты, а не бояться их.",
       "en": "The card of the day in the app always arrives upright — that's by design: it's worth learning the upright meanings solidly before adding another layer of meaning on top. When you lay the cards out yourself, though, they fall however they fall, and sooner or later you'll draw a reversed one. Let's work out what to do with it.\n\nA reversed card isn't a 'bad' version of the card, and it isn't the meaning in reverse. It's the very same energy — only something has happened to it: it's got stuck, bent past its limit, broken off midway, or turned inward and hidden — and sometimes, the other way round, it lets go. So read a reversed card in two steps: first name the upright meaning in your own words, then ask — what happened to it?\n\nTake the Fool. Upright, it's trust in life and a step into the unknown. Reversed, the Fool gets stuck at the edge: the step is calling, but the person stands still, afraid of stumbling. Sometimes the same energy does the opposite: someone leaps without looking, unable to tell courage from recklessness.\n\nThe Page of Wands upright is the spark of a new interest: curiosity, a first impulse, readiness to try. Reversed, it's the same interest that never made it past the spark: you flare up and cool down, start and put aside. The energy was real — it just ran out of follow-through, as if the card broke off mid-sentence.\n\nThe Queen of Swords upright is a clear mind and honesty without evasion: she calls things by their names, but never to wound. Reversed, it's the same clarity, only turned inward and frozen: coldness worn as armour, sarcasm instead of conversation, distance where there used to be plain speech. The strength hasn't gone anywhere — it's just hiding behind a wall.\n\nSome cases are harder — the reversed Tower, for instance. Upright, the Tower shatters illusions at once; reversed, it's the same crisis, postponed: the cracks show, but admitting them feels frightening, and holding up what's collapsing costs more than letting it go. Sometimes the answer to 'what happened' is different: the energy lets go — the worst is already past. The reversed Moon reads this way too: the fog is lifting.\n\nTry this today: pick any card from the app's reference section, open its 'Reversed' block, and put into your own words what happened to the card's energy. One sentence is enough: the exercise trains you to listen to reversed cards, not fear them.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -4426,7 +4597,10 @@
        }
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m6l2",
@@ -4438,7 +4612,10 @@
      "theory": {
       "ru": "Когда вы разбирали первые Старшие арканы, вы уже соединяли две карты союзом — «потому что», «но», «чтобы» — и получали фразу. У таких фраз есть несколько узнаваемых типов связок: зная их, вы увидите в паре не случайное соседство, а понятную структуру. Если одна карта легла перевёрнутой, тип связки тот же — меняется только то, что вы скажете про её энергию.\n\nПервый тип — пара одной масти: две карты одной стихии, разных чисел, продолжают один сюжет. Двойка Кубков — встреча двух сердец, чувство только родилось. Шестёрка Кубков — уже не встреча, а память о ней: тепло детства, старой дружбы. Рядом карты читаются как путь чувства во времени: «было живое притяжение, а теперь осталась тёплая память» — или наоборот, если Шестёрка выпала раньше: «ностальгия привела к новой встрече».\n\nВторой тип — старший и младший вместе: старший задаёт тему, младший показывает, как она проживается. Отшельник задаёт тему — тишина и отход от шума; Восьмёрка Мечей показывает, как эта тишина проживается на деле: не выбранная пауза, а ловушка тревожных мыслей, хотя путы держатся слабо. Императрица и Тройка Пентаклей звучат мягче: расцвет, которому дали созреть, оборачивается мастерством и трудом, который замечают.\n\nТретий тип — придворная карта рядом с числовой: придворная отвечает «кто», числовая — «что». Рыцарь Жезлов и Тройка Пентаклей вместе: «кто-то порывистый включается в дело, где ценят мастерство» — либо, если карта про вас, это ваша роль: смелый старт, доведённый до мастерства. Решайте по вопросу: про отношения с кем-то — человек, про решение — роль.\n\nЧетвёртый тип — когда карты тянут в разные стороны. Двойка Кубков — союз и желание остаться; Рыцарь Жезлов — рывок и нетерпение к переменам. Рядом они спорят: держаться или двигаться? Этот приём вы уже пробовали на Маге и Жрице. Новое здесь одно: очередь подсказывает не вкус, а сама пара — карта про нынешнее положение идёт первой, вторая говорит, куда из него шаг.\n\nПопробуйте сегодня: вытяните две случайные карты — из своей колоды или ткните не глядя в две карты в справочнике приложения — и определите тип связки. Свяжите пару одним союзом: «потому что», «но» или «а потом». Запишите фразу в заметку к карте дня.",
       "en": "Back when you met the first Major Arcana, you joined two cards with a connector — \"because\", \"but\", \"in order to\" — and got a sentence. Such sentences fall into a few recognisable types of combination: once you know them, a pair reads as a clear structure, not a random pairing. If a card falls reversed, the type of pair stays the same — only what you say about its energy changes.\n\nThe first type is a same-suit pair: two cards of one element, different numbers, continuing one story. The Two of Cups is two hearts meeting, a feeling just born. The Six of Cups isn't a meeting anymore — it's the memory of one: the warmth of childhood, an old friendship. Together they trace a feeling's path through time: \"there was a living attraction, and now what remains is its warm memory\" — or, if the Six comes first, \"nostalgia led to a new meeting.\"\n\nThe second type pairs a Major with a Minor: the Major sets the theme, the Minor shows how it plays out. The Hermit sets the theme — quiet, a step away from the noise; the Eight of Swords shows how that quiet is actually lived: not a chosen pause but a trap of anxious thoughts, though the bindings hold loosely. The Empress and the Three of Pentacles read more gently: a blossoming given time to ripen turns into craft and work that gets noticed.\n\nThe third type sets a court card beside a number card: the court card answers \"who\", the number card answers \"what\". The Knight of Wands and the Three of Pentacles together: \"someone impulsive joins a shared effort where skill is valued\" — or, if the card is about you, it's your own role: a bold start carried through to real craft. Let the question decide: about someone — a person; about your own choice — a role.\n\nThe fourth type pulls in opposite directions. The Two of Cups is union and the wish to stay; the Knight of Wands is a leap, impatience with staying put. Side by side they argue: hold on, or move? You have tried this before, on the Magician and the High Priestess. One thing is new: the order isn't a matter of taste — the card describing where things stand now comes first, and the second says where the step leads.\n\nTry this today: draw two random cards — from your own deck, or tap two cards at random in the app's card reference — and decide which type of pair they form. Join them with one connector: \"because\", \"but\" or \"and then\". Write the sentence in your card-of-the-day note.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -4573,7 +4750,10 @@
        "cardId": "c02"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m6l3",
@@ -4585,7 +4765,10 @@
      "theory": {
       "ru": "Вы уже знаете карты и умеете наводить между ними мостики. Сегодня соберём это в классический расклад «Три карты» из каталога приложения: позиции «Прошлое», «Настоящее», «Будущее». Классика для любого вопроса — как ситуация развивалась, где она сейчас и куда движется, если ничего не менять.\n\nНачните с вопроса и произнесите его вслух, а не только в уме. Слабый вопрос — «да или нет»: он сужает расклад до монетки. Хороший вопрос открывает пространство: «что мне важно понять про эти отношения», «что стоит за моей усталостью на работе». Чем честнее вопрос, тем честнее ответ.\n\nДальше перетасуйте карты, ничего не ожидая, и откройте три по одной, называя значение каждой: если карта легла перевёрнутой, сначала прямое значение, потом что с ним случилось. Полезно сначала окинуть взглядом все три — поймать общее впечатление, — а потом читать подробно. Главное впереди: наведите мостики между картами через «потому что», «чтобы», «но» — только так слова превращаются в рассказ.\n\nЕсть четыре правила из первоисточника этой колоды — книги, вышедшей вместе с ней в 1911 году. Три из них вы уже применили: вопрос вслух, пустая голова при тасовке, отложенные ожидания — иначе трактовка окрасится ими. Четвёртое новое: для постороннего прочитать верно легче, чем для себя или друга.\n\nЧетвёртое правило зовёт читать для других — и тут вспомните границу первого модуля: для других читаем только по их просьбе. А для себя особенно важна третья мысль: заметить, чего вы ждёте от расклада, и отложить это, прежде чем открывать карты.\n\nДопустим, вопрос: «что мне важно понять про эту рабочую нагрузку». Прошлое — Пятёрка Пентаклей: период нехватки и ощущения, что рассчитывать не на кого. Настоящее — Сила: справляетесь терпением, а не рывком. Будущее — Шестёрка Кубков: тепло придёт от знакомого — старых связей, простых дел. Мостик: «справлялись без опоры, потому что хватало терпения, — но теперь тот же темп ведёт к чему-то более тёплому».\n\nПопробуйте сегодня: сделайте свой первый расклад по этой схеме — на своей колоде или на трёх картах из справочника приложения. Произнесите вопрос вслух, откройте карты по очереди, наведите мостик и запишите вывод в 2–3 предложения — в дневник приложения или на бумаге.",
       "en": "You already know individual cards and how to build bridges between them. Today we bring that together in the classic Three Cards spread from the app's catalogue: the positions are Past, Present, Future. A classic for any question — how the situation arose, where it stands now, and where it's heading if nothing changes.\n\nStart with your question and say it aloud, not just in your head. A weak question is a yes-or-no one: it narrows the spread to a coin toss. A good question opens space: 'what do I need to understand about this relationship', 'what's behind my tiredness at work'. The more honest the question, the more honest the answer.\n\nNext, shuffle without expecting an outcome, then turn the three cards over one by one, naming what each means: if a card falls reversed, name the upright meaning first, then what happened to it. It helps to glance across all three first for a general impression, and only then read them in detail. The real work comes next: build bridges between the cards with 'because', 'in order to', 'but' — only then do the words become a story.\n\nFour practical rules come from the source this deck came with — the book published alongside it in 1911. Three you have already used: the question aloud, a mind kept as blank as you can while shuffling, bias set aside — or your reading will be coloured by it. The fourth is new: it's easier to read correctly for a stranger than for yourself or a friend.\n\nThe fourth rule invites you to read for others — and here recall the boundary from the first module: we read for others only at their request. For ourselves the third point matters most: notice what you hope to hear, and set it aside before turning a card.\n\nSay the question is: 'what do I need to understand about this workload'. Past — the Five of Pentacles: a stretch of scarcity and the feeling that there's no one to rely on. Present — Fortitude: patience rather than force. Future — the Six of Cups: warmth coming from what's familiar — old ties, simple things. The bridge: 'I held on without support because patience was there — but now the same pace leads somewhere warmer'.\n\nTry this today: make your own first spread using this pattern — your own deck, or three cards from the app's reference. Say your question aloud, turn the cards over in order, build a bridge, and write your conclusion in two or three sentences — in the app's journal, or on paper.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -4720,7 +4903,10 @@
        "cardId": "strength"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     },
     {
      "id": "m6l4",
@@ -4732,7 +4918,10 @@
      "theory": {
       "ru": "Позади весь курс: основы и этика чтения, Старшие и Младшие арканы, придворные карты, связки, перевёрнутые значения, первый расклад из трёх карт. Последний урок — не новая тема, а два чтения целиком, от вопроса до вывода: представьте, что кто-то задал такой вопрос.\n\nВопрос: «Что происходит с проектом, который завис уже который месяц, и куда всё идёт?» Раскладываем «Три карты»: «Прошлое» — Тройка Жезлов, «Настоящее» — перевёрнутая Луна, «Будущее» — Солнце. Общий взгляд сразу подсказывает: тревожная карта зажата между уверенным стартом и картой ясности.\n\nТройка Жезлов в «Прошлом»: усилия были настоящими, а не наивной затеей — корабли уже в море, первые результаты в пути. В «Настоящем» — перевёрнутая Луна. Сначала прямое значение: Луна — неясность, факты скрыты, а воображение достраивает картину страхами.\n\nПо методу перевёрнутых спрашиваем, что случилось с этой энергией: туман рассеивается — застревание было временным, скрытое выходит на свет. В «Будущем» — Солнце, лёгкость, которая приходит естественно. Но это не обещание даты: «Будущее» — направление, а не готовый исход. Мостик: усилия были настоящими, их накрыл туман — а туман расходится, значит дело идёт к ясности.\n\nВторой пример короче: карта дня — Королева Мечей, вопрос — как провести непростой разговор сегодня. Соблазн прочитать её как «рядом появится решительная женщина» — но карта дня — в первую очередь про вас. Как ваша роль она советует: назвать вещи своими именами, говорить прямо и обозначить границу.\n\nЗдесь чаще всего ошибаются: читают карты по одной, забыв мостик, — выходит список слов, а не история; теряют по дороге вопрос; предсказывают вместо наблюдения; видят в придворной только человека; тасуют, пока не выпадет ответ по душе — а правило: один вопрос, один расклад.\n\nКурс закончен, но чтение только начинается. Открывайте карту дня, пишите заметку — дневник хранит память о том, как вы менялись. Возвращайтесь в справочник и на страницы карт, которые хочется понять глубже. Урок стёрся из памяти — перечитайте его.\n\nПопробуйте сегодня: загляните в дневник и найдите карту, которую сегодня прочитали бы иначе. Запишите новое прочтение в сегодняшнюю заметку — прошлые записи в дневнике уже не меняются.",
       "en": "The whole course is behind you: the basics and ethics of reading, the Major and Minor Arcana, court cards, combinations, reversed meanings, your first three-card spread. The last lesson isn't a new topic — it's two full readings, question to conclusion: imagine someone asked this question.\n\nThe question: 'What's happening with the project that's stalled for months, and where is it heading?' You lay out Three Cards: Past holds the Three of Wands, Present the reversed Moon, Future the Sun. One glance already hints: the unsettled card sits between a confident start and a card of clarity.\n\nThe Three of Wands in Past: the effort was real, not a naive leap — ships already at sea, early results on the way. In Present sits the reversed Moon. First, the upright meaning: the Moon is uncertainty, facts hidden, imagination filling the gaps with fear.\n\nNow, following the reversed-card method, ask what happened to that energy. The answer here: the fog is lifting — the stuck feeling was temporary, hidden things are surfacing. In Future sits the Sun: ease that arrives naturally. But it's no promised date — the Future position shows direction, not a finished outcome. The bridge: the effort was real, fog came over it — and the fog is lifting, so things move toward clarity.\n\nThe second example is shorter: the card of the day is the Queen of Swords, with the question of handling a difficult conversation today. Tempting to read her as 'a decisive woman is about to show up' — but the card of the day is first of all about you. As your own role, she advises: call things by their names, speak plainly, set a boundary.\n\nThis is where mistakes happen most. Reading cards one at a time, without a bridge, leaves you with a list of words instead of a story. Losing the question and just describing pictures. Predicting instead of observing. Seeing a court card only as a person. And reshuffling until an answer you like turns up — though the rule was one question, one spread.\n\nThe course is over, but reading is only beginning. Open the card of the day, write a note — the journal holds the record of how you've changed. Return to the card reference and to the pages you want to understand more deeply. If a lesson has faded, read it again.\n\nTry this today: look through your journal and find a card you'd read differently now. Write the new reading into today's note — past entries no longer change.",
-      "status": "reviewed"
+      "status": {
+       "ru": "reviewed",
+       "en": "reviewed"
+      }
      },
      "quiz": [
       {
@@ -4867,7 +5056,10 @@
        "cardId": "s13"
       }
      ],
-     "quizStatus": "reviewed"
+     "quizStatus": {
+      "ru": "reviewed",
+      "en": "reviewed"
+     }
     }
    ]
   }
