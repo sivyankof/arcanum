@@ -72,7 +72,12 @@ def main() -> None:
             skipped += 1
             continue
         phrase = PHRASES[card["number"]]
-        card["content"]["birth_path"] = {"ru": phrase["ru"], "en": phrase["en"], "status": "draft"}
+        card["content"]["birth_path"] = {
+            "ru": phrase["ru"],
+            "en": phrase["en"],
+            # статус по языкам (спека 28а): черновик написан сразу на обоих
+            "status": {"ru": "draft", "en": "draft"},
+        }
         added += 1
     CARDS.write_text(
         json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n"

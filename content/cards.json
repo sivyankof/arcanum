@@ -48,6 +48,10 @@
      "taking a chance"
     ]
    },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
+   },
    "image": "fool.jpg",
    "source": {
     "waite_upright": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
@@ -160,10 +164,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -210,6 +210,10 @@
      "confidence",
      "getting started"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "magician.jpg",
    "source": {
@@ -323,10 +327,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -373,6 +373,10 @@
      "patience",
      "secrets"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "high-priestess.jpg",
    "source": {
@@ -486,10 +490,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -538,6 +538,10 @@
      "beauty",
      "health"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "empress.jpg",
    "source": {
@@ -651,10 +655,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -701,6 +701,10 @@
      "control",
      "protection"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "emperor.jpg",
    "source": {
@@ -814,10 +818,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -864,6 +864,10 @@
      "rules",
      "ceremony"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "hierophant.jpg",
    "source": {
@@ -977,10 +981,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -1027,6 +1027,10 @@
      "commitment",
      "romance"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "lovers.jpg",
    "source": {
@@ -1140,10 +1144,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -1190,6 +1190,10 @@
      "winning",
      "pushing through"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "chariot.jpg",
    "source": {
@@ -1303,10 +1307,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -1355,6 +1355,10 @@
      "self-mastery",
      "health"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "strength.jpg",
    "source": {
@@ -1468,10 +1472,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -1518,6 +1518,10 @@
      "quiet time",
      "seeking answers"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "hermit.jpg",
    "source": {
@@ -1631,10 +1635,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -1681,6 +1681,10 @@
      "opportunity",
      "ups and downs"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "wheel-of-fortune.jpg",
    "source": {
@@ -1794,10 +1798,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -1844,6 +1844,10 @@
      "fairness",
      "legal matters"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "justice.jpg",
    "source": {
@@ -1957,10 +1961,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2008,6 +2008,10 @@
      "delay",
      "acceptance"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "hanged-man.jpg",
    "source": {
@@ -2121,10 +2125,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2171,6 +2171,10 @@
      "closure",
      "rebirth"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "death.jpg",
    "source": {
@@ -2284,10 +2288,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2336,6 +2336,10 @@
      "finding balance",
      "health"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "temperance.jpg",
    "source": {
@@ -2449,10 +2453,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2499,6 +2499,10 @@
      "materialism",
      "unhealthy patterns"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "devil.jpg",
    "source": {
@@ -2612,10 +2616,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2662,6 +2662,10 @@
      "crisis",
      "unexpected news"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "tower.jpg",
    "source": {
@@ -2775,10 +2779,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2827,6 +2827,10 @@
      "clarity after chaos",
      "health"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "star.jpg",
    "source": {
@@ -2940,10 +2944,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -2990,6 +2990,10 @@
      "doubt",
      "fog"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "moon.jpg",
    "source": {
@@ -3103,10 +3107,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -3155,6 +3155,10 @@
      "good times",
      "health"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "sun.jpg",
    "source": {
@@ -3268,10 +3272,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -3318,6 +3318,10 @@
      "life review",
      "decision about the future"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "judgement.jpg",
    "source": {
@@ -3431,10 +3435,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -3481,6 +3481,10 @@
      "completion of a cycle",
      "new level"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "world.jpg",
    "source": {
@@ -3594,10 +3598,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -3647,6 +3647,10 @@
      "launching something",
      "drive"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w01.jpg",
    "source": {
@@ -3752,10 +3756,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -3802,6 +3802,10 @@
      "strategy",
      "options"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w02.jpg",
    "source": {
@@ -3907,10 +3911,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -3957,6 +3957,10 @@
      "next level",
      "future prospects"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w03.jpg",
    "source": {
@@ -4062,10 +4066,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -4112,6 +4112,10 @@
      "harmony at home",
      "safe haven"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w04.jpg",
    "source": {
@@ -4217,10 +4221,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -4267,6 +4267,10 @@
      "quarrel",
      "sparring"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w05.jpg",
    "source": {
@@ -4372,10 +4376,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -4422,6 +4422,10 @@
      "acclaim",
      "public success"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w06.jpg",
    "source": {
@@ -4527,10 +4531,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -4577,6 +4577,10 @@
      "holding your ground",
      "self-defence"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w07.jpg",
    "source": {
@@ -4682,10 +4686,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -4732,6 +4732,10 @@
      "urgency",
      "acceleration"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w08.jpg",
    "source": {
@@ -4837,10 +4841,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -4888,6 +4888,10 @@
      "endurance",
      "tiredness"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w09.jpg",
    "source": {
@@ -4993,10 +4997,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5043,6 +5043,10 @@
      "carrying everything",
      "exhaustion"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w10.jpg",
    "source": {
@@ -5148,10 +5152,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5198,6 +5198,10 @@
      "novice",
      "exploring"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w11.jpg",
    "source": {
@@ -5303,10 +5307,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5353,6 +5353,10 @@
      "restlessness",
      "sudden departure"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w12.jpg",
    "source": {
@@ -5458,10 +5462,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5508,6 +5508,10 @@
      "boldness",
      "presence"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w13.jpg",
    "source": {
@@ -5613,10 +5617,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5664,6 +5664,10 @@
      "boss",
      "big picture"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "w14.jpg",
    "source": {
@@ -5769,10 +5773,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5820,6 +5820,10 @@
      "trust",
      "affection"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c01.jpg",
    "source": {
@@ -5925,10 +5929,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -5975,6 +5975,10 @@
      "reconciliation",
      "commitment"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c02.jpg",
    "source": {
@@ -6080,10 +6084,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -6131,6 +6131,10 @@
      "community",
      "joy together"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c03.jpg",
    "source": {
@@ -6236,10 +6240,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -6286,6 +6286,10 @@
      "disengagement",
      "withdrawal"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c04.jpg",
    "source": {
@@ -6391,10 +6395,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -6441,6 +6441,10 @@
      "mourning",
      "focusing on what is lost"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c05.jpg",
    "source": {
@@ -6546,10 +6550,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -6596,6 +6596,10 @@
      "sentimentality",
      "revisiting the past"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c06.jpg",
    "source": {
@@ -6701,10 +6705,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -6751,6 +6751,10 @@
      "wishful thinking",
      "scattered focus"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c07.jpg",
    "source": {
@@ -6856,10 +6860,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -6906,6 +6906,10 @@
      "seeking more",
      "turning the page"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c08.jpg",
    "source": {
@@ -7011,10 +7015,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7061,6 +7061,10 @@
      "success",
      "feeling good"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c09.jpg",
    "source": {
@@ -7166,10 +7170,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7216,6 +7216,10 @@
      "togetherness",
      "lasting happiness"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c10.jpg",
    "source": {
@@ -7321,10 +7325,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7371,6 +7371,10 @@
      "new feelings",
      "gentle news"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c11.jpg",
    "source": {
@@ -7476,10 +7480,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7526,6 +7526,10 @@
      "offer",
      "charm"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c12.jpg",
    "source": {
@@ -7631,10 +7635,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7681,6 +7681,10 @@
      "acceptance",
      "emotional support"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c13.jpg",
    "source": {
@@ -7786,10 +7790,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7836,6 +7836,10 @@
      "wise support",
      "trusted advisor"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "c14.jpg",
    "source": {
@@ -7941,10 +7945,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -7991,6 +7991,10 @@
      "mental clarity",
      "the truth comes out"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s01.jpg",
    "source": {
@@ -8096,10 +8100,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -8146,6 +8146,10 @@
      "blocked",
      "weighing options"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s02.jpg",
    "source": {
@@ -8251,10 +8255,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -8301,6 +8301,10 @@
      "tears",
      "emotional pain"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s03.jpg",
    "source": {
@@ -8406,10 +8410,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -8458,6 +8458,10 @@
      "taking a break",
      "health"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s04.jpg",
    "source": {
@@ -8563,10 +8567,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -8613,6 +8613,10 @@
      "loss of face",
      "burned bridges"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s05.jpg",
    "source": {
@@ -8718,10 +8722,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -8768,6 +8768,10 @@
      "recovery",
      "calmer waters"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s06.jpg",
    "source": {
@@ -8873,10 +8877,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -8923,6 +8923,10 @@
      "avoiding confrontation",
      "trickery"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s07.jpg",
    "source": {
@@ -9028,10 +9032,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -9078,6 +9078,10 @@
      "helplessness",
      "limiting beliefs"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s08.jpg",
    "source": {
@@ -9183,10 +9187,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -9233,6 +9233,10 @@
      "nightmares",
      "mental anguish"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s09.jpg",
    "source": {
@@ -9338,10 +9342,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -9388,6 +9388,10 @@
      "betrayed",
      "end of the road"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s10.jpg",
    "source": {
@@ -9493,10 +9497,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -9543,6 +9543,10 @@
      "alertness",
      "watchfulness"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s11.jpg",
    "source": {
@@ -9648,10 +9652,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -9698,6 +9698,10 @@
      "confrontation",
      "forcefulness"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s12.jpg",
    "source": {
@@ -9803,10 +9807,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -9853,6 +9853,10 @@
      "straight talk",
      "discernment"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s13.jpg",
    "source": {
@@ -9958,10 +9962,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10008,6 +10008,10 @@
      "objectivity",
      "command"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "s14.jpg",
    "source": {
@@ -10113,10 +10117,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10166,6 +10166,10 @@
      "first earnings",
      "solid ground"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p01.jpg",
    "source": {
@@ -10271,10 +10275,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10321,6 +10321,10 @@
      "juggling money",
      "busy schedule"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p02.jpg",
    "source": {
@@ -10426,10 +10430,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10476,6 +10476,10 @@
      "renovation",
      "working together"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p03.jpg",
    "source": {
@@ -10581,10 +10585,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10631,6 +10631,10 @@
      "clinging",
      "security"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p04.jpg",
    "source": {
@@ -10736,10 +10740,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10789,6 +10789,10 @@
      "support",
      "recovery"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p05.jpg",
    "source": {
@@ -10894,10 +10898,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -10944,6 +10944,10 @@
      "sharing",
      "financial help"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p06.jpg",
    "source": {
@@ -11049,10 +11053,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -11100,6 +11100,10 @@
      "long-term view",
      "reviewing progress"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p07.jpg",
    "source": {
@@ -11205,10 +11209,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -11255,6 +11255,10 @@
      "mastery through practice",
      "training"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p08.jpg",
    "source": {
@@ -11360,10 +11364,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -11410,6 +11410,10 @@
      "personal space",
      "enjoying independence"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p09.jpg",
    "source": {
@@ -11515,10 +11519,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -11565,6 +11565,10 @@
      "family wealth",
      "roots"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p10.jpg",
    "source": {
@@ -11670,10 +11674,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -11721,6 +11721,10 @@
      "setting a goal",
      "learning finances"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p11.jpg",
    "source": {
@@ -11826,10 +11830,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -11876,6 +11876,10 @@
      "consistency",
      "duty"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p12.jpg",
    "source": {
@@ -11981,10 +11985,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -12031,6 +12031,10 @@
      "nurturing home",
      "down to earth"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p13.jpg",
    "source": {
@@ -12136,10 +12140,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   },
   {
@@ -12186,6 +12186,10 @@
      "prosperity",
      "financial mastery"
     ]
+   },
+   "wordsStatus": {
+    "ru": "reviewed",
+    "en": "reviewed"
    },
    "image": "p14.jpg",
    "source": {
@@ -12291,10 +12295,6 @@
       "en": "reviewed"
      }
     }
-   },
-   "wordsStatus": {
-    "ru": "reviewed",
-    "en": "reviewed"
    }
   }
  ]

@@ -69,7 +69,17 @@ def main() -> None:
                 block["status"] = to_map(block["status"])
                 changed["блоки карт"] += 1
         if "wordsStatus" not in card:
-            card["wordsStatus"] = {lang: WORDS_START for lang in CANON}
+            # Ключ ставится ровно туда, куда его кладёт build_cards.py — сразу после search.
+            # Дописать в конец было бы соблазнительно и незаметно: содержимое то же, а следующая
+            # пересборка колоды выдала бы дифф на 312 строк чистой перестановки.
+            words = {lang: WORDS_START for lang in CANON}
+            items = list(card.items())
+            card.clear()
+            for key, value in items:
+                card[key] = value
+                if key == "search":
+                    card["wordsStatus"] = words
+            card.setdefault("wordsStatus", words)
             changed["wordsStatus"] += 1
 
     course = json.loads(COURSE.read_text(encoding="utf-8"))

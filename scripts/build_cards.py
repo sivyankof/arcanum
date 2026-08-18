@@ -14,8 +14,10 @@
   search        — {ru: [...], en: [...]} — скрытые поисковые синонимы, 8-12 (спека 04г)
   image         — имя файла в assets/cards/
   source        — {waite_upright, waite_reversed, waite_description} (EN, public domain)
-  content       — 6 блоков × 2 языка, каждый блок {ru, en, status}
-                  status: todo | draft | reviewed | final
+  content       — блоки × 2 языка, каждый блок {ru, en, status}
+                  status — словарь ПО ЯЗЫКАМ: {"ru": "reviewed", "en": "draft"} (спека 28а);
+                  отсутствующий язык = todo
+  wordsStatus   — один статус на name + keywords + search (переводятся атомарно)
 Блоки: general, reversed, love, career, finances, health, day_card, symbolism
 """
 import json, re, unicodedata
@@ -134,6 +136,8 @@ def main():
         if prev:
             card["keywords"] = prev.get("keywords", card["keywords"])
         card["search"] = (prev or {}).get("search", {"ru": [], "en": []})
+        # статус слов переносится вместе с самими словами — они одно целое (решение 4а спеки 28а)
+        card["wordsStatus"] = (prev or {}).get("wordsStatus", {})
         card["image"] = f"{card['id']}.jpg"
         card["source"] = {
             "waite_upright": clean(c.get("meaning_up")),
@@ -145,7 +149,10 @@ def main():
         # спека 25: недостающие ключи BLOCKS дописываются пустыми todo-блоками —
         # схема сама чинится при будущих пересборках (например, когда в BLOCKS добавят новый блок)
         for b in BLOCKS:
-            content.setdefault(b, {"ru": "", "en": "", "status": "todo"})
+            # пустой словарь статуса = не готово ни на одном языке (спека 28а). Ключи es/pt
+            # тут не создаём вовсе: пустая строка значила бы «язык есть, и он пустой»,
+            # и presentLang показал бы пустоту вместо готового английского текста.
+            content.setdefault(b, {"ru": "", "en": "", "status": {}})
         card["content"] = content
         out.append(card)
 
@@ -156,7 +163,10 @@ def main():
                                     "cards": out}, ensure_ascii=False, indent=1) + "\n",
                         encoding="utf-8", newline="\n")
     majors = sum(1 for x in out if x["arcana"] == "major")
-    kept = sum(1 for x in out if any(b["status"] != "todo" for b in x["content"].values()))
+    # статус стал словарём: сравнение целого блока со строкой всегда истинно, и счётчик
+    # «сколько карт с написанным контентом» молча показывал бы все 78
+    kept = sum(1 for x in out
+               if any(s != "todo" for b in x["content"].values() for s in b["status"].values()))
     print(f"OK: {len(out)} карт ({majors} старших, {len(out)-majors} младших) -> {dst_path}")
     print(f"перенесено из прежней сборки: {len(existing)} карт, из них с готовым текстом {kept}")
 
