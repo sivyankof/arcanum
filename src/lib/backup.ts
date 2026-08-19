@@ -12,8 +12,10 @@ import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
 import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
 import { isLang, type Lang } from './lang';
+import { REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from './review';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
 import { QUESTION_MAX, SPREADS_MAX, type SpreadDraw } from './spread';
+import { EASE_MAX, EASE_MIN, MAX_INTERVAL_DAYS } from './srs';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
 import type { ThemeMode } from '../theme/theme';
@@ -28,8 +30,9 @@ const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на поряд�
 
 /** Версия персистуемой схемы (logic-spec §7). Единственный источник: стор берёт её отсюда.
  *  v8 → v9 (спека 36): `spreadsHistory` — ключ верхнего уровня, дефолт `[]` доливается сам.
- *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 10. */
-export const SCHEMA_VERSION = 9;
+ *  v9 → v10 (спека 45): `srs` и `reviewDay` — ключи верхнего уровня, дефолты доливаются сами.
+ *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 11. */
+export const SCHEMA_VERSION = 10;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */
@@ -44,6 +47,9 @@ export interface BackupState {
   freezeSpentDate: string | null;
   history: DailyDraw[];
   spreadsHistory: SpreadDraw[];
+  /** повторение (спека 45): состояние SM-2 по cardId и счётчик новых карт за день */
+  srs: SrsMap;
+  reviewDay: ReviewDay;
   lessonsProgress: LessonProgressMap;
   xp: number;
   settings: AppSettings;
@@ -69,6 +75,8 @@ export const PERSIST_DEFAULTS: BackupState = Object.freeze({
   // в типе) — двойной каст через unknown только для типов, где это бьёт компиляцию
   history: Object.freeze([]) as unknown as DailyDraw[],
   spreadsHistory: Object.freeze([]) as unknown as SpreadDraw[],
+  srs: Object.freeze({}) as SrsMap,
+  reviewDay: Object.freeze(REVIEW_DAY_DEFAULT) as ReviewDay,
   lessonsProgress: Object.freeze({}) as LessonProgressMap,
   xp: 0,
   settings: Object.freeze(DEFAULT_SETTINGS),
@@ -188,6 +196,17 @@ const isSpreadDraw = (v: unknown): boolean => {
 const isLesson = (v: unknown): boolean =>
   isObj(v) && isBool(v.done) && isCount(v.errors) && isNum(v.ts) && orAbsent(v.repeatDate, isISODay);
 
+// повторение (спека 45): состояние карты — в коридорах алгоритма (ease 1.3..5, интервал ≤ 365),
+// ключи — только id колоды; reviewDay.date пуст до первой новой карты
+const isSrsState = (v: unknown): boolean =>
+  isObj(v) && isCount(v.reps) && isCount(v.intervalDays) && v.intervalDays <= MAX_INTERVAL_DAYS &&
+  isNum(v.ease) && v.ease >= EASE_MIN && v.ease <= EASE_MAX && isISODay(v.due);
+const isSrsMap = (v: unknown): boolean =>
+  isObj(v) && Object.keys(v).length <= cardById.size &&
+  Object.entries(v).every(([id, s]) => cardById.has(id) && isSrsState(s));
+const isReviewDay = (v: unknown): boolean =>
+  isObj(v) && (v.date === '' || isISODay(v.date)) && isCount(v.newCount) && v.newCount <= cardById.size;
+
 // после mergeSettings все ключи на месте — проверяем типы значений (слияние типы не проверяет)
 const isSettings = (v: AppSettings): boolean =>
   isBool(v.reflectionOn) && isBool(v.pushesOn) &&
@@ -209,6 +228,7 @@ const validState = (s: BackupState): boolean =>
   Array.isArray(s.spreadsHistory) && s.spreadsHistory.length <= SPREADS_MAX && s.spreadsHistory.every(isSpreadDraw) &&
   isObj(s.lessonsProgress) && Object.keys(s.lessonsProgress).length <= MAX_BACKUP_LESSONS &&
   Object.values(s.lessonsProgress).every(isLesson) &&
+  isSrsMap(s.srs) && isReviewDay(s.reviewDay) &&
   isCount(s.xp) && s.xp <= MAX_BACKUP_XP && isSettings(s.settings) && isProfile(s.profile);
 
 /** Разбор и валидация файла бэкапа (спека 11): строгая, «всё или ничего».

@@ -45,6 +45,8 @@ export const VALID: BackupState = {
       note: 'Колесо в настоящем',
     },
   ],
+  srs: { fool: { reps: 2, intervalDays: 6, ease: 2.5, due: '2026-08-20' }, magician: { reps: 0, intervalDays: 0, ease: 1.96, due: '2026-08-14' } },
+  reviewDay: { date: '2026-08-14', newCount: 3 },
 };
 
 describe('buildBackup — сборка файла (спека 11)', () => {
@@ -60,10 +62,10 @@ describe('buildBackup — сборка файла (спека 11)', () => {
 });
 
 describe('белый список и дефолты', () => {
-  it('ключи бэкапа = персистуемая схема v9 (спека 36: + spreadsHistory) — новое поле стора требует осознанного решения здесь', () => {
+  it('ключи бэкапа = персистуемая схема v10 (спека 45: + srs, reviewDay) — новое поле стора требует осознанного решения здесь', () => {
     expect([...BACKUP_KEYS].sort()).toEqual([
       'freezeMonth', 'freezeSpentDate', 'freezes', 'history', 'installSeed', 'lang',
-      'lastDrawDate', 'lessonsProgress', 'profile', 'settings', 'spreadsHistory', 'streak',
+      'lastDrawDate', 'lessonsProgress', 'profile', 'reviewDay', 'settings', 'spreadsHistory', 'srs', 'streak',
       'themeMode', 'xp',
     ]);
   });
@@ -72,8 +74,8 @@ describe('белый список и дефолты', () => {
     expect(PERSIST_DEFAULTS.settings.pushMorning).toBe('09:00');
     expect(PERSIST_DEFAULTS.profile).toEqual({ onboarded: false });
   });
-  it('версия схемы 9: spreadsHistory (спека 36) — файл v9 старому ридеру откажет как «новее», а не «повреждён»', () => {
-    expect(SCHEMA_VERSION).toBe(9);
+  it('версия схемы 10: srs/reviewDay (спека 45) — файл v10 старому ридеру откажет как «новее», а не «повреждён»', () => {
+    expect(SCHEMA_VERSION).toBe(10);
   });
 });
 
@@ -252,5 +254,57 @@ describe('parseBackup — расклады (спека 36)', () => {
   it('больше SPREADS_MAX раскладов → corrupt', () => {
     const many = Array.from({ length: SPREADS_MAX + 1 }, (_, i) => ({ ...base, ts: base.ts + i }));
     expect(withSpreads(many)).toEqual({ ok: false, error: 'corrupt' });
+  });
+});
+
+describe('parseBackup — повторение (спека 45)', () => {
+  const withSrs = (srs: unknown, reviewDay: unknown = VALID.reviewDay) =>
+    parseBackup(JSON.stringify({ ...buildBackup(VALID, SCHEMA_VERSION, AT), state: { ...VALID, srs, reviewDay } }), SCHEMA_VERSION);
+
+  it('валидные srs и reviewDay проходят и сохраняются', () => {
+    const r = withSrs(VALID.srs);
+    expect(r.ok && r.state.srs).toEqual(VALID.srs);
+    expect(r.ok && r.state.reviewDay).toEqual(VALID.reviewDay);
+  });
+
+  it('файл v9 без srs/reviewDay доливается дефолтами', () => {
+    const { srs: _s, reviewDay: _d, ...old } = VALID;
+    const raw = { ...buildBackup(VALID, 9, AT), schemaVersion: 9, state: old };
+    const r = parseBackup(JSON.stringify(raw), SCHEMA_VERSION);
+    expect(r.ok && r.state.srs).toEqual({});
+    expect(r.ok && r.state.reviewDay).toEqual({ date: '', newCount: 0 });
+  });
+
+  const good = VALID.srs.fool;
+  it.each([
+    ['чужой cardId', { нет: good }],
+    ['ease ниже пола 1.3', { fool: { ...good, ease: 1.0 } }],
+    ['ease выше потолка 5', { fool: { ...good, ease: 5.1 } }],
+    ['интервал больше 365', { fool: { ...good, intervalDays: 400 } }],
+    ['интервал отрицательный', { fool: { ...good, intervalDays: -1 } }],
+    ['reps не целое', { fool: { ...good, reps: 1.5 } }],
+    ['due не ISO-день', { fool: { ...good, due: '2026-13-01' } }],
+    ['состояние — не объект', { fool: 'x' }],
+    ['srs — массив', [good]],
+  ])('битый srs: %s → corrupt', (_name, srs) => {
+    expect(withSrs(srs)).toEqual({ ok: false, error: 'corrupt' });
+  });
+
+  it('больше 78 записей srs → corrupt', () => {
+    const many = Object.fromEntries(Array.from({ length: 79 }, (_, i) => [`c${i}`, good]));
+    expect(withSrs(many)).toEqual({ ok: false, error: 'corrupt' });
+  });
+
+  it.each([
+    ['дата не ISO и не пустая', { date: '14.08.2026', newCount: 1 }],
+    ['newCount больше 78', { date: '2026-08-14', newCount: 100 }],
+    ['newCount отрицательный', { date: '2026-08-14', newCount: -1 }],
+    ['не объект', 'x'],
+  ])('битый reviewDay: %s → corrupt', (_name, day) => {
+    expect(withSrs(VALID.srs, day)).toEqual({ ok: false, error: 'corrupt' });
+  });
+
+  it('reviewDay с пустой датой (дефолт) валиден', () => {
+    expect(withSrs(VALID.srs, { date: '', newCount: 0 }).ok).toBe(true);
   });
 });
