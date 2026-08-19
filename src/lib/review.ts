@@ -188,22 +188,40 @@ export const NAME_MASK = '···';
 const LETTER = /[a-zа-яёÀ-ɏ]/i;
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+/** Убирает английский артикль, приклеившийся к маске: «The ···» → «···». Отдельным проходом,
+ *  а не необязательной группой в основной регулярке: там «the» цеплялось за конец соседнего
+ *  слова («soothe Empress», «bathe Empress») — движок находил совпадение, проверка целого слова
+ *  верно его отклоняла, НО `String.replace` с флагом `g` уже сдвигал `lastIndex` за конец этого
+ *  ложного совпадения, и настоящее имя сразу за ним оставалось непроверенным (утечка в подсказку).
+ *  Здесь такой ловушки нет: маска — не буквенное слово соседних языков, случайно приклеиться
+ *  к постороннему слову ей неоткуда. */
+function dropArticle(text: string): string {
+  return text.replace(new RegExp(`the\\s+${escapeRe(NAME_MASK)}`, 'gi'), (m: string, offset: number, s: string) => {
+    const before = s[offset - 1];
+    return before && LETTER.test(before) ? m : NAME_MASK;
+  });
+}
+
 /** Прячет имя карты в тексте подсказки: первое предложение general у ВСЕХ 78 карт начинается
  *  с имени (ru) или содержит его (en) — без маски рубашка toCard выдавала бы ответ (флаг дорисовки
  *  макета 19.08). Маскируются все вхождения целым словом, регистр не важен; английский артикль
- *  «The» перед именем уходит вместе с ним; у имён с артиклем («The Fool») пробуется и форма без него.
- *  «Мир» внутри «примирения» не трогается. Имени в тексте нет — текст как есть. */
+ *  «The» перед именем уходит вместе с ним (отдельным проходом — dropArticle); у имён с артиклем
+ *  («The Fool») пробуется и форма без него. «Мир» внутри «примирения» не трогается. Имени в тексте
+ *  нет — текст как есть. */
 export function maskCardName(text: string, name: string): string {
   const variants = [name, name.replace(/^the\s+/i, '')].filter((v, i, a) => v.length >= 3 && a.indexOf(v) === i);
   for (const v of variants) {
-    const re = new RegExp(`(?:the\\s+)?${escapeRe(v)}`, 'gi');
+    // ищем ТОЛЬКО само имя (без необязательного «the» в регулярке): отклонённое проверкой целого
+    // слова совпадение — это ровно имя внутри чужого слова, и пропуск его безопасен — другое
+    // вхождение имени с этой областью пересечься не может.
+    const re = new RegExp(escapeRe(v), 'gi');
     const out = text.replace(re, (m: string, offset: number, s: string) => {
       const before = s[offset - 1];
       const after = s[offset + m.length];
       const whole = !(before && LETTER.test(before)) && !(after && LETTER.test(after));
       return whole ? NAME_MASK : m;
     });
-    if (out !== text) return out;
+    if (out !== text) return dropArticle(out);
   }
   return text;
 }

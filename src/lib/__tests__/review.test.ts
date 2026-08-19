@@ -277,6 +277,13 @@ describe('maskCardName — имя карты в подсказке toCard зам
       .filter(Boolean);
     expect(leaks).toEqual([]);
   });
+
+  it('«the» внутри соседнего слова не съедает настоящее вхождение имени', () => {
+    expect(maskCardName('soothe Empress vibes are strong.', 'Empress')).toBe(`soothe ${NAME_MASK} vibes are strong.`);
+    expect(maskCardName('Let it bathe Empress light over you.', 'Empress')).toBe(`Let it bathe ${NAME_MASK} light over you.`);
+    // артикль перед именем по-прежнему уходит вместе с ним
+    expect(maskCardName('Read the Empress as a season.', 'Empress')).toBe(`Read ${NAME_MASK} as a season.`);
+  });
 });
 
 describe('reviewCardState — карточка «Повторение» в шапке курса (спека 45, раздел В)', () => {
