@@ -7,16 +7,21 @@ import {
   applyReview,
   buildSession,
   deckOrder,
+  maskCardName,
+  NAME_MASK,
   NEW_PER_DAY,
+  nextSessionSize,
   PROMPT_MAX,
   PROMPT_MIN,
   promptSentence,
+  reviewCardState,
   REVIEW_DAY_DEFAULT,
   reviewSummary,
   SESSION_MAX,
   sessionStats,
   type ReviewDay,
   type ReviewLogEntry,
+  type ReviewSummary,
   type SessionItem,
   type SrsMap,
 } from '../review';
@@ -232,5 +237,86 @@ describe('promptSentence — первое предложение general для 
         expect(text.trim().startsWith(p)).toBe(true);
       }
     }
+  });
+});
+
+describe('maskCardName — имя карты в подсказке toCard заменяется на «···»', () => {
+  it('ru: имя в начале предложения; регистр не важен', () => {
+    expect(maskCardName('Дурак — карта начала пути.', 'Дурак')).toBe(`${NAME_MASK} — карта начала пути.`);
+    expect(maskCardName('ДУРАК — карта.', 'Дурак')).toBe(`${NAME_MASK} — карта.`);
+  });
+  it('en: артикль The уходит вместе с именем; имя без артикля в name тоже маскируется', () => {
+    expect(maskCardName('The Fool is the card of beginnings.', 'The Fool')).toBe(`${NAME_MASK} is the card of beginnings.`);
+    expect(maskCardName('The Ace of Wands is the spark.', 'Ace of Wands')).toBe(`${NAME_MASK} is the spark.`);
+    // «Wheel Of Fortune» в name против «Wheel of Fortune» в тексте — регистр
+    expect(maskCardName('The Wheel of Fortune is the card of the turning point.', 'Wheel Of Fortune')).toBe(`${NAME_MASK} is the card of the turning point.`);
+  });
+  it('маскируются ВСЕ вхождения, но только целым словом: «примирения» не режется, «literal death» — да', () => {
+    expect(maskCardName('Мир — карта примирения с собой и мир вокруг.', 'Мир')).toBe(
+      `${NAME_MASK} — карта примирения с собой и ${NAME_MASK} вокруг.`,
+    );
+    // реальный случай корпуса: у Смерти слово стоит в первом предложении дважды
+    expect(maskCardName('Death is the card of endings — and it is almost never about literal death.', 'Death')).toBe(
+      `${NAME_MASK} is the card of endings — and it is almost never about literal ${NAME_MASK}.`,
+    );
+  });
+  it('имени в тексте нет — текст как есть', () => {
+    expect(maskCardName('Карта начала пути.', 'Дурак')).toBe('Карта начала пути.');
+  });
+
+  // контракт по корпусу: ни одна подсказка toCard не содержит имени своей карты — ни на ru, ни на en.
+  // Это и есть дефект, найденный при дорисовке макета; тест обязан быть красным без maskCardName
+  it.each(['ru', 'en'] as const)('корпус %s: promptSentence(general) после маски не содержит имени карты', (lang) => {
+    const leaks = cards
+      .map((c) => {
+        const name = inLang(c.name, lang);
+        const hint = maskCardName(promptSentence(inLang(c.content.general, lang)), name);
+        const bare = name.replace(/^the\s+/i, '');
+        return new RegExp(bare.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(hint) ? `${c.id}: ${hint}` : null;
+      })
+      .filter(Boolean);
+    expect(leaks).toEqual([]);
+  });
+});
+
+describe('reviewCardState — карточка «Повторение» в шапке курса (спека 45, раздел В)', () => {
+  const sum = (p: Partial<ReviewSummary> = {}): ReviewSummary => ({ deckSize: 8, due: 0, newAvailable: 0, dueTomorrow: 0, ...p });
+
+  it('колода пуста → hidden, какими бы ни были остальные числа', () => {
+    expect(reviewCardState(sum({ deckSize: 0, due: 3, newAvailable: 2 }))).toBe('hidden');
+  });
+  it('просроченные важнее новых → due', () => {
+    expect(reviewCardState(sum({ due: 2, newAvailable: 5 }))).toBe('due');
+  });
+  it('просроченных нет, новые есть → new', () => {
+    expect(reviewCardState(sum({ newAvailable: 1 }))).toBe('new');
+  });
+  it('ни просроченных, ни новых → done (даже при dueTomorrow 0)', () => {
+    expect(reviewCardState(sum({ dueTomorrow: 4 }))).toBe('done');
+    expect(reviewCardState(sum())).toBe('done');
+  });
+});
+
+describe('nextSessionSize — число в ссылке «Ещё N»', () => {
+  const sum = (p: Partial<ReviewSummary> = {}): ReviewSummary => ({ deckSize: 20, due: 0, newAvailable: 0, dueTomorrow: 0, ...p });
+
+  it('просроченные + доступные новые, потолок SESSION_MAX, ноль при пустой сводке', () => {
+    expect(nextSessionSize(sum({ due: 3, newAvailable: 4 }))).toBe(7);
+    expect(nextSessionSize(sum({ due: 8, newAvailable: 8 }))).toBe(SESSION_MAX);
+    expect(nextSessionSize(sum())).toBe(0);
+  });
+
+  it('обещает ровно столько карт, сколько соберёт buildSession на той же сводке', () => {
+    // 12 карт: c1..c3 просрочены, остальные новые; сегодня новых введено 8 → доступно 2
+    const d = deck(12);
+    const srs = overdue(3);
+    const day = { date: T, newCount: 8 };
+    const s = reviewSummary(d, srs, T, day);
+    expect(nextSessionSize(s)).toBe(5);
+    expect(buildSession(d, srs, T, day, lcg(1)).length).toBe(nextSessionSize(s));
+    // без дневного лимита упирается в SESSION_MAX — и там тоже совпадает
+    const s2 = reviewSummary(d, srs, T, REVIEW_DAY_DEFAULT);
+    expect(buildSession(d, srs, T, REVIEW_DAY_DEFAULT, lcg(2)).length).toBe(nextSessionSize(s2));
+    expect(nextSessionSize(s2)).toBe(SESSION_MAX);
   });
 });
