@@ -4,7 +4,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
-import { localDateISO, parseISODate } from '../lib/dates';
+import { daysInMonth, localDateISO, parseISODate } from '../lib/dates';
 import { useLang } from '../lib/i18n';
 import { localeTag } from '../lib/lang';
 import { radius, spacing } from '../theme/theme';
@@ -14,9 +14,6 @@ import { Txt } from './Txt';
 
 const DEFAULT_DATE = new Date(1995, 5, 15);
 const MIN_YEAR = 1900;
-
-/** Дней в месяце (месяц 0–11): new Date(y, m+1, 0) — последний день месяца m. */
-const daysInMonth = (y: number, m: number) => new Date(y, m + 1, 0).getDate();
 
 export function DatePicker({
   visible,

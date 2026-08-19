@@ -25,6 +25,7 @@ import { CornerBadge } from '../../src/components/CornerBadge';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
 import { MeaningPanel } from '../../src/components/MeaningPanel';
+import { MoonRow } from '../../src/components/MoonRow';
 import { NotePlate } from '../../src/components/NotePlate';
 import { Reflection } from '../../src/components/Reflection';
 import { Rule } from '../../src/components/Rule';
@@ -430,14 +431,9 @@ export default function TodayScreen() {
           <Rule />
         </FadeUp>
 
-        {/* строка луны (.moonrow эталона). Символ ☽ рисуем системным шрифтом:
-            в Manrope его нет, поэтому обёртка — обычный Text без fontFamily */}
+        {/* строка луны — общий MoonRow (спека 47), тап ведёт в лунный календарь */}
         <FadeUp index={1}>
-          <Text style={[st.moon, { color: t.muted }]}>
-            <Text>☽ </Text>
-            <Txt style={{ color: t.head, fontWeight: '600' }}>{tr(`moon.${moon.phase}`)}</Txt>
-            <Txt style={{ color: t.muted }}>{` · ${tr('moon.day', { n: moon.day })}`}</Txt>
-          </Text>
+          <MoonRow phase={moon.phase} day={moon.day} onPress={() => router.push('/moon')} />
         </FadeUp>
 
         {/* ряд пилюль (.pills эталона): серия слева, уровень справа и чуть шире */}
@@ -606,7 +602,6 @@ const st = StyleSheet.create({
   hidden: { opacity: 0 },
   date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
-  moon: { fontSize: 13, textAlign: 'center', marginTop: 12 },
   pills: { flexDirection: 'row', gap: 10, marginTop: 14 },
   pillStreak: { flex: 1 },
   pillXp: { flex: 1.5 },
