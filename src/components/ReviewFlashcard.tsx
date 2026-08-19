@@ -75,7 +75,8 @@ export function ReviewFlashcard({
 }
 
 const st = StyleSheet.create({
-  words: { alignItems: 'center', paddingHorizontal: 12 },
+  // gap 5 — .trkwcol эталона: единый столбик (чипы + предложение), а не только зазор между чипами
+  words: { alignItems: 'center', paddingHorizontal: 12, gap: 5 },
   hint: { fontFamily: fonts.display, fontSize: 11.5, lineHeight: 17, textAlign: 'center', marginTop: 8 },
   img: { width: '100%', height: '100%' },
 });

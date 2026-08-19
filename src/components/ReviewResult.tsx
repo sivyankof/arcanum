@@ -47,5 +47,5 @@ export function ReviewResult({
 const st = StyleSheet.create({
   // `.trlink` эталона: 10.5/ls1 accent по центру, отступ 10
   more: { marginTop: 10 },
-  moreTxt: { fontSize: 10.5, letterSpacing: 1, fontWeight: '600', textAlign: 'center' },
+  moreTxt: { fontSize: 10.5, letterSpacing: 1, textAlign: 'center' }, // .trlink — веса эталон не задаёт
 });

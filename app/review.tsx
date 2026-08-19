@@ -158,7 +158,10 @@ export default function ReviewScreen() {
   };
 
   const sum = reviewSummary(deck, srs, today, reviewDay);
-  const empty = !head && log.length === 0; // нечего повторять с самого входа
+  // нечего повторять с самого входа ИЛИ карта из очереди не нашлась в справочнике (рассинхрон
+  // колоды и cards.json — недостижимо при исправном контенте, стережёт контракт-тест курса, но
+  // без страховки экран остался бы пустым: ветка ниже рисуется только когда head И card есть оба)
+  const empty = (!head && log.length === 0) || (!!head && !card);
   const result = !head && log.length > 0; // очередь кончилась — итог
   const stats = sessionStats(log);
 
@@ -274,7 +277,7 @@ const st = StyleSheet.create({
   hidden: { opacity: 0 },
   plate: { fontFamily: fonts.display, fontSize: 17, letterSpacing: 3, textAlign: 'center', marginTop: 6 }, // .plate b 17/ls3, отступ 6
   sentence: { fontFamily: fonts.display, fontSize: 14.5, lineHeight: 22, marginTop: 10 }, // #trtext
-  link: { fontSize: 10.5, letterSpacing: 1, fontWeight: '600', textAlign: 'center', marginTop: 10 }, // .trlink
+  link: { fontSize: 10.5, letterSpacing: 1, textAlign: 'center', marginTop: 10 }, // .trlink — веса эталон не задаёт
   // .gradebtns: ряд gap 6, отступ 14; кнопка — бордер line, radius 12, паддинг 9×2, 10/700
   grades: { flexDirection: 'row', gap: 6, marginTop: 14 },
   grade: { flex: 1, borderWidth: 1, borderRadius: 12, paddingVertical: 9, paddingHorizontal: 2, alignItems: 'center' },
