@@ -1,4 +1,4 @@
-/** Коллекция-альбом (спека 46): секции, прогресс, режим секции — на РЕАЛЬНОЙ колоде и курсе,
+/** Коллекция-альбом (спека 46): секции, прогресс, прогресс под чипом — на РЕАЛЬНОЙ колоде и курсе,
  *  чтобы тест заодно был контрактом данных (22 старших + 4×14, m2l1–m2l4 = 8 старших макета). */
 import { COLLECTION_GROUPS, collectionProgress, collectionSections, filterProgress, groupOf } from '../collection';
 import { cards, course } from '../content';

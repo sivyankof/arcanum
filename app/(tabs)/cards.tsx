@@ -178,8 +178,10 @@ export default function CardsScreen() {
         }}
         ListFooterComponent={
           rows.length === 0 ? (
+            // подсказка про первый урок — только пока изученных нет вовсе; с изученными
+            // пустой результат — обычное «такой карты нет»
             <Txt style={[st.empty, { color: t.muted }]}>
-              {tr(filter === 'learned' ? 'cards.learnedEmpty' : 'cards.empty')}
+              {tr(filter === 'learned' && learned.size === 0 ? 'cards.learnedEmpty' : 'cards.empty')}
             </Txt>
           ) : null
         }
