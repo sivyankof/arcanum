@@ -8,6 +8,10 @@ export const XP_REFLECT = 3;
 export const REPEAT_XP = 2;
 export const XP_SPREAD = 5;
 
+/** +1 за вспомненную карту повторения (спека 45): начисляется в момент оценки ≥1 карты, которая
+ *  была к повторению; потолок в день естественный — оценённая карта уходит на дни. */
+export const XP_REVIEW = 1;
+
 /** XP за первое прохождение урока: 10 − 2×ошибки, но не меньше 4. */
 export function lessonXp(errors: number): number {
   return Math.max(10 - 2 * errors, 4);
