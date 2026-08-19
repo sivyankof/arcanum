@@ -21,6 +21,13 @@ export function daysAgoISO(n: number, from: Date = new Date()): string {
   return localDateISO(new Date(from.getFullYear(), from.getMonth(), from.getDate() - n));
 }
 
+/** Дата через n суток от ISO-дня (локально); n может быть отрицательным. Пара к daysAgoISO
+ *  для случаев, где отсчёт идёт не от «сейчас», а от сохранённой даты — срок следующего
+ *  показа карты повторения (спека 45). */
+export function plusDaysISO(iso: string, n: number): string {
+  return daysAgoISO(-n, parseISODate(iso));
+}
+
 /** YYYY-MM-DD → Date по ЛОКАЛЬНОЙ полуночи. `new Date('2026-08-11')` разобрал бы строку
  *  как UTC и в отрицательных поясах показал бы 10 августа — та же ловушка, что в аудите H2. */
 export function parseISODate(iso: string): Date {

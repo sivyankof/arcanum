@@ -1,7 +1,7 @@
 /** Тесты локальных границ дня (hf-01/H2). Все кейсы строятся из локальных компонентов
  *  (new Date(year, month, day, ...)), поэтому результат не зависит от часового пояса машины,
  *  на которой гоняются тесты, — как и сам контракт localDateISO/daysAgoISO. */
-import { daysAgoISO, formatFullDate, localDateISO, parseISODate } from '../dates';
+import { daysAgoISO, formatFullDate, localDateISO, parseISODate, plusDaysISO } from '../dates';
 
 describe('localDateISO', () => {
   it('сразу после полуночи — сегодняшняя дата', () => {
@@ -51,4 +51,18 @@ describe('formatFullDate — дата рождения в поле онборд�
     expect(formatFullDate('1994-02-10', 'ru')).toBe('10 февраля 1994'));
   test('en: «February 10, 1994» — запятая от локали, ручной склейки тут нет', () =>
     expect(formatFullDate('1994-02-10', 'en')).toBe('February 10, 1994'));
+});
+
+describe('plusDaysISO — дата через n суток от ISO-дня (спека 45)', () => {
+  it('переход через месяц и год', () => {
+    expect(plusDaysISO('2026-08-31', 1)).toBe('2026-09-01');
+    expect(plusDaysISO('2026-12-31', 1)).toBe('2027-01-01');
+  });
+  it('n = 0 — та же дата; отрицательное n — назад (в феврале невисокосного года)', () => {
+    expect(plusDaysISO('2026-08-19', 0)).toBe('2026-08-19');
+    expect(plusDaysISO('2026-03-01', -1)).toBe('2026-02-28');
+  });
+  it('365 дней — потолок интервала SM-2', () => {
+    expect(plusDaysISO('2026-08-19', 365)).toBe('2027-08-19');
+  });
 });
