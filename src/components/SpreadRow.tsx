@@ -5,7 +5,7 @@
 import { Image } from 'expo-image';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { cardImages } from '../lib/cardImages';
 import { cardById } from '../lib/content';
@@ -13,8 +13,8 @@ import { inLang, type Lang } from '../lib/lang';
 import { drawnCardLabel, spreadMeaningText, type DrawnCard } from '../lib/spread';
 import { fonts } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
-import { CardBackSurface } from './CardBackSurface';
 import { PressableScale } from './PressableScale';
+import { StarBack } from './StarBack';
 import { Txt } from './Txt';
 
 export function SpreadRow({
@@ -57,10 +57,7 @@ export function SpreadRow({
             {open ? (
               <Image source={cardImages[card.cardId]} style={[st.img, card.reversed && st.rev]} contentFit="cover" cachePolicy="memory-disk" />
             ) : (
-              <>
-                <CardBackSurface />
-                <Text style={[st.star, { color: t.accent }]}>✶</Text>
-              </>
+              <StarBack starSize={13} />
             )}
           </View>
           <View style={st.texts}>
@@ -91,7 +88,6 @@ const st = StyleSheet.create({
   thumb: { width: 34, height: 56, borderRadius: 5, borderWidth: 1, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' },
   img: { width: '100%', height: '100%' },
   rev: { transform: [{ rotate: '180deg' }] },
-  star: { fontSize: 13 },
   texts: { flex: 1 },
   pos: { fontSize: 8.5, letterSpacing: 1.8 },
   name: { fontFamily: fonts.display, fontSize: 15, marginTop: 1 },
