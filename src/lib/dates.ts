@@ -5,7 +5,7 @@
  *  «вчера»: карта дня не менялась вовремя, а серия (streak) рвалась, хотя человек открывал
  *  карту каждый день. Здесь — только локальные компоненты даты устройства.
  */
-import { LOCALES, type Lang } from './lang';
+import { LOCALES, WEEK_START, type Lang } from './lang';
 
 /** Дата в формате YYYY-MM-DD из ЛОКАЛЬНЫХ компонентов даты (getFullYear/getMonth/getDate). */
 export function localDateISO(d: Date = new Date()): string {
@@ -71,4 +71,31 @@ export function formatFullDate(iso: string, lang: Lang): string {
     });
   }
   return `${formatDayMonth(iso, lang)} ${parseISODate(iso).getFullYear()}`;
+}
+
+/** Семь подписей дней недели для шапки сетки лунного календаря (спека 47), начиная
+ *  с WEEK_START[lang]: ru «ПН … ВС», en «SUN … SAT». Тот же механизм, что formatEntryDate
+ *  (`weekday: 'short'`); pt-BR отдаёт «seg.» — хвостовую точку срезаем.
+ *  Опорная неделя: 9 августа 2026 — воскресенье (getDay 0). */
+export function weekdayLabels(lang: Lang): string[] {
+  const start = WEEK_START[lang];
+  return Array.from({ length: 7 }, (_, i) =>
+    new Date(2026, 7, 9 + ((start + i) % 7))
+      .toLocaleDateString(LOCALES[lang], { weekday: 'short' })
+      .replace(/\.$/, '')
+      .toUpperCase(),
+  );
+}
+
+/** «20:37» / «08:37 PM» — местное время события в строке лунного календаря (спека 47).
+ *  12 или 24 часа решает локаль, не мы. */
+export function formatTime(d: Date, lang: Lang): string {
+  return d.toLocaleTimeString(LOCALES[lang], { hour: '2-digit', minute: '2-digit' });
+}
+
+/** Дней в месяце (месяц 0–11): `new Date(y, m + 1, 0)` — последний день месяца m; JS сам
+ *  перекатывает год на декабре. Живёт здесь, а не копией в каждом потребителе: считают
+ *  и веб-пикер даты (спека 09), и сетка лунного календаря (спека 47). */
+export function daysInMonth(year: number, month0: number): number {
+  return new Date(year, month0 + 1, 0).getDate();
 }
