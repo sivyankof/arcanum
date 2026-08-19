@@ -241,24 +241,24 @@ design-system §5 (radius, паддинг как у `ModuleHeader`), Overline «
 ## Критерии приёмки — «готово, когда…»
 
 **45а (логика и данные):**
-- [ ] `src/lib/srs.ts` переписан: `SrsState` с `due`-датой, `reviewState`, `isDue`, константы;
+- [x] `src/lib/srs.ts` переписан: `SrsState` с `due`-датой, `reviewState`, `isDue`, константы;
       тесты по всем кейсам раздела А зелёные, старой сигнатуры (`review`, `dueCards`, `initialSrs`,
       `dueAt`) в репо нет (`grep`).
-- [ ] `src/lib/review.ts`: `deckOrder`, `reviewSummary`, `buildSession`, `applyGrade`,
+- [x] `src/lib/review.ts`: `deckOrder`, `reviewSummary`, `buildSession`, `applyGrade`,
       `sessionStats`, `promptSentence`, константы — под тестами; контракт-тест первого предложения
       `general` по всем 78 картам × ru/en зелёный.
-- [ ] Стор: `srs`, `reviewDay`, `reviewCard` (SM-2 + счётчик новых + XP по правилу «была к
+- [x] Стор: `srs`, `reviewDay`, `reviewCard` (SM-2 + счётчик новых + XP по правилу «была к
       повторению»), `resetSrs`, `devAgeSrs`; persist и `SCHEMA_VERSION` = **10**; тест-инвариант
       «xp по `sessionStats` = xp, начисленный стором» на сессии со сбоем и повтором.
-- [ ] Бэкап: новые поля в `BackupState`/`PERSIST_DEFAULTS`/`validState`, файл v9 принимается,
+- [x] Бэкап: новые поля в `BackupState`/`PERSIST_DEFAULTS`/`validState`, файл v9 принимается,
       битые `srs` — `corrupt`; круг «экспорт → импорт» возвращает `srs` и `reviewDay`
       (тест `backup`).
-- [ ] Три DEV-строки в настройках работают на устройстве: диалог «Очередь повторения» показывает
+- [x] Три DEV-строки в настройках работают на устройстве: диалог «Очередь повторения» показывает
       числа, «Состарить» сдвигает `due`, «Сбросить» обнуляет — единственная проверка Артёма
       в 45а (лайв-проверки экранов нет по существу).
-- [ ] i18n: ключи DEV-строк в ru и en (ключи `review.*` с плюрализацией — критерий 45б,
+- [x] i18n: ключи DEV-строк в ru и en (ключи `review.*` с плюрализацией — критерий 45б,
       проверяется тестом плюралей по образцу `i18nPlurals.test.ts`).
-- [ ] `npx tsc --noEmit` чистый, `npm test` зелёный; документы Г обновлены; спека получила
+- [x] `npx tsc --noEmit` чистый, `npm test` зелёный; документы Г обновлены; спека получила
       отчёт 45а; ветка влита в main.
 
 **45б (экраны):**
