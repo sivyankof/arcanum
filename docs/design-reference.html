@@ -462,9 +462,6 @@ border-radius:3px;transition:width .8s cubic-bezier(.25,1.2,.4,1)}
 
 
 /* дорисовки 14.08: тумблер, модалка заметки,选 состояния, курс лентой, о приложении */
-.tgl{width:40px;height:24px;border-radius:12px;background:var(--accent);position:relative;flex:none}
-.tgl::after{content:'';position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:9px;background:#fff}
-.tgl.off{background:var(--line)} .tgl.off::after{right:auto;left:3px}
 .subrow{display:flex;justify-content:space-between;padding:8px 14px 8px 44px;font-size:12.5px;color:var(--text)}
 .subrow span:last-child{color:var(--muted);font-weight:700}
 .pcap{padding:2px 14px 10px 44px;font-size:10px;color:var(--muted);line-height:1.5}
@@ -496,16 +493,71 @@ backdrop-filter:blur(8px);display:flex;justify-content:space-between;align-items
 .mh2 .pct2{font-size:11px;color:var(--accent);font-weight:700}
 .mh2.locked{opacity:.6}
 .path2{position:relative}
-.expl{display:none;background:var(--chipbg);border:1px solid var(--frame);border-radius:13px;
-padding:11px 14px;margin-top:10px;font-size:12.5px;color:var(--text);line-height:1.5}
+.expl{display:none;margin-top:12px;font-size:13px;color:var(--text);line-height:1.55;font-family:var(--serif);font-size:14.5px}
 .expl.on{display:block;animation:fu .4s ease}
-.qimg{display:block;width:86px;border-radius:9px;border:1px solid var(--frame);margin:0 auto 10px;
+.qimg{display:block;width:110px;border-radius:9px;border:1px solid var(--frame);margin:0 auto 10px;
 box-shadow:0 8px 22px var(--glow)}
-.barc.empty{border-style:dashed;border-color:var(--line)}
+.barc.empty{border-style:dashed;border-color:var(--line);background:none;backdrop-filter:none}
 .barc.empty img{display:none}
 .ab{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-top:10px}
 .ab h6{font-size:8.5px;letter-spacing:2.5px;color:var(--accent);margin-bottom:5px}
 .ab p{font-size:12px;line-height:1.55;color:var(--text)}
+
+
+/* правки 15.08 + экраны этапа 4 */
+.dlgov{position:absolute;inset:0;z-index:46;display:none;align-items:center;justify-content:center;
+background:rgba(4,5,14,.55);backdrop-filter:blur(5px)}
+.dlgov.on{display:flex}
+.dlg{width:270px;background:var(--bg);border:1px solid var(--frame);border-radius:20px;padding:20px 18px;
+text-align:center;animation:fu .3s ease}
+.dlg b{font-family:var(--serif);font-size:18px;color:var(--head);font-weight:600}
+.dlg p{font-size:12px;line-height:1.55;color:var(--muted);margin-top:8px}
+.dlg .db{display:flex;gap:8px;margin-top:14px}
+.dlg .db div{flex:1;border-radius:12px;padding:10px;font-size:11.5px;font-weight:700;cursor:pointer}
+.dlg .db .yes{background:linear-gradient(120deg,#caa45a,#efd9a2);color:#241c0d}
+.dlg .db .no{border:1px solid var(--line);color:var(--muted)}
+.notefull{position:absolute;inset:0;z-index:45;display:none;flex-direction:column;background:var(--bg)}
+.notefull.on{display:flex}
+.notehead{display:flex;align-items:center;gap:12px;padding:56px 20px 12px;border-bottom:1px solid var(--line)}
+.notehead .nx{width:30px;height:30px;border:1px solid var(--line);border-radius:15px;display:flex;
+align-items:center;justify-content:center;color:var(--muted);cursor:pointer;font-size:13px}
+.notehead b{font-family:var(--serif);font-size:18px;color:var(--head);font-weight:600}
+.notebody{flex:1;padding:16px 20px}
+.notecard{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.notecard img{width:44px;height:72px;object-fit:cover;border-radius:6px;border:1px solid var(--frame)}
+.notecard small{font-size:9px;letter-spacing:2px;color:var(--muted);display:block}
+.notecard b{font-family:var(--serif);font-size:16px;color:var(--head);font-weight:500}
+.gradebtns{display:flex;gap:6px;margin-top:14px}
+.gradebtns div{flex:1;border:1px solid var(--line);border-radius:12px;padding:9px 2px;text-align:center;
+font-size:10px;font-weight:700;color:var(--text);cursor:pointer;transition:.2s}
+.gradebtns div:hover{border-color:var(--frame)}
+.gradebtns .g0{color:var(--danger, #e07a6a);color:#e07a6a}
+.gradebtns .g3{color:var(--done)}
+.tcount{text-align:center;font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:10px}
+.colprog{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:12px 15px;
+margin-top:14px;backdrop-filter:blur(8px)}
+.colprog b{font-family:var(--serif);font-size:16px;color:var(--head);font-weight:600}
+.colbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:8px}
+.colbar i{display:block;height:100%;width:10.2%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px}
+.gc.closed .ph{opacity:.42;filter:grayscale(.4)}
+.gc.closed small{opacity:.5}
+.suitrow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
+border-radius:13px;padding:11px 14px;margin-top:8px;backdrop-filter:blur(8px)}
+.suitrow .sg{font-size:17px;color:var(--accent)}
+.suitrow .st3{flex:1;font-size:12.5px;color:var(--text);font-weight:600}
+.suitrow .sc2{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px}
+.mooncal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.mooncal .wd{text-align:center;font-size:8.5px;letter-spacing:1px;color:var(--muted);padding:4px 0}
+.mooncal .dcell{aspect-ratio:1;border:1px solid transparent;border-radius:10px;display:flex;
+flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--text)}
+.mooncal .dcell i{font-style:normal;font-size:8px;line-height:1;margin-top:1px}
+.mooncal .today2{border-color:var(--accent);background:var(--chipbg)}
+.mooncal .dim{color:var(--muted);opacity:.45}
+.mevent{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--frame);
+border-radius:14px;padding:12px 14px;margin-top:9px;backdrop-filter:blur(8px)}
+.mevent .mi{font-size:20px}
+.mevent b{display:block;font-size:9px;letter-spacing:2px;color:var(--accent)}
+.mevent span{font-family:var(--serif);font-size:14.5px;color:var(--head)}
 
 </style></head>
 <body>
@@ -517,6 +569,9 @@ box-shadow:0 8px 22px var(--glow)}
 <button class="on" onclick="demo('app',this)">Приложение</button>
 <button onclick="demo('ob',this)">Онбординг</button>
 <button onclick="demo('lesson',this)">Урок</button>
+<button onclick="demo('trainer',this)">Тренажёр</button>
+<button onclick="demo('collection',this)">Коллекция</button>
+<button onclick="demo('moon',this)">Луна</button>
 </div>
 <div class="phone"><div class="sc" data-mode="dark" id="sc">
   <div class="aur"></div><div class="noise"></div>
@@ -531,10 +586,10 @@ box-shadow:0 8px 22px var(--glow)}
 
   <!-- ===== СЕГОДНЯ ===== -->
   <div class="view on" id="v-today">
-    <div class="date fadeup d1">Суббота · 9 августа</div>
+    <div class="date fadeup d1">Воскресенье · 9 августа</div>
     <div class="h2 fadeup d1">Карта дня</div>
     <div class="rule fadeup d2"><span>✦</span></div>
-    <div class="moonrow fadeup d2">☽ <b>Растущая луна</b> · 8-й лунный день</div>
+    <div class="moonrow fadeup d2">☾ <b>Убывающая луна</b> · 26-й лунный день</div>
     <div class="pills fadeup d3">
       <div class="pill"><span class="ic">🔥</span><span class="tx"><b>12 дней</b><small>СЕРИЯ</small></span></div>
       <div class="pill" style="flex:1.5"><span class="tx" style="flex:1"><b style="font-size:11px">Уровень 3 · Читающая</b>
@@ -559,28 +614,17 @@ box-shadow:0 8px 22px var(--glow)}
       <button class="cta">ИЗУЧИТЬ КАРТУ →</button>
     </div>
 
-    <div class="mean" id="prelude" style="padding:0;background:none;border:none">
-      <div class="prelude">
-        <p>✦ Напомнить о вашей карте завтра утром?</p>
-        <div class="pb"><div class="yes" onclick="this.closest('#prelude').style.display='none'">НАПОМИНАТЬ</div>
-        <div class="no" onclick="this.closest('#prelude').style.display='none'">ПОЗЖЕ</div></div>
-      </div>
-    </div>
-
-    <div class="mean" id="daynote">
-      <div class="lbl">ЗАМЕТКА О ДНЕ</div>
-      <div class="rnote" id="rnote" onclick="openNote()">+ Записать пару строк…</div>
-    </div>
-
+    
     <div class="mean reflect" id="reflect">
       <div class="lbl">КАК ПРОШЁЛ ДЕНЬ</div>
-      <p style="font-size:14.5px">Как прошёл день со Звездой?</p>
+      <p style="font-size:14.5px">Как отозвалась сегодня карта Звезда?</p>
       <div class="rbtns" id="rbtns">
         <div class="rb" onclick="reflectDone(this,'Отозвалась ✓')">Отозвалась</div>
         <div class="rb" onclick="reflectDone(this,'Отчасти ≈')">Отчасти</div>
         <div class="rb" onclick="reflectDone(this,'Не отозвалась ✗')">Не отозвалась</div>
       </div>
       <div class="done2" id="rdone"></div>
+      <div class="rnote" id="rnote" onclick="openNote()" style="margin-top:10px">+ Добавить заметку о дне…</div>
     </div>
 
   </div>
@@ -690,8 +734,8 @@ box-shadow:0 8px 22px var(--glow)}
       <div class="opt" onclick="answer(this,false)">Маг</div>
       <div class="opt" onclick="answer(this,true)">Дурак</div>
       <div class="opt" onclick="answer(this,false)">Верховная Жрица</div>
-      <div class="expl" id="expl">Именно! Дурак — нулевой аркан: он начинает путь, ещё не зная правил, и в этом его сила.
-        <button class="cta" style="margin-top:10px;padding:11px" onclick="lessonNext()">ДАЛЕЕ →</button></div>
+      <div class="expl" id="expl"><span id="explpre" style="font-weight:700"></span> Дурак — нулевой аркан: он начинает путь, ещё не зная правил, и в этом его сила.</div>
+      <button class="cta" id="btnNext" style="margin-top:14px;display:none" onclick="lessonNext()">ДАЛЕЕ</button>
       <div class="xpchip" id="xp" style="display:none"></div>
     <div class="lresult" id="lresult">
       <div class="xpn" id="xpn">+0 XP</div>
@@ -758,14 +802,14 @@ box-shadow:0 8px 22px var(--glow)}
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
         <span class="pl">Язык</span><span class="pv">Русский</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
-        <span class="pl">Напоминания</span><div class="tgl"></div></div>
+        <span class="pl">Напоминания</span><span class="pv" style="color:var(--accent)">Вкл</span></div>
       <div class="subrow"><span>Утро · карта дня</span><span>9:00</span></div>
       <div class="subrow"><span>Вечер · как прошёл день</span><span>21:00</span></div>
-      <div class="pcap">Приходят тихо: без звука, только в шторке уведомлений</div>
+      <div class="pcap">Ещё напомним, если серия под угрозой, и один раз — если вы давно не заходили</div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3.5 2"/></svg>
         <span class="pl">Вечерняя рефлексия</span><span class="pv" style="color:var(--accent)">Вкл</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>
-        <span class="pl">Имя и дата рождения</span><span class="pv">Анна · 10.02.1994</span></div>
+        <span class="pl">Имя и дата рождения</span><span class="pv">Анна · 01.02.1990</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 17.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg>
         <span class="pl">Экспорт дневника</span><span class="pv">JSON</span></div>
       <div class="prow" onclick="this.querySelector('.pv').textContent='Откроется письмо ✉'">
@@ -783,12 +827,12 @@ box-shadow:0 8px 22px var(--glow)}
     <div style="text-align:center;margin-top:14px" class="fadeup d2">
       <div class="emb2" style="margin:0 auto"><svg viewBox="0 0 100 100" style="width:84px;height:84px;stroke:var(--accent);fill:none;stroke-width:.9"><circle cx="50" cy="50" r="33"/><circle cx="50" cy="50" r="41" stroke-dasharray="2 5"/><path d="M50 23 L57 43 L77 50 L57 57 L50 77 L43 57 L23 50 L43 43 Z"/><circle cx="50" cy="50" r="7"/></svg></div>
       <div class="h2">Arcanum</div>
-      <div class="date">ВЕРСИЯ 0.1</div>
+      <div class="date" style="text-transform:none;letter-spacing:1.5px">Версия 0.1</div>
     </div>
-    <div class="ab fadeup d3"><h6>ДИСКЛЕЙМЕР</h6><p>Приложение создано для развлекательных и образовательных целей. Карты — инструмент рефлексии, они не предсказывают будущее и не заменяют консультацию специалиста.</p></div>
-    <div class="ab fadeup d3"><h6>О КОЛОДЕ</h6><p>Иллюстрации — колода Райдер–Уэйт, нарисованная Памелой Колман Смит под руководством А. Э. Уэйта (1909). Работа находится в общественном достоянии. Спасибо, Памела.</p></div>
-    <div class="ab fadeup d4"><h6>КОНФИДЕНЦИАЛЬНОСТЬ</h6><p>Все ваши данные — дневник, заметки, прогресс — живут только на этом устройстве. У приложения нет сервера, и мы не видим ничего из того, что вы записываете.</p></div>
-    <div class="ab fadeup d4"><h6>ИСТОЧНИКИ</h6><p>Значения основаны на «The Pictorial Key to the Tarot» А. Э. Уэйта (1911) и классической школе. Структуры данных: tarot-api (MIT).</p></div>
+    <div class="ab fadeup d3"><h6>О ПРИЛОЖЕНИИ</h6><p>Arcanum — спутник в изучении таро: карта дня, курс, справочник всех 78 карт и дневник наблюдений.</p><p style="margin-top:8px">Приложение создано для развлекательных и образовательных целей. Оно не предсказывает будущее и не заменяет профессиональную консультацию — медицинскую, юридическую, финансовую или психологическую.</p></div>
+    <div class="ab fadeup d3"><h6>О КОЛОДЕ</h6><p>В приложении используется классическая колода Райдер–Уэйт. Рисунки карт выполнила художница Памела Колман Смит в 1909 году; сегодня они находятся в общественном достоянии.</p></div>
+    <div class="ab fadeup d4"><h6>ДАННЫЕ И КОНФИДЕНЦИАЛЬНОСТЬ</h6><p>Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов и серверов: ничего не отправляется в интернет и не передаётся третьим лицам.</p><p style="margin-top:8px">Резервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.</p></div>
+    <div class="ab fadeup d4"><h6>ИСТОЧНИКИ</h6><p>Названия и изображения карт подготовлены на основе открытого проекта tarot-api (лицензия MIT).</p></div>
   </div>
 
   <!-- ===== РАСКЛАД: ТРИ КАРТЫ ===== -->
@@ -852,10 +896,88 @@ box-shadow:0 8px 22px var(--glow)}
     <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>Найти карту…</div>
     <div class="seg"><button class="on">Все</button><button>Старшие</button><button>Жезлы</button><button>Кубки</button><button>Мечи</button><button>Пентакли</button></div>
   </div>
-  <div class="noteov" id="noteov" onclick="if(event.target===this)this.classList.remove('on')">
-    <div class="notesheet">
-      <div class="nh"><img id="noteimg" src=""><div><small>СБ · 9 АВГУСТА</small><b>Заметка о дне · Звезда</b></div></div>
-      <div class="notearea" onclick="this.textContent='Созвон и правда прошёл легко — как будто знала';this.style.color='var(--text)'">Что сегодня отозвалось?..</div>
+
+  <!-- ===== ЭТАП 4 · ТРЕНАЖЁР ПОВТОРЕНИЯ (SM-2) ===== -->
+  <div class="view" id="v-trainer">
+    <div class="backbtn fadeup d1" onclick="show('v-course')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>КУРС</div>
+    <div class="date fadeup d2">ПОВТОРЕНИЕ · ИНТЕРВАЛЬНЫЙ МЕТОД</div>
+    <div class="h2 fadeup d2">Тренажёр</div>
+    <div class="rule fadeup d2"><span>✦</span></div>
+    <div id="trmain">
+      <div class="tcount fadeup d3" id="trcount">СЕГОДНЯ К ПОВТОРЕНИЮ · 2</div>
+      <div class="ringwrap fadeup d3" style="height:330px;width:190px;margin-top:16px">
+        <div class="stage" id="trstage" style="perspective:1100px" onclick="trFlip()">
+          <div class="flip" id="trflip">
+            <div class="face backf"><div class="backpat"></div><div class="inframe"></div>
+              <div class="emb"><b style="font-size:15px" id="trq">?</b><small>ВСПОМНИТЕ ЗНАЧЕНИЕ · НАЖМИТЕ</small></div>
+            </div>
+            <div class="face front"><img id="trimg" src="" alt=""></div>
+          </div>
+        </div>
+      </div>
+      <div class="plate show" style="margin-top:10px"><b id="trname" style="font-size:17px"></b></div>
+      <div class="mean" id="trmean" style="margin-top:12px">
+        <div class="lbl">ЗНАЧЕНИЕ</div>
+        <p id="trtext" style="font-size:14.5px"></p>
+        <div class="gradebtns">
+          <div class="g0" onclick="trGrade()">Не вспомнила</div>
+          <div onclick="trGrade()">С трудом</div>
+          <div onclick="trGrade()">Вспомнила</div>
+          <div class="g3" onclick="trGrade()">Легко</div>
+        </div>
+      </div>
+    </div>
+    <div class="mean show" id="trempty" style="display:none;text-align:center;margin-top:30px">
+      <div style="width:64px;height:104px;margin:0 auto 12px;border:1px dashed var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted)">✶</div>
+      <p style="font-family:var(--serif);font-size:15.5px;color:var(--text)">Повторять пока нечего — пройдите урок, и карты появятся здесь.</p>
+      <button class="cta" style="margin-top:14px" onclick="show('v-course')">К КУРСУ</button>
+    </div>
+  </div>
+
+  <!-- ===== ЭТАП 4 · КОЛЛЕКЦИЯ-АЛЬБОМ ===== -->
+  <div class="view" id="v-collection">
+    <div class="backbtn fadeup d1" onclick="show('v-cards')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>КАРТЫ</div>
+    <div class="date fadeup d2">КОЛЛЕКЦИЯ</div>
+    <div class="h2 fadeup d2">Альбом</div>
+    <div class="colprog fadeup d3"><b>Открыто 8 из 78</b>
+      <div class="colbar"><i></i></div></div>
+    <div class="date fadeup d3" style="text-align:left;margin-top:18px">СТАРШИЕ АРКАНЫ · 8 ИЗ 22</div>
+    <div class="grid fadeup d4" id="colgrid" style="margin-top:10px"></div>
+    <div class="fadeup d5" style="margin-top:16px">
+      <div class="suitrow"><span class="sg">🜂</span><span class="st3">Жезлы</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="sg">🜄</span><span class="st3">Кубки</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="sg">🜁</span><span class="st3">Мечи</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="sg">🜃</span><span class="st3">Пентакли</span><span class="sc2">0 ИЗ 14</span></div>
+    </div>
+  </div>
+
+  <!-- ===== ЭТАП 4 · ЛУННЫЙ КАЛЕНДАРЬ ===== -->
+  <div class="view" id="v-moon">
+    <div class="backbtn fadeup d1" onclick="show('v-today')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>СЕГОДНЯ</div>
+    <div class="date fadeup d2">АВГУСТ 2026</div>
+    <div class="h2 fadeup d2">Лунный календарь</div>
+    <div class="rule fadeup d2"><span>☾</span></div>
+    <div class="moonrow fadeup d3">☾ <b>Убывающая луна</b> · 26-й лунный день</div>
+    <div class="mooncal fadeup d3" id="mooncal"></div>
+    <div class="fadeup d4">
+      <div class="mevent"><span class="mi">●</span><div><b>НОВОЛУНИЕ · 12–13 АВГУСТА</b><span>Время задумывать новое</span></div></div>
+      <div class="mevent"><span class="mi" style="color:var(--accent)">○</span><div><b>ПОЛНОЛУНИЕ · 27–28 АВГУСТА</b><span>Время подводить итоги</span></div></div>
+    </div>
+  </div>
+
+  <div class="dlgov" id="pushdlg">
+    <div class="dlg">
+      <b>Напомнить утром?</b>
+      <p>Пришлём одно тихое напоминание, когда придёт время новой карты. Выключить можно в любой момент в настройках.</p>
+      <div class="db"><div class="yes" onclick="document.getElementById('pushdlg').classList.remove('on')">Напомнить</div>
+      <div class="no" onclick="document.getElementById('pushdlg').classList.remove('on')">Не сейчас</div></div>
+    </div>
+  </div>
+  <div class="notefull" id="noteov">
+    <div class="notehead"><div class="nx" onclick="document.getElementById('noteov').classList.remove('on')">✕</div><b>Заметка</b></div>
+    <div class="notebody">
+      <div class="notecard"><img id="noteimg" src=""><div><small>ВОСКРЕСЕНЬЕ · 9 АВГУСТА</small><b>Звезда</b></div></div>
+      <div class="notearea" onclick="this.textContent='Созвон и правда прошёл легко — как будто знала';this.style.color='var(--text)'">О чём этот день?</div>
       <button class="cta" style="margin-top:14px" onclick="saveNote()">СОХРАНИТЬ</button>
     </div>
   </div>
@@ -911,7 +1033,7 @@ stage.onclick=()=>{
   document.getElementById('plate').classList.toggle('show',on);
   document.getElementById('mean').classList.toggle('show',on);
   document.getElementById('reflect').classList.toggle('show',on);
-  document.getElementById('daynote').classList.toggle('show',on);
+  if(on && !window.__pushAsked){ window.__pushAsked=true; setTimeout(()=>document.getElementById('pushdlg').classList.add('on'), 900); }
   if(on){
     const r=stage.getBoundingClientRect(), pr=sc.getBoundingClientRect();
     for(let i=0;i<18;i++){
@@ -926,7 +1048,13 @@ stage.onclick=()=>{
 };
 
 /* курс одной лентой (все 6 модулей) */
-const MODS = [{"title": "Знакомство с таро", "lessons": ["Что такое таро и как оно работает", "Устройство колоды: 78 карт", "Ритуал карты дня", "Этика и границы чтения"], "free": true}, {"title": "Старшие арканы I: путь начинается", "lessons": ["Дурак и Маг", "Жрица и Императрица", "Император и Иерофант", "Влюблённые и Колесница", "Повторение: Дурак — Колесница", "Практика: первые сочетания"], "free": true}, {"title": "Старшие арканы II: испытания и свет", "lessons": ["Сила и Отшельник", "Колесо Фортуны и Справедливость", "Повешенный, Смерть, Умеренность", "Дьявол и Башня", "Звезда, Луна, Солнце", "Суд и Мир. Путь Дурака целиком"], "free": false}, {"title": "Младшие арканы: четыре стихии", "lessons": ["Жезлы: огонь и действие (Туз–5)", "Жезлы: триумф и его цена (6–10)", "Кубки: вода и чувства (Туз–5)", "Кубки: от ностальгии к счастью (6–10)", "Мечи: воздух и разум (Туз–5)", "Мечи: тьма перед рассветом (6–10)", "Пентакли: земля и материя (Туз–5)", "Пентакли: труд и наследие (6–10)"], "free": false}, {"title": "Придворные карты: 16 характеров", "lessons": ["Пажи: ученики стихий", "Рыцари: энергия в движении", "Королевы: зрелость чувства", "Короли: зрелость действия"], "free": false}, {"title": "Практика чтения", "lessons": ["Перевёрнутые карты", "Связки карт: как читать пары", "Ваш первый расклад из трёх карт", "Разбор: два чтения целиком"], "free": false}];
+const MODS = [
+ {title:"Знакомство с таро", cnt:"4 УРОКА", lessons:["Что такое таро и как оно работает","Устройство колоды: 78 карт","Ритуал карты дня","Этика и границы чтения"], free:true},
+ {title:"Старшие арканы I: путь начинается", cnt:"6 УРОКОВ · 8 КАРТ", lessons:["Дурак и Маг","Жрица и Императрица","Император и Иерофант","Влюблённые и Колесница","Повторение: Дурак — Колесница","Практика: первые сочетания"], free:true},
+ {title:"Старшие арканы II: испытания и свет", cnt:"6 УРОКОВ · 14 КАРТ", lessons:["Сила и Отшельник","Колесо Фортуны и Справедливость","Повешенный, Смерть, Умеренность","Дьявол и Башня","Звезда, Луна, Солнце","Суд и Мир. Путь Дурака целиком"], free:false},
+ {title:"Младшие арканы: четыре стихии", cnt:"8 УРОКОВ · 40 КАРТ", lessons:["Жезлы: огонь и действие (Туз–5)","Жезлы: от борьбы к триумфу (6–10)","Кубки: вода и чувства (Туз–5)","Кубки: от ностальгии к счастью (6–10)","Мечи: воздух и разум (Туз–5)","Мечи: тьма перед рассветом (6–10)","Пентакли: земля и материя (Туз–5)","Пентакли: труд и наследие (6–10)"], free:false},
+ {title:"Придворные карты: 16 характеров", cnt:"4 УРОКА · 16 КАРТ", lessons:["Пажи: ученики стихий","Рыцари: энергия в движении","Королевы: зрелость чувства","Короли: зрелость действия"], free:false},
+ {title:"Практика чтения", cnt:"4 УРОКА", lessons:["Перевёрнутые карты","Связки карт: как читать пары","Ваш первый расклад из трёх карт","Разбор реальных примеров"], free:false}];
 const flow = document.getElementById('courseflow');
 const P6 = [[50,10],[26,30],[70,50],[38,68],[64,84],[44,96]];
 const P4 = [[50,12],[28,44],[68,72],[46,94]];
@@ -936,15 +1064,16 @@ function nodeIcon(st){
     : st==='lock' ? '<svg viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>'
     : '<svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 9l5.9.6-4.4 3.9 1.3 5.8L12 16.2l-5.2 3.1 1.3-5.8L3.7 9.6 9.6 9z"/></svg>';
 }
+const P8=[[50,7],[27,20],[68,33],[40,45],[62,58],[32,70],[64,83],[45,95]];
 MODS.forEach((m,mi)=>{
   const opened = mi<=1;
   let states;
   if(mi===0) states = m.lessons.map(()=> 'done');
   else if(mi===1) states = m.lessons.map((_,i)=> i<2?'done': i===2?'cur':'lock');
-  else states = m.lessons.slice(0,3).map(()=> 'lock');
-  const names = mi<=1 ? m.lessons : m.lessons.slice(0,3);
-  const pts = names.length>=6?P6 : names.length>=4?P4 : P3;
-  const hgt = names.length>=6?440 : names.length>=4?320 : 240;
+  else states = m.lessons.map(()=> 'lock');
+  const names = m.lessons;
+  const pts = names.length>=8?P8 : names.length>=6?P6 : P4;
+  const hgt = names.length>=8?580 : names.length>=6?440 : 320;
   const pct = mi===0?'100%': mi===1?'33%':'';
   let d2='';
   names.forEach((_,i)=>{ const p=pts[i]; d2 += i? ` C ${pts[i-1][0]},${(pts[i-1][1]+p[1])/2} ${p[0]},${(pts[i-1][1]+p[1])/2} ${p[0]},${p[1]}` : `M ${p[0]},${p[1]}`; });
@@ -955,11 +1084,12 @@ MODS.forEach((m,mi)=>{
       <div class="nc" ${st==='cur'?'onclick="show(\'v-lesson\')"':''}>${nodeIcon(st)}</div><div class="nm">${t.length>26?t.slice(0,24)+'…':t}</div></div>`;
   }).join('');
   flow.innerHTML += `<div class="msec">
-    <div class="mh2 ${opened?'':'locked'}"><span><small>МОДУЛЬ ${mi+1} ИЗ 6${m.free?'':' · 🔒'}</small><b>${m.title}</b></span>
+    <div class="mh2 ${opened?'':'locked'}"><span><small>МОДУЛЬ ${mi+1} ИЗ 6${m.free?'':' · 🔒'}</small><b>${m.title}</b>
+    <small style="color:var(--muted);letter-spacing:1.5px;margin-top:3px">${m.cnt}</small></span>
     ${pct?`<span class="pct2">${pct}</span>`:''}</div>
     <div class="path2" style="height:${hgt}px">
       <svg class="line" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><path d="${d2}" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/></svg>
-      ${nodes}${mi>1?'<div style="position:absolute;bottom:0;width:100%;text-align:center;font-size:9px;color:var(--muted);letter-spacing:1px">+ ЕЩЁ '+(m.lessons.length-3)+' УРОКА</div>':''}
+      ${nodes}
     </div></div>`;
 });
 document.querySelectorAll('#courseflow .node.lock .nc').forEach(c=>{
@@ -1024,6 +1154,12 @@ function demo(mode, btn){
     obStep(1);
   } else if(mode==='lesson'){
     show('v-lesson');
+  } else if(mode==='trainer'){
+    show('v-trainer');
+  } else if(mode==='collection'){
+    show('v-collection');
+  } else if(mode==='moon'){
+    show('v-moon');
   } else {
     show('v-today');
   }
@@ -1037,10 +1173,17 @@ function answer(el, ok){
   el.classList.add(ok ? 'ok' : 'no');
   if(!ok){ setTimeout(()=>document.querySelectorAll('.opt')[1].classList.add('ok'), 400); }
   window.__lessonOk = ok;
-  setTimeout(()=>document.getElementById('expl').classList.add('on'), 500);
+  setTimeout(()=>{
+    const pre=document.getElementById('explpre');
+    pre.textContent = ok ? 'Верно.' : 'Не совсем.';
+    pre.style.color = ok ? 'var(--done)' : '#e07a6a';
+    document.getElementById('expl').classList.add('on');
+    document.getElementById('btnNext').style.display='block';
+  }, 500);
 }
 function lessonNext(){
   document.getElementById('expl').classList.remove('on');
+  document.getElementById('btnNext').style.display='none';
   const r = document.getElementById('lresult'); r.classList.add('on');
   const target = window.__lessonOk ? 10 : 8; let cur = 0;
   const t = setInterval(()=>{ cur++; document.getElementById('xpn').textContent = '+'+cur+' XP';
@@ -1066,9 +1209,9 @@ document.getElementById('qimg').src = 'data:image/jpeg;base64,' + THUMBS['fool']
 document.getElementById('mcardimg').src = 'data:image/jpeg;base64,' + THUMBS['high-priestess'];
 function openCardSafe(id){ if(id==='fool'){show('v-detail');} }
 const JOURNAL = [
-  {d:'ПТ · 8 АВГУСТА', id:'star', o:'✓', n:'День и правда сложился — созвон прошёл легко'},
-  {d:'ЧТ · 7 АВГУСТА', id:'hermit', o:'≈', n:'Побыла одна, но тишины не хватило'},
-  {d:'СР · 6 АВГУСТА', id:'lovers', o:'✓', n:''},
+  {d:'СБ · 8 АВГУСТА', id:'star', o:'✓', n:'День и правда сложился — созвон прошёл легко'},
+  {d:'ПТ · 7 АВГУСТА', id:'hermit', o:'≈', n:'Побыла одна, но тишины не хватило'},
+  {d:'ЧТ · 6 АВГУСТА', id:'lovers', o:'✓', n:''},
 ];
 document.getElementById('journal').innerHTML = JOURNAL.map(j=>
   `<div class="jrow"><img src="data:image/jpeg;base64,${THUMBS[j.id]}">`+
@@ -1081,7 +1224,7 @@ function reflectDone(btn, t){
   btn.classList.add('sel');
   document.getElementById('rbtns').style.display='none';
   const d=document.getElementById('rdone');
-  d.innerHTML='Записано · '+t+' &nbsp; <span class="rchange" onclick="reflectEdit()">изменить (до полуночи)</span>';
+  d.innerHTML='Записано в дневник · '+t+' &nbsp; <span class="rchange" onclick="reflectEdit()">изменить можно до полуночи</span>';
   d.style.display='block';
 }
 function reflectEdit(){
@@ -1091,7 +1234,7 @@ function reflectEdit(){
 function toggleBarc(){
   const c=document.getElementById('barc'), bt=document.getElementById('barcbt');
   const empty = c.classList.toggle('empty');
-  bt.innerHTML = empty ? '<small>АРКАН РОЖДЕНИЯ</small><b style="font-size:13.5px;color:var(--muted)">Указать дату рождения…</b>'
+  bt.innerHTML = empty ? '<small>АРКАН РОЖДЕНИЯ</small><b style="font-size:13.5px;color:var(--muted)">Указать дату рождения</b>'
                        : '<small>АРКАН РОЖДЕНИЯ</small><b>0 · Дурак</b>';
 }
 function openNote(){ document.getElementById('noteov').classList.add('on'); }
@@ -1154,7 +1297,7 @@ function s3saved(btn){
   const j = document.getElementById('journal');
   const row = document.createElement('div'); row.className='jrow';
   row.innerHTML = `<div style="width:30px;height:48px;border:1px solid var(--frame);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:13px">🃏</div>`+
-    `<div class="jt"><div class="jd">СБ · 9 АВГУСТА · РАСКЛАД</div><div class="jn">Три карты · «Стоит ли менять работу этой осенью?»</div></div><div class="jo">✦</div>`;
+    `<div class="jt"><div class="jd">ВС · 9 АВГУСТА · РАСКЛАД</div><div class="jn">Три карты · «Стоит ли менять работу этой осенью?»</div></div><div class="jo">✦</div>`;
   j.prepend(row);
 }
 function s3reset(){
@@ -1194,6 +1337,60 @@ function lbClose(lb){ lb.classList.remove('on'); }
     last = y;
   }, {passive:true});
 })();
+
+
+/* этап 4: тренажёр SM-2 (демо: 2 карты) */
+const TR = [
+ {id:'fool', name:'Дурак', text:'Дурак — карта начала пути.'},
+ {id:'magician', name:'Маг', text:'Маг — карта воли и мастерства.'}];
+let trI = 0, trFlipped = false;
+function trLoad(){
+  const c = TR[trI];
+  document.getElementById('trimg').src = 'data:image/jpeg;base64,' + THUMBS[c.id];
+  document.getElementById('trname').textContent = '';
+  document.getElementById('trtext').textContent = c.text;
+  document.getElementById('trmean').classList.remove('show');
+  document.getElementById('trflip').parentElement.parentElement; 
+  document.getElementById('trflip').style.transform='';
+  document.getElementById('trstage').classList.remove('done');
+  document.getElementById('trcount').textContent = 'СЕГОДНЯ К ПОВТОРЕНИЮ · ' + (TR.length - trI);
+  trFlipped = false;
+}
+function trFlip(){
+  if(trFlipped) return; trFlipped = true;
+  document.getElementById('trstage').classList.add('done');
+  document.getElementById('trname').textContent = TR[trI].name.toUpperCase();
+  setTimeout(()=>document.getElementById('trmean').classList.add('show'), 450);
+}
+function trGrade(){
+  trI++;
+  if(trI >= TR.length){
+    document.getElementById('trmain').style.display='none';
+    document.getElementById('trempty').style.display='block';
+  } else trLoad();
+}
+trLoad();
+
+/* этап 4: коллекция */
+const OPENED = ['fool','magician','high-priestess','empress','emperor','hierophant','lovers','chariot'];
+const colgrid = document.getElementById('colgrid');
+colgrid.innerHTML = ALL.filter(c=>c.arcana==='major').map(c=>{
+  const open = OPENED.includes(c.id) && THUMBS[c.id];
+  const im = open ? `<img src="data:image/jpeg;base64,${THUMBS[c.id]}">`
+    : `<div class="ph">✶</div>`;
+  return `<div class="gc ${open?'':'closed'}"><div class="im">${im}</div><small>${open?c.name:'· · ·'}</small></div>`;
+}).join('');
+
+/* этап 4: лунный календарь августа 2026 (фазы — реальный расчёт moon.ts) */
+const mc = document.getElementById('mooncal');
+let mcal = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'].map(w=>`<div class="wd">${w}</div>`).join('');
+for(let i=0;i<5;i++) mcal += '<div></div>'; /* 1 августа 2026 — суббота */
+for(let d=1; d<=31; d++){
+  const isNew = d===12||d===13, isFull = d===27||d===28, today = d===9;
+  const glyph = isNew ? '<i>●</i>' : isFull ? '<i style="color:var(--accent)">○</i>' : '';
+  mcal += `<div class="dcell ${today?'today2':''} ${d<9?'dim':''}">${d}${glyph}</div>`;
+}
+mc.innerHTML = mcal;
 
 </script>
 </body></html>
