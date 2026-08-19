@@ -48,7 +48,7 @@ import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { levelFromXp } from '../../src/lib/xp';
 import { useApp } from '../../src/store/useApp';
-import { GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../../src/theme/glow';
+import { faceShadow, GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../../src/theme/glow';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { Txt } from '../../src/components/Txt';
@@ -91,11 +91,6 @@ const MEAN_SHIFT = 12;
 
 // кривая CSS-дефолта `ease` — им в эталоне идут и блик, и всплывание текста
 const EASE = Easing.bezier(0.25, 0.1, 0.25, 1);
-
-// тень карты дня (.face эталона): box-shadow 0 30px 66px var(--glow), 0 6px 18px rgba(0,0,0,.4) —
-// две тени (тёплое золотое свечение + мягкая тёмная), значения переносятся из CSS один в один.
-// Нужна на рубашке и на лице карты, поэтому вынесена, чтобы не дублировать строку дважды
-const FACE_SHADOW = (glow: string) => `0px 30px 66px ${glow}, 0px 6px 18px rgba(0,0,0,0.4)`;
 
 /** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
 function Ring({
@@ -475,13 +470,13 @@ export default function TodayScreen() {
                 виден быть не должен (хотфикс дефект 2, спека 14) */}
             <View style={[StyleSheet.absoluteFill, lbOrigin !== null && st.hidden]}>
               {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
-              <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+              <Animated.View style={[st.face, backStyle, { boxShadow: faceShadow(t.glow), backgroundColor: t.bg }]}>
                 <View style={[st.faceClip, { borderColor: t.frame }]}>
                   <CardBack corners hint={drawn ? undefined : tr('today.tapToReveal')} />
                 </View>
               </Animated.View>
               {/* лицо */}
-              <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+              <Animated.View style={[st.face, frontStyle, { boxShadow: faceShadow(t.glow), backgroundColor: t.bg }]}>
                 <View style={[st.faceClip, { borderColor: t.frame }]}>
                   <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
                   {/* блик: проходит по лицу карты сразу после переворота */}
@@ -618,7 +613,7 @@ const st = StyleSheet.create({
   // по образцу строки луны: по центру, muted; макета для строки нет — расхождение осознанное (спека 10)
   freezeRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10 },
   freezeText: { fontSize: 12 },
-  // тёплое свечение вокруг карты дня — значение в FACE_SHADOW (см. константу выше),
+  // тёплое свечение вокруг карты дня — значение в faceShadow (theme/glow.ts),
   // задаётся инлайн через boxShadow, т.к. зависит от темы
   face: {
     position: 'absolute',
