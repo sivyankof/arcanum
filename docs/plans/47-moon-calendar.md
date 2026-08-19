@@ -769,7 +769,9 @@ const st = StyleSheet.create({
 - [ ] **Шаг 4: проверка.** `npx tsc --noEmit` чистый; `npm test` зелёный; в браузере
   (`npx expo start --web`, http://localhost:8081) строка луны на «Сегодня» выглядит как раньше
   (тот же текст, тот же отступ 12 от разделителя; шеврона НЕТ — `onPress` ещё не передан);
-  `Rule` на «Сегодня»/«Курс»/«Карты» по-прежнему ✦.
+  `Rule` по-прежнему рисует ✦ у всех пяти реальных потребителей (грепом `import.*Rule`:
+  `app/(tabs)/index.tsx`, `app/(tabs)/course.tsx`, `app/(tabs)/profile.tsx`, `app/review.tsx`,
+  `src/components/SpreadScreen.tsx` — таба «Карты» среди них нет, он `Rule` не импортирует).
 
 - [ ] **Шаг 5: коммит.**
   `git add src/components/Rule.tsx src/components/MoonRow.tsx "app/(tabs)/index.tsx" && git commit -m "refactor: строка луны вынесена в MoonRow, у Rule проп glyph — под лунный календарь (spec 47)"`
