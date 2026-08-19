@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CardCell, CELL_W, GRID_COLS, GRID_GAP } from '../../src/components/CardCell';
+import { CardCell, CardGridRow, GRID_COLS, GRID_GAP } from '../../src/components/CardCell';
 import { CountRow } from '../../src/components/CountRow';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
@@ -148,16 +148,11 @@ export default function CardsScreen() {
         }
         renderItem={({ item: row, index }) => {
           const cells = (
-            <View style={[st.pad, st.row]}>
+            <CardGridRow count={row.length} style={st.pad}>
               {row.map((c) => (
                 <CardCell key={c.id} card={c} lang={lang} from="cards" badge={learned.has(c.id) ? tr('cards.learned') : undefined} />
               ))}
-              {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
-              {row.length < GRID_COLS &&
-                Array.from({ length: GRID_COLS - row.length }, (_, i) => (
-                  <View key={`gap-${i}`} style={{ width: CELL_W }} />
-                ))}
-            </View>
+            </CardGridRow>
           );
           // сетка входит вместе с шапкой — но ОДНИМ блоком, как `.grid` в эталоне: у всех рядов
           // один и тот же индекс каскада, ступенек между карточками нет (motion-spec §4).
@@ -206,6 +201,5 @@ const st = StyleSheet.create({
   searchPad: { marginHorizontal: spacing.xl },
   searchCompact: { paddingVertical: 9, paddingHorizontal: 14 },
   segRowCompact: { marginTop: 8 },
-  row: { flexDirection: 'row', gap: GRID_GAP },
   empty: { fontSize: 12.5, textAlign: 'center', marginTop: 40, paddingHorizontal: spacing.xl },
 });

@@ -8,7 +8,7 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { cardImages } from '../lib/cardImages';
 import { setCardOrigin } from '../lib/cardTransition';
 import type { TarotCard } from '../lib/content';
@@ -96,7 +96,28 @@ export function CardCell({
   );
 }
 
+/** Ряд сетки карт: до GRID_COLS ячеек с зазором GRID_GAP и добивкой пустыми местами, чтобы карты
+ *  неполного ряда не растягивались на всю ширину. Второе место после справочника — альбом коллекции. */
+export function CardGridRow({ count, style, children }: {
+  /** сколько настоящих ячеек в ряду (остальное — добивка) */
+  count: number;
+  /** внешние стили ряда (у справочника — горизонтальные поля экрана) */
+  style?: StyleProp<ViewStyle>;
+  children: React.ReactNode;
+}) {
+  return (
+    <View style={[st.row, style]}>
+      {children}
+      {count < GRID_COLS &&
+        Array.from({ length: GRID_COLS - count }, (_, i) => (
+          <View key={`gap-${i}`} style={{ width: CELL_W }} />
+        ))}
+    </View>
+  );
+}
+
 const st = StyleSheet.create({
+  row: { flexDirection: 'row', gap: GRID_GAP },
   cell: { width: CELL_W },
   imWrap: {
     borderRadius: radius.m,

@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, View, type ListRenderItemInfo } from 'react-native';
 import { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CardCell, CELL_W, GRID_COLS, GRID_GAP } from '../src/components/CardCell';
+import { CardCell, CardGridRow, GRID_COLS, GRID_GAP } from '../src/components/CardCell';
 import { CountRow } from '../src/components/CountRow';
 import { FadeUp } from '../src/components/FadeUp';
 import { PROGRESS_EASE, ProgressBar } from '../src/components/ProgressBar';
@@ -108,16 +108,11 @@ export default function CollectionScreen() {
       );
     } else if (item.kind === 'row') {
       body = (
-        <View style={st.row}>
+        <CardGridRow count={item.cards.length}>
           {item.cards.map((c) => (
             <CardCell key={c.id} card={c} lang={lang} from="collection" closed={!learned.has(c.id)} />
           ))}
-          {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
-          {item.cards.length < GRID_COLS &&
-            Array.from({ length: GRID_COLS - item.cards.length }, (_, i) => (
-              <View key={`gap-${i}`} style={{ width: CELL_W }} />
-            ))}
-        </View>
+        </CardGridRow>
       );
     } else {
       body = <CountRow title={sectionTitle(item.section)} count={item.section.open} total={item.section.total} />;
@@ -174,5 +169,4 @@ const st = StyleSheet.create({
   bar: { height: 6, marginTop: 8 }, // .colbar
   hint: { fontSize: 12.5, lineHeight: 18, textAlign: 'center', alignSelf: 'center', maxWidth: 270, marginTop: 18 },
   section: { fontSize: 9.5, letterSpacing: 3.5 }, // .date слева — заголовок секции-сетки
-  row: { flexDirection: 'row', gap: GRID_GAP },
 });
