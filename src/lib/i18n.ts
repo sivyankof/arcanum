@@ -26,10 +26,14 @@ export const resources = {
         // «дн.» не склоняется, но семейство держим полным — структурный тест требует все формы языка
         streakDays_one: "{{count}} дн.", streakDays_few: "{{count}} дн.", streakDays_many: "{{count}} дн.",
       },
-      // фазы луны и лунный день — строка под разделителем на «Сегодня» (logic-spec §6)
+      // фазы луны и лунный день — строка под разделителем на «Сегодня» (logic-spec §6);
+      // title/newHint/fullHint — экран лунного календаря (спека 47)
       moon: {
         new: "Новолуние", waxing: "Растущая луна", full: "Полнолуние", waning: "Убывающая луна",
         day: "{{n}}-й лунный день",
+        title: "Лунный календарь",
+        newHint: "Время задумывать новое",
+        fullHint: "Время подводить итоги",
       },
       // титулы уровней — logic-spec §4; шестой титул общий для 6-го и всех следующих
       level: {
@@ -312,6 +316,9 @@ export const resources = {
       moon: {
         new: "New moon", waxing: "Waxing moon", full: "Full moon", waning: "Waning moon",
         day: "lunar day {{n}}",
+        title: "Moon calendar",
+        newHint: "A time to begin",
+        fullHint: "A time to take stock",
       },
       level: {
         line: "Level {{n}} · {{title}}",

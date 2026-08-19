@@ -431,9 +431,9 @@ export default function TodayScreen() {
           <Rule />
         </FadeUp>
 
-        {/* строка луны — общий MoonRow (спека 47); onPress появится вместе с маршрутом /moon */}
+        {/* строка луны — общий MoonRow (спека 47), тап ведёт в лунный календарь */}
         <FadeUp index={1}>
-          <MoonRow phase={moon.phase} day={moon.day} />
+          <MoonRow phase={moon.phase} day={moon.day} onPress={() => router.push('/moon')} />
         </FadeUp>
 
         {/* ряд пилюль (.pills эталона): серия слева, уровень справа и чуть шире */}
