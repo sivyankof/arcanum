@@ -53,4 +53,11 @@ describe('pickPhrase', () => {
     expect(pickPhrase('freeze.saved', '2026-08-11', 'ru').length).toBeGreaterThan(0);
     expect(pickPhrase('freeze.saved', '2026-08-11', 'en').length).toBeGreaterThan(0);
   });
+
+  it('push.moon_new и push.moon_full отдают непустой текст на обоих языках', () => {
+    for (const key of ['push.moon_new', 'push.moon_full']) {
+      expect(pickPhrase(key, '2026-08-12', 'ru').length).toBeGreaterThan(0);
+      expect(pickPhrase(key, '2026-08-12', 'en').length).toBeGreaterThan(0);
+    }
+  });
 });
