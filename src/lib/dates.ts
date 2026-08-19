@@ -15,10 +15,15 @@ export function localDateISO(d: Date = new Date()): string {
   return `${y}-${m}-${day}`;
 }
 
-/** Дата N суток назад (локально). Конструктор Date сам нормализует переход через месяц/год,
- *  поэтому безопасно и вблизи перевода часов. */
+/** Локальная полночь дня «from + n суток». Единственное место, где записана эта арифметика:
+ *  конструктор Date сам нормализует переход через месяц, год и перевод часов. */
+export function localMidnight(from: Date, n = 0): Date {
+  return new Date(from.getFullYear(), from.getMonth(), from.getDate() + n);
+}
+
+/** Дата N суток назад (локально). */
 export function daysAgoISO(n: number, from: Date = new Date()): string {
-  return localDateISO(new Date(from.getFullYear(), from.getMonth(), from.getDate() - n));
+  return localDateISO(localMidnight(from, -n));
 }
 
 /** Дата через n суток от ISO-дня (локально); n может быть отрицательным. Пара к daysAgoISO

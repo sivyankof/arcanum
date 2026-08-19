@@ -1,7 +1,8 @@
 /** Сетка и события месяца лунного календаря (спека 47). Синтетические события собираются
  *  ЛОКАЛЬНЫМ конструктором Date — иначе тесты зависели бы от часового пояса машины. */
 import type { MoonEvent, MoonEventKind } from '../moon';
-import { monthEvents, monthGrid, type EventSource } from '../moonCalendar';
+import { monthEvents, monthGrid } from '../moonCalendar';
+import type { EventSource } from '../moon';
 
 /** Источник, который уважает границы периода — как настоящий moonEvents. */
 const sourceOf =

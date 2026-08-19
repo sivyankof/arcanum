@@ -9,9 +9,9 @@
  *  только когда приложение открыли, значит сегодняшняя активность гарантирована. Правило
  *  «3+ дня тишины → один возвратный» получается из этого само.
  */
-import { daysAgoISO, localDateISO } from './dates';
+import { daysAgoISO, localDateISO, localMidnight } from './dates';
 import type { DailyDraw, Outcome } from './journal';
-import { moonEvents, type MoonEventKind } from './moon';
+import { moonEvents, type EventSource, type MoonEventKind } from './moon';
 import { parseHHMM, type AppSettings } from './settings';
 
 export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze' | 'moon';
@@ -81,19 +81,22 @@ const PHRASE_KEY: Record<Exclude<PushKind, 'moon'>, string> = {
   freeze: 'push.freeze_saved',
 };
 
-/** Лунному пушу ключи фразы и заголовка выбираются по виду СОБЫТИЯ (спека 47б). */
-const MOON_PHRASE: Record<MoonEventKind, string> = {
+/** Лунному пушу ключи фразы и заголовка выбираются по виду СОБЫТИЯ (спека 47б).
+ *  Экспортируются ради контракт-теста: у заголовка нет других проверок — тело пуша ловит
+ *  `pickPhrase` (пустая строка на неизвестном ключе), а `i18n.t` на отсутствующем ключе молча
+ *  возвращает САМ КЛЮЧ, и опечатка уехала бы в баннер как есть (мутационная проверка 47б). */
+export const MOON_PHRASE: Record<MoonEventKind, string> = {
   new: 'push.moon_new',
   full: 'push.moon_full',
 };
-const MOON_TITLE: Record<MoonEventKind, string> = {
+export const MOON_TITLE: Record<MoonEventKind, string> = {
   new: 'push.titleMoonNew',
   full: 'push.titleMoonFull',
 };
 
-/** Локальная дата через N суток. Конструктор Date сам нормализует переход через месяц и год. */
+/** Локальная дата через N суток. */
 function daysAheadISO(n: number, from: Date): string {
-  return localDateISO(new Date(from.getFullYear(), from.getMonth(), from.getDate() + n));
+  return localDateISO(localMidnight(from, n));
 }
 
 /** Момент уже прошёл? Сравнение в локальном времени — как и всё в проекте после аудита H2. */
@@ -114,15 +117,6 @@ export function planInputFromStore(
   now: Date = new Date(),
 ): PlanInput {
   const today = history.find((h) => h.date === localDateISO(now));
-  // Окно лунных событий — от НАЧАЛА локального сегодня (событие в 04:18 обязано попасть в план
-  // и при пересчёте в 09:00) до конца последнего дня утренних (+MORNING_AHEAD_DAYS).
-  // moonEvents отдаёт [from, to) — правая граница это полночь дня +4, сам день +4 не входит.
-  const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const horizonEnd = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + MORNING_AHEAD_DAYS + 1,
-  );
   return {
     pushesOn: settings.pushesOn,
     reflectionOn: settings.reflectionOn,
@@ -133,11 +127,23 @@ export function planInputFromStore(
     lastDrawDate,
     todayCardId: today?.cardId,
     todayOutcome: today?.outcome,
-    moonDays: moonEvents(dayStart, horizonEnd).map((e) => ({
-      date: localDateISO(e.at),
-      kind: e.kind,
-    })),
+    moonDays: moonDaysIn(now),
   };
+}
+
+/** Дни лунных событий в горизонте плана: от НАЧАЛА локального сегодня (событие в 04:18 обязано
+ *  попасть в план и при пересчёте в 09:00) до конца последнего дня утренних. `moonEvents` отдаёт
+ *  полуинтервал [from, to), поэтому правая граница — полночь дня +MORNING_AHEAD_DAYS+1, и сам этот
+ *  день в окно не входит.
+ *
+ *  Источник событий инъектируется — тот же приём, что у `monthEvents` (спека 47): без него
+ *  проверка маппинга «момент → ЛОКАЛЬНЫЙ день» была бы тавтологией (тест строил бы ожидание тем же
+ *  `localDateISO`, что и реализация) и молчала бы на подмене реализации UTC-срезом ISO-строки. */
+export function moonDaysIn(now: Date, source: EventSource = moonEvents): MoonDay[] {
+  return source(localMidnight(now), localMidnight(now, MORNING_AHEAD_DAYS + 1)).map((e) => ({
+    date: localDateISO(e.at),
+    kind: e.kind,
+  }));
 }
 
 /** Утренний слот дня: в локальный день новолуния/полнолуния — лунный текст вместо дежурного

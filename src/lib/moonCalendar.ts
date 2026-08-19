@@ -2,7 +2,7 @@
  *  Числовой модуль: про язык и локаль не знает (подписи дней недели и время — dates.ts),
  *  про экран — тем более. */
 import { daysInMonth } from './dates';
-import { moonEvents, type MoonEvent, type MoonEventKind } from './moon';
+import { moonEvents, type EventSource, type MoonEventKind } from './moon';
 
 /** Событие месяца: вид, точный момент и число месяца по ЛОКАЛЬНОМУ календарю. */
 export interface MonthEvent {
@@ -11,7 +11,6 @@ export interface MonthEvent {
   day: number;
 }
 
-export type EventSource = (from: Date, to: Date) => MoonEvent[];
 
 /** События месяца по локальному календарю: момент 17:37 UTC — это 12-е число в Москве и 13-е
  *  в Окленде, поэтому границы — локальные полуночи (`new Date(y, m, 1)`, а не ISO-строки — ловушка

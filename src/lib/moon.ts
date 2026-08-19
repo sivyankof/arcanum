@@ -19,6 +19,9 @@ export interface MoonEvent {
   kind: MoonEventKind;
   at: Date;
 }
+/** Источник событий: сигнатура `moonEvents`. Подменяется в тестах синтетическими событиями —
+ *  иначе проверки зависели бы от часового пояса машины (спеки 47 и 47б). */
+export type EventSource = (from: Date, to: Date) => MoonEvent[];
 
 /** Полуширина окна главных фаз (новолуние/полнолуние) вокруг точного момента, в сутках (hf-01). */
 export const HALF_WINDOW = 0.92;

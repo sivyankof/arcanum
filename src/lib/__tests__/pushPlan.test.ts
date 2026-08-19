@@ -2,13 +2,17 @@ import {
   capPerDay,
   COMEBACK_AFTER_DAYS,
   MAX_PER_DAY,
+  MOON_PHRASE,
+  MOON_TITLE,
   MORNING_AHEAD_DAYS,
+  moonDaysIn,
   planInputFromStore,
   planPushes,
   type PlannedPush,
   type PlanInput,
 } from '../pushPlan';
 import { localDateISO, plusDaysISO } from '../dates';
+import i18n, { resources } from '../i18n';
 import { pickPhrase } from '../phrases';
 import { DEFAULT_SETTINGS } from '../settings';
 
@@ -374,5 +378,82 @@ describe('planInputFromStore — moonDays (спека 47б)', () => {
       kind: 'new',
     });
     expect(moonDaysAt(at(plusDaysISO(eventDay, -4), 8)).map((d) => d.date)).not.toContain(eventDay);
+  });
+});
+
+describe('moonDaysIn — окно и маппинг момента в локальный день (спека 47б)', () => {
+  // 20 августа 2026, 15:00 локально — день без настоящих событий, источник подменяется
+  const NOW = new Date(2026, 7, 20, 15, 0);
+
+  it('окно — от локальной полуночи сегодня на MORNING_AHEAD_DAYS + 1 суток', () => {
+    let seen: { from: Date; to: Date } | undefined;
+    moonDaysIn(NOW, (from, to) => {
+      seen = { from, to };
+      return [];
+    });
+    // границы проверяются компонентами даты, а не сравнением с localMidnight: иначе тест
+    // повторял бы реализацию и молчал бы на её подмене
+    expect([seen!.from.getHours(), seen!.from.getMinutes(), seen!.from.getSeconds()]).toEqual([0, 0, 0]);
+    expect(seen!.from.getDate()).toBe(20);
+    expect([seen!.to.getHours(), seen!.to.getMinutes()]).toEqual([0, 0]);
+    expect(seen!.to.getDate()).toBe(20 + MORNING_AHEAD_DAYS + 1);
+  });
+
+  it('момент события переводится в ЛОКАЛЬНЫЙ день, а не в UTC-день', () => {
+    // два синтетических события у краёв локальных суток: при ЛЮБОМ ненулевом смещении пояса
+    // хотя бы у одного UTC-день отличается от локального, поэтому подмена реализации на срез
+    // ISO-строки (UTC) обязана уронить этот тест. Ожидание — литералы, а не вызов localDateISO:
+    // иначе обе стороны сравнения менялись бы синхронно и проверка была бы тавтологией.
+    // ⚠️ На машине ровно в UTC две реализации неразличимы в принципе — там тест просто пройдёт.
+    const days = moonDaysIn(NOW, () => [
+      { kind: 'new', at: new Date(2026, 7, 21, 0, 30) },
+      { kind: 'full', at: new Date(2026, 7, 22, 23, 30) },
+    ]);
+    expect(days).toEqual([
+      { date: '2026-08-21', kind: 'new' },
+      { date: '2026-08-22', kind: 'full' },
+    ]);
+  });
+
+  it('planInputFromStore берёт окно у moonDaysIn (настоящий источник событий)', () => {
+    const real = planInputFromStore(DEFAULT_SETTINGS, 0, [], 0, null, NOW).moonDays;
+    expect(real).toEqual(moonDaysIn(NOW));
+  });
+});
+
+describe('ключи лунного пуша существуют в контенте и i18n (спека 47б)', () => {
+  // Шов, который не закрыт больше ничем: тело пуша ловится pickPhrase (пустая строка на
+  // неизвестном ключе), а i18n.t на отсутствующем ключе молча возвращает САМ КЛЮЧ — опечатка
+  // в titleMoonFull уехала бы в баннер как литерал «push.titleMoonFull». Ни веб-проверка
+  // (expo-notifications на вебе no-op), ни лайв-проверка (событие вне горизонта) это не видят.
+  // Языки обходятся по Object.keys(resources), а не по литералам 'ru'/'en' (правило hf-02):
+  // иначе третий язык проехал бы мимо проверки.
+  const LANGS = Object.keys(resources) as Array<keyof typeof resources>;
+
+  it.each(LANGS)('%s: заголовок лежит в ресурсах САМОГО языка, а не берётся фолбэком', (lang) => {
+    // проверять через i18n.t нельзя: fallbackLng: 'en' подставляет английскую строку вместо
+    // пропавшего русского ключа, t() возвращает осмысленный текст, и тест остаётся зелёным —
+    // ровно тот тихий уход в английский, который ловила hf-02. Поэтому смотрим сами ресурсы.
+    for (const key of Object.values(MOON_TITLE)) {
+      const text = key
+        .split('.')
+        .reduce<unknown>((node, part) => (node as Record<string, unknown>)?.[part], resources[lang].translation);
+      expect(typeof text).toBe('string');
+      expect(String(text).length).toBeGreaterThan(0);
+    }
+  });
+
+  it.each(LANGS)('%s: i18n действительно отдаёт заголовок, а не сам ключ', (lang) => {
+    const t = i18n.getFixedT(lang);
+    for (const key of Object.values(MOON_TITLE)) {
+      expect(t(key)).not.toBe(key);
+      expect(t(key).length).toBeGreaterThan(0);
+    }
+  });
+
+  it.each(LANGS)('%s: тела фраз непустые', (lang) => {
+    for (const key of Object.values(MOON_PHRASE)) {
+      expect(pickPhrase(key, '2026-08-12', lang).length).toBeGreaterThan(0);
+    }
   });
 });
