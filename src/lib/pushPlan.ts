@@ -11,9 +11,16 @@
  */
 import { daysAgoISO, localDateISO } from './dates';
 import type { DailyDraw, Outcome } from './journal';
+import type { MoonEventKind } from './moon';
 import { parseHHMM, type AppSettings } from './settings';
 
-export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze';
+export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze' | 'moon';
+
+/** День лунного события по ЛОКАЛЬНОМУ календарю — как на экране /moon (logic-spec §6). */
+export interface MoonDay {
+  date: string;
+  kind: MoonEventKind;
+}
 
 export interface PlannedPush {
   kind: PushKind;
@@ -27,6 +34,8 @@ export interface PlannedPush {
   cardId?: string;
   /** Подстановка {n} у спасения серии; freeze-пуш несёт то же поле для {days} (push.freeze_saved). */
   n?: number;
+  /** Явный ключ заголовка: у лунного пуша их два (новолуние/полнолуние), по виду не выбрать. */
+  titleKey?: string;
 }
 
 export interface PlanInput {
@@ -45,6 +54,8 @@ export interface PlanInput {
   todayCardId?: string;
   /** Ответ вечерней рефлексии уже дан. */
   todayOutcome?: Outcome;
+  /** Дни новолуний/полнолуний в горизонте плана (собирает planInputFromStore). */
+  moonDays: MoonDay[];
 }
 
 /** На сколько дней вперёд ставим утренние, прежде чем замолчать. */
@@ -57,15 +68,27 @@ export const STREAK_MIN = 3;
 /** Жёсткий инвариант logic-spec §8. */
 export const MAX_PER_DAY = 2;
 
-/** Кого оставляем, когда на день претендует больше двух. */
-const PRIORITY: PushKind[] = ['streak', 'evening', 'freeze', 'morning', 'comeback'];
+/** Кого оставляем, когда на день претендует больше двух. С morning лунный в один день
+ *  не сосуществует по построению (он и есть утренний этого дня), но порядок обязан быть
+ *  полным: «не нашёл в списке» = indexOf −1 = внезапно высший приоритет. */
+const PRIORITY: PushKind[] = ['streak', 'evening', 'freeze', 'moon', 'morning', 'comeback'];
 
-const PHRASE_KEY: Record<PushKind, string> = {
+const PHRASE_KEY: Record<Exclude<PushKind, 'moon'>, string> = {
   morning: 'push.morning_card',
   evening: 'push.evening_reflect',
   streak: 'push.streak_save',
   comeback: 'push.winback',
   freeze: 'push.freeze_saved',
+};
+
+/** Лунному пушу ключи фразы и заголовка выбираются по виду СОБЫТИЯ (спека 47б). */
+const MOON_PHRASE: Record<MoonEventKind, string> = {
+  new: 'push.moon_new',
+  full: 'push.moon_full',
+};
+const MOON_TITLE: Record<MoonEventKind, string> = {
+  new: 'push.titleMoonNew',
+  full: 'push.titleMoonFull',
 };
 
 /** Локальная дата через N суток. Конструктор Date сам нормализует переход через месяц и год. */
@@ -101,7 +124,22 @@ export function planInputFromStore(
     lastDrawDate,
     todayCardId: today?.cardId,
     todayOutcome: today?.outcome,
+    moonDays: [],
   };
+}
+
+/** Утренний слот дня: в локальный день новолуния/полнолуния — лунный текст вместо дежурного
+ *  («вместо, а не поверх», master-plan). Freeze-день сюда не попадает: его ветка в planPushes
+ *  стоит раньше — спасение серии функционально и праздником не перекрывается (спека 47б). */
+function morningSlot(
+  date: string,
+  at: { hour: number; minute: number },
+  moonDays: MoonDay[],
+): PlannedPush {
+  const moon = moonDays.find((m) => m.date === date);
+  return moon
+    ? { kind: 'moon', date, ...at, phraseKey: MOON_PHRASE[moon.kind], titleKey: MOON_TITLE[moon.kind] }
+    : { kind: 'morning', date, ...at, phraseKey: PHRASE_KEY.morning };
 }
 
 export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
@@ -115,7 +153,7 @@ export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
 
   // сегодняшний утренний — только пока карта не открыта
   if (!drawn) {
-    out.push({ kind: 'morning', date: today, ...morning, phraseKey: PHRASE_KEY.morning });
+    out.push(morningSlot(today, morning, input.moonDays));
   }
 
   // вечерний — только на сегодня: он называет карту по имени, а откроют ли завтрашнюю, неизвестно
@@ -166,7 +204,7 @@ export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
         n: input.streak,
       });
     } else {
-      out.push({ kind: 'morning', date: daysAheadISO(d, now), ...morning, phraseKey: PHRASE_KEY.morning });
+      out.push(morningSlot(daysAheadISO(d, now), morning, input.moonDays));
     }
   }
   out.push({

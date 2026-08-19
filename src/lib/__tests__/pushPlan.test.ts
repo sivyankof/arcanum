@@ -23,6 +23,7 @@ const base: PlanInput = {
   streak: 0,
   freezes: 0,
   lastDrawDate: null,
+  moonDays: [],
 };
 
 const kinds = (input: PlanInput, now: Date) => planPushes(input, now).map((p) => p.kind);
@@ -264,5 +265,81 @@ describe('planPushes — пуш «серию спасла заморозка» (
     expect(freeze.phraseKey).toBe('push.freeze_saved');
     expect(pickPhrase('push.freeze_saved', freeze.date, 'ru', { days: '5 дней' })).not.toBe('');
     expect(pickPhrase('push.freeze_saved', freeze.date, 'en', { days: '5 days' })).not.toBe('');
+  });
+});
+
+describe('planPushes — лунные пуши (спека 47б)', () => {
+  it('день события в горизонте — утренний этого дня становится лунным', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-13', kind: 'new' as const }] };
+    const day = onDate(input, MORNING_8AM, '2026-08-13');
+    expect(day).toHaveLength(1);
+    expect(day[0].kind).toBe('moon');
+    expect(day[0].phraseKey).toBe('push.moon_new');
+    expect(day[0].titleKey).toBe('push.titleMoonNew');
+    expect(day[0].hour).toBe(9);
+    expect(day[0].minute).toBe(0);
+  });
+
+  it('полнолуние даёт свою пару ключей', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-14', kind: 'full' as const }] };
+    const day = onDate(input, MORNING_8AM, '2026-08-14');
+    expect(day[0].kind).toBe('moon');
+    expect(day[0].phraseKey).toBe('push.moon_full');
+    expect(day[0].titleKey).toBe('push.titleMoonFull');
+  });
+
+  it('сегодняшний лунный стоит, пока карта не открыта, и вытесняет обычный утренний', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-12', kind: 'new' as const }] };
+    const today = onDate(input, MORNING_8AM, '2026-08-12');
+    expect(today.map((p) => p.kind)).toContain('moon');
+    expect(today.map((p) => p.kind)).not.toContain('morning');
+  });
+
+  it('карта открыта — сегодняшнего лунного нет (правило утреннего)', () => {
+    const input = {
+      ...base,
+      todayCardId: 'the-tower',
+      moonDays: [{ date: '2026-08-12', kind: 'full' as const }],
+    };
+    expect(onDate(input, MORNING_8AM, '2026-08-12').map((p) => p.kind)).not.toContain('moon');
+  });
+
+  it('freeze-день совпал с днём события — побеждает freeze', () => {
+    // карта открыта сегодня → freezeDay = послезавтра, 2026-08-14 (спека 10)
+    const input = {
+      ...base,
+      todayCardId: 'the-tower',
+      streak: 5,
+      freezes: 1,
+      moonDays: [{ date: '2026-08-14', kind: 'full' as const }],
+    };
+    expect(onDate(input, MORNING_8AM, '2026-08-14').map((p) => p.kind)).toEqual(['freeze']);
+  });
+
+  it('возвратный (4-й день) лунным не подменяется', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-16', kind: 'new' as const }] };
+    expect(onDate(input, MORNING_8AM, '2026-08-16').map((p) => p.kind)).toEqual(['comeback']);
+  });
+
+  it('день события вне горизонта утренних — лунного в плане нет', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-17', kind: 'new' as const }] };
+    expect(kinds(input, MORNING_8AM)).not.toContain('moon');
+  });
+
+  it('capPerDay: лунный уступает спасению серии и вечернему', () => {
+    const mk = (kind: PlannedPush['kind'], hour: number): PlannedPush => ({
+      kind,
+      date: '2026-08-12',
+      hour,
+      minute: 0,
+      phraseKey: 'x',
+    });
+    const kept = capPerDay([mk('moon', 9), mk('evening', 21), mk('streak', 20)]);
+    expect(kept.map((p) => p.kind).sort()).toEqual(['evening', 'streak']);
+  });
+
+  it('детерминизм: один вход — один план', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-13', kind: 'new' as const }] };
+    expect(planPushes(input, MORNING_8AM)).toEqual(planPushes(input, MORNING_8AM));
   });
 });
