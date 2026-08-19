@@ -162,7 +162,7 @@ export const resources = {
         devAgeSrs: "Состарить повторение на день",
         devResetSrs: "Сбросить повторение",
         // «Число: N» без числительных — плюрализация не нужна (урок hf-02)
-        reviewQueueText: "В колоде: {{deck}}\nЖдут сегодня: {{due}}\nНовых доступно: {{fresh}}\nЗавтра: {{tomorrow}}\nНовых введено сегодня: {{introduced}}",
+        reviewQueueText: "В колоде: {{deck}}\nЖдут сегодня: {{due}}\nНовых доступно: {{fresh}}\nЖдут к завтра (вкл. сегодняшние): {{tomorrow}}\nНовых введено сегодня: {{introduced}}",
         // бэкап (спека 11); тон — design-system §8: без «Ошибка!» и приказов
         exportData: "Экспорт данных",
         importData: "Импорт из файла",
@@ -395,7 +395,7 @@ export const resources = {
         devReviewQueue: "Review queue",
         devAgeSrs: "Age reviews by a day",
         devResetSrs: "Reset reviews",
-        reviewQueueText: "Deck: {{deck}}\nDue today: {{due}}\nNew available: {{fresh}}\nTomorrow: {{tomorrow}}\nNew introduced today: {{introduced}}",
+        reviewQueueText: "Deck: {{deck}}\nDue today: {{due}}\nNew available: {{fresh}}\nDue by tomorrow (incl. today): {{tomorrow}}\nNew introduced today: {{introduced}}",
         // бэкап (спека 11)
         exportData: "Export data",
         importData: "Import from file",

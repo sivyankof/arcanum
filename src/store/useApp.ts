@@ -5,7 +5,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
-import { daysAgoISO, localDateISO, parseISODate } from '../lib/dates';
+import { daysAgoISO, localDateISO, plusDaysISO } from '../lib/dates';
 import { deviceLocaleTags } from '../lib/deviceLang';
 import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
@@ -210,7 +210,7 @@ export const useApp = create<AppState>()(
       devAgeSrs: () =>
         set({
           srs: Object.fromEntries(
-            Object.entries(get().srs).map(([id, s]) => [id, { ...s, due: daysAgoISO(1, parseISODate(s.due)) }]),
+            Object.entries(get().srs).map(([id, s]) => [id, { ...s, due: plusDaysISO(s.due, -1) }]),
           ),
           reviewDay: REVIEW_DAY_DEFAULT,
         }),

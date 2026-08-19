@@ -227,9 +227,9 @@ describe('promptSentence — первое предложение general для 
         const text = inLang(c.content.general, lang);
         const p = promptSentence(text);
         expect(p.length).toBeGreaterThanOrEqual(PROMPT_MIN);
-        expect(p.length).toBeLessThanOrEqual(PROMPT_MAX);
-        const head = p.endsWith('…') && !text.trim().startsWith(p) ? p.slice(0, -1) : p;
-        expect(text.trim().startsWith(head)).toBe(true);
+        // строгая проверка: результат обязан быть НАЧАЛОМ текста без изменений. Обрезка
+        // добавляет «…», которого в исходном тексте на этом месте нет, — падает и на ней
+        expect(text.trim().startsWith(p)).toBe(true);
       }
     }
   });

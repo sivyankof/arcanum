@@ -33,7 +33,7 @@ import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
 import { AVAILABLE_LANGS, useLang } from '../src/lib/i18n';
 import { detectLang, LANG_NAMES } from '../src/lib/lang';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
-import { deckOrder, reviewSummary } from '../src/lib/review';
+import { deckOrder, newToday, reviewSummary } from '../src/lib/review';
 import {
   getPermission,
   listScheduled,
@@ -102,7 +102,7 @@ export default function SettingsScreen() {
         due: sum.due,
         fresh: sum.newAvailable,
         tomorrow: sum.dueTomorrow,
-        introduced: reviewDay.date === today ? reviewDay.newCount : 0,
+        introduced: newToday(reviewDay, today),
       }),
     );
   };
@@ -486,7 +486,7 @@ export default function SettingsScreen() {
               <SettingsRow icon="layers-outline" label={tr('settings.devReviewQueue')} value="DEV" onPress={showReviewQueue} />
             </FadeUp>
             <FadeUp index={15}>
-              <SettingsRow icon="time-outline" label={tr('settings.devAgeSrs')} value="DEV" onPress={devAgeSrs} />
+              <SettingsRow icon="hourglass-outline" label={tr('settings.devAgeSrs')} value="DEV" onPress={devAgeSrs} />
             </FadeUp>
             <FadeUp index={16}>
               <SettingsRow icon="refresh-outline" label={tr('settings.devResetSrs')} value="DEV" onPress={resetSrs} />

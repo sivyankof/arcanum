@@ -47,7 +47,10 @@ export function deckOrder(modules: CourseModule[], progress: LessonProgressMap):
   return [...learnedCardIds(modules, progress)];
 }
 
-function newToday(day: ReviewDay, todayISO: string): number {
+/** Счётчик новых карт действителен только за сегодня — вчерашняя запись значит «сегодня ещё
+ *  нуль». Общая проверка для reviewSummary/applyReview и DEV-диалога настроек, чтобы правило
+ *  не разъезжалось по двум местам. */
+export function newToday(day: ReviewDay, todayISO: string): number {
   return day.date === todayISO ? day.newCount : 0;
 }
 
