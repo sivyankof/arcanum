@@ -73,6 +73,7 @@ display:flex;align-items:center;justify-content:center;color:var(--accent);trans
 /* today */
 .moonrow{display:flex;justify-content:center;gap:14px;margin-top:12px;font-size:13px;color:var(--muted)}
 .moonrow b{color:var(--head);font-weight:600}
+.moonrow .chev{width:12px;height:12px;margin-left:-10px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .pills{display:flex;gap:10px;margin-top:14px}
 .pill{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:10px 13px;
 backdrop-filter:blur(10px);display:flex;align-items:center;gap:9px}
@@ -612,7 +613,7 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
     <div class="date fadeup d1">Воскресенье · 9 августа</div>
     <div class="h2 fadeup d1">Карта дня</div>
     <div class="rule fadeup d2"><span>✦</span></div>
-    <div class="moonrow fadeup d2">☾ <b>Убывающая луна</b> · 26-й лунный день</div>
+    <div class="moonrow fadeup d2" onclick="show('v-moon')" style="cursor:pointer">☽ <b>Убывающая луна</b> · 26-й лунный день <svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></div>
     <div class="pills fadeup d3">
       <div class="pill"><span class="ic">🔥</span><span class="tx"><b>12 дней</b><small>СЕРИЯ</small></span></div>
       <div class="pill" style="flex:1.5"><span class="tx" style="flex:1"><b style="font-size:11px">Уровень 3 · Читающая</b>
@@ -979,11 +980,11 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
     <div class="date fadeup d2">АВГУСТ 2026</div>
     <div class="h2 fadeup d2">Лунный календарь</div>
     <div class="rule fadeup d2"><span>☾</span></div>
-    <div class="moonrow fadeup d3">☾ <b>Убывающая луна</b> · 26-й лунный день</div>
+    <div class="moonrow fadeup d3">☽ <b>Убывающая луна</b> · 26-й лунный день</div>
     <div class="mooncal fadeup d3" id="mooncal"></div>
     <div class="fadeup d4">
-      <div class="mevent"><span class="mi">●</span><div><b>НОВОЛУНИЕ · 12–13 АВГУСТА</b><span>Время задумывать новое</span></div></div>
-      <div class="mevent"><span class="mi" style="color:var(--accent)">○</span><div><b>ПОЛНОЛУНИЕ · 27–28 АВГУСТА</b><span>Время подводить итоги</span></div></div>
+      <div class="mevent"><span class="mi">●</span><div><b>НОВОЛУНИЕ · 12 АВГУСТА · 20:37</b><span>Время задумывать новое</span></div></div>
+      <div class="mevent"><span class="mi" style="color:var(--accent)">○</span><div><b>ПОЛНОЛУНИЕ · 28 АВГУСТА · 07:18</b><span>Время подводить итоги</span></div></div>
     </div>
   </div>
 
@@ -1453,12 +1454,12 @@ function revCycle(){
 }
 function openLang(){ document.getElementById('langpick').classList.add('on'); }
 
-/* этап 4: лунный календарь августа 2026 (фазы — реальный расчёт moon.ts) */
+/* этап 4: лунный календарь августа 2026 — событие одним днём (спека 47), дата/время — реальные моменты по МСК */
 const mc = document.getElementById('mooncal');
 let mcal = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'].map(w=>`<div class="wd">${w}</div>`).join('');
 for(let i=0;i<5;i++) mcal += '<div></div>'; /* 1 августа 2026 — суббота */
 for(let d=1; d<=31; d++){
-  const isNew = d===12||d===13, isFull = d===27||d===28, today = d===9;
+  const isNew = d===12, isFull = d===28, today = d===9;
   const glyph = isNew ? '<i>●</i>' : isFull ? '<i style="color:var(--accent)">○</i>' : '';
   mcal += `<div class="dcell ${today?'today2':''} ${d<9?'dim':''}">${d}${glyph}</div>`;
 }
