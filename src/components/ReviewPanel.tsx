@@ -54,7 +54,9 @@ const st = StyleSheet.create({
   // та же панель, что шапка модуля (design-system §5); отступ снизу — до шапки первого модуля
   box: { ...moduleBox, marginBottom: spacing.m },
   // `.revcard small` / `.revcard b` эталона: Overline 8.5/ls2 accent, строка Cormorant 600 15 (меньше
-  // названия модуля намеренно — карточка не спорит с шапками модулей)
-  overline: { fontSize: 8.5, letterSpacing: 2, fontWeight: '600' },
+  // названия модуля намеренно — карточка не спорит с шапками модулей). У `.revcard small` веса нет —
+  // fontWeight здесь был бы видимой сменой начертания (Txt транслирует вес в отдельное семейство
+  // шрифта, не CSS-мелочь, прецедент задачи 13), а не «жирнее» той же гарнитуры
+  overline: { fontSize: 8.5, letterSpacing: 2 },
   line: { fontFamily: fonts.displaySemi, fontSize: 15, marginTop: 2 },
 });

@@ -20,8 +20,8 @@ import { KeywordChips } from './KeywordChips';
 import { Txt } from './Txt';
 
 // `.ringwrap` тренажёра в эталоне: 190×330 (карта дня — 216×378, масштаб ≈ 0.88)
-export const REVIEW_CARD_W = 190;
-export const REVIEW_CARD_H = 330;
+const REVIEW_CARD_W = 190;
+const REVIEW_CARD_H = 330;
 
 export function ReviewFlashcard({
   cardId,

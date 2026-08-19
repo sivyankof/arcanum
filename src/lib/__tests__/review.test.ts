@@ -1,7 +1,7 @@
 import type { CourseModule } from '../content';
 import { cards } from '../content';
 import type { LessonProgressMap } from '../courseProgress';
-import { inLang } from '../lang';
+import { inLang, LANGS, presentLang, type Localized } from '../lang';
 import {
   applyGrade,
   applyReview,
@@ -264,18 +264,53 @@ describe('maskCardName — имя карты в подсказке toCard зам
     expect(maskCardName('Карта начала пути.', 'Дурак')).toBe('Карта начала пути.');
   });
 
-  // контракт по корпусу: ни одна подсказка toCard не содержит имени своей карты — ни на ru, ни на en.
-  // Это и есть дефект, найденный при дорисовке макета; тест обязан быть красным без maskCardName
-  it.each(['ru', 'en'] as const)('корпус %s: promptSentence(general) после маски не содержит имени карты', (lang) => {
+  // контракт по корпусу: ни одна подсказка toCard не содержит имени своей карты — ни на одном языке
+  // приложения. Это и есть дефект, найденный при дорисовке макета; тест обязан быть красным без
+  // maskCardName. Обходит ВСЕ LANGS, не только ['ru', 'en'] — иначе задача 28 (переводы ES/PT)
+  // добавила бы язык, который этот контракт не увидит В ПРИНЦИПЕ. Имя берётся так же, как на
+  // экране (app/review.tsx) — на языке ПОКАЗАННОГО текста (presentLang), а не lang напрямую: у es/pt
+  // сегодня нет своего general (корпус ещё не переведён), presentLang честно падает на тот же 'en',
+  // что и сам текст, — то есть для непереведённых языков тест проверяет РОВНО ТО, что покажет экран
+  // прямо сейчас (комбинацию en/en), а не притворяется, что проверил испанский или пропускает его
+  // молча.
+  it.each(LANGS)('корпус %s: promptSentence(general) после маски не содержит имени карты', (lang) => {
     const leaks = cards
       .map((c) => {
-        const name = inLang(c.name, lang);
+        const textLang = presentLang(c.content.general, lang);
+        const name = inLang(c.name, textLang);
         const hint = maskCardName(promptSentence(inLang(c.content.general, lang)), name);
         const bare = name.replace(/^the\s+/i, '');
         return new RegExp(bare.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(hint) ? `${c.id}: ${hint}` : null;
       })
       .filter(Boolean);
     expect(leaks).toEqual([]);
+  });
+
+  // синтетика: воспроизводит ровно тот сценарий, который сегодняшний корпус показать не может
+  // (name.es есть, general.es нет — 28а разводит их разными единицами перевода). Проверяет тот же
+  // алгоритм, что app/review.tsx использует для маски (textLang = presentLang(general, lang), имя —
+  // inLang(name, textLang)), и одновременно фиксирует, что НАИВНЫЙ выбор (имя языка интерфейса без
+  // presentLang — состояние ДО фикса Important 1) на этом же входе действительно течёт. Это и есть
+  // «эксперимент со сломанным кодом» из отчёта: временная замена textLang на голый lang красит
+  // именно этот тест (см. final-fix-report.md)
+  it('расхождение языков name/general (будущий сценарий задачи 28): маска берёт язык показанного текста, а не интерфейса', () => {
+    const name: Localized<string> = { ru: 'Дурак', en: 'The Fool', es: 'El Loco' };
+    const general: Localized<string> = {
+      ru: 'Дурак — карта начала пути.',
+      en: 'The Fool is the card of beginnings.',
+      // es намеренно нет: presentLang(general, 'es') падает на 'en'
+    };
+
+    const textLang = presentLang(general, 'es');
+    const correctHint = maskCardName(promptSentence(inLang(general, 'es')), inLang(name, textLang));
+    expect(correctHint).not.toMatch(/fool/i);
+    expect(correctHint).toContain(NAME_MASK);
+
+    // наивный выбор — имя языка интерфейса напрямую, без presentLang: «El Loco» не встречается
+    // в английском предложении, маска молчит, и подсказка отдаёт готовый ответ
+    const naiveName = inLang(name, 'es');
+    const naiveHint = maskCardName(promptSentence(inLang(general, 'es')), naiveName);
+    expect(naiveHint).toMatch(/fool/i);
   });
 
   it('«the» внутри соседнего слова не съедает настоящее вхождение имени', () => {

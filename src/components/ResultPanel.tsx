@@ -1,10 +1,12 @@
 /** Панель итога (`.lresult` эталона, motion-spec §16): въезжает fade+up 500 мс → хаптика Success →
  *  счётчик «+N XP» катится (55 мс/шаг); когда счётчик докатился — зовёт onCounted (финал урока по нему
  *  запускает полосу модуля и конфетти). Общая часть LessonResult (урок) и ReviewResult (тренажёр,
- *  спека 45) — вынесена по правилу «2+ раза». Порядок содержимого фиксирован: title (Overline, если
- *  задан) → XP (или zeroTitle при gained 0) → line → children → CTA → footer. Порядок важен: footer
- *  у урока — слой конфетти, и он обязан лежать ПОВЕРХ CTA, как раньше. Reduce motion: счётчик
- *  мгновенный (motion-spec §16). */
+ *  спека 45) — вынесена по правилу «2+ раза». Порядок содержимого: title (Overline, если задан) →
+ *  [XP (или zeroTitle при gained 0) / line — порядок этой пары задаёт `lineFirst`] → children → CTA →
+ *  footer. У урока (`#lresult`) порядок XP → line, у тренажёра (`#trres`) — line → XP: макет и спека
+ *  расходятся здесь по-настоящему, `lineFirst` — не косметика. Порядок footer важен: у урока это
+ *  слой конфетти, и он обязан лежать ПОВЕРХ CTA, как раньше. Reduce motion: счётчик мгновенный
+ *  (motion-spec §16). */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -30,6 +32,7 @@ export function ResultPanel({
   title,
   zeroTitle,
   line,
+  lineFirst,
   cta,
   onCounted,
   children,
@@ -42,6 +45,10 @@ export function ResultPanel({
   zeroTitle?: string;
   /** строка под счётчиком, 11/ls1 muted */
   line: string;
+  /** true — строка стоит НАД счётчиком XP, а не под ним (тренажёр, `#trres` эталона: `lbl → lp →
+   *  xpn` против `xpn → lp` у урока); заодно переключает отступы на инлайн-стили #trres —
+   *  8 у строки, 6 у счётчика (у урока это marginBottom заголовка и marginTop строки) */
+  lineFirst?: boolean;
   cta: { label: string; onPress: () => void };
   /** момент «счётчик докатился»: ENTER_MS + gained × TICK_MS (при reduce motion — ENTER_MS) */
   onCounted?: () => void;
@@ -97,16 +104,31 @@ export function ResultPanel({
     transform: [{ translateY: (1 - enter.value) * 14 }],
   }));
 
+  // xp/zero и line — одна и та же пара элементов у обоих экранов, порядок задаёт lineFirst
+  // (Important 2 финального ревью: у тренажёра эталон рисует строку НАД счётчиком, у урока — под)
+  const xpBlock =
+    gained > 0 ? (
+      <Txt style={[st.xp, { color: t.accent }, lineFirst && st.xpAfterLine]}>{tr('lesson.xpGain', { n: shown })}</Txt>
+    ) : (
+      !!zeroTitle && <Txt style={[st.zero, { color: t.head }]}>{zeroTitle}</Txt>
+    );
+  const lineBlock = <Txt style={[st.line, { color: t.muted }, lineFirst && st.lineAfterTitle]}>{line}</Txt>;
+
   return (
     <Animated.View style={enterStyle}>
       <View style={[st.panel, { backgroundColor: t.panel, borderColor: t.frame }]}>
-        {!!title && <Txt style={[st.title, { color: t.accent }]}>{title}</Txt>}
-        {gained > 0 ? (
-          <Txt style={[st.xp, { color: t.accent }]}>{tr('lesson.xpGain', { n: shown })}</Txt>
+        {!!title && <Txt style={[st.title, { color: t.accent }, lineFirst && st.titleTight]}>{title}</Txt>}
+        {lineFirst ? (
+          <>
+            {lineBlock}
+            {xpBlock}
+          </>
         ) : (
-          !!zeroTitle && <Txt style={[st.zero, { color: t.head }]}>{zeroTitle}</Txt>
+          <>
+            {xpBlock}
+            {lineBlock}
+          </>
         )}
-        <Txt style={[st.line, { color: t.muted }]}>{line}</Txt>
         {children}
         <CtaButton label={cta.label} onPress={cta.onPress} style={st.cta} />
         {footer}
@@ -118,9 +140,12 @@ export function ResultPanel({
 const st = StyleSheet.create({
   // .lresult эталона: radius 18 — осознанный литерал, как radius 13 у строки дневника
   panel: { borderWidth: 1, borderRadius: 18, padding: 20, alignItems: 'center', marginTop: spacing.l },
-  title: { fontSize: 8.5, letterSpacing: 3, marginBottom: 8 }, // .lbl над результатом тренажёра
+  title: { fontSize: 8.5, letterSpacing: 3, marginBottom: 8 }, // .lbl над результатом тренажёра (дефолт: гэп до XP)
+  titleTight: { marginBottom: 0 }, // lineFirst: гэп до строки держит marginTop строки (8), не заголовок
   xp: { fontFamily: fonts.displaySemi, fontSize: 36 },
+  xpAfterLine: { marginTop: 6 }, // #trres .xpn margin-top:6 — тренажёр: счётчик идёт после строки
   zero: { fontFamily: fonts.display, fontSize: 24 },
-  line: { fontSize: 11, letterSpacing: 1, marginTop: 4 },
+  line: { fontSize: 11, letterSpacing: 1, marginTop: 4 }, // дефолт: .lp после XP (урок)
+  lineAfterTitle: { marginTop: 8 }, // #trres .lp margin-top:8 — тренажёр: строка сразу после заголовка
   cta: { marginTop: spacing.l, alignSelf: 'stretch' },
 });

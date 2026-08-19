@@ -32,6 +32,9 @@ export function ReviewResult({
       gained={gained}
       title={tr('review.panelTitle')}
       line={tr('review.resultLine', { n: cards, k: firstTry })}
+      // `#trres` эталона: строка «ПОВТОРЕНО N · С ПЕРВОГО РАЗА K» стоит НАД счётчиком «+X XP»
+      // (у урока — наоборот, там дефолт ResultPanel)
+      lineFirst
       cta={{ label: tr('review.done'), onPress: onDone }}
       footer={
         more > 0 ? (

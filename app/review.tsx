@@ -34,7 +34,7 @@ import { blockText, cardById, course } from '../src/lib/content';
 import { localDateISO } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
-import { inLang } from '../src/lib/lang';
+import { inLang, presentLang } from '../src/lib/lang';
 import {
   applyGrade,
   buildSession,
@@ -106,7 +106,13 @@ export default function ReviewScreen() {
 
   // проявление плашки и панели «ЗНАЧЕНИЕ»: toMeaning — сразу, toCard — после переворота (FLIP_MS)
   const reveal = useSharedValue(0);
-  const revealStyle = useAnimatedStyle(() => ({ opacity: reveal.value }));
+  // toCard: панель «ЗНАЧЕНИЕ» монтируется сразу и проявляется с задержкой на FLIP_MS — пока
+  // прозрачность 0, слой не должен ловить тап (иначе промах пальцем оценит карту, которую ещё не
+  // видно). pointerEvents ВНУТРИ стиля, не пропом (правило проекта)
+  const revealStyle = useAnimatedStyle(() => ({
+    opacity: reveal.value,
+    pointerEvents: reveal.value === 0 ? ('none' as const) : ('auto' as const),
+  }));
 
   const head = queue[0];
   const card = head ? cardById.get(head.cardId) : undefined;
@@ -118,7 +124,14 @@ export default function ReviewScreen() {
   // ответ), в панели «ЗНАЧЕНИЕ» после ответа — целиком
   const meaning = card ? blockText(card.content.general, lang) : { text: '', todo: true };
   const sentence = meaning.todo ? '' : promptSentence(meaning.text);
-  const backHint = sentence ? maskCardName(sentence, name) : '';
+  // маска берёт имя НА ЯЗЫКЕ ПОКАЗАННОГО ТЕКСТА (presentLang), а не языка интерфейса: name и текст
+  // general переводятся РАЗНЫМИ единицами (wordsStatus у слов, статус блока — отдельно, спека 28а),
+  // и у каждой inLang падает на английский независимо от другой. Испанское имя без испанского
+  // general (или наоборот) не совпало бы по языку с текстом — маска не нашла бы вхождение, и
+  // рубашка-вопрос напечатала бы ответ прямо под чипами. Плашка с именем (она — ОТВЕТ, не подсказка)
+  // языка показанного текста не спрашивает и остаётся на языке интерфейса — см. `name` выше
+  const maskName = card ? inLang(card.name, presentLang(card.content.general, lang)) : '';
+  const backHint = sentence ? maskCardName(sentence, maskName) : '';
 
   const onReveal = () => {
     if (!head || revealed) return;
@@ -144,11 +157,17 @@ export default function ReviewScreen() {
     setStep((s) => s + 1);
   };
 
-  // «Ещё N»: новая порция из актуального стора на том же экране
+  // «Ещё N»: новая порция из актуального стора на том же экране. Тот же busy-guard, что у оценки —
+  // двойной тап в одном кадре иначе пересобрал бы порцию дважды
   const onMore = () => {
+    if (busy.current) return;
+    busy.current = true;
     const s = useApp.getState();
     const next = buildSession(deck, s.srs, localDateISO(), s.reviewDay, Math.random);
-    if (next.length === 0) return;
+    if (next.length === 0) {
+      busy.current = false;
+      return;
+    }
     setQueue(next);
     setLog([]);
     setGained(0);
@@ -161,7 +180,8 @@ export default function ReviewScreen() {
   // нечего повторять с самого входа ИЛИ карта из очереди не нашлась в справочнике (рассинхрон
   // колоды и cards.json — недостижимо при исправном контенте, стережёт контракт-тест курса, но
   // без страховки экран остался бы пустым: ветка ниже рисуется только когда head И card есть оба)
-  const empty = (!head && log.length === 0) || (!!head && !card);
+  const cardMissing = !!head && !card;
+  const empty = (!head && log.length === 0) || cardMissing;
   const result = !head && log.length > 0; // очередь кончилась — итог
   const stats = sessionStats(log);
 
@@ -187,7 +207,13 @@ export default function ReviewScreen() {
         {empty && (
           <FadeUp index={1} style={{ marginTop: spacing.xl }}>
             <EmptyState
-              text={deck.length === 0 ? tr('review.emptyDeck') : tr('review.allDone', { n: sum.dueTomorrow })}
+              // карта не нашлась в справочнике — это НЕ «всё повторено» (колода не пуста и ничего
+              // не повторено); текст пустой колоды нейтрален и ситуации не противоречит
+              text={
+                deck.length === 0 || cardMissing
+                  ? tr('review.emptyDeck')
+                  : tr('review.allDone', { n: sum.dueTomorrow })
+              }
             />
             <CtaButton label={tr('review.toCourse')} onPress={() => router.back()} />
           </FadeUp>
