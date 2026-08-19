@@ -7,6 +7,7 @@ import {
   REPEAT_XP,
   XP_DRAW,
   XP_REFLECT,
+  XP_REVIEW,
   XP_SPREAD,
 } from '../xp';
 
@@ -51,6 +52,10 @@ describe('levelFromXp — пороги 0/50/150/300/500, дальше +250', () 
     expect(XP_REFLECT).toBe(3);
     expect(REPEAT_XP).toBe(2);
     expect(XP_SPREAD).toBe(5);
+  });
+
+  it('+1 за вспомненную карту повторения (спека 45): единственный ежедневный источник после курса', () => {
+    expect(XP_REVIEW).toBe(1);
   });
 });
 

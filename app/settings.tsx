@@ -33,6 +33,7 @@ import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
 import { AVAILABLE_LANGS, useLang } from '../src/lib/i18n';
 import { detectLang, LANG_NAMES } from '../src/lib/lang';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
+import { deckOrder, newToday, reviewSummary } from '../src/lib/review';
 import {
   getPermission,
   listScheduled,
@@ -86,6 +87,25 @@ export default function SettingsScreen() {
   const setLessonDone = useApp((s) => s.setLessonDone);
   const resetCourse = useApp((s) => s.resetCourse);
   const resetOnboarding = useApp((s) => s.resetOnboarding);
+  const srs = useApp((s) => s.srs);
+  const reviewDay = useApp((s) => s.reviewDay);
+  const resetSrs = useApp((s) => s.resetSrs);
+  const devAgeSrs = useApp((s) => s.devAgeSrs);
+  const [queueText, setQueueText] = React.useState<string | null>(null);
+  // DEV: сводка очереди повторения (спека 45) — та же сборка, что возьмёт карточка курса в 45б
+  const showReviewQueue = () => {
+    const today = localDateISO();
+    const sum = reviewSummary(deckOrder(course, lessonsProgress), srs, today, reviewDay);
+    setQueueText(
+      tr('settings.reviewQueueText', {
+        deck: sum.deckSize,
+        due: sum.due,
+        fresh: sum.newAvailable,
+        tomorrow: sum.dueTomorrow,
+        introduced: newToday(reviewDay, today),
+      }),
+    );
+  };
 
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
@@ -462,6 +482,15 @@ export default function SettingsScreen() {
                 onPress={() => setLang(detectLang(deviceTags, AVAILABLE_LANGS))}
               />
             </FadeUp>
+            <FadeUp index={14}>
+              <SettingsRow icon="layers-outline" label={tr('settings.devReviewQueue')} value="DEV" onPress={showReviewQueue} />
+            </FadeUp>
+            <FadeUp index={15}>
+              <SettingsRow icon="hourglass-outline" label={tr('settings.devAgeSrs')} value="DEV" onPress={devAgeSrs} />
+            </FadeUp>
+            <FadeUp index={16}>
+              <SettingsRow icon="refresh-outline" label={tr('settings.devResetSrs')} value="DEV" onPress={resetSrs} />
+            </FadeUp>
           </>
         )}
         <TimePicker
@@ -491,6 +520,15 @@ export default function SettingsScreen() {
           confirmTone="accent"
           onConfirm={() => setPlanText(null)}
           onCancel={() => setPlanText(null)}
+        />
+        <ConfirmDialog
+          visible={queueText !== null}
+          title={tr('settings.devReviewQueue')}
+          message={queueText ?? ''}
+          confirmLabel={tr('settings.ok')}
+          confirmTone="accent"
+          onConfirm={() => setQueueText(null)}
+          onCancel={() => setQueueText(null)}
         />
         <ConfirmDialog
           visible={importAsk !== null}

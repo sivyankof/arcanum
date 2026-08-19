@@ -20,6 +20,13 @@ describe('контракт викторин М1–М6 (course.json)', () => {
     expect(l.theory?.en).toBeTruthy();
   });
 
+  // Колода повторения (спека 45) строится из lesson.cards (deckOrder → learnedCardIds), а
+  // валидация бэкапа бракует ключ srs, которого нет в колоде, — «всё или ничего». Опечатка
+  // в id здесь тихо копится и однажды сделает СОБСТВЕННЫЙ бэкап пользователя нечитаемым целиком.
+  it.each(lessons.map((l) => [l.id, l] as const))('%s: карты урока существуют в колоде', (_id, l) => {
+    for (const cardId of l.cards) expect(cardById.has(cardId)).toBe(true);
+  });
+
   it.each(lessons.map((l) => [l.id, l] as const))('%s: 5 вопросов по схеме', (_id, l) => {
     expect(l.quiz).toBeDefined();
     expect(l.quiz!).toHaveLength(5);
