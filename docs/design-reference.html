@@ -546,6 +546,12 @@ border-radius:13px;padding:11px 14px;margin-top:8px;backdrop-filter:blur(8px)}
 .suitrow .sg{font-size:17px;color:var(--accent)}
 .suitrow .st3{flex:1;font-size:12.5px;color:var(--text);font-weight:600}
 .suitrow .sc2{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px}
+.colentry{margin-top:14px;cursor:pointer}
+.colentry svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.colentry .chev{width:14px;height:14px;stroke:var(--muted)}
+.suitrow .mini{width:22px;height:36px;border-radius:4px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+color:var(--accent);font-family:var(--serif);font-size:9px;background:radial-gradient(90% 90% at 50% 30%,#1b2450,#0c1130)}
+[data-mode="light"] .suitrow .mini{background:radial-gradient(90% 90% at 50% 30%,#f2e8cd,#e2d4ac)}
 .mooncal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
 .mooncal .wd{text-align:center;font-size:8.5px;letter-spacing:1px;color:var(--muted);padding:4px 0}
 .mooncal .dcell{aspect-ratio:1;border:1px solid transparent;border-radius:10px;display:flex;
@@ -676,6 +682,7 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
   <div class="view" id="v-cards">
     <div class="date fadeup d1">Справочник · Райдер–Уэйт 1909</div>
     <div class="h2 fadeup d1">78 карт</div>
+    <div class="suitrow colentry fadeup d1" onclick="show('v-collection')"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M7 5h10"/></svg><span class="st3">Коллекция</span><span class="sc2">8 ИЗ 78</span><svg viewBox="0 0 24 24" class="chev"><path d="M9 5l7 7-7 7"/></svg></div>
     <div class="stickysearch fadeup d2">
     <div class="search" style="margin-top:0"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>Найти карту…</div>
     <div class="seg" style="margin-top:9px">
@@ -989,10 +996,10 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
     <div class="date fadeup d3" style="text-align:left;margin-top:18px">СТАРШИЕ АРКАНЫ · 8 ИЗ 22</div>
     <div class="grid fadeup d4" id="colgrid" style="margin-top:10px"></div>
     <div class="fadeup d5" style="margin-top:16px">
-      <div class="suitrow"><span class="sg">🜂</span><span class="st3">Жезлы</span><span class="sc2">0 ИЗ 14</span></div>
-      <div class="suitrow"><span class="sg">🜄</span><span class="st3">Кубки</span><span class="sc2">0 ИЗ 14</span></div>
-      <div class="suitrow"><span class="sg">🜁</span><span class="st3">Мечи</span><span class="sc2">0 ИЗ 14</span></div>
-      <div class="suitrow"><span class="sg">🜃</span><span class="st3">Пентакли</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="mini">✶</span><span class="st3">Жезлы</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="mini">✶</span><span class="st3">Кубки</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="mini">✶</span><span class="st3">Мечи</span><span class="sc2">0 ИЗ 14</span></div>
+      <div class="suitrow"><span class="mini">✶</span><span class="st3">Пентакли</span><span class="sc2">0 ИЗ 14</span></div>
     </div>
   </div>
 
