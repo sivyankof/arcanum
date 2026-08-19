@@ -24,6 +24,7 @@ import { ConfirmDialog } from '../../src/components/ConfirmDialog';
 import { CornerBadge } from '../../src/components/CornerBadge';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
+import { MeaningPanel } from '../../src/components/MeaningPanel';
 import { NotePlate } from '../../src/components/NotePlate';
 import { Reflection } from '../../src/components/Reflection';
 import { Rule } from '../../src/components/Rule';
@@ -529,8 +530,7 @@ export default function TodayScreen() {
             </Animated.View>
             {/* кнопка живёт внутри блока значения — как .cta внутри .mean в эталоне */}
             <Animated.View style={meanStyle}>
-              <View style={[st.meanBox, { backgroundColor: t.panel, borderColor: t.line }]}>
-                <Txt style={[st.meanLbl, { color: t.accent }]}>{tr('today.meaning')}</Txt>
+              <MeaningPanel title={tr('today.meaning')}>
                 <Txt style={[st.meanTxt, { color: t.text }]}>
                   {hasText ? dayText : tr('card.soon')}
                 </Txt>
@@ -538,7 +538,7 @@ export default function TodayScreen() {
                   label={tr('today.continue')}
                   onPress={() => router.push(`/card/${card.id}?from=today`)}
                 />
-              </View>
+              </MeaningPanel>
               {/* один блок на весь вечерний ритуал: до 18:00 это «Заметка о дне» с плашкой,
                   после — тот же блок с вопросом и кнопками над той же плашкой (спека 06а) */}
               <Block title={showReflection ? tr('reflect.title') : tr('note.title')}>
@@ -639,8 +639,6 @@ const st = StyleSheet.create({
   sparkLayer: { zIndex: 2, elevation: 20 },
   cardName: { fontFamily: fonts.display, fontSize: 22, letterSpacing: 3, textAlign: 'center', marginTop: spacing.xl },
   cardSub: { fontSize: 9.5, letterSpacing: 2.5, textAlign: 'center', marginTop: 3 },
-  meanBox: { borderRadius: radius.l, borderWidth: 1, padding: spacing.l, marginTop: spacing.l },
-  meanLbl: { fontSize: 9.5, letterSpacing: 3 }, // Overline из дизайн-системы: 9.5–10
   meanTxt: { fontFamily: fonts.display, fontSize: 17, lineHeight: 25, marginTop: 8 },
   // тень кнопки из эталона `.btn`: box-shadow 0 12px 30px var(--glow) — задаётся инлайн
   // (boxShadow зависит от темы, см. JSX выше). overflow тут ставить нельзя — срежет тень;
