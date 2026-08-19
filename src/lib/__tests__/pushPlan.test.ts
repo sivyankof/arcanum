@@ -3,11 +3,14 @@ import {
   COMEBACK_AFTER_DAYS,
   MAX_PER_DAY,
   MORNING_AHEAD_DAYS,
+  planInputFromStore,
   planPushes,
   type PlannedPush,
   type PlanInput,
 } from '../pushPlan';
+import { localDateISO, plusDaysISO } from '../dates';
 import { pickPhrase } from '../phrases';
+import { DEFAULT_SETTINGS } from '../settings';
 
 // 12 августа 2026, 08:00 локального времени — до утреннего пуша
 const MORNING_8AM = new Date(2026, 7, 12, 8, 0);
@@ -341,5 +344,35 @@ describe('planPushes — лунные пуши (спека 47б)', () => {
   it('детерминизм: один вход — один план', () => {
     const input = { ...base, moonDays: [{ date: '2026-08-13', kind: 'new' as const }] };
     expect(planPushes(input, MORNING_8AM)).toEqual(planPushes(input, MORNING_8AM));
+  });
+});
+
+describe('planInputFromStore — moonDays (спека 47б)', () => {
+  // Точный момент новолуния 12.08.2026 17:37 UTC (logic-spec §6). Его ЛОКАЛЬНЫЙ день зависит
+  // от пояса машины, поэтому ожидание строится тем же localDateISO, что и реализация, —
+  // тест проверяет ОКНО (от начала дня, границы горизонта), а не сам маппинг момента в день.
+  const NEW_MOON = new Date(Date.UTC(2026, 7, 12, 17, 37));
+  const eventDay = localDateISO(NEW_MOON);
+  const at = (iso: string, h: number) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d, h, 0);
+  };
+  const moonDaysAt = (now: Date) =>
+    planInputFromStore(DEFAULT_SETTINGS, 0, [], 0, null, now).moonDays;
+
+  it('событие раньше now, но в том же локальном дне — в окне (окно от НАЧАЛА дня)', () => {
+    expect(moonDaysAt(at(eventDay, 23))).toContainEqual({ date: eventDay, kind: 'new' });
+  });
+
+  it('событие во вчерашнем дне — вне окна', () => {
+    expect(moonDaysAt(at(plusDaysISO(eventDay, 1), 8)).map((d) => d.date)).not.toContain(eventDay);
+  });
+
+  it('день +3 — в окне, день +4 — уже нет', () => {
+    expect(moonDaysAt(at(plusDaysISO(eventDay, -3), 8))).toContainEqual({
+      date: eventDay,
+      kind: 'new',
+    });
+    expect(moonDaysAt(at(plusDaysISO(eventDay, -4), 8)).map((d) => d.date)).not.toContain(eventDay);
   });
 });

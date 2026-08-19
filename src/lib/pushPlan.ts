@@ -11,7 +11,7 @@
  */
 import { daysAgoISO, localDateISO } from './dates';
 import type { DailyDraw, Outcome } from './journal';
-import type { MoonEventKind } from './moon';
+import { moonEvents, type MoonEventKind } from './moon';
 import { parseHHMM, type AppSettings } from './settings';
 
 export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze' | 'moon';
@@ -114,6 +114,15 @@ export function planInputFromStore(
   now: Date = new Date(),
 ): PlanInput {
   const today = history.find((h) => h.date === localDateISO(now));
+  // Окно лунных событий — от НАЧАЛА локального сегодня (событие в 04:18 обязано попасть в план
+  // и при пересчёте в 09:00) до конца последнего дня утренних (+MORNING_AHEAD_DAYS).
+  // moonEvents отдаёт [from, to) — правая граница это полночь дня +4, сам день +4 не входит.
+  const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const horizonEnd = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + MORNING_AHEAD_DAYS + 1,
+  );
   return {
     pushesOn: settings.pushesOn,
     reflectionOn: settings.reflectionOn,
@@ -124,7 +133,10 @@ export function planInputFromStore(
     lastDrawDate,
     todayCardId: today?.cardId,
     todayOutcome: today?.outcome,
-    moonDays: [],
+    moonDays: moonEvents(dayStart, horizonEnd).map((e) => ({
+      date: localDateISO(e.at),
+      kind: e.kind,
+    })),
   };
 }
 
