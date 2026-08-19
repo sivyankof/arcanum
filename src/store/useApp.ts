@@ -5,13 +5,15 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
-import { daysAgoISO, localDateISO } from '../lib/dates';
+import { daysAgoISO, localDateISO, parseISODate } from '../lib/dates';
 import { deviceLocaleTags } from '../lib/deviceLang';
 import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { detectLang, type Lang } from '../lib/lang';
+import { applyReview, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from '../lib/review';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { SPREADS_MAX, type SpreadDraw } from '../lib/spread';
+import type { SrsGrade } from '../lib/srs';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW, XP_SPREAD } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
@@ -56,6 +58,11 @@ export interface AppState {
   /** Сумма XP (logic-spec §4). Источники: урок, повтор урока, карта дня, первый ответ
    *  рефлексии дня. Задним числом за прошлые дни не начисляется — счёт с нуля у всех. */
   xp: number;
+  /** Повторение изученных карт (спека 45, logic-spec §12): состояние SM-2 по cardId (карта
+   *  без записи — новая) и счётчик новых карт за день. Колода не хранится — она считается
+   *  из lessonsProgress (deckOrder). */
+  srs: SrsMap;
+  reviewDay: ReviewDay;
   settings: AppSettings;
   /** Профиль онбординга (logic-spec §7): имя, дата и аркан рождения.
    *  onboarded: false — онбординг ещё не пройден, корневой layout уводит на /onboarding. */
@@ -76,6 +83,14 @@ export interface AppState {
   setLessonDone: (lessonId: string, done: boolean) => void;
   /** Завершение урока движком (спека 08). Возвращает начисленный XP для экрана результата. */
   completeLesson: (lessonId: string, errors: number) => number;
+  /** Оценка карты в тренажёре: SM-2 + счётчик новых + XP по правилу applyReview; возвращает
+   *  начисленный XP (0 или XP_REVIEW). */
+  reviewCard: (cardId: string, grade: SrsGrade) => number;
+  /** DEV: обнулить повторение (состояния и счётчик дня). */
+  resetSrs: () => void;
+  /** DEV: «состарить» повторение на день — все due на сутки назад, счётчик новых сброшен;
+   *  без этого «ждут завтра» и дневной лимит новых проверяются только календарём. */
+  devAgeSrs: () => void;
   resetCourse: () => void;
   setReflectionOn: (on: boolean) => void;
   setPushesOn: (on: boolean) => void;
@@ -182,6 +197,23 @@ export const useApp = create<AppState>()(
         return r.gained;
       },
       resetCourse: () => set({ lessonsProgress: {} }),
+
+      // Тренажёр (спека 45): вся арифметика — в чистой applyReview (review.ts), стор применяет
+      // результат и отдаёт начисленный XP экрану (тот же приём, что completeLesson).
+      reviewCard: (cardId, grade) => {
+        const { srs, reviewDay, xp } = get();
+        const r = applyReview(srs, reviewDay, cardId, grade, localDateISO());
+        set({ srs: r.srs, reviewDay: r.day, xp: xp + r.gained });
+        return r.gained;
+      },
+      resetSrs: () => set({ srs: {}, reviewDay: REVIEW_DAY_DEFAULT }),
+      devAgeSrs: () =>
+        set({
+          srs: Object.fromEntries(
+            Object.entries(get().srs).map(([id, s]) => [id, { ...s, due: daysAgoISO(1, parseISODate(s.due)) }]),
+          ),
+          reviewDay: REVIEW_DAY_DEFAULT,
+        }),
 
       setReflectionOn: (on) => set({ settings: { ...get().settings, reflectionOn: on } }),
       setPushesOn: (on) => set({ settings: { ...get().settings, pushesOn: on } }),
@@ -315,8 +347,12 @@ export const useApp = create<AppState>()(
       // Существующие пользователи получают freezes: 1 сразу (решение 2 спеки 10).
       // v7 → v8: домен `lang` расширен до ru/en/es/pt (спека 27) — форма не менялась, миграции нет.
       // v8 → v9: spreadsHistory (спека 36) — ключ ВЕРХНЕГО уровня, дефолт [] доливается
-      // поверхностным слиянием, ветка миграции не нужна. Следующая задача, меняющая схему,
-      // поднимает до 10.
+      // поверхностным слиянием, ветка миграции не нужна.
+      // v9 → v10: srs и reviewDay (спека 45) — ключи ВЕРХНЕГО уровня, дефолты {} и
+      // {date: '', newCount: 0} доливаются поверхностным слиянием, ветка миграции не нужна.
+      // ⚠️ reviewDay — вложенный объект: задача, добавляющая поле ВНУТРЬ него, обязана поднять
+      // версию и дописать слияние руками (ловушка 06а). Следующая задача, меняющая схему,
+      // поднимает до 11.
       // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
       // файлы из более новых версий приложения. Поднимать — там.
       version: SCHEMA_VERSION,
