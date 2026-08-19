@@ -1,36 +1,25 @@
-import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CornerBadge } from '../../src/components/CornerBadge';
+import { CardCell, CELL_W, GRID_COLS, GRID_GAP } from '../../src/components/CardCell';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
-import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { SearchField } from '../../src/components/SearchField';
-import { Skeleton } from '../../src/components/Skeleton';
 import { Txt } from '../../src/components/Txt';
-import { cardImages } from '../../src/lib/cardImages';
 import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/lib/cardSearch';
-import { setCardOrigin } from '../../src/lib/cardTransition';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
 import { useLang } from '../../src/lib/i18n';
-import { inLang, type Lang } from '../../src/lib/lang';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
-import { fonts, radius, spacing } from '../../src/theme/theme';
+import { fonts, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
-
-const { width: W } = Dimensions.get('window');
-const COLS = 3;
-const GAP = 11; // .grid эталона: gap 11 в обе стороны
-const CELL_W = (W - spacing.xl * 2 - GAP * (COLS - 1)) / COLS;
 
 /** Сколько рядов сетки участвует в появлении экрана — примерно один экран карточек. */
 const BODY_ROWS = 4;
@@ -43,43 +32,6 @@ const BAR_BLUR = 20;
 const BAR_FADE = 14;
 
 const AnimatedList = Animated.createAnimatedComponent(FlatList<TarotCard[]>);
-
-/** Ячейка сетки. Позицию картинки меряем на нажатии — с неё начнётся перелёт
- *  на страницу карты (пункт 6 motion-spec). */
-function Cell({ item, lang, learned }: { item: TarotCard; lang: Lang; learned: boolean }) {
-  const t = useTheme();
-  const { t: tr } = useTranslation();
-  const imRef = React.useRef<View>(null);
-  const [loaded, setLoaded] = React.useState(false);
-
-  return (
-    <PressableScale
-      onPressIn={() =>
-        imRef.current?.measureInWindow((x, y, w, h) => {
-          if (w) setCardOrigin(item.id, { x, y, w, h });
-        })
-      }
-      onPress={() => router.push(`/card/${item.id}?from=cards`)}
-      style={st.cell}
-    >
-      <View ref={imRef} style={[st.imWrap, { borderColor: t.line }]}>
-        <Image
-          source={cardImages[item.id]}
-          style={st.im}
-          contentFit="cover"
-          transition={180}
-          cachePolicy="memory-disk"
-          onLoad={() => setLoaded(true)}
-        />
-        {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
-        {learned && <CornerBadge label={tr('cards.learned')} />}
-      </View>
-      <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
-        {inLang(item.name, lang)}
-      </Txt>
-    </PressableScale>
-  );
-}
 
 type FiltersProps = {
   query: string;
@@ -132,7 +84,7 @@ export default function CardsScreen() {
 
   // 78 карт фильтруются мгновенно — задержки ввода (debounce) не нужно
   const rows = useMemo(
-    () => toRows(filterCards(cards, { query, filter, lang }), COLS),
+    () => toRows(filterCards(cards, { query, filter, lang }), GRID_COLS),
     [query, filter, lang],
   );
 
@@ -165,7 +117,7 @@ export default function CardsScreen() {
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingTop: insets.top, paddingBottom: 120 }}
-        ItemSeparatorComponent={() => <View style={{ height: GAP }} />}
+        ItemSeparatorComponent={() => <View style={{ height: GRID_GAP }} />}
         ListHeaderComponent={
           <>
             <FadeUp index={0} style={st.pad}>
@@ -184,11 +136,11 @@ export default function CardsScreen() {
           const cells = (
             <View style={[st.pad, st.row]}>
               {row.map((c) => (
-                <Cell key={c.id} item={c} lang={lang} learned={learned.has(c.id)} />
+                <CardCell key={c.id} card={c} lang={lang} from="cards" badge={learned.has(c.id) ? tr('cards.learned') : undefined} />
               ))}
               {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
-              {row.length < COLS &&
-                Array.from({ length: COLS - row.length }, (_, i) => (
+              {row.length < GRID_COLS &&
+                Array.from({ length: GRID_COLS - row.length }, (_, i) => (
                   <View key={`gap-${i}`} style={{ width: CELL_W }} />
                 ))}
             </View>
@@ -239,18 +191,6 @@ const st = StyleSheet.create({
   searchPad: { marginHorizontal: spacing.xl },
   searchCompact: { paddingVertical: 9, paddingHorizontal: 14 },
   segRowCompact: { marginTop: 8 },
-  row: { flexDirection: 'row', gap: GAP },
-  cell: { width: CELL_W },
-  imWrap: {
-    borderRadius: radius.m,
-    borderWidth: 1,
-    overflow: 'hidden',
-    aspectRatio: 0.58,
-    // .gc .im: тень по прямоугольнику миниатюры (design-system §4)
-    boxShadow: '0px 8px 20px rgba(0,0,0,0.28)',
-  },
-  im: { width: '100%', height: '100%' },
-  // бейдж «ИЗУЧЕНО ✓» — общий CornerBadge (эталон `.st2`, design-system §5)
-  name: { fontSize: 9.5, textAlign: 'center', marginTop: 5, fontWeight: '600', letterSpacing: 0.3, lineHeight: 12 },
+  row: { flexDirection: 'row', gap: GRID_GAP },
   empty: { fontSize: 12.5, textAlign: 'center', marginTop: 40, paddingHorizontal: spacing.xl },
 });
