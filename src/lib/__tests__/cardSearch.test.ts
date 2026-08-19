@@ -178,6 +178,20 @@ describe('filterCards', () => {
   it('фильтр и запрос складываются: в Кубках Дурака нет', () => {
     expect(filterCards(cards, { ...all, filter: 'cups', query: 'дурак' })).toEqual([]);
   });
+
+  it('фильтр «Изучено» оставляет только карты из множества изученных (порядок колоды)', () => {
+    const learned = new Set(['w01', 'fool', 'no-such-card']);
+    expect(filterCards(cards, { ...all, filter: 'learned', learned }).map((c) => c.id)).toEqual(['fool', 'w01']);
+  });
+
+  it('«Изучено» без множества — пусто', () => {
+    expect(filterCards(cards, { ...all, filter: 'learned' })).toHaveLength(0);
+  });
+
+  it('«Изучено» и запрос складываются', () => {
+    const learned = new Set(['fool', 'magician']);
+    expect(filterCards(cards, { ...all, filter: 'learned', learned, query: 'дурак' }).map((c) => c.id)).toEqual(['fool']);
+  });
 });
 
 describe('toRows', () => {

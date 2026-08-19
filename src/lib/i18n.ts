@@ -42,6 +42,9 @@ export const resources = {
         title: "78 карт", major: "Старшие", wands: "Жезлы", cups: "Кубки", swords: "Мечи", pentacles: "Пентакли",
         all: "Все", searchPlaceholder: "Найти карту…", empty: "Такой карты нет — проверьте написание",
         learned: "ИЗУЧЕНО ✓",
+        learnedFilter: "Изучено", learnedCount: "Изучено {{open}} из {{total}}",
+        learnedCountIn: "{{label}} · изучено {{open}} из {{total}}",
+        learnedEmpty: "Изученные карты появятся здесь после первого урока курса",
         subtitle: "СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909",
       },
       card: {
@@ -319,6 +322,9 @@ export const resources = {
         title: "78 cards", major: "Major", wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pentacles",
         all: "All", searchPlaceholder: "Find a card…", empty: "No such card — check the spelling",
         learned: "LEARNED ✓",
+        learnedFilter: "Learned", learnedCount: "Learned {{open}} of {{total}}",
+        learnedCountIn: "{{label}} · learned {{open}} of {{total}}",
+        learnedEmpty: "Learned cards will appear here after your first lesson",
         subtitle: "REFERENCE · RIDER–WAITE 1909",
       },
       card: {

@@ -175,6 +175,7 @@ font-size:10.5px;font-weight:700;letter-spacing:.6px;color:var(--muted);cursor:p
 .gc .im{position:relative;border-radius:11px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/5.15;
 box-shadow:0 8px 20px rgba(0,0,0,.28)}
 .gc img{width:100%;height:100%;object-fit:cover;display:block}
+.gc img.dim{opacity:.55}
 .gc .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
 background:radial-gradient(90% 90% at 50% 30%,#1b2450,#0c1130);color:var(--accent);
 font-family:var(--serif);font-size:17px}
@@ -539,13 +540,6 @@ margin-top:14px;backdrop-filter:blur(8px)}
 .colprog b{font-family:var(--serif);font-size:16px;color:var(--head);font-weight:600}
 .colbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:8px}
 .colbar i{display:block;height:100%;width:10.2%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px}
-.gc.closed .ph{opacity:.42;filter:grayscale(.4)}
-.gc.closed small{opacity:.5}
-.suitrow{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);
-border-radius:13px;padding:11px 14px;margin-top:8px;backdrop-filter:blur(8px)}
-.suitrow .sg{font-size:17px;color:var(--accent)}
-.suitrow .st3{flex:1;font-size:12.5px;color:var(--text);font-weight:600}
-.suitrow .sc2{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px}
 .mooncal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
 .mooncal .wd{text-align:center;font-size:8.5px;letter-spacing:1px;color:var(--muted);padding:4px 0}
 .mooncal .dcell{aspect-ratio:1;border:1px solid transparent;border-radius:10px;display:flex;
@@ -600,7 +594,6 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
 <button onclick="demo('ob',this)">Онбординг</button>
 <button onclick="demo('lesson',this)">Урок</button>
 <button onclick="demo('trainer',this)">Тренажёр</button>
-<button onclick="demo('collection',this)">Коллекция</button>
 <button onclick="demo('moon',this)">Луна</button>
 </div>
 <div class="phone"><div class="sc" data-mode="dark" id="sc">
@@ -676,11 +669,12 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
   <div class="view" id="v-cards">
     <div class="date fadeup d1">Справочник · Райдер–Уэйт 1909</div>
     <div class="h2 fadeup d1">78 карт</div>
+    <div class="colprog fadeup d1"><b>Изучено 8 из 78</b><div class="colbar"><i></i></div></div>
     <div class="stickysearch fadeup d2">
     <div class="search" style="margin-top:0"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>Найти карту…</div>
     <div class="seg" style="margin-top:9px">
       <button class="on">Все</button><button>Старшие</button><button>Жезлы</button>
-      <button>Кубки</button><button>Мечи</button><button>Пентакли</button>
+      <button>Кубки</button><button>Мечи</button><button>Пентакли</button><button>Изучено</button>
     </div>
     </div>
     <div class="grid fadeup d4" id="grid"></div>
@@ -979,23 +973,6 @@ border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;m
     </div>
   </div>
 
-  <!-- ===== ЭТАП 4 · КОЛЛЕКЦИЯ-АЛЬБОМ ===== -->
-  <div class="view" id="v-collection">
-    <div class="backbtn fadeup d1" onclick="show('v-cards')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>КАРТЫ</div>
-    <div class="date fadeup d2">КОЛЛЕКЦИЯ</div>
-    <div class="h2 fadeup d2">Альбом</div>
-    <div class="colprog fadeup d3"><b>Открыто 8 из 78</b>
-      <div class="colbar"><i></i></div></div>
-    <div class="date fadeup d3" style="text-align:left;margin-top:18px">СТАРШИЕ АРКАНЫ · 8 ИЗ 22</div>
-    <div class="grid fadeup d4" id="colgrid" style="margin-top:10px"></div>
-    <div class="fadeup d5" style="margin-top:16px">
-      <div class="suitrow"><span class="sg">🜂</span><span class="st3">Жезлы</span><span class="sc2">0 ИЗ 14</span></div>
-      <div class="suitrow"><span class="sg">🜄</span><span class="st3">Кубки</span><span class="sc2">0 ИЗ 14</span></div>
-      <div class="suitrow"><span class="sg">🜁</span><span class="st3">Мечи</span><span class="sc2">0 ИЗ 14</span></div>
-      <div class="suitrow"><span class="sg">🜃</span><span class="st3">Пентакли</span><span class="sc2">0 ИЗ 14</span></div>
-    </div>
-  </div>
-
   <!-- ===== ЭТАП 4 · ЛУННЫЙ КАЛЕНДАРЬ ===== -->
   <div class="view" id="v-moon">
     <div class="backbtn fadeup d1" onclick="show('v-today')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>СЕГОДНЯ</div>
@@ -1149,14 +1126,16 @@ MODS.forEach((m,mi)=>{
 document.querySelectorAll('#courseflow .node.lock .nc').forEach(c=>{
   c.parentElement.onclick=()=>{ c.classList.remove('wob'); void c.offsetWidth; c.classList.add('wob'); };
 });
+/* этап 4: коллекция */
+const OPENED = ['fool','magician','high-priestess','empress','emperor','hierophant','lovers','chariot'];
 /* cards grid */
 const grid=document.getElementById('grid');
 grid.innerHTML = ALL.slice(0,21).map(c=>{
   const im = THUMBS[c.id]
-   ? `<img src="data:image/jpeg;base64,${THUMBS[c.id]}">`
+   ? `<img src="data:image/jpeg;base64,${THUMBS[c.id]}" ${OPENED.includes(c.id)?'':'class="dim"'}>`
    : `<div class="ph">${c.arcana==='major'?ROMAN[c.n]:SUITG[c.suit]}</div>`;
   return `<div class="gc" data-id="${c.id}"><div class="im">${im}
-    ${c.id==='fool'?'<span class="st2">ИЗУЧЕНО ✓</span>':''}</div><small>${c.name}</small></div>`;
+    ${OPENED.includes(c.id)?'<span class="st2">ИЗУЧЕНО ✓</span>':''}</div><small>${c.name}</small></div>`;
 }).join('')+`<div class="gc"><div class="im"><div class="ph" style="font-size:12px;letter-spacing:1px">+57</div></div><small>Показать все</small></div>`;
 grid.querySelectorAll('.gc[data-id]').forEach(g=>{
   g.onclick=()=>{ if(g.dataset.id==='fool') show('v-detail'); };
@@ -1210,8 +1189,6 @@ function demo(mode, btn){
     show('v-lesson');
   } else if(mode==='trainer'){
     show('v-trainer');
-  } else if(mode==='collection'){
-    show('v-collection');
   } else if(mode==='moon'){
     show('v-moon');
   } else {
@@ -1475,16 +1452,6 @@ function revCycle(){
   else { t.textContent = 'Всё повторено ✓ · завтра: 4'; t.className='ok2'; i.style.display=''; }
 }
 function openLang(){ document.getElementById('langpick').classList.add('on'); }
-
-/* этап 4: коллекция */
-const OPENED = ['fool','magician','high-priestess','empress','emperor','hierophant','lovers','chariot'];
-const colgrid = document.getElementById('colgrid');
-colgrid.innerHTML = ALL.filter(c=>c.arcana==='major').map(c=>{
-  const open = OPENED.includes(c.id) && THUMBS[c.id];
-  const im = open ? `<img src="data:image/jpeg;base64,${THUMBS[c.id]}">`
-    : `<div class="ph">✶</div>`;
-  return `<div class="gc ${open?'':'closed'}"><div class="im">${im}</div><small>${open?c.name:'· · ·'}</small></div>`;
-}).join('');
 
 /* этап 4: лунный календарь августа 2026 (фазы — реальный расчёт moon.ts) */
 const mc = document.getElementById('mooncal');

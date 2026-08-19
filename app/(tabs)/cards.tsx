@@ -1,41 +1,37 @@
-import { Image } from 'expo-image';
-import { router } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
-import Animated from 'react-native-reanimated';
+import { FlatList, StyleSheet, View } from 'react-native';
+import Animated, { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CornerBadge } from '../../src/components/CornerBadge';
+import { CardCell, CardGridRow, GRID_COLS, GRID_GAP } from '../../src/components/CardCell';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
-import { PressableScale } from '../../src/components/PressableScale';
+import { PROGRESS_EASE, ProgressBar } from '../../src/components/ProgressBar';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { SearchField } from '../../src/components/SearchField';
-import { Skeleton } from '../../src/components/Skeleton';
 import { Txt } from '../../src/components/Txt';
-import { cardImages } from '../../src/lib/cardImages';
 import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/lib/cardSearch';
-import { setCardOrigin } from '../../src/lib/cardTransition';
+import { collectionSections, filterProgress } from '../../src/lib/collection';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
 import { useLang } from '../../src/lib/i18n';
-import { inLang, type Lang } from '../../src/lib/lang';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
-import { fonts, radius, spacing } from '../../src/theme/theme';
+import { fonts, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
-
-const { width: W } = Dimensions.get('window');
-const COLS = 3;
-const GAP = 11; // .grid эталона: gap 11 в обе стороны
-const CELL_W = (W - spacing.xl * 2 - GAP * (COLS - 1)) / COLS;
 
 /** Сколько рядов сетки участвует в появлении экрана — примерно один экран карточек. */
 const BODY_ROWS = 4;
 /** Шаг каскада для тела списка: на две ступеньки позже шапки, как `.grid d4` против `.d2` эталона. */
 const BODY_STEP = 3;
+
+/** Заливка панели прогресса: при входе — от нуля с задержкой (тайминг LevelCard), при смене чипа —
+ *  перетекание к новому значению без задержки. */
+const FILL_DELAY = 400;
+const FILL_MS = 1400;
+const FILL_SWITCH_MS = 600;
 
 /** Размытие парящей панели в CSS-пикселях эталона (`.cardsbar`: backdrop-filter blur(20px)). */
 const BAR_BLUR = 20;
@@ -43,43 +39,6 @@ const BAR_BLUR = 20;
 const BAR_FADE = 14;
 
 const AnimatedList = Animated.createAnimatedComponent(FlatList<TarotCard[]>);
-
-/** Ячейка сетки. Позицию картинки меряем на нажатии — с неё начнётся перелёт
- *  на страницу карты (пункт 6 motion-spec). */
-function Cell({ item, lang, learned }: { item: TarotCard; lang: Lang; learned: boolean }) {
-  const t = useTheme();
-  const { t: tr } = useTranslation();
-  const imRef = React.useRef<View>(null);
-  const [loaded, setLoaded] = React.useState(false);
-
-  return (
-    <PressableScale
-      onPressIn={() =>
-        imRef.current?.measureInWindow((x, y, w, h) => {
-          if (w) setCardOrigin(item.id, { x, y, w, h });
-        })
-      }
-      onPress={() => router.push(`/card/${item.id}?from=cards`)}
-      style={st.cell}
-    >
-      <View ref={imRef} style={[st.imWrap, { borderColor: t.line }]}>
-        <Image
-          source={cardImages[item.id]}
-          style={st.im}
-          contentFit="cover"
-          transition={180}
-          cachePolicy="memory-disk"
-          onLoad={() => setLoaded(true)}
-        />
-        {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
-        {learned && <CornerBadge label={tr('cards.learned')} />}
-      </View>
-      <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
-        {inLang(item.name, lang)}
-      </Txt>
-    </PressableScale>
-  );
-}
 
 type FiltersProps = {
   query: string;
@@ -96,7 +55,7 @@ type FiltersProps = {
  *  разметка одна, а различаются экземпляры только отступами. */
 function Filters({ query, onQuery, filter, onFilter, compact, onFocus, onBlur }: FiltersProps) {
   const { t: tr } = useTranslation();
-  const label = (f: CardFilter) => tr(f === 'all' ? 'cards.all' : `cards.${f}`);
+  const label = (f: CardFilter) => tr(f === 'all' ? 'cards.all' : f === 'learned' ? 'cards.learnedFilter' : `cards.${f}`);
 
   return (
     <>
@@ -130,15 +89,34 @@ export default function CardsScreen() {
   const listRef = useTabTopRef<FlatList<TarotCard[]>>();
   const { onScroll, barStyle, onBarLayout, setFocused } = useScrollAwareBar();
 
-  // 78 карт фильтруются мгновенно — задержки ввода (debounce) не нужно
-  const rows = useMemo(
-    () => toRows(filterCards(cards, { query, filter, lang }), COLS),
-    [query, filter, lang],
-  );
-
-  // карты пройденных уроков — бейдж «Изучено ✓» (спека 08)
+  // карты пройденных уроков — бейдж «ИЗУЧЕНО ✓», приглушение, чип «Изучено» и панель прогресса (спеки 08/46б)
   const lessonsProgress = useApp((s) => s.lessonsProgress);
   const learned = useMemo(() => learnedCardIds(course, lessonsProgress), [lessonsProgress]);
+
+  // 78 карт фильтруются мгновенно — задержки ввода (debounce) не нужно
+  const rows = useMemo(
+    () => toRows(filterCards(cards, { query, filter, lang, learned }), GRID_COLS),
+    [query, filter, lang, learned],
+  );
+
+  // панель прогресса (спека 46б): «Изучено N из M» под активным чипом — то же множество, что бейджи
+  const sections = useMemo(() => collectionSections(cards, learned), [learned]);
+  const progress = filterProgress(sections, filter);
+  const chipLabel = filter === 'all' || filter === 'learned' ? null : tr(`cards.${filter}`);
+  const progressText = chipLabel
+    ? tr('cards.learnedCountIn', { label: chipLabel, ...progress })
+    : tr('cards.learnedCount', progress);
+  const ratio = progress.total ? progress.open / progress.total : 0;
+  const fill = useSharedValue(0);
+  const firstFill = useRef(true);
+  useEffect(() => {
+    const first = firstFill.current;
+    firstFill.current = false;
+    fill.value = withDelay(
+      first ? FILL_DELAY : 0,
+      withTiming(ratio, { duration: first ? FILL_MS : FILL_SWITCH_MS, easing: PROGRESS_EASE, reduceMotion: ReduceMotion.System }),
+    );
+  }, [fill, ratio]);
 
   // поиск всегда идёт по всей колоде: иначе «Мечи» + «шут» дают пустой экран без видимой причины
   const onQuery = (v: string) => {
@@ -165,12 +143,17 @@ export default function CardsScreen() {
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingTop: insets.top, paddingBottom: 120 }}
-        ItemSeparatorComponent={() => <View style={{ height: GAP }} />}
+        ItemSeparatorComponent={() => <View style={{ height: GRID_GAP }} />}
         ListHeaderComponent={
           <>
             <FadeUp index={0} style={st.pad}>
               <Txt style={[st.sub, { color: t.muted }]}>{tr('cards.subtitle')}</Txt>
               <Txt style={[st.title, { color: t.head }]}>{tr('cards.title')}</Txt>
+              {/* панель прогресса изучения (`.colprog`, спека 46б): строка под активным чипом + полоса */}
+              <View style={[st.prog, { backgroundColor: t.panel, borderColor: t.line }]}>
+                <Txt style={[st.progText, { color: t.head }]}>{progressText}</Txt>
+                <ProgressBar progress={fill} radius={3} style={st.progBar} />
+              </View>
             </FadeUp>
             {/* поиск и чипы БЕЗ внешнего паддинга: отступы они задают себе сами, поэтому
                 лента чипов прокручивается от края до края экрана, а не обрывается за 24px
@@ -182,16 +165,11 @@ export default function CardsScreen() {
         }
         renderItem={({ item: row, index }) => {
           const cells = (
-            <View style={[st.pad, st.row]}>
+            <CardGridRow count={row.length} style={st.pad}>
               {row.map((c) => (
-                <Cell key={c.id} item={c} lang={lang} learned={learned.has(c.id)} />
+                <CardCell key={c.id} card={c} lang={lang} badge={learned.has(c.id) ? tr('cards.learned') : undefined} dimmed={!learned.has(c.id)} />
               ))}
-              {/* добивка неполного ряда, чтобы карты не растягивались на всю ширину */}
-              {row.length < COLS &&
-                Array.from({ length: COLS - row.length }, (_, i) => (
-                  <View key={`gap-${i}`} style={{ width: CELL_W }} />
-                ))}
-            </View>
+            </CardGridRow>
           );
           // сетка входит вместе с шапкой — но ОДНИМ блоком, как `.grid` в эталоне: у всех рядов
           // один и тот же индекс каскада, ступенек между карточками нет (motion-spec §4).
@@ -200,7 +178,11 @@ export default function CardsScreen() {
         }}
         ListFooterComponent={
           rows.length === 0 ? (
-            <Txt style={[st.empty, { color: t.muted }]}>{tr('cards.empty')}</Txt>
+            // подсказка про первый урок — только пока изученных нет вовсе; с изученными
+            // пустой результат — обычное «такой карты нет»
+            <Txt style={[st.empty, { color: t.muted }]}>
+              {tr(filter === 'learned' && learned.size === 0 ? 'cards.learnedEmpty' : 'cards.empty')}
+            </Txt>
           ) : null
         }
       />
@@ -230,6 +212,10 @@ const st = StyleSheet.create({
   pad: { paddingHorizontal: spacing.xl },
   sub: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center', paddingTop: spacing.xl },
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 },
+  // .colprog: панель прогресса под заголовком
+  prog: { borderWidth: 1, borderRadius: 15, paddingVertical: 12, paddingHorizontal: 15, marginTop: 14 },
+  progText: { fontFamily: fonts.displaySemi, fontSize: 16 }, // .colprog b — Cormorant 600
+  progBar: { height: 6, marginTop: 8 }, // .colbar
   // .stickysearch эталона: 14 сверху, 4 снизу; ещё 15 до сетки — .grid margin-top
   flowBar: { paddingTop: 14, paddingBottom: 4, marginBottom: 15 },
   bar: { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 30 },
@@ -239,18 +225,5 @@ const st = StyleSheet.create({
   searchPad: { marginHorizontal: spacing.xl },
   searchCompact: { paddingVertical: 9, paddingHorizontal: 14 },
   segRowCompact: { marginTop: 8 },
-  row: { flexDirection: 'row', gap: GAP },
-  cell: { width: CELL_W },
-  imWrap: {
-    borderRadius: radius.m,
-    borderWidth: 1,
-    overflow: 'hidden',
-    aspectRatio: 0.58,
-    // .gc .im: тень по прямоугольнику миниатюры (design-system §4)
-    boxShadow: '0px 8px 20px rgba(0,0,0,0.28)',
-  },
-  im: { width: '100%', height: '100%' },
-  // бейдж «ИЗУЧЕНО ✓» — общий CornerBadge (эталон `.st2`, design-system §5)
-  name: { fontSize: 9.5, textAlign: 'center', marginTop: 5, fontWeight: '600', letterSpacing: 0.3, lineHeight: 12 },
   empty: { fontSize: 12.5, textAlign: 'center', marginTop: 40, paddingHorizontal: spacing.xl },
 });

@@ -3,10 +3,11 @@
 import type { Lang, TarotCard } from './content';
 import { inLang, presentLang } from './lang';
 
-/** Фильтр по аркану/масти: 'all' — вся колода. */
-export type CardFilter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
+/** Фильтр по аркану/масти: 'all' — вся колода; 'learned' — только изученные (карты пройденных
+ *  уроков, спека 46б): множество приходит извне, сам модуль про курс не знает. */
+export type CardFilter = 'all' | 'major' | 'wands' | 'cups' | 'swords' | 'pentacles' | 'learned';
 
-export const CARD_FILTERS: CardFilter[] = ['all', 'major', 'wands', 'cups', 'swords', 'pentacles'];
+export const CARD_FILTERS: CardFilter[] = ['all', 'major', 'wands', 'cups', 'swords', 'pentacles', 'learned'];
 
 /** Приводит строку к виду для сравнения: нижний регистр, «ё» → «е», без крайних пробелов.
  *  «Ё» отдельной буквой набирают редко, а ищут одинаково — без этой замены «жрец» не найдёт
@@ -83,16 +84,18 @@ export function matchesQuery(card: TarotCard, query: string, lang: Lang): boolea
  *  Сброс фильтра при вводе запроса делает экран (спека 04, §2), здесь оба условия просто складываются. */
 export function filterCards(
   list: TarotCard[],
-  { query, filter, lang }: { query: string; filter: CardFilter; lang: Lang },
+  { query, filter, lang, learned }: { query: string; filter: CardFilter; lang: Lang; learned?: ReadonlySet<string> },
 ): TarotCard[] {
-  const byArcana =
+  const byFilter =
     filter === 'all'
       ? list
-      : filter === 'major'
-        ? list.filter((c) => c.arcana === 'major')
-        : list.filter((c) => c.suit === filter);
+      : filter === 'learned'
+        ? list.filter((c) => learned?.has(c.id) ?? false)
+        : filter === 'major'
+          ? list.filter((c) => c.arcana === 'major')
+          : list.filter((c) => c.suit === filter);
   const q = normalize(query);
-  return q ? byArcana.filter((c) => matchesQuery(c, q, lang)) : byArcana;
+  return q ? byFilter.filter((c) => matchesQuery(c, q, lang)) : byFilter;
 }
 
 /** Нарезка на ряды по `size` элементов: SectionList не умеет numColumns, сетку собираем рядами.
