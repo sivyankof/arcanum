@@ -157,6 +157,12 @@ export const resources = {
         devCourseReset: "Сбросить прогресс курса",
         devOnboarding: "Пройти онбординг заново",
         devDeviceLang: "Язык устройства",
+        // тренажёр (спека 45): DEV-строки очереди повторения; ключи экранов review.* — в 45б
+        devReviewQueue: "Очередь повторения",
+        devAgeSrs: "Состарить повторение на день",
+        devResetSrs: "Сбросить повторение",
+        // «Число: N» без числительных — плюрализация не нужна (урок hf-02)
+        reviewQueueText: "В колоде: {{deck}}\nЖдут сегодня: {{due}}\nНовых доступно: {{fresh}}\nЗавтра: {{tomorrow}}\nНовых введено сегодня: {{introduced}}",
         // бэкап (спека 11); тон — design-system §8: без «Ошибка!» и приказов
         exportData: "Экспорт данных",
         importData: "Импорт из файла",
@@ -386,6 +392,10 @@ export const resources = {
         devCourseReset: "Reset course progress",
         devOnboarding: "Replay onboarding",
         devDeviceLang: "Device language",
+        devReviewQueue: "Review queue",
+        devAgeSrs: "Age reviews by a day",
+        devResetSrs: "Reset reviews",
+        reviewQueueText: "Deck: {{deck}}\nDue today: {{due}}\nNew available: {{fresh}}\nTomorrow: {{tomorrow}}\nNew introduced today: {{introduced}}",
         // бэкап (спека 11)
         exportData: "Export data",
         importData: "Import from file",
