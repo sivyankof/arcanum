@@ -559,6 +559,36 @@ border-radius:14px;padding:12px 14px;margin-top:9px;backdrop-filter:blur(8px)}
 .mevent b{display:block;font-size:9px;letter-spacing:2px;color:var(--accent)}
 .mevent span{font-family:var(--serif);font-size:14.5px;color:var(--head)}
 
+
+/* спека 45: тренажёр (3 кнопки, два направления), карточка «Повторение», пикер языка */
+.trhint{text-align:center;font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:10px;cursor:pointer}
+.trmode{text-align:center;margin-top:8px}
+.trmode span{font-size:9px;letter-spacing:1.5px;color:var(--accent);border-bottom:1px dashed var(--frame);cursor:pointer}
+.trkwcol{display:flex;flex-direction:column;gap:5px;align-items:center;padding:0 12px}
+.trkwcol i{font-style:normal;font-size:10px;letter-spacing:.5px;font-weight:700;color:var(--accent);
+background:var(--chipbg);border:1px solid var(--frame);border-radius:12px;padding:3px 10px}
+.trkwcol p{font-family:var(--serif);font-size:11.5px;line-height:1.45;color:var(--goldsoft,#e8d5a8);
+color:var(--head);text-align:center;margin-top:8px}
+.trlink{display:block;text-align:center;font-size:10.5px;letter-spacing:1px;color:var(--accent);
+margin-top:10px;cursor:pointer}
+.revcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 16px;
+backdrop-filter:blur(10px);margin-top:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.revcard small{display:block;font-size:8.5px;letter-spacing:2px;color:var(--accent)}
+.revcard b{font-family:var(--serif);font-size:15px;color:var(--head);font-weight:600;margin-top:2px;display:block}
+.revcard b.ok2{color:var(--done)}
+.revcard .ri{color:var(--muted)}
+.revcard .ri svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.langov{position:absolute;inset:0;z-index:47;display:none;align-items:center;justify-content:center;
+background:rgba(0,0,0,.55)}
+.langov.on{display:flex}
+.langpanel{width:280px;max-width:320px;background:var(--bg);border:1px solid var(--line);border-radius:16px;
+padding:24px;animation:fu .25s ease}
+.langpanel h6{font-size:10px;letter-spacing:2px;color:var(--accent);text-align:center;margin-bottom:12px}
+.langrow{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-radius:12px;
+border:1px solid transparent;color:var(--text);font-size:13.5px;cursor:pointer;margin-top:5px}
+.langrow.cur{background:var(--chipbg);border-color:var(--frame);color:var(--head)}
+.langrow.cur i{font-style:normal;color:var(--accent);font-size:13px}
+
 </style></head>
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
@@ -634,6 +664,11 @@ border-radius:14px;padding:12px 14px;margin-top:9px;backdrop-filter:blur(8px)}
     <div class="date fadeup d1">6 МОДУЛЕЙ · 32 УРОКА</div>
     <div class="h2 fadeup d1">Курс</div>
     <div class="rule fadeup d2"><span>✦</span></div>
+    <!-- карточка «Повторение» (спека 45). Состояние «колода пуста» — карточка не показывается вовсе (отдельно не рисуем). Тап по иконке — цикл трёх состояний демо. -->
+    <div class="revcard fadeup d3" id="revcard" onclick="if(window.__revState!==2)show('v-trainer')">
+      <span><small>ПОВТОРЕНИЕ</small><b id="revtext">2 карты ждут</b></span>
+      <span class="ri" id="revico" onclick="event.stopPropagation();revCycle()"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.9-3M4 13a8 8 0 0 0 14.9 3"/><path d="M20 4v4h-4M4 20v-4h4"/></svg></span>
+    </div>
     <div id="courseflow" class="fadeup d3"></div>
   </div>
 
@@ -800,7 +835,7 @@ border-radius:14px;padding:12px 14px;margin-top:9px;backdrop-filter:blur(8px)}
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
         <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
-        <span class="pl">Язык</span><span class="pv">Русский</span></div>
+        <span class="pl" onclick="openLang()" style="cursor:pointer">Язык</span><span class="pv" onclick="openLang()" style="cursor:pointer">Русский ›</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
         <span class="pl">Напоминания</span><span class="pv" style="color:var(--accent)">Вкл</span></div>
       <div class="subrow"><span>Утро · карта дня</span><span>9:00</span></div>
@@ -904,27 +939,37 @@ border-radius:14px;padding:12px 14px;margin-top:9px;backdrop-filter:blur(8px)}
     <div class="h2 fadeup d2">Тренажёр</div>
     <div class="rule fadeup d2"><span>✦</span></div>
     <div id="trmain">
-      <div class="tcount fadeup d3" id="trcount">СЕГОДНЯ К ПОВТОРЕНИЮ · 2</div>
-      <div class="ringwrap fadeup d3" style="height:330px;width:190px;margin-top:16px">
-        <div class="stage" id="trstage" style="perspective:1100px" onclick="trFlip()">
+      <div class="tcount fadeup d3" id="trcount">К ПОВТОРЕНИЮ · 2</div>
+      <div class="trmode fadeup d3"><span onclick="trToggleMode()" id="trmodelbl">режим демо: карта → значение ⇄</span></div>
+      <div class="ringwrap fadeup d3" style="height:330px;width:190px;margin-top:14px">
+        <div class="stage" id="trstage" style="perspective:1100px" onclick="trReveal()">
           <div class="flip" id="trflip">
             <div class="face backf"><div class="backpat"></div><div class="inframe"></div>
-              <div class="emb"><b style="font-size:15px" id="trq">?</b><small>ВСПОМНИТЕ ЗНАЧЕНИЕ · НАЖМИТЕ</small></div>
+              <div class="emb" id="trback" style="gap:0;justify-content:center"></div>
             </div>
             <div class="face front"><img id="trimg" src="" alt=""></div>
           </div>
         </div>
       </div>
-      <div class="plate show" style="margin-top:10px"><b id="trname" style="font-size:17px"></b></div>
+      <div class="trhint" id="trhint" onclick="trReveal()">ВСПОМНИТЕ ЗНАЧЕНИЕ · НАЖМИТЕ</div>
+      <div class="plate" id="trplate" style="margin-top:6px"><b id="trname" style="font-size:17px"></b></div>
       <div class="mean" id="trmean" style="margin-top:12px">
         <div class="lbl">ЗНАЧЕНИЕ</div>
-        <p id="trtext" style="font-size:14.5px"></p>
+        <div class="kws" id="trkws" style="justify-content:center"></div>
+        <p id="trtext" style="font-size:14.5px;margin-top:10px"></p>
+        <span class="trlink" onclick="openCard('fool')">Страница карты →</span>
         <div class="gradebtns">
-          <div class="g0" onclick="trGrade()">Не вспомнила</div>
-          <div onclick="trGrade()">С трудом</div>
-          <div onclick="trGrade()">Вспомнила</div>
-          <div class="g3" onclick="trGrade()">Легко</div>
+          <div class="g0" onclick="trGrade(false)">Не помню</div>
+          <div onclick="trGrade(true)">Помню</div>
+          <div class="g3" onclick="trGrade(true)">Легко</div>
         </div>
+      </div>
+      <div class="lresult" id="trres" style="margin-top:16px">
+        <div class="lbl" style="text-align:center">ПОВТОРЕНИЕ</div>
+        <div class="lp" style="margin-top:8px">ПОВТОРЕНО 2 · С ПЕРВОГО РАЗА <span id="trok">1</span></div>
+        <div class="xpn" id="trxp" style="margin-top:6px">+2 XP</div>
+        <button class="cta" style="margin-top:14px" onclick="show('v-course')">ГОТОВО</button>
+        <span class="trlink" id="tragain" onclick="trRestart()">Ещё 3</span>
       </div>
     </div>
     <div class="mean show" id="trempty" style="display:none;text-align:center;margin-top:30px">
@@ -965,6 +1010,15 @@ border-radius:14px;padding:12px 14px;margin-top:9px;backdrop-filter:blur(8px)}
     </div>
   </div>
 
+  <div class="langov" id="langpick" onclick="if(event.target===this)this.classList.remove('on')">
+    <div class="langpanel">
+      <h6>ЯЗЫК</h6>
+      <div class="langrow cur" onclick="this.closest('.langov').classList.remove('on')"><span>Русский</span><i>✓</i></div>
+      <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>English</span></div>
+      <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Español</span></div>
+      <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Português</span></div>
+    </div>
+  </div>
   <div class="dlgov" id="pushdlg">
     <div class="dlg">
       <b>Напомнить утром?</b>
@@ -1339,37 +1393,88 @@ function lbClose(lb){ lb.classList.remove('on'); }
 })();
 
 
-/* этап 4: тренажёр SM-2 (демо: 2 карты) */
+/* этап 4: тренажёр SM-2 по спеке 45 — два направления, 3 оценки, результат */
 const TR = [
- {id:'fool', name:'Дурак', text:'Дурак — карта начала пути.'},
- {id:'magician', name:'Маг', text:'Маг — карта воли и мастерства.'}];
-let trI = 0, trFlipped = false;
+ {id:'fool', name:'Дурак', kw:['новое начало','спонтанность','вера в жизнь','свобода'],
+  sent:'Дурак — карта начала пути.', hint:'··· — карта начала пути.'},
+ {id:'magician', name:'Маг', kw:['воля','мастерство','проявление','ресурсы'],
+  sent:'Маг — карта воли и мастерства.', hint:'··· — карта воли и мастерства.'}];
+let trI = 0, trMode = 'toMeaning', trDone = false, trFirstOk = 0;
+function trSetFlip(open, instant){
+  const f = document.getElementById('trflip'), s = document.getElementById('trstage');
+  if(instant){ f.style.transition='none'; }
+  s.classList.toggle('done', open);
+  if(instant){ void f.offsetWidth; f.style.transition=''; }
+}
 function trLoad(){
   const c = TR[trI];
   document.getElementById('trimg').src = 'data:image/jpeg;base64,' + THUMBS[c.id];
-  document.getElementById('trname').textContent = '';
-  document.getElementById('trtext').textContent = c.text;
   document.getElementById('trmean').classList.remove('show');
-  document.getElementById('trflip').parentElement.parentElement; 
-  document.getElementById('trflip').style.transform='';
-  document.getElementById('trstage').classList.remove('done');
-  document.getElementById('trcount').textContent = 'СЕГОДНЯ К ПОВТОРЕНИЮ · ' + (TR.length - trI);
-  trFlipped = false;
+  document.getElementById('trkws').innerHTML = c.kw.map(k=>`<span>${k}</span>`).join('');
+  document.getElementById('trtext').textContent = c.sent;
+  document.getElementById('trcount').textContent = 'К ПОВТОРЕНИЮ · ' + (TR.length - trI);
+  trDone = false;
+  if(trMode === 'toMeaning'){
+    trSetFlip(true, true);  /* лицом вверх с начала, переворота нет */
+    document.getElementById('trplate').classList.add('show');
+    document.getElementById('trname').textContent = c.name.toUpperCase();
+    document.getElementById('trhint').textContent = 'ВСПОМНИТЕ ЗНАЧЕНИЕ · НАЖМИТЕ';
+    document.getElementById('trback').innerHTML = '';
+  } else {
+    trSetFlip(false, true); /* рубашка: слова + предложение без названия */
+    document.getElementById('trplate').classList.remove('show');
+    document.getElementById('trname').textContent = '';
+    document.getElementById('trhint').textContent = 'ВСПОМНИТЕ КАРТУ · НАЖМИТЕ';
+    document.getElementById('trback').innerHTML =
+      `<div class="trkwcol">${c.kw.map(k=>`<i>${k}</i>`).join('')}<p>${c.hint}</p></div>`;
+  }
 }
-function trFlip(){
-  if(trFlipped) return; trFlipped = true;
-  document.getElementById('trstage').classList.add('done');
-  document.getElementById('trname').textContent = TR[trI].name.toUpperCase();
-  setTimeout(()=>document.getElementById('trmean').classList.add('show'), 450);
+function trReveal(){
+  if(trDone) return; trDone = true;
+  if(trMode === 'toMeaning'){
+    document.getElementById('trmean').classList.add('show'); /* fade, без переворота */
+  } else {
+    trSetFlip(true, false); /* 3D-переворот */
+    document.getElementById('trplate').classList.add('show');
+    document.getElementById('trname').textContent = TR[trI].name.toUpperCase();
+    setTimeout(()=>document.getElementById('trmean').classList.add('show'), 450);
+  }
 }
-function trGrade(){
+function trGrade(ok){
+  if(!trDone) return;
+  if(ok) trFirstOk++;
   trI++;
   if(trI >= TR.length){
-    document.getElementById('trmain').style.display='none';
-    document.getElementById('trempty').style.display='block';
+    document.getElementById('trok').textContent = trFirstOk;
+    document.getElementById('trxp').textContent = '+' + trFirstOk + ' XP';
+    document.getElementById('trmean').classList.remove('show');
+    document.getElementById('trres').classList.add('on');
+    document.getElementById('trcount').textContent = 'К ПОВТОРЕНИЮ · 0';
   } else trLoad();
 }
+function trToggleMode(){
+  trMode = trMode === 'toMeaning' ? 'toCard' : 'toMeaning';
+  document.getElementById('trmodelbl').textContent =
+    'режим демо: ' + (trMode === 'toMeaning' ? 'карта → значение' : 'значение → карта') + ' ⇄';
+  trRestart();
+}
+function trRestart(){
+  trI = 0; trFirstOk = 0;
+  document.getElementById('trres').classList.remove('on');
+  trLoad();
+}
 trLoad();
+
+/* карточка «Повторение» — цикл трёх состояний по тапу на иконку */
+window.__revState = 0;
+function revCycle(){
+  window.__revState = (window.__revState + 1) % 3;
+  const t = document.getElementById('revtext'), i = document.getElementById('revico');
+  if(window.__revState === 0){ t.textContent = '2 карты ждут'; t.className=''; i.style.display=''; }
+  else if(window.__revState === 1){ t.textContent = 'Новых карт: 3'; t.className=''; i.style.display=''; }
+  else { t.textContent = 'Всё повторено ✓ · завтра: 4'; t.className='ok2'; i.style.display=''; }
+}
+function openLang(){ document.getElementById('langpick').classList.add('on'); }
 
 /* этап 4: коллекция */
 const OPENED = ['fool','magician','high-priestess','empress','emperor','hierophant','lovers','chariot'];
