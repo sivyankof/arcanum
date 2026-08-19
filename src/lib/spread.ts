@@ -1,6 +1,6 @@
 /** Расклады: запись, тасование, лимиты и текст позиции (спека 36, logic-spec §1а/§7).
  *  Чистый модуль без react/expo — целиком под юнит-тестами (spread.test.ts). */
-import { cardById, cards } from './content';
+import { blockText, cardById, cards } from './content';
 import { inLang, type Lang } from './lang';
 import { normalizeText } from './journal';
 
@@ -47,9 +47,7 @@ export function dealSpread(count: number, rng: () => number = Math.random): Draw
 /** Текст значения позиции: general у прямой, reversed у перевёрнутой (product-spec §4).
  *  Блок со статусом todo (или неизвестная карта) → todo: true, экран показывает «Текст готовится». */
 export function cardMeaning(cardId: string, reversed: boolean, lang: Lang): { text: string; todo: boolean } {
-  const block = cardById.get(cardId)?.content[reversed ? 'reversed' : 'general'];
-  if (!block || block.status === 'todo') return { text: '', todo: true };
-  return { text: inLang(block, lang), todo: false };
+  return blockText(cardById.get(cardId)?.content[reversed ? 'reversed' : 'general'], lang);
 }
 
 /** Часть react-i18next `t`, нужная этому модулю: один параметр `name` у ключа

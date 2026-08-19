@@ -32,7 +32,7 @@ import { Sparks } from '../../src/components/Sparks';
 import { StreakPill } from '../../src/components/StreakPill';
 import { XpPill } from '../../src/components/XpPill';
 import type { Rect } from '../../src/lib/cardTransition';
-import { cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
+import { blockText, cardById, cardImages, cardNumeral, cardOfDay } from '../../src/lib/content';
 import { daysAgoISO, formatEntryDate, localDateISO } from '../../src/lib/dates';
 import { hapticReveal, hapticSuccess } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
@@ -409,9 +409,8 @@ export default function TodayScreen() {
     }
   };
 
-  const dayBlock = card.content.day_card;
-  const dayText = dayBlock ? inLang(dayBlock, lang) : undefined;
-  const hasText = dayText && dayBlock.status !== 'todo';
+  const { text: dayText, todo: dayTodo } = blockText(card.content.day_card, lang);
+  const hasText = !dayTodo;
 
   const now = new Date();
   // «Пятница · 1 августа» — та же сборка, что строка записи дневника (formatEntryDate, weekday long);

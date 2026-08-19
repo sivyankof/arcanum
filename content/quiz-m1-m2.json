@@ -1,6 +1,9 @@
 {
  "_comment": "Вопросы викторин М1–М2, вычитаны редактором 13.08 (статус reviewed). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py, статусы двигает scripts/set_status.py. Зачины пояснений убраны 14.08 (задача 21, вариант (б): вердикт «Верно/Не совсем» пишет код).",
- "status": "reviewed",
+ "status": {
+  "ru": "reviewed",
+  "en": "reviewed"
+ },
  "lessons": [
   {
    "lessonId": "m1l1",

@@ -2,12 +2,40 @@
 import cardsJson from "../../content/cards.json";
 import spreadsJson from "../../content/spreads.json";
 import courseJson from "../../content/course.json";
-import type { Lang, Localized } from "./lang";
+import { inLang, presentLang, type Lang, type Localized } from "./lang";
 // тип языка живёт в src/lib/lang.ts; реэкспорт — чтобы cardSearch/lesson/компоненты не меняли импорт
 export type { Lang };
 export type BlockStatus = "todo" | "draft" | "reviewed" | "final";
 
-export interface CardContentBlock extends Localized { status: BlockStatus }
+/** Готовность ПО ЯЗЫКАМ (спека 28а). Отсутствующий язык читается как todo: пока перевода нет,
+ *  писать про него в файл нечего. До 19.08 статус был один на все языки, и из этого вышел
+ *  задокументированный инцидент — `reviewed`, поставленный редактором за русский, молча
+ *  распространялся на английский, которого не читал никто (задача 31). */
+export type StatusMap = Partial<Record<Lang, BlockStatus>>;
+
+export interface CardContentBlock extends Localized { status: StatusMap }
+
+/** Статус текста, который РЕАЛЬНО увидит пользователь. `inLang` молча падает на английский,
+ *  поэтому спрашивать статус выбранного языка нельзя: испанец с английским текстом получил бы
+ *  «Текст готовится» поверх готового текста, а при обратной ошибке — черновик под видом
+ *  готового. Каскада нет (решение 2а спеки): связку «есть текст ⟺ статус не todo» держит
+ *  контракт-тест cardsContent.test.ts, поэтому «показан язык, у которого todo» в бандл не
+ *  попадает, и разбирать этот случай в рантайме нечего. */
+export function statusIn(block: CardContentBlock, lang: Lang): BlockStatus {
+  return block.status[presentLang(block, lang)] ?? "todo";
+}
+
+/** Пара «что показать / готово ли» — одно правило на все экраны. Раньше его писали трижды:
+ *  страница карты, карта дня и значение позиции расклада спрашивали одно и то же по-своему.
+ *  Заглушку («Текст готовится») подставляет вызывающий: у расклада и карты дня она разная. */
+export function blockText(
+  block: CardContentBlock | undefined,
+  lang: Lang,
+): { text: string; todo: boolean } {
+  if (!block || statusIn(block, lang) === "todo") return { text: "", todo: true };
+  return { text: inLang(block, lang), todo: false };
+}
+
 export interface TarotCard {
   id: string;
   arcana: "major" | "minor";
@@ -20,6 +48,11 @@ export interface TarotCard {
    *  В интерфейсе не показывается никогда — иначе «расставание» и «долги» лезут в чипы. */
   search: Localized<string[]>;
   image: string;
+  /** Один статус на name + keywords + search: перевод карты заливается атомарно, по частям
+   *  нельзя. Источник поиска выбирается по языку НАЗВАНИЯ (`presentLang` в cardSearch), поэтому
+   *  `name.es` без `search.es` дал бы испанское название с английскими словами, которые стеммер
+   *  к тому моменту режет уже испанскими окончаниями (решение 4а спеки). */
+  wordsStatus?: StatusMap;
   content: Record<string, CardContentBlock>;
 }
 
@@ -47,8 +80,8 @@ export interface CourseLesson {
   theory?: CardContentBlock;
   /** викторина 5 вопросов; есть пока только у М1–М2 (сливается scripts/merge_quiz.py) */
   quiz?: QuizQuestion[];
-  /** workflow готовности викторины, как у блоков карт */
-  quizStatus?: BlockStatus;
+  /** workflow готовности викторины, как у блоков карт — по языкам (спека 28а) */
+  quizStatus?: StatusMap;
 }
 
 export interface CourseModule {
