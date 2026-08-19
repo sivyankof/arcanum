@@ -76,6 +76,10 @@ const CASES: Array<[string, Record<string, number>, string]> = [
   ['spreads.cards', { count: 1 }, '1 карта'],
   // плашка серии на «Сегодня»: «дн.» не склоняется, но семейство обязано быть полным (спека 27)
   ['today.streakDays', { count: 3 }, '3 дн.'],
+  // карточка «Повторение» на курсе (спека 45б): единственное склоняемое числительное тренажёра
+  ['review.due', { count: 1 }, '1 карта ждёт'],
+  ['review.due', { count: 3 }, '3 карты ждут'],
+  ['review.due', { count: 12 }, '12 карт ждут'],
 ];
 
 describe('русские числительные без Intl.PluralRules (как на iPhone)', () => {
