@@ -39,7 +39,7 @@ export function ModuleHeader({
     <View style={[st.box, { backgroundColor: t.panel, borderColor: t.line }]}>
       <View style={{ flex: 1 }}>
         <View style={st.overlineRow}>
-          <Txt style={[st.overline, { color: t.muted }]}>
+          <Txt style={[st.overline, { color: t.accent }]}>
             {tr('course.moduleOf', { n: index + 1, total })}
           </Txt>
           {!mod.free && <Ionicons name="lock-closed" size={12} color={t.muted} />}
