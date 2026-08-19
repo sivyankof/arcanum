@@ -24,6 +24,7 @@ import { Block } from '../../src/components/Block';
 import { CardLightbox } from '../../src/components/CardLightbox';
 import { CornerBadge } from '../../src/components/CornerBadge';
 import { FadeUp } from '../../src/components/FadeUp';
+import { KeywordChips } from '../../src/components/KeywordChips';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
@@ -43,12 +44,13 @@ import { useTheme } from '../../src/theme/useTheme';
 const FLY_MS = 350;
 
 /** Подпись нативной кнопки «назад» по источнику перехода (параметр from):
- *  со страницы расклада — «Расклад». */
+ *  со страницы расклада — «Расклад», из тренажёра — «Тренажёр». */
 const BACK_TITLES: Record<string, string> = {
   today: 'card.backToday',
   journal: 'card.backProfile',
   profile: 'card.backProfile',
   spread: 'card.backSpread',
+  review: 'card.backReview',
 };
 
 /** Ключ сферы значения — вкладки под героем страницы карты. Строгий порядок эталона.
@@ -321,13 +323,7 @@ export default function CardDetail() {
                 </View>
               )}
             </View>
-            <View style={st.kws}>
-              {inLang(card.keywords, lang).map((k) => (
-                <View key={k} style={[st.kw, { backgroundColor: t.chipBg, borderColor: t.line }]}>
-                  <Txt style={{ color: t.accent, fontSize: 10, fontWeight: '600' }}>{k}</Txt>
-                </View>
-              ))}
-            </View>
+            <KeywordChips words={inLang(card.keywords, lang)} style={{ marginTop: spacing.m }} />
           </FadeUp>
         </View>
 
@@ -423,8 +419,6 @@ const st = StyleSheet.create({
   nameRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', columnGap: 8 },
   birthChip: { borderWidth: 1, borderRadius: 8, paddingVertical: 3, paddingHorizontal: 8 },
   birthChipTxt: { fontSize: 9, letterSpacing: 1.5, fontWeight: '700' },
-  kws: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: spacing.m },
-  kw: { borderWidth: 1, borderRadius: 14, paddingHorizontal: 10, paddingVertical: 4 },
   // пилюля вкладок (.tabs эталона)
   tabs: { flexDirection: 'row', gap: 5, marginTop: 18, borderWidth: 1, borderRadius: 14, padding: 4 },
   tab: { flex: 1, borderRadius: 11, alignItems: 'center', justifyContent: 'center', paddingVertical: 8 },

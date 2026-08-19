@@ -65,3 +65,8 @@ export function textGlow(color: string, cssBlur: number): TextStyle {
     textShadowOffset: { width: 0, height: 0 },
   };
 }
+
+/** Тень граней крупной карты — `.face` эталона: 0 30px 66px glow + 0 6px 18px rgba(0,0,0,.4).
+ *  Карта дня (app/(tabs)/index.tsx) и флеш-карта тренажёра (ReviewFlashcard, спека 45); задаётся
+ *  инлайн через boxShadow, потому что зависит от темы. */
+export const faceShadow = (glow: string) => `0px 30px 66px ${glow}, 0px 6px 18px rgba(0,0,0,0.4)`;

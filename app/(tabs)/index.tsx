@@ -24,6 +24,7 @@ import { ConfirmDialog } from '../../src/components/ConfirmDialog';
 import { CornerBadge } from '../../src/components/CornerBadge';
 import { CtaButton } from '../../src/components/CtaButton';
 import { FadeUp } from '../../src/components/FadeUp';
+import { MeaningPanel } from '../../src/components/MeaningPanel';
 import { NotePlate } from '../../src/components/NotePlate';
 import { Reflection } from '../../src/components/Reflection';
 import { Rule } from '../../src/components/Rule';
@@ -47,7 +48,7 @@ import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { levelFromXp } from '../../src/lib/xp';
 import { useApp } from '../../src/store/useApp';
-import { GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../../src/theme/glow';
+import { faceShadow, GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../../src/theme/glow';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { Txt } from '../../src/components/Txt';
@@ -90,11 +91,6 @@ const MEAN_SHIFT = 12;
 
 // кривая CSS-дефолта `ease` — им в эталоне идут и блик, и всплывание текста
 const EASE = Easing.bezier(0.25, 0.1, 0.25, 1);
-
-// тень карты дня (.face эталона): box-shadow 0 30px 66px var(--glow), 0 6px 18px rgba(0,0,0,.4) —
-// две тени (тёплое золотое свечение + мягкая тёмная), значения переносятся из CSS один в один.
-// Нужна на рубашке и на лице карты, поэтому вынесена, чтобы не дублировать строку дважды
-const FACE_SHADOW = (glow: string) => `0px 30px 66px ${glow}, 0px 6px 18px rgba(0,0,0,0.4)`;
 
 /** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
 function Ring({
@@ -474,13 +470,13 @@ export default function TodayScreen() {
                 виден быть не должен (хотфикс дефект 2, спека 14) */}
             <View style={[StyleSheet.absoluteFill, lbOrigin !== null && st.hidden]}>
               {/* рубашка. Тень живёт на внешней View: на iOS overflow:'hidden' срезает собственную тень */}
-              <Animated.View style={[st.face, backStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+              <Animated.View style={[st.face, backStyle, { boxShadow: faceShadow(t.glow), backgroundColor: t.bg }]}>
                 <View style={[st.faceClip, { borderColor: t.frame }]}>
                   <CardBack corners hint={drawn ? undefined : tr('today.tapToReveal')} />
                 </View>
               </Animated.View>
               {/* лицо */}
-              <Animated.View style={[st.face, frontStyle, { boxShadow: FACE_SHADOW(t.glow), backgroundColor: t.bg }]}>
+              <Animated.View style={[st.face, frontStyle, { boxShadow: faceShadow(t.glow), backgroundColor: t.bg }]}>
                 <View style={[st.faceClip, { borderColor: t.frame }]}>
                   <Image source={cardImages[card.id]} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
                   {/* блик: проходит по лицу карты сразу после переворота */}
@@ -529,8 +525,7 @@ export default function TodayScreen() {
             </Animated.View>
             {/* кнопка живёт внутри блока значения — как .cta внутри .mean в эталоне */}
             <Animated.View style={meanStyle}>
-              <View style={[st.meanBox, { backgroundColor: t.panel, borderColor: t.line }]}>
-                <Txt style={[st.meanLbl, { color: t.accent }]}>{tr('today.meaning')}</Txt>
+              <MeaningPanel title={tr('today.meaning')}>
                 <Txt style={[st.meanTxt, { color: t.text }]}>
                   {hasText ? dayText : tr('card.soon')}
                 </Txt>
@@ -538,7 +533,7 @@ export default function TodayScreen() {
                   label={tr('today.continue')}
                   onPress={() => router.push(`/card/${card.id}?from=today`)}
                 />
-              </View>
+              </MeaningPanel>
               {/* один блок на весь вечерний ритуал: до 18:00 это «Заметка о дне» с плашкой,
                   после — тот же блок с вопросом и кнопками над той же плашкой (спека 06а) */}
               <Block title={showReflection ? tr('reflect.title') : tr('note.title')}>
@@ -618,7 +613,7 @@ const st = StyleSheet.create({
   // по образцу строки луны: по центру, muted; макета для строки нет — расхождение осознанное (спека 10)
   freezeRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 10 },
   freezeText: { fontSize: 12 },
-  // тёплое свечение вокруг карты дня — значение в FACE_SHADOW (см. константу выше),
+  // тёплое свечение вокруг карты дня — значение в faceShadow (theme/glow.ts),
   // задаётся инлайн через boxShadow, т.к. зависит от темы
   face: {
     position: 'absolute',
@@ -639,8 +634,6 @@ const st = StyleSheet.create({
   sparkLayer: { zIndex: 2, elevation: 20 },
   cardName: { fontFamily: fonts.display, fontSize: 22, letterSpacing: 3, textAlign: 'center', marginTop: spacing.xl },
   cardSub: { fontSize: 9.5, letterSpacing: 2.5, textAlign: 'center', marginTop: 3 },
-  meanBox: { borderRadius: radius.l, borderWidth: 1, padding: spacing.l, marginTop: spacing.l },
-  meanLbl: { fontSize: 9.5, letterSpacing: 3 }, // Overline из дизайн-системы: 9.5–10
   meanTxt: { fontFamily: fonts.display, fontSize: 17, lineHeight: 25, marginTop: 8 },
   // тень кнопки из эталона `.btn`: box-shadow 0 12px 30px var(--glow) — задаётся инлайн
   // (boxShadow зависит от темы, см. JSX выше). overflow тут ставить нельзя — срежет тень;

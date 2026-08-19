@@ -1,6 +1,7 @@
 /** Экран курса — «путь» как в Duolingo (спека 07): все 6 модулей одной лентой,
- *  шапка модуля + тропа-змейка. Движка урока нет — узлы ведут на заглушку /lesson/[id]. */
-import { router } from 'expo-router';
+ *  шапка модуля + тропа-змейка. Узлы ведут в урок (спека 08); над первым модулем — карточка
+ *  «Повторение» (спека 45). */
+import { router, useFocusEffect } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -8,12 +9,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CoursePath } from '../../src/components/CoursePath';
 import { FadeUp } from '../../src/components/FadeUp';
 import { ModuleHeader } from '../../src/components/ModuleHeader';
+import { ReviewPanel } from '../../src/components/ReviewPanel';
 import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { course, type CourseLesson } from '../../src/lib/content';
 import { lessonStates } from '../../src/lib/courseProgress';
+import { localDateISO } from '../../src/lib/dates';
 import { useLang } from '../../src/lib/i18n';
+import { deckOrder, reviewSummary } from '../../src/lib/review';
+import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, spacing } from '../../src/theme/theme';
@@ -26,6 +31,18 @@ export default function CourseScreen() {
   const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
   const lessonsProgress = useApp((s) => s.lessonsProgress);
+  const srs = useApp((s) => s.srs);
+  const reviewDay = useApp((s) => s.reviewDay);
+  // день для сводки повторения: по фокусу таба И по возврату из фона — useFocusEffect не ловит ни
+  // полночь, ни сворачивание (урок 06а), а таб «Курс» может остаться открытым с вечера: утром
+  // «ждут» должны появиться без переключения табов
+  const [today, setToday] = React.useState(() => localDateISO());
+  useFocusEffect(React.useCallback(() => setToday(localDateISO()), []));
+  useAppActive(() => setToday(localDateISO()));
+  const reviewSum = React.useMemo(
+    () => reviewSummary(deckOrder(course, lessonsProgress), srs, today, reviewDay),
+    [lessonsProgress, srs, reviewDay, today],
+  );
 
   const states = React.useMemo(() => lessonStates(course, lessonsProgress), [lessonsProgress]);
   const lessonsTotal = course.reduce((n, m) => n + m.lessons.length, 0);
@@ -83,7 +100,16 @@ export default function CourseScreen() {
             >
               {/* каскад — шапка экрана и только первая секция: глубже первого экрана
                   появление не анимируется (правило задачи 17) */}
-              {mi === 0 ? <FadeUp index={1}>{section}</FadeUp> : section}
+              {mi === 0 ? (
+                <FadeUp index={1}>
+                  {/* карточка «Повторение» (спека 45) — над первым модулем, в ТОМ ЖЕ шаге каскада:
+                      нового индекса FadeUp не добавляем (design-system §5) */}
+                  <ReviewPanel summary={reviewSum} onPress={() => router.push('/review')} />
+                  {section}
+                </FadeUp>
+              ) : (
+                section
+              )}
             </View>
           );
         })}

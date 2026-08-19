@@ -5,7 +5,9 @@
  *  Эмблема-«компас» вынесена сюда не только ради чистоты экрана: тот же рисунок нужен
  *  в онбординге (`.emb2` эталона), дублировать пути не будем.
  *
- *  Уголки `.cnr` — по пропу `corners`, включает только карта дня (спека 42/40). */
+ *  Уголки `.cnr` — по пропу `corners`, включает только карта дня (спека 42/40).
+ *
+ *  Проп `content` — зона эмблемы целиком (флеш-карта, спека 45). */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { glowShadow } from '../theme/glow';
@@ -18,7 +20,17 @@ import { Txt } from './Txt';
 
 const EMB_SIZE = 96; // .emb svg
 
-export function CardBack({ hint, corners = false }: { hint?: string; corners?: boolean }) {
+export function CardBack({
+  hint,
+  corners = false,
+  content,
+}: {
+  hint?: string;
+  corners?: boolean;
+  /** Содержимое зоны эмблемы вместо компаса и слова ARCANUM — рубашка флеш-карты (спека 45)
+   *  несёт там ключевые слова и предложение; hint рисуется под content как обычно. */
+  content?: React.ReactNode;
+}) {
   const t = useTheme();
 
   return (
@@ -32,15 +44,18 @@ export function CardBack({ hint, corners = false }: { hint?: string; corners?: b
       {corners && <CardCorners />}
 
       <View style={st.emb}>
-        {/* свечение эмблемы — эталон `.emb svg`: filter:drop-shadow(0 0 12px var(--glow)),
-            то есть по контуру символа, а не по прямоугольнику; boxShadow дал бы квадратную
-            тень вокруг прозрачного фона. Висит на отдельной обёртке: рядом с overflow:'hidden'
-            тень срезает, поэтому обрезка — только на faceClip */}
-        <View style={glowShadow(t.glow, t.accent, 12, 0.35)}>
-          <Emblem size={EMB_SIZE} />
-        </View>
-
-        <Txt style={[st.word, { color: t.accent }]}>ARCANUM</Txt>
+        {content ?? (
+          <>
+            {/* свечение эмблемы — эталон `.emb svg`: filter:drop-shadow(0 0 12px var(--glow)),
+                то есть по контуру символа, а не по прямоугольнику; boxShadow дал бы квадратную
+                тень вокруг прозрачного фона. Висит на отдельной обёртке: рядом с overflow:'hidden'
+                тень срезает, поэтому обрезка — только на faceClip */}
+            <View style={glowShadow(t.glow, t.accent, 12, 0.35)}>
+              <Emblem size={EMB_SIZE} />
+            </View>
+            <Txt style={[st.word, { color: t.accent }]}>ARCANUM</Txt>
+          </>
+        )}
 
         {!!hint && <Txt style={[st.hint, { color: t.muted }]}>{hint}</Txt>}
       </View>

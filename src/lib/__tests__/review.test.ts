@@ -1,22 +1,27 @@
 import type { CourseModule } from '../content';
 import { cards } from '../content';
 import type { LessonProgressMap } from '../courseProgress';
-import { inLang } from '../lang';
+import { inLang, LANGS, presentLang, type Localized } from '../lang';
 import {
   applyGrade,
   applyReview,
   buildSession,
   deckOrder,
+  maskCardName,
+  NAME_MASK,
   NEW_PER_DAY,
+  nextSessionSize,
   PROMPT_MAX,
   PROMPT_MIN,
   promptSentence,
+  reviewCardState,
   REVIEW_DAY_DEFAULT,
   reviewSummary,
   SESSION_MAX,
   sessionStats,
   type ReviewDay,
   type ReviewLogEntry,
+  type ReviewSummary,
   type SessionItem,
   type SrsMap,
 } from '../review';
@@ -232,5 +237,128 @@ describe('promptSentence — первое предложение general для 
         expect(text.trim().startsWith(p)).toBe(true);
       }
     }
+  });
+});
+
+describe('maskCardName — имя карты в подсказке toCard заменяется на «···»', () => {
+  it('ru: имя в начале предложения; регистр не важен', () => {
+    expect(maskCardName('Дурак — карта начала пути.', 'Дурак')).toBe(`${NAME_MASK} — карта начала пути.`);
+    expect(maskCardName('ДУРАК — карта.', 'Дурак')).toBe(`${NAME_MASK} — карта.`);
+  });
+  it('en: артикль The уходит вместе с именем; имя без артикля в name тоже маскируется', () => {
+    expect(maskCardName('The Fool is the card of beginnings.', 'The Fool')).toBe(`${NAME_MASK} is the card of beginnings.`);
+    expect(maskCardName('The Ace of Wands is the spark.', 'Ace of Wands')).toBe(`${NAME_MASK} is the spark.`);
+    // «Wheel Of Fortune» в name против «Wheel of Fortune» в тексте — регистр
+    expect(maskCardName('The Wheel of Fortune is the card of the turning point.', 'Wheel Of Fortune')).toBe(`${NAME_MASK} is the card of the turning point.`);
+  });
+  it('маскируются ВСЕ вхождения, но только целым словом: «примирения» не режется, «literal death» — да', () => {
+    expect(maskCardName('Мир — карта примирения с собой и мир вокруг.', 'Мир')).toBe(
+      `${NAME_MASK} — карта примирения с собой и ${NAME_MASK} вокруг.`,
+    );
+    // реальный случай корпуса: у Смерти слово стоит в первом предложении дважды
+    expect(maskCardName('Death is the card of endings — and it is almost never about literal death.', 'Death')).toBe(
+      `${NAME_MASK} is the card of endings — and it is almost never about literal ${NAME_MASK}.`,
+    );
+  });
+  it('имени в тексте нет — текст как есть', () => {
+    expect(maskCardName('Карта начала пути.', 'Дурак')).toBe('Карта начала пути.');
+  });
+
+  // контракт по корпусу: ни одна подсказка toCard не содержит имени своей карты — ни на одном языке
+  // приложения. Это и есть дефект, найденный при дорисовке макета; тест обязан быть красным без
+  // maskCardName. Обходит ВСЕ LANGS, не только ['ru', 'en'] — иначе задача 28 (переводы ES/PT)
+  // добавила бы язык, который этот контракт не увидит В ПРИНЦИПЕ. Имя берётся так же, как на
+  // экране (app/review.tsx) — на языке ПОКАЗАННОГО текста (presentLang), а не lang напрямую: у es/pt
+  // сегодня нет своего general (корпус ещё не переведён), presentLang честно падает на тот же 'en',
+  // что и сам текст, — то есть для непереведённых языков тест проверяет РОВНО ТО, что покажет экран
+  // прямо сейчас (комбинацию en/en), а не притворяется, что проверил испанский или пропускает его
+  // молча.
+  it.each(LANGS)('корпус %s: promptSentence(general) после маски не содержит имени карты', (lang) => {
+    const leaks = cards
+      .map((c) => {
+        const textLang = presentLang(c.content.general, lang);
+        const name = inLang(c.name, textLang);
+        const hint = maskCardName(promptSentence(inLang(c.content.general, lang)), name);
+        const bare = name.replace(/^the\s+/i, '');
+        return new RegExp(bare.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(hint) ? `${c.id}: ${hint}` : null;
+      })
+      .filter(Boolean);
+    expect(leaks).toEqual([]);
+  });
+
+  // синтетика: воспроизводит ровно тот сценарий, который сегодняшний корпус показать не может
+  // (name.es есть, general.es нет — 28а разводит их разными единицами перевода). Проверяет тот же
+  // алгоритм, что app/review.tsx использует для маски (textLang = presentLang(general, lang), имя —
+  // inLang(name, textLang)), и одновременно фиксирует, что НАИВНЫЙ выбор (имя языка интерфейса без
+  // presentLang — состояние ДО фикса Important 1) на этом же входе действительно течёт. Это и есть
+  // «эксперимент со сломанным кодом» из отчёта: временная замена textLang на голый lang красит
+  // именно этот тест (см. final-fix-report.md)
+  it('расхождение языков name/general (будущий сценарий задачи 28): маска берёт язык показанного текста, а не интерфейса', () => {
+    const name: Localized<string> = { ru: 'Дурак', en: 'The Fool', es: 'El Loco' };
+    const general: Localized<string> = {
+      ru: 'Дурак — карта начала пути.',
+      en: 'The Fool is the card of beginnings.',
+      // es намеренно нет: presentLang(general, 'es') падает на 'en'
+    };
+
+    const textLang = presentLang(general, 'es');
+    const correctHint = maskCardName(promptSentence(inLang(general, 'es')), inLang(name, textLang));
+    expect(correctHint).not.toMatch(/fool/i);
+    expect(correctHint).toContain(NAME_MASK);
+
+    // наивный выбор — имя языка интерфейса напрямую, без presentLang: «El Loco» не встречается
+    // в английском предложении, маска молчит, и подсказка отдаёт готовый ответ
+    const naiveName = inLang(name, 'es');
+    const naiveHint = maskCardName(promptSentence(inLang(general, 'es')), naiveName);
+    expect(naiveHint).toMatch(/fool/i);
+  });
+
+  it('«the» внутри соседнего слова не съедает настоящее вхождение имени', () => {
+    expect(maskCardName('soothe Empress vibes are strong.', 'Empress')).toBe(`soothe ${NAME_MASK} vibes are strong.`);
+    expect(maskCardName('Let it bathe Empress light over you.', 'Empress')).toBe(`Let it bathe ${NAME_MASK} light over you.`);
+    // артикль перед именем по-прежнему уходит вместе с ним
+    expect(maskCardName('Read the Empress as a season.', 'Empress')).toBe(`Read ${NAME_MASK} as a season.`);
+  });
+});
+
+describe('reviewCardState — карточка «Повторение» в шапке курса (спека 45, раздел В)', () => {
+  const sum = (p: Partial<ReviewSummary> = {}): ReviewSummary => ({ deckSize: 8, due: 0, newAvailable: 0, dueTomorrow: 0, ...p });
+
+  it('колода пуста → hidden, какими бы ни были остальные числа', () => {
+    expect(reviewCardState(sum({ deckSize: 0, due: 3, newAvailable: 2 }))).toBe('hidden');
+  });
+  it('просроченные важнее новых → due', () => {
+    expect(reviewCardState(sum({ due: 2, newAvailable: 5 }))).toBe('due');
+  });
+  it('просроченных нет, новые есть → new', () => {
+    expect(reviewCardState(sum({ newAvailable: 1 }))).toBe('new');
+  });
+  it('ни просроченных, ни новых → done (даже при dueTomorrow 0)', () => {
+    expect(reviewCardState(sum({ dueTomorrow: 4 }))).toBe('done');
+    expect(reviewCardState(sum())).toBe('done');
+  });
+});
+
+describe('nextSessionSize — число в ссылке «Ещё N»', () => {
+  const sum = (p: Partial<ReviewSummary> = {}): ReviewSummary => ({ deckSize: 20, due: 0, newAvailable: 0, dueTomorrow: 0, ...p });
+
+  it('просроченные + доступные новые, потолок SESSION_MAX, ноль при пустой сводке', () => {
+    expect(nextSessionSize(sum({ due: 3, newAvailable: 4 }))).toBe(7);
+    expect(nextSessionSize(sum({ due: 8, newAvailable: 8 }))).toBe(SESSION_MAX);
+    expect(nextSessionSize(sum())).toBe(0);
+  });
+
+  it('обещает ровно столько карт, сколько соберёт buildSession на той же сводке', () => {
+    // 12 карт: c1..c3 просрочены, остальные новые; сегодня новых введено 8 → доступно 2
+    const d = deck(12);
+    const srs = overdue(3);
+    const day = { date: T, newCount: 8 };
+    const s = reviewSummary(d, srs, T, day);
+    expect(nextSessionSize(s)).toBe(5);
+    expect(buildSession(d, srs, T, day, lcg(1)).length).toBe(nextSessionSize(s));
+    // без дневного лимита упирается в SESSION_MAX — и там тоже совпадает
+    const s2 = reviewSummary(d, srs, T, REVIEW_DAY_DEFAULT);
+    expect(buildSession(d, srs, T, REVIEW_DAY_DEFAULT, lcg(2)).length).toBe(nextSessionSize(s2));
+    expect(nextSessionSize(s2)).toBe(SESSION_MAX);
   });
 });
