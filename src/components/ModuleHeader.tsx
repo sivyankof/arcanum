@@ -52,16 +52,19 @@ export function ModuleHeader({
   );
 }
 
+/** Геометрия панели `.mhead` эталона — общая с карточкой «Повторение» над первым модулем (спека 45). */
+export const moduleBox = {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: spacing.m,
+  borderWidth: 1,
+  borderRadius: radius.l,
+  paddingVertical: 14,
+  paddingHorizontal: spacing.l,
+} as const;
+
 const st = StyleSheet.create({
-  box: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.m,
-    borderWidth: 1,
-    borderRadius: radius.l,
-    paddingVertical: 14,
-    paddingHorizontal: spacing.l,
-  },
+  box: moduleBox,
   overlineRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   overline: { fontSize: 9.5, letterSpacing: 2.5, fontWeight: '600' },
   title: { fontFamily: fonts.displaySemi, fontSize: 20, marginTop: 2 },
