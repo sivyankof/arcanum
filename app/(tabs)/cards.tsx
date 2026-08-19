@@ -5,6 +5,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardCell, CELL_W, GRID_COLS, GRID_GAP } from '../../src/components/CardCell';
+import { CountRow } from '../../src/components/CountRow';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
@@ -12,6 +13,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { SearchField } from '../../src/components/SearchField';
 import { Txt } from '../../src/components/Txt';
 import { CARD_FILTERS, filterCards, toRows, type CardFilter } from '../../src/lib/cardSearch';
+import { collectionProgress, collectionSections } from '../../src/lib/collection';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
 import { useLang } from '../../src/lib/i18n';
@@ -92,6 +94,9 @@ export default function CardsScreen() {
   const lessonsProgress = useApp((s) => s.lessonsProgress);
   const learned = useMemo(() => learnedCardIds(course, lessonsProgress), [lessonsProgress]);
 
+  // вход в альбом коллекции (спека 46): «открыто» считается тем же множеством, что бейджи «ИЗУЧЕНО ✓»
+  const opened = useMemo(() => collectionProgress(collectionSections(cards, learned)).open, [learned]);
+
   // поиск всегда идёт по всей колоде: иначе «Мечи» + «шут» дают пустой экран без видимой причины
   const onQuery = (v: string) => {
     setQuery(v);
@@ -123,6 +128,15 @@ export default function CardsScreen() {
             <FadeUp index={0} style={st.pad}>
               <Txt style={[st.sub, { color: t.muted }]}>{tr('cards.subtitle')}</Txt>
               <Txt style={[st.title, { color: t.head }]}>{tr('cards.title')}</Txt>
+              <CountRow
+                icon="albums-outline"
+                title={tr('cards.collection')}
+                count={opened}
+                total={cards.length}
+                chevron
+                onPress={() => router.push('/collection')}
+                style={st.collection}
+              />
             </FadeUp>
             {/* поиск и чипы БЕЗ внешнего паддинга: отступы они задают себе сами, поэтому
                 лента чипов прокручивается от края до края экрана, а не обрывается за 24px
@@ -182,6 +196,7 @@ const st = StyleSheet.create({
   pad: { paddingHorizontal: spacing.xl },
   sub: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center', paddingTop: spacing.xl },
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 },
+  collection: { marginTop: 14 }, // вход в альбом: отступ от заголовка, как .colprog
   // .stickysearch эталона: 14 сверху, 4 снизу; ещё 15 до сетки — .grid margin-top
   flowBar: { paddingTop: 14, paddingBottom: 4, marginBottom: 15 },
   bar: { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 30 },
