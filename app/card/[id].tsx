@@ -51,6 +51,7 @@ const BACK_TITLES: Record<string, string> = {
   profile: 'card.backProfile',
   spread: 'card.backSpread',
   review: 'card.backReview',
+  collection: 'card.backCollection',
 };
 
 /** Ключ сферы значения — вкладки под героем страницы карты. Строгий порядок эталона.
