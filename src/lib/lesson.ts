@@ -3,6 +3,7 @@
  *  живёт в экране: product-spec §2 — выход из урока прогресс шага не сохраняет. */
 import type { CourseLesson, Lang, QuizQuestion } from './content';
 import { inLang } from './lang';
+import { shuffle } from './shuffle';
 
 export type LessonStep =
   | { kind: 'theory'; text: string }
@@ -34,13 +35,15 @@ export function theoryPages(theory: string): string[] {
 export type Rng = () => number;
 
 /** Перемешивание вариантов (Фишер–Йетс) с переиндексацией correct. Возвращает НОВЫЙ объект —
- *  контент не мутируется (quiz в course.json один на всё приложение). */
+ *  контент не мутируется (quiz в course.json один на всё приложение). Сам алгоритм — общий
+ *  `shuffle` (src/lib/shuffle.ts), здесь остаётся только переиндексация correct. */
 export function shuffleOptions(q: QuizQuestion, rng: Rng): QuizQuestion {
-  const order = q.options.map((_, i) => i);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
+  // тасуем ИНДЕКСЫ общим shuffle (src/lib/shuffle.ts) — сам Фишер–Йетс живёт в проекте
+  // в одном экземпляре; здесь остаётся только переиндексация correct
+  const order = shuffle(
+    q.options.map((_, i) => i),
+    rng,
+  );
   return {
     ...q,
     options: order.map((i) => q.options[i]),
