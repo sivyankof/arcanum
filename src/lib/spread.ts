@@ -3,6 +3,7 @@
 import { blockText, cardById, cards } from './content';
 import { inLang, type Lang } from './lang';
 import { normalizeText } from './journal';
+import { shuffle } from './shuffle';
 
 /** Карта в позиции расклада. Порядок в массиве = порядок позиций spreads.json. */
 export interface DrawnCard {
@@ -34,13 +35,9 @@ export function normalizeQuestion(text: string): string {
 
 /** Тасуем все 78 (Фишер–Йетс), берём первые count — карта не может выпасть дважды в одном раскладе;
  *  каждой независимо reversed с вероятностью REVERSED_P. rng — параметр ради детерминированных
- *  тестов; в приложении — Math.random (криптостойкость не нужна). */
+ *  тестов; в приложении — Math.random (криптостойкость не нужна). Тасование — общий `shuffle`. */
 export function dealSpread(count: number, rng: () => number = Math.random): DrawnCard[] {
-  const ids = cards.map((c) => c.id);
-  for (let i = ids.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [ids[i], ids[j]] = [ids[j], ids[i]];
-  }
+  const ids = shuffle(cards.map((c) => c.id), rng);
   return ids.slice(0, count).map((cardId) => ({ cardId, reversed: rng() < REVERSED_P }));
 }
 
