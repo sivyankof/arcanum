@@ -13,9 +13,11 @@
 Success + катящийся XP), `KeywordChips` со страницы карты, `MeaningPanel` с «Сегодня», `faceShadow`
 в `glow.ts`, `moduleBox` из `ModuleHeader`; потом новые компоненты `ReviewPanel` / `ReviewFlashcard` /
 `ReviewResult` и экран `app/review.tsx`; состояние сессии живёт в экране, каждая оценка сразу
-в стор через `reviewCard`. Две чистые функции добавляются в `review.ts` (`reviewCardState`,
-`nextSessionSize`) — под тестами. Макет `v-trainer` дорисовывается Cowork-сессией ПАРАЛЛЕЛЬНО
-(бриф отправлен 19.08); задача 13 сверяет значения с CSS макета после его коммита.
+в стор через `reviewCard`. Три чистые функции добавляются в `review.ts` (`reviewCardState`,
+`nextSessionSize`, `maskCardName`) — под тестами, последняя — ещё и под корпусным контрактом
+78 × ru/en. Макет `#v-trainer` и карточка `.revcard` дорисованы Cowork 19.08 (коммит 9a33503
+в main) — значения стилей в плане сняты с него; задача 13 — контрольная сверка и список
+осознанных расхождений.
 
 **Стек:** Expo SDK 54 (НЕ обновлять), TypeScript strict, expo-router v6 (typed routes), reanimated,
 zustand/persist, jest-expo, Playwright из кэша npx для веб-проверки. Python не нужен.
@@ -56,11 +58,11 @@ zustand/persist, jest-expo, Playwright из кэша npx для веб-пров�
 
 | Файл | Ответственность | Действие |
 |---|---|---|
-| `src/lib/review.ts` | + `ReviewCardState`, `reviewCardState(sum)`, `nextSessionSize(sum)` | правка |
-| `src/lib/__tests__/review.test.ts` | + тесты двух функций (состояния, потолок, согласие с `buildSession`) | правка |
+| `src/lib/review.ts` | + `ReviewCardState`, `reviewCardState(sum)`, `nextSessionSize(sum)`, `NAME_MASK`, `maskCardName(text, name)` | правка |
+| `src/lib/__tests__/review.test.ts` | + тесты трёх функций (состояния, потолок, согласие с `buildSession`, маска + корпусный контракт 78 × ru/en) | правка |
 | `src/lib/i18n.ts` | + `review.*` (ru, en), `card.backReview` | правка |
 | `src/lib/__tests__/i18nPlurals.test.ts` | + CASES `review.due` 1/3/12 | правка |
-| `src/components/KeywordChips.tsx` | золотые чипы слов (`.kws` эталона), вынос со страницы карты | новый |
+| `src/components/KeywordChips.tsx` | золотые чипы слов (`.kws` эталона), вынос со страницы карты; режим `layout="column"` для рубашки | новый |
 | `app/card/[id].tsx` | чипы → `KeywordChips`; `BACK_TITLES.review` | правка |
 | `src/components/MeaningPanel.tsx` | панель `.mean` (бокс + Overline), вынос с «Сегодня» | новый |
 | `src/theme/glow.ts` | + `faceShadow(glow)` (был `FACE_SHADOW` в index.tsx) | правка |
@@ -68,7 +70,7 @@ zustand/persist, jest-expo, Playwright из кэша npx для веб-пров�
 | `src/components/CardBack.tsx` | + проп `content` — замена зоны эмблемы | правка |
 | `src/components/FlipCard.tsx` | общий 3D-переворот (из SpreadCard), `FLIP_MS` | новый |
 | `src/components/SpreadCard.tsx` | тонкая обёртка над `FlipCard` | правка |
-| `src/components/ResultPanel.tsx` | панель итога: въезд, Success, катящийся XP, line, CTA, footer | новый |
+| `src/components/ResultPanel.tsx` | панель итога: въезд, Success, катящийся XP, title/line, CTA, footer | новый |
 | `src/components/LessonResult.tsx` | на `ResultPanel`; оставляет полосу модуля и конфетти | правка |
 | `src/components/ModuleHeader.tsx` | экспорт `moduleBox` (геометрия панели `.mhead`) | правка |
 | `src/components/ReviewPanel.tsx` | карточка «Повторение» в шапке курса | новый |
@@ -85,27 +87,78 @@ zustand/persist, jest-expo, Playwright из кэша npx для веб-пров�
 ### Задача 0: ветка
 
 - [ ] **Шаг 1:** `git checkout main && git pull` → `git checkout -b feat/45b-review-screens`.
-  `git status` — чисто. (Коммит макета от Cowork может прийти в main позже — его подтянет задача 13.)
+  `git status` — чисто. В `main` уже лежат коммит макета 9a33503 и этот план (b51d550+).
 
 ---
 
-### Задача 1: `review.ts` — `reviewCardState` и `nextSessionSize`
+### Задача 1: `review.ts` — `reviewCardState`, `nextSessionSize`, `maskCardName`
 
 **Файлы:**
-- Правка: `src/lib/review.ts` (после `reviewSummary`)
+- Правка: `src/lib/review.ts` (после `reviewSummary` и после `promptSentence`)
 - Тест: `src/lib/__tests__/review.test.ts`
 
 **Интерфейсы:**
-- Потребляет: `ReviewSummary`, `SESSION_MAX`, `buildSession` (есть с 45а).
+- Потребляет: `ReviewSummary`, `SESSION_MAX`, `buildSession`, `promptSentence` (есть с 45а);
+  `cards`, `inLang` — для корпусного теста.
 - Производит: `type ReviewCardState = 'hidden' | 'due' | 'new' | 'done'`;
-  `reviewCardState(s: ReviewSummary): ReviewCardState`; `nextSessionSize(s: ReviewSummary): number`.
-  Их берут `ReviewPanel` (задача 8) и экран (задача 11).
+  `reviewCardState(s: ReviewSummary): ReviewCardState`; `nextSessionSize(s: ReviewSummary): number`;
+  `NAME_MASK = '···'`; `maskCardName(text: string, name: string): string`.
+  Их берут `ReviewPanel` (задача 8), `ReviewFlashcard` (9) и экран (11).
+
+⚠️ Зачем `maskCardName` — флаг Cowork при дорисовке макета (backlog, задача «Макет: правки
+дорисовок», закрыта 19.08): первое предложение `general` у **всех 78 карт** начинается с имени карты
+(ru: «Дурак — карта начала пути.», en: «The Fool is the card of beginnings.» — замер по корпусу 19.08:
+ru 78/78 начинаются с имени, en 78/78 содержат его в первом предложении). Спека 45 писала «рубашка:
+слова + предложение (без названия!)», подразумевая, что имени в предложении нет, — это было неверно,
+и без маски направление toCard выдавало бы ответ прямо на вопросе. Решение: имя в подсказке
+заменяется на «···» (как нарисовано в макете: «··· — карта начала пути.»); в панели «ЗНАЧЕНИЕ» после
+ответа предложение показывается целиком.
 
 - [ ] **Шаг 1: тесты (красные).** В конец `review.test.ts` (хелперы `deck`, `overdue`, `T`,
   `REVIEW_DAY_DEFAULT`, `lcg` уже объявлены в шапке файла; импорт дополнить именами
-  `nextSessionSize`, `reviewCardState`, `type ReviewSummary`):
+  `nextSessionSize`, `reviewCardState`, `maskCardName`, `NAME_MASK`, `type ReviewSummary`;
+  `cards` и `inLang` там уже импортированы):
 
 ```ts
+describe('maskCardName — имя карты в подсказке toCard заменяется на «···»', () => {
+  it('ru: имя в начале предложения; регистр не важен', () => {
+    expect(maskCardName('Дурак — карта начала пути.', 'Дурак')).toBe(`${NAME_MASK} — карта начала пути.`);
+    expect(maskCardName('ДУРАК — карта.', 'Дурак')).toBe(`${NAME_MASK} — карта.`);
+  });
+  it('en: артикль The уходит вместе с именем; имя без артикля в name тоже маскируется', () => {
+    expect(maskCardName('The Fool is the card of beginnings.', 'The Fool')).toBe(`${NAME_MASK} is the card of beginnings.`);
+    expect(maskCardName('The Ace of Wands is the spark.', 'Ace of Wands')).toBe(`${NAME_MASK} is the spark.`);
+    // «Wheel Of Fortune» в name против «Wheel of Fortune» в тексте — регистр
+    expect(maskCardName('The Wheel of Fortune is the card of the turning point.', 'Wheel Of Fortune')).toBe(`${NAME_MASK} is the card of the turning point.`);
+  });
+  it('маскируются ВСЕ вхождения, но только целым словом: «примирения» не режется, «literal death» — да', () => {
+    expect(maskCardName('Мир — карта примирения с собой и мир вокруг.', 'Мир')).toBe(
+      `${NAME_MASK} — карта примирения с собой и ${NAME_MASK} вокруг.`,
+    );
+    // реальный случай корпуса: у Смерти слово стоит в первом предложении дважды
+    expect(maskCardName('Death is the card of endings — and it is almost never about literal death.', 'Death')).toBe(
+      `${NAME_MASK} is the card of endings — and it is almost never about literal ${NAME_MASK}.`,
+    );
+  });
+  it('имени в тексте нет — текст как есть', () => {
+    expect(maskCardName('Карта начала пути.', 'Дурак')).toBe('Карта начала пути.');
+  });
+
+  // контракт по корпусу: ни одна подсказка toCard не содержит имени своей карты — ни на ru, ни на en.
+  // Это и есть дефект, найденный при дорисовке макета; тест обязан быть красным без maskCardName
+  it.each(['ru', 'en'] as const)('корпус %s: promptSentence(general) после маски не содержит имени карты', (lang) => {
+    const leaks = cards
+      .map((c) => {
+        const name = inLang(c.name, lang);
+        const hint = maskCardName(promptSentence(inLang(c.content.general, lang)), name);
+        const bare = name.replace(/^the\s+/i, '');
+        return new RegExp(bare.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(hint) ? `${c.id}: ${hint}` : null;
+      })
+      .filter(Boolean);
+    expect(leaks).toEqual([]);
+  });
+});
+
 describe('reviewCardState — карточка «Повторение» в шапке курса (спека 45, раздел В)', () => {
   const sum = (p: Partial<ReviewSummary>): ReviewSummary => ({ deckSize: 8, due: 0, newAvailable: 0, dueTomorrow: 0, ...p });
 
@@ -150,9 +203,42 @@ describe('nextSessionSize — число в ссылке «Ещё N»', () => {
 ```
 
 - [ ] **Шаг 2:** `npx jest src/lib/__tests__/review.test.ts` → FAIL: `reviewCardState is not a function`
-  (и `nextSessionSize`).
+  (и `nextSessionSize`, `maskCardName`). ⚠️ Дополнительно убедиться, что корпусный тест КРАСНЕЕТ
+  и на «почти верной» реализации: временно заставить `maskCardName` возвращать `text` как есть —
+  тест обязан перечислить все 78 карт на каждом языке (это и есть дефект из флага Cowork).
 
-- [ ] **Шаг 3: реализация.** В `src/lib/review.ts` после `reviewSummary`:
+- [ ] **Шаг 3: реализация.** В `src/lib/review.ts` после `promptSentence`:
+
+```ts
+/** Заглушка имени карты в подсказке направления toCard (как в макете: «··· — карта начала пути»). */
+export const NAME_MASK = '···';
+// буква для проверки «целое слово»: латиница, кириллица, расширенная латиница (ES/PT); \b в JS —
+// ASCII-only и кириллицу границей не считает, а \p{L} требует флага u, за Hermes которого не ручаемся
+const LETTER = /[a-zа-яёÀ-ɏ]/i;
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** Прячет имя карты в тексте подсказки: первое предложение general у ВСЕХ 78 карт начинается
+ *  с имени (ru) или содержит его (en) — без маски рубашка toCard выдавала бы ответ (флаг дорисовки
+ *  макета 19.08). Маскируются все вхождения целым словом, регистр не важен; английский артикль
+ *  «The» перед именем уходит вместе с ним; у имён с артиклем («The Fool») пробуется и форма без него.
+ *  «Мир» внутри «примирения» не трогается. Имени в тексте нет — текст как есть. */
+export function maskCardName(text: string, name: string): string {
+  const variants = [name, name.replace(/^the\s+/i, '')].filter((v, i, a) => v.length >= 3 && a.indexOf(v) === i);
+  for (const v of variants) {
+    const re = new RegExp(`(?:the\\s+)?${escapeRe(v)}`, 'gi');
+    const out = text.replace(re, (m: string, offset: number, s: string) => {
+      const before = s[offset - 1];
+      const after = s[offset + m.length];
+      const whole = !(before && LETTER.test(before)) && !(after && LETTER.test(after));
+      return whole ? NAME_MASK : m;
+    });
+    if (out !== text) return out;
+  }
+  return text;
+}
+```
+
+  И после `reviewSummary`:
 
 ```ts
 /** Состояние карточки «Повторение» в шапке курса (спека 45, раздел В): колода пуста — карточки нет
@@ -175,9 +261,10 @@ export function nextSessionSize(s: ReviewSummary): number {
 }
 ```
 
-- [ ] **Шаг 4:** `npx jest src/lib/__tests__/review.test.ts` → PASS; `npx tsc --noEmit` чисто.
+- [ ] **Шаг 4:** `npx jest src/lib/__tests__/review.test.ts` → PASS (включая корпусный контракт
+  78 × ru/en); `npx tsc --noEmit` чисто.
 - [ ] **Шаг 5:** `git add src/lib/review.ts src/lib/__tests__/review.test.ts` →
-  `git commit -m "feat: состояние карточки повторения и размер следующей порции (spec 45)"`.
+  `git commit -m "feat: состояние карточки повторения, размер порции «Ещё N», маска имени карты в подсказке (spec 45)"`.
 
 ---
 
@@ -273,24 +360,36 @@ export function nextSessionSize(s: ReviewSummary): number {
 - Создать: `src/components/KeywordChips.tsx`
 - Правка: `app/card/[id].tsx` (разметка чипов под названием; стили `kws`/`kw` удалить)
 
-**Производит:** `KeywordChips({ words: readonly string[]; style?: StyleProp<ViewStyle> })`.
-Потребители: страница карты (сейчас), панель «ЗНАЧЕНИЕ» тренажёра (задача 11).
+**Производит:** `KeywordChips({ words: readonly string[]; layout?: 'wrap' | 'column'; style?: StyleProp<ViewStyle> })`.
+Потребители: страница карты (сейчас), панель «ЗНАЧЕНИЕ» тренажёра и рубашка toCard (задачи 9, 11).
 
 - [ ] **Шаг 1: компонент.**
 
 ```tsx
 /** Золотые чипы ключевых слов (`.kws` эталона, design-system §5): 4 слова витрины под названием
- *  на странице карты и в панели «ЗНАЧЕНИЕ» тренажёра (спека 45) — второе появление, вынесено по
- *  правилу «2+ раза». Слова приходят уже на нужном языке (inLang снаружи). */
+ *  на странице карты, в панели «ЗНАЧЕНИЕ» тренажёра и столбиком на рубашке-вопросе (спека 45) —
+ *  вынесены по правилу «2+ раза». Слова приходят уже на нужном языке (inLang снаружи).
+ *  layout 'wrap' — лента с переносом (страница карты, панель); 'column' — столбик по центру
+ *  (рубашка toCard, `.trkwcol` эталона: gap 5). Сам чип один и тот же везде: макет рисует на рубашке
+ *  чип чуть иначе (radius 12, бордер frame, 700) — расхождение осознанное, второй стиль чипа для тех
+ *  же слов — дубликат (правило проекта). */
 import React from 'react';
 import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useTheme } from '../theme/useTheme';
 import { Txt } from './Txt';
 
-export function KeywordChips({ words, style }: { words: readonly string[]; style?: StyleProp<ViewStyle> }) {
+export function KeywordChips({
+  words,
+  layout = 'wrap',
+  style,
+}: {
+  words: readonly string[];
+  layout?: 'wrap' | 'column';
+  style?: StyleProp<ViewStyle>;
+}) {
   const t = useTheme();
   return (
-    <View style={[st.row, style]}>
+    <View style={[layout === 'column' ? st.column : st.row, style]}>
       {words.map((k) => (
         <View key={k} style={[st.chip, { backgroundColor: t.chipBg, borderColor: t.line }]}>
           <Txt style={[st.txt, { color: t.accent }]}>{k}</Txt>
@@ -302,6 +401,7 @@ export function KeywordChips({ words, style }: { words: readonly string[]; style
 
 const st = StyleSheet.create({
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  column: { flexDirection: 'column', alignItems: 'center', gap: 5 },
   chip: { borderWidth: 1, borderRadius: 14, paddingHorizontal: 10, paddingVertical: 4 },
   txt: { fontSize: 10, fontWeight: '600' },
 });
@@ -697,8 +797,9 @@ const st = StyleSheet.create({
 - Создать: `src/components/ResultPanel.tsx`
 - Правка: `src/components/LessonResult.tsx`
 
-**Производит:** `ResultPanel({ gained, zeroTitle?, line, cta: {label, onPress}, onCounted?, children?, footer? })`.
-Потребители: `LessonResult` (сейчас), `ReviewResult` (задача 10).
+**Производит:** `ResultPanel({ gained, title?, zeroTitle?, line, cta: {label, onPress}, onCounted?, children?, footer? })`.
+Потребители: `LessonResult` (сейчас, без `title`), `ReviewResult` (задача 10, `title` «ПОВТОРЕНИЕ» —
+`.lbl` над панелью результата в макете `#trres`).
 
 - [ ] **Шаг 1: `ResultPanel.tsx`.**
 
@@ -706,9 +807,10 @@ const st = StyleSheet.create({
 /** Панель итога (`.lresult` эталона, motion-spec §16): въезжает fade+up 500 мс → хаптика Success →
  *  счётчик «+N XP» катится (55 мс/шаг); когда счётчик докатился — зовёт onCounted (финал урока по нему
  *  запускает полосу модуля и конфетти). Общая часть LessonResult (урок) и ReviewResult (тренажёр,
- *  спека 45) — вынесена по правилу «2+ раза». Порядок содержимого фиксирован: XP (или zeroTitle при
- *  gained 0) → line → children → CTA → footer. Порядок важен: footer у урока — слой конфетти, и он обязан
- *  лежать ПОВЕРХ CTA, как раньше. Reduce motion: счётчик мгновенный (motion-spec §16). */
+ *  спека 45) — вынесена по правилу «2+ раза». Порядок содержимого фиксирован: title (Overline, если
+ *  задан) → XP (или zeroTitle при gained 0) → line → children → CTA → footer. Порядок важен: footer
+ *  у урока — слой конфетти, и он обязан лежать ПОВЕРХ CTA, как раньше. Reduce motion: счётчик
+ *  мгновенный (motion-spec §16). */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -731,6 +833,7 @@ const TICK_MS = 55; // шаг XP-счётчика
 
 export function ResultPanel({
   gained,
+  title,
   zeroTitle,
   line,
   cta,
@@ -739,6 +842,8 @@ export function ResultPanel({
   footer,
 }: {
   gained: number;
+  /** Overline над счётчиком (8.5/ls3 accent, `.lbl` эталона) — у тренажёра «ПОВТОРЕНИЕ»; у урока нет */
+  title?: string;
   /** заголовок вместо счётчика при gained = 0 (повтор урока: +2 сегодня уже получены); не задан — слот пуст */
   zeroTitle?: string;
   /** строка под счётчиком, 11/ls1 muted */
@@ -801,6 +906,7 @@ export function ResultPanel({
   return (
     <Animated.View style={enterStyle}>
       <View style={[st.panel, { backgroundColor: t.panel, borderColor: t.frame }]}>
+        {!!title && <Txt style={[st.title, { color: t.accent }]}>{title}</Txt>}
         {gained > 0 ? (
           <Txt style={[st.xp, { color: t.accent }]}>{tr('lesson.xpGain', { n: shown })}</Txt>
         ) : (
@@ -818,6 +924,7 @@ export function ResultPanel({
 const st = StyleSheet.create({
   // .lresult эталона: radius 18 — осознанный литерал, как radius 13 у строки дневника
   panel: { borderWidth: 1, borderRadius: 18, padding: 20, alignItems: 'center', marginTop: spacing.l },
+  title: { fontSize: 8.5, letterSpacing: 3, marginBottom: 8 }, // .lbl над результатом тренажёра
   xp: { fontFamily: fonts.displaySemi, fontSize: 36 },
   zero: { fontFamily: fonts.display, fontSize: 24 },
   line: { fontSize: 11, letterSpacing: 1, marginTop: 4 },
@@ -985,10 +1092,11 @@ export function ReviewPanel({ summary, onPress }: { summary: ReviewSummary; onPr
   const body = (
     <>
       <View style={{ flex: 1 }}>
-        <Txt style={[st.overline, { color: t.muted }]}>{tr('review.panelTitle')}</Txt>
+        <Txt style={[st.overline, { color: t.accent }]}>{tr('review.panelTitle')}</Txt>
         <Txt style={[st.line, { color: tappable ? t.head : t.success }]}>{line}</Txt>
       </View>
-      <Ionicons name="sync-outline" size={18} color={tappable ? t.accent : t.muted} />
+      {/* `.revcard .ri` эталона: иконка muted во всех состояниях, тап-аффорданс несёт сама панель */}
+      <Ionicons name="sync-outline" size={18} color={t.muted} />
     </>
   );
   const box = [st.box, { backgroundColor: t.panel, borderColor: t.line }];
@@ -1004,10 +1112,12 @@ export function ReviewPanel({ summary, onPress }: { summary: ReviewSummary; onPr
 }
 
 const st = StyleSheet.create({
-  // та же панель, что шапка модуля; отступ снизу — до шапки первого модуля
+  // та же панель, что шапка модуля (design-system §5); отступ снизу — до шапки первого модуля
   box: { ...moduleBox, marginBottom: spacing.m },
-  overline: { fontSize: 9.5, letterSpacing: 2.5, fontWeight: '600' },
-  line: { fontFamily: fonts.displaySemi, fontSize: 20, marginTop: 2 },
+  // `.revcard small` / `.revcard b` эталона: Overline 8.5/ls2 accent, строка Cormorant 600 15 (меньше
+  // названия модуля намеренно — карточка не спорит с шапками модулей)
+  overline: { fontSize: 8.5, letterSpacing: 2, fontWeight: '600' },
+  line: { fontFamily: fonts.displaySemi, fontSize: 15, marginTop: 2 },
 });
 ```
 
@@ -1024,21 +1134,29 @@ const st = StyleSheet.create({
 - Создать: `src/components/ReviewFlashcard.tsx`
 
 **Интерфейсы:**
-- Потребляет: `FlipCard` (задача 6), `CardBack` с `content` и `faceShadow` (задача 5), `Direction`
-  из `review.ts`, `cardImages`.
-- Производит: `ReviewFlashcard({ cardId, direction, revealed, keywords, sentence, hint, onPress })`,
-  `REVIEW_CARD_W = 190`, `REVIEW_CARD_H = 330`. Потребитель — экран (задача 11).
+- Потребляет: `FlipCard` (задача 6), `CardBack` с `content` и `faceShadow` (задача 5),
+  `KeywordChips layout="column"` (задача 3), `Direction` из `review.ts`, `cardImages`.
+- Производит: `ReviewFlashcard({ cardId, direction, revealed, keywords, hint, onPress })`,
+  `REVIEW_CARD_W = 190`, `REVIEW_CARD_H = 330`. `hint` здесь — ЗАМАСКИРОВАННОЕ предложение
+  (`maskCardName(promptSentence(general), name)`), его готовит экран (задача 11). Потребитель — экран.
+
+Композиция по макету (`#v-trainer`, коммит 9a33503): подпись «ВСПОМНИТЕ … · НАЖМИТЕ» стоит ПОД
+картой в обоих направлениях (`.trhint`), а не на рубашке — рубашка несёт только чипы-столбик
+(`.trkwcol`) и предложение-подсказку. Спека В писала подпись на рубашке — расхождение в пользу макета
+(одно место подписи для обоих направлений, и она тапается), фиксируется в отчёте и в правке спеки
+(задача 15).
 
 - [ ] **Шаг 1: компонент.**
 
 ```tsx
-/** Флеш-карта тренажёра (спека 45, раздел В): карта 190×330 (`.ringwrap` эталона `#v-trainer`) на
+/** Флеш-карта тренажёра (спека 45, раздел В; `#v-trainer` эталона): карта 190×330 (`.ringwrap`) на
  *  общем FlipCard. Направление toMeaning — лицо с самого начала, переворота нет (open + animateFlip
  *  false): образ и название — вопрос, ответ — панель «ЗНАЧЕНИЕ» у экрана. Направление toCard —
- *  рубашка CardBack, в зоне эмблемы 4 ключевых слова столбиком + первое предложение общего значения
- *  (БЕЗ названия — оно и есть ответ) + подпись «ВСПОМНИТЕ КАРТУ · НАЖМИТЕ»; тап → 3D-переворот
- *  FLIP_MS → лицо. Плашка названия, панель и кнопки — у экрана, здесь только карта. Уголков нет:
- *  они — знак ритуала карты дня (design-system §5). */
+ *  рубашка CardBack, в зоне эмблемы 4 ключевых слова столбиком (`.trkwcol`) + первое предложение
+ *  общего значения с ИМЕНЕМ КАРТЫ под маской «···» (maskCardName — иначе подсказка выдавала бы
+ *  ответ); тап → 3D-переворот FLIP_MS → лицо. Подпись «ВСПОМНИТЕ … · НАЖМИТЕ», плашка названия,
+ *  панель и кнопки — у экрана, здесь только карта. Уголков нет: они — знак ритуала карты дня
+ *  (design-system §5). */
 import { Image } from 'expo-image';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -1049,6 +1167,7 @@ import { fonts, radius } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { CardBack } from './CardBack';
 import { FlipCard } from './FlipCard';
+import { KeywordChips } from './KeywordChips';
 import { Txt } from './Txt';
 
 // `.ringwrap` тренажёра в эталоне: 190×330 (карта дня — 216×378, масштаб ≈ 0.88)
@@ -1060,7 +1179,6 @@ export function ReviewFlashcard({
   direction,
   revealed,
   keywords,
-  sentence,
   hint,
   onPress,
 }: {
@@ -1068,11 +1186,10 @@ export function ReviewFlashcard({
   direction: Direction;
   /** ответ открыт (toCard — переворот сделан) */
   revealed: boolean;
-  /** 4 слова витрины — на рубашке в направлении toCard, уже на языке интерфейса */
+  /** 4 слова витрины — чипами-столбиком на рубашке в направлении toCard, уже на языке интерфейса */
   keywords: readonly string[];
-  /** первое предложение general (promptSentence); '' — блок todo, на рубашке только слова */
-  sentence: string;
-  /** подпись на рубашке («ВСПОМНИТЕ КАРТУ · НАЖМИТЕ») */
+  /** подсказка на рубашке: первое предложение general с замаскированным именем; '' — блок todo,
+   *  на рубашке только чипы */
   hint: string;
   onPress: () => void;
 }) {
@@ -1093,15 +1210,11 @@ export function ReviewFlashcard({
         // на всю грань с колонкой: грань FlipCard центрирует детей, поэтому подкладываем absoluteFill
         <View style={StyleSheet.absoluteFill}>
           <CardBack
-            hint={hint}
             content={
+              // `.trkwcol` эталона: столбик gap 5 по центру, паддинг 0 12; предложение Cormorant 11.5
               <View style={st.words}>
-                {keywords.map((k) => (
-                  <Txt key={k} style={[st.kw, { color: t.head }]}>
-                    {k}
-                  </Txt>
-                ))}
-                {!!sentence && <Txt style={[st.sentence, { color: t.text }]}>{sentence}</Txt>}
+                <KeywordChips words={keywords} layout="column" />
+                {!!hint && <Txt style={[st.hint, { color: t.head }]}>{hint}</Txt>}
               </View>
             }
           />
@@ -1113,10 +1226,8 @@ export function ReviewFlashcard({
 }
 
 const st = StyleSheet.create({
-  // ⚠️ предварительные значения — задача 13 сверяет их с CSS дорисованного макета (#v-trainer .emb)
-  words: { alignItems: 'center', paddingHorizontal: 22 },
-  kw: { fontFamily: fonts.display, fontSize: 17, lineHeight: 22, letterSpacing: 1, textAlign: 'center' },
-  sentence: { fontFamily: fonts.display, fontSize: 13.5, lineHeight: 19, textAlign: 'center', marginTop: 10 },
+  words: { alignItems: 'center', paddingHorizontal: 12 },
+  hint: { fontFamily: fonts.display, fontSize: 11.5, lineHeight: 17, textAlign: 'center', marginTop: 8 },
   img: { width: '100%', height: '100%' },
 });
 ```
@@ -1146,7 +1257,6 @@ const st = StyleSheet.create({
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet } from 'react-native';
-import { spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { ResultPanel } from './ResultPanel';
 import { Txt } from './Txt';
@@ -1172,6 +1282,7 @@ export function ReviewResult({
   return (
     <ResultPanel
       gained={gained}
+      title={tr('review.panelTitle')}
       line={tr('review.resultLine', { n: cards, k: firstTry })}
       cta={{ label: tr('review.done'), onPress: onDone }}
       footer={
@@ -1186,8 +1297,9 @@ export function ReviewResult({
 }
 
 const st = StyleSheet.create({
-  more: { marginTop: spacing.m },
-  moreTxt: { fontSize: 12, fontWeight: '600', letterSpacing: 0.5 },
+  // `.trlink` эталона: 10.5/ls1 accent по центру, отступ 10
+  more: { marginTop: 10 },
+  moreTxt: { fontSize: 10.5, letterSpacing: 1, fontWeight: '600', textAlign: 'center' },
 });
 ```
 
@@ -1254,6 +1366,7 @@ import {
   applyGrade,
   buildSession,
   deckOrder,
+  maskCardName,
   nextSessionSize,
   promptSentence,
   reviewSummary,
@@ -1325,10 +1438,14 @@ export default function ReviewScreen() {
   const head = queue[0];
   const card = head ? cardById.get(head.cardId) : undefined;
   const keywords = card ? inLang(card.keywords, lang) : [];
+  const name = card ? inLang(card.name, lang) : '';
   // первое предложение общего значения через blockText: при todo — только чипы (keywords у всех 78
-  // вычитаны, «Текст готовится» на флеш-карте не бывает)
+  // вычитаны, «Текст готовится» на флеш-карте не бывает). На рубашке toCard — с именем под маской
+  // «···» (первое предложение general у всех карт начинается с имени — иначе вопрос выдавал бы
+  // ответ), в панели «ЗНАЧЕНИЕ» после ответа — целиком
   const meaning = card ? blockText(card.content.general, lang) : { text: '', todo: true };
   const sentence = meaning.todo ? '' : promptSentence(meaning.text);
+  const backHint = sentence ? maskCardName(sentence, name) : '';
 
   const onReveal = () => {
     if (!head || revealed) return;
@@ -1421,36 +1538,35 @@ export default function ReviewScreen() {
                 direction={head.direction}
                 revealed={revealed}
                 keywords={keywords}
-                sentence={sentence}
-                hint={tr('review.hintCard')}
+                hint={backHint}
                 onPress={onReveal}
               />
             </View>
 
-            {/* toMeaning: название — часть вопроса, видно сразу; подпись под картой зовёт нажать */}
+            {/* подпись «ВСПОМНИТЕ … · НАЖМИТЕ» — под картой в ОБОИХ направлениях (`.trhint` эталона),
+                тапается наравне с картой. После ответа гаснет, но место держит — иначе плашка и панель
+                подпрыгнули бы на её высоту ровно в момент проявления панели */}
+            <Pressable onPress={onReveal} hitSlop={8} disabled={revealed} style={revealed && st.hidden}>
+              <Txt style={[st.hint, { color: t.muted }]}>
+                {tr(head.direction === 'toCard' ? 'review.hintCard' : 'review.hintMeaning')}
+              </Txt>
+            </Pressable>
+
+            {/* toMeaning: название — часть вопроса, видно сразу */}
             {head.direction === 'toMeaning' && (
-              <Txt style={[st.plate, { color: t.head }]}>{inLang(card.name, lang).toUpperCase()}</Txt>
-            )}
-            {head.direction === 'toMeaning' && !revealed && (
-              <Pressable onPress={onReveal} hitSlop={8}>
-                <Txt style={[st.hint, { color: t.muted }]}>{tr('review.hintMeaning')}</Txt>
-              </Pressable>
+              <Txt style={[st.plate, { color: t.head }]}>{name.toUpperCase()}</Txt>
             )}
 
             {revealed && (
               <Animated.View style={revealStyle}>
                 {/* toCard: название — ответ, появляется вместе с панелью после переворота */}
                 {head.direction === 'toCard' && (
-                  <Txt style={[st.plate, { color: t.head }]}>{inLang(card.name, lang).toUpperCase()}</Txt>
+                  <Txt style={[st.plate, { color: t.head }]}>{name.toUpperCase()}</Txt>
                 )}
                 <MeaningPanel title={tr('review.meaning')} style={{ marginTop: spacing.m }}>
-                  <KeywordChips words={keywords} style={{ marginTop: 10 }} />
+                  <KeywordChips words={keywords} style={{ marginTop: 10, justifyContent: 'center' }} />
                   {!!sentence && <Txt style={[st.sentence, { color: t.text }]}>{sentence}</Txt>}
-                  <Pressable
-                    onPress={() => router.push(`/card/${card.id}?from=review`)}
-                    hitSlop={8}
-                    style={{ alignSelf: 'flex-start' }}
-                  >
+                  <Pressable onPress={() => router.push(`/card/${card.id}?from=review`)} hitSlop={8}>
                     <Txt style={[st.link, { color: t.accent }]}>{tr('review.cardPage')}</Txt>
                   </Pressable>
                   <View style={st.grades}>
@@ -1475,16 +1591,17 @@ export default function ReviewScreen() {
 }
 
 const st = StyleSheet.create({
-  // ⚠️ предварительные значения по CSS текущего макета (.date/.h2/.tcount/.plate/.mean/.gradebtns) —
-  // задача 13 сверяет с дорисованным #v-trainer
+  // значения — CSS `#v-trainer` эталона (коммит макета 9a33503): .date/.h2/.tcount/.ringwrap/.trhint/
+  // .plate/.mean/.trlink/.gradebtns
   overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' }, // .date
   title: { fontFamily: fonts.display, fontSize: 28, textAlign: 'center', marginTop: 3 }, // .h2
-  count: { fontSize: 10, letterSpacing: 2, textAlign: 'center', marginTop: spacing.l }, // .tcount
-  cardWrap: { alignSelf: 'center', marginTop: spacing.l }, // .ringwrap margin-top 16
-  plate: { fontFamily: fonts.display, fontSize: 17, letterSpacing: 3, textAlign: 'center', marginTop: 10 }, // .plate b 17/ls3
-  hint: { fontSize: 9.5, letterSpacing: 2.5, textAlign: 'center', marginTop: 10 },
-  sentence: { fontFamily: fonts.display, fontSize: 15, lineHeight: 22, marginTop: 10 },
-  link: { fontSize: 11, fontWeight: '600', letterSpacing: 0.5, marginTop: 10 },
+  count: { fontSize: 10, letterSpacing: 2, textAlign: 'center', marginTop: 10 }, // .tcount
+  cardWrap: { alignSelf: 'center', marginTop: 14 }, // .ringwrap margin-top 14
+  hint: { fontSize: 9, letterSpacing: 2, textAlign: 'center', marginTop: 10 }, // .trhint
+  hidden: { opacity: 0 },
+  plate: { fontFamily: fonts.display, fontSize: 17, letterSpacing: 3, textAlign: 'center', marginTop: 6 }, // .plate b 17/ls3, отступ 6
+  sentence: { fontFamily: fonts.display, fontSize: 14.5, lineHeight: 22, marginTop: 10 }, // #trtext
+  link: { fontSize: 10.5, letterSpacing: 1, fontWeight: '600', textAlign: 'center', marginTop: 10 }, // .trlink
   // .gradebtns: ряд gap 6, отступ 14; кнопка — бордер line, radius 12, паддинг 9×2, 10/700
   grades: { flexDirection: 'row', gap: 6, marginTop: 14 },
   grade: { flex: 1, borderWidth: 1, borderRadius: 12, paddingVertical: 9, paddingHorizontal: 2, alignItems: 'center' },
@@ -1574,35 +1691,39 @@ const st = StyleSheet.create({
 
 ---
 
-### Задача 13: сверка с дорисованным макетом (после коммита Cowork)
+### Задача 13: контрольная сверка с макетом и список осознанных расхождений
 
-**Файлы:** `docs/design-reference.html` (чтение), правки значений в `app/review.tsx`,
-`src/components/ReviewFlashcard.tsx`, `ReviewPanel.tsx`, `ReviewResult.tsx` по необходимости;
-`docs/design-system.md` (если макет уточнил числа).
+**Файлы:** `docs/design-reference.html` (чтение: `#v-trainer`, `.revcard` в `#v-course`, коммит
+9a33503 от 19.08), при необходимости правки значений в `app/review.tsx`, `ReviewFlashcard.tsx`,
+`ReviewPanel.tsx`, `ReviewResult.tsx`.
 
-Предусловие: в `main` лежит коммит Cowork «docs: макет — тренажёр по спеке 45 …». Если его ещё
-нет — задачу 14 выполнять ПО ТЕКУЩЕМУ макету нельзя (сверка была бы с четырьмя кнопками): дождаться.
+Значения в задачах 8–11 сняты с дорисованного макета при написании плана (19.08, уже в `main`).
+Эта задача — перепроверка перед веб-прогоном и фиксация расхождений для отчёта.
 
-- [ ] **Шаг 1:** `git fetch && git merge main` в ветку (конфликтов быть не должно — Cowork трогает
-  только `docs/`).
-- [ ] **Шаг 2: сверить по списку** (правило 6а-0: при конфликте макета со спекой/design-system —
-  права спека; расхождение — флагом в отчёт, не копировать):
-  - `#v-trainer .gradebtns` → три кнопки, gap/паддинг/кегль/цвета (ожидаем 6 / 9×2 / 10×700 /
-    danger–text–success) ↔ `st.grades/grade/gradeTxt`;
-  - рубашка `toCard`: кегли и отступы слов и предложения в `.emb` ↔ `ReviewFlashcard st.kw/sentence/words`;
-    подпись `.emb small` (8.5/ls2 muted — уже в `CardBack.hint`);
-  - подпись под картой `toMeaning` («ВСПОМНИТЕ ЗНАЧЕНИЕ · НАЖМИТЕ») ↔ `st.hint`;
-  - плашка названия (`#trname`) ↔ `st.plate`; счётчик `.tcount` ↔ `st.count`;
-  - панель «ЗНАЧЕНИЕ»: чипы / предложение (`#trtext`) / ссылка «Страница карты →» ↔ `st.sentence/link`;
-  - карточка «Повторение» в `#v-course` (overline, кегль строки, иконка, цвет done) ↔ `ReviewPanel`;
-  - панель результата (`.lresult`-образец: строка, «+X XP», CTA «ГОТОВО», «Ещё N») ↔ `ReviewResult`;
-    кегль «+X XP» в приложении 36 против 34 макета — решение задачи 08, не трогать;
-  - пустое состояние: макет рисует `#trempty` 64×104 пунктиром — приложение берёт общий
-    `EmptyState` (design-system §7, уже в четырёх местах) → расхождение ОСОЗНАННОЕ, записать в отчёт.
-- [ ] **Шаг 3:** внести правки значений; снять пометки «⚠️ предварительные значения» в комментариях
-  стилей; если макет уточнил числа против design-system §5 — обновить §5.
-- [ ] **Шаг 4:** `npx tsc --noEmit`; `git commit -m "feat: значения тренажёра по дорисованному макету (spec 45)"`
-  (если правок не было — коммита нет, так и записать в отчёт).
+- [ ] **Шаг 1: сверить по списку** (если макет менялся после 9a33503 — `git log -1 -- docs/design-reference.html`):
+  - `.gradebtns`: три кнопки, gap 6 / паддинг 9×2 / 10×700 / danger–text–success ↔ `st.grades/grade/gradeTxt`;
+  - `.trkwcol` (рубашка toCard): столбик gap 5, паддинг 0 12, предложение Cormorant 11.5 ↔
+    `ReviewFlashcard st.words/hint`, `KeywordChips layout="column"`;
+  - `.trhint` 9/ls2 muted, отступ 10, ПОД картой в обоих направлениях ↔ `st.hint`;
+  - `#trname` 17/ls3, отступ 6 ↔ `st.plate`; `.tcount` 10/ls2 отступ 10 ↔ `st.count`;
+    `.ringwrap` 190×330 отступ 14 ↔ `st.cardWrap` + `REVIEW_CARD_W/H`;
+  - панель `#trmean` отступ 12: `.kws` по центру, `#trtext` 14.5 отступ 10, `.trlink` 10.5/ls1 accent
+    по центру ↔ `MeaningPanel style`, `KeywordChips style`, `st.sentence/link`;
+  - `.revcard`: Overline 8.5/ls2 accent, строка Cormorant 600 15, иконка 18 muted, done цветом `done`
+    ↔ `ReviewPanel`;
+  - `#trres`: «ПОВТОРЕНИЕ» → строка → «+X XP» → CTA «ГОТОВО» → «Ещё N» ↔ `ReviewResult`/`ResultPanel`.
+- [ ] **Шаг 2: осознанные расхождения — в отчёт** (не копировать макет):
+  1. пустое состояние: макет рисует `#trempty` 64×104 пунктиром — приложение берёт общий `EmptyState`
+     (design-system §7, уже в четырёх местах);
+  2. чип на рубашке: макет — radius 12 / бордер frame / 700; приложение — тот же `KeywordChips`, что
+     и везде (radius 14 / line / 600): второй стиль чипа для тех же слов — дубликат;
+  3. порядок в панели результата: макет «строка → +X XP», приложение «+X XP → строка» — ритм общего
+     `ResultPanel` (как финал урока); Overline «ПОВТОРЕНИЕ» сверху — как в макете;
+  4. кегль «+X XP» 36 против 34 макета — решение задачи 08; подпись панели «ЗНАЧЕНИЕ» 9.5 против 8.5
+     (`.lbl`) — общий `MeaningPanel`, как «ЗНАЧЕНИЕ ДНЯ»;
+  5. подпись «НАЖМИТЕ» после ответа в макете остаётся — в приложении гаснет (место держит).
+- [ ] **Шаг 3:** если шаг 1 дал правки — `npx tsc --noEmit`, `git commit -m "fix: значения тренажёра по макету (spec 45)"`;
+  иначе коммита нет, так и записать в отчёт.
 
 ---
 
@@ -1713,6 +1834,8 @@ const clickOption = (page) => page.evaluate(() => {
   while (!(await visible(page, 'ГОТОВО')) && guard++ < 30) {
     if (await visible(page, 'ВСПОМНИТЕ КАРТУ')) {
       sawBack = true;
+      // рубашка: имя карты под маской «···», плашки с именем ещё нет
+      check(await visible(page, '···'), 'B рубашка: подсказка с маской «···»');
       if (!sawBackShot) { await shot(page, 'review-card-question-dark'); sawBackShot = true; }
       await reveal(page);
       check(await visible(page, 'Не помню'), 'B toCard: после переворота кнопки видны');
@@ -1841,27 +1964,36 @@ const clickOption = (page) => page.evaluate(() => {
 `docs/logic-spec.md`, `docs/backlog.md`, `CLAUDE.md`, `AGENTS.md`.
 
 - [ ] **Шаг 1: спека.** В `docs/specs/45-flashcards.md` отметить критерии приёмки 45б
-  (`[x]` — кроме лайв-проверки), добавить раздел **«Отчёт 45б (дата)»** по образцу отчёта 45а:
-  сделано (файлы, выносы, чем отличается от плана), тесты (число и разбивка: `review.test.ts` +7,
-  `i18nPlurals.test.ts` +3 — перепроверить прогоном каждого файла), веб-проверка (что прошло,
-  скриншоты, консоль), расхождения с макетом (список из задачи 13/14), **сценарий лайв-проверки
-  для Артёма** (переворот toCard, хаптика у трёх кнопок, «Ещё N» после «Состарить на день» × нужное,
-  карточка на курсе в трёх состояниях, «назад» со страницы карты — «Тренажёр», регрессия: расклад
-  «Три карты», финал урока, карта дня, чипы на странице карты).
-- [ ] **Шаг 2: product-spec §2.** «**Повторение 🔨(45)**» → «**Повторение ✅(45)**»; последнее
-  предложение абзаца «Тренажёр» («Часть 45а … ✅; экраны — 45б после дорисовки макета») →
-  «Обе части ✅ (45а — логика/стор/DEV, 45б — экраны)».
-- [ ] **Шаг 3: design-system §5.** В абзаце «Оценки повторения» снять фразу «Макет пока рисует
-  четыре — хвост дорисовки в бэклоге»; если задача 13 уточнила числа — записать их. Добавить строку
-  про общие компоненты, появившиеся в задаче: `FlipCard` (переворот), `ResultPanel` (панель итога),
+  (`[x]` — кроме лайв-проверки), в разделе В поправить две формулировки под реализацию: подпись
+  «ВСПОМНИТЕ … · НАЖМИТЕ» — ПОД картой в обоих направлениях (по макету), а на рубашке toCard —
+  чипы-столбик + предложение с именем карты под маской «···» (`maskCardName`; причина — первое
+  предложение `general` у всех 78 карт начинается с имени). Добавить раздел **«Отчёт 45б (дата)»**
+  по образцу отчёта 45а: сделано (файлы, выносы, чем отличается от плана), тесты (число и разбивка:
+  `review.test.ts` +12, `i18nPlurals.test.ts` +3 — перепроверить прогоном каждого файла),
+  веб-проверка (что прошло, скриншоты, консоль), расхождения с макетом (список задачи 13 шаг 2),
+  **сценарий лайв-проверки для Артёма** (переворот toCard и маска «···» на рубашке, хаптика у трёх
+  кнопок, «Ещё N» после «Состарить на день» × нужное число раз при колоде ≥ 11, карточка на курсе
+  в трёх состояниях, «назад» со страницы карты — «Тренажёр», регрессия: расклад «Три карты», финал
+  урока, карта дня, чипы на странице карты).
+- [ ] **Шаг 2: product-spec §2.** «**Повторение 🔨(45)**» → «**Повторение ✅(45)**»; в абзаце
+  «Тренажёр» — подпись под картой в обоих направлениях, рубашка «значение → карта» — чипы +
+  предложение с именем под маской; последнее предложение («Часть 45а … ✅; экраны — 45б после
+  дорисовки макета») → «Обе части ✅ (45а — логика/стор/DEV, 45б — экраны)».
+- [ ] **Шаг 3: design-system §5.** Абзац «Рубашка-вопрос тренажёра (направление toCard)» (добавлен
+  Cowork 19.08) привести к реализации: чипы — общий `KeywordChips` столбиком (не отдельный стиль
+  chipBg/frame/700), предложение Cormorant 11.5 с именем под маской «···», подпись «ВСПОМНИТЕ КАРТУ ·
+  НАЖМИТЕ» — под картой (`.trhint` 9/ls2 muted), не на рубашке. Добавить строку про общие
+  компоненты, появившиеся в задаче: `FlipCard` (переворот), `ResultPanel` (панель итога),
   `MeaningPanel` (`.mean`), `KeywordChips` (`.kws`) — по одной строке, где сейчас перечислены `Block`
   и `ModalPanel`.
 - [ ] **Шаг 4: logic-spec §12.** Одной строкой: «Карточка курса: `reviewCardState` (hidden/due/new/
   done по приоритету), ссылка «Ещё N» — `nextSessionSize = min(SESSION_MAX, due + newAvailable)`
-  (совпадение с `buildSession` под тестом)».
+  (совпадение с `buildSession` под тестом); подсказка toCard — `maskCardName(promptSentence(general))`
+  (корпусный контракт: имени карты в подсказке нет, 78 × ru/en)».
 - [ ] **Шаг 5: backlog.** Задача 45: статус «45б СДЕЛАНА (дата): экраны, веб-проверка 6а/6б ✓,
-  ждёт лайв-проверки Артёма; ветка `feat/45b-review-screens`». После лайв-проверки — `[x]` и
-  строка «ЗАКРЫТА».
+  ждёт лайв-проверки Артёма; ветка `feat/45b-review-screens`»; флаг Cowork про `promptSentence`/имя
+  карты (в закрытой задаче «Макет: правки дорисовок» и в строке 45) пометить «закрыт 45б:
+  `maskCardName` + корпусный контракт». После лайв-проверки — `[x]` и строка «ЗАКРЫТА».
 - [ ] **Шаг 6: CLAUDE.md «Статус» + AGENTS.md.** Абзац про 45б: что сделано, новые общие
   компоненты, уроки задачи (что вскрылось в ходе реализации — заполняется по факту), число тестов
   и сьютов (замерить `npm test`); в AGENTS.md — число тестов в разделе «Команды», упоминание
@@ -1885,8 +2017,10 @@ const clickOption = (page) => page.evaluate(() => {
 - композиция Overline → заголовок → Rule → счётчик → карта 190×330 → плашка → панель → 3 кнопки —
   задача 11 ✓; сессия один раз при монтировании, очередь — состояние, busy-guard — задача 11 ✓;
 - toMeaning лицом вверх, панель скрыта, подпись под картой, тап по карте ИЛИ подписи, fade 350 —
-  задачи 9, 11 ✓; toCard рубашка со словами + предложением без названия + подпись, переворот 500
-  (`SpreadCard`-механика = `FlipCard`) — задачи 5, 6, 9 ✓; `blockText` при todo — только чипы ✓;
+  задачи 9, 11 ✓; toCard рубашка со словами + предложением БЕЗ имени (маска «···», `maskCardName`
+  под корпусным контрактом — задача 1), переворот 500 (`SpreadCard`-механика = `FlipCard`) — задачи
+  5, 6, 9 ✓; подпись «ВСПОМНИТЕ КАРТУ · НАЖМИТЕ» — под картой, как в макете (спека В правится
+  в задаче 15, расхождение осознанное); `blockText` при todo — только чипы ✓;
 - кнопки «Не помню/Помню/Легко» (0/2/3), danger/text/success, бордер line, radius 12, 10/700,
   хаптика Light — задача 11 ✓; «не помню» → хвост (`applyGrade`), счётчик не уменьшается ✓;
 - пустые состояния двух видов + CTA «К курсу» — задача 11 (`EmptyState`, расхождение с `#trempty`
@@ -1899,15 +2033,17 @@ const clickOption = (page) => page.evaluate(() => {
 - документы Г — задача 15 ✓; persist не трогается ✓.
 
 **Плейсхолдеры:** в задачах нет «TBD»/«добавить по аналогии»; код каждого компонента выписан
-целиком; единственные «уточнить позже» — значения стилей, помеченные «⚠️ предварительные», с явной
-задачей 13 на их сверку — это не пробел плана, а зависимость от параллельной Cowork-работы.
+целиком; значения стилей сняты с дорисованного макета (коммит 9a33503), задача 13 — контрольная
+сверка, а не источник значений.
 
-**Согласованность имён:** `reviewCardState`/`nextSessionSize` (задача 1) ← `ReviewPanel` (8),
-экран (11); `FlipCard`/`FLIP_MS` (6) ← `SpreadCard` (6), `ReviewFlashcard` (9), экран (11);
-`ResultPanel({gained, zeroTitle, line, cta, onCounted, children, footer})` (7) ← `LessonResult` (7),
-`ReviewResult` (10); `CardBack.content` + `faceShadow` (5) ← `ReviewFlashcard` (9); `KeywordChips`
-(3), `MeaningPanel` (4) ← экран (11); `moduleBox` (8) ← `ReviewPanel` (8); ключи i18n (2) ←
-8, 10, 11; `BACK_TITLES.review` (11) ← ссылка «Страница карты →» с `?from=review` (11) ✓.
+**Согласованность имён:** `reviewCardState`/`nextSessionSize`/`maskCardName`/`NAME_MASK` (задача 1)
+← `ReviewPanel` (8), экран (11); `FlipCard`/`FLIP_MS` (6) ← `SpreadCard` (6), `ReviewFlashcard` (9),
+экран (11); `ResultPanel({gained, title, zeroTitle, line, cta, onCounted, children, footer})` (7) ←
+`LessonResult` (7), `ReviewResult` (10); `CardBack.content` + `faceShadow` (5) ← `ReviewFlashcard`
+(9); `KeywordChips({words, layout, style})` (3) ← `ReviewFlashcard` (9, column), экран (11, wrap);
+`MeaningPanel` (4) ← экран (11); `moduleBox` (8) ← `ReviewPanel` (8); ключи i18n (2) ← 8, 10, 11;
+`ReviewFlashcard({cardId, direction, revealed, keywords, hint, onPress})` (9) ← экран (11, `hint` =
+`backHint`); `BACK_TITLES.review` (11) ← ссылка «Страница карты →» с `?from=review` (11) ✓.
 
 **Решения, принятые в плане (не в спеке) — для отчёта и ревью:**
 1. «Ещё N» показывает размер СЛЕДУЮЩЕЙ порции (`nextSessionSize`), а не «всего осталось»: ссылка
@@ -1919,3 +2055,12 @@ const clickOption = (page) => page.evaluate(() => {
 5. XP на панели результата — сумма, реально начисленная стором (`reviewCard` возвращает gained), а не
    `sessionStats(log).xp`: по инварианту 45а они равны, но источник правды — стор; `sessionStats`
    даёт cards/firstTry.
+6. Имя карты в подсказке toCard маскируется «···» (`maskCardName`, все вхождения целым словом) —
+   ответ на флаг Cowork: первое предложение `general` у всех 78 карт начинается с имени. Спека 45
+   этого не предвидела; в панели «ЗНАЧЕНИЕ» после ответа предложение целиком.
+7. Подпись «ВСПОМНИТЕ … · НАЖМИТЕ» — под картой в ОБОИХ направлениях (макет), а не на рубашке
+   (спека В): одно место, одна тап-зона; после ответа гаснет, место держит.
+8. Чипы на рубашке — тот же `KeywordChips` (столбиком), а не второй стиль чипа из макета
+   (radius 12 / frame / 700): правило «один компонент на одну сущность».
+9. Порядок в панели результата — ритм общего `ResultPanel` («+X XP» → строка), Overline
+   «ПОВТОРЕНИЕ» сверху по макету; макет рисует строку над XP — расхождение осознанное.
