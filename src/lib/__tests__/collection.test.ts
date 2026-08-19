@@ -1,13 +1,6 @@
 /** Коллекция-альбом (спека 46): секции, прогресс, режим секции — на РЕАЛЬНОЙ колоде и курсе,
  *  чтобы тест заодно был контрактом данных (22 старших + 4×14, m2l1–m2l4 = 8 старших макета). */
-import {
-  COLLECTION_GROUPS,
-  collectionProgress,
-  collectionSections,
-  groupOf,
-  sectionMode,
-  type CollectionSection,
-} from '../collection';
+import { COLLECTION_GROUPS, collectionProgress, collectionSections, filterProgress, groupOf } from '../collection';
 import { cards, course } from '../content';
 import { learnedCardIds, type LessonProgressMap } from '../courseProgress';
 
@@ -62,17 +55,24 @@ describe('collectionSections', () => {
     const learned = learnedCardIds(course, done('m4l1')); // Жезлы 1–5
     const s = collectionSections(cards, learned);
     expect(s.map((x) => x.group)).toEqual([...COLLECTION_GROUPS]);
-    expect(s.map(sectionMode)).toEqual(['row', 'grid', 'row', 'row', 'row']);
+    expect(s.map((x) => x.open)).toEqual([0, 5, 0, 0, 0]);
     expect(s[1].open).toBe(5);
   });
 });
 
-describe('sectionMode', () => {
-  const sec = (open: number): CollectionSection => ({ group: 'cups', cards: [], open, total: 14 });
-  it('ни одной открытой — строка, хотя бы одна — сетка', () => {
-    expect(sectionMode(sec(0))).toBe('row');
-    expect(sectionMode(sec(1))).toBe('grid');
-    expect(sectionMode(sec(14))).toBe('grid');
+describe('filterProgress', () => {
+  const learned = learnedCardIds(course, done('m2l1', 'm2l2', 'm2l3', 'm2l4', 'm4l1'));
+  const s = collectionSections(cards, learned);
+
+  it('«Все» и «Изучено» — вся колода', () => {
+    expect(filterProgress(s, 'all')).toEqual({ open: 13, total: 78 });
+    expect(filterProgress(s, 'learned')).toEqual({ open: 13, total: 78 });
+  });
+
+  it('группа — её секция', () => {
+    expect(filterProgress(s, 'major')).toEqual({ open: 8, total: 22 });
+    expect(filterProgress(s, 'wands')).toEqual({ open: 5, total: 14 });
+    expect(filterProgress(s, 'cups')).toEqual({ open: 0, total: 14 });
   });
 });
 

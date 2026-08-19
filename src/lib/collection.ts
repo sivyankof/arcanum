@@ -1,9 +1,11 @@
-/** Коллекция-альбом (спека 46, logic-spec §13): чистые функции над колодой и множеством изученных
- *  карт. Ничего не хранится — альбом целиком выводится из `learnedCardIds` (то же множество, что
- *  бейдж «ИЗУЧЕНО ✓» справочника и колода тренажёра): «открыто» = «изучено», правило одно на три места. */
+/** Прогресс изучения в справочнике (спека 46б, logic-spec §13): чистые функции над колодой
+ *  и множеством изученных карт. Ничего не хранится — секции целиком выводятся из `learnedCardIds`
+ *  (то же множество, что бейдж «ИЗУЧЕНО ✓» справочника и колода тренажёра): «открыто» = «изучено»,
+ *  правило одно на три места. */
 import type { TarotCard } from './content';
+import type { CardFilter } from './cardSearch';
 
-/** Секции альбома в порядке экрана: старшие арканы, затем масти в порядке чипов справочника и курса М4. */
+/** Секции справочника в порядке экрана: старшие арканы, затем масти в порядке чипов справочника и курса М4. */
 export type CollectionGroup = 'major' | 'wands' | 'cups' | 'swords' | 'pentacles';
 export const COLLECTION_GROUPS: readonly CollectionGroup[] = ['major', 'wands', 'cups', 'swords', 'pentacles'];
 
@@ -41,9 +43,12 @@ export function collectionProgress(sections: readonly CollectionSection[]): { op
   );
 }
 
-/** Режим секции на экране (решение спеки 46, вопрос 7): хотя бы одна открытая карта — сетка
- *  с заголовком «НАЗВАНИЕ · N ИЗ M», ни одной — компактная строка «Название · 0 ИЗ M». */
-export type SectionMode = 'grid' | 'row';
-export function sectionMode(s: CollectionSection): SectionMode {
-  return s.open > 0 ? 'grid' : 'row';
+/** Число под активным чипом справочника (спека 46б): «Все»/«Изучено» — вся колода, группа — её секция. */
+export function filterProgress(
+  sections: readonly CollectionSection[],
+  filter: CardFilter,
+): { open: number; total: number } {
+  if (filter === 'all' || filter === 'learned') return collectionProgress(sections);
+  const s = sections.find((x) => x.group === filter);
+  return s ? { open: s.open, total: s.total } : { open: 0, total: 0 };
 }

@@ -134,7 +134,9 @@ export default function CardsScreen() {
                 count={opened}
                 total={cards.length}
                 chevron
-                onPress={() => router.push('/collection')}
+                // маршрут альбома удалён этой задачей (спека 46б) — строка целиком уходит в задаче 2,
+                // временный каст, как когда-то `lesson/[id]` (задача 07), держит tsc чистым до неё
+                onPress={() => router.push('/collection' as never)}
                 style={st.collection}
               />
             </FadeUp>
