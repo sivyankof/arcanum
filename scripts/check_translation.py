@@ -25,6 +25,9 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
 
 CANON = ('ru', 'en')
+# Ожидаемый статус нового языка: волна перевода кладёт `draft`, финальная сессия L-5
+# поднимает до `reviewed`. Без параметра приёмка L-5 краснела бы на ровном месте.
+EXPECT_STATUS = 'draft'
 CARDS_PATH = 'content/cards.json'
 COURSE_PATH = 'content/course.json'
 SPREADS_PATH = 'content/spreads.json'
@@ -182,8 +185,8 @@ def check_structure(cards_new, cards_old, in_wave, langs, rep):
             if not 8 <= len(sr) <= 12:
                 bad_words.append(f'{cid}: search.{lang} = {len(sr)} (нужно 8–12)')
             ws = card.get('wordsStatus', {}).get(lang)
-            if ws != 'draft':
-                bad_status.append(f'{cid}: wordsStatus.{lang} = {ws} (ожидался draft)')
+            if ws != EXPECT_STATUS:
+                bad_status.append(f'{cid}: wordsStatus.{lang} = {ws} (ожидался {EXPECT_STATUS})')
             for b in blocks_of(cid):
                 blk = card['content'].get(b)
                 if blk is None:
@@ -199,12 +202,12 @@ def check_structure(cards_new, cards_old, in_wave, langs, rep):
                 elif CYRILLIC.search(text):
                     cyr.append(f'{cid}.{b}.{lang}: кириллица в тексте')
                 st = blk.get('status', {}).get(lang)
-                if st != 'draft':
-                    bad_status.append(f'{cid}.{b}: status.{lang} = {st} (ожидался draft)')
+                if st != EXPECT_STATUS:
+                    bad_status.append(f'{cid}.{b}: status.{lang} = {st} (ожидался {EXPECT_STATUS})')
 
     rep.section('волна залита целиком (атомарность)', incomplete)
     rep.section('слова карты: keywords 4, search 8–12', bad_words)
-    rep.section('статус нового языка = draft', bad_status)
+    rep.section(f'статус нового языка = {EXPECT_STATUS}', bad_status)
     rep.section('пустых строк в новом языке нет', empty)
     rep.section('кириллицы в новом языке нет', cyr)
     for lst in (incomplete, bad_words, bad_status, empty, cyr):
@@ -497,9 +500,9 @@ def check_course(rep, langs, use_git, path=COURSE_PATH):
                     empty.append(f'{lid}: theory.{lang} пустая')
                 elif CYRILLIC.search(text):
                     cyr.append(f'{lid}: кириллица в theory.{lang}')
-                if th.get('status', {}).get(lang) != 'draft':
+                if th.get('status', {}).get(lang) != EXPECT_STATUS:
                     bad_status.append(f'{lid}: theory status.{lang} = {th.get("status", {}).get(lang)}')
-                if les.get('quizStatus', {}).get(lang) != 'draft':
+                if les.get('quizStatus', {}).get(lang) != EXPECT_STATUS:
                     bad_status.append(f'{lid}: quizStatus.{lang} = {les.get("quizStatus", {}).get(lang)}')
             for i, q in enumerate(les.get('quiz', [])):
                 for lang in langs:
@@ -585,7 +588,7 @@ def check_course(rep, langs, use_git, path=COURSE_PATH):
     rep.section('курс залит целиком', missing)
     rep.section('пустых значений нет', empty)
     rep.section('кириллицы в новом языке нет', cyr)
-    rep.section('статус нового языка = draft', bad_status)
+    rep.section(f'статус нового языка = {EXPECT_STATUS}', bad_status)
     rep.section('структура викторины не менялась (число вариантов)', structure)
     rep.section('канон курса не тронут, индекс верного ответа на месте', canon)
     for lst in (missing, empty, cyr, bad_status, structure, canon):
@@ -632,10 +635,16 @@ def main():
     ap.add_argument('--file', default=CARDS_PATH,
                     help='какой файл проверять (по умолчанию content/cards.json); '
                          'пригодится для черновика до слияния и для красных прогонов')
+    ap.add_argument('--status', default='draft', choices=('draft', 'reviewed', 'final'),
+                    help='какой статус ожидается у нового языка: волна кладёт draft, '
+                         'финальная сессия L-5 поднимает до reviewed')
     ap.add_argument('--scope', default='cards', choices=('cards', 'course', 'spreads'),
                     help='что принимаем: колоду карт (по умолчанию), курс или расклады. '
                          'Курс и расклады — периметр сессии L-4')
     args = ap.parse_args()
+
+    global EXPECT_STATUS
+    EXPECT_STATUS = args.status
 
     langs = [l.strip() for l in args.lang.split(',') if l.strip()]
     in_wave = WAVES[args.wave]
