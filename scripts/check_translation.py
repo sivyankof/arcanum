@@ -26,6 +26,8 @@ sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
 
 CANON = ('ru', 'en')
 CARDS_PATH = 'content/cards.json'
+COURSE_PATH = 'content/course.json'
+SPREADS_PATH = 'content/spreads.json'
 # 12 блоков есть у каждой карты; birth_path — только у Старших арканов
 COMMON_BLOCKS = ['general', 'reversed', 'love', 'career', 'finances', 'health', 'day_card',
                  'symbolism', 'love_reversed', 'career_reversed', 'finances_reversed',
@@ -444,6 +446,130 @@ def check_not_english(cards_new, in_wave, langs, rep):
     rep.errors.extend(same)
 
 
+def check_course(rep, langs, use_git, path=COURSE_PATH):
+    """Приёмка перевода курса (сессия L-4): заголовки модулей и уроков, теория, викторины.
+    ⚠️ Главная проверка здесь — НЕ полнота, а `correct`: индекс верного ответа не должен уехать
+    при переводе. Проект уже платил за это дважды (задачи 29 и 31): агент переставил варианты
+    местами, не тронув `correct`, схема осталась валидной, контракт-тест молчал — и вопрос
+    перестал проверять знание. Механически ловится только тем, что индекс и ЧИСЛО вариантов
+    сверяются с каноном; совпадение по смыслу остаётся человеку."""
+    data = json.loads(open(path, encoding='utf-8').read())
+    mods = data['modules'] if isinstance(data, dict) else data
+    old = None
+    if use_git:
+        head = subprocess.run(['git', 'show', f'HEAD:{COURSE_PATH}'], capture_output=True).stdout.decode('utf-8')
+        if head.strip():
+            o = json.loads(head)
+            old = {m['id']: m for m in (o['modules'] if isinstance(o, dict) else o)}
+
+    missing, empty, cyr, bad_status, structure, canon = [], [], [], [], [], []
+    for m in mods:
+        for lang in langs:
+            if not (m.get('title', {}).get(lang) or '').strip():
+                missing.append(f'модуль {m["id"]}: нет title.{lang}')
+        for les in m['lessons']:
+            lid = f'{m["id"]}/{les["id"]}'
+            for lang in langs:
+                if not (les.get('title', {}).get(lang) or '').strip():
+                    missing.append(f'{lid}: нет title.{lang}')
+                th = les.get('theory', {})
+                text = th.get(lang)
+                if text is None:
+                    missing.append(f'{lid}: нет theory.{lang}')
+                elif not text.strip():
+                    empty.append(f'{lid}: theory.{lang} пустая')
+                elif CYRILLIC.search(text):
+                    cyr.append(f'{lid}: кириллица в theory.{lang}')
+                if th.get('status', {}).get(lang) != 'draft':
+                    bad_status.append(f'{lid}: theory status.{lang} = {th.get("status", {}).get(lang)}')
+                if les.get('quizStatus', {}).get(lang) != 'draft':
+                    bad_status.append(f'{lid}: quizStatus.{lang} = {les.get("quizStatus", {}).get(lang)}')
+            for i, q in enumerate(les.get('quiz', [])):
+                for lang in langs:
+                    for field in ('q', 'explain'):
+                        t = q.get(field, {}).get(lang)
+                        if t is None:
+                            missing.append(f'{lid} в{i + 1}: нет {field}.{lang}')
+                        elif not t.strip():
+                            empty.append(f'{lid} в{i + 1}: {field}.{lang} пустой')
+                        elif CYRILLIC.search(t):
+                            cyr.append(f'{lid} в{i + 1}: кириллица в {field}.{lang}')
+                    # options — СПИСОК многоязычных объектов [{ru, en, …}], а не словарь по языкам
+                    for j, opt in enumerate(q.get('options', [])):
+                        t = opt.get(lang)
+                        if t is None:
+                            missing.append(f'{lid} в{i + 1}: нет варианта {j + 1}.{lang}')
+                        elif not t.strip():
+                            empty.append(f'{lid} в{i + 1}: вариант {j + 1}.{lang} пустой')
+                        elif CYRILLIC.search(t):
+                            cyr.append(f'{lid} в{i + 1}: кириллица в варианте {j + 1}.{lang}')
+                if old:
+                    om = old.get(m['id'])
+                    ol = next((x for x in om['lessons'] if x['id'] == les['id']), None) if om else None
+                    oq = ol.get('quiz', [])[i] if ol and i < len(ol.get('quiz', [])) else None
+                    if oq is not None:
+                        if oq.get('correct') != q.get('correct'):
+                            canon.append(f'{lid} в{i + 1}: correct {oq.get("correct")} → {q.get("correct")}')
+                        if len(oq.get('options', [])) != len(q.get('options', [])):
+                            structure.append(f'{lid} в{i + 1}: число вариантов '
+                                             f'{len(oq.get("options", []))} → {len(q.get("options", []))}')
+                        for lang in CANON:
+                            if oq.get('q', {}).get(lang) != q.get('q', {}).get(lang):
+                                canon.append(f'{lid} в{i + 1}: вопрос {lang} изменён')
+                            # порядок вариантов канона обязан сохраниться: переставили их —
+                            # и `correct` указывает на дистрактор (задачи 29 и 31)
+                            oo = [o.get(lang) for o in oq.get('options', [])]
+                            no = [o.get(lang) for o in q.get('options', [])]
+                            if oo != no:
+                                canon.append(f'{lid} в{i + 1}: варианты {lang} изменены или переставлены')
+            if old:
+                om = old.get(m['id'])
+                ol = next((x for x in om['lessons'] if x['id'] == les['id']), None) if om else None
+                if ol:
+                    for lang in CANON:
+                        if ol.get('theory', {}).get(lang) != les.get('theory', {}).get(lang):
+                            canon.append(f'{lid}: theory.{lang} изменена')
+
+    rep.section('курс залит целиком', missing)
+    rep.section('пустых значений нет', empty)
+    rep.section('кириллицы в новом языке нет', cyr)
+    rep.section('статус нового языка = draft', bad_status)
+    rep.section('структура викторины не менялась (число вариантов)', structure)
+    rep.section('канон курса не тронут, индекс верного ответа на месте', canon)
+    for lst in (missing, empty, cyr, bad_status, structure, canon):
+        rep.errors.extend(lst)
+    print('[ОТЧЁТ] совпадение вариантов ПО СМЫСЛУ механически не проверяется — '
+          'если варианты переставляли, сверять текст верного ответа до и после руками')
+
+
+def check_spreads(rep, langs, path=SPREADS_PATH):
+    """Расклады: у них НЕТ статусов, поэтому единственная проверка — полнота и структура."""
+    data = json.loads(open(path, encoding='utf-8').read())
+    spreads = data['spreads'] if isinstance(data, dict) else data
+    missing, empty, structure = [], [], []
+    for s in spreads:
+        for lang in langs:
+            for field in ('name', 'description'):
+                t = s.get(field, {}).get(lang)
+                if t is None:
+                    missing.append(f'{s["id"]}: нет {field}.{lang}')
+                elif not t.strip():
+                    empty.append(f'{s["id"]}: {field}.{lang} пустой')
+            for i, pos in enumerate(s.get('positions', [])):
+                t = pos.get(lang)
+                if t is None:
+                    missing.append(f'{s["id"]} поз.{i + 1}: нет {lang}')
+                elif not t.strip():
+                    empty.append(f'{s["id"]} поз.{i + 1}: {lang} пустая')
+        if len(s.get('positions', [])) != s.get('cards'):
+            structure.append(f'{s["id"]}: позиций {len(s.get("positions", []))}, карт {s.get("cards")}')
+    rep.section('расклады залиты целиком', missing)
+    rep.section('пустых значений нет', empty)
+    rep.section('число позиций совпадает с числом карт', structure)
+    for lst in (missing, empty, structure):
+        rep.errors.extend(lst)
+
+
 def main():
     ap = argparse.ArgumentParser(description='Приёмка волны перевода (задача 28)')
     ap.add_argument('--wave', default='majors', choices=sorted(WAVES),
@@ -454,10 +580,27 @@ def main():
     ap.add_argument('--file', default=CARDS_PATH,
                     help='какой файл проверять (по умолчанию content/cards.json); '
                          'пригодится для черновика до слияния и для красных прогонов')
+    ap.add_argument('--scope', default='cards', choices=('cards', 'course', 'spreads'),
+                    help='что принимаем: колоду карт (по умолчанию), курс или расклады. '
+                         'Курс и расклады — периметр сессии L-4')
     args = ap.parse_args()
 
     langs = [l.strip() for l in args.lang.split(',') if l.strip()]
     in_wave = WAVES[args.wave]
+
+    if args.scope in ('course', 'spreads'):
+        rep = Report()
+        title = 'курс (теория и викторины)' if args.scope == 'course' else 'расклады'
+        print(f'Приёмка: {title} · языки: {", ".join(langs)}')
+        print('=' * 70)
+        if args.scope == 'course':
+            check_course(rep, langs, not args.no_git, args.file if args.file != CARDS_PATH else COURSE_PATH)
+        else:
+            check_spreads(rep, langs, args.file if args.file != CARDS_PATH else SPREADS_PATH)
+        print('=' * 70)
+        print(f'ОШИБОК: {len(rep.errors)}')
+        print('ПРИЁМКА: ' + ('ЗЕЛЁНАЯ' if not rep.errors else 'КРАСНАЯ'))
+        return 1 if rep.errors else 0
 
     cards_new = load_cards(open(args.file, encoding='utf-8').read())
     cards_old = None
