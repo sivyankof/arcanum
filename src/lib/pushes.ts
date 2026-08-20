@@ -105,6 +105,7 @@ const TITLE_KEY: Record<PushKind, string> = {
   streak: 'push.titleStreak',
   comeback: 'push.titleComeback',
   freeze: 'push.titleFreeze',
+  moon: 'push.titleMoonNew',
 };
 
 // Номер последнего вызова applyPlan и хвост цепочки его применений. Планировщик вызывает
@@ -151,7 +152,7 @@ async function applyPlanImpl(plan: PlannedPush[], lang: Lang, mySeq: number): Pr
     const [y, m, d] = p.date.split('-').map(Number);
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: tFixed(TITLE_KEY[p.kind], { count: p.n ?? 0 }),
+        title: tFixed(p.titleKey ?? TITLE_KEY[p.kind], { count: p.n ?? 0 }),
         body: pushBody(p, lang),
       },
       trigger: {

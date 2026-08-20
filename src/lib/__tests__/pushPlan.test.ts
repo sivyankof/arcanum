@@ -2,12 +2,19 @@ import {
   capPerDay,
   COMEBACK_AFTER_DAYS,
   MAX_PER_DAY,
+  MOON_PHRASE,
+  MOON_TITLE,
   MORNING_AHEAD_DAYS,
+  moonDaysIn,
+  planInputFromStore,
   planPushes,
   type PlannedPush,
   type PlanInput,
 } from '../pushPlan';
+import { localDateISO, plusDaysISO } from '../dates';
+import i18n, { resources } from '../i18n';
 import { pickPhrase } from '../phrases';
+import { DEFAULT_SETTINGS } from '../settings';
 
 // 12 августа 2026, 08:00 локального времени — до утреннего пуша
 const MORNING_8AM = new Date(2026, 7, 12, 8, 0);
@@ -23,6 +30,7 @@ const base: PlanInput = {
   streak: 0,
   freezes: 0,
   lastDrawDate: null,
+  moonDays: [],
 };
 
 const kinds = (input: PlanInput, now: Date) => planPushes(input, now).map((p) => p.kind);
@@ -264,5 +272,188 @@ describe('planPushes — пуш «серию спасла заморозка» (
     expect(freeze.phraseKey).toBe('push.freeze_saved');
     expect(pickPhrase('push.freeze_saved', freeze.date, 'ru', { days: '5 дней' })).not.toBe('');
     expect(pickPhrase('push.freeze_saved', freeze.date, 'en', { days: '5 days' })).not.toBe('');
+  });
+});
+
+describe('planPushes — лунные пуши (спека 47б)', () => {
+  it('день события в горизонте — утренний этого дня становится лунным', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-13', kind: 'new' as const }] };
+    const day = onDate(input, MORNING_8AM, '2026-08-13');
+    expect(day).toHaveLength(1);
+    expect(day[0].kind).toBe('moon');
+    expect(day[0].phraseKey).toBe('push.moon_new');
+    expect(day[0].titleKey).toBe('push.titleMoonNew');
+    expect(day[0].hour).toBe(9);
+    expect(day[0].minute).toBe(0);
+  });
+
+  it('полнолуние даёт свою пару ключей', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-14', kind: 'full' as const }] };
+    const day = onDate(input, MORNING_8AM, '2026-08-14');
+    expect(day[0].kind).toBe('moon');
+    expect(day[0].phraseKey).toBe('push.moon_full');
+    expect(day[0].titleKey).toBe('push.titleMoonFull');
+  });
+
+  it('сегодняшний лунный стоит, пока карта не открыта, и вытесняет обычный утренний', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-12', kind: 'new' as const }] };
+    const today = onDate(input, MORNING_8AM, '2026-08-12');
+    expect(today.map((p) => p.kind)).toContain('moon');
+    expect(today.map((p) => p.kind)).not.toContain('morning');
+  });
+
+  it('карта открыта — сегодняшнего лунного нет (правило утреннего)', () => {
+    const input = {
+      ...base,
+      todayCardId: 'the-tower',
+      moonDays: [{ date: '2026-08-12', kind: 'full' as const }],
+    };
+    expect(onDate(input, MORNING_8AM, '2026-08-12').map((p) => p.kind)).not.toContain('moon');
+  });
+
+  it('freeze-день совпал с днём события — побеждает freeze', () => {
+    // карта открыта сегодня → freezeDay = послезавтра, 2026-08-14 (спека 10)
+    const input = {
+      ...base,
+      todayCardId: 'the-tower',
+      streak: 5,
+      freezes: 1,
+      moonDays: [{ date: '2026-08-14', kind: 'full' as const }],
+    };
+    expect(onDate(input, MORNING_8AM, '2026-08-14').map((p) => p.kind)).toEqual(['freeze']);
+  });
+
+  it('возвратный (4-й день) лунным не подменяется', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-16', kind: 'new' as const }] };
+    expect(onDate(input, MORNING_8AM, '2026-08-16').map((p) => p.kind)).toEqual(['comeback']);
+  });
+
+  it('день события вне горизонта утренних — лунного в плане нет', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-17', kind: 'new' as const }] };
+    expect(kinds(input, MORNING_8AM)).not.toContain('moon');
+  });
+
+  it('capPerDay: лунный уступает спасению серии и вечернему', () => {
+    const mk = (kind: PlannedPush['kind'], hour: number): PlannedPush => ({
+      kind,
+      date: '2026-08-12',
+      hour,
+      minute: 0,
+      phraseKey: 'x',
+    });
+    const kept = capPerDay([mk('moon', 9), mk('evening', 21), mk('streak', 20)]);
+    expect(kept.map((p) => p.kind).sort()).toEqual(['evening', 'streak']);
+  });
+
+  it('детерминизм: один вход — один план', () => {
+    const input = { ...base, moonDays: [{ date: '2026-08-13', kind: 'new' as const }] };
+    expect(planPushes(input, MORNING_8AM)).toEqual(planPushes(input, MORNING_8AM));
+  });
+});
+
+describe('planInputFromStore — moonDays (спека 47б)', () => {
+  // Точный момент новолуния 12.08.2026 17:37 UTC (logic-spec §6). Его ЛОКАЛЬНЫЙ день зависит
+  // от пояса машины, поэтому ожидание строится тем же localDateISO, что и реализация, —
+  // тест проверяет ОКНО (от начала дня, границы горизонта), а не сам маппинг момента в день.
+  const NEW_MOON = new Date(Date.UTC(2026, 7, 12, 17, 37));
+  const eventDay = localDateISO(NEW_MOON);
+  const at = (iso: string, h: number) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d, h, 0);
+  };
+  const moonDaysAt = (now: Date) =>
+    planInputFromStore(DEFAULT_SETTINGS, 0, [], 0, null, now).moonDays;
+
+  it('событие раньше now, но в том же локальном дне — в окне (окно от НАЧАЛА дня)', () => {
+    expect(moonDaysAt(at(eventDay, 23))).toContainEqual({ date: eventDay, kind: 'new' });
+  });
+
+  it('событие во вчерашнем дне — вне окна', () => {
+    expect(moonDaysAt(at(plusDaysISO(eventDay, 1), 8)).map((d) => d.date)).not.toContain(eventDay);
+  });
+
+  it('день +3 — в окне, день +4 — уже нет', () => {
+    expect(moonDaysAt(at(plusDaysISO(eventDay, -3), 8))).toContainEqual({
+      date: eventDay,
+      kind: 'new',
+    });
+    expect(moonDaysAt(at(plusDaysISO(eventDay, -4), 8)).map((d) => d.date)).not.toContain(eventDay);
+  });
+});
+
+describe('moonDaysIn — окно и маппинг момента в локальный день (спека 47б)', () => {
+  // 20 августа 2026, 15:00 локально — день без настоящих событий, источник подменяется
+  const NOW = new Date(2026, 7, 20, 15, 0);
+
+  it('окно — от локальной полуночи сегодня на MORNING_AHEAD_DAYS + 1 суток', () => {
+    let seen: { from: Date; to: Date } | undefined;
+    moonDaysIn(NOW, (from, to) => {
+      seen = { from, to };
+      return [];
+    });
+    // границы проверяются компонентами даты, а не сравнением с localMidnight: иначе тест
+    // повторял бы реализацию и молчал бы на её подмене
+    expect([seen!.from.getHours(), seen!.from.getMinutes(), seen!.from.getSeconds()]).toEqual([0, 0, 0]);
+    expect(seen!.from.getDate()).toBe(20);
+    expect([seen!.to.getHours(), seen!.to.getMinutes()]).toEqual([0, 0]);
+    expect(seen!.to.getDate()).toBe(20 + MORNING_AHEAD_DAYS + 1);
+  });
+
+  it('момент события переводится в ЛОКАЛЬНЫЙ день, а не в UTC-день', () => {
+    // два синтетических события у краёв локальных суток: при ЛЮБОМ ненулевом смещении пояса
+    // хотя бы у одного UTC-день отличается от локального, поэтому подмена реализации на срез
+    // ISO-строки (UTC) обязана уронить этот тест. Ожидание — литералы, а не вызов localDateISO:
+    // иначе обе стороны сравнения менялись бы синхронно и проверка была бы тавтологией.
+    // ⚠️ На машине ровно в UTC две реализации неразличимы в принципе — там тест просто пройдёт.
+    const days = moonDaysIn(NOW, () => [
+      { kind: 'new', at: new Date(2026, 7, 21, 0, 30) },
+      { kind: 'full', at: new Date(2026, 7, 22, 23, 30) },
+    ]);
+    expect(days).toEqual([
+      { date: '2026-08-21', kind: 'new' },
+      { date: '2026-08-22', kind: 'full' },
+    ]);
+  });
+
+  it('planInputFromStore берёт окно у moonDaysIn (настоящий источник событий)', () => {
+    const real = planInputFromStore(DEFAULT_SETTINGS, 0, [], 0, null, NOW).moonDays;
+    expect(real).toEqual(moonDaysIn(NOW));
+  });
+});
+
+describe('ключи лунного пуша существуют в контенте и i18n (спека 47б)', () => {
+  // Шов, который не закрыт больше ничем: тело пуша ловится pickPhrase (пустая строка на
+  // неизвестном ключе), а i18n.t на отсутствующем ключе молча возвращает САМ КЛЮЧ — опечатка
+  // в titleMoonFull уехала бы в баннер как литерал «push.titleMoonFull». Ни веб-проверка
+  // (expo-notifications на вебе no-op), ни лайв-проверка (событие вне горизонта) это не видят.
+  // Языки обходятся по Object.keys(resources), а не по литералам 'ru'/'en' (правило hf-02):
+  // иначе третий язык проехал бы мимо проверки.
+  const LANGS = Object.keys(resources) as Array<keyof typeof resources>;
+
+  it.each(LANGS)('%s: заголовок лежит в ресурсах САМОГО языка, а не берётся фолбэком', (lang) => {
+    // проверять через i18n.t нельзя: fallbackLng: 'en' подставляет английскую строку вместо
+    // пропавшего русского ключа, t() возвращает осмысленный текст, и тест остаётся зелёным —
+    // ровно тот тихий уход в английский, который ловила hf-02. Поэтому смотрим сами ресурсы.
+    for (const key of Object.values(MOON_TITLE)) {
+      const text = key
+        .split('.')
+        .reduce<unknown>((node, part) => (node as Record<string, unknown>)?.[part], resources[lang].translation);
+      expect(typeof text).toBe('string');
+      expect(String(text).length).toBeGreaterThan(0);
+    }
+  });
+
+  it.each(LANGS)('%s: i18n действительно отдаёт заголовок, а не сам ключ', (lang) => {
+    const t = i18n.getFixedT(lang);
+    for (const key of Object.values(MOON_TITLE)) {
+      expect(t(key)).not.toBe(key);
+      expect(t(key).length).toBeGreaterThan(0);
+    }
+  });
+
+  it.each(LANGS)('%s: тела фраз непустые', (lang) => {
+    for (const key of Object.values(MOON_PHRASE)) {
+      expect(pickPhrase(key, '2026-08-12', lang).length).toBeGreaterThan(0);
+    }
   });
 });

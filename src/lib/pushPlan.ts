@@ -9,11 +9,18 @@
  *  только когда приложение открыли, значит сегодняшняя активность гарантирована. Правило
  *  «3+ дня тишины → один возвратный» получается из этого само.
  */
-import { daysAgoISO, localDateISO } from './dates';
+import { daysAgoISO, localDateISO, localMidnight } from './dates';
 import type { DailyDraw, Outcome } from './journal';
+import { moonEvents, type EventSource, type MoonEventKind } from './moon';
 import { parseHHMM, type AppSettings } from './settings';
 
-export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze';
+export type PushKind = 'morning' | 'evening' | 'streak' | 'comeback' | 'freeze' | 'moon';
+
+/** День лунного события по ЛОКАЛЬНОМУ календарю — как на экране /moon (logic-spec §6). */
+export interface MoonDay {
+  date: string;
+  kind: MoonEventKind;
+}
 
 export interface PlannedPush {
   kind: PushKind;
@@ -27,6 +34,8 @@ export interface PlannedPush {
   cardId?: string;
   /** Подстановка {n} у спасения серии; freeze-пуш несёт то же поле для {days} (push.freeze_saved). */
   n?: number;
+  /** Явный ключ заголовка: у лунного пуша их два (новолуние/полнолуние), по виду не выбрать. */
+  titleKey?: string;
 }
 
 export interface PlanInput {
@@ -45,6 +54,8 @@ export interface PlanInput {
   todayCardId?: string;
   /** Ответ вечерней рефлексии уже дан. */
   todayOutcome?: Outcome;
+  /** Дни новолуний/полнолуний в горизонте плана (собирает planInputFromStore). */
+  moonDays: MoonDay[];
 }
 
 /** На сколько дней вперёд ставим утренние, прежде чем замолчать. */
@@ -57,10 +68,12 @@ export const STREAK_MIN = 3;
 /** Жёсткий инвариант logic-spec §8. */
 export const MAX_PER_DAY = 2;
 
-/** Кого оставляем, когда на день претендует больше двух. */
-const PRIORITY: PushKind[] = ['streak', 'evening', 'freeze', 'morning', 'comeback'];
+/** Кого оставляем, когда на день претендует больше двух. С morning лунный в один день
+ *  не сосуществует по построению (он и есть утренний этого дня), но порядок обязан быть
+ *  полным: «не нашёл в списке» = indexOf −1 = внезапно высший приоритет. */
+const PRIORITY: PushKind[] = ['streak', 'evening', 'freeze', 'moon', 'morning', 'comeback'];
 
-const PHRASE_KEY: Record<PushKind, string> = {
+const PHRASE_KEY: Record<Exclude<PushKind, 'moon'>, string> = {
   morning: 'push.morning_card',
   evening: 'push.evening_reflect',
   streak: 'push.streak_save',
@@ -68,9 +81,22 @@ const PHRASE_KEY: Record<PushKind, string> = {
   freeze: 'push.freeze_saved',
 };
 
-/** Локальная дата через N суток. Конструктор Date сам нормализует переход через месяц и год. */
+/** Лунному пушу ключи фразы и заголовка выбираются по виду СОБЫТИЯ (спека 47б).
+ *  Экспортируются ради контракт-теста: у заголовка нет других проверок — тело пуша ловит
+ *  `pickPhrase` (пустая строка на неизвестном ключе), а `i18n.t` на отсутствующем ключе молча
+ *  возвращает САМ КЛЮЧ, и опечатка уехала бы в баннер как есть (мутационная проверка 47б). */
+export const MOON_PHRASE: Record<MoonEventKind, string> = {
+  new: 'push.moon_new',
+  full: 'push.moon_full',
+};
+export const MOON_TITLE: Record<MoonEventKind, string> = {
+  new: 'push.titleMoonNew',
+  full: 'push.titleMoonFull',
+};
+
+/** Локальная дата через N суток. */
 function daysAheadISO(n: number, from: Date): string {
-  return localDateISO(new Date(from.getFullYear(), from.getMonth(), from.getDate() + n));
+  return localDateISO(localMidnight(from, n));
 }
 
 /** Момент уже прошёл? Сравнение в локальном времени — как и всё в проекте после аудита H2. */
@@ -101,7 +127,37 @@ export function planInputFromStore(
     lastDrawDate,
     todayCardId: today?.cardId,
     todayOutcome: today?.outcome,
+    moonDays: moonDaysIn(now),
   };
+}
+
+/** Дни лунных событий в горизонте плана: от НАЧАЛА локального сегодня (событие в 04:18 обязано
+ *  попасть в план и при пересчёте в 09:00) до конца последнего дня утренних. `moonEvents` отдаёт
+ *  полуинтервал [from, to), поэтому правая граница — полночь дня +MORNING_AHEAD_DAYS+1, и сам этот
+ *  день в окно не входит.
+ *
+ *  Источник событий инъектируется — тот же приём, что у `monthEvents` (спека 47): без него
+ *  проверка маппинга «момент → ЛОКАЛЬНЫЙ день» была бы тавтологией (тест строил бы ожидание тем же
+ *  `localDateISO`, что и реализация) и молчала бы на подмене реализации UTC-срезом ISO-строки. */
+export function moonDaysIn(now: Date, source: EventSource = moonEvents): MoonDay[] {
+  return source(localMidnight(now), localMidnight(now, MORNING_AHEAD_DAYS + 1)).map((e) => ({
+    date: localDateISO(e.at),
+    kind: e.kind,
+  }));
+}
+
+/** Утренний слот дня: в локальный день новолуния/полнолуния — лунный текст вместо дежурного
+ *  («вместо, а не поверх», master-plan). Freeze-день сюда не попадает: его ветка в planPushes
+ *  стоит раньше — спасение серии функционально и праздником не перекрывается (спека 47б). */
+function morningSlot(
+  date: string,
+  at: { hour: number; minute: number },
+  moonDays: MoonDay[],
+): PlannedPush {
+  const moon = moonDays.find((m) => m.date === date);
+  return moon
+    ? { kind: 'moon', date, ...at, phraseKey: MOON_PHRASE[moon.kind], titleKey: MOON_TITLE[moon.kind] }
+    : { kind: 'morning', date, ...at, phraseKey: PHRASE_KEY.morning };
 }
 
 export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
@@ -115,7 +171,7 @@ export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
 
   // сегодняшний утренний — только пока карта не открыта
   if (!drawn) {
-    out.push({ kind: 'morning', date: today, ...morning, phraseKey: PHRASE_KEY.morning });
+    out.push(morningSlot(today, morning, input.moonDays));
   }
 
   // вечерний — только на сегодня: он называет карту по имени, а откроют ли завтрашнюю, неизвестно
@@ -166,7 +222,7 @@ export function planPushes(input: PlanInput, now: Date): PlannedPush[] {
         n: input.streak,
       });
     } else {
-      out.push({ kind: 'morning', date: daysAheadISO(d, now), ...morning, phraseKey: PHRASE_KEY.morning });
+      out.push(morningSlot(daysAheadISO(d, now), morning, input.moonDays));
     }
   }
   out.push({

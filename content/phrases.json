@@ -122,6 +122,34 @@
     "ru": "Вчера прошло без карты — заморозка удержит серию, если вернуться сегодня",
     "en": "Yesterday passed without a card — return today and the freeze will hold your streak"
    }
+  ],
+  "moon_new": [
+   {
+    "ru": "Сегодня новолуние — время начинать. Какая карта откроет цикл?",
+    "en": "New moon today — a time for beginnings. Which card opens the cycle?"
+   },
+   {
+    "ru": "Новолуние: небо тёмное, колода ждёт ✦",
+    "en": "New moon: the sky is dark, the deck is waiting ✦"
+   },
+   {
+    "ru": "Новый лунный цикл начался. Ваша карта уже здесь",
+    "en": "A new lunar cycle begins. Your card is already here"
+   }
+  ],
+  "moon_full": [
+   {
+    "ru": "Полнолуние: самое время открыть карту дня",
+    "en": "Full moon — the perfect moment to draw your card"
+   },
+   {
+    "ru": "Луна сегодня полная. Что она подсветит в вашей карте?",
+    "en": "The moon is full today. What will it light up in your card?"
+   },
+   {
+    "ru": "Полнолуние ✦ Загляните, какая карта выпала вам сегодня",
+    "en": "Full moon ✦ See which card came to you today"
+   }
   ]
  },
  "freeze": {
