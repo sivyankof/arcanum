@@ -5,134 +5,380 @@
       "id": "card-of-day",
       "free": true,
       "cards": 1,
-      "name": { "ru": "Карта дня", "en": "Card of the Day" },
+      "name": {
+        "ru": "Карта дня",
+        "en": "Card of the Day",
+        "es": "Carta del día",
+        "pt": "Carta do dia"
+      },
       "description": {
         "ru": "Одна карта — энергия и урок сегодняшнего дня. Лучший способ учиться: одна карта в день.",
-        "en": "One card revealing the energy and lesson of your day. The best way to learn: one card a day."
+        "en": "One card revealing the energy and lesson of your day. The best way to learn: one card a day.",
+        "es": "Una carta con la energía y la lección de hoy. La mejor forma de aprender: una carta al día.",
+        "pt": "Uma carta que revela a energia e a lição de hoje. A melhor forma de aprender: uma carta por dia."
       },
       "positions": [
-        { "ru": "Энергия дня", "en": "Energy of the day" }
+        {
+          "ru": "Энергия дня",
+          "en": "Energy of the day",
+          "es": "Energía del día",
+          "pt": "Energia do dia"
+        }
       ]
     },
     {
       "id": "three-card",
       "free": true,
       "cards": 3,
-      "name": { "ru": "Три карты", "en": "Three Cards" },
+      "name": {
+        "ru": "Три карты",
+        "en": "Three Cards",
+        "es": "Tres cartas",
+        "pt": "Três cartas"
+      },
       "description": {
         "ru": "Классика для любого вопроса: как ситуация развивалась, где она сейчас и куда движется.",
-        "en": "A classic for any question: how the situation arose, where it stands, and where it is heading."
+        "en": "A classic for any question: how the situation arose, where it stands, and where it is heading.",
+        "es": "Un clásico para cualquier pregunta: cómo surgió la situación, dónde está ahora y hacia dónde va.",
+        "pt": "Um clássico para qualquer pergunta: como a situação começou, onde ela está agora e para onde caminha."
       },
       "positions": [
-        { "ru": "Прошлое", "en": "Past" },
-        { "ru": "Настоящее", "en": "Present" },
-        { "ru": "Будущее", "en": "Future" }
+        {
+          "ru": "Прошлое",
+          "en": "Past",
+          "es": "Pasado",
+          "pt": "Passado"
+        },
+        {
+          "ru": "Настоящее",
+          "en": "Present",
+          "es": "Presente",
+          "pt": "Presente"
+        },
+        {
+          "ru": "Будущее",
+          "en": "Future",
+          "es": "Futuro",
+          "pt": "Futuro"
+        }
       ]
     },
     {
       "id": "situation-action-outcome",
       "free": false,
       "cards": 3,
-      "name": { "ru": "Ситуация — Действие — Итог", "en": "Situation — Action — Outcome" },
+      "name": {
+        "ru": "Ситуация — Действие — Итог",
+        "en": "Situation — Action — Outcome",
+        "es": "Situación — Acción — Resultado",
+        "pt": "Situação — Ação — Resultado"
+      },
       "description": {
         "ru": "Практичный расклад, когда нужно решить, как поступить.",
-        "en": "A practical spread for deciding what to do next."
+        "en": "A practical spread for deciding what to do next.",
+        "es": "Una tirada práctica para cuando tienes que decidir qué hacer.",
+        "pt": "Uma tiragem prática para quando você precisa decidir como agir."
       },
       "positions": [
-        { "ru": "Суть ситуации", "en": "The situation" },
-        { "ru": "Что делать", "en": "Recommended action" },
-        { "ru": "К чему приведёт", "en": "Likely outcome" }
+        {
+          "ru": "Суть ситуации",
+          "en": "The situation",
+          "es": "La situación",
+          "pt": "A situação"
+        },
+        {
+          "ru": "Что делать",
+          "en": "Recommended action",
+          "es": "Qué hacer",
+          "pt": "O que fazer"
+        },
+        {
+          "ru": "К чему приведёт",
+          "en": "Likely outcome",
+          "es": "A qué lleva",
+          "pt": "Resultado provável"
+        }
       ]
     },
     {
       "id": "relationship",
       "free": false,
       "cards": 5,
-      "name": { "ru": "На отношения", "en": "Relationship Spread" },
+      "name": {
+        "ru": "На отношения",
+        "en": "Relationship Spread",
+        "es": "Relación de pareja",
+        "pt": "Relacionamento"
+      },
       "description": {
         "ru": "Взгляд на отношения с двух сторон: чувства, ожидания и общее направление.",
-        "en": "A look at a relationship from both sides: feelings, expectations, and shared direction."
+        "en": "A look at a relationship from both sides: feelings, expectations, and shared direction.",
+        "es": "Una mirada a la relación desde ambos lados: sentimientos, expectativas y rumbo común.",
+        "pt": "Um olhar sobre o relacionamento pelos dois lados: sentimentos, expectativas e o rumo em comum."
       },
       "positions": [
-        { "ru": "Вы в этих отношениях", "en": "You in the relationship" },
-        { "ru": "Партнёр в этих отношениях", "en": "Your partner in the relationship" },
-        { "ru": "Что вас соединяет", "en": "What unites you" },
-        { "ru": "Что мешает", "en": "What challenges you" },
-        { "ru": "Куда движутся отношения", "en": "Where it is heading" }
+        {
+          "ru": "Вы в этих отношениях",
+          "en": "You in the relationship",
+          "es": "Tú en la relación",
+          "pt": "Você no relacionamento"
+        },
+        {
+          "ru": "Партнёр в этих отношениях",
+          "en": "Your partner in the relationship",
+          "es": "Tu pareja en la relación",
+          "pt": "A outra pessoa no relacionamento"
+        },
+        {
+          "ru": "Что вас соединяет",
+          "en": "What unites you",
+          "es": "Lo que los une",
+          "pt": "O que une vocês"
+        },
+        {
+          "ru": "Что мешает",
+          "en": "What challenges you",
+          "es": "Lo que los frena",
+          "pt": "O que atrapalha vocês"
+        },
+        {
+          "ru": "Куда движутся отношения",
+          "en": "Where it is heading",
+          "es": "Hacia dónde va",
+          "pt": "Rumo do relacionamento"
+        }
       ]
     },
     {
       "id": "choice",
       "free": false,
       "cards": 5,
-      "name": { "ru": "Выбор из двух", "en": "Crossroads (Two Paths)" },
+      "name": {
+        "ru": "Выбор из двух",
+        "en": "Crossroads (Two Paths)",
+        "es": "Elección entre dos",
+        "pt": "Escolha entre dois caminhos"
+      },
       "description": {
         "ru": "Когда стоите перед выбором между двумя вариантами.",
-        "en": "For when you stand before two options."
+        "en": "For when you stand before two options.",
+        "es": "Para cuando tienes que elegir entre dos opciones.",
+        "pt": "Para quando você está diante de duas opções."
       },
       "positions": [
-        { "ru": "Вы и суть выбора", "en": "You and the choice" },
-        { "ru": "Путь A: что даст", "en": "Path A: what it brings" },
-        { "ru": "Путь A: цена", "en": "Path A: the cost" },
-        { "ru": "Путь B: что даст", "en": "Path B: what it brings" },
-        { "ru": "Путь B: цена", "en": "Path B: the cost" }
+        {
+          "ru": "Вы и суть выбора",
+          "en": "You and the choice",
+          "es": "Tú y la elección",
+          "pt": "Você e a escolha"
+        },
+        {
+          "ru": "Путь A: что даст",
+          "en": "Path A: what it brings",
+          "es": "Camino A: qué aporta",
+          "pt": "Caminho A: o que traz"
+        },
+        {
+          "ru": "Путь A: цена",
+          "en": "Path A: the cost",
+          "es": "Camino A: el precio",
+          "pt": "Caminho A: o preço"
+        },
+        {
+          "ru": "Путь B: что даст",
+          "en": "Path B: what it brings",
+          "es": "Camino B: qué aporta",
+          "pt": "Caminho B: o que traz"
+        },
+        {
+          "ru": "Путь B: цена",
+          "en": "Path B: the cost",
+          "es": "Camino B: el precio",
+          "pt": "Caminho B: o preço"
+        }
       ]
     },
     {
       "id": "horseshoe",
       "free": false,
       "cards": 7,
-      "name": { "ru": "Подкова", "en": "Horseshoe" },
+      "name": {
+        "ru": "Подкова",
+        "en": "Horseshoe",
+        "es": "Herradura",
+        "pt": "Ferradura"
+      },
       "description": {
         "ru": "Развёрнутый взгляд на ситуацию: от предыстории до совета и итога.",
-        "en": "A fuller view of a situation: from background to advice and outcome."
+        "en": "A fuller view of a situation: from background to advice and outcome.",
+        "es": "Una mirada amplia a la situación: del origen al consejo y al resultado.",
+        "pt": "Uma visão ampla da situação: do começo ao conselho e ao desfecho."
       },
       "positions": [
-        { "ru": "Прошлое", "en": "Past" },
-        { "ru": "Настоящее", "en": "Present" },
-        { "ru": "Скрытые влияния", "en": "Hidden influences" },
-        { "ru": "Препятствия", "en": "Obstacles" },
-        { "ru": "Окружение", "en": "External influences" },
-        { "ru": "Совет", "en": "Advice" },
-        { "ru": "Вероятный итог", "en": "Likely outcome" }
+        {
+          "ru": "Прошлое",
+          "en": "Past",
+          "es": "Pasado",
+          "pt": "Passado"
+        },
+        {
+          "ru": "Настоящее",
+          "en": "Present",
+          "es": "Presente",
+          "pt": "Presente"
+        },
+        {
+          "ru": "Скрытые влияния",
+          "en": "Hidden influences",
+          "es": "Influencias ocultas",
+          "pt": "Influências ocultas"
+        },
+        {
+          "ru": "Препятствия",
+          "en": "Obstacles",
+          "es": "Obstáculos",
+          "pt": "Obstáculos"
+        },
+        {
+          "ru": "Окружение",
+          "en": "External influences",
+          "es": "Entorno",
+          "pt": "Influências externas"
+        },
+        {
+          "ru": "Совет",
+          "en": "Advice",
+          "es": "Consejo",
+          "pt": "Conselho"
+        },
+        {
+          "ru": "Вероятный итог",
+          "en": "Likely outcome",
+          "es": "Resultado probable",
+          "pt": "Resultado provável"
+        }
       ]
     },
     {
       "id": "month-ahead",
       "free": false,
       "cards": 4,
-      "name": { "ru": "На месяц", "en": "Month Ahead" },
+      "name": {
+        "ru": "На месяц",
+        "en": "Month Ahead",
+        "es": "Próximo mes",
+        "pt": "Próximo mês"
+      },
       "description": {
         "ru": "Четыре недели вперёд: по одной карте на каждую.",
-        "en": "Four weeks ahead: one card for each."
+        "en": "Four weeks ahead: one card for each.",
+        "es": "Cuatro semanas por delante: una carta para cada una.",
+        "pt": "Quatro semanas pela frente: uma carta para cada uma."
       },
       "positions": [
-        { "ru": "Неделя 1", "en": "Week 1" },
-        { "ru": "Неделя 2", "en": "Week 2" },
-        { "ru": "Неделя 3", "en": "Week 3" },
-        { "ru": "Неделя 4", "en": "Week 4" }
+        {
+          "ru": "Неделя 1",
+          "en": "Week 1",
+          "es": "Semana 1",
+          "pt": "Semana 1"
+        },
+        {
+          "ru": "Неделя 2",
+          "en": "Week 2",
+          "es": "Semana 2",
+          "pt": "Semana 2"
+        },
+        {
+          "ru": "Неделя 3",
+          "en": "Week 3",
+          "es": "Semana 3",
+          "pt": "Semana 3"
+        },
+        {
+          "ru": "Неделя 4",
+          "en": "Week 4",
+          "es": "Semana 4",
+          "pt": "Semana 4"
+        }
       ]
     },
     {
       "id": "celtic-cross",
       "free": false,
       "cards": 10,
-      "name": { "ru": "Кельтский крест", "en": "Celtic Cross" },
+      "name": {
+        "ru": "Кельтский крест",
+        "en": "Celtic Cross",
+        "es": "Cruz celta",
+        "pt": "Cruz Celta"
+      },
       "description": {
         "ru": "Самый известный большой расклад — глубокий разбор одной ситуации. На основе метода А. Э. Уэйта (1911).",
-        "en": "The most famous full spread — a deep dive into one situation. Based on A. E. Waite's method (1911)."
+        "en": "The most famous full spread — a deep dive into one situation. Based on A. E. Waite's method (1911).",
+        "es": "La más conocida de las tiradas grandes: un análisis profundo de una sola situación. Basada en el método de A. E. Waite (1911).",
+        "pt": "A mais conhecida das grandes tiragens — uma análise profunda de uma única situação. Baseada no método de A. E. Waite (1911)."
       },
       "positions": [
-        { "ru": "Суть ситуации", "en": "The heart of the matter" },
-        { "ru": "Что пересекает (мешает или помогает)", "en": "What crosses you" },
-        { "ru": "Основание (корни ситуации)", "en": "The foundation" },
-        { "ru": "Недавнее прошлое", "en": "Recent past" },
-        { "ru": "Возможное лучшее", "en": "What crowns you (potential)" },
-        { "ru": "Ближайшее будущее", "en": "Near future" },
-        { "ru": "Вы сами", "en": "You yourself" },
-        { "ru": "Окружение", "en": "Your environment" },
-        { "ru": "Надежды и страхи", "en": "Hopes and fears" },
-        { "ru": "Итог", "en": "Final outcome" }
+        {
+          "ru": "Суть ситуации",
+          "en": "The heart of the matter",
+          "es": "El corazón del asunto",
+          "pt": "O cerne da questão"
+        },
+        {
+          "ru": "Что пересекает (мешает или помогает)",
+          "en": "What crosses you",
+          "es": "Lo que te cruza (a favor o en contra)",
+          "pt": "O que cruza (a favor ou contra)"
+        },
+        {
+          "ru": "Основание (корни ситуации)",
+          "en": "The foundation",
+          "es": "La base (las raíces)",
+          "pt": "A base (as raízes)"
+        },
+        {
+          "ru": "Недавнее прошлое",
+          "en": "Recent past",
+          "es": "Pasado reciente",
+          "pt": "Passado recente"
+        },
+        {
+          "ru": "Возможное лучшее",
+          "en": "What crowns you (potential)",
+          "es": "Lo mejor posible",
+          "pt": "O melhor possível"
+        },
+        {
+          "ru": "Ближайшее будущее",
+          "en": "Near future",
+          "es": "Futuro cercano",
+          "pt": "Futuro próximo"
+        },
+        {
+          "ru": "Вы сами",
+          "en": "You yourself",
+          "es": "Tú en la situación",
+          "pt": "Você na situação"
+        },
+        {
+          "ru": "Окружение",
+          "en": "Your environment",
+          "es": "Entorno",
+          "pt": "Influências externas"
+        },
+        {
+          "ru": "Надежды и страхи",
+          "en": "Hopes and fears",
+          "es": "Esperanzas y miedos",
+          "pt": "Esperanças e medos"
+        },
+        {
+          "ru": "Итог",
+          "en": "Final outcome",
+          "es": "Resultado final",
+          "pt": "Resultado final"
+        }
       ]
     }
   ]
