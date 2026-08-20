@@ -272,6 +272,27 @@ describe('maskCardName — имя карты в подсказке toCard зам
     expect(maskCardName('Карта начала пути.', 'Дурак')).toBe('Карта начала пути.');
   });
 
+  // Нашла волна L-2: в романских языках предлог сливается с артиклем в одно слово
+  // (pt «em» + «o» → «no», es «de» + «el» → «del»), поэтому имя из name («O Três de Paus»)
+  // в тексте выглядит как «No Três de Paus» — поиск полного имени его не находил, и рубашка
+  // тренажёра печатала ответ. Контракт по корпусу поймал это на w03.pt.
+  it('pt: предлог, слитый с артиклем, не прячет имя от маски', () => {
+    expect(maskCardName('No Três de Paus, seus barcos já estão navegando.', 'O Três de Paus')).toBe(
+      `No ${NAME_MASK}, seus barcos já estão navegando.`,
+    );
+  });
+
+  it('es: слитная форма del/al тоже не прячет имя', () => {
+    expect(maskCardName('El mensaje del Tres de Bastos es claro.', 'El Tres de Bastos')).toBe(
+      `El mensaje del ${NAME_MASK} es claro.`,
+    );
+  });
+
+  it('снятие артикля не ломает имя, которое само начинается с похожих букв', () => {
+    // «Os» в «Os Enamorados» — артикль, а «Ases» начинается с тех же букв и артиклем не является
+    expect(maskCardName('Dois Ases lado a lado.', 'Ases')).toBe(`Dois ${NAME_MASK} lado a lado.`);
+  });
+
   // контракт по корпусу: ни одна подсказка toCard не содержит имени своей карты — ни на одном языке
   // приложения. Это и есть дефект, найденный при дорисовке макета; тест обязан быть красным без
   // maskCardName. Обходит ВСЕ LANGS, не только ['ru', 'en'] — иначе задача 28 (переводы ES/PT)

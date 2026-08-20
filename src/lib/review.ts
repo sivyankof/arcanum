@@ -195,6 +195,13 @@ const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
  *  ложного совпадения, и настоящее имя сразу за ним оставалось непроверенным (утечка в подсказку).
  *  Здесь такой ловушки нет: маска — не буквенное слово соседних языков, случайно приклеиться
  *  к постороннему слову ей неоткуда. */
+/** Артикль в начале названия карты: английский «The», испанские el/la/los/las, португальские
+ *  o/a/os/as. Нужен, чтобы пробовать имя и БЕЗ артикля: в романских языках предлог сливается
+ *  с артиклем в одно слово («em» + «o» → «no», «de» + «el» → «del»), поэтому `name.pt`
+ *  «O Três de Paus» стоит в тексте как «No Três de Paus», и поиск полного имени его не находит.
+ *  Утечку нашла волна L-2: подсказка тренажёра печатала ответ на португальском (w03). */
+const ARTICLE_PREFIX = /^(?:the|el|la|los|las|o|a|os|as)\s+/i;
+
 function dropArticle(text: string): string {
   return text.replace(new RegExp(`the\\s+${escapeRe(NAME_MASK)}`, 'gi'), (m: string, offset: number, s: string) => {
     const before = s[offset - 1];
@@ -209,7 +216,9 @@ function dropArticle(text: string): string {
  *  («The Fool») пробуется и форма без него. «Мир» внутри «примирения» не трогается. Имени в тексте
  *  нет — текст как есть. */
 export function maskCardName(text: string, name: string): string {
-  const variants = [name, name.replace(/^the\s+/i, '')].filter((v, i, a) => v.length >= 3 && a.indexOf(v) === i);
+  const variants = [name, name.replace(ARTICLE_PREFIX, '')].filter(
+    (v, i, a) => v.length >= 3 && a.indexOf(v) === i,
+  );
   for (const v of variants) {
     // ищем ТОЛЬКО само имя (без необязательного «the» в регулярке): отклонённое проверкой целого
     // слова совпадение — это ровно имя внутри чужого слова, и пропуск его безопасен — другое
