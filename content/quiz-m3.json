@@ -2,7 +2,9 @@
  "_comment": "Вопросы викторин М3, черновик (статус draft, вычитка редактора впереди). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
  "status": {
   "ru": "reviewed",
-  "en": "reviewed"
+  "en": "reviewed",
+  "es": "draft",
+  "pt": "draft"
  },
  "lessons": [
   {
@@ -12,52 +14,72 @@
      "type": "single",
      "q": {
       "ru": "В чём главная сила карты Сила?",
-      "en": "What is the true strength of Fortitude?"
+      "en": "What is the true strength of Fortitude?",
+      "es": "¿En qué consiste la verdadera fuerza de La Fuerza?",
+      "pt": "Em que consiste a verdadeira força da carta A Força?"
      },
      "options": [
       {
        "ru": "В умении подавить чувства и порывы одним усилием воли",
-       "en": "The will to suppress your feelings and impulses by sheer force"
+       "en": "The will to suppress your feelings and impulses by sheer force",
+       "es": "En saber reprimir los sentimientos y los impulsos a pura voluntad",
+       "pt": "Em saber reprimir os sentimentos e os impulsos por puro esforço de vontade"
       },
       {
        "ru": "В терпении и доброте, которые приручают собственные страхи и порывы",
-       "en": "Patience and kindness that tame your own fears and impulses"
+       "en": "Patience and kindness that tame your own fears and impulses",
+       "es": "En la paciencia y la bondad que doman los propios miedos e impulsos",
+       "pt": "Na paciência e na gentileza que domam os próprios medos e impulsos"
       },
       {
        "ru": "В способности одолеть любого противника одним открытым напором",
-       "en": "The power to overwhelm an opponent by force"
+       "en": "The power to overwhelm an opponent by force",
+       "es": "En la capacidad de vencer a cualquier rival con puro empuje",
+       "pt": "Na capacidade de vencer qualquer adversário só na base do ímpeto"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Лев на карте — не враг, а наши порывы: их не убивают и не давят, а приручают — на его шее гирлянда цветов вместо цепи.",
-      "en": "The lion is not an enemy but our own impulses: they are not killed or crushed but tamed — a garland of flowers lies on his neck instead of a chain."
+      "en": "The lion is not an enemy but our own impulses: they are not killed or crushed but tamed — a garland of flowers lies on his neck instead of a chain.",
+      "es": "El león de la carta no es un enemigo, sino nuestros impulsos: no se los mata ni se los aplasta, se los doma; en su cuello lleva una guirnalda de flores en lugar de una cadena.",
+      "pt": "O leão da carta não é um inimigo, e sim os nossos impulsos: eles não são mortos nem esmagados, e sim domados — no pescoço dele há uma guirlanda de flores no lugar da corrente."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта говорит: то, что кажется неукротимым, поддаётся доброте быстрее, чем напору?",
-      "en": "Which card says that what seems untamable yields to kindness faster than to force?"
+      "en": "Which card says that what seems untamable yields to kindness faster than to force?",
+      "es": "¿Qué carta dice que lo que parece indomable cede antes ante la bondad que ante el empuje?",
+      "pt": "Qual carta diz que aquilo que parece indomável cede à gentileza mais depressa do que ao ímpeto?"
      },
      "options": [
       {
        "ru": "Сила",
-       "en": "Fortitude"
+       "en": "Fortitude",
+       "es": "La Fuerza",
+       "pt": "A Força"
       },
       {
        "ru": "Колесница",
-       "en": "The Chariot"
+       "en": "The Chariot",
+       "es": "El Carro",
+       "pt": "O Carro"
       },
       {
        "ru": "Отшельник",
-       "en": "The Hermit"
+       "en": "The Hermit",
+       "es": "El Ermitaño",
+       "pt": "O Eremita"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Женщина закрывает пасть льву без всякого оружия: спокойная уверенность сильнее рычания.",
-      "en": "The woman closes the lion's mouth with no weapon at all: calm confidence is stronger than roaring."
+      "en": "The woman closes the lion's mouth with no weapon at all: calm confidence is stronger than roaring.",
+      "es": "La mujer le cierra las fauces al león sin arma alguna: la confianza serena puede más que los rugidos.",
+      "pt": "A mulher fecha a boca do leão sem arma nenhuma: a confiança calma é mais forte do que o rugido."
      },
      "cardId": "strength"
     },
@@ -65,78 +87,108 @@
      "type": "single",
      "q": {
       "ru": "Чем уединение Отшельника отличается от одиночества-наказания?",
-      "en": "How is the Hermit's solitude different from loneliness as punishment?"
+      "en": "How is the Hermit's solitude different from loneliness as punishment?",
+      "es": "¿En qué se diferencia el retiro del Ermitaño de la soledad como castigo?",
+      "pt": "Em que o recolhimento do Eremita se diferencia da solidão como castigo?"
      },
      "options": [
       {
        "ru": "Ничем: карта якобы предупреждает об опасной изоляции",
-       "en": "It isn't: the card simply warns you about isolation"
+       "en": "It isn't: the card simply warns you about isolation",
+       "es": "En nada: la carta supuestamente advierte de un aislamiento peligroso",
+       "pt": "Em nada: dizem que a carta avisa sobre um isolamento perigoso"
       },
       {
        "ru": "Отшельник прячется от мира, который его разочаровал",
-       "en": "The Hermit hides from a world that disappointed him"
+       "en": "The Hermit hides from a world that disappointed him",
+       "es": "El Ermitaño se esconde de un mundo que lo decepcionó",
+       "pt": "O Eremita se esconde de um mundo que o decepcionou"
       },
       {
        "ru": "Это осознанная пауза, чтобы услышать себя, — и она выбрана добровольно",
-       "en": "It is a deliberate pause to hear yourself — chosen freely"
+       "en": "It is a deliberate pause to hear yourself — chosen freely",
+       "es": "Es una pausa consciente para escucharse a uno mismo, y es elegida por voluntad propia",
+       "pt": "É uma pausa consciente para escutar a si mesmo — e ela é escolhida por vontade própria"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Отшельник сам поднялся выше шума, а его фонарь поднят для других — это выбор, а не изгнание.",
-      "en": "The Hermit climbed above the noise himself, and his lantern is raised for others — it is a choice, not an exile."
+      "en": "The Hermit climbed above the noise himself, and his lantern is raised for others — it is a choice, not an exile.",
+      "es": "El Ermitaño subió por encima del ruido por su cuenta, y su farol está en alto para los demás: es una elección, no un destierro.",
+      "pt": "O Eremita subiu por conta própria acima do barulho, e a lanterna dele está erguida para os outros — é uma escolha, não um exílio."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём риск Силы — её слабое место?",
-      "en": "What is Fortitude's risk — its weak spot?"
+      "en": "What is Fortitude's risk — its weak spot?",
+      "es": "¿Cuál es el riesgo de La Fuerza, su punto débil?",
+      "pt": "Qual é o risco da Força — o ponto fraco dela?"
      },
      "options": [
       {
        "ru": "Перепутать мягкость с попустительством и делать вид, что льва нет",
-       "en": "Mistaking gentleness for indulgence and pretending the lion isn't there"
+       "en": "Mistaking gentleness for indulgence and pretending the lion isn't there",
+       "es": "Confundir la suavidad con la permisividad y hacer como si el león no estuviera",
+       "pt": "Confundir suavidade com permissividade e fingir que o leão não está ali"
       },
       {
        "ru": "Стать слишком жёсткой и постепенно растерять всю свою доброту",
-       "en": "Becoming too harsh and gradually losing all your kindness"
+       "en": "Becoming too harsh and gradually losing all your kindness",
+       "es": "Volverse demasiado dura y ir perdiendo poco a poco toda su bondad",
+       "pt": "Endurecer demais e ir perdendo aos poucos toda a gentileza"
       },
       {
        "ru": "Отдать все свои силы без остатка другим людям и полностью забыть о себе",
-       "en": "Giving all your strength away to others and completely forgetting about yourself"
+       "en": "Giving all your strength away to others and completely forgetting about yourself",
+       "es": "Entregar todas sus fuerzas a los demás y olvidarse por completo de sí misma",
+       "pt": "Entregar todas as forças aos outros, sem guardar nada, e esquecer completamente de si"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Приручить льва не значит его не замечать: мягкость Силы работает только вместе с честным взглядом на свои порывы.",
-      "en": "Taming the lion doesn't mean ignoring it: Fortitude's gentleness only works together with an honest look at your own impulses."
+      "en": "Taming the lion doesn't mean ignoring it: Fortitude's gentleness only works together with an honest look at your own impulses.",
+      "es": "Domar al león no significa no verlo: la suavidad de La Fuerza solo funciona junto con una mirada honesta a los propios impulsos.",
+      "pt": "Domar o leão não significa fingir que ele não está ali: a suavidade da Força só funciona junto com um olhar honesto para os próprios impulsos."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что предлагает связка Сила + Отшельник, когда внутри буря?",
-      "en": "What does the pair Fortitude + the Hermit suggest when a storm rages inside?"
+      "en": "What does the pair Fortitude + the Hermit suggest when a storm rages inside?",
+      "es": "¿Qué propone la dupla La Fuerza + El Ermitaño cuando por dentro hay tormenta?",
+      "pt": "O que a dupla A Força + O Eremita propõe quando há uma tempestade por dentro?"
      },
      "options": [
       {
        "ru": "Действовать сразу и резко, пока эмоции ещё дают вам много энергии",
-       "en": "Act at once and decisively, while your emotions still give you plenty of energy"
+       "en": "Act at once and decisively, while your emotions still give you plenty of energy",
+       "es": "Actuar de inmediato y de golpe, mientras las emociones todavía te dan mucha energía",
+       "pt": "Agir na hora e com firmeza, enquanto as emoções ainda dão bastante energia"
       },
       {
        "ru": "Сначала успокоить бурю, потом в тишине расслышать, чего вы хотите",
-       "en": "First calm the storm, then listen in the quiet for what you want"
+       "en": "First calm the storm, then listen in the quiet for what you want",
+       "es": "Primero calmar la tormenta y después, en el silencio, alcanzar a oír qué quieres",
+       "pt": "Primeiro acalmar a tempestade, depois escutar no silêncio o que você quer"
       },
       {
        "ru": "Переждать молча, ничего не меняя: всё как-нибудь само собой уляжется",
-       "en": "Wait it out calmly and change nothing: it will settle itself in time"
+       "en": "Wait it out calmly and change nothing: it will settle itself in time",
+       "es": "Esperar sin decir nada ni cambiar nada: todo se va a acomodar solo con el tiempo",
+       "pt": "Esperar em silêncio, sem mudar nada: uma hora tudo se acomoda sozinho"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Пока лев рычит, фонарь не поможет: сперва три спокойных вдоха, затем тишина и вопрос к себе.",
-      "en": "While the lion roars, no lantern will help: first three slow breaths, then silence and a question to yourself."
+      "en": "While the lion roars, no lantern will help: first three slow breaths, then silence and a question to yourself.",
+      "es": "Mientras el león ruge, el farol no ayuda: primero tres respiraciones tranquilas, después el silencio y una pregunta para ti.",
+      "pt": "Enquanto o leão ruge, nenhuma lanterna ajuda: primeiro três respirações calmas, depois o silêncio e uma pergunta para si."
      }
     }
    ]
@@ -148,78 +200,108 @@
      "type": "single",
      "q": {
       "ru": "Чего Колесо Фортуны просит от нас?",
-      "en": "What does Wheel Of Fortune ask of us?"
+      "en": "What does Wheel Of Fortune ask of us?",
+      "es": "¿Qué nos pide La Rueda de la Fortuna?",
+      "pt": "O que A Roda da Fortuna pede de nós?"
      },
      "options": [
       {
        "ru": "Контроля: удержать всё в своих руках",
-       "en": "Control: keep everything firmly in your own two hands"
+       "en": "Control: keep everything firmly in your own two hands",
+       "es": "Control: sostenerlo todo firme en las propias manos",
+       "pt": "Controle: segurar tudo nas próprias mãos"
       },
       {
        "ru": "Смирения: от нас всё равно ничего не зависит",
-       "en": "Resignation: nothing depends on us anyway, so why even try at all"
+       "en": "Resignation: nothing depends on us anyway, so why even try at all",
+       "es": "Resignación: de todos modos nada depende de nosotros",
+       "pt": "Resignação: de todo jeito nada depende de nós, então nem vale tentar"
       },
       {
        "ru": "Гибкости: заметить открывшуюся дверь и войти",
-       "en": "Flexibility: notice the door that opened and step through"
+       "en": "Flexibility: notice the door that opened and step through",
+       "es": "Flexibilidad: notar la puerta que se abrió y entrar",
+       "pt": "Flexibilidade: notar a porta que se abriu e entrar"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Колесо вертится само, но за спадом обычно идёт подъём — так устроен цикл, и важно не проспать поворот.",
-      "en": "The wheel turns on its own, but decline is typically followed by a rise — that's how the cycle works, and the turn is not to be slept through."
+      "en": "The wheel turns on its own, but decline is typically followed by a rise — that's how the cycle works, and the turn is not to be slept through.",
+      "es": "La rueda gira sola, pero después de la caída suele venir la subida: así funciona el ciclo, y lo importante es no dormirse en el giro.",
+      "pt": "A roda gira sozinha, mas depois da queda costuma vir a subida — o ciclo é assim, e o importante é não deixar a virada passar."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём ловушка Колеса Фортуны?",
-      "en": "What is the trap of Wheel Of Fortune?"
+      "en": "What is the trap of Wheel Of Fortune?",
+      "es": "¿Cuál es la trampa de La Rueda de la Fortuna?",
+      "pt": "Qual é a armadilha da Roda da Fortuna?"
      },
      "options": [
       {
        "ru": "Решить «всё за меня сделает судьба» и перестать выбирать",
-       "en": "Deciding “fate will do it all for me” and giving up choosing"
+       "en": "Deciding “fate will do it all for me” and giving up choosing",
+       "es": "Decidir que «el destino lo hará todo por mí» y dejar de elegir",
+       "pt": "Decidir que “o destino faz tudo por mim” e parar de escolher"
       },
       {
        "ru": "Поверить, что перемены всегда к худшему",
-       "en": "Believing change is always for the worse"
+       "en": "Believing change is always for the worse",
+       "es": "Creer que los cambios siempre son para peor",
+       "pt": "Acreditar que as mudanças são sempre para pior"
       },
       {
        "ru": "Увидеть в каждом совпадении тайный знак",
-       "en": "Reading every coincidence as a secret sign"
+       "en": "Reading every coincidence as a secret sign",
+       "es": "Ver en cada coincidencia una señal secreta",
+       "pt": "Enxergar em cada coincidência um sinal secreto"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Карта о том, что жизнь движется сама, — но дверь, которую она открывает, всё равно нужно заметить и войти.",
-      "en": "The card says life moves on its own — but the door it opens still has to be noticed and entered."
+      "en": "The card says life moves on its own — but the door it opens still has to be noticed and entered.",
+      "es": "La carta habla de que la vida se mueve sola, pero la puerta que abre igual hay que notarla y cruzarla.",
+      "pt": "A carta fala que a vida se move sozinha — mas a porta que ela abre ainda precisa ser notada, e é preciso entrar."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Поднятый меч, весы в руке — и никакой повязки на глазах. Какая это карта?",
-      "en": "A raised sword, scales in hand — and no blindfold. Which card is this?"
+      "en": "A raised sword, scales in hand — and no blindfold. Which card is this?",
+      "es": "Una espada en alto, una balanza en la mano y ninguna venda en los ojos. ¿Qué carta es?",
+      "pt": "Uma espada erguida, uma balança na mão — e nenhuma venda nos olhos. Que carta é essa?"
      },
      "options": [
       {
        "ru": "Умеренность",
-       "en": "Temperance"
+       "en": "Temperance",
+       "es": "La Templanza",
+       "pt": "A Temperança"
       },
       {
        "ru": "Справедливость",
-       "en": "Justice"
+       "en": "Justice",
+       "es": "La Justicia",
+       "pt": "A Justiça"
       },
       {
        "ru": "Верховная Жрица",
-       "en": "The High Priestess"
+       "en": "The High Priestess",
+       "es": "La Suma Sacerdotisa",
+       "pt": "A Sacerdotisa"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Меч — ясность решения, весы — беспристрастная оценка; повязка не нужна: правде нечего прятать.",
-      "en": "The sword is clarity of decision, the scales are impartial judgement; no blindfold is needed: truth has nothing to hide."
+      "en": "The sword is clarity of decision, the scales are impartial judgement; no blindfold is needed: truth has nothing to hide.",
+      "es": "La espada es la claridad de la decisión y la balanza, la mirada imparcial; la venda no hace falta: la verdad no tiene nada que esconder.",
+      "pt": "A espada é a clareza da decisão; a balança, a avaliação imparcial; a venda não faz falta: a verdade não tem o que esconder."
      },
      "cardId": "justice"
     },
@@ -227,52 +309,72 @@
      "type": "single",
      "q": {
       "ru": "О чём говорит Справедливость как карта причины и следствия?",
-      "en": "What does Justice say as the card of cause and effect?"
+      "en": "What does Justice say as the card of cause and effect?",
+      "es": "¿Qué dice La Justicia como carta de causa y efecto?",
+      "pt": "O que A Justiça diz como carta de causa e efeito?"
      },
      "options": [
       {
        "ru": "Жизнь несправедлива, и с этим нужно смириться",
-       "en": "Life is unfair and must be accepted"
+       "en": "Life is unfair and must be accepted",
+       "es": "Que la vida es injusta y hay que resignarse",
+       "pt": "Que a vida é injusta e é preciso se conformar com isso"
       },
       {
        "ru": "Каждому в жизни достаётся случайная доля удачи",
-       "en": "Everyone gets a random share of luck"
+       "en": "Everyone gets a random share of luck",
+       "es": "Que a cada quien le toca una porción de suerte al azar",
+       "pt": "Que cada pessoa recebe na vida uma parcela aleatória de sorte"
       },
       {
        "ru": "Усилия вознаграждаются, а срезанные углы дают о себе знать",
-       "en": "Effort pays off, and cut corners come back around"
+       "en": "Effort pays off, and cut corners come back around",
+       "es": "Que el esfuerzo se recompensa y los atajos terminan pasando factura",
+       "pt": "Que o esforço é recompensado e que os atalhos cobram seu preço"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Эта карта взвешивает то, что мы выбрали сами: решения ясной головой, по фактам — её территория.",
-      "en": "This card weighs what we chose ourselves: clear-headed decisions based on facts are its territory."
+      "en": "This card weighs what we chose ourselves: clear-headed decisions based on facts are its territory.",
+      "es": "Esta carta pesa lo que elegimos nosotros: las decisiones con la cabeza clara, por los hechos, son su territorio.",
+      "pt": "Esta carta pesa aquilo que escolhemos por conta própria: decisões de cabeça fria, pelos fatos, são o território dela."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Беспокоящую ситуацию урок предлагает разделить надвое. Как?",
-      "en": "The lesson suggests splitting a worrying situation in two. How?"
+      "en": "The lesson suggests splitting a worrying situation in two. How?",
+      "es": "La lección propone dividir en dos una situación que te inquieta. ¿Cómo?",
+      "pt": "A lição propõe dividir em duas partes uma situação que anda incomodando. Como?"
      },
      "options": [
       {
        "ru": "Что в этой ситуации было вам приятно, а что оказалось неприятно и вызвало досаду",
-       "en": "What in the situation felt pleasant to you, and what felt unpleasant and left you upset"
+       "en": "What in the situation felt pleasant to you, and what felt unpleasant and left you upset",
+       "es": "Lo que en ella te resultó agradable y lo que te resultó desagradable y te dejó con fastidio",
+       "pt": "O que nela foi agradável para você e o que foi desagradável e causou aborrecimento"
       },
       {
        "ru": "Что в ней случилось раньше по времени, а что случилось намного позже, под конец",
-       "en": "What in it happened first, and what happened much later, closer to the very end"
+       "en": "What in it happened first, and what happened much later, closer to the very end",
+       "es": "Lo que en ella ocurrió primero y lo que ocurrió mucho después, ya sobre el final",
+       "pt": "O que nela aconteceu antes no tempo e o que aconteceu bem depois, já no fim"
       },
       {
        "ru": "Что в ней от Колеса (не зависело от вас) и что от Справедливости (ваши выборы)",
-       "en": "What in it belongs to the Wheel (was never up to you) and what to Justice (your choices)"
+       "en": "What in it belongs to the Wheel (was never up to you) and what to Justice (your choices)",
+       "es": "Lo que en ella es de La Rueda (no dependía de ti) y lo que es de La Justicia (tus elecciones)",
+       "pt": "O que nela é da Roda (não dependia de você) e o que é da Justiça (as suas escolhas)"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Разделение возвращает ясность: не корить себя за повороты Колеса и не списывать на судьбу собственные решения.",
-      "en": "The split restores clarity: don't blame yourself for the Wheel's turns, and don't blame fate for your own decisions."
+      "en": "The split restores clarity: don't blame yourself for the Wheel's turns, and don't blame fate for your own decisions.",
+      "es": "El reparto devuelve claridad: no reprocharte los giros de La Rueda ni echarle al destino tus propias decisiones.",
+      "pt": "A separação devolve a clareza: não se cobrar pelas voltas da Roda e não jogar no destino as próprias decisões."
      }
     }
    ]
@@ -284,52 +386,72 @@
      "type": "single",
      "q": {
       "ru": "О чём почти всегда говорит Смерть в чтении карт?",
-      "en": "What does Death almost always mean in a reading?"
+      "en": "What does Death almost always mean in a reading?",
+      "es": "¿De qué habla casi siempre La Muerte en una lectura?",
+      "pt": "Do que A Morte fala quase sempre numa leitura de cartas?"
      },
      "options": [
       {
        "ru": "О естественном завершении этапа и обновлении",
-       "en": "A natural ending of a stage, and renewal"
+       "en": "A natural ending of a stage, and renewal",
+       "es": "Del final natural de una etapa y de la renovación",
+       "pt": "De um encerramento natural de uma etapa e de renovação"
       },
       {
        "ru": "О буквальной опасности, которую надо предотвратить",
-       "en": "A literal danger to prevent"
+       "en": "A literal danger to prevent",
+       "es": "De un peligro literal que hay que evitar",
+       "pt": "De um perigo literal que precisa ser evitado"
       },
       {
        "ru": "О чужом дурном влиянии, от которого стоит защититься",
-       "en": "Someone else's bad influence"
+       "en": "Someone else's bad influence",
+       "es": "De la mala influencia ajena, de la que conviene protegerse",
+       "pt": "De uma má influência alheia da qual convém se proteger"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "У всадника на карте нет оружия, а вдали между башнями встаёт солнце: перемена приходит сама и несёт рассвет.",
-      "en": "The rider on the card carries no weapon, and between the towers the sun is rising: the change arrives on its own and brings a dawn."
+      "en": "The rider on the card carries no weapon, and between the towers the sun is rising: the change arrives on its own and brings a dawn.",
+      "es": "El jinete de la carta no lleva armas y a lo lejos, entre dos torres, sale el sol: el cambio llega solo y trae un amanecer.",
+      "pt": "O cavaleiro da carta não tem arma, e ao longe, entre duas torres, o sol está nascendo: a mudança vem sozinha e traz um amanhecer."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Лицо спокойно, вокруг головы сияние, а привязана лишь одна нога. Какая это карта?",
-      "en": "A calm face, a glow around the head, and only one leg bound. Which card is this?"
+      "en": "A calm face, a glow around the head, and only one leg bound. Which card is this?",
+      "es": "El rostro tranquilo, un resplandor alrededor de la cabeza y una sola pierna atada. ¿Qué carta es?",
+      "pt": "Um rosto sereno, um brilho ao redor da cabeça e apenas uma perna presa. Que carta é essa?"
      },
      "options": [
       {
        "ru": "Дурак",
-       "en": "The Fool"
+       "en": "The Fool",
+       "es": "El Loco",
+       "pt": "O Louco"
       },
       {
        "ru": "Суд",
-       "en": "The Last Judgment"
+       "en": "The Last Judgment",
+       "es": "El Juicio",
+       "pt": "O Julgamento"
       },
       {
        "ru": "Повешенный",
-       "en": "The Hanged Man"
+       "en": "The Hanged Man",
+       "es": "El Colgado",
+       "pt": "O Enforcado"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Живое дерево и спокойное лицо выдают смысл: это не казнь, а добровольная пауза, в которой рождается озарение.",
-      "en": "The living tree and the calm face give it away: not an execution but a voluntary pause in which insight is born."
+      "en": "The living tree and the calm face give it away: not an execution but a voluntary pause in which insight is born.",
+      "es": "El árbol vivo y el rostro tranquilo delatan el sentido: no es una ejecución, sino una pausa voluntaria en la que nace la comprensión.",
+      "pt": "A árvore viva e o rosto sereno entregam o sentido: não é uma execução, e sim uma parada voluntária em que nasce uma revelação."
      },
      "cardId": "hanged-man"
     },
@@ -337,78 +459,108 @@
      "type": "single",
      "q": {
       "ru": "Что происходит во время паузы Повешенного?",
-      "en": "What happens during the Hanged Man's pause?"
+      "en": "What happens during the Hanged Man's pause?",
+      "es": "¿Qué ocurre durante la pausa del Colgado?",
+      "pt": "O que acontece durante a pausa do Enforcado?"
      },
      "options": [
       {
        "ru": "Ничего: это просто потерянное впустую время",
-       "en": "Nothing at all: it is simply lost and wasted time"
+       "en": "Nothing at all: it is simply lost and wasted time",
+       "es": "Nada: es simplemente tiempo perdido en vano",
+       "pt": "Nada: é só tempo perdido à toa"
       },
       {
        "ru": "Снаружи ничего не движется, а внутри зреет новый взгляд",
-       "en": "Nothing moves outside, while a new way of seeing ripens within"
+       "en": "Nothing moves outside, while a new way of seeing ripens within",
+       "es": "Por fuera nada se mueve, y por dentro madura una mirada nueva",
+       "pt": "Por fora nada se move, e por dentro amadurece um novo olhar"
       },
       {
        "ru": "Копятся силы и решимость для одного решающего рывка",
-       "en": "Energy quietly builds up for one decisive push"
+       "en": "Energy quietly builds up for one decisive push",
+       "es": "Se acumulan fuerzas y decisión para un solo arranque decisivo",
+       "pt": "Acumulam-se forças e determinação para um único impulso decisivo"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Перевернувшись, видишь то, чего не разглядеть на бегу; торопить эту остановку бесполезно.",
-      "en": "Upside down, you see what can't be seen on the run; rushing this stop is useless."
+      "en": "Upside down, you see what can't be seen on the run; rushing this stop is useless.",
+      "es": "Puesto cabeza abajo se ve lo que no se alcanza a ver corriendo; apurar esa detención no sirve de nada.",
+      "pt": "De cabeça para baixo, você enxerga o que não dá para ver na correria; apressar essa parada não adianta."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Чем занимается Умеренность после большого завершения?",
-      "en": "What does Temperance do after a great ending?"
+      "en": "What does Temperance do after a great ending?",
+      "es": "¿De qué se ocupa La Templanza después de un gran final?",
+      "pt": "Do que A Temperança se ocupa depois de um grande encerramento?"
      },
      "options": [
       {
        "ru": "Тонкой настройкой новой жизни: по капле, без крайностей и рывков",
-       "en": "Fine-tunes the new life: drop by drop, without extremes or jolts"
+       "en": "Fine-tunes the new life: drop by drop, without extremes or jolts",
+       "es": "Del ajuste fino de la vida nueva: gota a gota, sin extremos ni tirones",
+       "pt": "Do ajuste fino da vida nova: gota a gota, sem extremos nem arrancos"
       },
       {
        "ru": "Строгим самоограничением и запретами почти во всём сразу, без пощады к себе",
-       "en": "Imposes strict self-denial in almost everything at once, with no mercy for yourself"
+       "en": "Imposes strict self-denial in almost everything at once, with no mercy for yourself",
+       "es": "De una autolimitación estricta, con prohibiciones en casi todo a la vez y sin darse ninguna tregua",
+       "pt": "De uma autolimitação severa, com proibições em quase tudo de uma vez e sem piedade consigo"
       },
       {
        "ru": "Быстрым и решительным стартом с чистого листа, без оглядки на прошлое",
-       "en": "Makes a fast, decisive start from a clean slate, with no glance back at the past"
+       "en": "Makes a fast, decisive start from a clean slate, with no glance back at the past",
+       "es": "De un arranque rápido y decidido desde cero, sin mirar atrás al pasado",
+       "pt": "De um começo rápido e decidido do zero, sem olhar para o passado"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Ангел на карте переливает воду из чаши в чашу: противоположности — работа и отдых, чувства и разум — соединяются постепенно.",
-      "en": "The angel pours water from cup to cup: opposites — work and rest, feeling and reason — blend gradually."
+      "en": "The angel pours water from cup to cup: opposites — work and rest, feeling and reason — blend gradually.",
+      "es": "El ángel de la carta vierte agua de una copa a otra: los opuestos, el trabajo y el descanso, los sentimientos y la razón, se unen poco a poco.",
+      "pt": "O anjo da carta passa a água de uma taça para outra: os opostos — trabalho e descanso, sentimento e razão — se unem aos poucos."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В каком порядке урок описывает большую перемену?",
-      "en": "In what order does the lesson describe a great change?"
+      "en": "In what order does the lesson describe a great change?",
+      "es": "¿En qué orden describe la lección un cambio grande?",
+      "pt": "Em que ordem a lição descreve uma grande mudança?"
      },
      "options": [
       {
        "ru": "Завершение → пауза → настройка",
-       "en": "Ending → pause → tuning"
+       "en": "Ending → pause → tuning",
+       "es": "Final → pausa → ajuste",
+       "pt": "Encerramento → pausa → ajuste"
       },
       {
        "ru": "Настройка → пауза → завершение",
-       "en": "Tuning → pause → ending"
+       "en": "Tuning → pause → ending",
+       "es": "Ajuste → pausa → final",
+       "pt": "Ajuste → pausa → encerramento"
       },
       {
        "ru": "Пауза → завершение → настройка",
-       "en": "Pause → ending → tuning"
+       "en": "Pause → ending → tuning",
+       "es": "Pausa → final → ajuste",
+       "pt": "Pausa → encerramento → ajuste"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Сначала остановиться и увидеть (Повешенный), затем попрощаться с отжившим (Смерть), после — собрать новую жизнь по капле (Умеренность).",
-      "en": "First stop and see (the Hanged Man), then say goodbye to what is over (Death), then assemble the new life drop by drop (Temperance)."
+      "en": "First stop and see (the Hanged Man), then say goodbye to what is over (Death), then assemble the new life drop by drop (Temperance).",
+      "es": "Primero detenerse y ver (El Colgado), después despedirse de lo que ya cumplió su tiempo (La Muerte) y luego armar la vida nueva gota a gota (La Templanza).",
+      "pt": "Primeiro parar e enxergar (O Enforcado), depois se despedir daquilo que já cumpriu seu tempo (A Morte), então montar a vida nova gota a gota (A Temperança)."
      }
     }
    ]
@@ -420,78 +572,108 @@
      "type": "single",
      "q": {
       "ru": "Какая деталь карты Дьявол меняет её смысл целиком?",
-      "en": "Which detail of The Devil changes the whole meaning of the card?"
+      "en": "Which detail of The Devil changes the whole meaning of the card?",
+      "es": "¿Qué detalle de la carta El Diablo cambia por completo su sentido?",
+      "pt": "Qual detalhe da carta O Diabo muda o sentido dela por inteiro?"
      },
      "options": [
       {
        "ru": "Опущенный факел: энергия погасла навсегда",
-       "en": "The lowered torch: the energy is gone for good"
+       "en": "The lowered torch: the energy is gone for good",
+       "es": "La antorcha hacia abajo: la energía se apagó para siempre",
+       "pt": "A tocha voltada para baixo: a energia se apagou para sempre"
       },
       {
        "ru": "Цепи на шеях висят свободно — их можно снять",
-       "en": "The chains hang loose — they can be taken off"
+       "en": "The chains hang loose — they can be taken off",
+       "es": "Las cadenas cuelgan flojas en los cuellos: se pueden quitar",
+       "pt": "As correntes nos pescoços estão frouxas — dá para tirá-las"
       },
       {
        "ru": "Постамент: фигура выше людей и сильнее их",
-       "en": "The pedestal: the figure stands above people and is stronger"
+       "en": "The pedestal: the figure stands above people and is stronger",
+       "es": "El pedestal: la figura está por encima de las personas y es más fuerte que ellas",
+       "pt": "O pedestal: a figura está acima das pessoas e é mais forte do que elas"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Несвобода на этой карте держится не на замке, а на привычке: осознать это — уже половина выхода.",
-      "en": "The unfreedom on this card is held not by a lock but by habit: seeing that is already half the way out."
+      "en": "The unfreedom on this card is held not by a lock but by habit: seeing that is already half the way out.",
+      "es": "La falta de libertad de esta carta no se sostiene en un candado, sino en la costumbre: darse cuenta de eso ya es la mitad de la salida.",
+      "pt": "A falta de liberdade desta carta não se sustenta num cadeado, e sim num hábito: perceber isso já é metade da saída."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что на самом деле рушит Башня?",
-      "en": "What does The Tower actually bring down?"
+      "en": "What does The Tower actually bring down?",
+      "es": "¿Qué derrumba en realidad La Torre?",
+      "pt": "O que A Torre derruba de fato?"
      },
      "options": [
       {
        "ru": "Всю вашу жизнь целиком, без разбора и без всякой видимой причины",
-       "en": "Your whole life, indiscriminately and without any visible reason"
+       "en": "Your whole life, indiscriminately and without any visible reason",
+       "es": "Tu vida entera, sin distinguir nada y sin ninguna razón visible",
+       "pt": "A sua vida inteira, sem distinção e sem nenhum motivo visível"
       },
       {
        "ru": "Планы, которые изначально были слишком смелыми и потому обречены",
-       "en": "Plans that were simply too bold from the start and doomed to fail"
+       "en": "Plans that were simply too bold from the start and doomed to fail",
+       "es": "Los planes que desde el inicio eran demasiado audaces y por eso estaban condenados",
+       "pt": "Planos que desde o início eram ousados demais e por isso estavam condenados"
       },
       {
        "ru": "Конструкцию на шатком основании: самообман и иллюзии",
-       "en": "A structure on shaky ground: self-deception and illusions"
+       "en": "A structure on shaky ground: self-deception and illusions",
+       "es": "La construcción levantada sobre cimientos endebles: el autoengaño y las ilusiones",
+       "pt": "Uma construção sobre base instável: o autoengano e as ilusões"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Молния — вспышка правды: настоящее остаётся с вами, а на расчищенном месте строят прочнее.",
-      "en": "The lightning is a flash of truth: what was real stays with you, and on the cleared ground people build stronger."
+      "en": "The lightning is a flash of truth: what was real stays with you, and on the cleared ground people build stronger.",
+      "es": "El rayo es un destello de verdad: lo auténtico se queda contigo, y sobre el terreno despejado se construye más firme.",
+      "pt": "O raio é um clarão de verdade: o que era verdadeiro fica com você, e no terreno limpo se constrói mais firme."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Молния сбивает корону с вершины, и две фигуры летят вниз. Какая это карта?",
-      "en": "Lightning knocks the crown off the top, and two figures fall. Which card is this?"
+      "en": "Lightning knocks the crown off the top, and two figures fall. Which card is this?",
+      "es": "Un rayo tira la corona de la cima y dos figuras caen al vacío. ¿Qué carta es?",
+      "pt": "Um raio arranca a coroa do alto da torre, e duas figuras caem. Que carta é essa?"
      },
      "options": [
       {
        "ru": "Башня",
-       "en": "The Tower"
+       "en": "The Tower",
+       "es": "La Torre",
+       "pt": "A Torre"
       },
       {
        "ru": "Колесо Фортуны",
-       "en": "Wheel Of Fortune"
+       "en": "Wheel Of Fortune",
+       "es": "La Rueda de la Fortuna",
+       "pt": "A Roda da Fortuna"
       },
       {
        "ru": "Суд",
-       "en": "The Last Judgment"
+       "en": "The Last Judgment",
+       "es": "El Juicio",
+       "pt": "O Julgamento"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Падение здесь — освобождение из тюрьмы, которую принимали за крепость: ложная власть теряет корону.",
-      "en": "The fall here is release from a prison mistaken for a fortress: false power loses its crown."
+      "en": "The fall here is release from a prison mistaken for a fortress: false power loses its crown.",
+      "es": "La caída aquí es una liberación de la cárcel que se tomaba por fortaleza: el poder falso pierde la corona.",
+      "pt": "A queda aqui é a libertação de uma prisão que era tomada por fortaleza: o poder falso perde a coroa."
      },
      "cardId": "tower"
     },
@@ -499,52 +681,72 @@
      "type": "single",
      "q": {
       "ru": "С чего начинается выход из несвободы, по Дьяволу?",
-      "en": "Where does the way out of unfreedom begin, according to The Devil?"
+      "en": "Where does the way out of unfreedom begin, according to The Devil?",
+      "es": "¿Con qué empieza la salida de la falta de libertad, según El Diablo?",
+      "pt": "Por onde começa a saída da falta de liberdade, segundo O Diabo?"
      },
      "options": [
       {
        "ru": "С резкого разрыва: бросить всё в один день",
-       "en": "With a sharp break: drop everything in one day"
+       "en": "With a sharp break: drop everything in one day",
+       "es": "Con una ruptura brusca: dejarlo todo en un solo día",
+       "pt": "Por um rompimento brusco: largar tudo num único dia"
       },
       {
        "ru": "С честного взгляда без стыда: увидеть, что именно держит",
-       "en": "With an honest, shame-free look: see what exactly holds you"
+       "en": "With an honest, shame-free look: see what exactly holds you",
+       "es": "Con una mirada honesta y sin vergüenza: ver qué es exactamente lo que te retiene",
+       "pt": "Por um olhar honesto e sem vergonha: enxergar o que exatamente prende"
       },
       {
        "ru": "С поиска виноватых в том, как всё сложилось",
-       "en": "With finding someone to blame for how things turned out"
+       "en": "With finding someone to blame for how things turned out",
+       "es": "Con buscar culpables de cómo terminaron las cosas",
+       "pt": "Por procurar culpados pelo jeito que as coisas ficaram"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Сначала заметить цепь и признать её, потом решить, что вы достойны большего, — рывок без осознания приводит обратно.",
-      "en": "First notice the chain and admit it, then decide you deserve more — a leap without awareness leads back."
+      "en": "First notice the chain and admit it, then decide you deserve more — a leap without awareness leads back.",
+      "es": "Primero notar la cadena y reconocerla, después decidir que mereces más: un tirón sin darse cuenta lleva de vuelta al mismo lugar.",
+      "pt": "Primeiro perceber a corrente e admiti-la, depois decidir que você merece mais — um arranco sem consciência leva de volta."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Как связаны Дьявол и Башня в одном уроке?",
-      "en": "How are The Devil and The Tower linked in this lesson?"
+      "en": "How are The Devil and The Tower linked in this lesson?",
+      "es": "¿Cómo se relacionan El Diablo y La Torre en esta lección?",
+      "pt": "Como O Diabo e A Torre se ligam dentro desta lição?"
      },
      "options": [
       {
        "ru": "Дьявол показывает обжитую клетку, Башня её ломает",
-       "en": "The Devil shows the cage we've settled into; The Tower breaks it"
+       "en": "The Devil shows the cage we've settled into; The Tower breaks it",
+       "es": "El Diablo muestra la jaula que ya habitamos y La Torre la rompe",
+       "pt": "O Diabo mostra a jaula em que a gente se acomodou; A Torre a quebra"
       },
       {
        "ru": "Обе карты предупреждают об одном и том же наказании",
-       "en": "Both cards warn of the same punishment, just in different form"
+       "en": "Both cards warn of the same punishment, just in different form",
+       "es": "Las dos cartas advierten del mismo castigo, solo que de forma distinta",
+       "pt": "As duas cartas avisam sobre um mesmo castigo, só que de formas diferentes"
       },
       {
        "ru": "Башня строит то, что Дьявол разрушил",
-       "en": "The Tower builds up what The Devil had destroyed before it"
+       "en": "The Tower builds up what The Devil had destroyed before it",
+       "es": "La Torre construye lo que El Diablo había destruido antes",
+       "pt": "A Torre constrói aquilo que O Diabo tinha destruído antes"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "После Башни дышится легче, чем в самой уютной клетке: обе карты в итоге про освобождение.",
-      "en": "After the Tower you breathe easier than in the coziest cage: in the end, both cards are about liberation."
+      "en": "After the Tower you breathe easier than in the coziest cage: in the end, both cards are about liberation.",
+      "es": "Después de La Torre se respira mejor que en la jaula más acogedora: al final, las dos cartas hablan de liberación.",
+      "pt": "Depois da Torre se respira melhor do que na jaula mais aconchegante: no fim, as duas cartas falam de libertação."
      }
     }
    ]
@@ -556,52 +758,72 @@
      "type": "single",
      "q": {
       "ru": "О чём просит Луна?",
-      "en": "What does The Moon ask of you?"
+      "en": "What does The Moon ask of you?",
+      "es": "¿Qué te pide La Luna?",
+      "pt": "O que A Lua pede de você?"
      },
      "options": [
       {
        "ru": "Довериться первому впечатлению: оно всегда самое верное",
-       "en": "Trust your first impression: it is the truest"
+       "en": "Trust your first impression: it is the truest",
+       "es": "Confiar en la primera impresión: siempre es la más certera",
+       "pt": "Confiar na primeira impressão: ela é sempre a mais certeira"
       },
       {
        "ru": "Отложить абсолютно все дела до самого новолуния",
-       "en": "Put everything off until the new moon"
+       "en": "Put everything off until the new moon",
+       "es": "Dejar absolutamente todos los asuntos para la luna nueva",
+       "pt": "Adiar absolutamente tudo até a lua nova"
       },
       {
        "ru": "Не решать вслепую и дать ситуации время проясниться",
-       "en": "Don't decide blindly — give the situation time to clear"
+       "en": "Don't decide blindly — give the situation time to clear",
+       "es": "No decidir a ciegas y darle tiempo a la situación para que se aclare",
+       "pt": "Não decidir às cegas e dar tempo para a situação clarear"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "При отражённом свете видна не вся картина: интуиция подскажет, а факты стоит проверять при свете дня.",
-      "en": "By reflected light you can't see the whole picture: intuition will hint, and facts are best checked in daylight."
+      "en": "By reflected light you can't see the whole picture: intuition will hint, and facts are best checked in daylight.",
+      "es": "Con luz reflejada no se ve el cuadro completo: la intuición da pistas, y los hechos conviene revisarlos a la luz del día.",
+      "pt": "Sob luz refletida não se vê o quadro inteiro: a intuição dá a dica, e os fatos convém conferir à luz do dia."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Женщина у воды льёт воду из двух кувшинов, и поток не иссякает. Какая это карта?",
-      "en": "A woman by the water pours from two jugs, and the stream never runs dry. Which card is this?"
+      "en": "A woman by the water pours from two jugs, and the stream never runs dry. Which card is this?",
+      "es": "Una mujer junto al agua vierte de dos cántaros y el chorro no se agota. ¿Qué carta es?",
+      "pt": "Uma mulher à beira da água derrama água de dois jarros, e o fluxo não seca. Que carta é essa?"
      },
      "options": [
       {
        "ru": "Умеренность",
-       "en": "Temperance"
+       "en": "Temperance",
+       "es": "La Templanza",
+       "pt": "A Temperança"
       },
       {
        "ru": "Звезда",
-       "en": "The Star"
+       "en": "The Star",
+       "es": "La Estrella",
+       "pt": "A Estrela"
       },
       {
        "ru": "Луна",
-       "en": "The Moon"
+       "en": "The Moon",
+       "es": "La Luna",
+       "pt": "A Lua"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Умеренность тоже переливает воду, но там ангел и две чаши; здесь — открытость у воды и путеводный свет над головой.",
-      "en": "Temperance pours water too, but there an angel holds two cups; here it is openness at the water's edge and a guiding light overhead."
+      "en": "Temperance pours water too, but there an angel holds two cups; here it is openness at the water's edge and a guiding light overhead.",
+      "es": "La Templanza también vierte agua, pero allí hay un ángel y dos copas; aquí hay apertura junto al agua y una luz que guía en lo alto.",
+      "pt": "A Temperança também passa água de um lado para o outro, mas ali há um anjo e duas taças; aqui há abertura à beira da água e uma luz que guia acima da cabeça."
      },
      "cardId": "star"
     },
@@ -609,78 +831,108 @@
      "type": "single",
      "q": {
       "ru": "Чем свет Солнца отличается от света Луны?",
-      "en": "How is The Sun's light different from The Moon's?"
+      "en": "How is The Sun's light different from The Moon's?",
+      "es": "¿En qué se diferencia la luz del Sol de la de La Luna?",
+      "pt": "Em que a luz do Sol se diferencia da luz da Lua?"
      },
      "options": [
       {
        "ru": "Он прямой, а не отражённый: ситуация видна как есть",
-       "en": "It is direct, not reflected: the situation is seen as it is"
+       "en": "It is direct, not reflected: the situation is seen as it is",
+       "es": "Es directa y no reflejada: la situación se ve tal como es",
+       "pt": "Ela é direta, e não refletida: a situação é vista como ela é"
       },
       {
        "ru": "Он ярче обычного, но при этом гораздо быстрее гаснет",
-       "en": "It is brighter, but it fades much faster than usual"
+       "en": "It is brighter, but it fades much faster than usual",
+       "es": "Es más brillante de lo habitual, pero se apaga mucho más rápido",
+       "pt": "Ela é mais intensa que o normal, mas em compensação se apaga bem mais depressa"
       },
       {
        "ru": "Ничем: обе карты в этом уроке ровно про одну и ту же ясность",
-       "en": "Nothing at all: both cards in this lesson mean the very same clarity"
+       "en": "Nothing at all: both cards in this lesson mean the very same clarity",
+       "es": "En nada: en esta lección las dos cartas hablan exactamente de la misma claridad",
+       "pt": "Em nada: nesta lição as duas cartas falam exatamente da mesma clareza"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Под Луной воображение дорисовывает страхи, под Солнцем тучи рассеялись — вот почему их советы такие разные.",
-      "en": "Under the Moon imagination sketches in fears; under the Sun the clouds have parted — that is why their advice differs."
+      "en": "Under the Moon imagination sketches in fears; under the Sun the clouds have parted — that is why their advice differs.",
+      "es": "Bajo La Luna la imaginación termina de dibujar los miedos; bajo El Sol las nubes se abrieron: por eso sus consejos son tan distintos.",
+      "pt": "Sob a Lua a imaginação completa o desenho com medos; sob o Sol as nuvens se dissiparam — por isso os conselhos das duas são tão diferentes."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что такое «лунный» этап на пути от Звезды к Солнцу?",
-      "en": "What is the “moon” stretch on the road from The Star to The Sun?"
+      "en": "What is the “moon” stretch on the road from The Star to The Sun?",
+      "es": "¿Qué es la etapa «lunar» en el camino de La Estrella al Sol?",
+      "pt": "O que é a etapa “lunar” no caminho da Estrela até o Sol?"
      },
      "options": [
       {
        "ru": "Откат назад: значит, надежда Звезды с самого начала была ложной",
-       "en": "A rollback: it means the Star's hope was false from the start"
+       "en": "A rollback: it means the Star's hope was false from the start",
+       "es": "Un retroceso: quiere decir que la esperanza de La Estrella era falsa desde el principio",
+       "pt": "Um retrocesso: quer dizer que a esperança da Estrela era falsa desde o início"
       },
       {
        "ru": "Расплата за спешку и за нетерпеливость на предыдущем шаге",
-       "en": "A penalty for haste and impatience on the previous step"
+       "en": "A penalty for haste and impatience on the previous step",
+       "es": "El precio de la prisa y de la impaciencia en el paso anterior",
+       "pt": "A conta a pagar pela pressa e pela impaciência no passo anterior"
       },
       {
        "ru": "Предрассветный час: последние страхи перед ясностью",
-       "en": "The hour before dawn: the last fears before clarity"
+       "en": "The hour before dawn: the last fears before clarity",
+       "es": "La hora antes del amanecer: los últimos miedos antes de la claridad",
+       "pt": "A hora que antecede o amanhecer: os últimos medos antes da clareza"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Дорога от надежды к ясности не прямая: ночь сомнений — её законная часть, а не сбой.",
-      "en": "The road from hope to clarity is not straight: a night of doubts is its lawful part, not a failure."
+      "en": "The road from hope to clarity is not straight: a night of doubts is its lawful part, not a failure.",
+      "es": "El camino de la esperanza a la claridad no es recto: la noche de las dudas es parte legítima de él, no una falla.",
+      "pt": "O caminho da esperança até a clareza não é reto: a noite de dúvidas é parte legítima dele, e não uma falha."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Какой вопрос урок предлагает задавать тревожной мысли?",
-      "en": "What question does the lesson suggest asking an anxious thought?"
+      "en": "What question does the lesson suggest asking an anxious thought?",
+      "es": "¿Qué pregunta propone la lección hacerle a un pensamiento inquietante?",
+      "pt": "Que pergunta a lição propõe fazer a um pensamento aflitivo?"
      },
      "options": [
       {
        "ru": "«Кто вообще во всём этом виноват?»",
-       "en": "\"Who is to blame for this?\""
+       "en": "\"Who is to blame for this?\"",
+       "es": "«¿Quién tiene la culpa de todo esto?»",
+       "pt": "“Afinal, quem é o culpado de tudo isso?”"
       },
       {
        "ru": "«Это факт — или додумано?»",
-       "en": "\"Is this a fact — or filled in?\""
+       "en": "\"Is this a fact — or filled in?\"",
+       "es": "«¿Esto es un hecho, o lo completé yo?»",
+       "pt": "“Isto é um fato — ou eu preenchi as lacunas?”"
       },
       {
        "ru": "«Что самое худшее может случиться?»",
-       "en": "\"What is the worst that could happen?\""
+       "en": "\"What is the worst that could happen?\"",
+       "es": "«¿Qué es lo peor que puede pasar?»",
+       "pt": "“Qual é a pior coisa que pode acontecer?”"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Воображение подсовывает страхи вместо фактов: додуманное откладывают до ясности, а с фактами работают.",
-      "en": "Imagination serves up fears instead of facts: what is filled in waits for clarity, and facts are worked with."
+      "en": "Imagination serves up fears instead of facts: what is filled in waits for clarity, and facts are worked with.",
+      "es": "La imaginación ofrece miedos en lugar de hechos: lo que completaste tú se deja para cuando haya claridad, y con los hechos se trabaja.",
+      "pt": "A imaginação oferece medos no lugar dos fatos: as lacunas preenchidas ficam esperando a clareza, e com os fatos se trabalha."
      }
     }
    ]
@@ -692,78 +944,108 @@
      "type": "single",
      "q": {
       "ru": "Откуда, по Уэйту, звучит труба Суда?",
-      "en": "Where, in Waite's view, does the trumpet of The Last Judgment sound from?"
+      "en": "Where, in Waite's view, does the trumpet of The Last Judgment sound from?",
+      "es": "Según Waite, ¿desde dónde suena la trompeta del Juicio?",
+      "pt": "De onde soa a trombeta do Julgamento, segundo Waite?"
      },
      "options": [
       {
        "ru": "Не столько снаружи, сколько внутри нас",
-       "en": "Not so much outside as within us"
+       "en": "Not so much outside as within us",
+       "es": "No tanto desde afuera como desde dentro de nosotros",
+       "pt": "Menos do lado de fora do que dentro de nós"
       },
       {
        "ru": "Из прошлого: это голос старых ошибок",
-       "en": "From the past: it is the voice of old mistakes"
+       "en": "From the past: it is the voice of old mistakes",
+       "es": "Desde el pasado: es la voz de los viejos errores",
+       "pt": "Do passado: é a voz dos erros antigos"
       },
       {
        "ru": "От других людей: это их ожидания",
-       "en": "From other people: it is their expectations"
+       "en": "From other people: it is their expectations",
+       "es": "Desde los demás: son sus expectativas",
+       "pt": "Das outras pessoas: são as expectativas delas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Зов этой карты — переоценка, важное решение, второй шанс; ответ на него рождается внутри.",
-      "en": "The card's call is a reappraisal, a major decision, a second chance; the answer to it is born within."
+      "en": "The card's call is a reappraisal, a major decision, a second chance; the answer to it is born within.",
+      "es": "La llamada de esta carta es una revisión, una decisión importante, una segunda oportunidad; y la respuesta nace por dentro.",
+      "pt": "O chamado desta carta é uma reavaliação, uma decisão importante, uma segunda chance; a resposta a ele nasce por dentro."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что советует Мир, когда цель достигнута?",
-      "en": "What does The World advise when the goal is reached?"
+      "en": "What does The World advise when the goal is reached?",
+      "es": "¿Qué aconseja El Mundo cuando la meta ya se alcanzó?",
+      "pt": "O que O Mundo aconselha quando o objetivo foi alcançado?"
      },
      "options": [
       {
        "ru": "Сразу ставить перед собой новую цель, пока есть разгон",
-       "en": "Set a brand new goal at once, while you still have momentum"
+       "en": "Set a brand new goal at once, while you still have momentum",
+       "es": "Ponerse enseguida una meta nueva, mientras queda impulso",
+       "pt": "Estabelecer logo um novo objetivo, enquanto ainda há embalo"
       },
       {
        "ru": "Отпраздновать результат — и только потом начинать новое",
-       "en": "Celebrate the result — and only then begin the new"
+       "en": "Celebrate the result — and only then begin the new",
+       "es": "Celebrar el resultado y solo después empezar lo nuevo",
+       "pt": "Comemorar o resultado — e só depois começar o novo"
       },
       {
        "ru": "Проверить заново, не упущено ли в дороге что-нибудь важное",
-       "en": "Check carefully whether anything important was missed"
+       "en": "Check carefully whether anything important was missed",
+       "es": "Revisar de nuevo si por el camino no se pasó por alto algo importante",
+       "pt": "Conferir de novo se nada de importante ficou para trás no caminho"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Завершение — тоже искусство: цикл нужно замкнуть, иначе новое начнётся с чувства недоделанного.",
-      "en": "Completion is an art too: the cycle needs to be closed, or the new begins with a sense of unfinished business."
+      "en": "Completion is an art too: the cycle needs to be closed, or the new begins with a sense of unfinished business.",
+      "es": "Cerrar también es un arte: el ciclo hay que completarlo, o lo nuevo empieza con una sensación de algo inconcluso.",
+      "pt": "Encerrar também é uma arte: o ciclo precisa ser fechado, senão o novo começa com a sensação de coisa inacabada."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Танцующая фигура в овальном венке, по углам — четверо с Колеса Фортуны. Какая это карта?",
-      "en": "A dancing figure in an oval wreath, with the four figures from Wheel Of Fortune in the corners. Which card is this?"
+      "en": "A dancing figure in an oval wreath, with the four figures from Wheel Of Fortune in the corners. Which card is this?",
+      "es": "Una figura que baila dentro de una corona ovalada y, en las esquinas, los cuatro de La Rueda de la Fortuna. ¿Qué carta es?",
+      "pt": "Uma figura que dança dentro de uma coroa oval e, nos cantos, os quatro da Roda da Fortuna. Que carta é essa?"
      },
      "options": [
       {
        "ru": "Колесо Фортуны",
-       "en": "Wheel Of Fortune"
+       "en": "Wheel Of Fortune",
+       "es": "La Rueda de la Fortuna",
+       "pt": "A Roda da Fortuna"
       },
       {
        "ru": "Солнце",
-       "en": "The Sun"
+       "en": "The Sun",
+       "es": "El Sol",
+       "pt": "O Sol"
       },
       {
        "ru": "Мир",
-       "en": "The World"
+       "en": "The World",
+       "es": "El Mundo",
+       "pt": "O Mundo"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Венок замыкает цикл, а четыре фигуры больше не учатся по книгам — всё сошлось, это целостность.",
-      "en": "The wreath closes the cycle, and the four figures no longer study their books — everything has come together: wholeness."
+      "en": "The wreath closes the cycle, and the four figures no longer study their books — everything has come together: wholeness.",
+      "es": "La corona cierra el ciclo y las cuatro figuras ya no estudian sus libros: todo encajó, esto es integridad.",
+      "pt": "A coroa fecha o ciclo, e as quatro figuras já não estudam pelos livros — tudo se juntou, isto é inteireza."
      },
      "cardId": "world"
     },
@@ -771,52 +1053,72 @@
      "type": "single",
      "q": {
       "ru": "На Колесе Фортуны четыре фигуры по углам держали книги, на Мире — уже нет. Что это значит?",
-      "en": "On Wheel Of Fortune the four corner figures held books; on The World they no longer do. What does it mean?"
+      "en": "On Wheel Of Fortune the four corner figures held books; on The World they no longer do. What does it mean?",
+      "es": "En La Rueda de la Fortuna las cuatro figuras de las esquinas sostenían libros; en El Mundo ya no. ¿Qué significa?",
+      "pt": "Na Roda da Fortuna as quatro figuras dos cantos seguravam livros; no Mundo, já não. O que isso significa?"
      },
      "options": [
       {
        "ru": "Учение завершено: то, что изучалось, стало жизнью",
-       "en": "The study is complete: what was learned has become life"
+       "en": "The study is complete: what was learned has become life",
+       "es": "Que el aprendizaje se completó: lo que se estudiaba se volvió vida",
+       "pt": "O estudo está concluído: aquilo que se estudava virou vida"
       },
       {
        "ru": "Знания в итоге оказались никому не нужными и были забыты",
-       "en": "The knowledge turned out to be useless"
+       "en": "The knowledge turned out to be useless",
+       "es": "Que al final los conocimientos no le sirvieron a nadie y quedaron olvidados",
+       "pt": "No fim, o conhecimento não serviu para ninguém e acabou esquecido"
       },
       {
        "ru": "Это разные фигуры, и их совпадение случайно",
-       "en": "They are different figures; the match is a coincidence"
+       "en": "They are different figures; the match is a coincidence",
+       "es": "Que son figuras distintas y su parecido es casualidad",
+       "pt": "São figuras diferentes, e a coincidência é casual"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Колесо заставало героя посреди движения и учёбы; Мир — итог, где урок пройден и присвоен.",
-      "en": "The Wheel caught the hero mid-motion and mid-study; The World is the summing up, where the lesson has been learned and made one's own."
+      "en": "The Wheel caught the hero mid-motion and mid-study; The World is the summing up, where the lesson has been learned and made one's own.",
+      "es": "La Rueda encontraba al héroe en pleno movimiento y en plena tarea de aprender; El Mundo es el balance, donde la lección ya está aprendida y hecha propia.",
+      "pt": "A Roda pegava o herói no meio do movimento e do estudo; O Mundo é o balanço, em que a lição foi aprendida e se tornou sua."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Почему Мир называют «тем же нолём, но пройденным»?",
-      "en": "Why is The World called “the same zero, but a lived one”?"
+      "en": "Why is The World called “the same zero, but a lived one”?",
+      "es": "¿Por qué al Mundo se le llama «el mismo cero, pero ya recorrido»?",
+      "pt": "Por que O Mundo é chamado de “o mesmo zero, mas percorrido”?"
      },
      "options": [
       {
        "ru": "Потому что в конце долгого пути герой теряет всё, что успел приобрести",
-       "en": "Because at the very end of the road the hero loses everything"
+       "en": "Because at the very end of the road the hero loses everything",
+       "es": "Porque al final del largo camino el héroe pierde todo lo que alcanzó a ganar",
+       "pt": "Porque no fim de um longo caminho o herói perde tudo o que tinha conquistado"
       },
       {
        "ru": "Потому что весь путь Дурака с самого начала был одной большой ошибкой",
-       "en": "Because the Fool's whole journey was a mistake from the start"
+       "en": "Because the Fool's whole journey was a mistake from the start",
+       "es": "Porque todo el camino del Loco fue, desde el principio, un gran error",
+       "pt": "Porque o caminho do Louco foi, desde o início, um grande erro"
       },
       {
        "ru": "Потому что круг замыкается, чтобы начаться заново — на новой высоте",
-       "en": "Because the circle closes to begin again — one turn higher"
+       "en": "Because the circle closes to begin again — one turn higher",
+       "es": "Porque el círculo se cierra para volver a empezar, a otra altura",
+       "pt": "Porque o círculo se fecha para recomeçar — já numa altura nova"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "История 22 карт циклична: за Миром снова шаг Дурака, но это уже другой Дурак — с пройденным путём за плечами.",
-      "en": "The story of the 22 cards is a cycle: after The World comes the Fool's step again — but a different Fool, with the road behind him."
+      "en": "The story of the 22 cards is a cycle: after The World comes the Fool's step again — but a different Fool, with the road behind him.",
+      "es": "La historia de las 22 cartas es cíclica: después del Mundo vuelve el paso del Loco, pero ya es otro Loco, con el camino recorrido a sus espaldas.",
+      "pt": "A história das 22 cartas é cíclica: depois do Mundo vem de novo o passo do Louco, mas já é outro Louco — com o caminho percorrido nas costas."
      }
     }
    ]

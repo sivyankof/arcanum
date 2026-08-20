@@ -2,7 +2,9 @@
  "_comment": "Вопросы викторин M5, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
  "status": {
   "ru": "reviewed",
-  "en": "reviewed"
+  "en": "reviewed",
+  "es": "draft",
+  "pt": "draft"
  },
  "lessons": [
   {
@@ -12,130 +14,180 @@
      "type": "single",
      "q": {
       "ru": "Что объединяет Пажей всех четырёх мастей?",
-      "en": "What do all four Pages have in common, across suits?"
+      "en": "What do all four Pages have in common, across suits?",
+      "es": "¿Qué tienen en común las Sotas de los cuatro palos?",
+      "pt": "O que os Valetes dos quatro naipes têm em comum?"
      },
      "options": [
       {
        "ru": "Они распоряжаются своей стихией вовне, влияют на других",
-       "en": "They direct their element outward and influence others"
+       "en": "They direct their element outward and influence others",
+       "es": "Manejan su elemento hacia afuera e influyen en los demás",
+       "pt": "Dirigem o seu elemento para fora e influenciam os outros"
       },
       {
        "ru": "Они действуют без промедления и уверенно двигаются к цели",
-       "en": "They act without hesitation and move confidently toward a goal"
+       "en": "They act without hesitation and move confidently toward a goal",
+       "es": "Actúan sin demora y avanzan con seguridad hacia su meta",
+       "pt": "Agem sem demora e avançam com segurança rumo ao objetivo"
       },
       {
        "ru": "Они только начинают путь: учатся и приносят весть",
-       "en": "They're just starting out: they study and bring word"
+       "en": "They're just starting out: they study and bring word",
+       "es": "Apenas empiezan el camino: aprenden y traen noticias",
+       "pt": "Estão apenas começando o caminho: aprendem e trazem uma notícia"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Паж — самый юный ранг: он ещё не действует и не управляет, а учится, приглядывается и приносит новости.",
-      "en": "The Page is the youngest rank: not yet acting or directing, but studying, watching, and bringing news."
+      "en": "The Page is the youngest rank: not yet acting or directing, but studying, watching, and bringing news.",
+      "es": "La Sota es el rango más joven: todavía no actúa ni dirige, sino que aprende, observa y trae noticias.",
+      "pt": "O Valete é a patente mais jovem: ainda não age nem dirige, mas aprende, observa e traz notícias."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Как понять, о человеке или о вашей роли говорит придворная карта?",
-      "en": "How do you tell whether a court card means a person or your own role?"
+      "en": "How do you tell whether a court card means a person or your own role?",
+      "es": "¿Cómo saber si una carta de la corte habla de una persona o de tu propio papel?",
+      "pt": "Como saber se a carta da corte fala de uma pessoa ou do seu papel?"
      },
      "options": [
       {
        "ru": "Придворные карты рассказывают только про близких вам людей",
-       "en": "Court cards only ever describe people who are close to you"
+       "en": "Court cards only ever describe people who are close to you",
+       "es": "Las cartas de la corte solo describen a personas cercanas a ti",
+       "pt": "As cartas da corte falam apenas de pessoas próximas a você"
       },
       {
        "ru": "Вопрос про отношения — скорее человек, вопрос про решение — скорее роль",
-       "en": "A relationship question — usually a person; a decision question — your role"
+       "en": "A relationship question — usually a person; a decision question — your role",
+       "es": "Si la pregunta es sobre una relación, suele ser una persona; si es sobre una decisión, tu papel",
+       "pt": "Pergunta sobre relação — mais provável que seja pessoa; pergunta sobre decisão — mais provável que seja papel"
       },
       {
        "ru": "Это решает исключительно масть карты: Кубки — про людей, Мечи — про роли",
-       "en": "It's decided purely by the card's suit: Cups mean people, Swords mean roles"
+       "en": "It's decided purely by the card's suit: Cups mean people, Swords mean roles",
+       "es": "Lo decide únicamente el palo: Copas son personas y Espadas son papeles",
+       "pt": "Quem decide isso é só o naipe da carta: Copas são pessoas, Espadas são papéis"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Отношения с конкретным человеком чаще указывают на него самого; вопрос о себе и решении — чаще про вашу роль.",
-      "en": "A question about a specific relationship usually points to that person; a question about yourself and a decision usually points to your role."
+      "en": "A question about a specific relationship usually points to that person; a question about yourself and a decision usually points to your role.",
+      "es": "Una pregunta sobre una relación concreta suele apuntar a esa persona; una pregunta sobre ti y sobre una decisión suele apuntar a tu papel.",
+      "pt": "Uma pergunta sobre a relação com alguém costuma apontar para essa pessoa; uma pergunta sobre você e uma decisão costuma apontar para o seu papel."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Каким обычно видят Пажа Кубков как человека?",
-      "en": "How is the Page of Cups usually seen as a person?"
+      "en": "How is the Page of Cups usually seen as a person?",
+      "es": "¿Cómo se suele ver a La Sota de Copas como persona?",
+      "pt": "Como o Valete de Copas costuma ser visto como pessoa?"
      },
      "options": [
       {
        "ru": "Мечтательным и чувствительным, с открытым сердцем",
-       "en": "Dreamy and sensitive, with an open heart"
+       "en": "Dreamy and sensitive, with an open heart",
+       "es": "Soñadora y sensible, con el corazón abierto",
+       "pt": "Um sonhador sensível, de coração aberto"
       },
       {
        "ru": "Хладнокровным стратегом, который не показывает чувств",
-       "en": "A cool strategist who never shows feelings"
+       "en": "A cool strategist who never shows feelings",
+       "es": "Una estratega de sangre fría que nunca muestra lo que siente",
+       "pt": "Um estrategista frio, que nunca mostra o que sente"
       },
       {
        "ru": "Резким и прямолинейным критиком чужих слов",
-       "en": "A blunt, sharp-tongued critic of others' words"
+       "en": "A blunt, sharp-tongued critic of others' words",
+       "es": "Una crítica brusca y directa de lo que dicen los demás",
+       "pt": "Um crítico áspero e direto das palavras dos outros"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "У Пажа Кубков открытое сердце и творческий взгляд — он мечтает и чувствует раньше, чем считает.",
-      "en": "The Page of Cups has an open heart and a creative eye — feeling and dreaming come before calculating."
+      "en": "The Page of Cups has an open heart and a creative eye — feeling and dreaming come before calculating.",
+      "es": "La Sota de Copas tiene el corazón abierto y una mirada creativa: siente y sueña antes de calcular.",
+      "pt": "O Valete de Copas tem o coração aberto e um olhar criativo — ele sonha e sente antes de calcular."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что советует Паж Мечей, когда приходит новая идея или новость?",
-      "en": "What does the Page of Swords advise when a new idea or piece of news arrives?"
+      "en": "What does the Page of Swords advise when a new idea or piece of news arrives?",
+      "es": "¿Qué aconseja La Sota de Espadas cuando llega una idea nueva o una noticia?",
+      "pt": "O que o Valete de Espadas aconselha quando chega uma ideia nova ou uma notícia?"
      },
      "options": [
       {
        "ru": "Сразу делать выводы и без промедления делиться ими со всеми",
-       "en": "Draw conclusions at once and share them with everyone right away"
+       "en": "Draw conclusions at once and share them with everyone right away",
+       "es": "Sacar conclusiones de inmediato y compartirlas enseguida con todos",
+       "pt": "Tirar conclusões na hora e compartilhá-las com todos sem demora"
       },
       {
        "ru": "Проверять факты, а не спешить с выводами",
-       "en": "Check the facts and don't rush to conclusions"
+       "en": "Check the facts and don't rush to conclusions",
+       "es": "Verificar los hechos y no apresurar las conclusiones",
+       "pt": "Conferir os fatos e não se apressar nas conclusões"
       },
       {
        "ru": "Не обращать внимания, пока новость не подтвердится дважды",
-       "en": "Ignore it until it has been confirmed twice"
+       "en": "Ignore it until it has been confirmed twice",
+       "es": "No hacerle caso hasta que la noticia se confirme dos veces",
+       "pt": "Não dar atenção enquanto a notícia não for confirmada duas vezes"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Паж Мечей — про любопытство ума: собрать факты и не спешить с выводами, пока картина не прояснится.",
-      "en": "The Page of Swords is about a curious mind: gather the facts and hold off on conclusions until the picture is clear."
+      "en": "The Page of Swords is about a curious mind: gather the facts and hold off on conclusions until the picture is clear.",
+      "es": "La Sota de Espadas habla de la curiosidad de la mente: reunir los hechos y no apresurar conclusiones hasta que el panorama se aclare.",
+      "pt": "O Valete de Espadas é a curiosidade da mente: reunir os fatos e não se apressar nas conclusões até o quadro ficar claro."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая это карта?",
-      "en": "Which card is this?"
+      "en": "Which card is this?",
+      "es": "¿Qué carta es esta?",
+      "pt": "Que carta é esta?"
      },
      "options": [
       {
        "ru": "Паж Мечей",
-       "en": "Page of Swords"
+       "en": "Page of Swords",
+       "es": "La Sota de Espadas",
+       "pt": "O Valete de Espadas"
       },
       {
        "ru": "Рыцарь Кубков",
-       "en": "Knight of Cups"
+       "en": "Knight of Cups",
+       "es": "El Caballero de Copas",
+       "pt": "O Cavaleiro de Copas"
       },
       {
        "ru": "Паж Кубков",
-       "en": "Page of Cups"
+       "en": "Page of Cups",
+       "es": "La Sota de Copas",
+       "pt": "O Valete de Copas"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Юный паж рассматривает рыбу, выглянувшую из кубка, — чувства и творческие идеи, которые всплывают неожиданно.",
-      "en": "A young page watches a fish peek out of his cup — feelings and creative ideas surfacing unexpectedly."
+      "en": "A young page watches a fish peek out of his cup — feelings and creative ideas surfacing unexpectedly.",
+      "es": "Una sota joven contempla el pez que asoma de su copa: sentimientos e ideas creativas que salen a la superficie de forma inesperada.",
+      "pt": "O jovem valete observa o peixe que aparece dentro da taça — sentimentos e ideias criativas que vêm à tona de repente."
      },
      "cardId": "c11"
     }
@@ -148,130 +200,180 @@
      "type": "single",
      "q": {
       "ru": "Какую роль играет Рыцарь среди придворных карт?",
-      "en": "Which role does the Knight play among the court cards?"
+      "en": "Which role does the Knight play among the court cards?",
+      "es": "¿Qué papel cumple el Caballero entre las cartas de la corte?",
+      "pt": "Que papel o Cavaleiro desempenha entre as cartas da corte?"
      },
      "options": [
       {
        "ru": "Учится новому и приносит первую весть о переменах вокруг",
-       "en": "Learns something new and brings the first news of a change"
+       "en": "Learns something new and brings the first news of a change",
+       "es": "Aprende algo nuevo y trae la primera noticia de un cambio",
+       "pt": "Aprende coisas novas e traz a primeira notícia das mudanças em volta"
       },
       {
        "ru": "Действует и движется — намерение становится поступком",
-       "en": "Acts and moves — turns intention into action"
+       "en": "Acts and moves — turns intention into action",
+       "es": "Actúa y se mueve: convierte la intención en acción",
+       "pt": "Age e se movimenta — a intenção vira ato"
       },
       {
        "ru": "Владеет стихией внутри себя, без слов и суеты",
-       "en": "Masters the element inwardly, without words or fuss"
+       "en": "Masters the element inwardly, without words or fuss",
+       "es": "Domina el elemento dentro de sí, sin palabras ni alboroto",
+       "pt": "Domina o elemento dentro de si, sem palavras nem alarde"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Паж только учится и передаёт весть, а Рыцарь берёт эту весть и делает первый шаг — превращает намерение в конкретное действие.",
-      "en": "The Page only learns and delivers news; the Knight takes that news and makes the first move — turning intention into concrete action."
+      "en": "The Page only learns and delivers news; the Knight takes that news and makes the first move — turning intention into concrete action.",
+      "es": "La Sota apenas aprende y transmite la noticia; el Caballero toma esa noticia y da el primer paso: convierte la intención en una acción concreta.",
+      "pt": "O Valete apenas aprende e transmite a notícia; o Cavaleiro pega essa notícia e dá o primeiro passo — transforma a intenção em ação concreta."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Чем Рыцарь Мечей отличается от Рыцаря Пентаклей?",
-      "en": "How does the Knight of Swords differ from the Knight of Pentacles?"
+      "en": "How does the Knight of Swords differ from the Knight of Pentacles?",
+      "es": "¿En qué se diferencia El Caballero de Espadas del Caballero de Oros?",
+      "pt": "Em que o Cavaleiro de Espadas difere do Cavaleiro de Ouros?"
      },
      "options": [
       {
        "ru": "Мечи мчат без остановки, а Пентакли едут неспешно, но доезжают",
-       "en": "Swords race without slowing; Pentacles move unhurried but always arrive"
+       "en": "Swords race without slowing; Pentacles move unhurried but always arrive",
+       "es": "Espadas corre sin detenerse; Oros avanza sin prisa, pero siempre llega",
+       "pt": "Espadas correm sem parar; Ouros vão sem pressa, mas sempre chegam"
       },
       {
        "ru": "Мечи двигаются ради чувства, а Пентакли — ради победы в споре",
-       "en": "Swords move for the sake of feeling, while Pentacles move to win an argument"
+       "en": "Swords move for the sake of feeling, while Pentacles move to win an argument",
+       "es": "Espadas se mueve por un sentimiento y Oros, por ganar una discusión",
+       "pt": "Espadas se movem por um sentimento; Ouros, para vencer uma discussão"
       },
       {
        "ru": "Мечи откладывают решения, а Пентакли принимают их слишком быстро",
-       "en": "Swords delay their decisions, while Pentacles make theirs too quickly"
+       "en": "Swords delay their decisions, while Pentacles make theirs too quickly",
+       "es": "Espadas posterga sus decisiones y Oros las toma demasiado rápido",
+       "pt": "Espadas adiam as decisões; Ouros as tomam rápido demais"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Скорость каждого Рыцаря идёт от его стихии: воздух Мечей не терпит промедления, а земля Пентаклей ценит выносливость больше рывка.",
-      "en": "Each Knight's speed comes from his element: the air of Swords tolerates no delay, while the earth of Pentacles values endurance over a sprint."
+      "en": "Each Knight's speed comes from his element: the air of Swords tolerates no delay, while the earth of Pentacles values endurance over a sprint.",
+      "es": "La velocidad de cada Caballero viene de su elemento: el aire de Espadas no tolera la demora y la tierra de Oros valora más la resistencia que el arranque.",
+      "pt": "A velocidade de cada Cavaleiro vem do seu elemento: o ar de Espadas não suporta demora, e a terra de Ouros valoriza mais a resistência do que o arranque."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём главный риск Рыцаря Жезлов?",
-      "en": "Where is the Knight of Wands' main risk?"
+      "en": "Where is the Knight of Wands' main risk?",
+      "es": "¿Cuál es el riesgo principal del Caballero de Bastos?",
+      "pt": "Qual é o principal risco do Cavaleiro de Paus?"
      },
      "options": [
       {
        "ru": "Он слишком долго обдумывает и упускает нужный момент",
-       "en": "He deliberates far too long and misses the right moment"
+       "en": "He deliberates far too long and misses the right moment",
+       "es": "Le da vueltas demasiado tiempo y deja pasar el momento justo",
+       "pt": "Ele pensa demais e acaba perdendo o momento certo"
       },
       {
        "ru": "Он держится за привычное и отказывается менять маршрут",
-       "en": "He clings to the familiar and refuses to change his route"
+       "en": "He clings to the familiar and refuses to change his route",
+       "es": "Se aferra a lo conocido y se niega a cambiar de ruta",
+       "pt": "Ele se apega ao que já conhece e se recusa a mudar de rota"
       },
       {
        "ru": "Он срывается с места раньше, чем ясен маршрут",
-       "en": "He takes off before the route is clear"
+       "en": "He takes off before the route is clear",
+       "es": "Arranca antes de que la ruta esté clara",
+       "pt": "Ele dispara antes de a rota estar clara"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Огонь Жезлов зажигается первым — и так же быстро выгорает, если у порыва нет направления.",
-      "en": "The fire of Wands catches first and burns out just as fast when the impulse has no direction."
+      "en": "The fire of Wands catches first and burns out just as fast when the impulse has no direction.",
+      "es": "El fuego de Bastos es el primero en prenderse y se apaga con la misma rapidez cuando el impulso no tiene rumbo.",
+      "pt": "O fogo de Paus é o primeiro a se acender — e queima igualmente rápido quando o impulso não tem direção."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "На что стоит обратить внимание с предложением Рыцаря Кубков?",
-      "en": "What's worth watching for with the Knight of Cups' proposal?"
+      "en": "What's worth watching for with the Knight of Cups' proposal?",
+      "es": "¿A qué conviene prestar atención ante la propuesta del Caballero de Copas?",
+      "pt": "A que vale prestar atenção diante da proposta do Cavaleiro de Copas?"
      },
      "options": [
       {
        "ru": "Соглашаться сразу, не откладывая ответ ни на день",
-       "en": "Agree right away, without delaying your answer by a single day"
+       "en": "Agree right away, without delaying your answer by a single day",
+       "es": "Aceptar de inmediato, sin demorar la respuesta ni un día",
+       "pt": "Aceitar na hora, sem adiar a resposta nem um dia"
       },
       {
        "ru": "Проверять красивые слова делом — и свои, и чужие",
-       "en": "Test beautiful words by actions — your own and other people's"
+       "en": "Test beautiful words by actions — your own and other people's",
+       "es": "Comprobar con hechos las palabras bonitas, las tuyas y las ajenas",
+       "pt": "Conferir as palavras bonitas pelos atos — os seus e os dos outros"
       },
       {
        "ru": "Ждать, пока чувства подтвердит кто-то со стороны",
-       "en": "Wait for someone else to confirm the feeling for you"
+       "en": "Wait for someone else to confirm the feeling for you",
+       "es": "Esperar a que alguien de afuera te confirme el sentimiento",
+       "pt": "Esperar que alguém de fora confirme o sentimento"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Рыцарь Кубков красив в словах, но обещание должно подтвердиться поступком, иначе за красивым жестом может не оказаться содержания.",
-      "en": "The Knight of Cups is eloquent, but a promise needs to be backed by action, or the beautiful gesture may turn out to be empty."
+      "en": "The Knight of Cups is eloquent, but a promise needs to be backed by action, or the beautiful gesture may turn out to be empty.",
+      "es": "El Caballero de Copas es elocuente, pero una promesa necesita respaldarse con hechos; si no, detrás del gesto bonito puede no haber nada.",
+      "pt": "O Cavaleiro de Copas é bonito nas palavras, mas a promessa precisa se confirmar no gesto; senão, por trás do gesto bonito pode não haver conteúdo."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Кто перед вами?",
-      "en": "Who is this?"
+      "en": "Who is this?",
+      "es": "¿Quién está frente a ti?",
+      "pt": "Quem está diante de você?"
      },
      "options": [
       {
        "ru": "Рыцарь Мечей",
-       "en": "Knight of Swords"
+       "en": "Knight of Swords",
+       "es": "El Caballero de Espadas",
+       "pt": "O Cavaleiro de Espadas"
       },
       {
        "ru": "Рыцарь Жезлов",
-       "en": "Knight of Wands"
+       "en": "Knight of Wands",
+       "es": "El Caballero de Bastos",
+       "pt": "O Cavaleiro de Paus"
       },
       {
        "ru": "Паж Мечей",
-       "en": "Page of Swords"
+       "en": "Page of Swords",
+       "es": "La Sota de Espadas",
+       "pt": "O Valete de Espadas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Всадник мчится во весь опор навстречу ветру, не сбавляя хода, — так скачет только Рыцарь Мечей.",
-      "en": "A rider charges full-tilt into the wind without slowing — only the Knight of Swords rides like this."
+      "en": "A rider charges full-tilt into the wind without slowing — only the Knight of Swords rides like this.",
+      "es": "El jinete cabalga a toda velocidad contra el viento, sin bajar el ritmo: así solo cabalga El Caballero de Espadas.",
+      "pt": "O cavaleiro avança a todo galope contra o vento, sem diminuir o ritmo — só o Cavaleiro de Espadas cavalga assim."
      },
      "cardId": "s12"
     }
@@ -284,130 +386,180 @@
      "type": "single",
      "q": {
       "ru": "Чем Королева отличается от Рыцаря той же масти?",
-      "en": "How is a Queen different from a Knight of the same suit?"
+      "en": "How is a Queen different from a Knight of the same suit?",
+      "es": "¿En qué se diferencia la Reina del Caballero del mismo palo?",
+      "pt": "Em que a Rainha difere do Cavaleiro do mesmo naipe?"
      },
      "options": [
       {
        "ru": "Королева сильнее и потому побеждает Рыцаря в раскладе",
-       "en": "The Queen is stronger and so outranks the Knight in any spread"
+       "en": "The Queen is stronger and so outranks the Knight in any spread",
+       "es": "La Reina es más fuerte y por eso le gana al Caballero en la tirada",
+       "pt": "A Rainha é mais forte e por isso vence o Cavaleiro na tiragem"
       },
       {
        "ru": "Рыцарь мчится вовне, Королева владеет стихией внутри",
-       "en": "The Knight rushes outward; the Queen owns the element within"
+       "en": "The Knight rushes outward; the Queen owns the element within",
+       "es": "El Caballero se lanza hacia afuera; la Reina domina el elemento por dentro",
+       "pt": "O Cavaleiro corre para fora; a Rainha domina o elemento por dentro"
       },
       {
        "ru": "Рыцарь про чувства, а Королева про дела и решения",
-       "en": "The Knight is about feelings, the Queen about business"
+       "en": "The Knight is about feelings, the Queen about business",
+       "es": "El Caballero habla de sentimientos y la Reina, de asuntos y decisiones",
+       "pt": "O Cavaleiro é sobre sentimentos, e a Rainha sobre os afazeres e as decisões"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Рыцарь — движение наружу; Королева — та же стихия, обжитая внутри: она не гонит её, а держит ровно.",
-      "en": "The Knight is motion outward; the Queen is the same element made her own inside — held steady rather than driven."
+      "en": "The Knight is motion outward; the Queen is the same element made her own inside — held steady rather than driven.",
+      "es": "El Caballero es movimiento hacia afuera; la Reina es el mismo elemento habitado por dentro: no lo empuja, lo sostiene firme.",
+      "pt": "O Cavaleiro é movimento para fora; a Rainha é o mesmo elemento habitado por dentro: ela não o força, mantém ele firme e no mesmo nível."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что означает прямота Королевы Мечей?",
-      "en": "What does the Queen of Swords' directness mean?"
+      "en": "What does the Queen of Swords' directness mean?",
+      "es": "¿Qué significa la franqueza de La Reina de Espadas?",
+      "pt": "O que significa a franqueza da Rainha de Espadas?"
      },
      "options": [
       {
        "ru": "Она пережила потери, но не ожесточилась, а научилась видеть суть",
-       "en": "She has known loss without hardening, and sees to the essence"
+       "en": "She has known loss without hardening, and sees to the essence",
+       "es": "Vivió pérdidas sin endurecerse y aprendió a ver el fondo de las cosas",
+       "pt": "Ela passou por perdas e não endureceu: aprendeu a ver o essencial"
       },
       {
        "ru": "Она держит всех на расстоянии и не подпускает никого близко к себе",
-       "en": "She keeps everyone at a distance and lets no one get close to her"
+       "en": "She keeps everyone at a distance and lets no one get close to her",
+       "es": "Mantiene a todos a distancia y no deja que nadie se le acerque",
+       "pt": "Ela mantém todo mundo à distância e não deixa ninguém chegar perto dela"
       },
       {
        "ru": "Она никогда не сталкивалась с трудностями и поэтому спокойна",
-       "en": "She has never faced hardship, which is why she stays calm"
+       "en": "She has never faced hardship, which is why she stays calm",
+       "es": "Nunca enfrentó dificultades y por eso está tranquila",
+       "pt": "Ela nunca enfrentou dificuldades e por isso está tranquila"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Ясность и честность этой Королевы — не холодность: холодность как броня — уже риск карты, а не её сила.",
-      "en": "This Queen's clarity and honesty are not coldness: coldness worn as armour is the risk here, not her gift."
+      "en": "This Queen's clarity and honesty are not coldness: coldness worn as armour is the risk here, not her gift.",
+      "es": "La claridad y la honestidad de esta Reina no son frialdad: la frialdad como armadura es el riesgo de la carta, no su fuerza.",
+      "pt": "A clareza e a honestidade dessa Rainha não são frieza: a frieza como armadura já é o risco da carta, não a força dela."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что отличает Королеву Пентаклей от остальных трёх?",
-      "en": "What sets the Queen of Pentacles apart from the other three?"
+      "en": "What sets the Queen of Pentacles apart from the other three?",
+      "es": "¿Qué distingue a la Reina de Oros de las otras tres?",
+      "pt": "O que distingue a Rainha de Ouros das outras três?"
      },
      "options": [
       {
        "ru": "Она заботится о доме, а рабочие решения оставляет другим",
-       "en": "She tends the home and leaves work decisions to others"
+       "en": "She tends the home and leaves work decisions to others",
+       "es": "Cuida la casa y deja las decisiones del trabajo a otros",
+       "pt": "Ela cuida da casa e deixa as decisões de trabalho para os outros"
       },
       {
        "ru": "Она живёт идеями и вдохновляет, не касаясь быта",
-       "en": "She lives on ideas and inspires, never touching daily life"
+       "en": "She lives on ideas and inspires, never touching daily life",
+       "es": "Vive de ideas e inspira, sin tocar lo cotidiano",
+       "pt": "Ela vive de ideias e inspira, sem tocar no dia a dia"
       },
       {
        "ru": "Она соединяет дом и дело: изобилие, стоящее на земле",
-       "en": "She weaves home and work: abundance rooted in the earth"
+       "en": "She weaves home and work: abundance rooted in the earth",
+       "es": "Une la casa y el trabajo: abundancia con los pies en la tierra",
+       "pt": "Ela une a casa e o trabalho: abundância enraizada na terra"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Королева Пентаклей — про практичность и заботу: дом, тело, близкие и дело держатся у неё вместе.",
-      "en": "The Queen of Pentacles is about practicality and care: home, body, loved ones, and work all held together."
+      "en": "The Queen of Pentacles is about practicality and care: home, body, loved ones, and work all held together.",
+      "es": "La Reina de Oros habla de sentido práctico y cuidado: la casa, el cuerpo, los suyos y el trabajo se sostienen juntos en sus manos.",
+      "pt": "A Rainha de Ouros é senso prático e cuidado: a casa, o corpo, as pessoas próximas e o trabalho se sustentam juntos nela."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём риск Королевы Кубков, если чувствительность переливается через край?",
-      "en": "What is the Queen of Cups' risk when her sensitivity overflows?"
+      "en": "What is the Queen of Cups' risk when her sensitivity overflows?",
+      "es": "¿Cuál es el riesgo de la Reina de Copas cuando su sensibilidad se desborda?",
+      "pt": "Qual é o risco da Rainha de Copas quando a sensibilidade transborda?"
      },
      "options": [
       {
        "ru": "Излишняя холодность и полное безразличие к чувствам других",
-       "en": "Excessive coldness and total indifference to other people's feelings"
+       "en": "Excessive coldness and total indifference to other people's feelings",
+       "es": "Frialdad excesiva e indiferencia total ante los sentimientos ajenos",
+       "pt": "Frieza excessiva e total indiferença aos sentimentos dos outros"
       },
       {
        "ru": "Зависимость от чужих эмоций и потеря собственных границ",
-       "en": "Dependence on other people's emotions and losing your own boundaries"
+       "en": "Dependence on other people's emotions and losing your own boundaries",
+       "es": "Depender de las emociones ajenas y perder los propios límites",
+       "pt": "Depender das emoções alheias e perder os próprios limites"
       },
       {
        "ru": "Внезапная тяга к спорам и конфликтам с близкими людьми",
-       "en": "A sudden urge to argue and conflict with loved ones"
+       "en": "A sudden urge to argue and conflict with loved ones",
+       "es": "Un impulso repentino de discutir y pelear con los seres queridos",
+       "pt": "Uma vontade repentina de discutir e brigar com as pessoas próximas"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Забота без границ превращается в зависимость — воде тоже нужны берега.",
-      "en": "Care without boundaries turns into dependence — even water needs its banks."
+      "en": "Care without boundaries turns into dependence — even water needs its banks.",
+      "es": "El cuidado sin límites se convierte en dependencia: hasta el agua necesita orillas.",
+      "pt": "O cuidado sem limites vira dependência — a água também precisa de margens."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Назовите эту карту.",
-      "en": "Name this card."
+      "en": "Name this card.",
+      "es": "Nombra esta carta.",
+      "pt": "Diga o nome desta carta."
      },
      "options": [
       {
        "ru": "Королева Мечей",
-       "en": "Queen of Swords"
+       "en": "Queen of Swords",
+       "es": "La Reina de Espadas",
+       "pt": "A Rainha de Espadas"
       },
       {
        "ru": "Королева Пентаклей",
-       "en": "Queen of Pentacles"
+       "en": "Queen of Pentacles",
+       "es": "La Reina de Oros",
+       "pt": "A Rainha de Ouros"
       },
       {
        "ru": "Король Мечей",
-       "en": "King of Swords"
+       "en": "King of Swords",
+       "es": "El Rey de Espadas",
+       "pt": "O Rei de Espadas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Меч поднят вертикально, ладонь раскрыта навстречу реальности, на троне и короне — бабочки: Королева Мечей приняла правду такой, какая есть.",
-      "en": "The sword stands straight up, her hand opens to meet reality, and butterflies mark the throne and crown: the Queen of Swords has accepted the truth as it is."
+      "en": "The sword stands straight up, her hand opens to meet reality, and butterflies mark the throne and crown: the Queen of Swords has accepted the truth as it is.",
+      "es": "La espada se alza recta, la palma se abre hacia la realidad y hay mariposas en el trono y en la corona: La Reina de Espadas aceptó la verdad tal como es.",
+      "pt": "A espada está erguida na vertical, a palma se abre para a realidade e há borboletas no trono e na coroa: a Rainha de Espadas aceitou a verdade como ela é."
      },
      "cardId": "s13"
     }
@@ -420,130 +572,180 @@
      "type": "single",
      "q": {
       "ru": "Чем Король отличается от Королевы по оси ранга?",
-      "en": "How does the King differ from the Queen on the rank axis?"
+      "en": "How does the King differ from the Queen on the rank axis?",
+      "es": "¿En qué se diferencia el Rey de la Reina en el eje del rango?",
+      "pt": "Em que o Rei difere da Rainha no eixo das patentes?"
      },
      "options": [
       {
        "ru": "Король владеет стихией внутри себя, а Королева — снаружи",
-       "en": "The King holds the element within; the Queen directs it outward"
+       "en": "The King holds the element within; the Queen directs it outward",
+       "es": "El Rey domina el elemento dentro de sí y la Reina lo dirige hacia afuera",
+       "pt": "O Rei domina o elemento dentro de si, e a Rainha o dirige para fora"
       },
       {
        "ru": "Король распоряжается стихией вовне, Королева — внутри",
-       "en": "The King directs the element outward, the Queen holds it within"
+       "en": "The King directs the element outward, the Queen holds it within",
+       "es": "El Rey dirige el elemento hacia afuera y la Reina lo sostiene por dentro",
+       "pt": "O Rei dirige o elemento para fora, e a Rainha o domina por dentro"
       },
       {
        "ru": "Разницы нет: это одна и та же роль в мужском и женском облике",
-       "en": "There's no real difference: it's one role in male and female form"
+       "en": "There's no real difference: it's one role in male and female form",
+       "es": "No hay diferencia: es el mismo papel en versión masculina y femenina",
+       "pt": "Não há diferença: é o mesmo papel em versão masculina e feminina"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Королева обжила стихию внутри себя, а Король направляет её на других — ведёт, решает, отвечает.",
-      "en": "The Queen has made the element her own inner world; the King directs it toward others — leading, deciding, answering for them."
+      "en": "The Queen has made the element her own inner world; the King directs it toward others — leading, deciding, answering for them.",
+      "es": "La Reina habitó el elemento dentro de sí; el Rey lo dirige hacia los demás: guía, decide y responde por ellos.",
+      "pt": "A Rainha habitou o elemento por dentro, e o Rei o dirige aos outros — conduz, decide, responde."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Двор из шестнадцати карт: что задаёт ранг, а что — масть?",
-      "en": "The court of sixteen cards: what does the rank set, and what the suit?"
+      "en": "The court of sixteen cards: what does the rank set, and what the suit?",
+      "es": "La corte de dieciséis cartas: ¿qué define el rango y qué define el palo?",
+      "pt": "A corte de dezesseis cartas: o que a patente define e o que o naipe define?"
      },
      "options": [
       {
        "ru": "Ранг — зрелость роли, масть — стихия, в которой роль живёт",
-       "en": "Rank sets the role's maturity; the suit gives its element"
+       "en": "Rank sets the role's maturity; the suit gives its element",
+       "es": "El rango, la madurez del papel; el palo, el elemento en el que ese papel vive",
+       "pt": "A patente dá a maturidade do papel; o naipe, o elemento em que esse papel vive"
       },
       {
        "ru": "Ранг — стихия карты, масть — возраст и пол персонажа",
-       "en": "Rank is the card's element; the suit gives the character's age and sex"
+       "en": "Rank is the card's element; the suit gives the character's age and sex",
+       "es": "El rango, el elemento de la carta; el palo, la edad y el sexo del personaje",
+       "pt": "A patente dá o elemento da carta; o naipe, a idade e o sexo do personagem"
       },
       {
        "ru": "Ранг — сила карты, масть — её место в раскладе и порядок чтения",
-       "en": "Rank is the card's power; the suit fixes its place and reading order"
+       "en": "Rank is the card's power; the suit fixes its place and reading order",
+       "es": "El rango, la fuerza de la carta; el palo, su lugar en la tirada y el orden de lectura",
+       "pt": "A patente dá a força da carta; o naipe, o lugar dela na tiragem e a ordem de leitura"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Ранги идут по вертикали — от ученичества к зрелости, масти по горизонтали — четыре стихии; на пересечении и стоят шестнадцать характеров.",
-      "en": "Ranks run one way, from apprenticeship to maturity; suits run the other, as four elements — and sixteen characters stand where they cross."
+      "en": "Ranks run one way, from apprenticeship to maturity; suits run the other, as four elements — and sixteen characters stand where they cross.",
+      "es": "Los rangos van en un sentido, del aprendizaje a la madurez; los palos van en el otro, como cuatro elementos: donde se cruzan están los dieciséis caracteres.",
+      "pt": "As patentes correm na vertical, do aprendizado à maturidade; os naipes, na horizontal, como quatro elementos — e é no cruzamento que estão as dezesseis personalidades."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что происходит с Королём Жезлов, когда его сила выходит из равновесия?",
-      "en": "What happens to the King of Wands when his energy tips out of balance?"
+      "en": "What happens to the King of Wands when his energy tips out of balance?",
+      "es": "¿Qué le pasa al Rey de Bastos cuando su fuerza se sale del equilibrio?",
+      "pt": "O que acontece com o Rei de Paus quando a força dele sai do equilíbrio?"
      },
      "options": [
       {
        "ru": "Он теряет интерес к целям и предпочитает подождать, пока всё решится само",
-       "en": "He loses interest in goals and prefers to wait for things to sort themselves out"
+       "en": "He loses interest in goals and prefers to wait for things to sort themselves out",
+       "es": "Pierde el interés en las metas y prefiere esperar a que todo se resuelva solo",
+       "pt": "Ele perde o interesse pelas metas e prefere esperar que tudo se resolva sozinho"
       },
       {
        "ru": "Он погружается в тревожные сомнения и без конца откладывает решение",
-       "en": "He sinks into anxious doubt and keeps putting off the decision"
+       "en": "He sinks into anxious doubt and keeps putting off the decision",
+       "es": "Se hunde en dudas ansiosas y aplaza la decisión una y otra vez",
+       "pt": "Ele mergulha em dúvidas ansiosas e adia a decisão sem parar"
       },
       {
        "ru": "Он давит авторитетом и мало слушает, вместо того чтобы вести за собой",
-       "en": "He pushes his authority and barely listens, instead of leading the way"
+       "en": "He pushes his authority and barely listens, instead of leading the way",
+       "es": "Impone su autoridad y escucha poco, en lugar de guiar a los demás",
+       "pt": "Ele pressiona pela autoridade e escuta pouco, em vez de conduzir os outros"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Власть без тепла — авторитарность и позиция «я знаю лучше»: сила есть, а слышать других уже не получается.",
-      "en": "Power without warmth is authoritarian: an 'I know best' stance — the will is there, but no one is being heard."
+      "en": "Power without warmth is authoritarian: an 'I know best' stance — the will is there, but no one is being heard.",
+      "es": "El poder sin calidez se vuelve autoritario, la postura del «yo sé más»: la fuerza sigue ahí, pero ya no logra escuchar a nadie.",
+      "pt": "Poder sem calor humano é autoritarismo e a postura do “eu sei melhor”: a força está lá, mas já não se consegue ouvir os outros."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Какой совет даёт Король Мечей, когда нужно принять решение?",
-      "en": "What advice does the King of Swords give when a decision needs to be made?"
+      "en": "What advice does the King of Swords give when a decision needs to be made?",
+      "es": "¿Qué consejo da El Rey de Espadas cuando hay que tomar una decisión?",
+      "pt": "Que conselho o Rei de Espadas dá na hora de tomar uma decisão?"
      },
      "options": [
       {
        "ru": "Довериться первому чувству и решить сразу",
-       "en": "Trust the first feeling that comes and decide on the spot"
+       "en": "Trust the first feeling that comes and decide on the spot",
+       "es": "Confiar en el primer sentimiento y decidir de inmediato",
+       "pt": "Confiar no primeiro sentimento e decidir na hora"
       },
       {
        "ru": "Отложить эмоции, взвесить факты и решить по совести",
-       "en": "Set emotions aside, weigh the facts, decide by conscience"
+       "en": "Set emotions aside, weigh the facts, decide by conscience",
+       "es": "Dejar las emociones a un lado, sopesar los hechos y decidir en conciencia",
+       "pt": "Deixar a emoção de lado, pesar os fatos e decidir pela consciência"
       },
       {
        "ru": "Спросить всех вокруг и выбрать самый популярный вариант",
-       "en": "Ask everyone around you and go with the most popular option"
+       "en": "Ask everyone around you and go with the most popular option",
+       "es": "Preguntarle a todo el mundo y elegir la opción más popular",
+       "pt": "Perguntar a todo mundo em volta e escolher a opção mais popular"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Зрелый разум умеет быть беспристрастным — судить по фактам, а не по настроению.",
-      "en": "A mature mind can stay impartial — judging by facts rather than mood."
+      "en": "A mature mind can stay impartial — judging by facts rather than mood.",
+      "es": "Una mente madura sabe ser imparcial: juzga por los hechos y no por el estado de ánimo.",
+      "pt": "A mente madura sabe ser imparcial — julga pelos fatos, e não pelo humor."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Кто изображён на карте?",
-      "en": "Who is shown on the card?"
+      "en": "Who is shown on the card?",
+      "es": "¿Quién aparece en la carta?",
+      "pt": "Quem está retratado na carta?"
      },
      "options": [
       {
        "ru": "Король Кубков",
-       "en": "King of Cups"
+       "en": "King of Cups",
+       "es": "El Rey de Copas",
+       "pt": "O Rei de Copas"
       },
       {
        "ru": "Король Мечей",
-       "en": "King of Swords"
+       "en": "King of Swords",
+       "es": "El Rey de Espadas",
+       "pt": "O Rei de Espadas"
       },
       {
        "ru": "Королева Кубков",
-       "en": "Queen of Cups"
+       "en": "Queen of Cups",
+       "es": "La Reina de Copas",
+       "pt": "A Rainha de Copas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Трон стоит среди волнующегося моря, кубок в одной руке и скипетр в другой — это Король Кубков, а не Король Мечей и не Королева той же масти.",
-      "en": "A throne set amid a restless sea, a cup in one hand and a sceptre in the other — this is the King of Cups, not the King of Swords or the Queen of the same suit."
+      "en": "A throne set amid a restless sea, a cup in one hand and a sceptre in the other — this is the King of Cups, not the King of Swords or the Queen of the same suit.",
+      "es": "Un trono en medio de un mar agitado, una copa en una mano y un cetro en la otra: es El Rey de Copas, no El Rey de Espadas ni La Reina del mismo palo.",
+      "pt": "O trono está em meio a um mar agitado, com a taça em uma das mãos e o cetro na outra — este é o Rei de Copas, e não o Rei de Espadas nem a Rainha do mesmo naipe."
      },
      "cardId": "c14"
     }

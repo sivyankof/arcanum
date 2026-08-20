@@ -2,7 +2,9 @@
  "_comment": "Вопросы викторин M6, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
  "status": {
   "ru": "reviewed",
-  "en": "reviewed"
+  "en": "reviewed",
+  "es": "draft",
+  "pt": "draft"
  },
  "lessons": [
   {
@@ -12,130 +14,180 @@
      "type": "single",
      "q": {
       "ru": "Что вернее всего описывает перевёрнутую карту?",
-      "en": "Which of these best describes a reversed card?"
+      "en": "Which of these best describes a reversed card?",
+      "es": "¿Qué describe mejor una carta invertida?",
+      "pt": "O que descreve melhor uma carta invertida?"
      },
      "options": [
       {
        "ru": "Полная противоположность прямого значения той же карты",
-       "en": "The complete opposite of the same card's upright meaning"
+       "en": "The complete opposite of the same card's upright meaning",
+       "es": "Lo opuesto exacto del significado al derecho de esa misma carta",
+       "pt": "O oposto completo do significado em pé da mesma carta"
       },
       {
        "ru": "Та же энергия карты, с которой что-то случилось",
-       "en": "The same card energy, with something having happened to it"
+       "en": "The same card energy, with something having happened to it",
+       "es": "La misma energía de la carta, solo que algo le pasó",
+       "pt": "A mesma energia da carta, só que algo aconteceu com ela"
       },
       {
        "ru": "Отдельная карта с собственным, никак не связанным с прямым значением",
-       "en": "A separate card with a meaning of its own, unrelated to the upright one"
+       "en": "A separate card with a meaning of its own, unrelated to the upright one",
+       "es": "Una carta aparte, con un significado propio y sin relación con el que tiene al derecho",
+       "pt": "Uma carta à parte, com um significado próprio e sem nenhuma ligação com o significado em pé"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Перевёрнутое положение не отменяет значение карты и не меняет его на противоположное — оно показывает, что энергия карты застряла, перегнулась или ушла внутрь.",
-      "en": "A reversed position doesn't cancel a card's meaning or flip it into its opposite — it shows that the card's energy has got stuck, bent, or turned inward."
+      "en": "A reversed position doesn't cancel a card's meaning or flip it into its opposite — it shows that the card's energy has got stuck, bent, or turned inward.",
+      "es": "La posición invertida no anula el significado de la carta ni lo vuelve su contrario: muestra que la energía de la carta se atascó, se dobló o se fue hacia adentro.",
+      "pt": "A posição invertida não anula o significado da carta nem o troca pelo oposto — ela mostra que a energia da carta travou, passou do ponto ou foi para dentro."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "С чего лучше начать чтение перевёрнутой карты?",
-      "en": "What's the best way to start reading a reversed card?"
+      "en": "What's the best way to start reading a reversed card?",
+      "es": "¿Cómo conviene empezar a leer una carta invertida?",
+      "pt": "Por onde é melhor começar a leitura de uma carta invertida?"
      },
      "options": [
       {
        "ru": "Назвать прямое значение карты, а потом спросить: что с ним случилось",
-       "en": "Name the card's upright meaning, then ask what happened to it"
+       "en": "Name the card's upright meaning, then ask what happened to it",
+       "es": "Nombrar el significado que la carta tiene al derecho y luego preguntar qué le pasó",
+       "pt": "Dizer o significado em pé da carta e depois perguntar o que aconteceu com ele"
       },
       {
        "ru": "Сразу искать значение в перевёрнутом виде, минуя прямое",
-       "en": "Look straight for the reversed meaning, skipping the upright one"
+       "en": "Look straight for the reversed meaning, skipping the upright one",
+       "es": "Buscar directamente el significado invertido y saltarse el que tiene al derecho",
+       "pt": "Procurar direto o significado na versão invertida, pulando o significado em pé"
       },
       {
        "ru": "Сравнить её с соседними картами расклада и забыть про прямое значение",
-       "en": "Compare it with the neighbouring cards in the spread and forget the upright meaning"
+       "en": "Compare it with the neighbouring cards in the spread and forget the upright meaning",
+       "es": "Compararla con las cartas vecinas de la tirada y olvidar el significado al derecho",
+       "pt": "Comparar a carta com as vizinhas da tiragem e esquecer o significado em pé"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Прямое значение — это язык карты; спросив, что с ним стало, вы переводите его на перевёрнутый лад, а не гадаете заново.",
-      "en": "The upright meaning is the card's language; asking what became of it translates that language into the reversed key, instead of guessing from scratch."
+      "en": "The upright meaning is the card's language; asking what became of it translates that language into the reversed key, instead of guessing from scratch.",
+      "es": "El significado al derecho es el idioma de la carta; al preguntar qué fue de él, lo traduces a la clave invertida en lugar de adivinar desde cero.",
+      "pt": "O significado em pé é a língua da carta; ao perguntar o que aconteceu com ele, você o traduz para o tom invertido em vez de adivinhar do zero."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Паж Жезлов выпал перевёрнутым. Какой из случаев урока это описывает?",
-      "en": "The Page of Wands turns up reversed. Which of the lesson's cases is this?"
+      "en": "The Page of Wands turns up reversed. Which of the lesson's cases is this?",
+      "es": "La Sota de Bastos sale invertida. ¿Cuál de los casos de la lección es este?",
+      "pt": "O Valete de Paus saiu invertido. Qual dos casos da lição é este?"
      },
      "options": [
       {
        "ru": "Ушла внутрь: энергия спряталась и превратилась в холодность и броню",
-       "en": "Turned inward: the energy hid and hardened into coldness and armour indoors"
+       "en": "Turned inward: the energy hid and hardened into coldness and armour indoors",
+       "es": "Se fue hacia adentro: la energía se escondió y se volvió frialdad y armadura",
+       "pt": "Foi para dentro: a energia se escondeu e virou frieza e armadura"
       },
       {
        "ru": "Застряла: шаг напрашивается, а человек стоит на месте",
-       "en": "Got stuck: the step is calling, but the person stands still"
+       "en": "Got stuck: the step is calling, but the person stands still",
+       "es": "Se atascó: el paso se impone, pero la persona no se mueve",
+       "pt": "Travou: o passo está pedindo para acontecer, mas a pessoa continua parada"
       },
       {
        "ru": "Оборвалась на полпути: интерес вспыхнул и погас, не дойдя до дела",
-       "en": "Broke off midway: the interest flared and faded before it reached anything"
+       "en": "Broke off midway: the interest flared and faded before it reached anything",
+       "es": "Se cortó a mitad de camino: el interés se encendió y se apagó antes de llegar a algo",
+       "pt": "Se interrompeu no meio do caminho: o interesse acendeu e esfriou, sem chegar à ação"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "У Пажа Жезлов энергия настоящая, просто ей не хватило продолжения — вспышка без второго дыхания.",
-      "en": "The Page of Wands' energy is real — it simply runs out of follow-through, a flare with no second wind."
+      "en": "The Page of Wands' energy is real — it simply runs out of follow-through, a flare with no second wind.",
+      "es": "La energía de La Sota de Bastos es real; solo le faltó continuidad: un chispazo sin segundo aire.",
+      "pt": "No Valete de Paus a energia é de verdade, só faltou continuidade — uma faísca sem segundo fôlego."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Как в уроке объясняется перевёрнутая Королева Мечей?",
-      "en": "How does the lesson explain the reversed Queen of Swords?"
+      "en": "How does the lesson explain the reversed Queen of Swords?",
+      "es": "¿Cómo explica la lección La Reina de Espadas invertida?",
+      "pt": "Como a lição explica a Rainha de Espadas invertida?"
      },
      "options": [
       {
        "ru": "Как ясность, ушедшую внутрь и застывшую в холодность и броню",
-       "en": "As clarity that has turned inward and frozen into coldness and armour"
+       "en": "As clarity that has turned inward and frozen into coldness and armour",
+       "es": "Como una claridad que se fue hacia adentro y se congeló en frialdad y armadura",
+       "pt": "Como clareza que foi para dentro e congelou em frieza e armadura"
       },
       {
        "ru": "Как противоположность честности — склонность лукавить и обманывать",
-       "en": "As the opposite of honesty — a growing tendency to mislead and deceive"
+       "en": "As the opposite of honesty — a growing tendency to mislead and deceive",
+       "es": "Como lo contrario de la honestidad: una tendencia creciente a mentir y engañar",
+       "pt": "Como o oposto da honestidade — uma tendência a enrolar e enganar"
       },
       {
        "ru": "Как знак того, что рядом скоро появится лживый человек",
-       "en": "As a sign that a deceitful person is about to appear nearby"
+       "en": "As a sign that a deceitful person is about to appear nearby",
+       "es": "Como señal de que pronto aparecerá cerca una persona mentirosa",
+       "pt": "Como sinal de que vai aparecer por perto uma pessoa mentirosa"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Острый ум Королевы Мечей никуда не делся: перевёрнутая карта показывает, что он спрятался за стеной вместо разговора.",
-      "en": "The Queen of Swords' sharp mind hasn't gone anywhere: reversed, it shows that mind hiding behind a wall instead of a conversation."
+      "en": "The Queen of Swords' sharp mind hasn't gone anywhere: reversed, it shows that mind hiding behind a wall instead of a conversation.",
+      "es": "La mente afilada de La Reina de Espadas no desapareció: invertida, la carta muestra esa mente escondida tras un muro en lugar de una conversación.",
+      "pt": "A mente afiada da Rainha de Espadas não foi a lugar nenhum: invertida, a carta mostra essa mente escondida atrás de um muro, em vez da conversa."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Перевёрнутая Башня выпала там, где трещины уже видны. Как прочитать её честно?",
-      "en": "The reversed Tower falls where the cracks already show. How do you read it honestly?"
+      "en": "The reversed Tower falls where the cracks already show. How do you read it honestly?",
+      "es": "La Torre invertida sale donde las grietas ya se ven. ¿Cómo leerla con honestidad?",
+      "pt": "A Torre invertida saiu onde as rachaduras já estão à vista. Como ler isso com honestidade?"
      },
      "options": [
       {
        "ru": "Кризис уже точно не наступит, можно расслабиться",
-       "en": "The crisis definitely won't happen now, so you can relax"
+       "en": "The crisis definitely won't happen now, so you can relax",
+       "es": "La crisis ya no va a llegar, así que se puede estar tranquilo",
+       "pt": "A crise com certeza não vai acontecer, dá para relaxar"
       },
       {
        "ru": "Трудность полностью выдумана и никакого кризиса на самом деле нет",
-       "en": "The difficulty is entirely imaginary, and there's no real crisis here at all"
+       "en": "The difficulty is entirely imaginary, and there's no real crisis here at all",
+       "es": "La dificultad es del todo imaginaria y en realidad aquí no hay ninguna crisis",
+       "pt": "A dificuldade é totalmente inventada e não existe crise nenhuma de verdade"
       },
       {
        "ru": "Кризис откладывается: трещины видны, но признать их страшно",
-       "en": "The crisis is postponed: the cracks show, admitting them feels frightening"
+       "en": "The crisis is postponed: the cracks show, admitting them feels frightening",
+       "es": "La crisis se aplaza: las grietas se ven, pero da miedo reconocerlas",
+       "pt": "A crise está adiada: as rachaduras estão à vista, mas admitir dá medo"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Честное чтение не сглаживает трудность и не пугает исходом — оно называет то, что уже происходит, и напоминает: держать рушащееся тяжелее, чем отпустить.",
-      "en": "An honest reading neither softens the difficulty nor frightens with an outcome — it names what's already happening and notes that holding up what's collapsing is harder than letting go."
+      "en": "An honest reading neither softens the difficulty nor frightens with an outcome — it names what's already happening and notes that holding up what's collapsing is harder than letting go.",
+      "es": "Una lectura honesta no suaviza la dificultad ni asusta con el desenlace: nombra lo que ya está pasando y recuerda que sostener lo que se derrumba pesa más que soltarlo.",
+      "pt": "Uma leitura honesta não suaviza a dificuldade nem assusta com o desfecho — ela nomeia o que já está acontecendo e lembra que segurar o que está desabando pesa mais do que soltar."
      }
     }
    ]
@@ -147,130 +199,180 @@
      "type": "single",
      "q": {
       "ru": "Двойка и Шестёрка Кубков стоят рядом в раскладе. Что связывает эту пару?",
-      "en": "The Two and the Six of Cups fall next to each other. What connects this pair?"
+      "en": "The Two and the Six of Cups fall next to each other. What connects this pair?",
+      "es": "El Dos y el Seis de Copas salen uno al lado del otro. ¿Qué une a esta pareja?",
+      "pt": "O Dois e o Seis de Copas estão lado a lado na tiragem. O que liga esse par?"
      },
      "options": [
       {
        "ru": "Одна стихия, разные числа: пара показывает, как чувство меняется во времени",
-       "en": "One element, different numbers: the pair traces how a feeling changes over time"
+       "en": "One element, different numbers: the pair traces how a feeling changes over time",
+       "es": "Un mismo elemento y números distintos: la pareja muestra cómo cambia un sentimiento con el tiempo",
+       "pt": "Um mesmo elemento, números diferentes: o par mostra como o sentimento muda no tempo"
       },
       {
        "ru": "Ничего особенного: карты одной масти рядом не связаны между собой",
-       "en": "Nothing in particular: same-suit cards side by side aren't connected"
+       "en": "Nothing in particular: same-suit cards side by side aren't connected",
+       "es": "Nada en particular: dos cartas del mismo palo juntas no se relacionan entre sí",
+       "pt": "Nada de especial: cartas do mesmo naipe lado a lado não têm ligação entre si"
       },
       {
        "ru": "Карты спорят между собой: одна про начало отношений, другая — про их разрыв",
-       "en": "The cards argue with each other: one is about a new relationship, the other about its end"
+       "en": "The cards argue with each other: one is about a new relationship, the other about its end",
+       "es": "Las cartas se contradicen: una habla del inicio de una relación y la otra, de su ruptura",
+       "pt": "As cartas discutem entre si: uma fala do início de uma relação, a outra do fim dela"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Одна стихия и разные числа складываются в сюжет: карты одной масти часто показывают, как одна история меняется во времени.",
-      "en": "One element with different numbers adds up to a story: cards of the same suit often show how one situation changes over time."
+      "en": "One element with different numbers adds up to a story: cards of the same suit often show how one situation changes over time.",
+      "es": "Un mismo elemento con números distintos arma una historia: las cartas de un mismo palo suelen mostrar cómo una misma situación cambia con el tiempo.",
+      "pt": "Um mesmo elemento com números diferentes forma um enredo: cartas do mesmo naipe costumam mostrar como uma história muda no tempo."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В паре «старший + младший» какую роль обычно играет старший аркан?",
-      "en": "In a Major-and-Minor pair, what role does the Major card usually play?"
+      "en": "In a Major-and-Minor pair, what role does the Major card usually play?",
+      "es": "En una pareja de Arcano Mayor y Arcano Menor, ¿qué papel cumple normalmente el Mayor?",
+      "pt": "No par “Maior + Menor”, que papel o Arcano Maior costuma ter?"
      },
      "options": [
       {
        "ru": "Полностью описывает ситуацию сам, а младший аркан только уточняет дату события",
-       "en": "It fully describes the situation on its own, and the Minor card only pins down a date"
+       "en": "It fully describes the situation on its own, and the Minor card only pins down a date",
+       "es": "Describe la situación por completo él solo, y el Menor solo precisa la fecha del suceso",
+       "pt": "Descreve sozinho a situação inteira, e o Arcano Menor apenas especifica a data do acontecimento"
       },
       {
        "ru": "Отменяет значение младшего аркана, если они противоречат друг другу",
-       "en": "It cancels the Minor card's meaning whenever the two disagree"
+       "en": "It cancels the Minor card's meaning whenever the two disagree",
+       "es": "Anula el significado del Menor cada vez que los dos se contradicen",
+       "pt": "Anula o significado do Arcano Menor sempre que os dois se contradizem"
       },
       {
        "ru": "Задаёт общую тему, а младший показывает, как она проживается в жизни",
-       "en": "It sets the overall theme, while the Minor shows how that theme plays out"
+       "en": "It sets the overall theme, while the Minor shows how that theme plays out",
+       "es": "Marca el tema general, y el Menor muestra cómo ese tema se vive en la práctica",
+       "pt": "Propõe o tema geral, e o Menor mostra como esse tema é vivido na prática"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Старший аркан держит общую тему, а числовая карта конкретизирует её — так и работает пара «старший + младший».",
-      "en": "The Major card holds the overall theme, and the number card makes it concrete — that's how a Major-and-Minor pair works."
+      "en": "The Major card holds the overall theme, and the number card makes it concrete — that's how a Major-and-Minor pair works.",
+      "es": "El Arcano Mayor sostiene el tema general y la carta numerada lo concreta: así funciona la pareja de Mayor y Menor.",
+      "pt": "O Arcano Maior sustenta o tema geral, e a carta numérica o concretiza — é assim que funciona o par “Maior + Menor”."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Отшельник и Восьмёрка Мечей внешне похожи — обе карты про уединение. В чём разница между ними?",
-      "en": "The Hermit and the Eight of Swords look alike on the surface — both are about being alone. What's the difference between them?"
+      "en": "The Hermit and the Eight of Swords look alike on the surface — both are about being alone. What's the difference between them?",
+      "es": "El Ermitaño y El Ocho de Espadas se parecen por fuera: las dos hablan de estar a solas. ¿Cuál es la diferencia entre ellas?",
+      "pt": "O Eremita e o Oito de Espadas se parecem por fora — as duas cartas falam de ficar sozinho. Qual é a diferença entre elas?"
      },
      "options": [
       {
        "ru": "Разницы нет: обе карты про одиночество, которого не выбирали",
-       "en": "No difference: both are about loneliness you didn't choose"
+       "en": "No difference: both are about loneliness you didn't choose",
+       "es": "No hay diferencia: las dos hablan de una soledad que no se eligió",
+       "pt": "Não há diferença: as duas falam de uma solidão que não foi escolhida"
       },
       {
        "ru": "Отшельник уходит от шума сам; Восьмёрка — ловушка тревожных мыслей, а не обстоятельств",
-       "en": "The Hermit steps away from the noise on purpose; the Eight is a trap held by anxious thoughts"
+       "en": "The Hermit steps away from the noise on purpose; the Eight is a trap held by anxious thoughts",
+       "es": "El Ermitaño se aparta del ruido por decisión propia; el Ocho es una trampa de pensamientos ansiosos, no de circunstancias",
+       "pt": "O Eremita se afasta do barulho por vontade própria; o Oito é uma armadilha de pensamentos ansiosos, e não de circunstâncias"
       },
       {
        "ru": "Отшельник всегда про человека рядом, а Восьмёрка Мечей — всегда про вашу собственную роль в этом",
-       "en": "The Hermit is always about someone nearby, and the Eight of Swords is always about your own role"
+       "en": "The Hermit is always about someone nearby, and the Eight of Swords is always about your own role",
+       "es": "El Ermitaño siempre habla de alguien cercano y El Ocho de Espadas, siempre de tu propio papel en esto",
+       "pt": "O Eremita é sempre sobre alguém próximo, e o Oito de Espadas é sempre sobre o seu próprio papel nisso"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Похожие снаружи карты могут значить противоположное изнутри: у Отшельника уединение выбрано, у Восьмёрки Мечей — это ловушка мыслей.",
-      "en": "Cards that look alike can mean opposite things underneath: the Hermit's solitude is chosen, the Eight of Swords is a trap made of anxious thoughts."
+      "en": "Cards that look alike can mean opposite things underneath: the Hermit's solitude is chosen, the Eight of Swords is a trap made of anxious thoughts.",
+      "es": "Cartas parecidas por fuera pueden significar lo contrario por dentro: en El Ermitaño la soledad es elegida; en El Ocho de Espadas es una trampa de pensamientos.",
+      "pt": "Cartas parecidas por fora podem significar o oposto por dentro: no Eremita o retiro é escolhido; no Oito de Espadas, é uma armadilha de pensamentos."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Рыцарь Жезлов оказался рядом с Тройкой Пентаклей. На какой вопрос отвечает каждая карта?",
-      "en": "The Knight of Wands turns up beside the Three of Pentacles. Which question does each card answer?"
+      "en": "The Knight of Wands turns up beside the Three of Pentacles. Which question does each card answer?",
+      "es": "El Caballero de Bastos cae junto al Tres de Oros. ¿A qué pregunta responde cada carta?",
+      "pt": "O Cavaleiro de Paus caiu ao lado do Três de Ouros. A que pergunta cada carta responde?"
      },
      "options": [
       {
        "ru": "Придворная — на вопрос «кто», числовая — на «что»: порывистый человек в деле, где ценят мастерство",
-       "en": "The court card answers 'who', the number card 'what': someone impulsive in work where skill is valued"
+       "en": "The court card answers 'who', the number card 'what': someone impulsive in work where skill is valued",
+       "es": "La de la corte responde «quién» y la numerada «qué»: alguien impulsivo en un trabajo donde se valora el oficio",
+       "pt": "A da corte responde “quem”, e a numérica responde “o quê”: alguém impetuoso em um trabalho onde se valoriza o ofício"
       },
       {
        "ru": "Обе карты отвечают на один и тот же вопрос «когда», поэтому пару читают как точную дату события",
-       "en": "Both cards answer the same question, 'when', so the pair is read as an exact date"
+       "en": "Both cards answer the same question, 'when', so the pair is read as an exact date",
+       "es": "Las dos responden a la misma pregunta, «cuándo», y por eso la pareja se lee como una fecha exacta",
+       "pt": "As duas cartas respondem à mesma pergunta, “quando”, por isso o par se lê como a data exata do acontecimento"
       },
       {
        "ru": "Придворная карта отвечает на вопрос «что», а числовая — на вопрос «кто», в этом и заключается их связка",
-       "en": "The court card stands for 'what' and the number card for 'who' — that's the whole point of the combination"
+       "en": "The court card stands for 'what' and the number card for 'who' — that's the whole point of the combination",
+       "es": "La carta de la corte responde «qué» y la numerada responde «quién»: en eso consiste su combinación",
+       "pt": "A carta da corte responde “o quê”, e a numérica responde “quem” — é nisso que consiste a ligação entre elas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Придворная карта подсказывает «кто», числовая — «что»: вместе они складывают персонажа и его дело.",
-      "en": "The court card points to 'who', the number card to 'what' — together they sketch a character and their task."
+      "en": "The court card points to 'who', the number card to 'what' — together they sketch a character and their task.",
+      "es": "La carta de la corte señala el «quién» y la numerada, el «qué»: juntas arman un personaje y su tarea.",
+      "pt": "A carta da corte aponta o “quem”, e a numérica aponta o “o quê” — juntas, compõem um personagem e a tarefa dele."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Эта карта выпала рядом с Рыцарем Жезлов. Как лучше прочитать пару?",
-      "en": "This card turns up beside the Knight of Wands. What's the best way to read the pair?"
+      "en": "This card turns up beside the Knight of Wands. What's the best way to read the pair?",
+      "es": "Esta carta salió junto al Caballero de Bastos. ¿Cómo conviene leer la pareja?",
+      "pt": "Esta carta saiu ao lado do Cavaleiro de Paus. Qual é a melhor forma de ler o par?"
      },
      "options": [
       {
        "ru": "Одна карта отменяет другую, поэтому расклад нужно перетасовать заново",
-       "en": "One card cancels the other, so the spread needs to be reshuffled"
+       "en": "One card cancels the other, so the spread needs to be reshuffled",
+       "es": "Una carta anula a la otra, así que hay que volver a barajar la tirada",
+       "pt": "Uma carta anula a outra, por isso a tiragem precisa ser embaralhada de novo"
       },
       {
        "ru": "Карта Кубков полностью нейтрализует Рыцаря: спешить в этой ситуации не стоит",
-       "en": "The Cups card fully neutralises the Knight: there's no need to hurry here"
+       "en": "The Cups card fully neutralises the Knight: there's no need to hurry here",
+       "es": "La carta de Copas neutraliza por completo al Caballero: en esta situación no hay que apurarse",
+       "pt": "A carta de Copas neutraliza completamente o Cavaleiro: nessa situação não vale a pena ter pressa"
       },
       {
        "ru": "Обе правдивы сразу: сначала побыть в союзе, потом действовать решительно",
-       "en": "Both are true at once: first stay within the bond, then act decisively"
+       "en": "Both are true at once: first stay within the bond, then act decisively",
+       "es": "Las dos son ciertas a la vez: primero permanecer un tiempo en el vínculo y después actuar con decisión",
+       "pt": "As duas são verdadeiras ao mesmo tempo: primeiro ficar na união, depois agir com decisão"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Спор карт редко решается в пользу одной: чаще обе стороны верны по очереди, а не отменяют одна другую.",
-      "en": "A disagreement between cards is rarely settled in favour of just one: more often both sides hold true, each in its turn."
+      "en": "A disagreement between cards is rarely settled in favour of just one: more often both sides hold true, each in its turn.",
+      "es": "Una discusión entre cartas rara vez se resuelve a favor de una sola: lo habitual es que las dos sean ciertas por turnos, en lugar de anularse entre sí.",
+      "pt": "Uma discussão entre cartas raramente se resolve a favor de uma só: mais frequentemente as duas são verdadeiras, cada uma na sua vez."
      },
      "cardId": "c02"
     }
@@ -283,130 +385,180 @@
      "type": "single",
      "q": {
       "ru": "Что означает позиция «Будущее» в раскладе «Три карты»?",
-      "en": "What is meant by the 'Future' position in the Three Cards spread?"
+      "en": "What is meant by the 'Future' position in the Three Cards spread?",
+      "es": "¿Qué significa la posición «Futuro» en la tirada de Tres cartas?",
+      "pt": "O que significa a posição “Futuro” na tiragem “Três cartas”?"
      },
      "options": [
       {
        "ru": "Направление, куда движется ситуация, если ничего не менять",
-       "en": "The direction the situation is heading, if nothing changes"
+       "en": "The direction the situation is heading, if nothing changes",
+       "es": "La dirección hacia la que va la situación si nada cambia",
+       "pt": "A direção para onde a situação caminha, se nada mudar"
       },
       {
        "ru": "Точную дату события, к которой стоит начинать готовиться заранее",
-       "en": "The exact date of the event you should start preparing for now"
+       "en": "The exact date of the event you should start preparing for now",
+       "es": "La fecha exacta del suceso para el que conviene prepararse desde ya",
+       "pt": "A data exata do acontecimento, para o qual vale começar a se preparar desde já"
       },
       {
        "ru": "Список дел, которые нужно закрыть в ближайшие дни",
-       "en": "A list of tasks to finish over the next few days"
+       "en": "A list of tasks to finish over the next few days",
+       "es": "La lista de tareas que hay que cerrar en los próximos días",
+       "pt": "Uma lista de tarefas que precisam ser fechadas nos próximos dias"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "«Будущее» показывает тенденцию при текущем курсе, а не готовый исход — этим рефлексия и отличается от предсказания.",
-      "en": "'Future' shows a trend under the current course, not a finished outcome — that's what separates reflection from prediction."
+      "en": "'Future' shows a trend under the current course, not a finished outcome — that's what separates reflection from prediction.",
+      "es": "El «Futuro» muestra una tendencia según el rumbo actual, no un desenlace cerrado: en eso la reflexión se diferencia de la predicción.",
+      "pt": "O “Futuro” mostra a tendência no rumo atual, e não um desfecho pronto — é nisso que a reflexão se distingue da previsão."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Какой из этих вопросов подходит для расклада лучше всего?",
-      "en": "Which of these questions suits the spread best?"
+      "en": "Which of these questions suits the spread best?",
+      "es": "¿Cuál de estas preguntas es la más apropiada para una tirada?",
+      "pt": "Qual destas perguntas é a mais adequada para uma tiragem?"
      },
      "options": [
       {
        "ru": "Уйдёт ли он от жены до конца этого года?",
-       "en": "Will he leave his wife before the end of this year?"
+       "en": "Will he leave his wife before the end of this year?",
+       "es": "¿Va a dejar a su esposa antes de que termine este año?",
+       "pt": "Ele vai deixar a esposa antes do fim deste ano?"
       },
       {
        "ru": "Когда я наконец разбогатею и смогу не работать?",
-       "en": "When will I finally get rich and stop working for good?"
+       "en": "When will I finally get rich and stop working for good?",
+       "es": "¿Cuándo tendré por fin dinero de sobra y podré dejar de trabajar?",
+       "pt": "Quando é que eu finalmente vou ficar rico e poder parar de trabalhar?"
       },
       {
        "ru": "Что мне важно понять про эти отношения?",
-       "en": "What do I need to understand about this relationship?"
+       "en": "What do I need to understand about this relationship?",
+       "es": "¿Qué necesito entender sobre esta relación?",
+       "pt": "O que é importante eu entender sobre essa relação?"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Открытый вопрос оставляет пространство для смысла. «Да или нет» сводит расклад к монетке, «когда именно» — к дате, а про чужую жизнь мы не спрашиваем без просьбы.",
-      "en": "An open question leaves room for meaning. 'Yes or no' reduces the spread to a coin toss, 'when exactly' to a date — and we don't ask about someone else's life uninvited."
+      "en": "An open question leaves room for meaning. 'Yes or no' reduces the spread to a coin toss, 'when exactly' to a date — and we don't ask about someone else's life uninvited.",
+      "es": "Una pregunta abierta deja espacio para el sentido. El «sí o no» reduce la tirada a una moneda al aire y el «cuándo exactamente», a una fecha; y sobre la vida ajena no preguntamos si no nos lo piden.",
+      "pt": "A pergunta aberta deixa espaço para o sentido. O “sim ou não” reduz a tiragem a um cara ou coroa, o “quando exatamente” a uma data — e sobre a vida alheia não se pergunta sem pedido."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что помогает связать три карты в единый рассказ, а не оставить их тремя отдельными словами?",
-      "en": "What helps connect the three cards into one story instead of leaving them as separate words?"
+      "en": "What helps connect the three cards into one story instead of leaving them as separate words?",
+      "es": "¿Qué ayuda a unir las tres cartas en un solo relato en lugar de dejarlas como tres palabras sueltas?",
+      "pt": "O que ajuda a ligar as três cartas em um relato único, em vez de deixá-las como três palavras soltas?"
      },
      "options": [
       {
        "ru": "Подсчёт числовых значений всех трёх карт",
-       "en": "Adding up the numeric value of all three cards drawn"
+       "en": "Adding up the numeric value of all three cards drawn",
+       "es": "Sumar el valor numérico de las tres cartas que salieron",
+       "pt": "Somar os valores numéricos das três cartas abertas"
       },
       {
        "ru": "Мостик через союзы «потому что», «чтобы», «но»",
-       "en": "A bridge built with 'because', 'in order to', 'but'"
+       "en": "A bridge built with 'because', 'in order to', 'but'",
+       "es": "Un puente hecho con «porque», «para» y «pero»",
+       "pt": "Uma ponte armada com as conjunções “porque”, “para” e “mas”"
       },
       {
        "ru": "Чтение карт в обратном порядке, от «Будущего» к «Прошлому»",
-       "en": "Reading the cards backwards, from 'Future' through to 'Past'"
+       "en": "Reading the cards backwards, from 'Future' through to 'Past'",
+       "es": "Leer las cartas al revés, del «Futuro» hacia el «Pasado»",
+       "pt": "Ler as cartas na ordem inversa, do “Futuro” para o “Passado”"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Союз превращает три отдельных значения в одну фразу — приём уже знаком по прошлому занятию.",
-      "en": "A connector turns three separate meanings into a single sentence — a technique already familiar from the last lesson."
+      "en": "A connector turns three separate meanings into a single sentence — a technique already familiar from the last lesson.",
+      "es": "Un conector convierte tres significados sueltos en una sola frase: un recurso que ya conoces de la clase anterior.",
+      "pt": "A conjunção transforma três significados soltos em uma frase — um recurso já conhecido da lição anterior."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Почему первоисточник колоды называет чтение для постороннего более лёгким, чем для себя?",
-      "en": "Why does the deck's original source call reading for a stranger easier than reading for yourself?"
+      "en": "Why does the deck's original source call reading for a stranger easier than reading for yourself?",
+      "es": "¿Por qué la fuente original de la baraja considera más fácil leer para un desconocido que para uno mismo?",
+      "pt": "Por que a fonte original do baralho diz que ler para uma pessoa de fora é mais fácil do que ler para si mesmo?"
      },
      "options": [
       {
        "ru": "Потому что для постороннего разрешено вытягивать больше карт",
-       "en": "Because more cards are allowed in a reading done for a stranger"
+       "en": "Because more cards are allowed in a reading done for a stranger",
+       "es": "Porque para un desconocido está permitido sacar más cartas",
+       "pt": "Porque, para uma pessoa de fora, é permitido tirar mais cartas"
       },
       {
        "ru": "Потому что расклад «Три карты» вообще не подходит для себя",
-       "en": "Because the Three Cards spread doesn't work for reading about yourself"
+       "en": "Because the Three Cards spread doesn't work for reading about yourself",
+       "es": "Porque la tirada de Tres cartas no sirve para leerse a uno mismo",
+       "pt": "Porque a tiragem “Três cartas” não serve para ler sobre si mesmo"
       },
       {
        "ru": "Потому что для себя мешают личные ожидания и предубеждения",
-       "en": "Because personal expectations and bias get in the way"
+       "en": "Because personal expectations and bias get in the way",
+       "es": "Porque para uno mismo estorban las expectativas y los prejuicios personales",
+       "pt": "Porque, para si mesmo, as expectativas e os preconceitos atrapalham"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Личная заинтересованность окрашивает трактовку — поэтому для себя мы особенно бережны к ожиданиям. А для других читаем только по их просьбе: это правило этики из первого модуля.",
-      "en": "Personal stakes colour the reading — so for ourselves we stay especially careful with expectations. And we read for others only at their request: that's the ethics rule from the first module."
+      "en": "Personal stakes colour the reading — so for ourselves we stay especially careful with expectations. And we read for others only at their request: that's the ethics rule from the first module.",
+      "es": "El interés personal tiñe la interpretación: por eso, con nosotros mismos cuidamos especialmente las expectativas. Y para otros leemos solo si nos lo piden: es la regla de ética del primer módulo.",
+      "pt": "O interesse pessoal tinge a interpretação — por isso, para nós mesmos, redobramos o cuidado com as expectativas. E para os outros lemos só a pedido deles: essa é a regra de ética do primeiro módulo."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "В позиции «Настоящее» выпала эта карта — что она подсказывает?",
-      "en": "In the 'Present' position, this card turned up — what does it suggest?"
+      "en": "In the 'Present' position, this card turned up — what does it suggest?",
+      "es": "En la posición «Presente» salió esta carta: ¿qué sugiere?",
+      "pt": "Na posição “Presente” saiu esta carta — o que ela sugere?"
      },
      "options": [
       {
        "ru": "Внутреннего ресурса хватит, чтобы справиться мягко — терпением, а не напором",
-       "en": "You have enough inner resource to handle this gently — with patience"
+       "en": "You have enough inner resource to handle this gently — with patience",
+       "es": "El recurso interior alcanza para resolverlo con suavidad, con paciencia y no con presión",
+       "pt": "O recurso interior basta para dar conta com suavidade — pela paciência, e não por um puxão"
       },
       {
        "ru": "Ситуация требует физической силы: нужно надавить решительнее и быстрее",
-       "en": "The situation calls for physical strength: push harder and more quickly now"
+       "en": "The situation calls for physical strength: push harder and more quickly now",
+       "es": "La situación exige fuerza física: hay que presionar con más decisión y más rapidez",
+       "pt": "A situação exige força física: é preciso pressionar com mais decisão e rapidez"
       },
       {
        "ru": "Уже через неделю всё разрешится само собой, вмешиваться не нужно",
-       "en": "Everything will resolve on its own within a week — no need to act"
+       "en": "Everything will resolve on its own within a week — no need to act",
+       "es": "En una semana todo se va a resolver solo, no hace falta intervenir",
+       "pt": "Em uma semana tudo vai se resolver sozinho, não é preciso intervir"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Карта говорит о мягкой смелости — приручить тревогу терпением, а не бороться с ней в лоб; конкретных сроков она не называет.",
-      "en": "The card speaks of gentle courage — taming the worry through patience rather than fighting it head-on; it names no specific timeline."
+      "en": "The card speaks of gentle courage — taming the worry through patience rather than fighting it head-on; it names no specific timeline.",
+      "es": "La carta habla de un valor suave: domesticar la inquietud con paciencia en lugar de pelear de frente con ella; no señala ningún plazo concreto.",
+      "pt": "A carta fala de uma coragem suave — domar a inquietação pela paciência, em vez de enfrentá-la de frente; ela não indica prazo nenhum."
      },
      "cardId": "strength"
     }
@@ -419,130 +571,180 @@
      "type": "single",
      "q": {
       "ru": "Друг разложил три карты и читает каждую по отдельности, не связывая их друг с другом. Какой совет ему дать?",
-      "en": "A friend lays out three cards and reads each one separately, without connecting them. What advice would help most?"
+      "en": "A friend lays out three cards and reads each one separately, without connecting them. What advice would help most?",
+      "es": "Un amigo sacó tres cartas y lee cada una por separado, sin conectarlas entre sí. ¿Qué consejo le darías?",
+      "pt": "Um amigo abriu três cartas e lê cada uma separadamente, sem ligar umas às outras. Que conselho dar a ele?"
      },
      "options": [
       {
        "ru": "Всё в порядке: связывать карты нужно только в раскладах для других людей",
-       "en": "Nothing's wrong: bridging the cards only matters in readings done for other people"
+       "en": "Nothing's wrong: bridging the cards only matters in readings done for other people",
+       "es": "Todo está bien: solo hace falta conectar las cartas en las tiradas para otras personas",
+       "pt": "Está tudo certo: ligar as cartas só é preciso em tiragens para outras pessoas"
       },
       {
        "ru": "Навести мостик между картами: тогда выйдет история, а не список слов",
-       "en": "Build a bridge between the cards: that turns them into a story, not a list"
+       "en": "Build a bridge between the cards: that turns them into a story, not a list",
+       "es": "Tender un puente entre las cartas: así sale una historia y no una lista de palabras",
+       "pt": "Armar uma ponte entre as cartas: assim sai uma história, e não uma lista de palavras"
       },
       {
        "ru": "Стоит читать карты в обратном порядке — сначала «Будущее», потом «Прошлое»",
-       "en": "It helps to read the cards in reverse order — Future first, then Past"
+       "en": "It helps to read the cards in reverse order — Future first, then Past",
+       "es": "Conviene leer las cartas al revés: primero el «Futuro» y después el «Pasado»",
+       "pt": "Vale ler as cartas na ordem inversa — primeiro o “Futuro”, depois o “Passado”"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Одна карта — слово, а мостик между картами превращает слова в историю: без него получается список значений, а не ответ на вопрос.",
-      "en": "One card is a word, and a bridge between cards turns words into a story: without it, you get a list of meanings instead of an answer."
+      "en": "One card is a word, and a bridge between cards turns words into a story: without it, you get a list of meanings instead of an answer.",
+      "es": "Una carta sola es una palabra, y el puente entre cartas convierte las palabras en una historia: sin él queda una lista de significados y no una respuesta a la pregunta.",
+      "pt": "Uma carta é uma palavra, e a ponte entre as cartas transforma palavras em história: sem ela, sai uma lista de significados, e não uma resposta à pergunta."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "На середине расклада человек уже не помнит вопрос, с которым сел за карты, и просто описывает картинки одну за другой. В чём его ошибка?",
-      "en": "Halfway through a reading, someone can no longer recall the question they started with and is simply describing the pictures one by one. What's gone wrong?"
+      "en": "Halfway through a reading, someone can no longer recall the question they started with and is simply describing the pictures one by one. What's gone wrong?",
+      "es": "A mitad de la tirada, una persona ya no recuerda la pregunta con la que se sentó a leer y solo describe los dibujos uno tras otro. ¿En qué se equivoca?",
+      "pt": "No meio da tiragem, a pessoa já não lembra a pergunta com que se sentou para as cartas e simplesmente descreve as imagens uma atrás da outra. Qual é o erro dela?"
      },
      "options": [
       {
        "ru": "Он потерял вопрос, а без вопроса карты рассыпаются на общие слова",
-       "en": "They've lost the question, and the cards fall apart into vague generalities"
+       "en": "They've lost the question, and the cards fall apart into vague generalities",
+       "es": "Perdió la pregunta, y sin pregunta las cartas se deshacen en frases generales",
+       "pt": "Ela perdeu a pergunta, e sem pergunta as cartas se desfazem em palavras genéricas"
       },
       {
        "ru": "Ему стоило выбрать расклад попроще, чем «Три карты»",
-       "en": "They should have picked a simpler spread than Three Cards"
+       "en": "They should have picked a simpler spread than Three Cards",
+       "es": "Debió elegir una tirada más simple que la de Tres cartas",
+       "pt": "Ela deveria ter escolhido uma tiragem mais simples do que a “Três cartas”"
       },
       {
        "ru": "Ничего страшного: расклад одинаково работает и без исходного вопроса",
-       "en": "Nothing serious: a spread works just as well without the original question in mind"
+       "en": "Nothing serious: a spread works just as well without the original question in mind",
+       "es": "No pasa nada: la tirada funciona igual sin la pregunta inicial",
+       "pt": "Ela não tem com que se preocupar: a tiragem funciona igual sem a pergunta inicial"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Вопрос держит расклад собранным: без него любая карта звучит правдоподобно, но ни одна не отвечает на то, ради чего вы сели за карты.",
-      "en": "The question keeps a reading focused: without it, every card sounds plausible, yet none of them answers what you actually sat down to ask."
+      "en": "The question keeps a reading focused: without it, every card sounds plausible, yet none of them answers what you actually sat down to ask.",
+      "es": "La pregunta mantiene la tirada unida: sin ella cualquier carta suena verosímil, pero ninguna responde a aquello por lo que te sentaste a leer.",
+      "pt": "A pergunta mantém a tiragem inteira: sem ela, qualquer carta soa verossímil, mas nenhuma responde àquilo por que você se sentou para as cartas."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В разборе примера «Будущее» — Солнце, и звучит это очень обнадёживающе. Как лучше понять эту позицию?",
-      "en": "In the example, the Future position holds the Sun, and it all sounds very reassuring. What's the right way to read that position?"
+      "en": "In the example, the Future position holds the Sun, and it all sounds very reassuring. What's the right way to read that position?",
+      "es": "En el ejemplo, en el «Futuro» está El Sol y todo suena muy alentador. ¿Cómo conviene entender esa posición?",
+      "pt": "Na análise do exemplo, no “Futuro” está o Sol, e isso soa muito animador. Qual é a melhor forma de entender essa posição?"
      },
      "options": [
       {
        "ru": "Как знак, что дальше расклад можно уже не разбирать",
-       "en": "As a sign that the rest of the spread no longer needs reading"
+       "en": "As a sign that the rest of the spread no longer needs reading",
+       "es": "Como señal de que ya no hace falta seguir analizando la tirada",
+       "pt": "Como um sinal de que o resto da tiragem já não precisa ser analisado"
       },
       {
        "ru": "Как обещание: раз выпало Солнце, всё точно закончится хорошо",
-       "en": "As a promise: the Sun turned up, so it is bound to end well"
+       "en": "As a promise: the Sun turned up, so it is bound to end well",
+       "es": "Como una promesa: si salió El Sol, todo va a terminar bien seguro",
+       "pt": "Como uma promessa: se saiu o Sol, tudo com certeza vai acabar bem"
       },
       {
        "ru": "Как направление ситуации сейчас, а не обещанный результат",
-       "en": "As the situation's current direction, not a promised result"
+       "en": "As the situation's current direction, not a promised result",
+       "es": "Como la dirección que lleva la situación ahora, no como un resultado prometido",
+       "pt": "Como a direção da situação agora, e não como um resultado prometido"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "«Будущее» показывает, куда сейчас движется ситуация, а не выносит приговор: направление можно заметить и изменить, если оно вам не по душе.",
-      "en": "The Future position shows where the situation is currently headed, not a verdict: you can notice the direction and change it, if it isn't the one you want."
+      "en": "The Future position shows where the situation is currently headed, not a verdict: you can notice the direction and change it, if it isn't the one you want.",
+      "es": "El «Futuro» muestra hacia dónde va la situación en este momento, no dicta una sentencia: la dirección se puede notar y cambiar si no te convence.",
+      "pt": "O “Futuro” mostra para onde a situação caminha agora, e não profere uma sentença: dá para perceber a direção e mudá-la, se ela não agradar."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В раскладе выпадает придворная карта, и первая мысль — конкретный человек из вашей жизни. Что стоит проверить, прежде чем решить, кто это?",
-      "en": "A court card turns up in a spread, and the first thought is a specific person in your life. What's worth checking before deciding who it is?"
+      "en": "A court card turns up in a spread, and the first thought is a specific person in your life. What's worth checking before deciding who it is?",
+      "es": "En una tirada sale una carta de la corte y lo primero que piensas es en una persona concreta de tu vida. ¿Qué conviene revisar antes de decidir quién es?",
+      "pt": "Na tiragem sai uma carta da corte, e o primeiro pensamento é uma pessoa concreta da sua vida. O que vale conferir antes de decidir quem é?"
      },
      "options": [
       {
        "ru": "Не подходит ли карта лучше как ваша роль в ситуации",
-       "en": "Whether the card fits better as your own role"
+       "en": "Whether the card fits better as your own role",
+       "es": "Si la carta no encaja mejor como tu propio papel en la situación",
+       "pt": "Se a carta não cabe melhor como o seu papel na situação"
       },
       {
        "ru": "Ничего: придворная карта — это всегда конкретный человек рядом",
-       "en": "Nothing: a court card always means a specific person nearby"
+       "en": "Nothing: a court card always means a specific person nearby",
+       "es": "Nada: una carta de la corte siempre es una persona concreta que está cerca",
+       "pt": "Nada: a carta da corte é sempre uma pessoa concreta ao seu lado"
       },
       {
        "ru": "Стоит пересдать карты, пока не выпадет кто-то более понятный",
-       "en": "It's best to reshuffle until a clearer person turns up"
+       "en": "It's best to reshuffle until a clearer person turns up",
+       "es": "Conviene volver a barajar hasta que salga alguien más claro",
+       "pt": "Vale tirar as cartas de novo, até sair alguém mais claro"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Правило простое: сомневаетесь — читайте придворную карту как свою роль, это работает и в отношениях, и в решениях о себе.",
-      "en": "The rule is simple: when in doubt, read a court card as your own role — it works both for questions about relationships and about yourself."
+      "en": "The rule is simple: when in doubt, read a court card as your own role — it works both for questions about relationships and about yourself.",
+      "es": "La regla es simple: si dudas, lee la carta de la corte como tu propio papel; sirve tanto para las relaciones como para las decisiones sobre ti.",
+      "pt": "A regra é simples: na dúvida, leia a carta da corte como o seu papel — isso funciona tanto nas relações quanto nas decisões sobre você."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "На сегодня выпала эта карта, а вопрос — как провести непростой разговор. Что она подсказывает, если прочитать её как вашу роль?",
-      "en": "Today's draw is this card, alongside the question of how to handle a difficult conversation. What does it suggest, read as your own role?"
+      "en": "Today's draw is this card, alongside the question of how to handle a difficult conversation. What does it suggest, read as your own role?",
+      "es": "Hoy salió esta carta y la pregunta es cómo llevar una conversación difícil. ¿Qué sugiere si la lees como tu propio papel?",
+      "pt": "Para hoje saiu esta carta, e a pergunta é como conduzir uma conversa difícil. O que ela sugere, se for lida como o seu papel?"
      },
      "options": [
       {
        "ru": "Рядом появится решительная женщина, которая всё расставит по местам",
-       "en": "A decisive woman is about to appear and set everything straight"
+       "en": "A decisive woman is about to appear and set everything straight",
+       "es": "Cerca va a aparecer una mujer decidida que pondrá todo en su lugar",
+       "pt": "Vai aparecer por perto uma mulher decidida, que vai colocar tudo nos eixos"
       },
       {
        "ru": "Пора называть вещи своими именами и говорить прямо, без резкости",
-       "en": "It's time to call things by their names and speak plainly, without harshness"
+       "en": "It's time to call things by their names and speak plainly, without harshness",
+       "es": "Es momento de llamar a las cosas por su nombre y hablar con franqueza, sin aspereza",
+       "pt": "É hora de chamar as coisas pelo nome e falar de frente, sem aspereza"
       },
       {
        "ru": "Разговор точно закончится в вашу пользу, если держаться твёрдо",
-       "en": "The conversation is sure to go your way if you hold firm"
+       "en": "The conversation is sure to go your way if you hold firm",
+       "es": "La conversación va a terminar a tu favor seguro si te mantienes firme",
+       "pt": "A conversa com certeza vai terminar a seu favor, se você se mantiver firme"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Королева Мечей как ваша роль — про ясность и прямоту, а не про предсказание исхода. Вариант «точно в вашу пользу» — та самая ловушка предсказания, которой курс просил избегать.",
-      "en": "Here the Queen of Swords is about clarity and plain speech, not about forecasting an outcome. The 'sure to go your way' option is exactly the prediction trap the course has asked you to avoid."
+      "en": "Here the Queen of Swords is about clarity and plain speech, not about forecasting an outcome. The 'sure to go your way' option is exactly the prediction trap the course has asked you to avoid.",
+      "es": "La Reina de Espadas como tu propio papel habla de claridad y franqueza, no de predecir un desenlace. La opción del «seguro a tu favor» es justamente la trampa de la predicción que el curso pidió evitar.",
+      "pt": "A Rainha de Espadas como o seu papel é sobre clareza e franqueza, não sobre prever o desfecho. A opção “com certeza a seu favor” é justamente a armadilha da previsão que o curso pediu para evitar."
      },
      "cardId": "s13"
     }

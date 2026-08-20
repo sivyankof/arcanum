@@ -2,7 +2,9 @@
  "_comment": "Вопросы викторин М4, черновик (статус draft). Схема: type single|card; card имеет cardId для показа изображения. Слияние в course.json — scripts/merge_quiz.py (берёт все content/quiz-*.json), статусы двигает scripts/set_status.py.",
  "status": {
   "ru": "reviewed",
-  "en": "reviewed"
+  "en": "reviewed",
+  "es": "draft",
+  "pt": "draft"
  },
  "lessons": [
   {
@@ -12,130 +14,180 @@
      "type": "single",
      "q": {
       "ru": "Какая стихия у Жезлов и что она означает?",
-      "en": "Which element do Wands belong to, and what does it stand for?"
+      "en": "Which element do Wands belong to, and what does it stand for?",
+      "es": "¿A qué elemento pertenecen los Bastos y qué representa?",
+      "pt": "Qual é o elemento dos Paus e o que ele significa?"
      },
      "options": [
       {
        "ru": "Вода: чувства, привязанность, близость",
-       "en": "Water: feelings, attachment, closeness"
+       "en": "Water: feelings, attachment, closeness",
+       "es": "Agua: sentimientos, apego, cercanía",
+       "pt": "Água: sentimentos, apego, proximidade"
       },
       {
        "ru": "Огонь: воля, замысел, действие",
-       "en": "Fire: will, intention, action"
+       "en": "Fire: will, intention, action",
+       "es": "Fuego: voluntad, idea, acción",
+       "pt": "Fogo: vontade, ideia, ação"
       },
       {
        "ru": "Земля: тело, труд, материальные дела",
-       "en": "Earth: the body, labour, material things"
+       "en": "Earth: the body, labour, material things",
+       "es": "Tierra: el cuerpo, el trabajo, lo material",
+       "pt": "Terra: o corpo, o trabalho, as coisas materiais"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Жезлы — стихия огня: всё, что зажигает и требует действия прямо сейчас.",
-      "en": "Wands are the element of fire: whatever lights you up and demands action right now."
+      "en": "Wands are the element of fire: whatever lights you up and demands action right now.",
+      "es": "Bastos es el elemento fuego: todo lo que enciende y pide acción ahora mismo.",
+      "pt": "Os Paus são o elemento do fogo: tudo o que acende e exige ação agora mesmo."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что советует Туз Жезлов, когда приходит вдохновение?",
-      "en": "What does the Ace of Wands advise when inspiration strikes?"
+      "en": "What does the Ace of Wands advise when inspiration strikes?",
+      "es": "¿Qué aconseja el As de Bastos cuando llega la inspiración?",
+      "pt": "O que o Ás de Paus aconselha quando a inspiração chega?"
      },
      "options": [
       {
        "ru": "Подождать, пока идея дозреет сама",
-       "en": "Wait for the idea to ripen on its own"
+       "en": "Wait for the idea to ripen on its own",
+       "es": "Esperar a que la idea madure sola",
+       "pt": "Esperar que a ideia amadureça sozinha"
       },
       {
        "ru": "Сделать первый конкретный шаг прямо сейчас",
-       "en": "Take one concrete step right now"
+       "en": "Take one concrete step right now",
+       "es": "Dar un primer paso concreto ahora mismo",
+       "pt": "Dar um primeiro passo concreto agora mesmo"
       },
       {
        "ru": "Записать идею и вернуться к ней через месяц",
-       "en": "Write the idea down and return to it in a month"
+       "en": "Write the idea down and return to it in a month",
+       "es": "Anotar la idea y volver a ella dentro de un mes",
+       "pt": "Anotar a ideia e voltar a ela daqui a um mês"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Энергия Туза разгорается в действии, а не в ожидании подходящего момента.",
-      "en": "The Ace's energy catches fire through doing, not through waiting for the right moment."
+      "en": "The Ace's energy catches fire through doing, not through waiting for the right moment.",
+      "es": "La energía del As prende en la acción, no en la espera del momento perfecto.",
+      "pt": "A energia do Ás se acende na ação, não na espera pelo momento certo."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Двойка Жезлов показывает первый успех. О чём она в первую очередь?",
-      "en": "The Two of Wands shows a first success. What is it mainly about?"
+      "en": "The Two of Wands shows a first success. What is it mainly about?",
+      "es": "El Dos de Bastos muestra un primer éxito. ¿De qué habla sobre todo?",
+      "pt": "O Dois de Paus mostra um primeiro sucesso. Do que ele trata antes de tudo?"
      },
      "options": [
       {
        "ru": "О планировании и выборе дальнейшего пути",
-       "en": "About planning and choosing the next direction"
+       "en": "About planning and choosing the next direction",
+       "es": "De planificar y elegir el camino que sigue",
+       "pt": "De planejar e escolher o caminho seguinte"
       },
       {
        "ru": "О завершении дел и полном отдыхе от забот",
-       "en": "About wrapping up all your tasks and resting fully"
+       "en": "About wrapping up all your tasks and resting fully",
+       "es": "De cerrar todos los asuntos y descansar por completo",
+       "pt": "De encerrar todas as tarefas e descansar por completo"
       },
       {
        "ru": "О соперничестве и споре с другими людьми",
-       "en": "About rivalry and arguing with other people"
+       "en": "About rivalry and arguing with other people",
+       "es": "De rivalidad y discusión con otras personas",
+       "pt": "De rivalidade e discussão com outras pessoas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Мир уже в руках героя, но пока в виде замысла — карта про выбор маршрута, а не про финал.",
-      "en": "The world is already in the figure's hands, but only as a vision — the card is about choosing a route, not an ending."
+      "en": "The world is already in the figure's hands, but only as a vision — the card is about choosing a route, not an ending.",
+      "es": "El mundo ya está en manos de la figura, pero todavía como plan: la carta trata de elegir la ruta, no de un final.",
+      "pt": "O mundo já está nas mãos da figura, mas ainda como projeto: a carta trata de escolher a rota, não de um final."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что на самом деле означает шум и спор в Пятёрке Жезлов?",
-      "en": "What does the noise and argument in the Five of Wands really mean?"
+      "en": "What does the noise and argument in the Five of Wands really mean?",
+      "es": "¿Qué significan en realidad el ruido y la discusión del Cinco de Bastos?",
+      "pt": "O que o barulho e a discussão do Cinco de Paus significam de verdade?"
      },
      "options": [
       {
        "ru": "Серьёзный конфликт, который нужно немедленно прекратить",
-       "en": "A serious conflict that must be stopped immediately"
+       "en": "A serious conflict that must be stopped immediately",
+       "es": "Un conflicto serio que hay que detener de inmediato",
+       "pt": "Um conflito sério que precisa ser interrompido de imediato"
       },
       {
        "ru": "Тренировочное столкновение мнений — проверка на прочность",
-       "en": "A sparring match of opinions testing your strength"
+       "en": "A sparring match of opinions testing your strength",
+       "es": "Un enfrentamiento de práctica entre opiniones: una prueba de temple",
+       "pt": "Um choque de opiniões de treino — um teste de resistência"
       },
       {
        "ru": "Знак, что нужно уступить и перестать отстаивать своё",
-       "en": "A sign to give in and stop standing your ground"
+       "en": "A sign to give in and stop standing your ground",
+       "es": "Una señal de ceder y dejar de defender lo tuyo",
+       "pt": "Um sinal de que é hora de ceder e parar de defender o que é seu"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Никто не ранен, жезлы подняты вверх: это скорее игра, чем битва, — этап притирки.",
-      "en": "No one is hurt, the wands are raised high: it's more play than battle — a stage of finding your fit."
+      "en": "No one is hurt, the wands are raised high: it's more play than battle — a stage of finding your fit.",
+      "es": "Nadie sale herido y los bastones están en alto: es más juego que batalla, una etapa de acomodarse.",
+      "pt": "Ninguém saiu ferido e os paus estão erguidos para o alto: é mais brincadeira do que batalha — uma fase de ajuste mútuo."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта перед вами?",
-      "en": "Which card is this?"
+      "en": "Which card is this?",
+      "es": "¿Qué carta tienes delante?",
+      "pt": "Que carta está diante de você?"
      },
      "options": [
       {
        "ru": "Восьмёрка Жезлов",
-       "en": "Eight of Wands"
+       "en": "Eight of Wands",
+       "es": "El Ocho de Bastos",
+       "pt": "O Oito de Paus"
       },
       {
        "ru": "Двойка Жезлов",
-       "en": "Two of Wands"
+       "en": "Two of Wands",
+       "es": "El Dos de Bastos",
+       "pt": "O Dois de Paus"
       },
       {
        "ru": "Тройка Жезлов",
-       "en": "Three of Wands"
+       "en": "Three of Wands",
+       "es": "El Tres de Bastos",
+       "pt": "O Três de Paus"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Три жезла, укреплённые в земле, и корабли в море: человек смотрит, как его замыслы плывут к цели, — результаты уже в пути.",
-      "en": "Three wands planted in the ground and ships at sea: the figure watches his plans sail toward their goal — the results are already on their way."
+      "en": "Three wands planted in the ground and ships at sea: the figure watches his plans sail toward their goal — the results are already on their way.",
+      "es": "Tres bastones plantados en la tierra y barcos en el mar: la figura mira cómo sus planes navegan hacia la meta, los resultados ya vienen en camino.",
+      "pt": "Três paus fincados na terra e navios no mar: a figura observa seus planos navegarem rumo ao objetivo — os resultados já estão a caminho."
      },
      "cardId": "w03"
     }
@@ -148,130 +200,180 @@
      "type": "single",
      "q": {
       "ru": "Что говорит Шестёрка Жезлов о признанном успехе?",
-      "en": "What does the Six of Wands say about recognised success?"
+      "en": "What does the Six of Wands say about recognised success?",
+      "es": "¿Qué dice el Seis de Bastos sobre el éxito reconocido?",
+      "pt": "O que o Seis de Paus diz sobre o sucesso reconhecido?"
      },
      "options": [
       {
        "ru": "Его можно принять без ложной скромности",
-       "en": "You can accept it without false modesty"
+       "en": "You can accept it without false modesty",
+       "es": "Que puedes aceptarlo sin falsa modestia",
+       "pt": "Que ele pode ser aceito sem falsa modéstia"
       },
       {
        "ru": "Его лучше держать в тайне, чтобы не сглазить",
-       "en": "It's better kept quiet, or you'll jinx it"
+       "en": "It's better kept quiet, or you'll jinx it",
+       "es": "Que conviene callarlo para no atraer la mala suerte",
+       "pt": "Que é melhor mantê-lo em segredo, para não dar azar"
       },
       {
        "ru": "Он означает, что дальше будет только легче",
-       "en": "It means everything from here on will be easy"
+       "en": "It means everything from here on will be easy",
+       "es": "Que a partir de ahí todo será más fácil",
+       "pt": "Que daqui em diante tudo só vai ficar mais fácil"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Всадник возвращается с лавровым венком — заслуженные лавры принимают открыто, а не прячут.",
-      "en": "The rider returns wearing a laurel wreath — earned laurels are accepted openly, not hidden."
+      "en": "The rider returns wearing a laurel wreath — earned laurels are accepted openly, not hidden.",
+      "es": "El jinete vuelve con una corona de laurel: los laureles ganados se aceptan de frente, no se esconden.",
+      "pt": "O cavaleiro volta com uma coroa de louros — os louros merecidos se aceitam abertamente, não se escondem."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Как лучше вести себя, когда позиция под давлением (Семёрка Жезлов)?",
-      "en": "What's the best response when your position is under pressure (Seven of Wands)?"
+      "en": "What's the best response when your position is under pressure (Seven of Wands)?",
+      "es": "¿Cómo conviene reaccionar cuando tu posición está bajo presión (Siete de Bastos)?",
+      "pt": "Como agir quando a sua posição está sob pressão (Sete de Paus)?"
      },
      "options": [
       {
        "ru": "Извиняться и оправдываться, чтобы избежать конфликта",
-       "en": "Apologise and over-explain to avoid conflict"
+       "en": "Apologise and over-explain to avoid conflict",
+       "es": "Disculparse y dar explicaciones de más para evitar el conflicto",
+       "pt": "Pedir desculpas e se justificar para evitar o conflito"
       },
       {
        "ru": "Спокойно и твёрдо отстаивать то, что вам дорого",
-       "en": "Calmly and firmly defend what matters to you"
+       "en": "Calmly and firmly defend what matters to you",
+       "es": "Defender con calma y firmeza lo que te importa",
+       "pt": "Defender com calma e firmeza aquilo que importa para você"
       },
       {
        "ru": "Немедленно уступить, чтобы сохранить силы",
-       "en": "Give in immediately to save your strength"
+       "en": "Give in immediately to save your strength",
+       "es": "Ceder de inmediato para ahorrar fuerzas",
+       "pt": "Ceder de imediato para poupar as forças"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Позиция выше даёт преимущество: побеждает тот, кто не отступает и не тратит силы на оправдания.",
-      "en": "Higher ground gives the edge: the one who doesn't step back or waste energy explaining is the one who wins."
+      "en": "Higher ground gives the edge: the one who doesn't step back or waste energy explaining is the one who wins.",
+      "es": "La posición elevada da ventaja: gana quien no retrocede ni gasta energía en justificarse.",
+      "pt": "A posição mais alta dá vantagem: vence quem não recua nem gasta energia se justificando."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что советует Восьмёрка Жезлов, когда события вдруг ускоряются?",
-      "en": "What does the Eight of Wands advise when things suddenly speed up?"
+      "en": "What does the Eight of Wands advise when things suddenly speed up?",
+      "es": "¿Qué aconseja el Ocho de Bastos cuando todo se acelera de golpe?",
+      "pt": "O que o Oito de Paus aconselha quando os acontecimentos aceleram de repente?"
      },
      "options": [
       {
        "ru": "Притормозить и перепроверить всё по десять раз",
-       "en": "Slow down and double-check everything ten times"
+       "en": "Slow down and double-check everything ten times",
+       "es": "Frenar y revisar cada cosa diez veces",
+       "pt": "Frear e reconferir tudo dez vezes"
       },
       {
        "ru": "Остановить всё и дождаться более удобного момента",
-       "en": "Stop everything and wait for a better moment"
+       "en": "Stop everything and wait for a better moment",
+       "es": "Detener todo y esperar un momento más cómodo",
+       "pt": "Parar tudo e esperar um momento mais conveniente"
       },
       {
        "ru": "Не медлить: отвечать быстро и двигаться с потоком",
-       "en": "Don't stall: answer quickly and move with the flow"
+       "en": "Don't stall: answer quickly and move with the flow",
+       "es": "No demorarse: responder rápido y moverse con la corriente",
+       "pt": "Não hesitar: responder rápido e seguir com o fluxo"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Жезлы летят с наклоном к земле — полёт завершается, и лучший ответ на попутный ветер — не тормозить.",
-      "en": "The wands tilt earthward — the flight is ending, and the best answer to a tailwind is not to slow down."
+      "en": "The wands tilt earthward — the flight is ending, and the best answer to a tailwind is not to slow down.",
+      "es": "Los bastones vuelan inclinados hacia la tierra: el vuelo se está terminando, y la mejor respuesta a un viento a favor es no frenar.",
+      "pt": "Os paus voam inclinados para o chão — o voo está terminando, e a melhor resposta a um vento a favor é não frear."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Девятка Жезлов напоминает: усталость на последнем рубеже — это повод…",
-      "en": "The Nine of Wands reminds us: fatigue at the last stand is a reason to…"
+      "en": "The Nine of Wands reminds us: fatigue at the last stand is a reason to…",
+      "es": "El Nueve de Bastos recuerda que el cansancio en la última línea es motivo para…",
+      "pt": "O Nove de Paus lembra: o cansaço na última linha de defesa é motivo para…"
      },
      "options": [
       {
        "ru": "сразу всё бросить, раз сил не осталось",
-       "en": "drop everything at once, since your strength is gone"
+       "en": "drop everything at once, since your strength is gone",
+       "es": "abandonarlo todo enseguida, ya que no quedan fuerzas",
+       "pt": "largar tudo na hora, já que não sobraram forças"
       },
       {
        "ru": "держаться до конца — и проверить, реальна ли угроза",
-       "en": "hold the line — and check the threat is real"
+       "en": "hold the line — and check the threat is real",
+       "es": "sostener la línea hasta el final y revisar si la amenaza es real",
+       "pt": "aguentar até o fim — e conferir se a ameaça é real"
       },
       {
        "ru": "искать нового противника, чтобы доказать свою силу",
-       "en": "look for a new opponent to prove your strength"
+       "en": "look for a new opponent to prove your strength",
+       "es": "buscar un rival nuevo para demostrar tu fuerza",
+       "pt": "procurar um novo adversário para provar a sua força"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Восемь жезлов за спиной — защита из пройденных испытаний; вопрос в том, ждёт ли вас ещё один бой.",
-      "en": "The eight wands behind him are defence built from past trials; the question is whether another battle is really coming."
+      "en": "The eight wands behind him are defence built from past trials; the question is whether another battle is really coming.",
+      "es": "Los ocho bastones a su espalda son una defensa hecha de pruebas ya superadas; la pregunta es si de verdad viene otra batalla.",
+      "pt": "Os oito paus atrás dele são uma proteção feita de provas já vencidas; a questão é se ainda vem mais um combate."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта перед вами?",
-      "en": "Which card is this?"
+      "en": "Which card is this?",
+      "es": "¿Qué carta tienes delante?",
+      "pt": "Que carta está diante de você?"
      },
      "options": [
       {
        "ru": "Десятка Жезлов",
-       "en": "Ten of Wands"
+       "en": "Ten of Wands",
+       "es": "El Diez de Bastos",
+       "pt": "O Dez de Paus"
       },
       {
        "ru": "Девятка Жезлов",
-       "en": "Nine of Wands"
+       "en": "Nine of Wands",
+       "es": "El Nueve de Bastos",
+       "pt": "O Nove de Paus"
       },
       {
        "ru": "Пятёрка Жезлов",
-       "en": "Five of Wands"
+       "en": "Five of Wands",
+       "es": "El Cinco de Bastos",
+       "pt": "O Cinco de Paus"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Человек несёт десять жезлов, прижав их к груди, и за ними не видит дороги — успех обернулся тяжестью.",
-      "en": "A man carries ten wands pressed to his chest and can't see the road past them — success has turned into weight."
+      "en": "A man carries ten wands pressed to his chest and can't see the road past them — success has turned into weight.",
+      "es": "Un hombre carga diez bastones apretados contra el pecho y por encima de ellos no ve el camino: el éxito se volvió peso.",
+      "pt": "A figura carrega dez paus apertados contra o peito e não enxerga o caminho atrás deles — o sucesso virou peso."
      },
      "cardId": "w10"
     }
@@ -284,130 +386,180 @@
      "type": "single",
      "q": {
       "ru": "О чём говорит Туз Кубков?",
-      "en": "What does the Ace of Cups tell you?"
+      "en": "What does the Ace of Cups tell you?",
+      "es": "¿De qué habla el As de Copas?",
+      "pt": "Sobre o que fala o Ás de Copas?"
      },
      "options": [
       {
        "ru": "Чувства нужно сначала проверить и только потом впустить",
-       "en": "Feelings must be tested first and only then let in"
+       "en": "Feelings must be tested first and only then let in",
+       "es": "Los sentimientos hay que probarlos primero y solo después dejarlos entrar",
+       "pt": "Que o sentimento precisa ser testado antes de ser deixado entrar"
       },
       {
        "ru": "Новое чувство приходит само — и его стоит просто принять",
-       "en": "A new feeling arrives on its own — just accept it"
+       "en": "A new feeling arrives on its own — just accept it",
+       "es": "Un sentimiento nuevo llega solo, y basta con aceptarlo",
+       "pt": "Que um sentimento novo chega sozinho — e vale simplesmente acolhê-lo"
       },
       {
        "ru": "Хорошее достаётся только тем, кто этого добивается трудом",
-       "en": "Good things come only to those who work hard for them"
+       "en": "Good things come only to those who work hard for them",
+       "es": "Lo bueno les llega solo a quienes lo consiguen con esfuerzo",
+       "pt": "Que o bom só chega para quem conquista com muito esforço"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Туз — чаша, которая переполняется сама, без всякого усилия: рука из облака просто протягивает дар, и его нужно принять, а не заслуживать.",
-      "en": "The Ace is a chalice overflowing on its own, with no effort at all: a hand from a cloud simply offers the gift, and it's meant to be accepted, not earned."
+      "en": "The Ace is a chalice overflowing on its own, with no effort at all: a hand from a cloud simply offers the gift, and it's meant to be accepted, not earned.",
+      "es": "El As es una copa que se desborda sola, sin ningún esfuerzo: una mano sale de la nube y simplemente ofrece el don, que está para recibirse, no para merecerse.",
+      "pt": "O Ás é uma taça que transborda sozinha, sem esforço nenhum: a mão saída da nuvem apenas estende o presente, e ele é para ser aceito, não merecido."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что подчёркивает Двойка Кубков в отношениях?",
-      "en": "What does the Two of Cups highlight in a relationship?"
+      "en": "What does the Two of Cups highlight in a relationship?",
+      "es": "¿Qué destaca el Dos de Copas en una relación?",
+      "pt": "O que o Dois de Copas destaca em um relacionamento?"
      },
      "options": [
       {
        "ru": "Взаимность: то, что вы отдаёте, возвращается обратно",
-       "en": "Mutuality — what you give comes back to you"
+       "en": "Mutuality — what you give comes back to you",
+       "es": "La reciprocidad: lo que das vuelve a ti",
+       "pt": "A reciprocidade: o que você dá volta para você"
       },
       {
        "ru": "Крепче тот союз, где один вкладывается сильнее другого",
-       "en": "A bond grows stronger when one partner gives more"
+       "en": "A bond grows stronger when one partner gives more",
+       "es": "Que el vínculo se afirma cuando uno pone más que el otro",
+       "pt": "A entrega desigual: o laço fica mais forte quando um se dedica mais"
       },
       {
        "ru": "Главное в паре — терпеливо молчать о своих чувствах",
-       "en": "What matters most in a couple is keeping your feelings to yourself"
+       "en": "What matters most in a couple is keeping your feelings to yourself",
+       "es": "Que lo importante en la pareja es callar los propios sentimientos con paciencia",
+       "pt": "O silêncio: o mais importante em um casal é calar sobre o que sente"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Юноша и девушка меняются чашами на равных — карта про честный обмен, а не про то, кто вложился сильнее.",
-      "en": "The young man and woman trade cups equally — the card is about honest exchange, not about who invested more."
+      "en": "The young man and woman trade cups equally — the card is about honest exchange, not about who invested more.",
+      "es": "El joven y la joven intercambian sus copas de igual a igual: la carta trata del intercambio honesto, no de quién puso más.",
+      "pt": "O rapaz e a moça trocam taças em pé de igualdade — a carta fala de troca honesta, não de quem investiu mais."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём ловушка Четвёрки Кубков?",
-      "en": "What is the trap of the Four of Cups?"
+      "en": "What is the trap of the Four of Cups?",
+      "es": "¿Cuál es la trampa del Cuatro de Copas?",
+      "pt": "Qual é a armadilha do Quatro de Copas?"
      },
      "options": [
       {
        "ru": "Человеку в этой карте нужно больше вещей и впечатлений",
-       "en": "The man in this card simply wants more things and thrills"
+       "en": "The man in this card simply wants more things and thrills",
+       "es": "Que al joven de la carta simplemente le hacen falta más cosas y experiencias nuevas",
+       "pt": "A pessoa da carta simplesmente quer mais coisas e mais emoções"
       },
       {
        "ru": "Три имеющиеся чаши стоит поскорее разбить и забыть",
-       "en": "The three existing cups should be smashed and forgotten"
+       "en": "The three existing cups should be smashed and forgotten",
+       "es": "Que conviene romper cuanto antes las tres copas que ya tiene y olvidarlas",
+       "pt": "As três taças que já estão ali deveriam ser quebradas e esquecidas"
       },
       {
        "ru": "Скучающий взгляд не замечает предложенную новую чашу",
-       "en": "A bored gaze fails to notice the new cup being offered"
+       "en": "A bored gaze fails to notice the new cup being offered",
+       "es": "Que la mirada aburrida no nota la copa nueva que le ofrecen",
+       "pt": "O olhar entediado não percebe a nova taça que está sendo oferecida"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Юноша сидит, скрестив руки, и не видит четвёртую чашу, протянутую из облака: скука — в застывшем взгляде, а не в мире вокруг.",
-      "en": "The young man sits with arms crossed and doesn't see the fourth cup offered from the cloud: the boredom is in his frozen gaze, not in the world around him."
+      "en": "The young man sits with arms crossed and doesn't see the fourth cup offered from the cloud: the boredom is in his frozen gaze, not in the world around him.",
+      "es": "El joven está sentado con los brazos cruzados y no ve la cuarta copa que le tiende la nube: el aburrimiento está en la mirada detenida, no en el mundo alrededor.",
+      "pt": "O rapaz está sentado de braços cruzados e não vê a quarta taça estendida pela nuvem: o tédio está no olhar parado, não no mundo em volta."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Как Пятёрка Кубков предлагает обращаться с потерей?",
-      "en": "How does the Five of Cups suggest handling loss?"
+      "en": "How does the Five of Cups suggest handling loss?",
+      "es": "¿Cómo propone el Cinco de Copas tratar la pérdida?",
+      "pt": "Como o Cinco de Copas propõe lidar com a perda?"
      },
      "options": [
       {
        "ru": "Не задерживаться на горе, а сразу двигаться дальше",
-       "en": "Skip the grief entirely and simply move on right away"
+       "en": "Skip the grief entirely and simply move on right away",
+       "es": "No detenerse en el dolor y seguir adelante de inmediato",
+       "pt": "Não se demorar no luto e seguir em frente na mesma hora"
       },
       {
        "ru": "Погоревать честно, заметив две целые чаши за спиной",
-       "en": "Grieve honestly, noticing the two full cups behind you"
+       "en": "Grieve honestly, noticing the two full cups behind you",
+       "es": "Hacer el duelo con honestidad, notando las dos copas enteras a tu espalda",
+       "pt": "Sofrer com honestidade, notando as duas taças inteiras atrás de si"
       },
       {
        "ru": "Считать, что пролитые чаши ещё можно наполнить заново",
-       "en": "Assume the spilled cups can still be refilled somehow"
+       "en": "Assume the spilled cups can still be refilled somehow",
+       "es": "Suponer que las copas derramadas todavía se pueden volver a llenar",
+       "pt": "Achar que as taças derramadas ainda podem ser enchidas de novo"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Карта не торопит горевание, но напоминает обернуться: за спиной фигуры стоят две полные чаши — опора, которая никуда не делась.",
-      "en": "The card doesn't rush grief, but it reminds you to turn around: two full cups stand behind the figure — support that never went anywhere."
+      "en": "The card doesn't rush grief, but it reminds you to turn around: two full cups stand behind the figure — support that never went anywhere.",
+      "es": "La carta no apura el duelo, pero recuerda darse vuelta: detrás de la figura hay dos copas llenas, un sostén que no se fue a ninguna parte.",
+      "pt": "A carta não apressa o luto, mas lembra de olhar para trás: atrás da figura estão duas taças cheias — um apoio que não foi embora."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта показана на картинке?",
-      "en": "Which card is shown in the picture?"
+      "en": "Which card is shown in the picture?",
+      "es": "¿Qué carta se muestra en la imagen?",
+      "pt": "Que carta aparece na imagem?"
      },
      "options": [
       {
        "ru": "Пятёрка Кубков",
-       "en": "Five of Cups"
+       "en": "Five of Cups",
+       "es": "El Cinco de Copas",
+       "pt": "O Cinco de Copas"
       },
       {
        "ru": "Четвёрка Кубков",
-       "en": "Four of Cups"
+       "en": "Four of Cups",
+       "es": "El Cuatro de Copas",
+       "pt": "O Quatro de Copas"
       },
       {
        "ru": "Тройка Кубков",
-       "en": "Three of Cups"
+       "en": "Three of Cups",
+       "es": "El Tres de Copas",
+       "pt": "O Três de Copas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Чёрный плащ, три опрокинутые чаши, река и мост вдали — это Пятёрка Кубков. Четвёрка и Тройка выглядят иначе: скрещённые руки под деревом и три поднятые чаши в саду.",
-      "en": "The black cloak, three spilled cups, the river and the bridge beyond — this is the Five of Cups. The Four and the Three look different: arms crossed beneath a tree, three cups raised in a garden."
+      "en": "The black cloak, three spilled cups, the river and the bridge beyond — this is the Five of Cups. The Four and the Three look different: arms crossed beneath a tree, three cups raised in a garden.",
+      "es": "La capa negra, tres copas volcadas, el río y el puente a lo lejos: es el Cinco de Copas. El Cuatro y el Tres se ven distintos: brazos cruzados bajo un árbol y tres copas en alto en un jardín.",
+      "pt": "O manto preto, três taças derrubadas, o rio e a ponte ao longe — este é o Cinco de Copas. O Quatro e o Três são diferentes: braços cruzados sob uma árvore e três taças erguidas num jardim."
      },
      "cardId": "c05"
     }
@@ -420,130 +572,180 @@
      "type": "single",
      "q": {
       "ru": "Как лучше использовать тепло Шестёрки Кубков?",
-      "en": "What's the best way to use the warmth of the Six of Cups?"
+      "en": "What's the best way to use the warmth of the Six of Cups?",
+      "es": "¿Cuál es la mejor manera de usar el calor del Seis de Copas?",
+      "pt": "Qual é a melhor forma de usar o calor do Seis de Copas?"
      },
      "options": [
       {
        "ru": "Прятаться в прошлом от сегодняшних забот и решений",
-       "en": "Hiding in the past from today's concerns and choices"
+       "en": "Hiding in the past from today's concerns and choices",
+       "es": "Esconderse en el pasado de las preocupaciones y decisiones de hoy",
+       "pt": "Se esconder no passado para fugir das preocupações e decisões de hoje"
       },
       {
        "ru": "Пользоваться теплом воспоминаний, не убегая в них",
-       "en": "Drawing on the warmth of memory without living in it"
+       "en": "Drawing on the warmth of memory without living in it",
+       "es": "Aprovechar el calor de los recuerdos sin escaparse a ellos",
+       "pt": "Aproveitar o calor das lembranças sem fugir para dentro delas"
       },
       {
        "ru": "Отказаться от воспоминаний вовсе, чтобы не размякнуть",
-       "en": "Cutting memories off entirely so they don't soften you"
+       "en": "Cutting memories off entirely so they don't soften you",
+       "es": "Renunciar del todo a los recuerdos para no ablandarse",
+       "pt": "Abrir mão das lembranças por completo, para não amolecer"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Карта разрешает поностальгировать, но предупреждает: воспоминания хороши как источник тепла, а не убежище от сегодняшнего дня.",
-      "en": "The card allows for nostalgia but warns: memories are good as a source of warmth, not as a hiding place from today."
+      "en": "The card allows for nostalgia but warns: memories are good as a source of warmth, not as a hiding place from today.",
+      "es": "La carta permite la nostalgia, pero advierte: los recuerdos sirven como fuente de calor, no como refugio del día de hoy.",
+      "pt": "A carta permite a nostalgia, mas avisa: a lembrança serve como fonte de calor, não como refúgio contra o dia de hoje."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "О чём предупреждает Семёрка Кубков?",
-      "en": "What does the Seven of Cups warn about?"
+      "en": "What does the Seven of Cups warn about?",
+      "es": "¿Sobre qué advierte el Siete de Copas?",
+      "pt": "Sobre o que o Sete de Copas avisa?"
      },
      "options": [
       {
        "ru": "Пока вы перебираете фантазии, жизнь стоит на месте",
-       "en": "While you sort through fantasies, life stalls"
+       "en": "While you sort through fantasies, life stalls",
+       "es": "Mientras revisas fantasías, la vida se queda quieta",
+       "pt": "Que, enquanto você remexe nas fantasias, a vida fica parada"
       },
       {
        "ru": "Мечтать вредно, поэтому от всех планов лучше отказаться",
-       "en": "Dreaming is harmful, so every plan is better dropped"
+       "en": "Dreaming is harmful, so every plan is better dropped",
+       "es": "Soñar hace daño, así que mejor abandonar todos los planes",
+       "pt": "Que sonhar faz mal, então é melhor abandonar todos os planos"
       },
       {
        "ru": "Все семь видений одинаково стоит воплотить по очереди",
-       "en": "All seven visions are equally worth chasing in turn"
+       "en": "All seven visions are equally worth chasing in turn",
+       "es": "Las siete visiones valen lo mismo y conviene perseguirlas todas por turno",
+       "pt": "Que as sete visões merecem igualmente ser realizadas, uma a uma"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Шесть чаш держат соблазны — любовь, успех, богатство, славу, страсти, искушение, — и только седьмая, под покрывалом, скрывает то, что вам действительно нужно. Карта не против мечтаний: она против того, чтобы перебирать их вместо выбора.",
-      "en": "Six cups hold temptations — love, success, wealth, fame, passion, lure — and only the seventh, under its veil, hides what you actually need. The card isn't against dreaming: it's against sorting through dreams instead of choosing."
+      "en": "Six cups hold temptations — love, success, wealth, fame, passion, lure — and only the seventh, under its veil, hides what you actually need. The card isn't against dreaming: it's against sorting through dreams instead of choosing.",
+      "es": "Seis copas guardan tentaciones —amor, éxito, riqueza, fama, pasión, seducción— y solo la séptima, bajo el velo, esconde lo que de verdad necesitas. La carta no está en contra de soñar: está en contra de revisar sueños en lugar de elegir.",
+      "pt": "Seis taças guardam tentações — amor, sucesso, riqueza, fama, paixão, sedução — e só a sétima, sob o véu, esconde o que você realmente precisa. A carta não é contra sonhar: é contra remexer nos sonhos em vez de escolher."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Почему уход Восьмёрки Кубков — не поражение?",
-      "en": "Why isn't the departure in the Eight of Cups a defeat?"
+      "en": "Why isn't the departure in the Eight of Cups a defeat?",
+      "es": "¿Por qué la partida del Ocho de Copas no es una derrota?",
+      "pt": "Por que a partida do Oito de Copas não é uma derrota?"
      },
      "options": [
       {
        "ru": "Потому что там и правда было очень плохо всё это время",
-       "en": "Because things there really were quite bad the whole time"
+       "en": "Because things there really were quite bad the whole time",
+       "es": "Porque allí de verdad se estaba muy mal todo ese tiempo",
+       "pt": "Porque ali as coisas estavam mesmo muito ruins esse tempo todo"
       },
       {
        "ru": "Потому что оставленное никогда не имело значения вовсе",
-       "en": "Because what he leaves behind never truly mattered at all"
+       "en": "Because what he leaves behind never truly mattered at all",
+       "es": "Porque lo que deja atrás nunca tuvo la menor importancia",
+       "pt": "Porque o que ficou para trás nunca teve importância nenhuma"
       },
       {
        "ru": "Потому что путник ищет смысл, а не бежит от плохого",
-       "en": "Because he's walking toward meaning, not away from something bad"
+       "en": "Because he's walking toward meaning, not away from something bad",
+       "es": "Porque el caminante busca sentido, no huye de algo malo",
+       "pt": "Porque o viajante busca sentido, não foge de algo ruim"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Путник уходит от восьми аккуратно составленных чаш не потому, что там было плохо, а потому что душа зовёт дальше, — это взросление, а не бегство.",
-      "en": "The traveller leaves eight neatly stacked cups not because things were bad there, but because something within calls him onward — this is growth, not escape."
+      "en": "The traveller leaves eight neatly stacked cups not because things were bad there, but because something within calls him onward — this is growth, not escape.",
+      "es": "El caminante deja atrás ocho copas prolijamente apiladas no porque allí estuviera mal, sino porque algo por dentro lo llama más lejos: es crecer, no escapar.",
+      "pt": "O viajante deixa oito taças cuidadosamente empilhadas não porque ali fosse ruim, mas porque algo dentro dele chama adiante — isso é amadurecimento, não fuga."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что на самом деле показывает Девятка Кубков?",
-      "en": "What does the Nine of Cups really show?"
+      "en": "What does the Nine of Cups really show?",
+      "es": "¿Qué muestra en realidad el Nueve de Copas?",
+      "pt": "O que o Nove de Copas mostra de verdade?"
      },
      "options": [
       {
        "ru": "Что желаемое само падает с неба, без вашего участия",
-       "en": "That what you want simply falls from the sky on its own"
+       "en": "That what you want simply falls from the sky on its own",
+       "es": "Que lo deseado cae del cielo solo, sin que hagas nada",
+       "pt": "Que o desejado cai do céu sozinho, sem a sua participação"
       },
       {
        "ru": "Умение честно радоваться тому, что уже есть, и делиться этим",
-       "en": "The skill of enjoying what's there, and sharing it"
+       "en": "The skill of enjoying what's there, and sharing it",
+       "es": "La capacidad de alegrarse con honestidad por lo que ya hay, y de compartirlo",
+       "pt": "Que dá para se alegrar de verdade com o que já existe e compartilhar isso"
       },
       {
        "ru": "Что радоваться лучше тихо и наедине с собой",
-       "en": "That joy is better kept quiet and private"
+       "en": "That joy is better kept quiet and private",
+       "es": "Que la alegría se disfruta mejor en silencio y a solas",
+       "pt": "Que a alegria é melhor vivida em silêncio e a sós"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Хозяин на картинке сидит перед готовым изобилием — карта про удовлетворение настоящим и умение замечать хорошее, а не про мечту, случившуюся по волшебству.",
-      "en": "The host in the picture sits before ready-made abundance — the card is about satisfaction with what's real and noticing the good, not about a wish granted by magic."
+      "en": "The host in the picture sits before ready-made abundance — the card is about satisfaction with what's real and noticing the good, not about a wish granted by magic.",
+      "es": "El anfitrión de la imagen está sentado frente a una abundancia ya lista: la carta trata de la satisfacción con lo real y de notar lo bueno, no de un deseo concedido por arte de magia.",
+      "pt": "O anfitrião da imagem está sentado diante de uma abundância já pronta — a carta fala de satisfação com o presente e de saber notar o que é bom, não de um desejo realizado por magia."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта показана на картинке?",
-      "en": "Which card is shown in the picture?"
+      "en": "Which card is shown in the picture?",
+      "es": "¿Qué carta se muestra en la imagen?",
+      "pt": "Que carta aparece na imagem?"
      },
      "options": [
       {
        "ru": "Десятка Кубков",
-       "en": "Ten of Cups"
+       "en": "Ten of Cups",
+       "es": "El Diez de Copas",
+       "pt": "O Dez de Copas"
       },
       {
        "ru": "Шестёрка Кубков",
-       "en": "Six of Cups"
+       "en": "Six of Cups",
+       "es": "El Seis de Copas",
+       "pt": "O Seis de Copas"
       },
       {
        "ru": "Девятка Кубков",
-       "en": "Nine of Cups"
+       "en": "Nine of Cups",
+       "es": "El Nueve de Copas",
+       "pt": "O Nove de Copas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Радуга из десяти кубков, пара с поднятыми руками и танцующие дети у дома на холме — это Десятка Кубков, карта состоявшегося семейного счастья.",
-      "en": "A rainbow of ten cups, a couple with raised arms, and dancing children by a hilltop home — this is the Ten of Cups, the card of happiness already here."
+      "en": "A rainbow of ten cups, a couple with raised arms, and dancing children by a hilltop home — this is the Ten of Cups, the card of happiness already here.",
+      "es": "Un arcoíris de diez copas, una pareja con los brazos en alto y niños que bailan junto a la casa en la colina: es el Diez de Copas, la carta de la felicidad ya presente.",
+      "pt": "Um arco-íris de dez taças, um casal de braços erguidos e crianças dançando junto à casa na colina — este é o Dez de Copas, a carta da felicidade familiar já realizada."
      },
      "cardId": "c10"
     }
@@ -556,78 +758,108 @@
      "type": "single",
      "q": {
       "ru": "Чем стихия Мечей отличается от Жезлов и Кубков?",
-      "en": "How does the element of Swords differ from Wands and Cups?"
+      "en": "How does the element of Swords differ from Wands and Cups?",
+      "es": "¿En qué se diferencia el elemento de Espadas de Bastos y Copas?",
+      "pt": "Em que o elemento das Espadas se diferencia dos Paus e das Copas?"
      },
      "options": [
       {
        "ru": "Она сразу зовёт к делу, как Жезлы, и не оставляет времени думать",
-       "en": "It calls you to act at once, like Wands, leaving no time to think"
+       "en": "It calls you to act at once, like Wands, leaving no time to think",
+       "es": "Llama a actuar de inmediato, como Bastos, y no deja tiempo para pensar",
+       "pt": "Ele chama para a ação na hora, como os Paus, e não deixa tempo para pensar"
       },
       {
        "ru": "Она про мысль, слово и цену ясности для разума",
-       "en": "It's about thought, words, and the price of clarity"
+       "en": "It's about thought, words, and the price of clarity",
+       "es": "Trata del pensamiento, la palabra y el precio que la mente paga por la claridad",
+       "pt": "Ele trata do pensamento, da palavra e do preço da clareza para a mente"
       },
       {
        "ru": "Она про деньги и заботу о теле, как Пентакли",
-       "en": "It's about money and the body, like Pentacles"
+       "en": "It's about money and the body, like Pentacles",
+       "es": "Trata del dinero y del cuidado del cuerpo, como Oros",
+       "pt": "Ele trata de dinheiro e do cuidado com o corpo, como os Ouros"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Мечи — стихия воздуха: ясность и слово стоят в центре, а не порыв к делу или забота о материальном.",
-      "en": "Swords is the element of air: clarity and words sit at its centre, not an urge to act or care for material things."
+      "en": "Swords is the element of air: clarity and words sit at its centre, not an urge to act or care for material things.",
+      "es": "Espadas es el elemento aire: en su centro están la claridad y la palabra, no el impulso de actuar ni el cuidado de lo material.",
+      "pt": "As Espadas são o elemento do ar: a clareza e a palavra estão no centro, não o impulso de agir nem o cuidado com o material."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что означает повязка на глазах героини Двойки Мечей?",
-      "en": "What does the blindfold on the Two of Swords figure mean?"
+      "en": "What does the blindfold on the Two of Swords figure mean?",
+      "es": "¿Qué significa la venda en los ojos de la figura del Dos de Espadas?",
+      "pt": "O que significa a venda nos olhos da figura do Dois de Espadas?"
      },
      "options": [
       {
        "ru": "Полное доверие интуиции, а разум можно на время отключить",
-       "en": "Total trust in intuition, with reason switched off for a while"
+       "en": "Total trust in intuition, with reason switched off for a while",
+       "es": "Confianza total en la intuición, con la razón apagada por un rato",
+       "pt": "A confiança total na intuição, com a razão desligada por um tempo"
       },
       {
        "ru": "Наказание, которое кто-то навязал ей против воли",
-       "en": "A punishment someone forced on her against her will"
+       "en": "A punishment someone forced on her against her will",
+       "es": "Un castigo que alguien le impuso contra su voluntad",
+       "pt": "Um castigo que alguém impôs a ela contra a sua vontade"
       },
       {
        "ru": "Избегание выбора: мнимое равновесие, пока не видно фактов и чувств",
-       "en": "Avoiding a choice: a calm that lasts only while you look away"
+       "en": "Avoiding a choice: a calm that lasts only while you look away",
+       "es": "Evitar la elección: un equilibrio aparente que dura mientras no mires",
+       "pt": "A fuga da escolha: um equilíbrio aparente que dura só enquanto você não olha"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Повязку никто не завязывал силой — её можно снять в любой момент, как только вы решитесь посмотреть на факты и чувства сразу.",
-      "en": "No one tied the blindfold by force — it can come off the moment you're ready to look at both the facts and the feelings at once."
+      "en": "No one tied the blindfold by force — it can come off the moment you're ready to look at both the facts and the feelings at once.",
+      "es": "Nadie le ató la venda por la fuerza: se puede quitar en cualquier momento, apenas te animes a mirar a la vez los hechos y los sentimientos.",
+      "pt": "Ninguém amarrou a venda à força — ela pode sair a qualquer momento, assim que você decidir olhar de uma vez para os fatos e para os sentimentos."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта показывает вспышку ясности после путаницы?",
-      "en": "Which card shows a flash of clarity after confusion?"
+      "en": "Which card shows a flash of clarity after confusion?",
+      "es": "¿Qué carta muestra un destello de claridad después de la confusión?",
+      "pt": "Que carta mostra um lampejo de clareza depois da confusão?"
      },
      "options": [
       {
        "ru": "Туз Мечей",
-       "en": "Ace of Swords"
+       "en": "Ace of Swords",
+       "es": "El As de Espadas",
+       "pt": "O Ás de Espadas"
       },
       {
        "ru": "Тройка Мечей",
-       "en": "Three of Swords"
+       "en": "Three of Swords",
+       "es": "El Tres de Espadas",
+       "pt": "O Três de Espadas"
       },
       {
        "ru": "Четвёрка Мечей",
-       "en": "Four of Swords"
+       "en": "Four of Swords",
+       "es": "El Cuatro de Espadas",
+       "pt": "O Quatro de Espadas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Рука из облака держит меч, увенчанный короной, — образ внезапного и честного понимания сути.",
-      "en": "A hand from a cloud holds a crowned sword — the image of a sudden, honest grasp of what matters."
+      "en": "A hand from a cloud holds a crowned sword — the image of a sudden, honest grasp of what matters.",
+      "es": "Una mano sale de la nube y sostiene una espada coronada: la imagen de una comprensión repentina y honesta del fondo del asunto.",
+      "pt": "Uma mão saída da nuvem segura uma espada coroada — a imagem de uma compreensão súbita e honesta do essencial."
      },
      "cardId": "s01"
     },
@@ -635,52 +867,72 @@
      "type": "single",
      "q": {
       "ru": "Тройка Мечей говорит о боли. Что при этом важно помнить?",
-      "en": "The Three of Swords is about pain. What's important to remember?"
+      "en": "The Three of Swords is about pain. What's important to remember?",
+      "es": "El Tres de Espadas habla del dolor. ¿Qué es importante recordar?",
+      "pt": "O Três de Espadas fala de dor. O que é importante lembrar aqui?"
      },
      "options": [
       {
        "ru": "Признанная боль постепенно отпускает, как дождь на карте",
-       "en": "Acknowledged pain gradually eases, like the rain in the picture"
+       "en": "Acknowledged pain gradually eases, like the rain in the picture",
+       "es": "Que el dolor reconocido afloja de a poco, como la lluvia de la carta",
+       "pt": "Que a dor reconhecida vai aos poucos passando, como a chuva da carta"
       },
       {
        "ru": "Боль лучше скрывать ото всех и делать вид, что всё в порядке",
-       "en": "Pain is best hidden and never spoken about"
+       "en": "Pain is best hidden and never spoken about",
+       "es": "Que el dolor conviene esconderlo de todos y aparentar que todo está bien",
+       "pt": "Que a dor é melhor escondida de todos, fingindo que está tudo bem"
       },
       {
        "ru": "Нужно сразу найти виноватого и свести счёты",
-       "en": "You should immediately find someone to blame and settle the score"
+       "en": "You should immediately find someone to blame and settle the score",
+       "es": "Que hay que encontrar de inmediato un culpable y ajustar cuentas",
+       "pt": "Que é preciso achar logo um culpado e acertar as contas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Карта не говорит, что боли не будет, — она показывает дождь, который заканчивается, если позволить себе прожить боль, а не прятать её.",
-      "en": "The card doesn't say there will be no pain — it shows rain that ends once you let yourself feel the pain instead of hiding it."
+      "en": "The card doesn't say there will be no pain — it shows rain that ends once you let yourself feel the pain instead of hiding it.",
+      "es": "La carta no dice que no vaya a haber dolor: muestra una lluvia que termina cuando te permites atravesarlo en lugar de esconderlo.",
+      "pt": "A carta não diz que não haverá dor — ela mostra uma chuva que acaba quando você se permite viver a dor em vez de escondê-la."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём урок Пятёрки Мечей?",
-      "en": "What is the lesson of the Five of Swords?"
+      "en": "What is the lesson of the Five of Swords?",
+      "es": "¿Cuál es la lección del Cinco de Espadas?",
+      "pt": "Qual é a lição do Cinco de Espadas?"
      },
      "options": [
       {
        "ru": "Побеждать нужно любой ценой, чего бы это ни стоило",
-       "en": "Win at any cost, no matter what it costs you"
+       "en": "Win at any cost, no matter what it costs you",
+       "es": "Que hay que ganar a cualquier precio, cueste lo que cueste",
+       "pt": "Que vale vencer a qualquer preço, custe o que custar"
       },
       {
        "ru": "Конфликтов нужно избегать всегда, даже если вы правы",
-       "en": "Always avoid conflict, even when you're right"
+       "en": "Always avoid conflict, even when you're right",
+       "es": "Que hay que evitar siempre los conflictos, incluso cuando tienes razón",
+       "pt": "Que todo conflito deve ser evitado, mesmo quando você tem razão"
       },
       {
        "ru": "Не каждая победа стоит того, чем за неё платят",
-       "en": "Not every victory is worth what it costs"
+       "en": "Not every victory is worth what it costs",
+       "es": "Que no toda victoria vale lo que se paga por ella",
+       "pt": "Que nem toda vitória vale o que se paga por ela"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Пятёрка не запрещает спорить — она спрашивает о цене: что осталось у победителя, кроме собранных мечей?",
-      "en": "The Five doesn't forbid arguing — it asks about the price: what does the winner have left besides the swords he has gathered?"
+      "en": "The Five doesn't forbid arguing — it asks about the price: what does the winner have left besides the swords he has gathered?",
+      "es": "El Cinco no prohíbe discutir: pregunta por el precio. ¿Qué le quedó al vencedor, además de las espadas que juntó?",
+      "pt": "O Cinco não proíbe discutir — ele pergunta pelo preço: o que sobrou para o vencedor além das espadas que recolheu?"
      }
     }
    ]
@@ -692,78 +944,108 @@
      "type": "single",
      "q": {
       "ru": "Шестёрка Мечей продолжает путь после Пятёрки. О чём она?",
-      "en": "The Six of Swords continues the journey after the Five. What is it about?"
+      "en": "The Six of Swords continues the journey after the Five. What is it about?",
+      "es": "El Seis de Espadas sigue el camino después del Cinco. ¿De qué trata?",
+      "pt": "O Seis de Espadas continua o caminho depois do Cinco. Do que ele trata?"
      },
      "options": [
       {
        "ru": "О новой победе, которая наконец расставит всё по местам",
-       "en": "Winning a new argument that finally settles things"
+       "en": "Winning a new argument that finally settles things",
+       "es": "De una nueva victoria que por fin pondrá todo en su lugar",
+       "pt": "De uma nova vitória que finalmente vai colocar tudo no lugar"
       },
       {
        "ru": "О переходе к спокойствию, даже если грусть ещё рядом",
-       "en": "Moving toward calm, even if sadness still lingers"
+       "en": "Moving toward calm, even if sadness still lingers",
+       "es": "Del paso hacia la calma, aunque la tristeza siga cerca",
+       "pt": "Da travessia rumo à calma, mesmo que a tristeza ainda esteja por perto"
       },
       {
        "ru": "О полном и мгновенном забвении всего, что случилось раньше",
-       "en": "Instantly forgetting everything that happened before"
+       "en": "Instantly forgetting everything that happened before",
+       "es": "De olvidar por completo y al instante todo lo que pasó antes",
+       "pt": "Do esquecimento total e imediato de tudo o que aconteceu antes"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Лодочник везёт вас к спокойному берегу: буря позади, а грусть в лодке — это память, которая пока едет с вами, не мешая двигаться.",
-      "en": "A ferryman carries you toward a calm shore: the storm is behind you, and the sadness in the boat is memory that travels with you without stopping the crossing."
+      "en": "A ferryman carries you toward a calm shore: the storm is behind you, and the sadness in the boat is memory that travels with you without stopping the crossing.",
+      "es": "El barquero te lleva hacia una orilla tranquila: la tormenta quedó atrás, y la tristeza de la barca es una memoria que viaja contigo sin impedirte avanzar.",
+      "pt": "O barqueiro leva você para uma margem tranquila: a tempestade ficou para trás, e a tristeza no barco é a memória que ainda viaja junto, sem impedir a travessia."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "На что в первую очередь указывает Семёрка Мечей?",
-      "en": "What does the Seven of Swords point to first?"
+      "en": "What does the Seven of Swords point to first?",
+      "es": "¿A qué apunta primero el Siete de Espadas?",
+      "pt": "Para o que o Sete de Espadas aponta antes de tudo?"
      },
      "options": [
       {
        "ru": "На обходной путь: хитрость чужую или собственное избегание",
-       "en": "A roundabout path: someone else's cunning, or your own avoidance"
+       "en": "A roundabout path: someone else's cunning, or your own avoidance",
+       "es": "A un rodeo: la astucia ajena o tu propia forma de esquivar",
+       "pt": "Para um caminho indireto: a esperteza alheia ou a sua própria esquiva"
       },
       {
        "ru": "На честный разговор, который наконец состоялся",
-       "en": "An honest conversation that finally happened"
+       "en": "An honest conversation that finally happened",
+       "es": "A una conversación honesta que por fin sucedió",
+       "pt": "Para uma conversa honesta que finalmente aconteceu"
       },
       {
        "ru": "На выгодную сделку, которая устраивает все стороны",
-       "en": "A deal that suits every side"
+       "en": "A deal that suits every side",
+       "es": "A un buen trato que le conviene a todas las partes",
+       "pt": "Para um acordo vantajoso que agrada a todos os lados"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Карта — про хитрость и увиливание, свои или чужие; она приглашает проверить, не превратилась ли осторожность в прятки с собой.",
-      "en": "The card is about cunning and dodging — someone else's or your own — and invites you to check whether caution has turned into hide-and-seek with yourself."
+      "en": "The card is about cunning and dodging — someone else's or your own — and invites you to check whether caution has turned into hide-and-seek with yourself.",
+      "es": "La carta trata de la astucia y las evasivas, propias o ajenas; invita a revisar si la precaución no se volvió un juego de escondidas contigo.",
+      "pt": "A carta fala de esperteza e de escapadas, suas ou de outros; ela convida você a conferir se a cautela não virou um esconde-esconde consigo mesmo."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта показывает дно, за которым на горизонте уже встаёт рассвет?",
-      "en": "Which card shows a rock bottom with dawn already rising on the horizon?"
+      "en": "Which card shows a rock bottom with dawn already rising on the horizon?",
+      "es": "¿Qué carta muestra el fondo con el amanecer ya asomando en el horizonte?",
+      "pt": "Que carta mostra o fundo do poço com o amanhecer já surgindo no horizonte?"
      },
      "options": [
       {
        "ru": "Восьмёрка Мечей",
-       "en": "Eight of Swords"
+       "en": "Eight of Swords",
+       "es": "El Ocho de Espadas",
+       "pt": "O Oito de Espadas"
       },
       {
        "ru": "Девятка Мечей",
-       "en": "Nine of Swords"
+       "en": "Nine of Swords",
+       "es": "El Nueve de Espadas",
+       "pt": "O Nove de Espadas"
       },
       {
        "ru": "Десятка Мечей",
-       "en": "Ten of Swords"
+       "en": "Ten of Swords",
+       "es": "El Diez de Espadas",
+       "pt": "O Dez de Espadas"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "У Десятки всё худшее уже случилось — добавить к нему нечего, а на горизонте той же картинки встаёт солнце.",
-      "en": "In the Ten the worst has already happened — nothing can be added to it, and in the same picture the sun is coming up on the horizon."
+      "en": "In the Ten the worst has already happened — nothing can be added to it, and in the same picture the sun is coming up on the horizon.",
+      "es": "En el Diez ya pasó lo peor y no hay nada que sumarle, y en esa misma imagen el sol está saliendo en el horizonte.",
+      "pt": "No Dez o pior já aconteceu — não há o que acrescentar, e na mesma imagem o sol nasce no horizonte."
      },
      "cardId": "s10"
     },
@@ -771,52 +1053,72 @@
      "type": "single",
      "q": {
       "ru": "Восьмёрка Мечей показывает связанную и с завязанными глазами фигуру. Что важно заметить на картинке?",
-      "en": "The Eight of Swords shows a bound, blindfolded figure. What's important to notice in the picture?"
+      "en": "The Eight of Swords shows a bound, blindfolded figure. What's important to notice in the picture?",
+      "es": "El Ocho de Espadas muestra una figura atada y con los ojos vendados. ¿Qué es importante notar en la imagen?",
+      "pt": "O Oito de Espadas mostra uma figura amarrada e com os olhos vendados. O que é importante notar na imagem?"
      },
      "options": [
       {
        "ru": "Путы слабые, и впереди есть проход — ограничение чаще в мыслях",
-       "en": "The ropes are loose and a path stays open: the limit lives in the mind"
+       "en": "The ropes are loose and a path stays open: the limit lives in the mind",
+       "es": "Las ataduras están flojas y adelante queda un paso libre: el límite suele estar en la mente",
+       "pt": "As amarras estão frouxas e há uma passagem adiante — o limite costuma estar na cabeça"
       },
       {
        "ru": "Путы затянуты, и мечи стоят сплошной стеной",
-       "en": "The ropes are tight and the swords form an unbroken wall"
+       "en": "The ropes are tight and the swords form an unbroken wall",
+       "es": "Las ataduras están apretadas y las espadas forman una pared sin huecos",
+       "pt": "As amarras estão apertadas e as espadas formam uma parede sem brechas"
       },
       {
        "ru": "Повязка снята, и фигура уже видит выход",
-       "en": "The blindfold is off and the figure can already see the way out"
+       "en": "The blindfold is off and the figure can already see the way out",
+       "es": "La venda ya está quitada y la figura ve la salida",
+       "pt": "A venda já foi tirada e a figura enxerga a saída"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Настоящая тюрьма здесь — повязка из тревожных мыслей, а не верёвки: снять её можно, поставив под сомнение хотя бы одно «нельзя».",
-      "en": "The real prison here is the blindfold woven from anxious thoughts, not the ropes — it comes off once you question even one of those 'impossibles'."
+      "en": "The real prison here is the blindfold woven from anxious thoughts, not the ropes — it comes off once you question even one of those 'impossibles'.",
+      "es": "La verdadera cárcel aquí es la venda tejida con pensamientos ansiosos, no las cuerdas: se quita en cuanto pones en duda aunque sea un solo «no puedo».",
+      "pt": "A prisão de verdade aqui é a venda tecida de pensamentos ansiosos, não as cordas: ela cai quando você coloca em dúvida pelo menos um daqueles “não dá”."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Девятка Мечей — про тяжёлые мысли ночью. Что карта говорит о мечах на стене?",
-      "en": "The Nine of Swords is about heavy thoughts at night. What does the card say about the swords on the wall?"
+      "en": "The Nine of Swords is about heavy thoughts at night. What does the card say about the swords on the wall?",
+      "es": "El Nueve de Espadas muestra a una mujer sentada en la cama con los pensamientos pesados de la noche. ¿Qué dice la carta sobre las espadas de la pared?",
+      "pt": "O Nove de Espadas trata de pensamentos pesados à noite. O que a carta diz sobre as espadas na parede?"
      },
      "options": [
       {
        "ru": "Они прямо ранят героиню каждую ночь, и её тревога — точный приговор",
-       "en": "They actually wound her every night, and her anxiety is an exact verdict"
+       "en": "They actually wound her every night, and her anxiety is an exact verdict",
+       "es": "Que la hieren de verdad cada noche y que su angustia es una sentencia exacta",
+       "pt": "Que elas ferem a figura todas as noites, e a angústia dela é uma sentença exata"
       },
       {
        "ru": "Мечи на стене — это чужие обиды, и снять их может только тот, кто их повесил",
-       "en": "The swords on the wall are other people's grudges, and only whoever hung them can take them down"
+       "en": "The swords on the wall are other people's grudges, and only whoever hung them can take them down",
+       "es": "Que las espadas de la pared son rencores ajenos y solo puede bajarlas quien las colgó",
+       "pt": "Que as espadas na parede são mágoas alheias, e só quem as pendurou pode tirá-las"
       },
       {
        "ru": "Они висят на стене и не касаются её — страх реален, но не приговор",
-       "en": "They hang on the wall, never touching her — real as a feeling, not a verdict"
+       "en": "They hang on the wall, never touching her — real as a feeling, not a verdict",
+       "es": "Que cuelgan de la pared sin tocarla: el miedo es real como vivencia, no como sentencia",
+       "pt": "Que elas ficam na parede e não a tocam — o medo é real, mas não é uma sentença"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Карта не спорит с тем, что тревожно, — она отделяет само переживание от факта: то, что чувствуется правдой ночью, не обязано быть правдой.",
-      "en": "The card doesn't argue that the worry is real — it separates the feeling from the fact: what feels true at night doesn't have to be true."
+      "en": "The card doesn't argue that the worry is real — it separates the feeling from the fact: what feels true at night doesn't have to be true.",
+      "es": "La carta no discute que haya angustia: separa la vivencia del hecho. Lo que de noche se siente como verdad no tiene por qué serlo.",
+      "pt": "A carta não discute que a angústia existe — ela separa o sentimento do fato: o que parece verdade de noite não é obrigado a ser verdade."
      }
     }
    ]
@@ -828,130 +1130,180 @@
      "type": "single",
      "q": {
       "ru": "Что на самом деле предлагает вам Туз Пентаклей?",
-      "en": "What does the Ace of Pentacles actually offer you?"
+      "en": "What does the Ace of Pentacles actually offer you?",
+      "es": "¿Qué te ofrece en realidad el As de Oros?",
+      "pt": "O que o Ás de Ouros de fato oferece a você?"
      },
      "options": [
       {
        "ru": "Гарантию, что деньги придут сами по себе, без ваших усилий",
-       "en": "A guarantee that money will show up on its own, no effort needed"
+       "en": "A guarantee that money will show up on its own, no effort needed",
+       "es": "La garantía de que el dinero llegará solo, sin esfuerzo de tu parte",
+       "pt": "A garantia de que o dinheiro vem sozinho, sem nenhum esforço seu"
       },
       {
        "ru": "Семя новой возможности, которому нужны конкретные шаги",
-       "en": "The seed of a new opportunity that needs concrete steps"
+       "en": "The seed of a new opportunity that needs concrete steps",
+       "es": "La semilla de una oportunidad nueva que necesita pasos concretos",
+       "pt": "A semente de uma nova oportunidade, que precisa de passos concretos"
       },
       {
        "ru": "Совет вложить все сбережения в новое дело поскорее",
-       "en": "Advice to put all your savings into a new venture right away"
+       "en": "Advice to put all your savings into a new venture right away",
+       "es": "El consejo de poner cuanto antes todos tus ahorros en un negocio nuevo",
+       "pt": "O conselho de aplicar todas as economias em um negócio novo o quanto antes"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Туз — это возможность в руке, а не готовый результат: семени нужна почва, то есть ваши реальные действия.",
-      "en": "The Ace is an opportunity in your palm, not a finished result: the seed needs soil — your actual actions."
+      "en": "The Ace is an opportunity in your palm, not a finished result: the seed needs soil — your actual actions.",
+      "es": "El As es una oportunidad en la mano, no un resultado terminado: la semilla necesita tierra, es decir, acciones reales de tu parte.",
+      "pt": "O Ás é uma oportunidade na mão, não um resultado pronto: a semente precisa de terra, ou seja, das suas ações reais."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Чему учит образ жонглирования на Двойке Пентаклей?",
-      "en": "What does the juggling image on the Two of Pentacles teach?"
+      "en": "What does the juggling image on the Two of Pentacles teach?",
+      "es": "¿Qué enseña la imagen de los malabares del Dos de Oros?",
+      "pt": "O que a imagem do malabarismo no Dois de Ouros ensina?"
      },
      "options": [
       {
        "ru": "Сохранять гибкость и держать баланс на ходу",
-       "en": "Stay flexible and keep your balance on the move"
+       "en": "Stay flexible and keep your balance on the move",
+       "es": "A mantener la flexibilidad y el equilibrio sobre la marcha",
+       "pt": "Manter a flexibilidade e o equilíbrio em pleno movimento"
       },
       {
        "ru": "Довести все дела до идеального порядка, а уже потом расслабиться",
-       "en": "Bring every task to perfect order before you finally allow yourself to relax"
+       "en": "Bring every task to perfect order before you finally allow yourself to relax",
+       "es": "A dejar todos los asuntos en orden perfecto y recién entonces relajarse",
+       "pt": "Deixar tudo em ordem perfeita e só então relaxar"
       },
       {
        "ru": "Отказаться сразу от одной из двух задач, чтобы не распыляться",
-       "en": "Drop one of the two tasks right away so you don't spread yourself thin"
+       "en": "Drop one of the two tasks right away so you don't spread yourself thin",
+       "es": "A abandonar de entrada una de las dos tareas para no dispersarse",
+       "pt": "Abandonar logo uma das duas tarefas, para não se dispersar"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Танцор удерживает оба пентакля в движении: карта про баланс на ходу, а не про идеальный порядок или отказ от одной из задач.",
-      "en": "The dancer keeps both pentacles moving: the card is about balance on the move, not perfect order or dropping a task."
+      "en": "The dancer keeps both pentacles moving: the card is about balance on the move, not perfect order or dropping a task.",
+      "es": "El bailarín mantiene las dos monedas en movimiento: la carta trata del equilibrio sobre la marcha, no del orden perfecto ni de soltar una tarea.",
+      "pt": "O dançarino mantém as duas moedas em movimento: a carta fala de equilíbrio em pleno andamento, não de ordem perfeita nem de largar uma das tarefas."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём разница между Тройкой и Четвёркой Пентаклей?",
-      "en": "What is the difference between the Three and the Four of Pentacles?"
+      "en": "What is the difference between the Three and the Four of Pentacles?",
+      "es": "¿Cuál es la diferencia entre el Tres y el Cuatro de Oros?",
+      "pt": "Qual é a diferença entre o Três e o Quatro de Ouros?"
      },
      "options": [
       {
        "ru": "Обе карты об одном и том же — про то, как накопить как можно больше денег",
-       "en": "Both cards are about the same thing — piling up as much money as possible"
+       "en": "Both cards are about the same thing — piling up as much money as possible",
+       "es": "Las dos cartas hablan de lo mismo: de juntar la mayor cantidad de dinero posible",
+       "pt": "As duas cartas falam da mesma coisa — de juntar o máximo de dinheiro possível"
       },
       {
        "ru": "Тройка про деньги, а Четвёрка про отношения между людьми",
-       "en": "The Three is about money, while the Four is about relationships between people"
+       "en": "The Three is about money, while the Four is about relationships between people",
+       "es": "El Tres trata del dinero y el Cuatro de las relaciones entre las personas",
+       "pt": "O Três fala de dinheiro, e o Quatro fala das relações entre as pessoas"
       },
       {
        "ru": "Тройка — совместный труд и признание, Четвёрка — удержание нажитого в одиночку",
-       "en": "The Three is shared work and recognition, the Four is holding on to what's yours, alone"
+       "en": "The Three is shared work and recognition, the Four is holding on to what's yours, alone",
+       "es": "El Tres es trabajo compartido y reconocimiento; el Cuatro, retener en soledad lo ganado",
+       "pt": "O Três é trabalho conjunto e reconhecimento; o Quatro, segurar sozinho o que já se tem"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Тройка — мастер, чей труд оценили заказчики; Четвёрка — сжатые руки, которые боятся отдать или впустить новое.",
-      "en": "The Three is a craftsman whose work his patrons value; the Four is clenched hands afraid to give or let anything new in."
+      "en": "The Three is a craftsman whose work his patrons value; the Four is clenched hands afraid to give or let anything new in.",
+      "es": "El Tres es un artesano cuyo trabajo valoran quienes se lo encargaron; el Cuatro son unas manos cerradas que temen dar o dejar entrar algo nuevo.",
+      "pt": "O Três é o artesão cujo trabalho os clientes reconhecem; o Quatro são mãos fechadas, com medo de dar ou de deixar entrar algo novo."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что важно заметить на Пятёрке Пентаклей рядом с двумя замёрзшими путниками?",
-      "en": "What matters most to notice on the Five of Pentacles, beside the two freezing travellers?"
+      "en": "What matters most to notice on the Five of Pentacles, beside the two freezing travellers?",
+      "es": "Además de los dos caminantes muertos de frío, ¿qué es lo más importante que hay que notar en el Cinco de Oros?",
+      "pt": "O que é importante notar no Cinco de Ouros, ao lado dos dois viajantes que passam frio?"
      },
      "options": [
       {
        "ru": "Что помощи ждать неоткуда, и рассчитывать можно только на себя",
-       "en": "That there is nowhere to expect help from and you're entirely on your own"
+       "en": "That there is nowhere to expect help from and you're entirely on your own",
+       "es": "Que no hay ayuda de dónde esperarla y solo puedes contar contigo",
+       "pt": "Que não há de onde esperar ajuda e só dá para contar consigo mesmo"
       },
       {
        "ru": "Что светящееся окно рядом — это помощь, которую легко не заметить",
-       "en": "That the glowing window nearby is help that's easy to walk past"
+       "en": "That the glowing window nearby is help that's easy to walk past",
+       "es": "Que el vitral encendido que tienen al lado es una ayuda fácil de pasar por alto",
+       "pt": "Que a janela iluminada ali ao lado é uma ajuda fácil de não notar"
       },
       {
        "ru": "Что нужда — это наказание за прошлые ошибки, которое нужно перетерпеть",
-       "en": "That hardship is a punishment for past mistakes you simply have to endure"
+       "en": "That hardship is a punishment for past mistakes you simply have to endure",
+       "es": "Que la carencia es un castigo por errores del pasado que solo hay que aguantar",
+       "pt": "Que a privação é um castigo por erros do passado e só resta aguentar"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "На карте есть освещённый витраж совсем рядом с путниками — опора существует, её просто нужно заметить и принять.",
-      "en": "There is a lit stained-glass window right beside the travellers — support exists, you just need to notice and accept it."
+      "en": "There is a lit stained-glass window right beside the travellers — support exists, you just need to notice and accept it.",
+      "es": "En la carta hay un vitral iluminado justo al lado de los caminantes: el sostén existe, solo hay que notarlo y aceptarlo.",
+      "pt": "Na carta há um vitral aceso bem ao lado dos viajantes — o apoio existe, basta notá-lo e aceitá-lo."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта перед вами?",
-      "en": "Which card is in front of you?"
+      "en": "Which card is in front of you?",
+      "es": "¿Qué carta tienes delante?",
+      "pt": "Que carta está diante de você?"
      },
      "options": [
       {
        "ru": "Пятёрка Пентаклей",
-       "en": "Five of Pentacles"
+       "en": "Five of Pentacles",
+       "es": "El Cinco de Oros",
+       "pt": "O Cinco de Ouros"
       },
       {
        "ru": "Семёрка Пентаклей",
-       "en": "Seven of Pentacles"
+       "en": "Seven of Pentacles",
+       "es": "El Siete de Oros",
+       "pt": "O Sete de Ouros"
       },
       {
        "ru": "Пятёрка Мечей",
-       "en": "Five of Swords"
+       "en": "Five of Swords",
+       "es": "El Cinco de Espadas",
+       "pt": "O Cinco de Espadas"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Снег, костыли и лохмотья рядом с витражным окном — это Пятёрка Пентаклей: у Семёрки Пентаклей на карте сад и куст с монетами.",
-      "en": "Snow, crutches and rags beside the stained-glass window — this is the Five of Pentacles; the Seven of Pentacles shows a garden and a bush hung with coins."
+      "en": "Snow, crutches and rags beside the stained-glass window — this is the Five of Pentacles; the Seven of Pentacles shows a garden and a bush hung with coins.",
+      "es": "Nieve, muletas y harapos junto a un vitral: es el Cinco de Oros; el Siete de Oros muestra un jardín y un arbusto cargado de monedas.",
+      "pt": "Neve, muletas e trapos ao lado da janela de vitral — este é o Cinco de Ouros: o Sete de Ouros traz um jardim e um arbusto carregado de moedas."
      },
      "cardId": "p05"
     }
@@ -964,130 +1316,180 @@
      "type": "single",
      "q": {
       "ru": "Когда щедрость Шестёрки Пентаклей перестаёт быть здоровой?",
-      "en": "When does the generosity of the Six of Pentacles stop being healthy?"
+      "en": "When does the generosity of the Six of Pentacles stop being healthy?",
+      "es": "¿Cuándo deja de ser sana la generosidad del Seis de Oros?",
+      "pt": "Quando a generosidade do Seis de Ouros deixa de ser saudável?"
      },
      "options": [
       {
        "ru": "Когда помощь приходит с невидимыми условиями",
-       "en": "When help comes with invisible strings attached"
+       "en": "When help comes with invisible strings attached",
+       "es": "Cuando la ayuda llega con condiciones invisibles",
+       "pt": "Quando a ajuda vem com condições invisíveis"
       },
       {
        "ru": "Когда дающий использует весы, чтобы всё было честно и по справедливости",
-       "en": "When the giver uses scales to make sure everything stays fair"
+       "en": "When the giver uses scales to make sure everything stays fair",
+       "es": "Cuando quien da usa una balanza para que todo sea justo y parejo",
+       "pt": "Quando quem dá usa a balança para que tudo fique justo e equilibrado"
       },
       {
        "ru": "Когда в обмене вообще участвуют деньги, а не только внимание и время",
-       "en": "When money is involved in the exchange at all, not just attention and time"
+       "en": "When money is involved in the exchange at all, not just attention and time",
+       "es": "Cuando en el intercambio hay dinero de por medio y no solo atención y tiempo",
+       "pt": "Quando há dinheiro envolvido na troca, e não só atenção e tempo"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Здоровый обмен — взвешенный и без скрытой платы; весы в руке купца — это честность, а не проблема.",
-      "en": "A healthy exchange is measured and free of hidden cost; the scales in the merchant's hand are honesty, not the problem."
+      "en": "A healthy exchange is measured and free of hidden cost; the scales in the merchant's hand are honesty, not the problem.",
+      "es": "Un intercambio sano es medido y sin costo escondido; la balanza en la mano del mercader es honestidad, no el problema.",
+      "pt": "Uma troca saudável é medida e sem cobrança escondida; a balança na mão do mercador é honestidade, não o problema."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "О чём предупреждает пауза садовника на Семёрке Пентаклей?",
-      "en": "What does the gardener's pause on the Seven of Pentacles warn about?"
+      "en": "What does the gardener's pause on the Seven of Pentacles warn about?",
+      "es": "¿Sobre qué advierte la pausa del jardinero en el Siete de Oros?",
+      "pt": "Sobre o que avisa a pausa do jardineiro no Sete de Ouros?"
      },
      "options": [
       {
        "ru": "О том, что все вложенные усилия оказались напрасны и пропали зря",
-       "en": "That all the effort invested was wasted for nothing"
+       "en": "That all the effort invested was wasted for nothing",
+       "es": "Que todo el esfuerzo invertido resultó en vano y se perdió",
+       "pt": "Que todo o esforço investido foi em vão e se perdeu à toa"
       },
       {
        "ru": "О том, что нужно бросить старое дело и сразу начать новое",
-       "en": "That you should drop the old project and start a new one immediately"
+       "en": "That you should drop the old project and start a new one immediately",
+       "es": "Que hay que dejar el proyecto viejo y empezar uno nuevo de inmediato",
+       "pt": "Que é hora de largar o trabalho antigo e começar outro na mesma hora"
       },
       {
        "ru": "О том, что плоды зреют в своём темпе, а не по нашему нетерпению",
-       "en": "That fruit ripens at its own pace, not on our impatient schedule"
+       "en": "That fruit ripens at its own pace, not on our impatient schedule",
+       "es": "Que los frutos maduran a su propio ritmo, no al de nuestra impaciencia",
+       "pt": "Que os frutos amadurecem no ritmo deles, não no da nossa impaciência"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Садовник оценивает, а не паникует: урожай уже зреет, торопить его бесполезно, но честно посмотреть на курс стоит.",
-      "en": "The gardener is assessing, not panicking: the harvest is already ripening, rushing it is pointless, but an honest look at your course is worthwhile."
+      "en": "The gardener is assessing, not panicking: the harvest is already ripening, rushing it is pointless, but an honest look at your course is worthwhile.",
+      "es": "El jardinero evalúa, no entra en pánico: la cosecha ya está madurando y apurarla no sirve, pero vale la pena mirar el rumbo con honestidad.",
+      "pt": "O jardineiro avalia, não entra em pânico: a colheita já está amadurecendo, apressá-la não adianta, mas vale olhar com honestidade para o rumo."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "В чём разница между Восьмёркой и Девяткой Пентаклей?",
-      "en": "What is the difference between the Eight and the Nine of Pentacles?"
+      "en": "What is the difference between the Eight and the Nine of Pentacles?",
+      "es": "¿Cuál es la diferencia entre el Ocho y el Nueve de Oros?",
+      "pt": "Qual é a diferença entre o Oito e o Nove de Ouros?"
      },
      "options": [
       {
        "ru": "Восьмёрка — труд ещё в процессе, Девятка — уже заслуженный плод",
-       "en": "The Eight is work in progress, the Nine is fruit already earned"
+       "en": "The Eight is work in progress, the Nine is fruit already earned",
+       "es": "El Ocho es trabajo todavía en proceso; el Nueve, el fruto ya merecido",
+       "pt": "O Oito é o trabalho ainda em curso; o Nove, o fruto já merecido"
       },
       {
        "ru": "Обе карты описывают один и тот же этап работы",
-       "en": "Both cards describe the same stage of the work"
+       "en": "Both cards describe the same stage of the work",
+       "es": "Las dos cartas describen la misma etapa del trabajo",
+       "pt": "As duas cartas descrevem a mesma etapa do trabalho"
       },
       {
        "ru": "Восьмёрка — про врождённый талант, Девятка — про удачное стечение обстоятельств",
-       "en": "The Eight is about natural talent, the Nine about a lucky break"
+       "en": "The Eight is about natural talent, the Nine about a lucky break",
+       "es": "El Ocho trata del talento innato y el Nueve de un golpe de suerte",
+       "pt": "O Oito fala de talento de nascença; o Nove, de um golpe de sorte"
       }
      ],
      "correct": 0,
      "explain": {
       "ru": "Восьмёрка — мастер за верстаком, ещё в процессе; Девятка — тот же путь, но уже пройденный, и здесь можно позволить себе покой.",
-      "en": "The Eight is a craftsman at the workbench, still mid-process; the Nine is the same path already walked, where rest is allowed."
+      "en": "The Eight is a craftsman at the workbench, still mid-process; the Nine is the same path already walked, where rest is allowed.",
+      "es": "El Ocho es un artesano en su mesa de trabajo, todavía en proceso; el Nueve es el mismo camino ya recorrido, donde uno puede permitirse la calma.",
+      "pt": "O Oito é o artesão na bancada, ainda no meio do processo; o Nove é o mesmo caminho já percorrido, onde dá para se permitir o descanso."
      }
     },
     {
      "type": "single",
      "q": {
       "ru": "Что в первую очередь означает Десятка Пентаклей?",
-      "en": "What does the Ten of Pentacles mean first and foremost?"
+      "en": "What does the Ten of Pentacles mean first and foremost?",
+      "es": "¿Qué significa ante todo el Diez de Oros?",
+      "pt": "O que o Dez de Ouros significa antes de tudo?"
      },
      "options": [
       {
        "ru": "Конец забот: дальше всё будет держаться само собой",
-       "en": "The end of worries: from now on everything holds itself up"
+       "en": "The end of worries: from now on everything holds itself up",
+       "es": "El fin de las preocupaciones: de aquí en más todo se sostiene solo",
+       "pt": "O fim das preocupações: daqui em diante tudo se sustenta sozinho"
       },
       {
        "ru": "Стабильность и наследие, которые строятся не только для себя",
-       "en": "Stability and legacy built not only for yourself"
+       "en": "Stability and legacy built not only for yourself",
+       "es": "Estabilidad y herencia que se construyen no solo para uno",
+       "pt": "A estabilidade e o legado que se constroem não só para si"
       },
       {
        "ru": "Личный достаток, накопленный для себя и на свой век",
-       "en": "Personal wealth built for yourself and your own lifetime"
+       "en": "Personal wealth built for yourself and your own lifetime",
+       "es": "Un bienestar personal, acumulado para uno y para la propia vida",
+       "pt": "A prosperidade pessoal, acumulada para si e para a própria vida"
       }
      ],
      "correct": 1,
      "explain": {
       "ru": "Три поколения под одной аркой — это дом и традиции, которые переживут одного человека, а не гарантия беззаботной жизни.",
-      "en": "Three generations under one archway are a home and traditions that outlast one person — not a guarantee of a carefree life."
+      "en": "Three generations under one archway are a home and traditions that outlast one person — not a guarantee of a carefree life.",
+      "es": "Tres generaciones bajo un mismo arco son una casa y unas tradiciones que sobreviven a una persona, no una garantía de vida sin preocupaciones.",
+      "pt": "Três gerações sob o mesmo arco são uma casa e tradições que sobrevivem a uma pessoa só, não a garantia de uma vida sem preocupações."
      }
     },
     {
      "type": "card",
      "q": {
       "ru": "Какая карта изображена?",
-      "en": "Which card is pictured?"
+      "en": "Which card is pictured?",
+      "es": "¿Qué carta está representada?",
+      "pt": "Que carta está representada?"
      },
      "options": [
       {
        "ru": "Десятка Пентаклей",
-       "en": "Ten of Pentacles"
+       "en": "Ten of Pentacles",
+       "es": "El Diez de Oros",
+       "pt": "O Dez de Ouros"
       },
       {
        "ru": "Девятка Кубков",
-       "en": "Nine of Cups"
+       "en": "Nine of Cups",
+       "es": "El Nueve de Copas",
+       "pt": "O Nove de Copas"
       },
       {
        "ru": "Девятка Пентаклей",
-       "en": "Nine of Pentacles"
+       "en": "Nine of Pentacles",
+       "es": "El Nueve de Oros",
+       "pt": "O Nove de Ouros"
       }
      ],
      "correct": 2,
      "explain": {
       "ru": "Женщина в своём саду с соколом на руке и улиткой у ног — это Девятка Пентаклей: благополучие, созданное собственным трудом.",
-      "en": "A woman in her own garden with a falcon on her wrist and a snail at her feet is the Nine of Pentacles: prosperity created by her own labour."
+      "en": "A woman in her own garden with a falcon on her wrist and a snail at her feet is the Nine of Pentacles: prosperity created by her own labour.",
+      "es": "Una mujer en su jardín con un halcón en la mano y un caracol a sus pies: es el Nueve de Oros, el bienestar creado con el propio trabajo.",
+      "pt": "A mulher no seu jardim, com um falcão na mão e um caracol aos pés, é o Nove de Ouros: prosperidade criada pelo próprio trabalho."
      },
      "cardId": "p09"
     }
