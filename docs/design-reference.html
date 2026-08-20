@@ -30,7 +30,7 @@ box-shadow:0 50px 110px rgba(0,0,0,.8),0 6px 18px rgba(0,0,0,.5),inset 0 1px 1px
 --frame:#8f7439;--navbg:rgba(7,9,23,.66);--lock:#525a80;--done:#3d7a5c;
 --chipbg:rgba(226,189,114,.1)}
 [data-mode="light"]{--glass:rgba(250,246,236,.45);--bg:linear-gradient(#fcf8ee,#efe8d2);
---text:#3d3d55;--head:#4a3a16;--muted:#a29878;--line:#e3d8ba;--panel:rgba(255,255,255,.66);
+--text:#3d3d55;--head:#4a3a16;--muted:#6f664b;--line:#e3d8ba;--panel:rgba(255,255,255,.66);
 --accent:#a8802e;--accent2:#8a6a24;--glow:rgba(168,128,46,.25);--ring:#d8c89e;
 --frame:#c4a259;--navbg:rgba(252,248,238,.7);--lock:#c9bd9c;--done:#4d9370;
 --chipbg:rgba(168,128,46,.1)}
@@ -185,8 +185,9 @@ font-family:var(--serif);font-size:17px}
 letter-spacing:.3px;line-height:1.3}
 .gc:hover small{color:var(--head)}
 /* угловой бейдж поверх картинки (design-system §5): «ИЗУЧЕНО ✓» в сетке и ярлычок
-   «можно увеличить» на входах в полноэкранный просмотр — одна форма, два варианта */
-.st2{position:absolute;top:6px;right:6px;font-size:8px;color:var(--accent2);background:rgba(0,0,0,.4);
+   «можно увеличить» на входах в полноэкранный просмотр — одна форма, два варианта.
+   Цвет текста фиксирован #f0d9a4: на тёмном скриме цвет теме не следует (задача 48) */
+.st2{position:absolute;top:6px;right:6px;font-size:8px;color:#f0d9a4;background:rgba(0,0,0,.4);
 border-radius:8px;padding:2px 6px;letter-spacing:.5px;backdrop-filter:blur(4px);z-index:2}
 .st2.ico{padding:3px;line-height:0}
 .st2.ico svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;
