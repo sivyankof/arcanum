@@ -7,13 +7,14 @@
  *  - иконочный (`icon`) — ярлычок «можно увеличить» на входах в полноэкранный
  *    просмотр: герой страницы карты и лицевая грань открытой карты дня (спека 39).
  *
- *  Подложка-скрим задаётся ЛИТЕРАЛОМ, а не токеном темы: это затемнение поверх фото
- *  (как тень миниатюры в сетке), от темы оно не зависит. */
+ *  Подложка-скрим И цвет содержимого задаются вне темы: скрим — затемнение поверх фото,
+ *  одинаково тёмное в обеих темах, поэтому и золото на нём всегда светлое (`gold.onScrim`).
+ *  Тем-зависимый `accent2` на светлой теме — ТЁМНОЕ золото: на скриме давал 1.35:1,
+ *  бейдж «ИЗУЧЕНО ✓» был почти невидим (замер в спеке 48). */
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
-import { radius } from '../theme/theme';
-import { useTheme } from '../theme/useTheme';
+import { gold, radius } from '../theme/theme';
 import { Txt } from './Txt';
 
 const ICON_SIZE = 12;
@@ -29,14 +30,12 @@ export function CornerBadge({
   icon?: React.ComponentProps<typeof Ionicons>['name'];
   style?: StyleProp<ViewStyle>;
 }) {
-  const t = useTheme();
-
   return (
     <View style={[st.badge, icon ? st.padIcon : st.padText, style]}>
       {icon ? (
-        <Ionicons name={icon} size={ICON_SIZE} color={t.accent2} />
+        <Ionicons name={icon} size={ICON_SIZE} color={gold.onScrim} />
       ) : (
-        <Txt style={[st.label, { color: t.accent2 }]}>{label}</Txt>
+        <Txt style={[st.label, { color: gold.onScrim }]}>{label}</Txt>
       )}
     </View>
   );
