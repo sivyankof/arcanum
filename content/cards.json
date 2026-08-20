@@ -421,7 +421,7 @@
      "pt": "Nas finanças, aparece a capacidade de multiplicar: renda nova das suas habilidades, negociação do seu valor. Faça contas e planeje — dinheiro obedece a quem administra."
     },
     "health": {
-     "ru": "Для самочувствия — тема осознанного отношения к себе. Режим, движение, внимание к телу: здесь многое зависит именно от вас — и ровно поэтому легко откладывается на потом.",
+     "ru": "Для самочувствия — тема осознанного отношения к себе. Режим, движение, внимание к телу: здесь многое зависит именно от вас. Заметьте, что даётся легко само собой, а что каждый раз требует решения.",
      "en": "For wellbeing — a theme of conscious care for yourself. Routine, movement, attention to the body: much of this depends on you alone, and that is exactly why it slides to another day so easily.",
      "status": {
       "ru": "reviewed",
@@ -1467,7 +1467,7 @@
      "pt": "Para o seu bem-estar, o Hierofante sugere olhar os hábitos herdados “por tradição”: quais padrões de família — em torno de comida, descanso, corpo — sustentam você e quais esvaziam? Constância e práticas testadas restauram mais que novidades da moda."
     },
     "day_card": {
-     "ru": "Сегодня учитесь и спрашивайте. Если стоите перед задачей — найдите того, кто уже решал такую, и попросите совета: сегодня двери наставников открыты. Хороший день для урока, лекции, книги, разговора со старшим. Кто уже проходил этот путь до вас?",
+     "ru": "Сегодня учитесь и спрашивайте. Если стоите перед задачей — найдите того, кто уже решал такую, и попросите совета: сегодня двери наставников открыты. Хороший день для урока, лекции, книги, разговора со старшим. Одна подсказка стоит трёх попыток вслепую.",
      "en": "Today, learn and ask. If a task stands before you, find someone who has solved it and ask their advice — mentors' doors are open today. A good day for a lesson, a lecture, a book, a talk with someone senior. Who has already walked this road before you?",
      "status": {
       "ru": "reviewed",
@@ -1794,8 +1794,8 @@
      "pt": "Uma decisão financeira compartilhada emperra: as posições não estão alinhadas e a conversa fica sempre para depois. Antes de agir cada um por si, falem sobre o que importa para cada um."
     },
     "health_reversed": {
-     "ru": "Внутренний разлад между «хочу» и «надо» забирает больше сил, чем кажется: невысказанное решение отзывается напряжением. Спросите себя, какой честный ответ вы откладываете.",
-     "en": "The inner tug between 'I want' and 'I should' drains more energy than it seems: an unmade decision shows up as tension. Ask yourself which honest answer you keep postponing.",
+     "ru": "Внутренний разлад между «хочу» и «надо» тяжелее, чем выглядит со стороны: невысказанное решение отзывается напряжением. Спросите себя, какой честный ответ вы откладываете.",
+     "en": "The inner tug between 'I want' and 'I should' weighs more than it looks from outside: an unmade decision shows up as tension. Ask yourself which honest answer you keep postponing.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -2696,7 +2696,7 @@
      "pt": "A Roda da Fortuna invertida traz a sensação de que nada sai como planejado: atrasos, timing ruim, uma sequência de azar. Isso não dura — a roda continua girando. Não se agarre ao que está indo embora nem se culpe pelo que não está nas suas mãos. Faça o possível e solte o resto."
     },
     "love": {
-     "ru": "В любви Колесо — про поворот: неожиданное знакомство, оживший интерес, переход отношений на новый этап. Обратите внимание на случайности этих дней — иногда в них видно направление. Если период в паре трудный, помните: это фаза, а не приговор.",
+     "ru": "В любви Колесо — про поворот: неожиданное знакомство, оживший интерес, переход отношений на новый этап. Присмотритесь к случайностям этих дней — иногда в них видно направление. Если период в паре трудный, помните: это фаза, а не приговор.",
      "en": "In love, the Wheel is about a turn: an unexpected meeting, interest rekindled, a relationship moving to a new stage. Notice the coincidences of these days — sometimes a direction shows through them. If things are hard as a couple, remember: this is a phase, not a verdict.",
      "status": {
       "ru": "reviewed",
@@ -3757,7 +3757,7 @@
      "pt": "Nas finanças, o meio-termo é o caminho: sem apostas arriscadas e sem economia excessiva. Bom momento para organizar o orçamento, equilibrar gastos e receitas e começar a guardar pouco, mas com regularidade. A moderação é a melhor conselheira financeira."
     },
     "health": {
-     "ru": "Для самочувствия — тема ритма и меры. Прислушайтесь: где вы перегибаете, а где недодаёте себе — во сне, еде, движении, отдыхе? Спросите себя, чего просит ваш день: встряски или ровного, бережного темпа. Маленькие регулярные шаги обычно даются легче разовых подвигов.",
+     "ru": "Для самочувствия — тема ритма и меры. Прислушайтесь: где вы перегибаете, а где недодаёте себе — во сне, еде, движении, отдыхе? Спросите себя, чего просит ваш день: резких перемен или ровного, бережного темпа. Маленькие регулярные шаги обычно даются легче разовых подвигов.",
      "en": "For wellbeing — a question of rhythm and measure. Where do you overdo it, and where do you shortchange yourself — in sleep, food, movement, rest? Ask what your day calls for: a shake-up, or a steadier pace. Small regular steps are usually easier than one-off heroics.",
      "status": {
       "ru": "reviewed",
@@ -4863,7 +4863,7 @@
      "pt": "Condições que pareciam nebulosas vão se abrindo aos poucos — bom momento para reler o contrato com calma, sem pressa. As letras miúdas estão mais fáceis de enxergar agora do que há uma semana."
     },
     "health_reversed": {
-     "ru": "Ночная тревога и дневная редко совпадают в размере. Проверьте вечерний страх при свете дня: что в нём устоит, а что вы додумали сами?",
+     "ru": "Ночная тревога редко бывает такой же сильной утром. Проверьте вечерний страх при свете дня: что в нём устоит, а что вы додумали сами?",
      "en": "Fear at night and fear by daylight are rarely the same size. Hold last night's worry up to the morning: what still stands, and what did you fill in yourself?",
      "status": {
       "ru": "reviewed",
@@ -5049,7 +5049,7 @@
      "pt": "Há vitalidade voltando e leveza no corpo: é disso que o Sol fala. Bom momento para se perguntar: o que me enche de energia e o que a consome? Mais luz, movimento e ar fresco — as coisas simples nutrem especialmente agora. Se permita alegria sem culpa."
     },
     "day_card": {
-     "ru": "Сегодня ваш день. Планируйте важное на светлое время, говорите «да» приглашениям, выходите на солнце — буквально. Если давно хотели чем-то похвастаться или кого-то порадовать, сделайте это сейчас. Искренняя радость заразительна — понаблюдайте, как она отзывается в других.",
+     "ru": "Сегодня ваш день. Планируйте важное на светлое время, говорите «да» приглашениям, выходите на солнце — буквально. Если давно хотели чем-то похвастаться или кого-то порадовать, сделайте это сейчас. Искренняя радость заразительна — делитесь ею, не считая отдачу.",
      "en": "Today is your day. Schedule what matters for daylight hours, say yes to invitations, get out into the sun — literally. If you've been meaning to share a win or make someone happy, do it now. Genuine joy is contagious — notice how it lands with the people around you.",
      "status": {
       "ru": "reviewed",
@@ -5121,7 +5121,7 @@
      "pt": "Financeiramente está tudo bem, mas a ansiedade ou a comparação impedem você de sentir isso — ou, ao contrário, o otimismo corre à frente dos números. Confira os fatos e reconheça o que já está bom."
     },
     "health_reversed": {
-     "ru": "Возможно, вы сравниваете себя со «старой нормой» — и за этой меркой трудно разглядеть что-то ещё. Попробуйте описать своё сегодня без сравнения с тем, как было раньше.",
+     "ru": "Возможно, вы меряете себя по «старой норме» — и за этой меркой трудно разглядеть что-то ещё. Попробуйте описать своё сегодня без сравнения с тем, как было раньше.",
      "en": "You may be measuring yourself against some 'old normal', and that yardstick hides everything else. Try describing how today actually is, without holding it up against how things used to be.",
      "status": {
       "ru": "reviewed",
@@ -5629,8 +5629,8 @@
      "pt": "A meta financeira está quase ao alcance da mão, e ainda assim você ou não percebe isso, ou teme parar para fazer um balanço. Diga em voz alta o quanto já percorreu — isso também faz parte do caminho."
     },
     "health_reversed": {
-     "ru": "Целостность — не то, что однажды возвращается насовсем: она собирается из обычных дней. Оглянитесь на путь, который вы прошли в заботе о себе, — он длиннее, чем кажется изнутри.",
-     "en": "Wholeness doesn't return once and for good — it gathers out of ordinary days. Look back at how far you've come in caring for yourself: it's longer than it feels from inside.",
+     "ru": "Целостность — не то, что однажды возвращается насовсем: она собирается из обычных дней. Сколько маленьких решений в свою пользу вы уже приняли — почти всегда больше, чем помнится.",
+     "en": "Wholeness doesn't return once and for good — it gathers out of ordinary days. Count the small choices you have already made in your own favour — almost always more than you remember.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -6046,8 +6046,8 @@
      "pt": "As finanças estão estáveis, mas o potencial é maior. Hora de planejar reserva, investimento, nova fonte de renda. Faça as contas no papel antes de arriscar: estratégia importa mais que pressa."
     },
     "health": {
-     "ru": "Спокойная, ровная энергия. Устраивает ли вас привычный ритм жизни — или он стал слишком тесным? Небольшое обновление рутины возвращает вкус к движению быстрее, чем большая перемена.",
-     "en": "Calm, steady energy. Does your usual rhythm still fit you, or has it grown too tight? A small refresh of a routine brings the appetite for movement back faster than a big change does.",
+     "ru": "Спокойная, ровная энергия. Не наскучил ли вам сложившийся уклад дня? Небольшая смена привычного освежает быстрее, чем крупная перестройка — и тело замечает такой сдвиг раньше, чем календарь.",
+     "en": "Calm, steady energy. Has the shape of your day started to bore you? A small change to the familiar refreshes faster than a big rebuild — and the body notices such a shift before the calendar does.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -7735,7 +7735,7 @@
      "pt": "No trabalho, vem o esforço final: o projeto está quase pronto, embora a reserva de energia esteja baixa. Não desista nem aceite condições piores só porque a força acabou. Pode aparecer concorrência ou um teste de resistência, e você tem mais preparo do que imagina. Proteja os seus resultados e os seus limites: dizer não a tarefas extras também é trabalho."
     },
     "finances": {
-     "ru": "Финансовая устойчивость достигнута трудом, и её стоит беречь: подушка безопасности сейчас важнее рискованных вложений. Не давайте в долг из чувства вины. Если период был тяжёлым, отметьте, что уже удалось удержать, — и держите курс.",
+     "ru": "Финансовая устойчивость достигнута трудом, и её стоит беречь: подушка безопасности сейчас важнее рискованных вложений. Не давайте в долг из чувства вины. Если период был тяжёлым, отметьте, что уже удалось сохранить, — и держите курс.",
      "en": "Your financial stability was earned the hard way, so guard it: a safety cushion matters more now than risky investments. Don't lend money out of guilt. If it's been a difficult stretch, notice what you've already managed to hold on to — and stay the course.",
      "status": {
       "ru": "reviewed",
@@ -9438,7 +9438,7 @@
      "pt": "No trabalho, surge uma parceria feliz: um aliado confiável, um projeto a quatro mãos, um acordo bom para os dois lados. Agora é fácil achar entendimento na equipe, e os conflitos se resolvem em paz. Se você busca colaboração, dê o primeiro sinal: é bem provável que a resposta seja calorosa."
     },
     "finances": {
-     "ru": "В финансах — честные сделки и совместные решения: общий бюджет, договор, взаимовыгодный обмен. Проговорите условия вслух: там, где о деньгах сказано прямо, недопониманию остаётся меньше места.",
+     "ru": "В финансах — честные сделки и совместные решения: общий бюджет, договор, взаимовыгодный обмен. Обсудите условия вслух: там, где о деньгах сказано прямо, недопониманию остаётся меньше места.",
      "en": "Financially — fair deals and shared decisions: a joint budget, a contract, a mutually beneficial exchange. Say the terms out loud: where money is named plainly, there's less room for misunderstanding.",
      "status": {
       "ru": "reviewed",
@@ -10909,7 +10909,7 @@
      "pt": "Nas finanças, surge a disposição de abrir mão de uma fonte de renda em troca de sentido ou de paz interior. Revise os gastos com o que já não alegra: assinaturas, compras de status. O dinheiro costuma alcançar você depois, quando você segue o seu próprio caminho."
     },
     "health": {
-     "ru": "Для самочувствия — сигнал усталости, которую вы давно не замечали. Спросите себя, что вас истощает и от чего пора отдохнуть. Присмотритесь, что даёт вам передышку: смена обстановки, тишина или время наедине с собой.",
+     "ru": "Для самочувствия — сигнал усталости, которую вы давно не замечали. Спросите себя, что вас истощает, и присмотритесь, что действительно даёт передышку: смена обстановки, тишина или время наедине с собой.",
      "en": "For wellbeing — a signal of tiredness you have long overlooked. Ask yourself what drains you and what you need a rest from. Notice what gives you a breather: a change of scenery, quiet, or time alone.",
      "status": {
       "ru": "reviewed",
@@ -13646,8 +13646,8 @@
      "pt": "Discussão de dinheiro em que os dois lados se fincaram por princípio caminha enfim para um acordo. Ceder um pouco não é perder, é recuperar a tranquilidade, que vale bem mais do que provar quem tinha razão."
     },
     "health_reversed": {
-     "ru": "Когда долгий конфликт идёт на спад, плечи узнают об этом раньше головы. Перемирие внутри иногда наступает раньше, чем снаружи.",
-     "en": "When a long conflict winds down, the shoulders learn of it before the head does. A truce on the inside sometimes arrives before anything changes outside.",
+     "ru": "Плечи узнают о затишье раньше головы: тело отпускает хватку, пока мысли ещё спорят. Перемирие внутри иногда наступает раньше, чем снаружи.",
+     "en": "The shoulders learn of the lull before the head does: the body lets go while the mind still argues. A truce on the inside sometimes arrives before anything changes outside.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -13755,7 +13755,7 @@
    },
    "content": {
     "general": {
-     "ru": "Шестёрка Мечей — карта перехода к спокойным водам. Трудный период отступает: вы уходите от того, что ранило, — физически или внутренне. Пусть на сердце ещё грусть, курс верный: печаль на середине пути — не признак ошибки. Не требуйте от себя мгновенной радости — переправа требует времени. Берите с собой опыт, а не тяжесть, и позвольте течению помочь вам.",
+     "ru": "Шестёрка Мечей — карта перехода к спокойным водам. Трудный период отступает: вы уходите от того, что ранило, — физически или внутренне. Пусть на сердце ещё грусть, курс верный: она на середине пути — не признак ошибки. Не требуйте от себя мгновенной радости — переправа требует времени. Берите с собой опыт, а не тяжесть, и позвольте течению помочь вам.",
      "en": "The Six of Swords is the card of passage to calmer waters. A difficult period is receding: you are moving away from what hurt you — physically or within. Though sadness may still linger, the course is right: sorrow midway is not a sign of a wrong turn. Don't demand instant joy of yourself — a crossing takes time. Take the experience with you, not the weight, and let the current help you.",
      "status": {
       "ru": "reviewed",
@@ -14616,7 +14616,7 @@
      "pt": "Uma conta mental que gira sem parar quase sempre é maior do que a de verdade. Papel e calculadora contam com mais honestidade que a preocupação das três da manhã."
     },
     "health_reversed": {
-     "ru": "Обратите внимание, как засыпается в эти дни и за какие сценарии голова держится крепче всего. Если тревога перед сном сильна, попробуйте тёплый душ или тишину без телефона.",
+     "ru": "Присмотритесь, как вам спится в эти дни и за какие сценарии голова держится крепче всего. Если тревога перед сном сильна, попробуйте тёплый душ или тишину без телефона.",
      "en": "Notice how sleep is coming these days, and which scenarios the mind holds onto hardest. If bedtime anxiety is still strong, try a warm shower or quiet without your phone.",
      "status": {
       "ru": "reviewed",
@@ -18693,7 +18693,7 @@
      "pt": "Seu corpo gosta de ritmo: mais ou menos a mesma hora de dormir, de comer, de se mexer. Pergunte-se: qual pequeno hábito, repetido, mudaria o seu dia a dia daqui a um ano? Comece por ele e não largue no terceiro dia."
     },
     "day_card": {
-     "ru": "Сегодня — день методичности. Не хватайтесь за новое: доведите до конца начатое, разберите накопившееся, сделайте скучное, но важное. Двигайтесь в своём темпе и не сравнивайте себя с более быстрыми. Этот рыцарь едет шагом — и доезжает: «сделано» сильнее, чем «задумано».",
+     "ru": "Сегодня — день методичности. Не хватайтесь за новое: доведите до конца начатое, разберите накопившееся, сделайте скучное, но важное. Двигайтесь в своём темпе и не сравнивайте себя с более быстрыми. «Сделано» сильнее, чем «задумано».",
      "en": "Today is a day for method. Don't grab at anything new: finish what you started, clear the backlog, do the boring-but-important thing. Move at your own pace and don't compare yourself with faster people. This knight rides at a walk — and arrives: \"done\" is stronger than \"planned\".",
      "status": {
       "ru": "reviewed",
