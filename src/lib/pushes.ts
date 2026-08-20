@@ -11,7 +11,7 @@ import i18n from './i18n';
 import type { Lang } from './lang';
 import { pickPhrase } from './phrases';
 import { pushBody } from './pushBody';
-import type { PlannedPush, PushKind } from './pushPlan';
+import { TITLE_KEY, type PlannedPush } from './pushPlan';
 
 // реэкспорт: `pushBody` — чистая сборка текста, живёт в `pushBody.ts` без единого импорта
 // expo-notifications, чтобы её мог напрямую проверять юнит-тест (пункт 3 второй волны фиксов
@@ -98,15 +98,6 @@ export async function requestPermission(): Promise<PermissionState> {
   const { status } = await Notifications.requestPermissionsAsync();
   return status as PermissionState;
 }
-
-const TITLE_KEY: Record<PushKind, string> = {
-  morning: 'push.titleMorning',
-  evening: 'push.titleEvening',
-  streak: 'push.titleStreak',
-  comeback: 'push.titleComeback',
-  freeze: 'push.titleFreeze',
-  moon: 'push.titleMoonNew',
-};
 
 // Номер последнего вызова applyPlan и хвост цепочки его применений. Планировщик вызывает
 // applyPlan реактивно на каждое изменение стора, а сама она — «отменить всё, затем поставить

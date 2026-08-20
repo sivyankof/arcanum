@@ -94,6 +94,21 @@ export const MOON_TITLE: Record<MoonEventKind, string> = {
   full: 'push.titleMoonFull',
 };
 
+/** Ключи заголовков по виду пуша. Жили в `pushes.ts` (долг 06б, хвост 47б) — там их не достаёт
+ *  ни один тест: весь модуль обёрнут вокруг expo-notifications и вне устройства — no-op.
+ *  Здесь — под тем же контракт-тестом, что MOON_TITLE: `i18n.t` на отсутствующем ключе молча
+ *  возвращает САМ КЛЮЧ, и опечатка уехала бы в баннер литералом «push.titleX».
+ *  У `moon` значение — только полнота Record для индекс-безопасности: настоящий ключ лунного
+ *  всегда приходит явным `titleKey` из MOON_TITLE по виду события. */
+export const TITLE_KEY: Record<PushKind, string> = {
+  morning: 'push.titleMorning',
+  evening: 'push.titleEvening',
+  streak: 'push.titleStreak',
+  comeback: 'push.titleComeback',
+  freeze: 'push.titleFreeze',
+  moon: 'push.titleMoonNew',
+};
+
 /** Локальная дата через N суток. */
 function daysAheadISO(n: number, from: Date): string {
   return localDateISO(localMidnight(from, n));

@@ -4,6 +4,7 @@ import {
   MAX_PER_DAY,
   MOON_PHRASE,
   MOON_TITLE,
+  TITLE_KEY,
   MORNING_AHEAD_DAYS,
   moonDaysIn,
   planInputFromStore,
@@ -421,7 +422,7 @@ describe('moonDaysIn — окно и маппинг момента в локал
   });
 });
 
-describe('ключи лунного пуша существуют в контенте и i18n (спека 47б)', () => {
+describe('ключи заголовков пушей существуют в контенте и i18n (спека 47б, хвост 06б)', () => {
   // Шов, который не закрыт больше ничем: тело пуша ловится pickPhrase (пустая строка на
   // неизвестном ключе), а i18n.t на отсутствующем ключе молча возвращает САМ КЛЮЧ — опечатка
   // в titleMoonFull уехала бы в баннер как литерал «push.titleMoonFull». Ни веб-проверка
@@ -429,25 +430,42 @@ describe('ключи лунного пуша существуют в конте�
   // Языки обходятся по Object.keys(resources), а не по литералам 'ru'/'en' (правило hf-02):
   // иначе третий язык проехал бы мимо проверки.
   const LANGS = Object.keys(resources) as Array<keyof typeof resources>;
+  // Дежурные заголовки (TITLE_KEY) — тот же класс дыры, закрыт выносом константы из pushes.ts
+  // (хвост 47б). Set: TITLE_KEY.moon — фолбэк на значение из MOON_TITLE, ключи пересекаются.
+  const ALL_TITLE_KEYS = [...new Set([...Object.values(TITLE_KEY), ...Object.values(MOON_TITLE)])];
 
   it.each(LANGS)('%s: заголовок лежит в ресурсах САМОГО языка, а не берётся фолбэком', (lang) => {
     // проверять через i18n.t нельзя: fallbackLng: 'en' подставляет английскую строку вместо
     // пропавшего русского ключа, t() возвращает осмысленный текст, и тест остаётся зелёным —
     // ровно тот тихий уход в английский, который ловила hf-02. Поэтому смотрим сами ресурсы.
-    for (const key of Object.values(MOON_TITLE)) {
-      const text = key
-        .split('.')
-        .reduce<unknown>((node, part) => (node as Record<string, unknown>)?.[part], resources[lang].translation);
-      expect(typeof text).toBe('string');
-      expect(String(text).length).toBeGreaterThan(0);
+    for (const key of ALL_TITLE_KEYS) {
+      const path = key.split('.');
+      const leaf = path.pop()!;
+      const parent = path.reduce<unknown>(
+        (node, part) => (node as Record<string, unknown>)?.[part],
+        resources[lang].translation,
+      ) as Record<string, unknown> | undefined;
+      expect(parent).toBeDefined();
+      // ключ с {{count}} лежит в ресурсах ТОЛЬКО плюральным семейством (push.titleStreak_one/
+      // _few/_many) — точного узла push.titleStreak не существует. Считаем ключ существующим,
+      // если есть точный узел ИЛИ хотя бы одна плюральная форма; ПОЛНОТУ семейства этот тест
+      // не проверяет нарочно — это контракт сьюта i18nPlurals, дублировать его нельзя.
+      const exact = parent?.[leaf];
+      const pluralForms = Object.keys(parent ?? {}).filter(
+        (k) => k.startsWith(`${leaf}_`) && typeof parent?.[k] === 'string',
+      );
+      const exists = typeof exact === 'string' ? exact.length > 0 : pluralForms.length > 0;
+      expect(`${key} (${lang}): existing=${exists}`).toBe(`${key} (${lang}): existing=true`);
     }
   });
 
   it.each(LANGS)('%s: i18n действительно отдаёт заголовок, а не сам ключ', (lang) => {
     const t = i18n.getFixedT(lang);
-    for (const key of Object.values(MOON_TITLE)) {
-      expect(t(key)).not.toBe(key);
-      expect(t(key).length).toBeGreaterThan(0);
+    for (const key of ALL_TITLE_KEYS) {
+      // count обязателен: без него плюральный ключ не резолвится (applyPlan передаёт его всегда)
+      const text = t(key, { count: 2 });
+      expect(text).not.toBe(key);
+      expect(text.length).toBeGreaterThan(0);
     }
   });
 
