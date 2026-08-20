@@ -226,18 +226,26 @@ describe('promptSentence — первое предложение general для 
     expect(out.length).toBe(PROMPT_MAX);
     expect(out.endsWith('…')).toBe(true);
   });
-  it('контракт по корпусу: у всех 78 карт первое предложение general (ru, en) в коридоре и является началом текста', () => {
-    for (const c of cards) {
-      for (const lang of ['ru', 'en'] as const) {
+  // Обходит ВСЕ LANGS по той же причине, что и контракт маски ниже: подсказка тренажёра
+  // строится из general на языке ПОКАЗАННОГО текста, и волна переводов 28 приносит новые
+  // тексты в этот же путь. До приёмки L-1 здесь стояли литералы ['ru', 'en'] — соседний
+  // контракт в этом же файле уже был расширен на LANGS, а этот остался, то есть испанский
+  // general существовал бы и не проверялся ничем. У языка без перевода inLang честно падает
+  // на английский, и проверка повторяет английский — это не притворство: ровно такую строку
+  // и покажет экран.
+  it.each(LANGS)(
+    'контракт по корпусу %s: первое предложение general в коридоре и является началом текста',
+    (lang) => {
+      for (const c of cards) {
         const text = inLang(c.content.general, lang);
         const p = promptSentence(text);
-        expect(p.length).toBeGreaterThanOrEqual(PROMPT_MIN);
+        expect(`${c.id}: длина ${p.length >= PROMPT_MIN}`).toBe(`${c.id}: длина true`);
         // строгая проверка: результат обязан быть НАЧАЛОМ текста без изменений. Обрезка
         // добавляет «…», которого в исходном тексте на этом месте нет, — падает и на ней
-        expect(text.trim().startsWith(p)).toBe(true);
+        expect(`${c.id}: начало ${text.trim().startsWith(p)}`).toBe(`${c.id}: начало true`);
       }
-    }
-  });
+    },
+  );
 });
 
 describe('maskCardName — имя карты в подсказке toCard заменяется на «···»', () => {
