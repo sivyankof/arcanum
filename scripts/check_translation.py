@@ -543,6 +543,41 @@ def check_course(rep, langs, use_git, path=COURSE_PATH):
                         if ol.get('theory', {}).get(lang) != les.get('theory', {}).get(lang):
                             canon.append(f'{lid}: theory.{lang} изменена')
 
+    # Викторины живут в ДВУХ местах: staging `content/quiz-*.json` и собранный course.json.
+    # `merge_quiz.py` заменяет массив вопросов урока целиком, поэтому перевод, залитый прямо
+    # в course.json, стирается первым же прогоном конвейера. Обратная ошибка не менее вероятна:
+    # перевели staging и забыли слить — тогда приложение показывает старые вопросы, а причина
+    # выглядит как «перевода нет». Различить эти два случая и есть смысл проверки.
+    import glob
+    staged = {}
+    for path in sorted(glob.glob('content/quiz-*.json')):
+        try:
+            qf = json.loads(open(path, encoding='utf-8').read())
+        except (OSError, ValueError):
+            continue
+        for entry in qf.get('lessons', []):
+            staged[entry.get('lessonId')] = (path, entry.get('questions', []), qf.get('status') or {})
+    unmerged = []
+    for m in mods:
+        for les in m['lessons']:
+            info = staged.get(les['id'])
+            if not info:
+                continue
+            path, questions, st = info
+            for lang in langs:
+                st_has = any((q.get('q', {}) or {}).get(lang) for q in questions)
+                course_has = any((q.get('q', {}) or {}).get(lang) for q in les.get('quiz', []))
+                if st_has and not course_has:
+                    unmerged.append(f'{les["id"]}: {lang} есть в {path}, но не в course.json')
+                elif course_has and not st_has:
+                    unmerged.append(f'{les["id"]}: {lang} есть в course.json, но НЕ в staging — '
+                                    f'следующий merge_quiz.py его сотрёт')
+                if st.get(lang) and st.get(lang) != les.get('quizStatus', {}).get(lang):
+                    unmerged.append(f'{les["id"]}: статус {lang} в staging «{st.get(lang)}», '
+                                    f'в course.json «{les.get("quizStatus", {}).get(lang)}»')
+    rep.section('staging викторин и course.json согласованы (merge_quiz.py прогнан)', unmerged)
+    rep.errors.extend(unmerged)
+
     rep.section('курс залит целиком', missing)
     rep.section('пустых значений нет', empty)
     rep.section('кириллицы в новом языке нет', cyr)
