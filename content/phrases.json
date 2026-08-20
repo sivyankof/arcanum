@@ -4,39 +4,55 @@
   "morning": [
    {
     "ru": "Доброе утро, {name}",
-    "en": "Good morning, {name}"
+    "en": "Good morning, {name}",
+    "es": "Buenos días, {name}",
+    "pt": "Bom dia, {name}"
    },
    {
     "ru": "С новым днём, {name}",
-    "en": "A new day, {name}"
+    "en": "A new day, {name}",
+    "es": "Un nuevo día, {name}",
+    "pt": "Um novo dia começa, {name}"
    },
    {
     "ru": "Утро доброе, {name} ✦",
-    "en": "Morning, {name} ✦"
+    "en": "Morning, {name} ✦",
+    "es": "Buen amanecer, {name} ✦",
+    "pt": "Amanheceu, {name} ✦"
    }
   ],
   "day": [
    {
     "ru": "Добрый день, {name}",
-    "en": "Good afternoon, {name}"
+    "en": "Good afternoon, {name}",
+    "es": "Buenas tardes, {name}",
+    "pt": "Boa tarde, {name}"
    },
    {
     "ru": "Рады видеть вас, {name}",
-    "en": "Good to see you, {name}"
+    "en": "Good to see you, {name}",
+    "es": "Qué bueno verte, {name}",
+    "pt": "Que bom ver você, {name}"
    }
   ],
   "evening": [
    {
     "ru": "Добрый вечер, {name}",
-    "en": "Good evening, {name}"
+    "en": "Good evening, {name}",
+    "es": "Buenas noches, {name}",
+    "pt": "Boa noite, {name}"
    },
    {
     "ru": "Тихого вечера, {name}",
-    "en": "A quiet evening to you, {name}"
+    "en": "A quiet evening to you, {name}",
+    "es": "Una noche tranquila para ti, {name}",
+    "pt": "Uma noite tranquila para você, {name}"
    },
    {
     "ru": "Вечер — время вспомнить день, {name}",
-    "en": "Evening — time to look back on the day, {name}"
+    "en": "Evening — time to look back on the day, {name}",
+    "es": "La noche es para mirar atrás el día, {name}",
+    "pt": "A noite é hora de rever o dia, {name}"
    }
   ]
  },
@@ -44,15 +60,21 @@
   "question": [
    {
     "ru": "Как отозвалась сегодня карта {card}?",
-    "en": "How did {card} resonate today?"
+    "en": "How did {card} resonate today?",
+    "es": "¿Cómo resonó hoy la carta {card}?",
+    "pt": "Como a carta {card} ressoou hoje?"
    },
    {
     "ru": "Карта {card} была с вами весь день. Что скажете?",
-    "en": "{card} was with you all day. How was it?"
+    "en": "{card} was with you all day. How was it?",
+    "es": "{card} te acompañó todo el día. ¿Qué tal fue?",
+    "pt": "A carta {card} esteve com você o dia todo. Como foi?"
    },
    {
     "ru": "Вечер — время оглянуться: {card} про ваш день?",
-    "en": "Evening is for looking back — was {card} about your day?"
+    "en": "Evening is for looking back — was {card} about your day?",
+    "es": "La noche invita a mirar atrás: ¿{card} hablaba de tu día?",
+    "pt": "A noite é para olhar para trás: {card} falou do seu dia?"
    }
   ]
  },
@@ -60,95 +82,135 @@
   "morning_card": [
    {
     "ru": "Ваша карта уже ждёт ✦",
-    "en": "Your card is waiting ✦"
+    "en": "Your card is waiting ✦",
+    "es": "Tu carta ya te espera ✦",
+    "pt": "Sua carta já está esperando por você ✦"
    },
    {
     "ru": "Новый день — новая карта",
-    "en": "A new day, a new card"
+    "en": "A new day, a new card",
+    "es": "Nuevo día, nueva carta",
+    "pt": "Novo dia, nova carta"
    },
    {
     "ru": "Какая карта выпала вам сегодня?",
-    "en": "Which card came to you today?"
+    "en": "Which card came to you today?",
+    "es": "¿Qué carta llegó a ti hoy?",
+    "pt": "Qual carta veio para você hoje?"
    },
    {
     "ru": "Колода перетасована. Ваш ход",
-    "en": "The deck is shuffled. Your move"
+    "en": "The deck is shuffled. Your move",
+    "es": "El mazo está barajado. Te toca",
+    "pt": "O baralho está embaralhado. É a sua vez"
    }
   ],
   "evening_reflect": [
    {
     "ru": "Как прошёл день с картой {card}?",
-    "en": "How did your day go with {card}?"
+    "en": "How did your day go with {card}?",
+    "es": "¿Cómo fue tu día con {card}?",
+    "pt": "Como foi o seu dia com a carta {card}?"
    },
    {
     "ru": "Карта {card} была с вами весь день. Отозвалась?",
-    "en": "{card} was with you all day. Did it resonate?"
+    "en": "{card} was with you all day. Did it resonate?",
+    "es": "{card} te acompañó todo el día. ¿Resonó?",
+    "pt": "A carta {card} acompanhou você o dia todo. Ressoou?"
    },
    {
     "ru": "Минутка перед сном: отозвалась ли карта {card}?",
-    "en": "A moment before sleep — did {card} resonate?"
+    "en": "A moment before sleep — did {card} resonate?",
+    "es": "Un momento antes de dormir: ¿resonó {card}?",
+    "pt": "Um instante antes de dormir: a carta {card} ressoou?"
    }
   ],
   "streak_save": [
    {
     "ru": "Серия {days} — ещё можно сохранить",
-    "en": "Your {n}-day streak can still be saved"
+    "en": "Your {n}-day streak can still be saved",
+    "es": "Tu racha de {days} todavía se puede salvar",
+    "pt": "Sua sequência de {days} ainda pode ser salva"
    },
    {
     "ru": "Осталось немного до полуночи — серия ждёт",
-    "en": "A little time before midnight — your streak awaits"
+    "en": "A little time before midnight — your streak awaits",
+    "es": "Queda un poco para la medianoche: tu racha espera",
+    "pt": "Falta pouco para a meia-noite — sua sequência espera"
    }
   ],
   "winback": [
    {
     "ru": "Луна скучала. Ваша карта ждёт",
-    "en": "The moon missed you. Your card is waiting"
+    "en": "The moon missed you. Your card is waiting",
+    "es": "La luna te extrañó. Tu carta espera",
+    "pt": "A lua sentiu sua falta. Sua carta espera"
    },
    {
     "ru": "Колода на месте, никуда не ушла ✦",
-    "en": "The deck is right where you left it ✦"
+    "en": "The deck is right where you left it ✦",
+    "es": "El mazo sigue donde lo dejaste ✦",
+    "pt": "O baralho continua onde você o deixou ✦"
    }
   ],
   "freeze_saved": [
    {
     "ru": "Пропущенный день укроет заморозка — откройте карту сегодня, и серия {days} продолжится",
-    "en": "A freeze can cover the missed day — open today's card and your {n}-day streak goes on"
+    "en": "A freeze can cover the missed day — open today's card and your {n}-day streak goes on",
+    "es": "La congelación puede cubrir el día que te saltaste: abre la carta de hoy y tu racha de {days} sigue adelante",
+    "pt": "Um congelamento pode cobrir o dia perdido — abra a carta de hoje e sua sequência de {days} continua"
    },
    {
     "ru": "Заморозка прощает один пропуск. Карта уже ждёт ✦",
-    "en": "One skipped day, forgiven by the freeze. Your card is waiting ✦"
+    "en": "One skipped day, forgiven by the freeze. Your card is waiting ✦",
+    "es": "Un día salteado, perdonado por la congelación. Tu carta ya espera ✦",
+    "pt": "Um dia pulado, perdoado pelo congelamento. Sua carta já espera ✦"
    },
    {
     "ru": "Вчера прошло без карты — заморозка удержит серию, если вернуться сегодня",
-    "en": "Yesterday passed without a card — return today and the freeze will hold your streak"
+    "en": "Yesterday passed without a card — return today and the freeze will hold your streak",
+    "es": "Ayer pasó sin carta: vuelve hoy y la congelación sostendrá tu racha",
+    "pt": "Ontem passou sem carta — volte hoje e o congelamento segura a sua sequência"
    }
   ],
   "moon_new": [
    {
     "ru": "Сегодня новолуние — время начинать. Какая карта откроет цикл?",
-    "en": "New moon today — a time for beginnings. Which card opens the cycle?"
+    "en": "New moon today — a time for beginnings. Which card opens the cycle?",
+    "es": "Hoy hay luna nueva: tiempo de comenzar. ¿Qué carta abre el ciclo?",
+    "pt": "Hoje é lua nova — tempo de recomeços. Qual carta abre o ciclo?"
    },
    {
     "ru": "Новолуние: небо тёмное, колода ждёт ✦",
-    "en": "New moon: the sky is dark, the deck is waiting ✦"
+    "en": "New moon: the sky is dark, the deck is waiting ✦",
+    "es": "Luna nueva: el cielo está oscuro, el mazo espera ✦",
+    "pt": "Lua nova: o céu está escuro, o baralho espera ✦"
    },
    {
     "ru": "Новый лунный цикл начался. Ваша карта уже здесь",
-    "en": "A new lunar cycle begins. Your card is already here"
+    "en": "A new lunar cycle begins. Your card is already here",
+    "es": "Comienza un nuevo ciclo lunar. Tu carta ya está aquí",
+    "pt": "Um novo ciclo lunar começa. Sua carta já está aqui"
    }
   ],
   "moon_full": [
    {
     "ru": "Полнолуние: самое время открыть карту дня",
-    "en": "Full moon — the perfect moment to draw your card"
+    "en": "Full moon — the perfect moment to draw your card",
+    "es": "Luna llena: el momento justo para abrir la carta del día",
+    "pt": "Lua cheia — o momento perfeito para tirar a sua carta"
    },
    {
     "ru": "Луна сегодня полная. Что она подсветит в вашей карте?",
-    "en": "The moon is full today. What will it light up in your card?"
+    "en": "The moon is full today. What will it light up in your card?",
+    "es": "Hoy la luna está llena. ¿Qué iluminará en tu carta?",
+    "pt": "A lua está cheia hoje. O que ela vai iluminar na sua carta?"
    },
    {
     "ru": "Полнолуние ✦ Загляните, какая карта выпала вам сегодня",
-    "en": "Full moon ✦ See which card came to you today"
+    "en": "Full moon ✦ See which card came to you today",
+    "es": "Luna llena ✦ Mira qué carta llegó a ti hoy",
+    "pt": "Lua cheia ✦ Veja qual carta veio para você hoje"
    }
   ]
  },
@@ -156,68 +218,94 @@
   "saved": [
    {
     "ru": "Серию спасла заморозка",
-    "en": "A freeze saved your streak"
+    "en": "A freeze saved your streak",
+    "es": "Una congelación salvó tu racha",
+    "pt": "Um congelamento salvou a sua sequência"
    },
    {
     "ru": "Пропущенный день укрыла заморозка — серия цела",
-    "en": "The freeze covered the missed day — your streak is safe"
+    "en": "The freeze covered the missed day — your streak is safe",
+    "es": "La congelación cubrió el día que faltó: tu racha sigue intacta",
+    "pt": "O congelamento cobriu o dia perdido — sua sequência segue intacta"
    }
   ]
  },
  "lesson_done": [
   {
    "ru": "Урок пройден. Знание уложилось на своё место",
-   "en": "Lesson complete. The knowledge has found its place"
+   "en": "Lesson complete. The knowledge has found its place",
+   "es": "Lección completada. El conocimiento encontró su lugar",
+   "pt": "Lição concluída. O conhecimento encontrou o seu lugar"
   },
   {
    "ru": "Ещё один шаг по пути — и он ваш",
-   "en": "One more step on the path — and it is yours"
+   "en": "One more step on the path — and it is yours",
+   "es": "Un paso más en el camino, y ya es tuyo",
+   "pt": "Mais um passo no caminho — e ele é seu"
   },
   {
    "ru": "Готово! Карты становятся всё более знакомыми",
-   "en": "Done! The cards grow more familiar"
+   "en": "Done! The cards grow more familiar",
+   "es": "¡Listo! Las cartas se vuelven cada vez más familiares",
+   "pt": "Pronto! As cartas vão ficando mais familiares"
   }
  ],
  "streak_milestone": [
   {
    "ru": "{n} дней подряд — привычка становится ритуалом",
-   "en": "{n} days in a row — a habit becomes a ritual"
+   "en": "{n} days in a row — a habit becomes a ritual",
+   "es": "{n} días seguidos: el hábito se vuelve ritual",
+   "pt": "{n} dias seguidos — o hábito vira ritual"
   },
   {
    "ru": "Серия {n}! Постоянство — тоже магия",
-   "en": "A {n}-day streak! Consistency is its own kind of magic"
+   "en": "A {n}-day streak! Consistency is its own kind of magic",
+   "es": "¡Racha de {n} días! La constancia también es su propia magia",
+   "pt": "Sequência de {n} dias! Constância também é uma forma de magia"
   }
  ],
  "empty": {
   "journal": [
    {
     "ru": "Дневник пока пуст — первая запись появится после карты дня",
-    "en": "The journal is empty for now — your first entry will appear after the card of the day"
+    "en": "The journal is empty for now — your first entry will appear after the card of the day",
+    "es": "El diario está vacío por ahora: tu primera entrada aparecerá después de la carta del día",
+    "pt": "O diário ainda está vazio — seu primeiro registro aparece depois da carta do dia"
    },
    {
     "ru": "Здесь будут жить ваши дни с картами. Начните с сегодняшнего",
-    "en": "Your days with the cards will live here. Start with today"
+    "en": "Your days with the cards will live here. Start with today",
+    "es": "Aquí vivirán tus días con las cartas. Empieza por el de hoy",
+    "pt": "Seus dias com as cartas vão morar aqui. Comece pelo de hoje"
    }
   ],
   "filter": [
    {
     "ru": "В этом месяце таких записей нет",
-    "en": "No such entries this month"
+    "en": "No such entries this month",
+    "es": "Este mes no hay entradas así",
+    "pt": "Não há registros assim neste mês"
    },
    {
     "ru": "Под этот фильтр ничего не попало — попробуйте другой",
-    "en": "Nothing matches this filter — try another"
+    "en": "Nothing matches this filter — try another",
+    "es": "Nada coincide con este filtro: prueba con otro",
+    "pt": "Nada corresponde a este filtro — experimente outro"
    }
   ]
  },
  "error_soft": [
   {
    "ru": "Карты перемешались. Попробуйте ещё раз",
-   "en": "The cards got shuffled. Please try again"
+   "en": "The cards got shuffled. Please try again",
+   "es": "Las cartas se mezclaron. Inténtalo de nuevo",
+   "pt": "As cartas se embaralharam. Tente novamente"
   },
   {
    "ru": "Что-то сбилось — сейчас поправим. Повторите, пожалуйста",
-   "en": "Something slipped — let's set it right. Please try again"
+   "en": "Something slipped — let's set it right. Please try again",
+   "es": "Algo se salió de lugar: ya lo acomodamos. Vuelve a intentarlo, por favor",
+   "pt": "Algo saiu do lugar — já vamos ajeitar. Tente de novo, por favor"
   }
  ]
 }

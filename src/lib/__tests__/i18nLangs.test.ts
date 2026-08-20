@@ -1,5 +1,5 @@
-/** Проводка языков в i18n (спека 27): какие языки доступны и как ведёт себя интерфейс на языке,
- *  UI-строк которого ещё нет (es/pt до сессии L-0 плана локализации). */
+/** Проводка языков в i18n (спека 27) и контракт строк, включённых сессией L-0 (задача 28):
+ *  какие языки доступны, отдают ли es/pt СВОИ строки и не потерялись ли плейсхолдеры. */
 import i18n, { AVAILABLE_LANGS, resources } from '../i18n';
 import { LANGS } from '../lang';
 
@@ -22,15 +22,62 @@ describe('AVAILABLE_LANGS', () => {
   });
 });
 
-describe('язык без ресурсов: i18n принимает его, строки падают на en', () => {
+/** До сессии L-0 здесь стоял обратный контракт («язык без ресурсов падает на en» — es/pt
+ *  отдавали 'Today'). L-0 включила испанский и португальский, и тест перевёрнут: язык обязан
+ *  отдавать строку из СВОИХ ресурсов. Ожидание берётся из resources самого языка, а не
+ *  литералом «не по-английски»: fallbackLng подменил бы пропавший ключ английским текстом,
+ *  и проверка «непустая строка» осталась бы зелёной (правило hf-02 про тихий фолбэк). */
+describe('языки, включённые L-0: t() отдаёт строки САМОГО языка', () => {
   afterEach(() => {
     i18n.changeLanguage('ru');
   });
 
-  it.each(['es', 'pt'])('%s — language выставлен, t() английский', (lng) => {
+  it.each(['es', 'pt'] as const)('%s — language выставлен, t() не английский', (lng) => {
     i18n.changeLanguage(lng);
     expect(i18n.language).toBe(lng);
-    expect(i18n.t('tabs.today')).toBe('Today');
-    expect(i18n.t('course.lessons', { count: 2 })).toBe('2 LESSONS');
+    const own = (resources[lng].translation as { tabs: { today: string } }).tabs.today;
+    expect(i18n.t('tabs.today')).toBe(own);
+    expect(own).not.toBe('Today');
+    // плюральный ключ тоже резолвится в самом языке (формы _one/_other есть — сьют i18nPlurals)
+    expect(i18n.t('course.lessons', { count: 2 })).not.toBe('2 LESSONS');
+  });
+});
+
+/** Плейсхолдеры перевода. Набор ключей и полноту плюральных форм стережёт i18nPlurals;
+ *  дыра, которую не закрывал никто, — {{подстановки}} внутри строки: перевод с потерянным
+ *  {{count}} валиден для i18next (интерполяция просто не срабатывает) и молча показывает
+ *  строку без числа. Сравниваем НАБОР плейсхолдеров каждого семейства ключей с английским —
+ *  по объединению форм: у языков разные наборы суффиксов (_few/_many против _one/_other). */
+describe('плейсхолдеры совпадают с en во всех языках', () => {
+  const PLACEHOLDER = /\{\{\s*([\w.]+)\s*\}\}/g;
+  const family = (key: string) => key.replace(/_(zero|one|two|few|many|other)$/, '');
+
+  const collect = (lang: keyof typeof resources) => {
+    const out = new Map<string, Set<string>>();
+    const walk = (node: unknown, path: string) => {
+      if (typeof node === 'string') {
+        const fam = family(path);
+        const set = out.get(fam) ?? new Set<string>();
+        for (const m of node.matchAll(PLACEHOLDER)) set.add(m[1]);
+        out.set(fam, set);
+        return;
+      }
+      if (node && typeof node === 'object')
+        for (const [k, v] of Object.entries(node)) walk(v, path ? `${path}.${k}` : k);
+    };
+    walk(resources[lang].translation, '');
+    return out;
+  };
+
+  const en = collect('en');
+  const others = (Object.keys(resources) as Array<keyof typeof resources>).filter((l) => l !== 'en');
+
+  it.each(others)('%s', (lng) => {
+    const own = collect(lng);
+    for (const [fam, enSet] of en) {
+      const ownSet = own.get(fam);
+      if (!ownSet) continue; // отсутствие ключа — забота контракта наборов в i18nPlurals
+      expect(`${fam}: [${[...ownSet].sort()}]`).toBe(`${fam}: [${[...enSet].sort()}]`);
+    }
   });
 });

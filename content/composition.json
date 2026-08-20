@@ -4,15 +4,21 @@
   "variants": [
    {
     "ru": "{x} из {n} карт — Старшие арканы: расклад о значимых поворотах, а не о повседневных мелочах. Спросите себя: какой из этих поворотов уже начался?",
-    "en": "{x} of {n} cards are Major Arcana: this spread speaks of meaningful turning points, not daily details. Ask yourself: which of these turns has already begun?"
+    "en": "{x} of {n} cards are Major Arcana: this spread speaks of meaningful turning points, not daily details. Ask yourself: which of these turns has already begun?",
+    "es": "{x} de {n} cartas son Arcanos Mayores: esta tirada habla de giros importantes, no de detalles cotidianos. Pregúntate: ¿cuál de esos giros ya comenzó?",
+    "pt": "{x} de {n} cartas são Arcanos Maiores: esta tiragem fala de viradas significativas, e não de detalhes do dia a dia. Pergunte-se: qual dessas viradas já começou?"
    },
    {
     "ru": "Старших арканов здесь больше обычного ({x} из {n}) — тема крупнее, чем кажется на первый взгляд. Что в этой истории главное, если убрать детали?",
-    "en": "More Major Arcana than usual ({x} of {n}) — the theme is bigger than it first appears. What remains at the heart of this story once the details fall away?"
+    "en": "More Major Arcana than usual ({x} of {n}) — the theme is bigger than it first appears. What remains at the heart of this story once the details fall away?",
+    "es": "Hay más Arcanos Mayores de lo habitual ({x} de {n}): el tema es más grande de lo que parece a primera vista. ¿Qué queda en el centro de esta historia cuando se apartan los detalles?",
+    "pt": "Há mais Arcanos Maiores que o habitual ({x} de {n}) — o tema é maior do que parece à primeira vista. O que fica no centro desta história quando os detalhes saem de cena?"
    },
    {
     "ru": "{x} из {n} — Старшие арканы. Такие расклады говорят о длинных сюжетах жизни. Какой сюжет сейчас разворачивается у вас?",
-    "en": "{x} of {n} are Major Arcana. Spreads like this speak of life's longer storylines. Which storyline is unfolding for you right now?"
+    "en": "{x} of {n} are Major Arcana. Spreads like this speak of life's longer storylines. Which storyline is unfolding for you right now?",
+    "es": "{x} de {n} son Arcanos Mayores. Tiradas así hablan de las tramas largas de la vida. ¿Qué trama se está desplegando en ti ahora?",
+    "pt": "{x} de {n} são Arcanos Maiores. Tiragens assim falam dos enredos longos da vida. Qual enredo está se desenrolando para você agora?"
    }
   ]
  },
@@ -21,11 +27,15 @@
    "variants": [
     {
      "ru": "Преобладают Жезлы — расклад о деле, энергии и инициативе. Куда сейчас на самом деле уходит ваш огонь?",
-     "en": "Wands prevail — this spread is about action, energy and initiative. Where is your fire truly going right now?"
+     "en": "Wands prevail — this spread is about action, energy and initiative. Where is your fire truly going right now?",
+     "es": "Predominan los Bastos: la tirada habla de acción, energía e iniciativa. ¿Adónde va de verdad tu fuego en este momento?",
+     "pt": "Predominam Paus — a tiragem fala de ação, energia e iniciativa. Para onde o seu fogo está indo de verdade agora?"
     },
     {
      "ru": "Жезлов больше половины: история про движение и начинания. Что вам давно хочется начать?",
-     "en": "More than half are Wands: a story of motion and beginnings. What have you long wanted to start?"
+     "en": "More than half are Wands: a story of motion and beginnings. What have you long wanted to start?",
+     "es": "Más de la mitad son Bastos: una historia de movimiento y comienzos. ¿Qué llevas tiempo con ganas de empezar?",
+     "pt": "Mais da metade são Paus: uma história de movimento e de começos. O que você vem querendo começar há tempos?"
     }
    ]
   },
@@ -33,11 +43,15 @@
    "variants": [
     {
      "ru": "Преобладают Кубки — расклад о чувствах и отношениях. О ком или о чём это на самом деле?",
-     "en": "Cups prevail — this spread is about feelings and relationships. Who or what is it really about?"
+     "en": "Cups prevail — this spread is about feelings and relationships. Who or what is it really about?",
+     "es": "Predominan las Copas: la tirada habla de sentimientos y vínculos. ¿De quién o de qué se trata en realidad?",
+     "pt": "Predominam Copas — a tiragem fala de sentimentos e relações. Sobre quem ou sobre o que isso é, de verdade?"
     },
     {
      "ru": "Кубков больше половины: сердце здесь громче ума. Что оно пытается сказать?",
-     "en": "More than half are Cups: the heart speaks louder than the mind here. What is it trying to say?"
+     "en": "More than half are Cups: the heart speaks louder than the mind here. What is it trying to say?",
+     "es": "Más de la mitad son Copas: aquí el corazón suena más fuerte que la mente. ¿Qué está tratando de decir?",
+     "pt": "Mais da metade são Copas: aqui o coração fala mais alto que a mente. O que ele está tentando dizer?"
     }
    ]
   },
@@ -45,11 +59,15 @@
    "variants": [
     {
      "ru": "Преобладают Мечи — расклад о мыслях, словах и решениях. Какое решение вы откладываете?",
-     "en": "Swords prevail — this spread is about thoughts, words and decisions. Which decision have you been postponing?"
+     "en": "Swords prevail — this spread is about thoughts, words and decisions. Which decision have you been postponing?",
+     "es": "Predominan las Espadas: la tirada habla de pensamientos, palabras y decisiones. ¿Qué decisión vienes postergando?",
+     "pt": "Predominam Espadas — a tiragem fala de pensamentos, palavras e decisões. Qual decisão você vem adiando?"
     },
     {
      "ru": "Мечей больше половины: много воздуха и рассуждений. Где среди них факты, а где — накрученное?",
-     "en": "More than half are Swords: plenty of air and reasoning. Which of these thoughts are facts, and which are spirals?"
+     "en": "More than half are Swords: plenty of air and reasoning. Which of these thoughts are facts, and which are spirals?",
+     "es": "Más de la mitad son Espadas: mucho aire y mucho razonamiento. ¿Cuáles de esas ideas son hechos y cuáles, vueltas de cabeza?",
+     "pt": "Mais da metade são Espadas: muito ar e muito raciocínio. Entre esses pensamentos, quais são fatos e quais são espirais da mente?"
     }
    ]
   },
@@ -57,11 +75,15 @@
    "variants": [
     {
      "ru": "Преобладают Пентакли — расклад об опоре и материальном. Что даёт вам почву под ногами?",
-     "en": "Pentacles prevail — this spread is about foundations and the material world. What gives you solid ground?"
+     "en": "Pentacles prevail — this spread is about foundations and the material world. What gives you solid ground?",
+     "es": "Predominan los Oros: la tirada habla del sostén y de lo material. ¿Qué te da piso firme?",
+     "pt": "Predominam Ouros — a tiragem fala de apoio e do mundo material. O que dá chão firme para você?"
     },
     {
      "ru": "Пентаклей больше половины: разговор об устойчивости и плодах труда. Какой ваш труд ждёт признания?",
-     "en": "More than half are Pentacles: a conversation about stability and the fruits of work. Which of your efforts awaits recognition?"
+     "en": "More than half are Pentacles: a conversation about stability and the fruits of work. Which of your efforts awaits recognition?",
+     "es": "Más de la mitad son Oros: una conversación sobre la estabilidad y los frutos del trabajo. ¿Cuál de tus esfuerzos espera reconocimiento?",
+     "pt": "Mais da metade são Ouros: uma conversa sobre estabilidade e sobre os frutos do trabalho. Qual esforço seu espera reconhecimento?"
     }
    ]
   }
@@ -70,15 +92,21 @@
   "variants": [
    {
     "ru": "Многое в раскладе перевёрнуто — темы в процессе переосмысления. Что из привычного вы сейчас пересматриваете?",
-    "en": "Much of this spread is reversed — its themes are being rethought. What familiar thing are you reconsidering now?"
+    "en": "Much of this spread is reversed — its themes are being rethought. What familiar thing are you reconsidering now?",
+    "es": "Buena parte de la tirada está invertida: sus temas están en revisión. ¿Qué de lo habitual estás replanteando ahora?",
+    "pt": "Boa parte da tiragem está invertida — os temas estão em processo de revisão. O que, entre as coisas habituais, você está repensando agora?"
    },
    {
     "ru": "Перевёрнутых карт больше половины: энергия идёт вовнутрь, а не наружу. Чему стоит дать дозреть?",
-    "en": "More than half the cards are reversed: the energy turns inward rather than outward. What deserves more time to ripen?"
+    "en": "More than half the cards are reversed: the energy turns inward rather than outward. What deserves more time to ripen?",
+    "es": "Más de la mitad de las cartas están invertidas: la energía va hacia adentro y no hacia afuera. ¿A qué conviene darle tiempo de madurar?",
+    "pt": "Mais da metade das cartas estão invertidas: a energia se volta para dentro, e não para fora. O que merece mais tempo para amadurecer?"
    },
    {
     "ru": "Расклад смотрит вверх ногами — как будто просит взглянуть на ситуацию с непривычной стороны. С какой?",
-    "en": "The spread stands on its head — as if asking you to look from an unfamiliar angle. Which one?"
+    "en": "The spread stands on its head — as if asking you to look from an unfamiliar angle. Which one?",
+    "es": "La tirada se ve de cabeza, como si pidiera mirar la situación desde un ángulo poco habitual. ¿Cuál?",
+    "pt": "A tiragem se apresenta de cabeça para baixo — como se pedisse um olhar por um ângulo pouco familiar. Qual seria ele?"
    }
   ]
  },
@@ -87,7 +115,9 @@
    "variants": [
     {
      "ru": "В раскладе {x} туза — сразу несколько начал. Какое из них ваше?",
-     "en": "{x} Aces in this spread — several beginnings at once. Which one is yours?"
+     "en": "{x} Aces in this spread — several beginnings at once. Which one is yours?",
+     "es": "{x} Ases en esta tirada: varios comienzos a la vez. ¿Cuál de ellos es el tuyo?",
+     "pt": "{x} Ases nesta tiragem — vários começos ao mesmo tempo. Qual deles é o seu?"
     }
    ]
   },
@@ -95,7 +125,9 @@
    "variants": [
     {
      "ru": "{x} десятки — несколько историй подходят к завершению. Какую пора отпустить с благодарностью?",
-     "en": "{x} Tens — several stories are reaching completion. Which one is ready to be released with gratitude?"
+     "en": "{x} Tens — several stories are reaching completion. Which one is ready to be released with gratitude?",
+     "es": "{x} Dieces: varias historias se acercan a su cierre. ¿Cuál está lista para soltarse con gratitud?",
+     "pt": "{x} Dezes — várias histórias chegando ao fim. Qual delas já pode ser solta com gratidão?"
     }
    ]
   },
@@ -103,7 +135,9 @@
    "variants": [
     {
      "ru": "Придворных карт в раскладе — {x}: вокруг вашего вопроса много людей и ролей. Чья роль здесь главная?",
-     "en": "{x} court cards — many people and roles surround your question. Whose role matters most here?"
+     "en": "{x} court cards — many people and roles surround your question. Whose role matters most here?",
+     "es": "Cartas de la corte en la tirada: {x}. Alrededor de tu pregunta hay muchas personas y muchos papeles. ¿Cuál de esos papeles es el principal aquí?",
+     "pt": "Cartas da corte na tiragem: {x} — há muitas pessoas e papéis em volta da sua pergunta. De quem é o papel principal aqui?"
     }
    ]
   },
@@ -111,30 +145,76 @@
    "variants": [
     {
      "ru": "Номинал «{rank}» повторяется {x} раза — тема настойчиво возвращается. Что она хочет от вас?",
-     "en": "The rank “{rank}” repeats {x} times — the theme keeps returning. What does it want from you?"
+     "en": "The rank “{rank}” repeats {x} times — the theme keeps returning. What does it want from you?",
+     "es": "El rango «{rank}» se repite {x} veces: el tema vuelve con insistencia. ¿Qué quiere de ti?",
+     "pt": "O valor “{rank}” se repete {x} vezes — o tema volta com insistência. O que ele quer de você?"
     }
    ]
   }
  },
  "rankNames": {
-  "2": { "ru": "Двойка", "en": "Two" },
-  "3": { "ru": "Тройка", "en": "Three" },
-  "4": { "ru": "Четвёрка", "en": "Four" },
-  "5": { "ru": "Пятёрка", "en": "Five" },
-  "6": { "ru": "Шестёрка", "en": "Six" },
-  "7": { "ru": "Семёрка", "en": "Seven" },
-  "8": { "ru": "Восьмёрка", "en": "Eight" },
-  "9": { "ru": "Девятка", "en": "Nine" }
+  "2": {
+   "ru": "Двойка",
+   "en": "Two",
+   "es": "Dos",
+   "pt": "Dois"
+  },
+  "3": {
+   "ru": "Тройка",
+   "en": "Three",
+   "es": "Tres",
+   "pt": "Três"
+  },
+  "4": {
+   "ru": "Четвёрка",
+   "en": "Four",
+   "es": "Cuatro",
+   "pt": "Quatro"
+  },
+  "5": {
+   "ru": "Пятёрка",
+   "en": "Five",
+   "es": "Cinco",
+   "pt": "Cinco"
+  },
+  "6": {
+   "ru": "Шестёрка",
+   "en": "Six",
+   "es": "Seis",
+   "pt": "Seis"
+  },
+  "7": {
+   "ru": "Семёрка",
+   "en": "Seven",
+   "es": "Siete",
+   "pt": "Sete"
+  },
+  "8": {
+   "ru": "Восьмёрка",
+   "en": "Eight",
+   "es": "Ocho",
+   "pt": "Oito"
+  },
+  "9": {
+   "ru": "Девятка",
+   "en": "Nine",
+   "es": "Nueve",
+   "pt": "Nove"
+  }
  },
  "neutral": {
   "variants": [
    {
     "ru": "Состав ровный: ни одна стихия не перетягивает. Каждая позиция говорит сама за себя — вслушайтесь в них по очереди.",
-    "en": "The composition is balanced: no element dominates. Each position speaks for itself — listen to them one by one."
+    "en": "The composition is balanced: no element dominates. Each position speaks for itself — listen to them one by one.",
+    "es": "La composición es pareja: ningún elemento se impone. Cada posición habla por sí misma; escúchalas una por una.",
+    "pt": "A composição está equilibrada: nenhum elemento se impõe. Cada posição fala por si — escute uma de cada vez."
    },
    {
     "ru": "Расклад собран из разных стихий — картина объёмная. Начните с той карты, которая зацепила взгляд первой.",
-    "en": "This spread draws from every element — a full-bodied picture. Start with the card that caught your eye first."
+    "en": "This spread draws from every element — a full-bodied picture. Start with the card that caught your eye first.",
+    "es": "La tirada reúne elementos distintos: el cuadro es amplio. Empieza por la carta que atrapó tu mirada primero.",
+    "pt": "Esta tiragem reúne elementos diferentes — o quadro ganha volume. Comece pela carta que prendeu o seu olhar primeiro."
    }
   ]
  }
