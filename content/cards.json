@@ -421,28 +421,28 @@
      "pt": "Nas finanças, aparece a capacidade de multiplicar: renda nova das suas habilidades, negociação do seu valor. Faça contas e planeje — dinheiro obedece a quem administra."
     },
     "health": {
-     "ru": "Для здоровья — ресурс и восстановление через осознанность: вы способны влиять на своё состояние режимом, движением, вниманием к телу. Хорошая карта для начала оздоровительных практик.",
-     "en": "For health — resourcefulness and recovery through awareness: your routine, movement and attention to the body can genuinely shape how you feel. A good card for starting wellness practices.",
+     "ru": "Для самочувствия — тема осознанного отношения к себе. Режим, движение, внимание к телу: здесь многое зависит именно от вас — и ровно поэтому легко откладывается на потом.",
+     "en": "For wellbeing — a theme of conscious care for yourself. Routine, movement, attention to the body: much of this depends on you alone, and that is exactly why it slides to another day so easily.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Para tu salud, recursos y recuperación desde la conciencia. Tus horarios, el movimiento y la atención al cuerpo cambian cómo te sientes. Buena carta para estrenar prácticas de bienestar.",
-     "pt": "Para a sua saúde, energia e recuperação vêm da consciência: sua rotina, o movimento e a atenção ao corpo mudam de verdade como você se sente. Boa carta para estrear práticas de cuidado."
+     "es": "Para tu bienestar aparece el tema del trato consciente contigo. Horarios, movimiento, atención al cuerpo: aquí mucho depende de ti, y justo por eso se pospone con tanta facilidad para otro día.",
+     "pt": "Para o seu bem-estar, o tema é o cuidado consciente consigo. Rotina, movimento, atenção ao corpo: aqui muita coisa depende só de você — e é justamente por isso que fica tão fácil deixar para outro dia."
     },
     "day_card": {
-     "ru": "Сегодня ваш день действия. Сформулируйте одно намерение утром — и сделайте к нему три конкретных шага. Слова имеют силу: озвучьте желаемое вслух или запишите. Вечером заметите: получилось больше, чем обычно.",
-     "en": "Today is your day of action. Set one intention in the morning — and take three concrete steps toward it. Words carry power: say your aim aloud or write it down. By evening you'll notice more got done than usual.",
+     "ru": "Сегодня ваш день действия. Сформулируйте одно намерение утром — и сделайте к нему три конкретных шага. Слова имеют силу: озвучьте желаемое вслух или запишите. Названное намерение сдвигается с места чаще, чем то, что осталось в голове.",
+     "en": "Today is your day of action. Set one intention in the morning — and take three concrete steps toward it. Words carry power: say your aim aloud or write it down. A named intention moves more often than one left in your head.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy es tu día de acción. Define una intención por la mañana y da tres pasos concretos hacia ella. Las palabras tienen fuerza: di tu objetivo en voz alta o escríbelo. Al caer la tarde vas a notar que avanzaste más que de costumbre.",
-     "pt": "Hoje é seu dia de ação. Defina uma intenção pela manhã e dê três passos concretos na direção dela. Palavras têm força: diga seu objetivo em voz alta ou escreva. À noite você vai notar que rendeu mais que o normal."
+     "es": "Hoy es un día para actuar. Define una intención por la mañana y da tres pasos concretos hacia ella. Las palabras tienen fuerza: di en voz alta lo que quieres o escríbelo. Una intención nombrada se mueve más que la que se queda en la cabeza.",
+     "pt": "Hoje é o seu dia de agir. Defina uma intenção pela manhã e dê três passos concretos na direção dela. Palavras têm força: diga o seu objetivo em voz alta ou escreva. Uma intenção dita sai do lugar com mais frequência do que outra guardada só na cabeça."
     },
     "symbolism": {
      "ru": "Жест Мага — одна рука к небу, другая к земле: «что наверху, то и внизу», проведение замысла в материю. Знак бесконечности над головой — безграничность духа. Змея, кусающая свой хвост, на поясе — вечный цикл. На столе четыре символа мастей — все стихии и инструменты в его распоряжении. Розы и лилии в саду — союз страсти и чистоты мысли.",
@@ -1209,16 +1209,16 @@
      "pt": "Para o seu bem-estar, o Imperador pergunta: sua rotina sustenta ou desgasta você? Repare se a tensão constante e o hábito de controlar tudo estão consumindo sua energia. O corpo pede não só disciplina, mas também permissão para relaxar."
     },
     "day_card": {
-     "ru": "Сегодня наведите порядок в одном деле, до которого не доходили руки: разберите бумаги, составьте план, назначьте встречу, обозначьте границу в разговоре. Действуйте спокойно и твёрдо — без оправданий. Вечером вы почувствуете: земля под ногами стала надёжнее.",
-     "en": "Today, bring order to one thing you've been putting off: sort the papers, draft the plan, book the meeting, state a boundary in a conversation. Act calmly and firmly — no apologies needed. By evening you'll feel the ground under your feet grow steadier.",
+     "ru": "Сегодня наведите порядок в одном деле, до которого не доходили руки: разберите бумаги, составьте план, назначьте встречу, обозначьте границу в разговоре. Действуйте спокойно и твёрдо — без оправданий. Если обозначаете границу — спокойный тон удержит её дольше раздражённого.",
+     "en": "Today, bring order to one thing you've been putting off: sort the papers, draft the plan, book the meeting, state a boundary in a conversation. Act calmly and firmly — no apologies needed. If you do state a boundary, a calm tone will hold it longer than an irritated one.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy pon orden en algo que venías postergando: ordena los papeles, arma el plan, agenda la reunión, marca un límite en una conversación. Actúa con calma y firmeza — sin disculpas de más. Al final del día vas a sentir el suelo bajo tus pies más firme.",
-     "pt": "Hoje, coloque em ordem uma coisa que vem sendo adiada: organizar os papéis, rascunhar o plano, marcar a reunião, dizer um limite numa conversa. Aja com calma e firmeza — sem pedir desculpas. À noite, o chão sob os seus pés vai parecer mais seguro."
+     "es": "Hoy pon orden en algo que venías postergando: ordena los papeles, arma el plan, agenda la reunión, marca un límite en una conversación. Actúa con calma y firmeza, sin dar explicaciones de más. Y si marcas un límite, un tono tranquilo lo sostiene más tiempo que uno irritado.",
+     "pt": "Hoje, ponha em ordem uma coisa que vem sendo adiada: organizar os papéis, rascunhar o plano, marcar a reunião, dizer um limite numa conversa. Aja com calma e firmeza — sem pedir desculpas. Se for mesmo marcar um limite, um tom tranquilo o sustenta por muito mais tempo do que um tom irritado."
     },
     "symbolism": {
      "ru": "Император сидит на массивном каменном троне — власть, которая опирается на устойчивость, а не на порыв. Головы баранов на троне — знак Овна: воля, инициатива, лидерство. Скипетр в форме анкха — власть над жизнью, держава в левой руке — мир, за который он отвечает. Доспехи под мантией — готовность защищать своё. Голые скалы позади — порядок, созданный трудом там, где ничего не росло само.",
@@ -1467,16 +1467,16 @@
      "pt": "Para o seu bem-estar, o Hierofante sugere olhar os hábitos herdados “por tradição”: quais padrões de família — em torno de comida, descanso, corpo — sustentam você e quais esvaziam? Constância e práticas testadas restauram mais que novidades da moda."
     },
     "day_card": {
-     "ru": "Сегодня учитесь и спрашивайте. Если стоите перед задачей — найдите того, кто уже решал такую, и попросите совета: сегодня двери наставников открыты. Хороший день для урока, лекции, книги, разговора со старшим. Уважение к чужому опыту сэкономит вам месяцы.",
-     "en": "Today, learn and ask. If a task stands before you, find someone who has solved it and ask their advice — mentors' doors are open today. A good day for a lesson, a lecture, a book, a talk with someone senior. Respect for others' experience will save you months.",
+     "ru": "Сегодня учитесь и спрашивайте. Если стоите перед задачей — найдите того, кто уже решал такую, и попросите совета: сегодня двери наставников открыты. Хороший день для урока, лекции, книги, разговора со старшим. Кто уже проходил этот путь до вас?",
+     "en": "Today, learn and ask. If a task stands before you, find someone who has solved it and ask their advice — mentors' doors are open today. A good day for a lesson, a lecture, a book, a talk with someone senior. Who has already walked this road before you?",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy toca aprender y preguntar. Si tienes una tarea por delante, busca a quien ya la resolvió y pide su consejo: las puertas de los mentores están abiertas. Buen día para una clase, una charla, un libro, una conversación con alguien mayor. El respeto por la experiencia ajena te ahorra meses.",
-     "pt": "Hoje, aprenda e pergunte. Se há uma tarefa diante de você, encontre alguém que já resolveu igual e peça conselho — as portas dos mentores estão abertas. Bom dia para uma aula, uma palestra, um livro, uma conversa com alguém mais velho. Respeitar a experiência dos outros economiza meses."
+     "es": "Hoy toca aprender y preguntar. Si tienes una tarea por delante, busca a quien ya la resolvió y pide su consejo: las puertas de los mentores están abiertas. Buen día para una clase, una charla, un libro, una conversación con alguien mayor. ¿Quién recorrió este camino antes que tú?",
+     "pt": "Hoje, aprenda e pergunte. Se há uma tarefa diante de você, encontre alguém que já resolveu igual e peça conselho — hoje as portas dos mentores estão abertas. Bom dia para uma aula, uma palestra, um livro, uma conversa com alguém mais velho. Quem já percorreu esse caminho antes de você?"
     },
     "symbolism": {
      "ru": "Иерофант в тройной короне и с тройным крестом — власть над тремя мирами: телесным, душевным и духовным. Правая рука поднята в благословении: два пальца к небу, два к земле — знание передаётся, но часть его остаётся сокрытой. Скрещённые ключи у ног — ключи к тайне, доступной через обучение. Два служителя перед ним — путь ученичества: знание живёт, пока его передают.",
@@ -1794,16 +1794,16 @@
      "pt": "Uma decisão financeira compartilhada emperra: as posições não estão alinhadas e a conversa fica sempre para depois. Antes de agir sozinho, falem sobre o que importa para cada um."
     },
     "health_reversed": {
-     "ru": "Внутренний разлад между «хочу» и «надо» забирает больше сил, чем кажется: невысказанное решение держит тело в напряжении. Дайте себе честный ответ — станет заметно легче.",
-     "en": "The inner tug between 'I want' and 'I should' drains more energy than it seems: an unmade decision keeps the body tense. Give yourself an honest answer, and the weight will ease.",
+     "ru": "Внутренний разлад между «хочу» и «надо» забирает больше сил, чем кажется: невысказанное решение отзывается напряжением. Спросите себя, какой честный ответ вы откладываете.",
+     "en": "The inner tug between 'I want' and 'I should' drains more energy than it seems: an unmade decision shows up as tension. Ask yourself which honest answer you keep postponing.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "El tironeo interno entre el «quiero» y el «debo» consume más energía de lo que parece: una decisión pendiente mantiene el cuerpo tenso. Date una respuesta honesta y el peso se aligera.",
-     "pt": "O puxão interno entre “quero” e “devo” consome mais energia do que aparenta: uma decisão não tomada mantém o corpo tenso. Se dê uma resposta honesta e o peso alivia."
+     "es": "El tironeo interno entre el «quiero» y el «debo» consume más energía de lo que parece: una decisión sin tomar se nota como tensión. Pregúntate qué respuesta honesta vas postergando.",
+     "pt": "O puxão interno entre “quero” e “devo” consome mais energia do que aparenta: uma decisão não tomada reaparece como tensão. Pergunte-se qual é a resposta honesta que você vem adiando."
     }
    }
   },
@@ -1905,16 +1905,16 @@
    },
    "content": {
     "general": {
-     "ru": "Колесница — карта движения и победы. Вы набрали ход, и сейчас главное — держать руль: цель ясна, воля собрана, препятствия уступают тому, кто не сворачивает. Карта говорит об управлении противоположными силами — сомнением и азартом, чувствами и расчётом: не подавляйте их, а направьте в одну сторону. Успех близок, если вы не распыляетесь. Дорога открыта — езжайте.",
-     "en": "The Chariot is the card of momentum and victory. You have gathered speed, and now the key is to hold the reins: the goal is clear, your will is focused, and obstacles yield to those who don't swerve. The card speaks of steering opposing forces — doubt and drive, feeling and calculation: don't suppress them, point them the same way. Success is near if you don't scatter yourself. The road is open — drive.",
+     "ru": "Колесница — карта движения и победы. Вы набрали ход, и сейчас главное — держать руль: цель ясна, воля собрана, препятствия уступают тому, кто не сворачивает. Карта говорит об управлении противоположными силами — сомнением и азартом, чувствами и расчётом: не подавляйте их, а направьте в одну сторону. Главный риск здесь — распыление: проверьте, не тянете ли вы несколько целей сразу. Дорога открыта — езжайте.",
+     "en": "The Chariot is the card of momentum and victory. You have gathered speed, and now the key is to hold the reins: the goal is clear, your will is focused, and obstacles yield to those who don't swerve. The card speaks of steering opposing forces — doubt and drive, feeling and calculation: don't suppress them, point them the same way. The main risk here is scattering: check whether you're pulling toward several goals at once. The road is open — drive.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "El Carro es la carta del impulso y la victoria. Ya tomaste velocidad y ahora lo clave es sostener las riendas: la meta está clara, la voluntad reunida, y los obstáculos ceden ante quien no se desvía. La carta habla de conducir fuerzas opuestas —duda y entusiasmo, sentimiento y cálculo—: no las reprimas, oriéntalas hacia el mismo lado. El éxito está cerca si no te dispersas. El camino está abierto: avanza.",
-     "pt": "O Carro é a carta do impulso e da vitória. Você ganhou velocidade, e agora o essencial é segurar as rédeas: a meta está clara, a vontade reunida, e os obstáculos cedem a quem não desvia. A carta fala de conduzir forças opostas — dúvida e entusiasmo, sentimento e cálculo: em vez de sufocá-las, aponte todas para o mesmo lado. O sucesso está perto se você não se dispersar. A estrada está aberta — siga."
+     "es": "El Carro es la carta del impulso y la victoria. Ya tomaste velocidad y ahora lo importante es sostener las riendas: la meta está clara, la voluntad reunida, y los obstáculos ceden ante quien no se desvía. La carta habla de conducir fuerzas opuestas —duda y entusiasmo, sentimiento y cálculo—: no las reprimas, oriéntalas hacia el mismo lado. El riesgo principal aquí es dispersarse: revisa si no estás tirando de varias metas a la vez. El camino está abierto: avanza.",
+     "pt": "O Carro é a carta do impulso e da vitória. Você ganhou velocidade, e agora o essencial é segurar as rédeas: a meta está clara, a vontade reunida, e os obstáculos cedem a quem não desvia. A carta fala de conduzir forças opostas — dúvida e entusiasmo, sentimento e cálculo: em vez de sufocá-las, aponte todas para o mesmo lado. O risco maior aqui é a dispersão: verifique se você não está puxando várias metas ao mesmo tempo. A estrada está aberta — seguir depende de você."
     },
     "reversed": {
      "ru": "Перевёрнутая Колесница — потеря управления: спешка, разброс усилий, движение ради движения. Возможно, вы давите на газ там, где нужно свериться с картой, — или буксуете из-за чужих мнений. Остановитесь и спросите: куда именно вы едете и ваша ли это дорога?",
@@ -2453,7 +2453,7 @@
      "pt": "No amor chega um período de silêncio: alguém precisa de espaço, e isso não é rejeição. Não preencha a falta com suposições — pergunte com cuidado. Para quem está só, se entender importa mais do que procurar; um encontro significativo vira possível quando você para de fugir para a correria."
     },
     "career": {
-     "ru": "В работе — время сосредоточенной самостоятельной работы, анализа и повышения квалификации. Шумные проекты и командные авралы сейчас не ваше: глубина важнее скорости. Хороший период, чтобы учиться у более опытного человека или самой стать наставницей.",
+     "ru": "В работе — время сосредоточенной самостоятельной работы, анализа и повышения квалификации. Шумные проекты и командные авралы сейчас не ваше: глубина важнее скорости. Хороший период, чтобы учиться у более опытного человека или самим передать опыт тому, кто только начинает.",
      "en": "At work — a time for focused solo work, analysis and building expertise. Loud projects and team rushes aren't your zone right now: depth beats speed. A good period to learn from someone more experienced — or to become a mentor yourself.",
      "status": {
       "ru": "reviewed",
@@ -2461,8 +2461,8 @@
       "es": "draft",
       "pt": "draft"
      },
-     "es": "En el trabajo, tiempo de labor propia y concentrada, de análisis y de subir tu nivel. Los proyectos ruidosos y las corridas de equipo no son lo tuyo ahora: la profundidad gana a la velocidad. Buen período para aprender de alguien con más experiencia o asumir tú un rol de mentoría.",
-     "pt": "No trabalho, é tempo de esforço solitário e concentrado, de análise e de aprimorar o que você sabe. Projetos barulhentos e correria de equipe não combinam agora: profundidade vale mais que velocidade. Bom período para aprender com alguém mais experiente — ou orientar quem começa."
+     "es": "En el trabajo es tiempo de labor propia y concentrada, de análisis y de subir tu nivel. Los proyectos ruidosos y las corridas de equipo no son lo tuyo ahora: la profundidad gana a la velocidad. Buen período para aprender de alguien con más oficio o enseñar a quien empieza.",
+     "pt": "No trabalho, é tempo de esforço solitário e concentrado, de análise e de aprofundar o que você sabe. Projetos barulhentos e correria de equipe não combinam agora: profundidade vale mais que velocidade. Bom período para aprender com alguém mais experiente — ou orientar quem começa."
     },
     "finances": {
      "ru": "В финансах Отшельник — скромность и обдуманность: не время для крупных трат и рискованных вложений. Спокойно пересмотрите бюджет наедине с собой, без чужих советов. Разумная экономия сейчас — не ограничение, а забота о будущем.",
@@ -2696,16 +2696,16 @@
      "pt": "A Roda da Fortuna invertida traz a sensação de que nada sai como planejado: atrasos, timing ruim, uma sequência de azar. Isso não dura — a roda continua girando. Não se agarre ao que está indo embora nem se culpe pelo que não está nas suas mãos. Faça o possível e solte o resto."
     },
     "love": {
-     "ru": "В любви — судьбоносный поворот: неожиданное знакомство, возвращение чувств, переход отношений на новый этап. То, что происходит, выглядит как случайность, но ведёт вас в нужную сторону. Если период в паре трудный — помните: это фаза, а не приговор.",
-     "en": "In love — a fateful turn: an unexpected meeting, feelings rekindled, a relationship moving to a new stage. What's happening looks like chance, but it's leading you the right way. If things are hard as a couple, remember: this is a phase, not a verdict.",
+     "ru": "В любви Колесо — про поворот: неожиданное знакомство, оживший интерес, переход отношений на новый этап. Обратите внимание на случайности этих дней — иногда в них видно направление. Если период в паре трудный, помните: это фаза, а не приговор.",
+     "en": "In love, the Wheel is about a turn: an unexpected meeting, interest rekindled, a relationship moving to a new stage. Notice the coincidences of these days — sometimes a direction shows through them. If things are hard as a couple, remember: this is a phase, not a verdict.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "En el amor hay un giro del destino: un encuentro inesperado, sentimientos que vuelven, un vínculo que pasa a otra etapa. Lo que ocurre parece azar, pero te lleva en la dirección correcta. Si el momento en pareja es difícil, recuerda: es una fase, no una sentencia.",
-     "pt": "No amor acontece uma virada marcante: um encontro inesperado, sentimentos reacesos, a relação passando para outra etapa. O que acontece parece acaso, mas conduz você para o lado certo. Se a fase a dois está difícil, lembre: isso é uma fase, não uma sentença."
+     "es": "En el amor, la Rueda habla de un giro: un encuentro inesperado, un interés que revive, un vínculo que pasa a otra etapa. Presta atención a las casualidades de estos días: a veces dejan ver una dirección. Si el momento en pareja es difícil, recuerda: es una fase, no una sentencia.",
+     "pt": "No amor, a Roda fala de virada: um encontro inesperado, um interesse que reacende, a relação passando para outra etapa. Repare nos acasos destes dias — às vezes é neles que a direção aparece. Se a fase a dois está difícil, lembre: isso é uma fase, não uma sentença."
     },
     "career": {
      "ru": "В работе — перемены, которые вы не планировали: новое предложение, реорганизация, неожиданный шанс. Не держитесь за старое только потому, что оно привычно. Сейчас полезно быть на виду и говорить «да» возможностям — окно удачи не бесконечно.",
@@ -2927,16 +2927,16 @@
    },
    "content": {
     "general": {
-     "ru": "Справедливость — карта причины и следствия. Сейчас всё встаёт на свои места: усилия вознаграждаются, а срезанные углы дают о себе знать. Это время честности — прежде всего с собой. Решения стоит принимать ясной головой, взвесив факты, а не эмоции. Если вы поступали по совести, исход будет в вашу пользу. Карта также говорит о договорах, документах и официальных вопросах.",
-     "en": "Justice is the card of cause and effect. Things are falling into place: effort gets rewarded, and cut corners come back around. This is a time for honesty — above all with yourself. Make decisions with a clear head, weighing facts rather than emotions. If you've acted with integrity, the outcome will favour you. The card also points to contracts, documents and official matters.",
+     "ru": "Справедливость — карта причины и следствия. Сейчас всё встаёт на свои места: усилия вознаграждаются, а срезанные углы дают о себе знать. Это время честности — прежде всего с собой. Решения стоит принимать ясной головой, взвесив факты, а не эмоции. Сверьтесь с собственной совестью: какие решения вы готовы назвать честными, а какие — нет? Карта также говорит о договорах, документах и официальных вопросах.",
+     "en": "Justice is the card of cause and effect. Things are falling into place: effort gets rewarded, and cut corners come back around. This is a time for honesty — above all with yourself. Make decisions with a clear head, weighing facts rather than emotions. Check in with your own conscience: which decisions would you call honest, and which would you not? The card also points to contracts, documents and official matters.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "La Justicia es la carta de causa y efecto. Todo se acomoda en su lugar: el esfuerzo recibe recompensa y los atajos vuelven a cobrarse. Es tiempo de honestidad, ante todo contigo. Conviene decidir con la cabeza clara, pesando hechos y no emociones. Si actuaste con conciencia, el resultado será a tu favor. La carta también habla de contratos, documentos y asuntos oficiales.",
-     "pt": "A Justiça é a carta de causa e efeito. As coisas vão se ajeitando: o esforço recebe retorno, e os atalhos cobram seu preço. Este é um tempo de honestidade — antes de tudo com você mesmo. Decida de cabeça limpa, pesando fatos em vez de emoções. Se você agiu com integridade, o desfecho tende a favorecer você. A carta também aponta contratos, documentos e questões oficiais."
+     "es": "La Justicia es la carta de causa y efecto. Todo se acomoda en su lugar: el esfuerzo recibe recompensa y los atajos vuelven a cobrarse. Es tiempo de honestidad, ante todo contigo. Conviene decidir con la cabeza clara, pesando hechos y no emociones. Consulta tu propia conciencia: ¿qué decisiones llamarías honestas y cuáles no? La carta también habla de contratos, documentos y asuntos oficiales.",
+     "pt": "A Justiça é a carta de causa e efeito. As coisas vão se ajeitando: o esforço recebe retorno, e os atalhos cobram seu preço. Este é um tempo de honestidade — antes de tudo com você. Decida de cabeça limpa, pesando fatos em vez de emoções. Confira com a sua própria consciência: quais decisões você chamaria de honestas, e quais não chamaria? A carta também aponta contratos, documentos e questões oficiais."
     },
     "reversed": {
      "ru": "Перевёрнутая Справедливость — перекос: несправедливое решение, предвзятость, нежелание признать свою часть ответственности. Возможно, вы судите себя слишком строго — или, наоборот, ищете виноватых вовне. Прежде чем требовать честности от других, проверьте, где вы обманываете себя.",
@@ -2963,16 +2963,16 @@
      "pt": "No amor, pesa a necessidade de equilíbrio: quanto cada um dá e quanto recebe? É hora de falar com franqueza sobre o que se acumulou — com calma, sem acusações. Para quem está só, um vínculo que começa com intenções claras. Às vezes a carta indica oficializar a união."
     },
     "career": {
-     "ru": "В работе — оценка по заслугам: результаты будут замечены, договорённости — зафиксированы. Хорошее время для подписания контрактов, переговоров о повышении, решения юридических вопросов. Ведите дела прозрачно: сейчас любые неточности всплывают быстро.",
-     "en": "At work — recognition on merit: your results will be noticed, agreements formalised. A good time for signing contracts, negotiating a raise, resolving legal matters. Keep your dealings transparent: right now inaccuracies surface quickly.",
+     "ru": "В работе — оценка по заслугам: покажите результаты сами и зафиксируйте договорённости письменно. Хорошее время для подписания контрактов, переговоров о повышении, решения юридических вопросов. Ведите дела прозрачно: неточности сейчас видны быстро.",
+     "en": "At work — recognition on merit: show your results yourself and put agreements in writing. A good time for signing contracts, negotiating a raise, resolving legal matters. Keep your dealings transparent: inaccuracies surface quickly right now.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "En el trabajo llega reconocimiento por mérito: tus resultados se notan y los acuerdos quedan fijados. Buen momento para firmar contratos, negociar un aumento, resolver temas legales. Lleva todo con transparencia: cualquier inexactitud sale a la luz rápido.",
-     "pt": "No trabalho, o reconhecimento vem por mérito: seus resultados serão notados e os acordos, formalizados. Bom momento para assinar contratos, negociar aumento, resolver pendências jurídicas. Conduza tudo com transparência: agora qualquer imprecisão aparece rápido."
+     "es": "En el trabajo cuenta el mérito: encárgate de mostrar tus resultados y deja los acuerdos por escrito. Buen momento para firmar contratos, negociar un aumento, resolver temas legales. Lleva todo con transparencia: ahora cualquier inexactitud sale a la luz rápido.",
+     "pt": "No trabalho, o reconhecimento vem por mérito: seja você a apresentar os seus resultados e deixe os acordos por escrito. Bom momento para assinar contratos, negociar aumento, resolver pendências jurídicas. Conduza tudo com transparência: agora qualquer imprecisão aparece rápido."
     },
     "finances": {
      "ru": "В финансах — порядок и точность: проверьте счета, налоги, условия договоров. Долги — возвращать, обещания — выполнять. Честно заработанное сейчас приходит вовремя; сомнительные схемы, наоборот, оборачиваются потерями.",
@@ -3511,16 +3511,16 @@
      "pt": "Para o seu bem-estar, começa uma temporada de renovação: corpo e mente pedem que você encerre o que drena. Reflita sobre quais hábitos e cargas você carrega por inércia. Ao soltar o desnecessário, você libera energia para se recuperar. Seja gentil consigo durante essa passagem."
     },
     "day_card": {
-     "ru": "Сегодня что-то можно завершить — и это будет правильным. Закройте давно висящую задачу, доскажите недосказанное, удалите лишнее, наведите порядок. Не начинайте нового: день создан для точек, а не для запятых. Вечером почувствуете лёгкость — знак, что вы отпустили вовремя.",
-     "en": "Today, something can be completed — and that will be right. Close a long-hanging task, finish an unfinished conversation, delete the clutter, tidy up. Don't start anything new: this day is made for full stops, not commas. By evening you'll feel lighter — a sign you let go at the right time.",
+     "ru": "Сегодня что-то можно завершить — и это будет правильным. Закройте давно висящую задачу, доскажите недосказанное, удалите лишнее, наведите порядок. Не начинайте нового: день создан для точек, а не для запятых. Незакрытое дело тратит силы тихо — но каждый день.",
+     "en": "Today, something can be completed — and that will be right. Close a long-hanging task, finish an unfinished conversation, delete the clutter, tidy up. Don't start anything new: this day is made for full stops, not commas. An unfinished thing drains you quietly — but every single day.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy algo puede darse por terminado, y estará bien así. Cierra una tarea que llevaba tiempo pendiente, di lo que quedó sin decir, borra lo que sobra, ordena. No empieces nada nuevo: este día se hizo para los puntos finales, no para las comas. Al anochecer sentirás alivio: señal de que soltaste a tiempo.",
-     "pt": "Hoje algo pode ser concluído — e isso vai estar certo. Feche uma tarefa pendurada há tempo, termine uma conversa inacabada, apague o excesso, arrume o espaço. Não comece nada novo: este dia foi feito para pontos finais, não para vírgulas. À noite você vai se sentir mais leve — sinal de que soltou na hora certa."
+     "es": "Hoy hay algo que puedes dar por terminado, y estará bien así. Cierra una tarea que llevaba tiempo pendiente, di lo que quedó sin decir, borra lo que sobra, ordena. No empieces nada nuevo: este día se hizo para los puntos finales, no para las comas. Un asunto sin cerrar gasta fuerzas en silencio, pero todos los días.",
+     "pt": "Hoje dá para encerrar alguma coisa — e será o movimento certo. Feche uma tarefa pendurada há tempo, termine uma conversa inacabada, apague o excesso, arrume o espaço. Não comece nada novo: este dia foi feito para pontos finais, não para vírgulas. Um assunto em aberto consome energia em silêncio — mas consome todo santo dia."
     },
     "symbolism": {
      "ru": "На карте Уэйта — не жнец с косой, а всадник в доспехах с чёрным знаменем, на котором белая роза: жизнь, продолжающаяся сквозь любые перемены. У него нет оружия — перемены приходят сами, без насилия. Перед ним король, ребёнок, девушка и епископ: переход касается всех, независимо от статуса. Вдали между двумя башнями встаёт солнце — знак, что за каждым завершением есть рассвет.",
@@ -3697,16 +3697,16 @@
    },
    "content": {
     "general": {
-     "ru": "Умеренность — карта баланса и мягкой настройки. Она говорит: не нужно резких движений, крайностей и рывков — ваша сила сейчас в терпении и точной дозировке. Как ангел на карте смешивает воду из двух чаш, так и вы учитесь соединять противоположное: работу и отдых, чувства и разум, своё и чужое. Всё складывается — не мгновенно, но верно. Доверьтесь постепенности: именно она сейчас ведёт вас к цели.",
-     "en": "Temperance is the card of balance and gentle calibration. Its message: no sharp moves, no extremes, no forcing — your strength right now lies in patience and the right measure. Just as the angel blends water between two cups, you are learning to combine opposites: work and rest, feeling and reason, your needs and others'. Things are coming together — not instantly, but surely. Trust the gradual path: it is what carries you to your goal now.",
+     "ru": "Умеренность — карта баланса и мягкой настройки. Она говорит: не нужно резких движений, крайностей и рывков — ваша сила сейчас в терпении и точной дозировке. Как ангел на карте смешивает воду из двух чаш, так и вы учитесь соединять противоположное: работу и отдых, чувства и разум, своё и чужое. Не подгоняйте события — замечайте маленькие сдвиги. Постепенность здесь — не задержка, а способ движения.",
+     "en": "Temperance is the card of balance and gentle calibration. Its message: no sharp moves, no extremes, no forcing — your strength right now lies in patience and the right measure. Just as the angel blends water between two cups, you are learning to combine opposites: work and rest, feeling and reason, your needs and others'. Don't hurry things along — notice the small shifts instead. Going slowly here is not a delay but a way of moving.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "La Templanza trae equilibrio y ajuste suave. Su mensaje: nada de movimientos bruscos, ni extremos, ni tirones; tu fuerza ahora está en la paciencia y en la dosis justa. Así como el ángel mezcla el agua entre dos copas, tú aprendes a combinar opuestos: trabajo y descanso, emoción y razón, lo tuyo y lo de los demás. Las cosas se acomodan, no de golpe, pero sí con firmeza. Confía en lo gradual: es lo que te lleva a la meta.",
-     "pt": "A Temperança é a carta do equilíbrio e do ajuste suave. Seu recado: nada de movimentos bruscos, sem extremos nem pressa — sua força agora está na paciência e na medida certa. Assim como o anjo mistura a água entre duas taças, você aprende a combinar opostos: trabalho e descanso, sentimento e razão, o seu e o do outro. As coisas vão se juntando — não num instante, mas com firmeza. Confie no caminho gradual: é ele que leva você ao objetivo agora."
+     "es": "La Templanza es la carta del equilibrio y del ajuste suave. Su mensaje: nada de movimientos bruscos, ni extremos, ni tirones; tu fuerza ahora está en la paciencia y en la dosis justa. Así como el ángel mezcla el agua entre dos copas, tú aprendes a combinar opuestos: trabajo y descanso, emoción y razón, lo tuyo y lo de los demás. No apures los acontecimientos: mejor nota los desplazamientos pequeños. Aquí lo gradual no es una demora, sino una forma de avanzar.",
+     "pt": "A Temperança é a carta do equilíbrio e do ajuste suave. Seu recado: nada de movimentos bruscos, de extremos nem de arrancadas — sua força agora está na paciência e na medida certa. Assim como o anjo mistura a água entre duas taças, você aprende a combinar opostos: trabalho e descanso, sentimento e razão, o seu e o do outro. Não apresse os acontecimentos — repare nos pequenos deslocamentos. Aqui, ir aos poucos não é atraso: é a forma de avançar."
     },
     "reversed": {
      "ru": "Перевёрнутая Умеренность — потеря меры: перегруз в одном и пустота в другом, качели «всё или ничего». Возможно, вы слишком многого требуете от себя или пытаетесь совместить несовместимое. Остановитесь и пересоберите пропорции: где перебор, а где недостаток? Маленькая корректировка сработает лучше революции.",
@@ -3757,28 +3757,28 @@
      "pt": "Nas finanças, o meio-termo é o caminho: sem apostas arriscadas e sem economia excessiva. Bom momento para organizar o orçamento, equilibrar gastos e receitas e começar a guardar pouco, mas com regularidade. A moderação é a melhor conselheira financeira."
     },
     "health": {
-     "ru": "Для самочувствия — восстановление через ритм и умеренность. Прислушайтесь: где вы перегибаете, а где недодаёте себе — во сне, еде, движении, отдыхе? Телу сейчас нужна не встряска, а ровный, бережный режим. Маленькие регулярные шаги дадут больше, чем разовые подвиги.",
-     "en": "For wellbeing — recovery through rhythm and moderation. Listen closely: where do you overdo it, and where do you shortchange yourself — in sleep, food, movement, rest? Your body needs a steady, gentle routine now, not a shake-up. Small regular steps will give you more than one-off heroics.",
+     "ru": "Для самочувствия — тема ритма и меры. Прислушайтесь: где вы перегибаете, а где недодаёте себе — во сне, еде, движении, отдыхе? Спросите себя, чего просит ваш день: встряски или ровного, бережного темпа. Маленькие регулярные шаги обычно даются легче разовых подвигов.",
+     "en": "For wellbeing — a question of rhythm and measure. Where do you overdo it, and where do you shortchange yourself — in sleep, food, movement, rest? Ask what your day calls for: a shake-up, or a steadier pace. Small regular steps are usually easier than one-off heroics.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Para tu bienestar, la recuperación pasa por el ritmo y la moderación. Escucha con atención: ¿dónde te excedes y dónde te quedas con menos de lo que necesitas —en sueño, comida, movimiento, descanso? Tu cuerpo no necesita una sacudida ahora, sino una rutina pareja y amable. Los pasos pequeños y regulares te darán más que los esfuerzos aislados.",
-     "pt": "Para o seu bem-estar, a recuperação vem do ritmo e da moderação. Escute com atenção: onde você exagera e onde se dá menos do que precisa — no sono, na comida, no movimento, no descanso? O corpo pede agora uma rotina firme e suave, não um tranco. Passos pequenos e regulares rendem mais que grandes esforços isolados."
+     "es": "Para tu bienestar importan el ritmo y la medida. Escucha: ¿dónde te excedes y dónde te das menos de lo que necesitas, en sueño, comida, movimiento, descanso? Pregúntate qué pide tu día: una sacudida o un paso parejo y cuidado. Los pasos pequeños y regulares suelen costar menos que las hazañas aisladas.",
+     "pt": "Para o seu bem-estar, a questão é de ritmo e medida. Escute: onde você exagera e onde se dá menos do que precisa — no sono, na comida, no movimento, no descanso? Pergunte-se o que o seu dia pede: uma sacudida ou um passo constante e cuidadoso. Passos pequenos e regulares saem mais fáceis que façanhas isoladas."
     },
     "day_card": {
-     "ru": "Сегодня ищите середину. Не соглашайтесь на крайности — ни в делах, ни в разговорах, ни в тратах. Если назревает спор, предложите компромисс сами. Чередуйте напряжение и паузы: час работы — десять минут тишины. День наградит вас ровным, спокойным чувством «всё на своих местах».",
-     "en": "Today, look for the middle path. Refuse extremes — in tasks, conversations and spending alike. If an argument is brewing, be the one who offers the compromise. Alternate effort with pauses: an hour of work, ten minutes of quiet. The day will reward you with a calm, steady sense that everything is in its place.",
+     "ru": "Сегодня ищите середину. Не соглашайтесь на крайности — ни в делах, ни в разговорах, ни в тратах. Если назревает спор, предложите компромисс сами. Чередуйте напряжение и паузы: час работы — десять минут тишины. Одна нога на земле, другая в воде — так держится равновесие.",
+     "en": "Today, look for the middle path. Refuse extremes — in tasks, conversations and spending alike. If an argument is brewing, be the one who offers the compromise. Alternate effort with pauses: an hour of work, ten minutes of quiet. One foot on land, one in the water — that is how balance holds.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy busca el camino del medio. Rechaza los extremos, tanto en las tareas como en las conversaciones y en los gastos. Si se asoma una discusión, sé tú quien proponga el acuerdo. Alterna esfuerzo y pausas: una hora de trabajo, diez minutos de silencio. El día te devolverá una sensación tranquila de que todo está en su lugar.",
-     "pt": "Hoje, procure o meio-termo. Recuse os extremos — nas tarefas, nas conversas e nos gastos. Se uma discussão estiver se formando, seja você quem propõe o acordo. Alterne esforço e pausas: uma hora de trabalho, dez minutos de silêncio. O dia devolve a você a sensação calma e firme de que tudo está no lugar."
+     "es": "Hoy busca el camino del medio. Rechaza los extremos, tanto en las tareas como en las conversaciones y en los gastos. Si se asoma una discusión, sé tú quien proponga el acuerdo. Alterna esfuerzo y pausas: una hora de trabajo, diez minutos de silencio. Un pie en la tierra y otro en el agua: así se sostiene el equilibrio.",
+     "pt": "Hoje, procure o meio-termo. Recuse os extremos — nas tarefas, nas conversas e nos gastos. Se uma discussão estiver se formando, seja você quem propõe o acordo. Alterne esforço e pausas: uma hora de trabalho, dez minutos de silêncio. Um pé na terra, outro na água — é assim que o equilíbrio se mantém."
     },
     "symbolism": {
      "ru": "Ангел с солнечным знаком на лбу переливает воду из чаши в чашу — живой поток чувств, который не должен застаиваться. Одна нога стоит на земле, другая — в воде: равновесие между материальным и эмоциональным. Треугольник в квадрате на груди — дух, вписанный в материю. Тропа за спиной ведёт к горам, над которыми сияет свет короны: путь к цели лежит через терпение и меру.",
@@ -4279,7 +4279,7 @@
      "pt": "Para o seu bem-estar, a tensão acumulada vinha procurando saída: corpo e mente não conseguem mais funcionar no limite. Se algo derrubou você, isso não é fraqueza, e sim um pedido de revisão da carga. Se pergunte: quais sinais eu vinha ignorando? O que importa agora é chão firme, descanso e o apoio de quem está perto de você."
     },
     "day_card": {
-     "ru": "Сегодня будьте готовы к неожиданностям — и не спешите называть их катастрофой. Если планы ломаются, отмените лишнее и займитесь главным. Правда, которая сегодня вскроется, — ваш союзник, даже если сначала неприятна. Вечером спросите себя: от какой иллюзии меня освободил этот день?",
+     "ru": "Сегодня будьте готовы к неожиданностям — и не спешите называть их катастрофой. Если планы ломаются, отмените лишнее и займитесь главным. Правда, которая может сегодня открыться, — ваш союзник, даже если сначала неприятна. Вечером спросите себя: от какой иллюзии меня освободил этот день?",
      "en": "Today, be ready for surprises — and don't rush to call them disasters. If plans break down, cancel the non-essential and focus on what matters most. Any truth that surfaces today is your ally, even if it stings at first. In the evening, ask yourself: what illusion did this day free me from?",
      "status": {
       "ru": "reviewed",
@@ -4287,8 +4287,8 @@
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy prepárate para las sorpresas y no corras a llamarlas catástrofe. Si los planes se rompen, deja de lado lo que puede esperar y ocúpate de lo esencial. Cualquier verdad que salga a la luz hoy es tu aliada, aunque al principio incomode. Por la noche pregúntate: ¿de qué ilusión me liberó este día?",
-     "pt": "Hoje, conte com surpresas — e não corra para chamá-las de desastre. Se os planos desmoronarem, cancele o supérfluo e cuide do essencial. Qualquer verdade que aparecer hoje é sua aliada, mesmo que arda no começo. À noite, se pergunte: de que ilusão este dia me libertou?"
+     "es": "Hoy prepárate para las sorpresas y no corras a llamarlas catástrofe. Si los planes se rompen, cancela lo que puede esperar y ocúpate de lo esencial. Cualquier verdad que salga a la luz hoy es tu aliada, aunque al principio incomode. Por la noche pregúntate: ¿de qué ilusión me liberó este día?",
+     "pt": "Hoje, conte com surpresas — e não corra para chamá-las de desastre. Se os planos desmoronarem, cancele o supérfluo e cuide do essencial. Qualquer verdade que aparecer hoje é sua aliada, mesmo que arda no começo. À noite, pergunte-se: de que ilusão este dia me libertou?"
     },
     "symbolism": {
      "ru": "Башня стоит на скале — конструкция, построенная гордыней на неподходящем основании. Молния сбивает корону с вершины: вспышка истины свергает ложную власть. Пламя вырывается из окон, и две фигуры падают вниз — старое понимание мира и его ложное толкование; падение здесь — освобождение из тюрьмы, которую принимали за крепость. Языки пламени в форме буквы йод — очищающий огонь духа.",
@@ -4608,16 +4608,16 @@
      "pt": "Depois de um trecho duro, a confiança com dinheiro ainda não voltou, e parece não haver luz à vista. Tudo se nivela mais devagar do que você queria, mas se nivela — repare nos pequenos avanços."
     },
     "health_reversed": {
-     "ru": "Силы в теле есть, просто усталость последних дней их заслоняет. Позвольте себе немного света и движения без цели «доказать» — ощущение лёгкости обычно приходит само, без спешки.",
-     "en": "The energy is in your body, recent fatigue just hides it from view. Give yourself some light and movement with no goal to 'prove' anything — lightness tends to show up on its own, without hurry.",
+     "ru": "Усталость последних дней заслоняет то, что вам в радость. Позвольте себе немного света и движения без цели «доказать»: звезда на карте льёт воду не спеша.",
+     "en": "The fatigue of recent days hides what you still enjoy. Give yourself some light and movement with no goal to 'prove' anything: the star on the card pours water without hurry.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Las fuerzas están en tu cuerpo; el cansancio de estos días simplemente las tapa. Permítete un poco de luz y de movimiento sin la meta de «demostrar» nada: la sensación de liviandad suele llegar sola, sin apuro.",
-     "pt": "A energia está no seu corpo, o cansaço destes dias apenas a esconde. Se permita um pouco de luz e movimento sem a meta de “provar” nada — a leveza costuma aparecer sozinha, sem pressa."
+     "es": "El cansancio de estos días tapa aquello que te da alegría. Permítete un poco de luz y de movimiento sin la meta de «demostrar» nada: la estrella de la carta vierte el agua sin apuro.",
+     "pt": "O cansaço destes dias esconde aquilo que dá alegria a você. Se permita um pouco de luz e movimento, sem a meta de “provar” nada: a estrela da carta derrama a água sem nenhuma pressa."
     }
    }
   },
@@ -4791,16 +4791,16 @@
      "pt": "Escutar por dentro é o convite da Lua: pensamentos ansiosos e sono agitado podem refletir uma tensão acumulada. Se pergunte o que exatamente preocupa você — e sobre o que você evita pensar. Um ritual suave à noite, um pouco de silêncio e colocar os pensamentos no papel ajudam a devolver o equilíbrio interno."
     },
     "day_card": {
-     "ru": "Сегодня не спешите с выводами. Если ситуация кажется запутанной — она и правда пока не ясна, и это нормально. Не назначайте решающих разговоров, перепроверяйте информацию и записывайте то, что приходит интуитивно: сны, догадки, ощущения. Завтра многое встанет на свои места.",
-     "en": "Don't rush to conclusions today. If a situation feels confusing, it genuinely isn't clear yet — and that's okay. Avoid scheduling decisive conversations, double-check information, and jot down what comes intuitively: dreams, hunches, gut feelings. Tomorrow, much of it will fall into place.",
+     "ru": "Сегодня не спешите с выводами. Если ситуация кажется запутанной — она и правда пока не ясна, и это нормально. Не назначайте решающих разговоров, перепроверяйте информацию и записывайте то, что приходит интуитивно: сны, догадки, ощущения. Через день-другой перечитайте записи: возможно, картина будет выглядеть иначе.",
+     "en": "Don't rush to conclusions today. If a situation feels confusing, it genuinely isn't clear yet — and that's okay. Avoid scheduling decisive conversations, double-check information, and jot down what comes intuitively: dreams, hunches, gut feelings. In a day or two, reread those notes — the picture may look different.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy no corras a sacar conclusiones. Si una situación se siente confusa, es porque todavía no está clara, y eso está bien. Evita fijar conversaciones decisivas, verifica los datos dos veces y anota lo que llegue por intuición: sueños, corazonadas, sensaciones. Mañana muchas piezas se acomodan solas.",
-     "pt": "Hoje, não corra para conclusões. Se uma situação parece confusa, é porque ela realmente ainda não está clara — e tudo bem. Evite marcar conversas decisivas, confira as informações duas vezes e anote o que chega pela intuição: sonhos, palpites, sensações. Amanhã boa parte disso se encaixa."
+     "es": "Hoy no corras a sacar conclusiones. Si una situación se siente confusa, es porque todavía no está clara, y eso está bien. Evita fijar conversaciones decisivas, verifica los datos dos veces y anota lo que llegue por intuición: sueños, corazonadas, sensaciones. En un día o dos relee esas notas: quizá el panorama se vea distinto.",
+     "pt": "Hoje, não corra para conclusões. Se uma situação parece confusa, é porque ela realmente ainda não está clara — e tudo bem. Evite marcar conversas decisivas, confira as informações duas vezes e anote o que chega pela intuição: sonhos, palpites, sensações. Daqui a um ou dois dias, releia essas anotações — o quadro pode parecer outro."
     },
     "symbolism": {
      "ru": "Луна с человеческим лицом растёт «стороной милосердия» и роняет капли — «росу мысли». Внизу пёс и волк воют на свет: приручённые и дикие страхи нашей природы. Из глубин водоёма выползает рак — смутные тревоги подсознания, которые поднимаются и снова уходят на дно. Тропа между двумя башнями ведёт в неизвестное: путь есть, но идти по нему придётся при отражённом, неверном свете.",
@@ -4863,16 +4863,16 @@
      "pt": "Condições que pareciam nebulosas vão se abrindo aos poucos — bom momento para reler o contrato com calma, sem pressa. As letras miúdas estão mais fáceis de enxergar agora do que há uma semana."
     },
     "health_reversed": {
-     "ru": "Тревожные мысли, которые мешали спать, понемногу отступают — туман рассеивается. Если беспокойство ещё возвращается по вечерам, запишите его на бумаге вместо того, чтобы носить в себе.",
-     "en": "The anxious thoughts that kept you up are slowly easing — the fog is lifting. If worry still returns in the evenings, put it on paper instead of carrying it alone.",
+     "ru": "Ночная тревога и дневная редко совпадают в размере. Проверьте вечерний страх при свете дня: что в нём устоит, а что вы додумали сами?",
+     "en": "Fear at night and fear by daylight are rarely the same size. Hold last night's worry up to the morning: what still stands, and what did you fill in yourself?",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Los pensamientos ansiosos que no te dejaban dormir aflojan de a poco — la niebla se despeja. Si la inquietud vuelve por las noches, ponla en papel en vez de cargarla sola.",
-     "pt": "Os pensamentos ansiosos que tiravam o seu sono vão cedendo aos poucos — a névoa se dispersa. Se a inquietação ainda volta à noite, coloque isso no papel em vez de carregar tudo sozinho."
+     "es": "El miedo de noche y el de pleno día casi nunca tienen el mismo tamaño. Contrasta a la luz de la mañana la inquietud de anoche: ¿qué se sostiene y qué pusiste tú de tu cosecha?",
+     "pt": "De noite o medo tem um tamanho; de dia, quase sempre tem outro. Olhe à luz do dia para a inquietação de ontem à noite: o que continua de pé e o que foi você que acrescentou?"
     }
    }
   },
@@ -5025,16 +5025,16 @@
      "pt": "Na carreira, chegam reconhecimento e sucesso merecido: o projeto funciona, os seus resultados aparecem, a sua reputação trabalha a seu favor. Ótimo momento para apresentações, visibilidade, lançar algo de que você se orgulha. Nada de modéstia excessiva — agora é hora de se mostrar."
     },
     "finances": {
-     "ru": "В финансах — стабильность и рост: доходы увеличиваются, долги отступают, появляется ощущение достатка. Можно позволить себе радость — покупку или поездку. Только не путайте щедрость с расточительностью на волне эйфории.",
-     "en": "Financially — stability and growth: income rises, debts recede, and a sense of plenty returns. You can afford a treat — a purchase or a trip. Just don't let the high spirits turn generosity into overspending.",
+     "ru": "В финансах Солнце — про стабильность и ощущение достатка. Складывается оно из простых вещей: доход, закрытый долг, привычка считать спокойно. Можно позволить себе радость — покупку или поездку. Только не путайте щедрость с расточительностью на волне эйфории.",
+     "en": "Financially — the Sun is about stability and a sense of plenty. That feeling rests on plain things: income, a debt closed, calmer counting. You can afford a treat — a purchase or a trip. Just don't let high spirits turn generosity into overspending.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "En lo económico, estabilidad y crecimiento: los ingresos suben, las deudas retroceden y vuelve la sensación de abundancia. Puedes darte un gusto: una compra o un viaje. Solo cuida que el buen ánimo no convierta la generosidad en derroche.",
-     "pt": "Nas finanças, vêm estabilidade e crescimento: a renda sobe, as dívidas recuam e volta a sensação de fartura. Dá para se dar um presente — uma compra ou uma viagem. Só não deixe a euforia transformar generosidade em gasto exagerado."
+     "es": "En lo económico, el Sol habla de estabilidad y de sensación de abundancia. Esa sensación se arma con cosas simples: un ingreso, una deuda cerrada, la costumbre de contar con calma. Puedes darte un gusto: una compra o un viaje. Solo cuida que el buen ánimo no vuelva derroche la generosidad.",
+     "pt": "Nas finanças, o Sol fala de estabilidade e de uma sensação de fartura. Ela se forma de coisas simples: a renda, uma dívida encerrada, o hábito de contar com calma. Dá para se dar uma alegria — uma compra ou uma viagem. Só não confunda generosidade com desperdício na onda da euforia."
     },
     "health": {
      "ru": "Солнце говорит о приливе жизненных сил и лёгкости в теле. Хороший момент спросить себя: что наполняет меня энергией, а что забирает? Больше света, движения и воздуха — простые вещи сейчас особенно поддерживают. Позвольте себе радость без чувства вины.",
@@ -5049,16 +5049,16 @@
      "pt": "Há vitalidade voltando e leveza no corpo: é disso que o Sol fala. Bom momento para se perguntar o que enche você de energia e o que a consome. Mais luz, movimento e ar fresco — as coisas simples nutrem especialmente agora. Se permita alegria sem culpa."
     },
     "day_card": {
-     "ru": "Сегодня ваш день. Планируйте важное на светлое время, говорите «да» приглашениям, выходите на солнце — буквально. Если давно хотели чем-то похвастаться или кого-то порадовать, сделайте это сейчас. Искренняя радость сегодня заразительна и вернётся к вам умноженной.",
-     "en": "Today is your day. Schedule what matters for daylight hours, say yes to invitations, get out into the sun — literally. If you've been meaning to share a win or make someone happy, do it now. Genuine joy is contagious today, and it will come back to you multiplied.",
+     "ru": "Сегодня ваш день. Планируйте важное на светлое время, говорите «да» приглашениям, выходите на солнце — буквально. Если давно хотели чем-то похвастаться или кого-то порадовать, сделайте это сейчас. Искренняя радость заразительна — понаблюдайте, как она отзывается в других.",
+     "en": "Today is your day. Schedule what matters for daylight hours, say yes to invitations, get out into the sun — literally. If you've been meaning to share a win or make someone happy, do it now. Genuine joy is contagious — notice how it lands with the people around you.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Hoy es tu día. Agenda lo importante en las horas de luz, dile que sí a las invitaciones, sal al sol — literalmente. Si venías queriendo contar un logro o alegrarle el día a alguien, hazlo ahora. La alegría sincera se contagia hoy y vuelve a ti multiplicada.",
-     "pt": "Hoje o dia é seu. Marque o que importa para as horas de luz, diga sim aos convites, saia ao sol — literalmente. Se você vinha querendo compartilhar uma conquista ou alegrar alguém, faça isso agora. A alegria sincera é contagiante hoje e volta para você multiplicada."
+     "es": "Hoy es tu día. Agenda lo importante en las horas de luz, dile que sí a las invitaciones, sal al sol, literalmente. Si venías queriendo contar un logro o alegrarle el día a alguien, hazlo ahora. La alegría sincera se contagia: observa cómo resuena en quienes te rodean.",
+     "pt": "Hoje o dia é todo seu. Marque o que importa para as horas de luz, diga sim aos convites, saia ao sol — literalmente. Se você vinha querendo compartilhar uma conquista ou alegrar alguém, faça isso agora. A alegria sincera é contagiante — repare em como ela chega às pessoas ao redor."
     },
     "symbolism": {
      "ru": "Обнажённый ребёнок на белом коне — простота и невинность, которым нечего скрывать; это, по Уэйту, «восстановленный мир» и мудрость в облике детства. Красное знамя в его руке — жизненная сила и победа. Огромное солнце с прямыми и волнистыми лучами — свет сознания, прямой, а не отражённый (в отличие от Луны). Подсолнухи за каменной стеной — расцвет, повернувшийся к свету; стена — сад прежней, защищённой жизни, из которого ребёнок уже выехал навстречу открытому миру.",
@@ -5121,16 +5121,16 @@
      "pt": "Financeiramente está tudo bem, mas a ansiedade ou a comparação impedem você de sentir isso — ou, ao contrário, o otimismo corre à frente dos números. Confira os fatos e reconheça o que já está bom."
     },
     "health_reversed": {
-     "ru": "Тело чувствует себя лучше, чем вам кажется, — просто вы сравниваете себя со «старой нормой» и не замечаете прогресса. Отметьте одну вещь, которая сегодня даётся легче, чем месяц назад.",
-     "en": "Physical energy is probably better than you think — you're comparing yourself to some 'old normal' and missing the progress. Notice one thing that comes easier today than it did a month ago.",
+     "ru": "Возможно, вы сравниваете себя со «старой нормой» — и за этой меркой трудно разглядеть что-то ещё. Попробуйте описать своё сегодня без сравнения с тем, как было раньше.",
+     "en": "You may be measuring yourself against some 'old normal', and that yardstick hides everything else. Try describing how today actually is, without holding it up against how things used to be.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Tu energía física está mejor de lo que crees — te comparas con la «normalidad de antes» y te pierdes el avance. Nota una cosa que hoy te sale más fácil que hace un mes.",
-     "pt": "O corpo está melhor do que você imagina — você se compara a um “antigo normal” e deixa de ver o progresso. Repare numa coisa que hoje sai mais fácil do que saía um mês atrás."
+     "es": "Quizá te estés midiendo con la «normalidad de antes», y detrás de esa vara cuesta ver todo lo demás. Prueba a describir cómo es tu día de hoy, sin ponerlo al lado de cómo eran antes las cosas.",
+     "pt": "Talvez você esteja se medindo por um “antigo normal”, e essa régua acaba escondendo tudo o que não cabe nela. Experimente descrever como o seu hoje é de fato, sem colocá-lo lado a lado com o jeito que as coisas eram antes."
     }
    }
   },
@@ -5545,16 +5545,16 @@
      "pt": "Nas finanças, o Mundo indica meta alcançada: a reserva que você queria, o empréstimo quitado, o nível de renda que buscava. Os investimentos dão frutos. Bom momento para consolidar o resultado e definir com calma o próximo objetivo."
     },
     "health": {
-     "ru": "Мир говорит об ощущении целостности: тело, чувства и мысли наконец в согласии. Хороший момент отметить, какой путь вы прошли в заботе о себе, и поблагодарить себя за него. Спросите себя: что помогает мне чувствовать себя целой — и как сохранить это ощущение?",
-     "en": "The World speaks of a sense of wholeness: body, feelings, and mind finally in accord. A good moment to notice how far you've come in caring for yourself — and to thank yourself for it. Ask: what helps me feel whole, and how can I keep that feeling alive?",
+     "ru": "Мир говорит об ощущении целостности: тело, чувства и мысли в согласии друг с другом. Хороший момент отметить, какой путь вы прошли в заботе о себе. Что помогает вам чувствовать себя в ладу с собой — и как это сохранить?",
+     "en": "The World speaks of a sense of wholeness: body, feelings and mind in accord. A good moment to notice how far you've come in caring for yourself. Ask: what helps me feel at ease with myself, and how can I keep that?",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Sentirte entera es de lo que habla El Mundo: el cuerpo, las emociones y el pensamiento por fin están de acuerdo. Buen momento para notar cuánto camino recorriste en cuidarte — y agradecértelo a ti misma. Pregúntate: ¿qué me ayuda a sentirme completa y cómo mantengo viva esa sensación?",
-     "pt": "Uma sensação de inteireza é o que o Mundo descreve: corpo, sentimentos e pensamentos finalmente em acordo. Bom momento para notar o quanto você avançou no cuidado consigo — e agradecer a si mesmo por isso. Pergunte: o que me ajuda a me sentir inteiro, e como manter essa sensação viva?"
+     "es": "El Mundo habla de una sensación de integridad: el cuerpo, las emociones y el pensamiento en sintonía. Buen momento para mirar el camino que llevas recorrido al cuidarte. Pregúntate: ¿qué me ayuda a sentirme en paz conmigo y cómo puedo conservarlo?",
+     "pt": "O Mundo fala de uma sensação de inteireza: corpo, sentimentos e pensamentos em acordo uns com os outros. Bom momento para notar o caminho que você percorreu no cuidado consigo. Pergunte: o que me ajuda a ficar em paz comigo, e como faço para manter isso?"
     },
     "day_card": {
      "ru": "Сегодня ставьте точки. Доведите до конца то, что тянется давно, — и позвольте себе почувствовать удовольствие от завершённого. Отметьте свой результат, даже маленький: скажите о нём вслух, запишите, поделитесь. Мир сегодня открыт вам — примите комплименты и приглашения.",
@@ -5629,16 +5629,16 @@
      "pt": "A meta financeira está quase ao alcance da mão, e ainda assim você ou não percebe isso, ou teme parar para fazer um balanço. Diga em voz alta o quanto já percorreu — isso também faz parte do caminho."
     },
     "health_reversed": {
-     "ru": "Ощущение целостности почти вернулось, но привычная рутина не даёт это заметить. Оглянитесь на путь, который вы прошли в заботе о себе, — он длиннее, чем кажется изнутри.",
-     "en": "The sense of wholeness has nearly returned, but routine keeps you from noticing it. Look back at how far you've come in caring for yourself — it's a longer road than it feels from inside.",
+     "ru": "Целостность — не то, что однажды возвращается насовсем: она собирается из обычных дней. Оглянитесь на путь, который вы прошли в заботе о себе, — он длиннее, чем кажется изнутри.",
+     "en": "Wholeness doesn't return once and for good — it gathers out of ordinary days. Look back at how far you've come in caring for yourself: it's longer than it feels from inside.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
       "es": "draft",
       "pt": "draft"
      },
-     "es": "Volvió casi por completo la sensación de integridad, pero la rutina de siempre no te deja notarlo. Mira hacia atrás el camino que hiciste cuidándote — es más largo de lo que parece desde adentro.",
-     "pt": "A sensação de inteireza quase voltou, mas a rotina de sempre não deixa você perceber. Olhe para trás e veja o quanto avançou no cuidado consigo: o caminho já é mais longo do que parece de dentro dele."
+     "es": "La integridad no vuelve de una vez y para siempre: se arma con los días comunes. Mira hacia atrás el camino que hiciste al cuidarte; es más largo de lo que parece desde adentro.",
+     "pt": "Inteireza não é algo que volta de uma vez e para sempre: ela se constrói com dias comuns. Olhe para trás, para o caminho que você percorreu no cuidado consigo — ele é mais longo do que parece de dentro."
     }
    }
   },
@@ -5898,8 +5898,8 @@
      }
     },
     "health": {
-     "ru": "Спокойная, ровная энергия. Хороший момент спросить себя: устраивает ли вас привычный ритм жизни, или он стал слишком тесным? Небольшое обновление рутины вернёт вкус к движению.",
-     "en": "Calm, steady energy. A good moment to ask yourself: does your usual rhythm still fit, or has it grown too tight? A small refresh of your routine will bring back your appetite for movement.",
+     "ru": "Спокойная, ровная энергия. Устраивает ли вас привычный ритм жизни — или он стал слишком тесным? Небольшое обновление рутины возвращает вкус к движению быстрее, чем большая перемена.",
+     "en": "Calm, steady energy. Does your usual rhythm still fit you, or has it grown too tight? A small refresh of a routine brings the appetite for movement back faster than a big change does.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6045,8 +6045,8 @@
      }
     },
     "finances": {
-     "ru": "Ваши вложения начинают окупаться, доход постепенно растёт. Возможна прибыль из «дальних» источников: удалённая работа, зарубежные проекты, новые рынки. Планируйте бюджет на перспективу, а не на неделю вперёд.",
-     "en": "Your investments are starting to pay off, and income may grow. Profit can come from \"distant\" sources: remote work, international projects. Plan for the long run, not just for the week.",
+     "ru": "Присмотритесь, какие вложения уже начали работать, а какие пока только обещают. Возможна прибыль из «дальних» источников: удалённая работа, зарубежные проекты, новые рынки. Планируйте бюджет на перспективу, а не на неделю вперёд.",
+     "en": "Take a look at which investments have started to work and which are still only promising. Profit can come from \"distant\" sources: remote work, international projects, new markets. Plan for the long run, not just for the week.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6340,7 +6340,7 @@
     },
     "love": {
      "ru": "В любви — искры: споры, ревность, борьба за внимание. Хорошая новость: за трением часто прячется живая страсть. Ссорьтесь честно — о проблеме, а не друг против друга. Одиноким — вокруг интересного вам человека может быть конкуренция.",
-     "en": "In love — sparks: arguments, jealousy, a tug-of-war for attention. The good news: friction often hides real passion. Fight fair — about the problem, not against each other. If you're single, expect some competition around the person you like.",
+     "en": "In love — sparks: arguments, jealousy, a tug-of-war for attention. The good news: friction often hides real passion. Fight fair — about the problem, not against each other. If you're single, there may be competition around the person you like.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6372,7 +6372,7 @@
     },
     "day_card": {
      "ru": "Сегодня возможны споры и толкотня мнений — не принимайте это близко к сердцу. Отстаивайте свою позицию спокойно и по делу, а лишние стычки пропускайте мимо. Избыток адреналина сбросьте движением: тренировка, быстрая прогулка, танцы.",
-     "en": "Expect some arguments and jostling opinions today — don't take it to heart. Defend your position calmly and on the merits, and let the pointless clashes pass you by. Burn off the extra adrenaline with movement: a workout, a brisk walk, dancing.",
+     "en": "Arguments and jostling opinions are possible today — try not to take them to heart. Defend your position calmly and on the merits, and let the pointless clashes pass you by. Burn off any extra adrenaline with movement: a workout, a brisk walk, dancing.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6566,8 +6566,8 @@
      }
     },
     "health_reversed": {
-     "ru": "Прогресс в самочувствии есть, а гордости за него как будто не хватает — хочется, чтобы кто-то заметил старания. Похвалите себя сами: этого достаточно, чтобы двигаться дальше.",
-     "en": "There's real progress in how you feel, but the pride in it feels thin — you want someone else to notice the effort. Praise yourself for it: that's reason enough to keep going.",
+     "ru": "Вы правда заботитесь о себе, а гордости за это как будто не хватает — хочется, чтобы старания признал кто-то ещё. Своё признание здесь работает не хуже чужого.",
+     "en": "The care you've put into yourself is real, but the pride in it feels thin — you'd like someone else to say it. Your own credit counts no less than anyone else's.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6788,8 +6788,8 @@
    },
    "content": {
     "general": {
-     "ru": "Восьмёрка Жезлов — карта стремительного движения. События, которые долго стояли на месте, вдруг набирают скорость: приходят ответы, новости, предложения. Это попутный ветер — жизнь говорит вам «да». Лучшее, что можно сделать, — не тормозить: отвечайте быстро, отправляйте, соглашайтесь, летите. Период задержек закончился, и всё, что вы запустили раньше, наконец приходит к цели.",
-     "en": "The Eight of Wands is a card of swift movement. Things that stood still for ages suddenly pick up speed: answers, news and offers come flying in. This is a tailwind — life is saying yes. The best thing you can do is not slow down: reply quickly, send it, agree, go. The season of delays is over, and what you set in motion is finally reaching its goal.",
+     "ru": "Восьмёрка Жезлов — карта стремительного движения. События, которые долго стояли на месте, вдруг набирают скорость: приходят ответы, новости, предложения. Это попутный ветер — жизнь говорит вам «да». Лучшее, что можно сделать, — не тормозить: отвечайте быстро, отправляйте, соглашайтесь, летите. Стрелы уже в воздухе — не разворачивайте их на полпути.",
+     "en": "The Eight of Wands is a card of swift movement. Things that stood still for ages suddenly pick up speed: answers, news and offers come flying in. This is a tailwind — life is saying yes. The best thing you can do is not slow down: reply quickly, send it, agree, go. The arrows are already in the air — don't turn them back halfway.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6804,8 +6804,8 @@
      }
     },
     "love": {
-     "ru": "В любви это «стрелы Амура»: стремительное развитие чувств, неожиданное сообщение, знакомство, которое быстро набирает обороты. В паре — оживление: поездка, признание, страстный период. Если ждёте ответа от человека — он уже близко. Не играйте в недоступность: сейчас честная скорость лучше любой тактики.",
-     "en": "In love these are Cupid's arrows: feelings develop fast, a message arrives out of the blue, a new acquaintance quickly gathers momentum. For couples — a revival: a trip, a confession, a passionate stretch. If you're waiting to hear from someone, the answer is close. Don't play hard to get: honest speed now beats any tactic.",
+     "ru": "В любви это «стрелы Амура»: стремительное развитие чувств, неожиданное сообщение, знакомство, которое быстро набирает обороты. В паре — оживление: поездка, признание, страстный период. Если ждёте ответа — стрелы летят в обе стороны. Не играйте в недоступность: честная скорость лучше любой тактики.",
+     "en": "In love these are Cupid's arrows: feelings develop fast, a message arrives out of the blue, a new acquaintance quickly gathers momentum. For couples — a revival: a trip, a confession, a passionate stretch. If you're waiting to hear back, the arrows fly both ways. Don't play hard to get: honest speed beats any tactic.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6960,8 +6960,8 @@
      }
     },
     "love": {
-     "ru": "В любви — настороженность после прежних ран: хочется близости, но страшно снова довериться. Партнёру порой достаётся оборона, предназначенная кому-то из прошлого. Признайте свою усталость и говорите о ней словами, а не колкостями. Если отношения переживают трудный период — он ближе к концу, чем кажется.",
-     "en": "In love — wariness after old wounds: you long for closeness but fear trusting again. Your partner sometimes meets defences built for someone from the past. Admit that you're tired and say it in words, not in barbs. If the relationship is going through a rough patch, the end of it is closer than it seems.",
+     "ru": "В любви — настороженность после прежних ран: хочется близости, но страшно снова довериться. Партнёру порой достаётся оборона, предназначенная кому-то из прошлого. Признайте свою усталость и говорите о ней словами, а не колкостями. Усталость от обороны легко принять за усталость от человека.",
+     "en": "In love — wariness after old wounds: you long for closeness but fear trusting again. Your partner sometimes meets defences built for someone from the past. Admit that you're tired and say it in words, not in barbs. Exhaustion from keeping guard is easily mistaken for exhaustion with the person.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -6976,8 +6976,8 @@
      }
     },
     "finances": {
-     "ru": "Финансовая устойчивость достигнута трудом, и её стоит беречь: подушка безопасности сейчас важнее рискованных вложений. Не давайте в долг из чувства вины. Если период был тяжёлым — самое сложное уже позади, держите курс.",
-     "en": "Your financial stability was earned the hard way, so guard it: a safety cushion matters more now than risky investments. Don't lend money out of guilt. If it's been a difficult stretch, the hardest part is behind you — stay the course.",
+     "ru": "Финансовая устойчивость достигнута трудом, и её стоит беречь: подушка безопасности сейчас важнее рискованных вложений. Не давайте в долг из чувства вины. Если период был тяжёлым, отметьте, что уже удалось удержать, — и держите курс.",
+     "en": "Your financial stability was earned the hard way, so guard it: a safety cushion matters more now than risky investments. Don't lend money out of guilt. If it's been a difficult stretch, notice what you've already managed to hold on to — and stay the course.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -7131,8 +7131,8 @@
      }
     },
     "finances": {
-     "ru": "Доход может расти, но вместе с ним растут обязательства: кредиты, помощь близким, расходы «по инерции». Проверьте, что из финансовой нагрузки действительно необходимо. Освободившись от лишнего, вы почувствуете, что денег стало больше, даже если сумма не изменилась.",
-     "en": "Income may be growing, but so are the obligations: loans, helping relatives, spending on autopilot. Check which parts of the financial load are truly necessary. Once you shed the excess, you'll feel richer even if the numbers haven't changed.",
+     "ru": "Доход может расти, но вместе с ним растут обязательства: кредиты, помощь близким, расходы «по инерции». Проверьте, что из финансовой нагрузки действительно необходимо. Ощущение достатка чаще меняется от снятой нагрузки, чем от выросшей суммы.",
+     "en": "Income may be growing, but so are the obligations: loans, helping relatives, spending on autopilot. Check which parts of the financial load are truly necessary. A sense of having enough shifts more often from a load lifted than from a bigger number.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -7147,8 +7147,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня снимите с себя хотя бы одно лишнее дело: передайте, перенесите, отмените. Прежде чем сказать «да» новой просьбе, сделайте паузу. Вечер посвятите не догонянию списка, а отдыху — мир не рухнет. Вы удивитесь, сколько сил появляется, когда ноша становится честной.",
-     "en": "Today, put down at least one unnecessary task: hand it over, reschedule it, cancel it. Before saying yes to a new request, pause. Give the evening to rest, not to catching up on the list — the world won't collapse. You'll be surprised how much strength returns when the load becomes an honest one.",
+     "ru": "Сегодня снимите с себя хотя бы одно лишнее дело: передайте, перенесите, отмените. Прежде чем сказать «да» новой просьбе, сделайте паузу. Вечер посвятите не догонянию списка, а отдыху — мир не рухнет. Часть сил уходит не на дела, а на то, что вы несёте по привычке.",
+     "en": "Today, put down at least one unnecessary task: hand it over, reschedule it, cancel it. Before saying yes to a new request, pause. Give the evening to rest, not to catching up on the list — the world won't collapse. Some strength goes not into the tasks, but into what you carry out of habit.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -7900,8 +7900,8 @@
      }
     },
     "career": {
-     "ru": "В работе Туз Кубков — дело, которое отзывается в сердце. Возможен проект, где важны творчество, забота о людях и атмосфера в команде. Хорошее время предложить идею, которая давно вас вдохновляет: её встретят теплее, чем вы ожидаете.",
-     "en": "In career, the Ace of Cups points to work that resonates with your heart. A project may appear where creativity, care for people and team atmosphere matter. It's a good time to pitch an idea that has long inspired you — it will be received more warmly than you expect.",
+     "ru": "В работе Туз Кубков — дело, которое отзывается в сердце. Возможен проект, где важны творчество, забота о людях и атмосфера в команде. Если давно вынашиваете идею, сейчас хороший момент её озвучить — тёплый отклик вполне возможен.",
+     "en": "In career, the Ace of Cups points to work that resonates with your heart. A project may appear where creativity, care for people and team atmosphere matter. If an idea has been inspiring you for a while, this is a good moment to voice it — a warm response is quite possible.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -8063,24 +8063,24 @@
      }
     },
     "finances": {
-     "ru": "В финансах — честные сделки и совместные решения: общий бюджет, договор, взаимовыгодный обмен. Деньги, связанные с партнёрством, сейчас в безопасности. Главное — проговаривать условия открыто, тогда недопониманий не будет.",
-     "en": "Financially — fair deals and shared decisions: a joint budget, a contract, a mutually beneficial exchange. Money tied to partnership is safe now. Just state the terms openly, and there will be no misunderstandings.",
+     "ru": "В финансах — честные сделки и совместные решения: общий бюджет, договор, взаимовыгодный обмен. Проговорите условия вслух: там, где о деньгах сказано прямо, недопониманию остаётся меньше места.",
+     "en": "Financially — fair deals and shared decisions: a joint budget, a contract, a mutually beneficial exchange. Say the terms out loud: where money is named plainly, there's less room for misunderstanding.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
      }
     },
     "health": {
-     "ru": "Карта напоминает: близость лечит. Обратите внимание, как отношения влияют на ваше состояние — рядом с кем вы расцветаете, а после кого чувствуете усталость? Ищите баланс между «отдавать» и «получать» — в нём ваш ресурс.",
-     "en": "The card reminds you that closeness heals. Notice how relationships affect your state — around whom do you bloom, and after whom do you feel drained? Seek the balance between giving and receiving; that's where your strength lives.",
+     "ru": "Карта напоминает: близость — это тоже забота о себе. Обратите внимание, как отношения влияют на ваше состояние — рядом с кем вы расцветаете, а после кого чувствуете усталость? Ищите баланс между «отдавать» и «получать» — в нём ваш ресурс.",
+     "en": "The card reminds you that closeness is a form of self-care too. Notice how relationships affect your state — around whom do you bloom, and after whom do you feel drained? Seek the balance between giving and receiving; that's where your strength lives.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
      }
     },
     "day_card": {
-     "ru": "Сегодня день диалога. Сделайте шаг навстречу: напишите сами, предложите встретиться, извинитесь, если давно собирались. Любое искреннее «давай поговорим» сегодня сработает лучше любых ухищрений. И не отказывайтесь от помощи — её предложат от чистого сердца, примите с благодарностью.",
-     "en": "Today is a day for dialogue. Take the first step: message first, suggest meeting, apologise if you've been meaning to. Any sincere \"let's talk\" will work today. And accept help — it will be offered wholeheartedly.",
+     "ru": "Сегодня день диалога. Сделайте шаг навстречу: напишите сами, предложите встретиться, извинитесь, если давно собирались. Искреннее «давай поговорим» сегодня дороже любых ухищрений. И если помощь предложат — не отказывайтесь, примите её с благодарностью.",
+     "en": "Today is a day for dialogue. Take the first step: message first, suggest meeting, apologise if you've been meaning to. A sincere \"let's talk\" is worth more than any tactic today. And if help is offered, don't turn it down — accept it with gratitude.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -8505,8 +8505,8 @@
      }
     },
     "reversed": {
-     "ru": "В перевёрнутом положении траур подходит к концу: боль отпускает, появляются силы принять случившееся и жить дальше. Возможно возвращение того, что казалось потерянным, — человека, надежды, веры в себя. Карта поддерживает: вы прошли трудное, впереди восстановление. Не возвращайтесь мыслями туда, где темно.",
-     "en": "Reversed, the mourning is ending: the pain loosens its grip, and you find strength to accept what happened and move on. Something that seemed lost may return — a person, a hope, faith in yourself. You've come through the hard part; recovery lies ahead. Don't let your thoughts drift back into the dark.",
+     "ru": "В перевёрнутом положении траур подходит к концу: боль отпускает, появляются силы принять случившееся и жить дальше. Возможно возвращение того, что казалось потерянным, — человека, надежды, веры в себя. Карта поддерживает: самое трудное вы уже прожили, и на это можно опереться. Не возвращайтесь мыслями туда, где темно.",
+     "en": "Reversed, the mourning is ending: the pain loosens its grip, and you find strength to accept what happened and move on. Something that seemed lost may return — a person, a hope, faith in yourself. You've come through the hard part, and that is something to lean on. Don't let your thoughts drift back into the dark.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -8692,7 +8692,7 @@
      }
     },
     "health": {
-     "ru": "Карта предлагает вернуть в жизнь то, что радовало раньше: любимое занятие из детства, игру, простое удовольствие без цели. Спросите себя: когда я в последний раз делала что-то просто так? Внутренний ребёнок — тоже источник сил.",
+     "ru": "Карта предлагает вернуть в жизнь то, что радовало раньше: любимое занятие из детства, игру, простое удовольствие без цели. Спросите себя: когда мне в последний раз доводилось сделать что-то просто так? Внутренний ребёнок — тоже источник сил.",
      "en": "The card invites you to bring back what once delighted you: a favourite childhood pastime, play, simple pleasure with no goal. Ask yourself: when did I last do something just because? Your inner child is a source of strength too.",
      "status": {
       "ru": "reviewed",
@@ -9002,8 +9002,8 @@
      }
     },
     "health": {
-     "ru": "Для самочувствия — сигнал усталости, которую вы давно не замечали. Спросите себя, что вас истощает и от чего пора отдохнуть. Смена обстановки, тишина, время наедине с собой сейчас восстановят лучше всего.",
-     "en": "For wellbeing — a signal of tiredness you have long overlooked. Ask yourself what drains you and what you need a rest from. A change of scenery, quiet, and time alone will restore you best right now.",
+     "ru": "Для самочувствия — сигнал усталости, которую вы давно не замечали. Спросите себя, что вас истощает и от чего пора отдохнуть. Присмотритесь, что даёт вам передышку: смена обстановки, тишина или время наедине с собой.",
+     "en": "For wellbeing — a signal of tiredness you have long overlooked. Ask yourself what drains you and what you need a rest from. Notice what gives you a breather: a change of scenery, quiet, or time alone.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -9165,7 +9165,7 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня — день маленького праздника. Утром загадайте желание: Девятка Кубков считается картой его исполнения. Побалуйте себя тем, что давно откладывали, — ужин, ванна, встреча с подругой. И заметьте, сколько хорошего в вашей жизни уже есть: благодарность притягивает продолжение.",
+     "ru": "Сегодня — день маленького праздника. Утром загадайте желание: Девятка Кубков считается картой его исполнения. Побалуйте себя тем, что давно откладывали, — ужин, ванна, встреча с близким человеком. И заметьте, сколько хорошего в вашей жизни уже есть: благодарность притягивает продолжение.",
      "en": "Today is a day for a small celebration. Make a wish in the morning: the Nine of Cups is traditionally considered the card of their fulfilment. Treat yourself to something long postponed — a dinner, a bath, an evening with a friend. And notice how much good is already in your life: gratitude invites more.",
      "status": {
       "ru": "reviewed",
@@ -9451,7 +9451,7 @@
      }
     },
     "career": {
-     "ru": "В работе — свежая идея, творческое предложение, стажировка или новое обучение. Как человек — молодой коллега с большим потенциалом, которому нужна ваша поддержка и вера. Совет карты: не бойтесь показаться неопытной — искренний интерес сейчас ценнее уверенного вида.",
+     "ru": "В работе — свежая идея, творческое предложение, стажировка или новое обучение. Как человек — молодой коллега с большим потенциалом, которому нужна ваша поддержка и вера. Совет карты: не бойтесь признать, что опыта пока мало, — искренний интерес сейчас ценнее уверенного вида.",
      "en": "At work — a fresh idea, a creative offer, an internship or new studies. As a person — a young colleague with potential who needs your support. The card's advice: don't be afraid of looking inexperienced — genuine interest is worth more right now than a confident front.",
      "status": {
       "ru": "reviewed",
@@ -9785,8 +9785,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня главный инструмент — чуткость. Прислушивайтесь к интуиции: первое ощущение о человеке или ситуации окажется верным. Кому-то рядом может понадобиться ваше тепло — подарите его, но без самопожертвования. Вечером спросите себя: какие чувства были сегодня и о чём они говорят?",
-     "en": "Today your main instrument is sensitivity. Listen to your intuition: the first impression of a person or situation will prove right. Someone near you may need your warmth — offer it, but without self-sacrifice. In the evening ask yourself: what did I feel today, and what is it telling me?",
+     "ru": "Сегодня главный инструмент — чуткость. Прислушивайтесь к интуиции: первое ощущение о человеке или ситуации стоит заметить, а не отмахнуться от него. Кому-то рядом может понадобиться ваше тепло — подарите его, но без самопожертвования. Вечером спросите себя: какие чувства были сегодня и о чём они говорят?",
+     "en": "Today your main instrument is sensitivity. Listen to your intuition: a first impression of a person or situation is worth noticing rather than dismissing. Someone near you may need your warmth — offer it, but without self-sacrifice. In the evening ask yourself: what did I feel today, and what is it telling me?",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -9940,8 +9940,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня будьте самым спокойным человеком в комнате. Если вокруг заштормит — эмоции, дедлайны, чужие драмы, — не ныряйте в волну: наблюдайте, дышите, отвечайте мягко. Кому-то понадобится ваш совет — дайте его без назиданий. Вечером похвалите себя за выдержку.",
-     "en": "Today, be the calmest person in the room. If a storm rises around you — emotions, deadlines, other people's dramas — don't dive into the wave: observe, breathe, answer gently. Someone will need your advice — give it without lecturing. In the evening, credit yourself for your composure.",
+     "ru": "Сегодня будьте самым спокойным человеком в комнате. Если вокруг заштормит — эмоции, дедлайны, чужие драмы, — не ныряйте в волну: наблюдайте, дышите, отвечайте мягко. Если у вас попросят совета — дайте его без назиданий. Вечером похвалите себя за выдержку.",
+     "en": "Today, be the calmest person in the room. If a storm rises around you — emotions, deadlines, other people's dramas — don't dive into the wave: observe, breathe, answer gently. If someone asks for your advice, give it without lecturing. In the evening, credit yourself for your composure.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10250,8 +10250,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня не убегайте от решения, которое уже давно ждёт. Не обязательно решать всё сразу — достаточно честно взглянуть на ситуацию: выписать «за» и «против», задать прямой вопрос, услышать ответ. Вечером заметите: неизвестность пугала сильнее, чем правда.",
-     "en": "Today, don't run from the decision that has long been waiting. You don't have to settle everything at once — just look at the situation honestly: list the pros and cons, ask the direct question, hear the answer. By evening you'll notice: the unknown was scarier than the truth.",
+     "ru": "Сегодня не убегайте от решения, которое уже давно ждёт. Не обязательно решать всё сразу — достаточно честно взглянуть на ситуацию: выписать «за» и «против», задать прямой вопрос, услышать ответ. Неизвестность почти всегда громче правды.",
+     "en": "Today, don't run from the decision that has long been waiting. You don't have to settle everything at once — just look at the situation honestly: list the pros and cons, ask the direct question, hear the answer. The unknown is almost always louder than the truth.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10282,8 +10282,8 @@
      }
     },
     "finances_reversed": {
-     "ru": "Цифры, на которые вы боялись смотреть, наконец складываются в понятную картину: счёт, долг, реальный остаток на карте. Знать тяжелее, чем не знать, всего один вечер — дальше становится легче.",
-     "en": "The numbers you were afraid to face are finally coming into focus: a bill, a debt, the real balance on your card. Knowing feels harder than not knowing for exactly one evening; after that it gets easier.",
+     "ru": "Цифры, на которые вы боялись смотреть, наконец складываются в понятную картину: счёт, долг, реальный остаток на карте. Знать тяжелее, чем не знать, — зато с цифрами уже можно что-то делать.",
+     "en": "The numbers you avoided finally add up: a bill, a debt, the real balance on your card. Knowing is harder than not knowing — but numbers are something you can act on.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10357,8 +10357,8 @@
    },
    "content": {
     "general": {
-     "ru": "Тройка Мечей — карта сердечной боли: разочарование, разрыв, ранящие слова или горькая правда. Это одна из самых прямых карт колоды, и первое, что она говорит: вам действительно больно, и это нормально. Но у неё есть и вторая часть: дождь на карте заканчивается. Боль, которую признали и прожили, очищает — и постепенно отпускает. Вы не останетесь в этой точке.",
-     "en": "The Three of Swords is the card of heartache: disappointment, a rupture, wounding words or a bitter truth. It is one of the deck's most direct cards, and it says first: yes, this really hurts, and that is okay. But it has a second part: the rain on this card ends. Pain that is acknowledged and lived through cleanses — and gradually lets go. You will not stay here.",
+     "ru": "Тройка Мечей — карта сердечной боли: разочарование, разрыв, ранящие слова или горькая правда. Это одна из самых прямых карт колоды, и первое, что она говорит: вам действительно больно, и это нормально. Но у неё есть и вторая часть: дождь на карте заканчивается. Боль, которую признали и прожили, очищает — и постепенно отпускает. Эта точка — не вся история.",
+     "en": "The Three of Swords is the card of heartache: disappointment, a rupture, wounding words or a bitter truth. It is one of the deck's most direct cards, and it says first: yes, this really hurts, and that is okay. But it has a second part: the rain on this card ends. Pain that is acknowledged and lived through cleanses — and gradually lets go. This point is not the whole story.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10405,8 +10405,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня возможны ранящие слова или неприятная новость. Не прокручивайте обиду по кругу: признайте чувство, назовите его, дайте ему место. Если больно — поплачьте, это не слабость. К вечеру дождь стихнет. Бережность к себе сегодня важнее продуктивности.",
-     "en": "Today may bring wounding words or unwelcome news. Don't replay the hurt on a loop: acknowledge the feeling, name it, give it room. If it hurts — cry; that is not weakness. By evening the rain will ease. Gentleness with yourself matters more today than productivity.",
+     "ru": "Сегодня возможны ранящие слова или неприятная новость. Не прокручивайте обиду по кругу: признайте чувство, назовите его, дайте ему место. Если больно — поплачьте, это не слабость. К вечеру оглянитесь: дождь всё ещё идёт? Бережность к себе сегодня важнее продуктивности.",
+     "en": "Today may bring wounding words or unwelcome news. Don't replay the hurt on a loop: acknowledge the feeling, name it, give it room. If it hurts — cry; that is not weakness. By evening, look again: is the rain still falling? Gentleness with yourself matters more today than productivity.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10562,8 +10562,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня — день тишины. Не планируйте подвигов: сделайте необходимое и оставьте себе пространство для покоя. Полчаса без телефона, ранний сон, отменённая необязательная встреча — маленькие решения в свою пользу. Мир подождёт, а вы вернётесь к нему сильнее.",
-     "en": "Today is a day of quiet. Don't plan any feats: do what is necessary and leave room for stillness. Half an hour without your phone, an early night, a cancelled optional meeting — small decisions in your own favour. The world will wait, and you will return to it stronger.",
+     "ru": "Сегодня — день тишины. Не планируйте подвигов: сделайте необходимое и оставьте себе пространство для покоя. Полчаса без телефона, ранний сон, отменённая необязательная встреча — маленькие решения в свою пользу. Мир подождёт — заметьте, что даёт вам такая пауза.",
+     "en": "Today is a day of quiet. Don't plan any feats: do what is necessary and leave room for stillness. Half an hour without your phone, an early night, a cancelled optional meeting — small decisions in your own favour. The world will wait — notice what such a pause gives back to you.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10757,8 +10757,8 @@
      }
     },
     "health_reversed": {
-     "ru": "Напряжение от долгого конфликта постепенно отпускает тело: дышится свободнее, зажатость в плечах слабеет. Этот сдвиг подсказывает, что перемирие уже началось — в том числе внутри.",
-     "en": "The tension from a long conflict is easing out of your body: breathing loosens, the tightness in your shoulders fades. That shift is a sign the truce has already begun — inside as well.",
+     "ru": "Когда долгий конфликт идёт на спад, плечи узнают об этом раньше головы. Перемирие внутри иногда наступает раньше, чем снаружи.",
+     "en": "When a long conflict winds down, the shoulders learn of it before the head does. A truce on the inside sometimes arrives before anything changes outside.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10824,8 +10824,8 @@
    },
    "content": {
     "general": {
-     "ru": "Шестёрка Мечей — карта перехода к спокойным водам. Трудный период отступает: вы уходите от того, что ранило, — физически или внутренне. Пусть на сердце ещё грусть, курс верный: дальше будет легче. Не требуйте от себя мгновенной радости — переправа требует времени. Берите с собой опыт, а не тяжесть, и позвольте течению помочь вам.",
-     "en": "The Six of Swords is the card of passage to calmer waters. A difficult period is receding: you are moving away from what hurt you — physically or within. Though sadness may still linger, the course is right: it gets easier from here. Don't demand instant joy of yourself — a crossing takes time. Take the experience with you, not the weight, and let the current help you.",
+     "ru": "Шестёрка Мечей — карта перехода к спокойным водам. Трудный период отступает: вы уходите от того, что ранило, — физически или внутренне. Пусть на сердце ещё грусть, курс верный: печаль на середине пути — не признак ошибки. Не требуйте от себя мгновенной радости — переправа требует времени. Берите с собой опыт, а не тяжесть, и позвольте течению помочь вам.",
+     "en": "The Six of Swords is the card of passage to calmer waters. A difficult period is receding: you are moving away from what hurt you — physically or within. Though sadness may still linger, the course is right: sorrow midway is not a sign of a wrong turn. Don't demand instant joy of yourself — a crossing takes time. Take the experience with you, not the weight, and let the current help you.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10840,16 +10840,16 @@
      }
     },
     "love": {
-     "ru": "В любви — выход из бурь: после ссор или кризиса отношения входят в спокойное русло. Возможны дистанция или переезд, которые изменят всё к лучшему. Одиноким — время отплыть от прошлого: старая история отпускает, впереди тише и светлее.",
-     "en": "In love — emerging from the storms: after quarrels or a crisis, the relationship enters calmer waters. Distance or a move may change things for the better. For singles — time to sail away from the past: an old story is letting go, and ahead it is quieter and brighter.",
+     "ru": "В любви — выход из бурь: после ссор или кризиса возможен более спокойный период. Если возникнет дистанция или переезд — чаще это передышка, а не конец истории. Одиноким — время отплыть от прошлого: старая история постепенно отпускает.",
+     "en": "In love — emerging from the storms: after quarrels or a crisis, a calmer stretch becomes possible. If distance or a move comes up, it is more often a breather than an ending. For singles — time to sail away from the past: an old story is quietly loosening its grip.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
      }
     },
     "career": {
-     "ru": "В работе — переход: смена проекта, команды, места или подхода. Перемены могут быть вынужденными, но ведут к лучшему. Двигайтесь постепенно, без резких манёвров: сейчас важно не победить, а спокойно переправиться. Помощь проводника — коллеги или наставника — примите с благодарностью.",
-     "en": "At work — a transition: a change of project, team, place or approach. The change may be forced, but it leads somewhere better. Move gradually, without sharp manoeuvres: the point now is not to win but to cross calmly. Accept a guide's help — a colleague or mentor — with gratitude.",
+     "ru": "В работе — переход: смена проекта, команды, места или подхода. Перемены могут быть вынужденными — попробуйте разглядеть, что они открывают. Двигайтесь постепенно, без резких манёвров: сейчас важно не победить, а спокойно переправиться. Помощь проводника — коллеги или наставника — примите с благодарностью.",
+     "en": "At work — a transition: a change of project, team, place or approach. The change may be forced — look for what it opens up. Move gradually, without sharp manoeuvres: the point now is not to win but to cross calmly. Accept a guide's help — a colleague or mentor — with gratitude.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -10864,8 +10864,8 @@
      }
     },
     "health": {
-     "ru": "Для самочувствия — восстановление после трудной полосы: напряжение спадает медленно, и это нормально. Помогает смена обстановки, даже маленькая: другой маршрут, вода, тишина. Замечайте признаки того, что вам уже легче, — они есть.",
-     "en": "For wellbeing — recovery after a rough stretch: tension eases slowly, and that is normal. A change of scenery helps, even a small one: a different route, water, quiet. Notice the signs that you already feel lighter — they are there.",
+     "ru": "Для самочувствия — время отнестись к себе бережно после трудной полосы. Помогает смена обстановки, даже маленькая: другой маршрут, вода, тишина. Спросите себя, что помогает вам выдохнуть, — и дайте этому место.",
+     "en": "For wellbeing — a time to treat yourself gently after a rough stretch. A change of scenery helps, even a small one: a different route, water, quiet. Ask yourself what helps you breathe out — and make room for it.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -11182,8 +11182,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня проверьте свои «не могу» на прочность. Выберите одно ограничение, которое кажется незыблемым, и спросите: это правда или привычка? Сделайте маленький шаг за его пределы — напишите, спросите, попробуйте. К вечеру заметите: стены оказались тоньше, чем выглядели утром.",
-     "en": "Today, test your \"I can'ts\". Pick one limit that feels set in stone and ask: is this true, or just habit? Take one small step past it — write the message, ask the question, give it a try. By evening you'll notice the walls were thinner than they looked this morning.",
+     "ru": "Сегодня проверьте свои «не могу» на прочность. Выберите одно ограничение, которое кажется незыблемым, и спросите: это правда или привычка? Сделайте маленький шаг за его пределы — напишите, спросите, попробуйте. Такие стены часто оказываются тоньше, чем выглядят с утра.",
+     "en": "Today, test your \"I can'ts\". Pick one limit that feels set in stone and ask: is this true, or just habit? Take one small step past it — write the message, ask the question, give it a try. Walls like that often turn out thinner than they look in the morning.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -11377,8 +11377,8 @@
      }
     },
     "health_reversed": {
-     "ru": "Сон постепенно возвращается, и голова меньше держится за худшие сценарии. Если тревога перед сном всё ещё сильна, попробуйте тёплый душ или тишину без телефона вместо прокручивания мыслей.",
-     "en": "Sleep is gradually returning, and the mind clings less to worst-case scenarios. If bedtime anxiety is still strong, try a warm shower or quiet without your phone instead of replaying thoughts.",
+     "ru": "Обратите внимание, как засыпается в эти дни и за какие сценарии голова держится крепче всего. Если тревога перед сном сильна, попробуйте тёплый душ или тишину без телефона.",
+     "en": "Notice how sleep is coming these days, and which scenarios the mind holds onto hardest. If bedtime anxiety is still strong, try a warm shower or quiet without your phone.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -11532,8 +11532,8 @@
      }
     },
     "health_reversed": {
-     "ru": "Самое тяжёлое уже позади: силы возвращаются понемногу, хоть и не сразу. Если продолжаете жить в режиме «надо потерпеть ещё немного», это как раз сигнал остановиться и дать себе полноценный отдых.",
-     "en": "The hardest part is behind you — strength is slowly coming back, even if not all at once. If you're still running on \"just a bit more endurance\", that's the sign to stop and let yourself truly rest.",
+     "ru": "После трудной полосы режим «надо потерпеть ещё немного» умеет держаться дольше самой полосы. Если эта фраза всё ещё звучит внутри, это повод остановиться и дать себе полноценный отдых.",
+     "en": "After a hard stretch, the 'just a bit more endurance' setting can outlast the stretch itself. If that phrase is still running, that's a reason to stop and rest properly.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -11957,8 +11957,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня выбирайте ясность: скажите прямо то, что давно формулируете в голове, — спокойно и без обвинений. Хороший день для важного разговора, наведения порядка в делах и отказа от того, что вам не подходит. Правда, сказанная с уважением, сегодня укрепит, а не разрушит.",
-     "en": "Today, choose clarity: say out loud what you've long been phrasing in your head — calmly and without blame. It's a good day for an important conversation, for putting your affairs in order, and for declining what doesn't suit you. Truth spoken with respect will strengthen things today, not break them.",
+     "ru": "Сегодня выбирайте ясность: скажите прямо то, что давно формулируете в голове, — спокойно и без обвинений. Хороший день для важного разговора, наведения порядка в делах и отказа от того, что вам не подходит. Правда, сказанная с уважением, звучит иначе, чем брошенная в лоб.",
+     "en": "Today, choose clarity: say out loud what you've long been phrasing in your head — calmly and without blame. It's a good day for an important conversation, for putting your affairs in order, and for declining what doesn't suit you. Truth spoken with respect sounds nothing like truth thrown bluntly.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -12222,8 +12222,8 @@
    },
    "content": {
     "general": {
-     "ru": "Туз Пентаклей — это рука, протягивающая вам вполне осязаемый подарок: новую возможность в работе, деньгах или доме. Семя будущего благополучия уже у вас в ладони, но ему нужна почва — конкретные шаги, а не только мечты. Хорошее время для стартов: новая должность, первый взнос, переезд. Начните с малого, и оно вырастет.",
-     "en": "The Ace of Pentacles is a hand offering you a very tangible gift: a fresh opportunity in work, money or home. The seed of future prosperity is already in your palm, but it needs soil — concrete steps, not just dreams. A good time for beginnings: a new role, a first payment, a move. Start small and let it grow.",
+     "ru": "Туз Пентаклей — это рука, протягивающая вам вполне осязаемый подарок: новую возможность в работе, деньгах или доме. Семя будущего благополучия уже у вас в ладони, но ему нужна почва — конкретные шаги, а не только мечты. Хорошее время для стартов: новая должность, первый взнос, переезд. Начните с малого — и наблюдайте, что из этого растёт.",
+     "en": "The Ace of Pentacles is a hand offering you a very tangible gift: a fresh opportunity in work, money or home. The seed of future prosperity is already in your palm, but it needs soil — concrete steps, not just dreams. A good time for beginnings: a new role, a first payment, a move. Start small and watch what grows from it.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -12580,8 +12580,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня хороший день для совместных дел: рабочая встреча, общий проект, просьба о совете. Покажите то, что умеете, — не из хвастовства, а чтобы вас видели. И похвалите чужой вклад: признание, которое вы дарите другим, обязательно возвращается.",
-     "en": "Today favours joint efforts: a work meeting, a shared project, asking for advice. Show what you can do — not to boast, but to be seen. And praise someone else's contribution: the recognition you give away always finds its way back.",
+     "ru": "Сегодня хороший день для совместных дел: рабочая встреча, общий проект, просьба о совете. Покажите то, что умеете, — не из хвастовства, а чтобы вас видели. И похвалите чужой вклад: признание, которое вы дарите другим, обычно возвращается.",
+     "en": "Today favours joint efforts: a work meeting, a shared project, asking for advice. Show what you can do — not to boast, but to be seen. And praise someone else's contribution: the recognition you give away tends to find its way back.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -12933,8 +12933,8 @@
      }
     },
     "health_reversed": {
-     "ru": "Силы понемногу возвращаются после изматывающего периода. Позвольте себе восстанавливаться не спеша и не требуйте от тела мгновенно быть прежним.",
-     "en": "Strength is slowly coming back after an exhausting stretch. Let yourself recover at your own pace, without demanding your body instantly be as before.",
+     "ru": "Изматывающий период оставляет след, и торопить себя после него — привычный соблазн. Замечайте, что даёт вам опору сейчас, а не то, каким ваш темп был раньше.",
+     "en": "An exhausting stretch leaves its mark, and rushing yourself afterwards is a familiar temptation. Notice what gives you steady ground now, rather than how your pace used to look.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -13048,8 +13048,8 @@
      }
     },
     "day_card": {
-     "ru": "День взаимопомощи: поделитесь тем, чего у вас в избытке, — временем, знанием, деньгами, добрым словом. И примите то, что предлагают вам, без «ой, не стоило». Заметьте, как приятно бывать на обеих сторонах обмена: щедрость сегодня возвращается быстрее обычного.",
-     "en": "A day of mutual help: share what you have in abundance — time, knowledge, money, a kind word. And accept what is offered to you without \"oh, you shouldn't have\". Notice how good it feels to stand on both sides of the exchange: today generosity returns faster than usual.",
+     "ru": "День взаимопомощи: поделитесь тем, чего у вас в избытке, — временем, знанием, деньгами, добрым словом. И примите то, что предлагают вам, без «ой, не стоило». Заметьте, как приятно бывать на обеих сторонах обмена и что меняется, когда вы позволяете помочь и себе.",
+     "en": "A day of mutual help: share what you have in abundance — time, knowledge, money, a kind word. And accept what is offered to you without \"oh, you shouldn't have\". Notice how good it feels to stand on both sides of the exchange — and what shifts when you let yourself be helped too.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -13172,8 +13172,8 @@
      }
     },
     "love": {
-     "ru": "В любви — этап оценки: отношения развиваются, но медленно, и вы спрашиваете себя, туда ли вложено сердце. Не торопите чувства и не делайте выводов на пике усталости. Одиноким карта советует терпение: сейчас зреет то, что проявится позже.",
-     "en": "In love — a season of assessment: the relationship is growing, but slowly, and you wonder whether your heart is invested in the right place. Don't rush the feelings, and don't draw conclusions at the peak of tiredness. For singles the card counsels patience: something is ripening now that will show itself later.",
+     "ru": "В любви — этап оценки: отношения развиваются, но медленно, и вы спрашиваете себя, туда ли вложено сердце. Не торопите чувства и не делайте выводов на пике усталости. Одиноким карта советует терпение: сколько времени вы обычно даёте тому, что растёт медленно?",
+     "en": "In love — a season of assessment: the relationship is growing, but slowly, and you wonder whether your heart is invested in the right place. Don't rush the feelings, and don't draw conclusions at the peak of tiredness. For singles the card counsels patience: how much time do you usually give to something that grows slowly?",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -13204,8 +13204,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня — день ревизии, а не рывка. Посмотрите на свои проекты и вложения: что даёт плоды, а что просто отнимает силы? Позвольте себе паузу без чувства вины: остановиться и подумать — тоже работа. Решения, принятые сегодня, сэкономят вам месяцы.",
-     "en": "Today is for review, not for a sprint. Look at your projects and investments: what is bearing fruit, and what merely drains you? Allow yourself a pause without guilt: stopping to think is work too. The decisions you make today will save you months.",
+     "ru": "Сегодня — день ревизии, а не рывка. Посмотрите на свои проекты и вложения: что даёт плоды, а что просто отнимает силы? Позвольте себе паузу без чувства вины: остановиться и подумать — тоже работа. Решения, принятые сегодня, могут сэкономить вам месяцы.",
+     "en": "Today is for review, not for a sprint. Look at your projects and investments: what is bearing fruit, and what merely drains you? Allow yourself a pause without guilt: stopping to think is work too. The decisions you make today can save you months.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -13801,8 +13801,8 @@
      }
     },
     "career": {
-     "ru": "Отличная карта для учёбы, стажировки, первой работы, нового проекта. Вы в начале пути — и это преимущество: свежий взгляд плюс готовность впитывать. Берите задачи «на вырост», задавайте вопросы, ищите наставника. Ваше прилежание заметят. Хорошие новости о работе тоже возможны.",
-     "en": "An excellent card for study, internships, a first job, a new project. You are at the start of the road — and that is an advantage: a fresh eye plus a readiness to absorb. Take on stretch tasks, ask questions, look for a mentor. Your diligence will be noticed. Good news about work is also possible.",
+     "ru": "Отличная карта для учёбы, стажировки, первой работы, нового проекта. Вы в начале пути — и это преимущество: свежий взгляд плюс готовность впитывать. Берите задачи «на вырост», задавайте вопросы, ищите наставника. Прилежание — как раз то, что обычно замечают. Хорошие новости о работе тоже возможны.",
+     "en": "An excellent card for study, internships, a first job, a new project. You are at the start of the road — and that is an advantage: a fresh eye plus a readiness to absorb. Take on stretch tasks, ask questions, look for a mentor. Diligence tends to get noticed. Good news about work is also possible.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
@@ -13980,8 +13980,8 @@
      }
     },
     "day_card": {
-     "ru": "Сегодня — день методичности. Не хватайтесь за новое: доведите до конца начатое, разберите накопившееся, сделайте скучное, но важное. Двигайтесь в своём темпе и не сравнивайте себя с более быстрыми. Вечером вы будете довольны: «сделано» сильнее, чем «задумано».",
-     "en": "Today is a day for method. Don't grab at anything new: finish what you started, clear the backlog, do the boring-but-important thing. Move at your own pace and don't compare yourself with faster people. By evening you'll be satisfied: \"done\" is stronger than \"planned\".",
+     "ru": "Сегодня — день методичности. Не хватайтесь за новое: доведите до конца начатое, разберите накопившееся, сделайте скучное, но важное. Двигайтесь в своём темпе и не сравнивайте себя с более быстрыми. Этот рыцарь едет шагом — и доезжает: «сделано» сильнее, чем «задумано».",
+     "en": "Today is a day for method. Don't grab at anything new: finish what you started, clear the backlog, do the boring-but-important thing. Move at your own pace and don't compare yourself with faster people. This knight rides at a walk — and arrives: \"done\" is stronger than \"planned\".",
      "status": {
       "ru": "reviewed",
       "en": "reviewed"
