@@ -212,18 +212,36 @@ describe('toRows', () => {
   });
 });
 
-describe('язык без переводов контента (es/pt до задачи 28) — спека 27', () => {
-  it('ищет по английским словам и стеммит английскими окончаниями, а не падает', () => {
+describe('язык текста может отличаться от языка пользователя (спека 27, обновлено при приёмке L-1)', () => {
+  // Синтетическая карта только с ru/en: «язык без перевода» нужен тесту всегда, а реальные
+  // карты переводятся волнами задачи 28 — фикстура из живого контента протухла с L-1,
+  // когда fool получил испанские слова.
+  const enOnly = {
+    ...fool,
+    name: { ru: fool.name.ru, en: fool.name.en },
+    keywords: { ru: fool.keywords.ru, en: fool.keywords.en },
+    search: { ru: fool.search.ru, en: fool.search.en },
+  };
+
+  it('язык без переводов ищет по английским словам и стеммит английскими окончаниями', () => {
     // у карты нет name.es → текст берётся из en, окончания — английские
-    expect(matchesQuery(fool, 'fool', 'es')).toBe(true);
+    expect(matchesQuery(enOnly, 'fool', 'es')).toBe(true);
     // поисковое слово en «risk» находится по форме «risks» ТОЛЬКО английским стеммингом
     // (русские окончания «s» не срежут, префикс тоже не совпадёт) — так проверяется, что
     // окончания берутся по языку текста, а не по выбранному языку
-    expect(matchesQuery(fool, 'risks', 'pt')).toBe(true);
-    expect(matchesQuery(fool, 'дурак', 'es')).toBe(false);
+    expect(matchesQuery(enOnly, 'risks', 'pt')).toBe(true);
+    expect(matchesQuery(enOnly, 'дурак', 'es')).toBe(false);
+  });
+
+  it('переведённая карта (fool после L-1) ищется своими словами, а не английскими', () => {
+    expect(matchesQuery(fool, 'loco', 'es')).toBe(true); // name.es «El Loco»
+    expect(matchesQuery(fool, 'riesgo', 'es')).toBe(true); // search.es
+    expect(matchesQuery(fool, 'risco', 'pt')).toBe(true); // search.pt
+    // язык названия испанский → источник слов испанский, английское слово больше не находит
+    expect(matchesQuery(fool, 'risks', 'es')).toBe(false);
   });
 
   it('фильтрация всей колоды на pt не бросает и что-то находит', () => {
-    expect(filterCards(cards, { query: 'sword', filter: 'all', lang: 'pt' }).length).toBeGreaterThan(0);
+    expect(filterCards(cards, { query: 'louco', filter: 'all', lang: 'pt' }).length).toBeGreaterThan(0);
   });
 });

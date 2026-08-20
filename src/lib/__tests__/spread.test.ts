@@ -73,8 +73,9 @@ describe('cardMeaning — текст значения для позиции', ()
     const fool = cardById.get('fool')!;
     expect(cardMeaning('fool', false, 'ru')).toEqual({ text: fool.content.general.ru, todo: false });
     expect(cardMeaning('fool', true, 'en')).toEqual({ text: fool.content.reversed.en, todo: false });
-    // испанского текста нет — фолбэк на английский (inLang)
-    expect(cardMeaning('fool', false, 'es').text).toBe(fool.content.general.en);
+    // испанский переведён (L-1) — приходит испанский текст; сам фолбэк inLang на язык
+    // без перевода покрыт контрактами lang/content, здесь проверяется передача языка
+    expect(cardMeaning('fool', false, 'es').text).toBe(fool.content.general.es);
     expect(cardMeaning('нет-такой', false, 'ru')).toEqual({ text: '', todo: true });
   });
 });
