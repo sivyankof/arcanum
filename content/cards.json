@@ -1209,8 +1209,8 @@
      "pt": "Para o seu bem-estar, o Imperador pergunta: sua rotina sustenta ou desgasta você? Repare se a tensão constante e o hábito de controlar tudo estão consumindo sua energia. O corpo pede não só disciplina, mas também permissão para relaxar."
     },
     "day_card": {
-     "ru": "Сегодня наведите порядок в одном деле, до которого не доходили руки: разберите бумаги, составьте план, назначьте встречу, обозначьте границу в разговоре. Действуйте спокойно и твёрдо — без оправданий. Если обозначаете границу — спокойный тон удержит её дольше раздражённого.",
-     "en": "Today, bring order to one thing you've been putting off: sort the papers, draft the plan, book the meeting, state a boundary in a conversation. Act calmly and firmly — no apologies needed. If you do state a boundary, a calm tone will hold it longer than an irritated one.",
+     "ru": "Сегодня наведите порядок в одном деле, до которого не доходили руки: разберите бумаги, составьте план, назначьте встречу, обозначьте границу в разговоре. Действуйте спокойно и твёрдо — без оправданий. Ровный голос удержит сказанное дольше, чем раздражённый.",
+     "en": "Today, bring order to one thing you've been putting off: sort the papers, draft the plan, book the meeting, state a boundary in a conversation. Act calmly and firmly — no apologies needed. A level voice will hold what you said longer than an irritated one.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -2927,8 +2927,8 @@
    },
    "content": {
     "general": {
-     "ru": "Справедливость — карта причины и следствия. Сейчас всё встаёт на свои места: усилия вознаграждаются, а срезанные углы дают о себе знать. Это время честности — прежде всего с собой. Решения стоит принимать ясной головой, взвесив факты, а не эмоции. Сверьтесь с собственной совестью: какие решения вы готовы назвать честными, а какие — нет? Карта также говорит о договорах, документах и официальных вопросах.",
-     "en": "Justice is the card of cause and effect. Things are falling into place: effort gets rewarded, and cut corners come back around. This is a time for honesty — above all with yourself. Make decisions with a clear head, weighing facts rather than emotions. Check in with your own conscience: which decisions would you call honest, and which would you not? The card also points to contracts, documents and official matters.",
+     "ru": "Справедливость — карта причины и следствия. Сейчас всё встаёт на свои места: усилия вознаграждаются, а срезанные углы дают о себе знать. Это время честности — прежде всего с собой. Решения стоит принимать ясной головой, взвесив факты, а не эмоции. Сверьтесь с собственной совестью: где вы поступаете прямо, а где — как удобно? Карта также говорит о договорах, документах и официальных вопросах.",
+     "en": "Justice is the card of cause and effect. Things are falling into place: effort gets rewarded, and cut corners come back around. This is a time for honesty — above all with yourself. Make decisions with a clear head, weighing facts rather than emotions. Check in with your own conscience: where are you acting straight, and where simply as it suits you? The card also points to contracts, documents and official matters.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -3769,8 +3769,8 @@
      "pt": "Para o seu bem-estar, a questão é de ritmo e medida. Escute: onde você exagera e onde se dá menos do que precisa — no sono, na comida, no movimento, no descanso? Pergunte-se o que o seu dia pede: uma sacudida ou um passo constante e cuidadoso. Passos pequenos e regulares saem mais fáceis que façanhas isoladas."
     },
     "day_card": {
-     "ru": "Сегодня ищите середину. Не соглашайтесь на крайности — ни в делах, ни в разговорах, ни в тратах. Если назревает спор, предложите компромисс сами. Чередуйте напряжение и паузы: час работы — десять минут тишины. Одна нога на земле, другая в воде — так держится равновесие.",
-     "en": "Today, look for the middle path. Refuse extremes — in tasks, conversations and spending alike. If an argument is brewing, be the one who offers the compromise. Alternate effort with pauses: an hour of work, ten minutes of quiet. One foot on land, one in the water — that is how balance holds.",
+     "ru": "Сегодня ищите середину. Не соглашайтесь на крайности — ни в делах, ни в разговорах, ни в тратах. Если назревает спор, предложите компромисс сами. Чередуйте напряжение и паузы: час работы — десять минут тишины. К вечеру оцените день не по сделанному, а по тому, насколько ровно вы шли.",
+     "en": "Today, look for the middle path. Refuse extremes — in tasks, conversations and spending alike. If an argument is brewing, be the one who offers the compromise. Alternate effort with pauses: an hour of work, ten minutes of quiet. By evening, judge the day not by what got done but by how steady you kept.",
      "status": {
       "ru": "reviewed",
       "en": "reviewed",
@@ -7711,7 +7711,7 @@
      "pt": "O Nove de Paus invertido revela o cansaço que endurece e vira defesa permanente: você espera o golpe de qualquer direção e gasta força se protegendo do que nem existe. O que aconteceu antes pode fazer pessoas e chances novas parecerem ameaça. Baixe o escudo por um minuto e avalie com honestidade: qual obstáculo é real e qual é só lembrança?"
     },
     "love": {
-     "ru": "В любви — настороженность после прежних ран: хочется близости, но страшно снова довериться. Партнёру порой достаётся оборона, предназначенная кому-то из прошлого. Признайте свою усталость и говорите о ней словами, а не колкостями. Усталость от обороны легко принять за усталость от человека.",
+     "ru": "В любви — настороженность после прежних ран: хочется близости, но страшно снова довериться. Партнёру порой достаётся оборона, предназначенная кому-то из прошлого. Признайте, что вымотаны, и говорите об этом словами, а не колкостями. Усталость от обороны легко принять за усталость от человека.",
      "en": "In love — wariness after old wounds: you long for closeness but fear trusting again. Your partner sometimes meets defences built for someone from the past. Admit that you're tired and say it in words, not in barbs. Exhaustion from keeping guard is easily mistaken for exhaustion with the person.",
      "status": {
       "ru": "reviewed",

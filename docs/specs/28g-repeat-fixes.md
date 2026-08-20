@@ -23,7 +23,7 @@
 
 **EN станет:** Today, look for the middle path. Refuse extremes — in tasks, conversations and spending alike. If an argument is brewing, be the one who offers the compromise. Alternate effort with pauses: an hour of work, ten minutes of quiet. By evening, judge the day not by what got done but by how steady you kept.
 
-- [ ] согласны
+- [x] согласны
 
   Свой вариант:
 
@@ -39,7 +39,7 @@
 
 **EN станет:** Today, bring order to one thing you've been putting off: sort the papers, draft the plan, book the meeting, state a boundary in a conversation. Act calmly and firmly — no apologies needed. A level voice will hold what you said longer than an irritated one.
 
-- [ ] согласны
+- [x] согласны
 
   Свой вариант:
 
@@ -55,7 +55,7 @@
 
 **EN станет:** Justice is the card of cause and effect. Things are falling into place: effort gets rewarded, and cut corners come back around. This is a time for honesty — above all with yourself. Make decisions with a clear head, weighing facts rather than emotions. Check in with your own conscience: where are you acting straight, and where simply as it suits you? The card also points to contracts, documents and official matters.
 
-- [ ] согласны
+- [x] согласны
 
   Свой вариант:
 
@@ -67,6 +67,6 @@
 
 **RU станет:** В любви — настороженность после прежних ран: хочется близости, но страшно снова довериться. Партнёру порой достаётся оборона, предназначенная кому-то из прошлого. Признайте, что вымотаны, и говорите об этом словами, а не колкостями. Усталость от обороны легко принять за усталость от человека.
 
-- [ ] согласны
+- [x] согласны
 
   Свой вариант:
