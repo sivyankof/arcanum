@@ -2,6 +2,7 @@
  *  регистр, «ё/е», сложение фильтра с запросом, нарезка на ряды сетки. */
 import { filterCards, matchesQuery, normalize, stem, tokenize, toRows } from '../cardSearch';
 import { cardById, cards } from '../content';
+import { LANGS, type Lang } from '../lang';
 
 const fool = cardById.get('fool')!;
 const lovers = cardById.get('lovers')!;
@@ -70,24 +71,30 @@ describe('matchesQuery — по скрытым поисковым синоним
 });
 
 describe('наполнение ключевых слов (спека 04г)', () => {
-  it('у каждой карты ровно 4 слова витрины в обоих языках', () => {
-    const bad = cards.filter((c) => c.keywords.ru.length !== 4 || c.keywords.en.length !== 4);
+  // Правила слов проверяются на КАЖДОМ языке, у которого слова есть, а не только на каноне:
+  // до приёмки L-1 здесь стояли литералы ru/en, и переведённые испанские слова не смотрел
+  // никто — дубли витрины и поиска приехали в корпус молча (нашлось при поиске швов 20.08).
+  // Условие «если язык присутствует» — обязательная половина: язык без перевода законно
+  // не имеет слов вовсе, его полноту стережёт cardsContent (атомарность единицы перевода).
+  const withWords = (lang: Lang) => cards.filter((c) => c.keywords[lang] !== undefined);
+
+  it.each(LANGS)('%s: у каждой карты со словами ровно 4 слова витрины', (lang) => {
+    const bad = withWords(lang).filter((c) => c.keywords[lang]!.length !== 4);
     expect(bad.map((c) => c.id)).toEqual([]);
   });
 
-  it('у каждой карты 8–12 поисковых синонимов в обоих языках', () => {
+  it.each(LANGS)('%s: у каждой карты со словами 8–12 поисковых синонимов', (lang) => {
     const inRange = (a: string[]) => a.length >= 8 && a.length <= 12;
-    const bad = cards.filter((c) => !inRange(c.search.ru) || !inRange(c.search.en));
+    const bad = withWords(lang).filter((c) => !inRange(c.search[lang] ?? []));
     expect(bad.map((c) => c.id)).toEqual([]);
   });
 
-  it('поисковые синонимы не дублируют витрину', () => {
-    const bad = cards.filter((c) =>
-      (['ru', 'en'] as const).some((lang) => {
-        const shown = new Set(c.keywords[lang].map(normalize));
-        return c.search[lang].some((w) => shown.has(normalize(w)));
-      }),
-    );
+  it.each(LANGS)('%s: поисковые синонимы не дублируют витрину', (lang) => {
+    // дубль не ломает поиск (витрина индексируется и так), но тратит слот из 8–12 впустую
+    const bad = withWords(lang).filter((c) => {
+      const shown = new Set(c.keywords[lang]!.map(normalize));
+      return (c.search[lang] ?? []).some((w) => shown.has(normalize(w)));
+    });
     expect(bad.map((c) => c.id)).toEqual([]);
   });
 
