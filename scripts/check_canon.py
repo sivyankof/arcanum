@@ -22,6 +22,20 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+# Испанские и португальские словари живут отдельными модулями scripts/dict_es.py и
+# scripts/dict_pt.py: они калибруются на корпусе карт И на текстах курса, и держать их
+# копию здесь нельзя — при первой же правке они разъедутся (правило «повторяется 2+ раза»).
+# В каждом модуле над словарём записано, что пробовали и отбросили, с числами: это
+# единственный способ не наступить второй раз на «uno mismo» или на «illness» внутри
+# «stillness». Заведены 20.08 (L-5), когда проверки впервые распространили на es/pt.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from dict_es import (  # noqa: E402
+    PREDICTION_ES, JARGON_ES, MEDICINE_ES, GENDER_ES, GLOSSARY_ES,
+)
+from dict_pt import (  # noqa: E402
+    PREDICTION_PT, JARGON_PT, MEDICINE_PT, GENDER_PT, GLOSSARY_PT,
+)
+
 # Windows-консоль по умолчанию cp1251 и падает на кириллице в выводе.
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -33,28 +47,37 @@ PHRASES_PATH = ROOT / "content" / "phrases.json"
 
 # --- пороги и словари (docs/content-guide.md) ---------------------------------
 
+# ⚠️ Нормы es/pt сняты С КОРПУСА 20.08 (L-5), а не переведены из русских: границы —
+# квантили 1.5% и 98.5% фактических длин, округлённые наружу до чётного. Метод выбран
+# так, чтобы СТРОГОСТЬ совпала с ru/en: база даёт 2.2% блоков вне нормы (42 из 1872),
+# новые нормы — 1.9% (35 из 1872). Первая попытка масштабировала границы ru по
+# отношению медиан и дала 91 «нарушение» на es/pt — почти все ложные, ровно тот же
+# провал, что описан выше про общую норму на два языка (задача 31).
+# Для приписок сфер нижняя граница оставлена масштабированной от ru (≈104 знака,
+# k≈1.04), а не квантильной: квантиль дал бы 140–150 и завалил бы любую будущую
+# короткую приписку, законную по русской норме.
 # Лимиты слов основных блоков. birth_path не нормирован — вычитан отдельно (задача 23).
 # ⚠️ Границы РАЗНЫЕ для языков, и это не придирка: русский текст той же мысли короче
 # английского на 20–25% (медиана career: ru 36 слов, en 45) — английский тратит слова
 # на артикли и вспомогательные глаголы. Общая норма на два языка давала 100 «нарушений»,
 # из которых 73 были просто русскими текстами нормальной длины (спека 31, 15.08).
 WORD_LIMITS = {
-    "general": {"ru": (40, 70), "en": (50, 85)},
-    "reversed": {"ru": (30, 50), "en": (38, 62)},
-    "love": {"ru": (30, 50), "en": (38, 60)},
-    "career": {"ru": (28, 45), "en": (34, 56)},
-    "day_card": {"ru": (28, 45), "en": (38, 56)},
-    "finances": {"ru": (24, 38), "en": (28, 48)},
-    "health": {"ru": (24, 40), "en": (30, 48)},
-    "symbolism": {"ru": (40, 70), "en": (50, 85)},
+    "general": {"ru": (40, 70), "en": (50, 85), "es": (52, 94), "pt": (54, 90)},
+    "reversed": {"ru": (30, 50), "en": (38, 62), "es": (36, 66), "pt": (36, 64)},
+    "love": {"ru": (30, 50), "en": (38, 60), "es": (38, 66), "pt": (40, 68)},
+    "career": {"ru": (28, 45), "en": (34, 56), "es": (30, 62), "pt": (30, 62)},
+    "day_card": {"ru": (28, 45), "en": (38, 56), "es": (34, 60), "pt": (34, 62)},
+    "finances": {"ru": (24, 38), "en": (28, 48), "es": (26, 54), "pt": (24, 54)},
+    "health": {"ru": (24, 40), "en": (30, 48), "es": (30, 52), "pt": (30, 56)},
+    "symbolism": {"ru": (40, 70), "en": (50, 85), "es": (58, 102), "pt": (60, 96)},
 }
 
 # Приписки сфер меряются знаками, а не словами (задача 25).
 CHAR_LIMITS = {
-    "love_reversed": {"ru": (100, 220), "en": (90, 220)},
-    "career_reversed": {"ru": (100, 220), "en": (90, 220)},
-    "finances_reversed": {"ru": (100, 220), "en": (90, 220)},
-    "health_reversed": {"ru": (100, 220), "en": (90, 220)},
+    "love_reversed": {"ru": (100, 220), "en": (90, 220), "es": (104, 248), "pt": (104, 230)},
+    "career_reversed": {"ru": (100, 220), "en": (90, 220), "es": (104, 230), "pt": (104, 234)},
+    "finances_reversed": {"ru": (100, 220), "en": (90, 220), "es": (102, 230), "pt": (106, 226)},
+    "health_reversed": {"ru": (100, 220), "en": (90, 220), "es": (104, 220), "pt": (104, 224)},
 }
 
 HEALTH_BLOCKS = ("health", "health_reversed")
@@ -88,11 +111,15 @@ PREDICTION = {
           r"(?:\s+\w+){0,2}\s+will\s+(?:come|arrive|return|follow)|"
           r"you\s+will\s+(?:build|achieve|obtain|gain|find|meet)|"
           r"are\s+on\s+(?:its|their)\s+way|will\s+thank\s+you",
+    "es": PREDICTION_ES,
+    "pt": PREDICTION_PT,
 }
 
 JARGON = {
     "ru": r"вибрац|энерги[ияюей] вселенн|высшие силы|карма нака|астрал|чакр|аур[аыу]\b|тонкий план",
     "en": r"vibrations|the universe will|higher powers|karma will|astral|chakra|aura\b",
+    "es": JARGON_ES,
+    "pt": JARGON_PT,
 }
 
 MEDICINE = {
@@ -100,6 +127,8 @@ MEDICINE = {
           r"лекарств|обследован|клиник|заболеван",
     # ⚠️ Границы слова обязательны: без них «illness» ловился внутри «stillness».
     "en": r"diagnos|treatment|doctor|medication|\billness\b|symptom|therapy|prescription|clinic|disease",
+    "es": MEDICINE_ES,
+    "pt": MEDICINE_PT,
 }
 
 # Женский род ЧИТАТЕЛЯ. Голые «сама» / «одной» из набора убраны намеренно: в задаче 25
@@ -138,6 +167,7 @@ GENDER = [
     # Мужская форма здесь так же запрещена, как женская, — правило content-guide от 15.08.
     r"\b(?:делает|сделает|делают|сделают)\s+вас\s+\w+(?:ым|ой|ей)\b",
 ]
+
 # Существительные на «-ла»: глагол прошедшего времени от них не отличить без морфологии,
 # а список короткий. Без него «вы даёте телу тепла» читалось как женский род.
 GENDER_NOUNS = r"\b(?:тепла|дела|тела|числа|масла|крыла|зеркала|начала|светила|стекла|весла)\b"
@@ -150,6 +180,8 @@ GLOSSARY = {
     "ru": r"масть\s+(?:чаш|посох|денари)|мает?и\s+(?:чаш|посох|денари)|\bденарии\b|"
           r"обратн(?:ая|ой|ую) карт",
     "en": r"Rider-Waite",
+    "es": GLOSSARY_ES,
+    "pt": GLOSSARY_PT,
 }
 
 # Имена карт — канон из cards.json. Общепринятые синонимы в текстах называют карту иначе,
@@ -163,14 +195,45 @@ NAME_ALIASES = {
 # ⚠️ «рак» обязан быть в границах слова целиком: без \b он ловил «брак», а брак —
 # законный поисковый запрос. «Исцеление» оставлено разрешённым: у Звезды и Умеренности
 # это душевное исцеление, а запрет content-guide — про диагнозы и лечение.
-SEARCH_BANNED = r"выигрыш|он вернётся|она вернётся|приворот|\bрак\b|депресси|беременн|"
-SEARCH_BANNED += r"смерть близк|диагноз"
+# ⚠️ Регулярка была одна на все языки и потому проверяла только русские наборы:
+# английское «award» или испанское «embarazo» она не видела в принципе. Разведена
+# по языкам 20.08 (L-5). Испанский «premio»/португальский «prêmio» НЕ запрещены —
+# это перевод канонического английского «award» (награда за заслуги), а не выигрыш;
+# запрещён азарт («lotería», «apuesta»). Найдено при разведении: empress.search.es
+# держал «embarazo», которого нет ни в одном другом языке.
+SEARCH_BANNED_BY_LANG = {
+    "ru": r"выигрыш|он вернётся|она вернётся|приворот|\bрак\b|депресси|беременн|"
+          r"смерть близк|диагноз",
+    "en": r"jackpot|he will come back|she will come back|love spell|\bcancer\b|depression|"
+          r"pregnan|death of a loved|diagnosis",
+    "es": r"loter[íi]a|apuesta|volver[áa] conmigo|amarre|hechizo|\bc[áa]ncer\b|depresi[óo]n|"
+          r"embarazo|embarazada|muerte de un ser|diagn[óo]stico",
+    "pt": r"loteria|aposta|vai voltar para mim|amarra[çc][ãa]o|feiti[çc]o|\bc[âa]ncer\b|"
+          r"depress[ãa]o|gravidez|gr[áa]vida|morte de algu[ée]m|diagn[óo]stico",
+}
 
 # Структурные обороты жанра — не тики: «Туз Кубков — это…», «is the card of».
 STRUCTURAL_TRIGRAM = (
     r"^(?:the |is the |of |a |an )|card of|the ace|the two|the three|the four|the five|"
     r"the six|the seven|the eight|the nine|the ten|of wands|of cups|of swords|of pentacles|"
-    r"кубков|жезлов|мечей|пентаклей|это карта|карта дня"
+    r"кубков|жезлов|мечей|пентаклей|это карта|карта дня|"
+    # es/pt: те же жанровые формулы. Без них тиками объявляется «el as de», «a carta do
+    # dia» и названия мастей — то есть сам способ, которым корпус называет карту.
+    r"^(?:el |la |los |las |un |una |o |a |os |as |um |uma )|carta de|carta del|carta do|"
+    r"el as de|o [áa]s de|de bastos|de copas|de espadas|de oros|"
+    r"de paus|de copas|de espadas|de ouros|carta do dia|carta del d[íi]a|"
+    # ⚠️ Указатели сфер в триграммах — та же конвенция, что и в проверке 7, и отсутствие
+    # их здесь било прежде всего по английскому канону: «at work a» ×29, «in love the» ×24,
+    # «for wellbeing a» ×19 попадали в тики, хотя это буквально предписанный зачин блока.
+    # На русском проблема не видна (нет артиклей), поэтому и не всплывала до переноса
+    # проверки на es/pt.
+    r"^(?:in love|at work|financially|with money|for wellbeing|for health|your path|today)|"
+    r"^(?:в любви|в отношениях|в работе|в карьере|в финансах|в деньгах|для самочувствия)|"
+    r"^(?:en el amor|en las relaciones|en el trabajo|en la carrera|en lo econ[óo]mico|"
+    r"con el dinero|para tu bienestar|para tu salud|tu camino)|"
+    r"^(?:no amor|nos relacionamentos|no trabalho|na carreira|nas finan[çc]as|"
+    r"com o dinheiro|para o seu bem|para a sua sa[úu]de|seu caminho)|"
+    r"es la carta|é a carta|esta carta es|esta carta é"
 )
 
 # Указатели сферы в начале блока — конвенция корпуса (решение 15.08), не однообразие.
@@ -180,18 +243,45 @@ SPHERE_OPENERS = {
            "в перевёрнутом положении", "в перевёрнутом виде", "перевёрнутая", "перевёрнутый"],
     "en": ["in love", "in relationships", "at work", "in career", "financially",
            "with money", "for wellbeing", "for health", "today", "your path", "reversed"],
+    # es/pt — реестр из content-guide (тот же, что в check_translation.py), плюс формы
+    # перевёрнутой карты: в романских языках указатель стоит ПОСЛЕ имени карты
+    # («El Loco invertido…»), поэтому одним префиксом он не снимается — его ловит
+    # отдельная ветка strip_sphere_opener по слову invertid*.
+    "es": ["en el amor", "en las relaciones", "en el trabajo", "en la carrera",
+           "en lo económico", "con el dinero", "para tu bienestar", "para tu salud",
+           "hoy", "tu camino", "invertido", "invertida",
+           # 9 блоков reversed открываются полной формой — прямой аналог русского
+           # «В перевёрнутом положении» (8 блоков в каноне)
+           "en posición invertida", "en la posición invertida"],
+    "pt": ["no amor", "nos relacionamentos", "no trabalho", "na carreira",
+           "nas finanças", "com o dinheiro", "para o seu bem-estar", "para a sua saúde",
+           "hoje", "seu caminho", "invertido", "invertida", "invertidos", "invertidas",
+           "na posição invertida"],
 }
 
 # Служебные слова: сами по себе зачином не являются, за ними идёт настоящее начало.
-FUNCTION_WORDS = {"the", "a", "an", "is", "it", "this", "of", "это", "и", "а", "но"}
+FUNCTION_WORDS = {"the", "a", "an", "is", "it", "this", "of", "это", "и", "а", "но",
+                  # es/pt: артикли и связки, за которыми стоит настоящий зачин
+                  "el", "la", "los", "las", "un", "una", "es", "de", "del", "que", "y",
+                  "o", "os", "as", "um", "uma", "é", "do", "da", "e"}
 
 # Формула жанра «X — карта Y»: ею открывается почти каждый general, это не однообразие.
-GENRE_FORMULAS = {"ru": ["карта", "это карта"], "en": ["card of", "card"]}
+GENRE_FORMULAS = {"ru": ["карта", "это карта"], "en": ["card of", "card"],
+                  "es": ["es la carta de", "es la carta", "la carta de", "carta"],
+                  "pt": ["é a carta de", "é a carta", "a carta de", "carta"]}
 
 KEYWORDS_COUNT = 4
 SEARCH_RANGE = (8, 12)
 SEARCH_SPREAD_MAX = 8      # слово, подходящее больше чем 8 картам, поиску бесполезно
 OPENING_MIN_REPEAT = 3     # порог однообразия зачинов (задача 25)
+# ⚠️ Порог откалиброван на РУССКОМ и на аналитических языках даёт служебный шум:
+# после добавления указателей сфер в STRUCTURAL_TRIGRAM остаток ru 3 · en 3 · es 12 · pt 11,
+# и весь остаток es/pt — предлог+артикль+местоимение («de lo que», «em vez de»), чего
+# русский синтетический строй не порождает в принципе. Порог намеренно НЕ поднят под
+# романские языки: замер 20.08 показал, что частотные обороты перевода следуют канону,
+# а не изобретены переводчиком — «buen momento para» 40 при ru «хорошее время» 35 и
+# en «good time» 39; «en voz alta» 27 при ru «вслух» 24. Поднимать порог значило бы
+# ослепить проверку ради красивого нуля; правильнее читать её вывод как справку.
 TIC_MIN_COUNT = 15         # оборот-тик по корпусу
 TIC_CLUSTER_MIN = 3        # редкий оборот: кучность внутри карты имеет смысл считать от него
 QUIZ_SPREAD_MAX = 0.33     # допустимый разброс длин вариантов внутри вопроса (задача 29)
@@ -200,7 +290,7 @@ CLUSTER_BLOCKS = 3         # в скольких блоках одной кар�
 LEN_RATIO_TOLERANCE = 0.45 # допуск отклонения отношения длин en/ru от медианы корпуса
 MIN_LEN_FOR_RATIO = 25     # короче этого отношение длин не информативно
 
-LANGS = ("ru", "en")
+LANGS = ("ru", "en", "es", "pt")
 
 
 # --- загрузка -----------------------------------------------------------------
@@ -294,7 +384,19 @@ def strip_sphere_opener(text: str, lang: str, card_name: str = "") -> list[str]:
     # Порядок важен: имя карты стоит ПОСЛЕ артикля («The Ace of Cups is…»),
     # а формула жанра — после имени («… is the card of beginnings»).
     drop_function_words()
-    drop_prefix(words(card_name))
+    # ⚠️ Имя карты в es/pt начинается с артикля («El Dos de Bastos»), а артикль из
+    # текста уже снят выше — поэтому префикс не совпадал и имя не срезалось: проверка
+    # объявляла однообразием сам способ называть карту («dos de…» ×4, «rey de…» ×4).
+    name_tokens = words(card_name)
+    while name_tokens and name_tokens[0] in FUNCTION_WORDS:
+        name_tokens = name_tokens[1:]
+    drop_prefix(name_tokens)
+    # ⚠️ В es/pt указатель перевёрнутой карты стоит ПОСЛЕ её имени («El Mago invertido…»),
+    # в отличие от русского «Перевёрнутый Маг…», где он идёт первым и снимается как
+    # префикс. Без этой ветки проверка объявляла однообразием сам указатель: «invertido…»
+    # открывал 49 блоков из 78 — то есть ровно ту конвенцию, которую канон и предписывает.
+    if tokens and tokens[0] in ("invertido", "invertida", "invertidos", "invertidas"):
+        tokens = tokens[1:]
     drop_function_words()
     for formula in GENRE_FORMULAS[lang]:
         if drop_prefix(formula.split()):
@@ -366,20 +468,23 @@ def check_4_medicine(cards: list[dict]) -> list[str]:
     return _regex_check(cards, MEDICINE, only_blocks=HEALTH_BLOCKS)
 
 
+GENDER_BY_LANG = {"ru": GENDER, "es": GENDER_ES, "pt": GENDER_PT}
+
+
 def check_5_gender(cards: list[dict]) -> list[str]:
     """Женский род читателя (решение 15.08: корпус безличен)."""
     out = []
     for card in cards:
         for name, lang, text in blocks(card):
-            if lang != "ru":
+            if lang not in GENDER_BY_LANG:
                 continue
             seen: set[int] = set()
-            for pattern in GENDER:
+            for pattern in GENDER_BY_LANG[lang]:
                 for hit in re.finditer(pattern, text, flags=re.IGNORECASE):
                     # Один и тот же оборот ловится несколькими паттернами — считаем один раз.
                     if any(abs(hit.start() - s) < 12 for s in seen):
                         continue
-                    if re.search(GENDER_NOUNS, hit.group(0), flags=re.IGNORECASE):
+                    if lang == "ru" and re.search(GENDER_NOUNS, hit.group(0), flags=re.IGNORECASE):
                         continue
                     around = text[max(0, hit.start() - 45):hit.end() + 30]
                     seen.add(hit.start())
@@ -507,7 +612,7 @@ def check_10_words(cards: list[dict]) -> list[str]:
             if not SEARCH_RANGE[0] <= len(se) <= SEARCH_RANGE[1]:
                 out.append(f"{card['id']}.search.{lang}: {len(se)} слов, норма {SEARCH_RANGE[0]}–{SEARCH_RANGE[1]}")
             for word in kw:
-                if lang == "ru" and word != word.lower():
+                if lang in ("ru", "es", "pt") and word != word.lower():
                     out.append(f"{card['id']}.keywords.ru: «{word}» не строчными")
             dupes = {w for w in kw if w.lower() in {s.lower() for s in se}}
             if dupes:
@@ -516,7 +621,8 @@ def check_10_words(cards: list[dict]) -> list[str]:
                 repeated = [w for w, c in Counter(x.lower() for x in bucket).items() if c > 1]
                 if repeated:
                     out.append(f"{card['id']}.{name}.{lang}: повтор внутри набора — {repeated}")
-            banned = [w for w in se if re.search(SEARCH_BANNED, w, flags=re.IGNORECASE)]
+            banned = [w for w in se
+                      if re.search(SEARCH_BANNED_BY_LANG[lang], w, flags=re.IGNORECASE)]
             if banned:
                 out.append(f"{card['id']}.search.{lang}: запрещённое — {banned}")
             for word in set(w.lower() for w in kw + se):

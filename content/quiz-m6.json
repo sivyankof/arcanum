@@ -3,8 +3,8 @@
  "status": {
   "ru": "reviewed",
   "en": "reviewed",
-  "es": "draft",
-  "pt": "draft"
+  "es": "reviewed",
+  "pt": "reviewed"
  },
  "lessons": [
   {

@@ -62,6 +62,20 @@ STOPWORDS = {
     "en": {"which", "there", "their", "these", "those", "about", "would", "could", "should",
            "where", "while", "yourself", "something", "someone", "anything", "really",
            "you're", "you'll", "yours", "other", "another", "through"},
+    # es/pt заведены при приёмке L-5: до неё скрипт падал на них KeyError прямо в проверке
+    # тавтологий, то есть правки в переводах не проверялись вовсе — а их в одной волне 216.
+    # Состав тот же по смыслу, что у ru/en: частотные служебные и связочные слова, которые
+    # повторяются в любом тексте и без снятия дают сплошной шум.
+    "es": {"cuando", "porque", "aunque", "donde", "mientras", "ahora", "puede", "puedes",
+           "quiere", "quieres", "tiene", "tienes", "hacer", "hace", "haces", "estar",
+           "estás", "está", "están", "algo", "alguien", "sobre", "entre", "desde", "hasta",
+           "para", "pero", "como", "eso", "esto", "esta", "este", "otro", "otra", "más",
+           "muy", "también", "siempre", "nunca", "todo", "toda", "todos", "todas"},
+    "pt": {"quando", "porque", "embora", "onde", "enquanto", "agora", "pode", "podes",
+           "quer", "quere", "tem", "tens", "fazer", "faz", "estar", "está", "estão",
+           "algo", "alguém", "sobre", "entre", "desde", "até", "para", "mas", "como",
+           "isso", "isto", "essa", "esse", "outro", "outra", "mais", "muito", "também",
+           "sempre", "nunca", "tudo", "toda", "todos", "todas", "você"},
 }
 
 # Общая часть пары: одна и та же мысль на двух языках. Если правка сменила мысль
@@ -276,12 +290,16 @@ def check_5_pair(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
             continue
         if len(langs) == len(LANGS):
             continue
-        (lang, edit), = langs.items()
-        other = "en" if lang == "ru" else "ru"
-        drift = overlap(edit["before"], edit["after"])
-        if drift < MEANING_DRIFT:
-            out.append(f"[язык без пары] {card_id}.{block}: правка в {lang} "
-                       f"(общих слов {drift:.0%}), {other} не тронут")
+        # ⚠️ Раньше здесь стояла распаковка ровно одного языка: проверка писалась, когда
+        # языков было два, и «не все» означало «ровно один». С четырьмя языками волна,
+        # тронувшая es и pt (ровно случай L-5), роняла скрипт ValueError. Смысл проверки
+        # прежний: правка сменила мысль в одних языках, а другие остались со старой.
+        untouched = [l for l in LANGS if l not in langs]
+        for lang, edit in sorted(langs.items()):
+            drift = overlap(edit["before"], edit["after"])
+            if drift < MEANING_DRIFT:
+                out.append(f"[язык без пары] {card_id}.{block}: правка в {lang} "
+                           f"(общих слов {drift:.0%}), не тронуты: {', '.join(untouched)}")
     return out
 
 
@@ -348,16 +366,25 @@ def check_8_unpaired(edits: list[dict], cards: dict[str, dict]) -> list[str]:
     for (card_id, block), langs in sorted(by_block.items()):
         if block not in PAIRED_BLOCKS or len(langs) == len(LANGS):
             continue
-        (lang, edit), = langs.items()
-        other = "en" if lang == "ru" else "ru"
         card = cards.get(card_id)
         if card is None:
             continue
-        pair = block_text(card, block, other) or "—"
-        dropped = [w for w in words(edit["before"]) if w not in set(words(edit["after"]))]
-        out.append(f"[сверить] {card_id}.{block}: правка в {lang}\n"
-                   f"    убрано: {' '.join(dropped) or '—'}\n"
-                   f"    {other}: {pair}")
+        # то же исправление, что в проверке 5: языков четыре, и «не все» больше не значит
+        # «ровно один» — волна, тронувшая es и pt, роняла скрипт ValueError.
+        # ⚠️ Пара считается внутри СЕМЬИ, а не по всему набору: канон (ru, en) и переводы
+        # (es, pt) живут своей жизнью, и правка ОБОИХ переводов при нетронутом каноне —
+        # норма волны локализации, а не находка. Без этого проверка выдавала по строке
+        # на каждую правку перевода: 216 «находок» на волне, где дефектов нет.
+        for lang, edit in sorted(langs.items()):
+            family = ("ru", "en") if lang in ("ru", "en") else ("es", "pt")
+            if all(l in langs for l in family):
+                continue
+            other = family[1] if lang == family[0] else family[0]
+            pair = block_text(card, block, other) or "—"
+            dropped = [w for w in words(edit["before"]) if w not in set(words(edit["after"]))]
+            out.append(f"[сверить] {card_id}.{block}: правка в {lang}\n"
+                       f"    убрано: {' '.join(dropped) or '—'}\n"
+                       f"    {other}: {pair}")
     return out
 
 
