@@ -86,6 +86,15 @@ REVERSED_MARKER = {
     'es': re.compile(r'^.{0,40}?\binvertid[ao]s?\b', re.I),
     'pt': re.compile(r'^.{0,40}?\binvertid[ao]s?\b', re.I),
 }
+# Приписки сфер (`*_reversed`) по правилу content-guide указателей НЕ имеют — но в каноне
+# нашлось 3 блока `love_reversed` и 3 `finances_reversed`, которые открываются указателем
+# сферы. Раз канон это допускает, перевод обязан следовать ему карта-в-карту, а проверка —
+# снимать указатель перед сравнением зачинов, иначе законное следование канону выглядит
+# «сведённым зачином» (нашла приёмка L-3).
+for _lang, _table in POINTERS.items():
+    for _sphere in SPHERE_BLOCKS:
+        _table[f'{_sphere}_reversed'] = list(_table[_sphere])
+
 MINOR_RE = re.compile(r'^[wcsp]\d\d$')
 CYRILLIC = re.compile('[Ѐ-ӿ]')
 WORD_RE = re.compile(r"[\wÀ-ɏ'-]+", re.UNICODE)
@@ -269,7 +278,8 @@ def check_pointers(cards_new, langs, rep):
     свободный. Поэтому сверяется не «у всех ли есть указатель», а совпадение с каноном
     карта-в-карту — расхождение в любую сторону показывается человеку."""
     for lang in langs:
-        for block in ['love', 'career', 'finances', 'health', 'birth_path', 'day_card']:
+        for block in ['love', 'career', 'finances', 'health', 'birth_path', 'day_card',
+                      'love_reversed', 'career_reversed', 'finances_reversed', 'health_reversed']:
             missing, extra = [], []
             for c in cards_new:
                 t = c['content'].get(block, {}).get(lang)
@@ -356,16 +366,19 @@ def check_openings(cards_new, langs, rep, threshold=3):
             if n < threshold:
                 continue
             addrs = examples[fw]
-            ru_starts = collections.Counter(
-                filter(None, (opening_of(c, b, 'ru') for c, b in addrs)))
-            ru_top = ru_starts.most_common(1)[0][1] if ru_starts else 0
+            ru_starts = [opening_of(c, b, 'ru') for c, b in addrs]
+            uniq_ru = len({s for s in ru_starts if s})
             label = (f'«{fw}» ×{n} '
                      f'({", ".join(f"{c['id']}.{b}" for c, b in addrs[:3])})')
-            # русский на тех же адресах повторяется так же часто → это конвенция корпуса
-            if ru_top >= threshold:
-                ok_by_canon.append(label)
+            # Ошибка — только когда в русском ВСЕ зачины разные, а перевод свёл их в один:
+            # тогда однообразие внесено переводом. Если русский сам повторяется хотя бы
+            # частично (у всех тузов «рука из облака» — канонический элемент рисунка,
+            # у финансов «Финансовая стабильность»/«устойчивость»), это свойство корпуса,
+            # и жёсткий порог «3 совпадения в переводе» объявлял бы находкой саму карту.
+            if uniq_ru == len(addrs) and uniq_ru > 1:
+                found.append(f'{label} — в ru все зачины разные')
             else:
-                found.append(f'{label} — в ru эти блоки начинаются по-разному')
+                ok_by_canon.append(f'{label} — в ru {uniq_ru} разных из {len(addrs)}')
         rep.section(f'сведённые зачины {lang} (совпали в переводе, различаются в ru)', found, sample=8)
         rep.errors.extend([f'{lang}: {f}' for f in found])
         if ok_by_canon:
