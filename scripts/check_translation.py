@@ -34,6 +34,56 @@ MAJOR_ONLY = ['birth_path']
 # блоки-сферы: у них зачин-указатель («В любви…»), решение Артёма 20.08 распространяет
 # конвенцию канона на es/pt — разнообразие проверяется в тексте ПОСЛЕ указателя
 SPHERE_BLOCKS = ['love', 'career', 'finances', 'health']
+
+# Реестр зачинов-указателей — копия таблицы из content-guide.md (раздел «Реестр зачинов-
+# указателей», заведён 20.08). content-guide прямо требует: «скрипт проверки обязан сначала
+# отрезать указатель по реестру, иначе он либо поднимет ложную тревогу на нормальной конвенции,
+# либо (хуже) заставит переводчика её сломать» — ровно это и случилось в L-1, где порог
+# разнообразия применялся к строке ВМЕСТЕ с указателем и указатели вымело из es/pt.
+# Указатель есть не только у сфер: birth_path («Ваш путь»), day_card («Сегодня») и reversed
+# («Перевёрнутая <Карта>») тоже. Формы — в нижнем регистре, сравнение по началу строки.
+POINTERS = {
+    'ru': {
+        'love': ['в любви', 'в отношениях'],
+        'career': ['в работе', 'в карьере'],
+        'finances': ['в финансах', 'в деньгах'],
+        'health': ['для самочувствия', 'для здоровья'],
+        'birth_path': ['ваш путь'],
+        'day_card': ['сегодня'],
+    },
+    'en': {
+        'love': ['in love', 'in relationships'],
+        'career': ['at work', 'in career'],
+        'finances': ['financially', 'with money'],
+        'health': ['for wellbeing', 'for health'],
+        'birth_path': ['your path'],
+        'day_card': ['today'],
+    },
+    'es': {
+        'love': ['en el amor', 'en las relaciones'],
+        'career': ['en el trabajo', 'en la carrera'],
+        'finances': ['en lo económico', 'con el dinero'],
+        'health': ['para tu bienestar', 'para tu salud'],
+        'birth_path': ['tu camino'],
+        'day_card': ['hoy'],
+    },
+    'pt': {
+        'love': ['no amor', 'nos relacionamentos'],
+        'career': ['no trabalho', 'na carreira'],
+        'finances': ['nas finanças', 'com o dinheiro'],
+        'health': ['para o seu bem-estar', 'para a sua saúde'],
+        'birth_path': ['seu caminho'],
+        'day_card': ['hoje'],
+    },
+}
+# у `reversed` указатель несёт имя самой карты («Перевёрнутая Императрица…»), поэтому он не
+# перечислим таблицей: снимается слово-маркер вместе со всем, что стоит до него
+REVERSED_MARKER = {
+    'ru': re.compile(r'^перевёрнут\w*\b', re.I),
+    'en': re.compile(r'^reversed\b', re.I),
+    'es': re.compile(r'^.{0,40}?\binvertid[ao]s?\b', re.I),
+    'pt': re.compile(r'^.{0,40}?\binvertid[ao]s?\b', re.I),
+}
 MINOR_RE = re.compile(r'^[wcsp]\d\d$')
 CYRILLIC = re.compile('[Ѐ-ӿ]')
 WORD_RE = re.compile(r"[\wÀ-ɏ'-]+", re.UNICODE)
@@ -56,8 +106,27 @@ def blocks_of(card_id):
     return COMMON_BLOCKS + (MAJOR_ONLY if not MINOR_RE.match(card_id) else [])
 
 
-def first_words(text, n=2):
+# Служебные слова, которые НЕ несут смысла в зачине. Нужны, чтобы сравнивать языки
+# сопоставимо: русский обходится тире («Дурак — карта начала пути»), а романские обязаны
+# ставить связку и артикль («El Loco es la carta de los comienzos»). Без их снятия окно
+# в два слова попадает у ru на «карта начала» (информативно), а у es на «es la» (пусто) —
+# и проверка объявляет находкой саму грамматику языка.
+STOPWORDS = {
+    'ru': {'и', 'в', 'во', 'на', 'о', 'об', 'к', 'с', 'со', 'у', 'это', 'а', 'но', 'же', 'то'},
+    'en': {'the', 'a', 'an', 'is', 'are', 'of', 'to', 'in', 'at', 'it', 'this', 'and', 'for'},
+    'es': {'el', 'la', 'los', 'las', 'un', 'una', 'es', 'son', 'está', 'de', 'del', 'al',
+           'en', 'lo', 'que', 'y', 'se', 'a', 'su', 'sus', 'te', 'tu'},
+    'pt': {'o', 'a', 'os', 'as', 'um', 'uma', 'é', 'são', 'está', 'de', 'do', 'da', 'dos',
+           'das', 'em', 'no', 'na', 'nos', 'nas', 'que', 'e', 'se', 'ao', 'seu', 'sua'},
+}
+
+
+def first_words(text, n=2, lang=None):
+    """Первые n ЗНАМЕНАТЕЛЬНЫХ слов: служебные снимаются по языку."""
     words = WORD_RE.findall(text.lower())
+    if lang:
+        stop = STOPWORDS.get(lang, set())
+        words = [w for w in words if w not in stop]
     return ' '.join(words[:n]) if len(words) >= n else None
 
 
@@ -193,61 +262,114 @@ def check_key_order(cards_new, rep):
 
 
 def check_pointers(cards_new, langs, rep):
-    """Зачины сферных блоков: указатель определяется как САМАЯ ЧАСТАЯ формула сферы,
-    и дальше проверяется, сколько карт от неё отклоняются (решение 20.08 — единообразие)."""
+    """Указатель ставится там, где он стоит в РУССКОМ КАНОНЕ у этой карты, а не по умолчанию
+    (content-guide, 20.08): у четырёх карт `health` в каноне свободный, значит и в переводе
+    свободный. Поэтому сверяется не «у всех ли есть указатель», а совпадение с каноном
+    карта-в-карту — расхождение в любую сторону показывается человеку."""
     for lang in langs:
-        for sphere in SPHERE_BLOCKS:
-            starts = collections.Counter()
+        for block in ['love', 'career', 'finances', 'health', 'birth_path', 'day_card']:
+            missing, extra = [], []
             for c in cards_new:
-                t = c['content'][sphere].get(lang)
-                if t:
-                    fw = first_words(t)
-                    if fw:
-                        starts[fw] += 1
-            if not starts:
+                t = c['content'].get(block, {}).get(lang)
+                ru = c['content'].get(block, {}).get('ru')
+                if not t or not ru:
+                    continue
+                ru_has = strip_pointer(ru, 'ru', block) != ru
+                tr_has = strip_pointer(t, lang, block) != t
+                if ru_has and not tr_has:
+                    missing.append(c['id'])
+                elif tr_has and not ru_has:
+                    extra.append(c['id'])
+            if not missing and not extra:
                 continue
-            pointer, hits = starts.most_common(1)[0]
-            total = sum(starts.values())
-            others = total - hits
-            mark = 'OK  ' if others == 0 else '[ОТЧЁТ]'
-            print(f'{mark} указатель {lang}.{sphere}: «{pointer}» у {hits} из {total}'
-                  + (f', отклоняются {others}' if others else ''))
-            if others:
-                rep.note(f'{lang}.{sphere}: {others} карт вне указателя «{pointer}»')
+            print(f'[ОТЧЁТ] указатели {lang}.{block}: нет там, где канон его держит — '
+                  f'{len(missing)} {missing[:4]}; есть там, где канон свободен — '
+                  f'{len(extra)} {extra[:4]}')
+            rep.note(f'{lang}.{block}: указателей не совпало с каноном '
+                     f'({len(missing)} нет, {len(extra)} лишних)')
+
+
+def strip_name(text, name):
+    """Снимает имя карты в начале блока вместе с артиклем: «El Emperador es…» → «es…».
+    Канон делает так же («Император — карта структуры»), поэтому имя в зачине — норма
+    корпуса, а не находка; без его снятия проверка выдаёт по 3–4 ложных срабатывания
+    на каждую карту, чьё имя длиннее одного слова."""
+    if not name:
+        return text
+    bare = re.sub(r'^(el|la|los|las|o|a|os|as|the)\s+', '', name.strip(), flags=re.I)
+    low = text.lstrip().lower()
+    for form in (name.strip().lower(), bare.lower()):
+        if form and low.startswith(form):
+            return text.lstrip()[len(form):].lstrip(' ,.:;—-')
+    return text
+
+
+def strip_pointer(text, lang, block):
+    """Снимает зачин-указатель по реестру content-guide. Возвращает текст ПОСЛЕ указателя.
+    Указателя может не быть законно (четыре карты держат `health` свободным, потому что
+    он свободен в русском каноне) — тогда текст возвращается как есть."""
+    low = text.lstrip().lower()
+    if block == 'reversed':
+        m = REVERSED_MARKER.get(lang, REVERSED_MARKER['en']).match(low)
+        if m:
+            return text.lstrip()[m.end():].lstrip(' ,.:;—-')
+        return text
+    for form in sorted(POINTERS.get(lang, {}).get(block, []), key=len, reverse=True):
+        if low.startswith(form):
+            return text.lstrip()[len(form):].lstrip(' ,.:;—-')
+    return text
+
+
+def opening_of(card, block, lang):
+    """Зачин блока для сравнения: снят указатель по реестру и имя карты."""
+    t = card['content'].get(block, {}).get(lang)
+    if not t:
+        return None
+    name = card.get('name', {}).get(lang, '')
+    return first_words(strip_name(strip_pointer(t, lang, block), name), lang=lang)
 
 
 def check_openings(cards_new, langs, rep, threshold=3):
-    """Однообразие зачинов ПО КАЖДОМУ ЯЗЫКУ ОТДЕЛЬНО (урок задачи 25: en тихо разошёлся с ru).
-    У сферных блоков указатель снимается — считается то, что идёт ПОСЛЕ него."""
-    for lang in langs:
-        pointers = {}
-        for sphere in SPHERE_BLOCKS:
-            starts = collections.Counter()
-            for c in cards_new:
-                t = c['content'][sphere].get(lang)
-                if t:
-                    fw = first_words(t)
-                    if fw:
-                        starts[fw] += 1
-            if starts:
-                pointers[sphere] = starts.most_common(1)[0][0]
+    """Однообразие зачинов ПО КАЖДОМУ ЯЗЫКУ ОТДЕЛЬНО (урок задачи 25: переводчик сводит
+    разные обороты оригинала к одной удобной конструкции — «Your body…» открывало 11 приписок
+    из 78, хотя в русском разнобой).
 
-        repeats = collections.Counter()
+    ⚠️ Норма берётся ИЗ КОРПУСА, а не из головы (урок задачи 31). Голый порог «3+ одинаковых
+    зачина» на переводе даёт ложную тревогу: на тех же 22 картах канон ru даёт 15 таких групп,
+    en — 67, то есть перевод «нарушает» правило РЕЖЕ оригинала. Дефект — не совпадение само
+    по себе, а совпадение ТАМ, ГДЕ ОРИГИНАЛ РАЗЛИЧАЕТСЯ: значит смысл свёлся при переводе.
+    Поэтому каждая группа сверяется с русскими зачинами ТЕХ ЖЕ адресов."""
+    for lang in langs:
+        if lang in CANON:
+            continue
+        repeats, examples = collections.Counter(), {}
         for c in cards_new:
             for b in blocks_of(c['id']):
-                t = c['content'][b].get(lang)
-                if not t:
-                    continue
-                words = WORD_RE.findall(t.lower())
-                if b in pointers:
-                    ptr = pointers[b].split()
-                    if words[:len(ptr)] == ptr:
-                        words = words[len(ptr):]
-                if len(words) >= 2:
-                    repeats[' '.join(words[:2])] += 1
-        found = [f'«{k}» ×{v}' for k, v in repeats.most_common() if v >= threshold]
-        rep.section(f'повторы зачинов {lang} (порог {threshold}+)', found, sample=8)
-        rep.errors.extend([f'{lang}: зачин {f}' for f in found])
+                fw = opening_of(c, b, lang)
+                if fw:
+                    repeats[fw] += 1
+                    examples.setdefault(fw, []).append((c, b))
+        found, ok_by_canon = [], []
+        for fw, n in repeats.most_common():
+            if n < threshold:
+                continue
+            addrs = examples[fw]
+            ru_starts = collections.Counter(
+                filter(None, (opening_of(c, b, 'ru') for c, b in addrs)))
+            ru_top = ru_starts.most_common(1)[0][1] if ru_starts else 0
+            label = (f'«{fw}» ×{n} '
+                     f'({", ".join(f"{c['id']}.{b}" for c, b in addrs[:3])})')
+            # русский на тех же адресах повторяется так же часто → это конвенция корпуса
+            if ru_top >= threshold:
+                ok_by_canon.append(label)
+            else:
+                found.append(f'{label} — в ru эти блоки начинаются по-разному')
+        rep.section(f'сведённые зачины {lang} (совпали в переводе, различаются в ru)', found, sample=8)
+        rep.errors.extend([f'{lang}: {f}' for f in found])
+        if ok_by_canon:
+            print(f'[ОТЧЁТ] {lang}: групп зачинов, повторяющих конвенцию канона: {len(ok_by_canon)}')
+            for f in ok_by_canon[:4]:
+                print(f'       {f}')
 
 
 def check_names(cards_new, langs, rep):
