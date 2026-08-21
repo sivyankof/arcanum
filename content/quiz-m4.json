@@ -650,14 +650,14 @@
      },
      "options": [
       {
-       "ru": "Потому что там и правда было очень плохо всё это время",
-       "en": "Because things there really were quite bad the whole time",
+       "ru": "Потому что он сбежал от того, что его изматывало",
+       "en": "Because he finally fled something that had been wearing him down",
        "es": "Porque allí de verdad se estaba muy mal todo ese tiempo",
        "pt": "Porque ali as coisas estavam mesmo muito ruins esse tempo todo"
       },
       {
-       "ru": "Потому что оставленное никогда не имело значения вовсе",
-       "en": "Because what he leaves behind never truly mattered at all",
+       "ru": "Потому что оставленное было ошибкой с самого начала",
+       "en": "Because what he left behind was a mistake from the very start",
        "es": "Porque lo que deja atrás nunca tuvo la menor importancia",
        "pt": "Porque o que ficou para trás nunca teve importância nenhuma"
       },
@@ -909,14 +909,14 @@
      },
      "options": [
       {
-       "ru": "Побеждать нужно любой ценой, чего бы это ни стоило",
-       "en": "Win at any cost, no matter what it costs you",
+       "ru": "Побеждать важнее, чем сохранить отношения с соперником",
+       "en": "Winning matters more than keeping a relationship with the rival",
        "es": "Que hay que ganar a cualquier precio, cueste lo que cueste",
        "pt": "Que vale vencer a qualquer preço, custe o que custar"
       },
       {
-       "ru": "Конфликтов нужно избегать всегда, даже если вы правы",
-       "en": "Always avoid conflict, even when you're right",
+       "ru": "Лучше отступить, чтобы не потерять расположение окружающих",
+       "en": "It's better to back down than risk losing others' approval",
        "es": "Que hay que evitar siempre los conflictos, incluso cuando tienes razón",
        "pt": "Que todo conflito deve ser evitado, mesmo quando você tem razão"
       },
@@ -1065,14 +1065,14 @@
        "pt": "As amarras estão frouxas e há uma passagem adiante — o limite costuma estar na cabeça"
       },
       {
-       "ru": "Путы затянуты, и мечи стоят сплошной стеной",
-       "en": "The ropes are tight and the swords form an unbroken wall",
+       "ru": "Путы туго затянуты, а мечи выстроены плотной стеной вокруг фигуры",
+       "en": "The ropes are pulled tight, and the swords form a dense wall around the figure",
        "es": "Las ataduras están apretadas y las espadas forman una pared sin huecos",
        "pt": "As amarras estão apertadas e as espadas formam uma parede sem brechas"
       },
       {
-       "ru": "Повязка снята, и фигура уже видит выход",
-       "en": "The blindfold is off and the figure can already see the way out",
+       "ru": "Повязка снята с глаз, и фигура шагает вперёд, уже не оглядываясь",
+       "en": "The blindfold is off her eyes, and the figure walks forward without looking back",
        "es": "La venda ya está quitada y la figura ve la salida",
        "pt": "A venda já foi tirada e a figura enxerga a saída"
       }
