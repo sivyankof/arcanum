@@ -98,6 +98,9 @@ export interface Spread {
   id: string;
   /** freemium-флаг: false = PREMIUM-бейдж в списке; в v1 не блокирует (product-spec §4) */
   free: boolean;
+  /** Привязка к лунному событию (спека 51): расклад доступен только в окно новолуния
+   *  или полнолуния. У восьми обычных раскладов поля нет. */
+  moon?: 'new' | 'full';
   cards: number;
   name: Localized;
   description: Localized;
