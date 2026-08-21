@@ -25,17 +25,20 @@ import { CardLightbox } from '../../src/components/CardLightbox';
 import { CornerBadge } from '../../src/components/CornerBadge';
 import { FadeUp } from '../../src/components/FadeUp';
 import { KeywordChips } from '../../src/components/KeywordChips';
+import { MasteryChip } from '../../src/components/MasteryChip';
 import { PressableScale } from '../../src/components/PressableScale';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardImages } from '../../src/lib/cardImages';
-import { blockText, cardById, cardNumeral } from '../../src/lib/content';
+import { blockText, cardById, cardNumeral, course } from '../../src/lib/content';
+import { learnedCardIds } from '../../src/lib/courseProgress';
 import { formatDayMonth } from '../../src/lib/dates';
 import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import { cardHistory } from '../../src/lib/journal';
 import { inLang } from '../../src/lib/lang';
+import { masteryLevel } from '../../src/lib/mastery';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { useApp } from '../../src/store/useApp';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
@@ -214,6 +217,11 @@ export default function CardDetail() {
   const history = useApp((s) => s.history);
   // золотой чип у названия, если карта — аркан рождения пользователя (product-spec §3, спека 09)
   const birthCardId = useApp((s) => s.profile.birthArcanaId);
+  // ступень мастерства изученной карты (спека 49): learned — то же множество, что бейдж
+  // «ИЗУЧЕНО ✓» в справочнике; неизученной карте чип не показывается вовсе
+  const lessonsProgress = useApp((s) => s.lessonsProgress);
+  const srsEntry = useApp((s) => s.srs[id ?? '']);
+  const learned = React.useMemo(() => learnedCardIds(course, lessonsProgress), [lessonsProgress]);
   const fadeStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
   // вибрация при возврате — общий хук (второе появление паттерна вынесено в useBackHaptic)
   useBackHaptic();
@@ -225,6 +233,7 @@ export default function CardDetail() {
   // получает золотую рамку и звёздочку в заголовке; на обычном месте блок не дублируется
   const isTodayCard = todayCardId === card.id;
   const isBirthArcana = birthCardId === card.id;
+  const mastery = learned.has(card.id) ? masteryLevel(srsEntry) : undefined;
 
   const num = cardNumeral(card);
   const arcanaLabel =
@@ -313,6 +322,7 @@ export default function CardDetail() {
           )}
           <FadeUp index={0} style={{ flex: 1 }}>
             <Txt style={[st.num, { color: t.muted }]}>{num} · {arcanaLabel}</Txt>
+            {mastery !== undefined && <MasteryChip level={mastery} style={st.mastery} />}
             <View style={st.nameRow}>
               <Txt style={[st.name, { color: t.head }]}>{inLang(card.name, lang)}</Txt>
               {isBirthArcana && (
@@ -415,6 +425,7 @@ const st = StyleSheet.create({
   },
   im: { width: '100%', height: '100%' },
   num: { fontSize: 9.5, letterSpacing: 2.5 },
+  mastery: { marginTop: 6 },
   name: { fontFamily: fonts.display, fontSize: 26, marginTop: 4, lineHeight: 32 },
   nameRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', columnGap: 8 },
   birthChip: { borderWidth: 1, borderRadius: 8, paddingVertical: 3, paddingHorizontal: 8 },
