@@ -11,6 +11,7 @@ import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../src/components/FadeUp';
 import { MoonRow } from '../src/components/MoonRow';
+import { MoonSpreadPanel } from '../src/components/MoonSpreadPanel';
 import { Rule } from '../src/components/Rule';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
@@ -133,20 +134,24 @@ export default function MoonScreen() {
 
         <FadeUp index={2}>
           {events.map((e) => (
-            <View
-              key={e.at.getTime()}
-              style={[st.event, { backgroundColor: t.panel, borderColor: t.frame }, e.day < today && st.dim]}
-            >
-              <EventGlyph kind={e.kind} size={14} />
-              <View style={st.eventTexts}>
-                <Txt style={[st.eventTitle, { color: t.accent }]}>
-                  {`${tr(`moon.${e.kind}`)} · ${formatDayMonth(localDateISO(e.at), lang)} · ${formatTime(e.at, lang)}`.toUpperCase()}
-                </Txt>
-                <Txt style={[st.eventHint, { color: t.head }]}>
-                  {tr(e.kind === 'new' ? 'moon.newHint' : 'moon.fullHint')}
-                </Txt>
+            <React.Fragment key={e.at.getTime()}>
+              <View
+                style={[st.event, { backgroundColor: t.panel, borderColor: t.frame }, e.day < today && st.dim]}
+              >
+                <EventGlyph kind={e.kind} size={14} />
+                <View style={st.eventTexts}>
+                  <Txt style={[st.eventTitle, { color: t.accent }]}>
+                    {`${tr(`moon.${e.kind}`)} · ${formatDayMonth(localDateISO(e.at), lang)} · ${formatTime(e.at, lang)}`.toUpperCase()}
+                  </Txt>
+                  <Txt style={[st.eventHint, { color: t.head }]}>
+                    {tr(e.kind === 'new' ? 'moon.newHint' : 'moon.fullHint')}
+                  </Txt>
+                </View>
               </View>
-            </View>
+              {/* панель расклада — только под событием, чьё окно идёт или впереди (спека 51);
+                  момент события передаётся пропом, чтобы панель судила о СВОЁМ событии */}
+              {e.day >= today && <MoonSpreadPanel kind={e.kind} at={e.at} now={now} />}
+            </React.Fragment>
           ))}
         </FadeUp>
       </ScrollView>
