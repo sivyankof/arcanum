@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest"
+    "test": "jest",
+    "kill:dev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/kill-dev.ps1"
   },
   "jest": {
     "preset": "jest-expo"
