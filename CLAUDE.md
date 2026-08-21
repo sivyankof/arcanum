@@ -103,7 +103,7 @@
 - `src/theme/` — токены и useTheme; `src/store/useApp.ts` — Zustand-состояние (тема, язык, серия, история)
 - `src/lib/content.ts` — доступ к контенту; `src/lib/cardImages.ts` — АВТОГЕНЕРИРУЕТСЯ (`scripts/gen_card_images.py`), не править руками
 - `src/lib/srs.ts` — алгоритм интервальных повторений SM-2 (для флеш-карт, этап 4)
-- `content/*.json` — 78 карт (cards) / 8 раскладов (spreads) / курс 6 модулей (course) /
+- `content/*.json` — 78 карт (cards) / 10 раскладов (spreads, из них 2 лунных — задача 51) / курс 6 модулей (course) /
   фразы «Состава расклада» (composition) / вариативные системные фразы (phrases) — все двуязычные ru/en.
   Правило вариативности: повторяющийся текст = минимум 2–3 формулировки одного смысла (content-guide)
 - `assets/cards/` — 78 изображений Райдер–Уэйт (public domain)
