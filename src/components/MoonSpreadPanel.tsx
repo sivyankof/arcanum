@@ -15,7 +15,7 @@ import { useLang } from '../lib/i18n';
 import { inLang } from '../lib/lang';
 import type { MoonEventKind } from '../lib/moon';
 import { isMoonWindowOpen } from '../lib/moonSpread';
-import { fonts } from '../theme/theme';
+import { fonts, LOCKED_OPACITY } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
 import { Txt } from './Txt';
@@ -41,7 +41,9 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
 
   const body = (
     <>
-      <Txt style={[st.name, { color: t.head }]}>{inLang(spread.name, lang)}</Txt>
+      <Txt style={[st.name, { color: t.head }]}>
+        {inLang(spread.name, lang)} · {tr('spreads.cards', { count: spread.cards })}
+      </Txt>
       <Txt style={[st.right, { color: t.accent }]}>{right}</Txt>
     </>
   );
@@ -52,6 +54,10 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
   return open ? (
     <PressableScale
       onPress={() => {
+        // Окно могло закрыться, пока экран висел смонтированным (переход через полночь):
+        // `now` обновляется только на возврате из фона, а гейт маршрута берёт время заново —
+        // без этой перепроверки панель звала бы «ОТКРЫТЬ», а маршрут молча редиректил.
+        if (!isMoonWindowOpen(at)) return;
         hapticTap();
         router.push({ pathname: '/spreads/[id]', params: { id: spread.id } });
       }}
@@ -80,5 +86,5 @@ const st = StyleSheet.create({
   // сжимаемый текст — flex 1 (в RN flexShrink по умолчанию 0, урок задачи 16)
   name: { flex: 1, fontFamily: fonts.display, fontSize: 13.5 },
   right: { fontSize: 9, letterSpacing: 1.5, fontWeight: '700' },
-  dim: { opacity: 0.45 }, // тот же токен приглушения, что у прошедших дней календаря
+  dim: { opacity: LOCKED_OPACITY }, // тот же токен приглушения, что у прошедших дней календаря
 });

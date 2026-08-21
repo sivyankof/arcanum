@@ -1,4 +1,6 @@
 /** Каталог раскладов (product-spec §4): панель `.sp` = мини-схема позиций + имя + описание + PREMIUM.
+ *  У лунных раскладов (спека 51) PREMIUM заменён бейджем события «●/○ СОБЫТИЕ», а вне окна
+ *  события карточка приглушена и не нажимается — причина написана на ней самой датой.
  *  Тап — экран расклада во вложенном стеке этого таба (спека 36); «Карта дня» ведёт на «Сегодня». */
 import { router } from 'expo-router';
 import React from 'react';
@@ -18,7 +20,7 @@ import { inLang } from '../../../src/lib/lang';
 import { moonSpreadState } from '../../../src/lib/moonSpread';
 import { useAppActive } from '../../../src/lib/useAppActive';
 import { useTabTopRef } from '../../../src/lib/useTabScrollToTop';
-import { fonts, spacing } from '../../../src/theme/theme';
+import { fonts, LOCKED_OPACITY, spacing } from '../../../src/theme/theme';
 import { useTheme } from '../../../src/theme/useTheme';
 
 export default function SpreadsScreen() {
@@ -36,6 +38,10 @@ export default function SpreadsScreen() {
 
   const open = (s: Spread, locked: boolean) => {
     if (locked) return; // вне окна карточка не нажимается: причина написана на ней датой
+    // Окно могло закрыться, пока таб висел смонтированным (переход через полночь): `now` в
+    // сторе экрана обновляется только на возврате из фона, а гейт маршрута берёт время заново —
+    // без перепроверки карточка звала бы в закрытый расклад, а маршрут молча редиректил бы назад.
+    if (s.moon && !moonSpreadState(s.moon)?.open) return;
     hapticTap();
     // «Карта дня» раскладом не играется — это ритуал главного экрана (product-spec §4)
     if (s.id === 'card-of-day') router.navigate('/');
@@ -62,9 +68,10 @@ export default function SpreadsScreen() {
             ? tr('moonSpread.opensOn', { date: formatDayMonth(localDateISO(moon.at), lang) })
             : `${tr('spreads.cards', { count: s.cards })} · ${inLang(s.description, lang)}`;
           return (
-            <FadeUp key={s.id} index={1 + si}>
+            <FadeUp key={s.id} index={Math.min(1 + si, 8)}>
               <PressableScale
                 onPress={() => open(s, locked)}
+                disabled={locked}
                 style={[st.item, { backgroundColor: t.panel, borderColor: t.line }, locked && st.dim]}
               >
                 <SpreadDiagram spreadId={s.id} />
@@ -74,10 +81,13 @@ export default function SpreadsScreen() {
                 </View>
                 {/* у лунных раскладов бейдж события ВМЕСТО PREMIUM: бейдж на карточке один,
                     и событийный информативнее. free: false у полнолуния остаётся в данных
-                    для будущего пейволла — в v1 он рисует только бейдж (product-spec §4) */}
+                    для будущего пейволла — в v1 он рисует только бейдж (product-spec §4).
+                    Глиф перед текстом — как в мокапе (design-reference.html): ● новолуние,
+                    ○ полнолуние; в перевод не заводим (символ не зависит от языка). */}
                 {s.moon ? (
                   <View style={[st.badge, { borderColor: t.frame, backgroundColor: t.chipBg }]}>
                     <Txt style={{ color: t.accent, fontSize: 8, letterSpacing: 1.2, fontWeight: '700' }}>
+                      {s.moon === 'new' ? '● ' : '○ '}
                       {tr('moonSpread.event')}
                     </Txt>
                   </View>
@@ -117,5 +127,5 @@ const st = StyleSheet.create({
   name: { fontFamily: fonts.displaySemi, fontSize: 17 }, // `.sp .tx b`
   desc: { fontSize: 10, lineHeight: 15, marginTop: 3 }, // `.sp .tx small`
   badge: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3 },
-  dim: { opacity: 0.45 }, // вне окна события — как прошедшие дни лунного календаря
+  dim: { opacity: LOCKED_OPACITY }, // вне окна события — как прошедшие дни лунного календаря
 });

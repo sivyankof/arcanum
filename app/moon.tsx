@@ -21,7 +21,7 @@ import { WEEK_START } from '../src/lib/lang';
 import { moonInfo, type MoonEventKind } from '../src/lib/moon';
 import { monthEvents, monthGrid } from '../src/lib/moonCalendar';
 import { useAppActive } from '../src/lib/useAppActive';
-import { fonts, spacing } from '../src/theme/theme';
+import { fonts, LOCKED_OPACITY, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
 // .mooncal: 7 колонок, зазор 4
@@ -169,7 +169,7 @@ const st = StyleSheet.create({
   cell: { borderWidth: 1, borderColor: 'transparent', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }, // .dcell
   cellNum: { fontSize: 11 },
   cellGlyph: { marginTop: 1 },
-  dim: { opacity: 0.45 }, // .dim — прошедшие дни и события
+  dim: { opacity: LOCKED_OPACITY }, // .dim — прошедшие дни и события
   // .mevent: панель panel/frame, radius 14, паддинг 12/14, отступ 9, ряд gap 12
   event: {
     flexDirection: 'row',
