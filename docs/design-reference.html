@@ -25,14 +25,14 @@ box-shadow:0 50px 110px rgba(0,0,0,.8),0 6px 18px rgba(0,0,0,.5),inset 0 1px 1px
 .sc{position:absolute;inset:11px;border-radius:43px;overflow:hidden;color:var(--text);transition:.5s}
 .sc{background:var(--bg)}
 [data-mode="dark"]{--glass:rgba(12,15,34,.42);--bg:radial-gradient(135% 100% at 50% -12%,#1c2244 0%,#0e1129 48%,#070917 100%);
---text:#e2e6f4;--head:#f5eacb;--muted:#7e86ab;--line:#262e56;--panel:rgba(24,30,62,.55);
+--text:#e2e6f4;--head:#f5eacb;--muted:#848cb2;--line:#262e56;--panel:rgba(24,30,62,.55);
 --accent:#e2bd72;--accent2:#f0d9a4;--glow:rgba(226,189,114,.35);--ring:#39426f;
---frame:#8f7439;--navbg:rgba(7,9,23,.66);--lock:#525a80;--done:#3d7a5c;
+--frame:#8f7439;--navbg:rgba(7,9,23,.66);--lock:#525a80;--done:#63ab89;
 --chipbg:rgba(226,189,114,.1)}
 [data-mode="light"]{--glass:rgba(250,246,236,.45);--bg:linear-gradient(#fcf8ee,#efe8d2);
 --text:#3d3d55;--head:#4a3a16;--muted:#6f664b;--line:#e3d8ba;--panel:rgba(255,255,255,.66);
---accent:#a8802e;--accent2:#8a6a24;--glow:rgba(168,128,46,.25);--ring:#d8c89e;
---frame:#c4a259;--navbg:rgba(252,248,238,.7);--lock:#c9bd9c;--done:#4d9370;
+--accent:#7c5e20;--accent2:#8a6a24;--glow:rgba(168,128,46,.25);--ring:#d8c89e;
+--frame:#c4a259;--navbg:rgba(252,248,238,.7);--lock:#c9bd9c;--done:#386b51;
 --chipbg:rgba(168,128,46,.1)}
 .noise{position:absolute;inset:0;opacity:.4;pointer-events:none;mix-blend-mode:overlay;z-index:1;
 background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E")}
@@ -291,7 +291,7 @@ margin-top:16px;backdrop-filter:blur(10px)}
 .opt{background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:13px 16px;
 margin-top:9px;cursor:pointer;color:var(--text);font-size:13px;transition:.2s;backdrop-filter:blur(8px)}
 .opt:hover{border-color:var(--frame)}
-.opt.ok{border-color:#5aa07e;background:rgba(90,160,126,.12)}
+.opt.ok{border-color:var(--done);background:rgba(90,160,126,.12)}
 .opt.no{border-color:#c96a5a;opacity:.6}
 .xpchip{display:none;align-self:center;margin-top:14px;background:var(--chipbg);border:1px solid var(--frame);
 border-radius:16px;padding:6px 16px;color:var(--accent);font-weight:800;font-size:12px;letter-spacing:1px;
@@ -993,7 +993,7 @@ border:.5px solid rgba(226,189,114,.3)}
       <div class="mt"><small>КАРТА МЕСЯЦА</small><b>Верховная Жрица · 4 раза</b>
       <span>Отозвалось 12 из 18 дней</span>
       <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;margin-top:6px;gap:2px">
-        <i style="flex:12;background:var(--done, #3d7a5c);background:#5aa07e;border-radius:3px"></i>
+        <i style="flex:12;background:var(--done);border-radius:3px"></i>
         <i style="flex:4;background:var(--accent);border-radius:3px"></i>
         <i style="flex:2;background:var(--muted);opacity:.5;border-radius:3px"></i>
       </div></div>
