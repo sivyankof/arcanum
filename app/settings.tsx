@@ -26,13 +26,14 @@ import {
 } from '../src/lib/backup';
 import { pickBackupText, shareBackup } from '../src/lib/backupIo';
 import { course } from '../src/lib/content';
-import { nextLessonId } from '../src/lib/courseProgress';
+import { learnedCardIds, nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
 import { deviceLocaleTags } from '../src/lib/deviceLang';
 import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
 import { AVAILABLE_LANGS, useLang } from '../src/lib/i18n';
 import { detectLang, LANG_NAMES } from '../src/lib/lang';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
+import { queueReveal } from '../src/lib/revealQueue';
 import { deckOrder, newToday, reviewSummary } from '../src/lib/review';
 import {
   getPermission,
@@ -494,6 +495,17 @@ export default function SettingsScreen() {
             </FadeUp>
             <FadeUp index={17}>
               <SettingsRow icon="ribbon-outline" label={tr('settings.devSeedMastery')} value="DEV" onPress={devSeedMastery} />
+            </FadeUp>
+            <FadeUp index={18}>
+              <SettingsRow
+                icon="sparkles"
+                label={tr('settings.devFlipMoment')}
+                value="DEV"
+                // ВСЕ изученные карты в очередь «момента переворота» — заодно проверяется потолок
+                // каскада (волна у первых REVEAL_CAP, остальные сразу яркие). Без строки каждый
+                // прогон лайв-проверки требовал бы проходить урок заново (спека 46в)
+                onPress={() => queueReveal([...learnedCardIds(course, lessonsProgress)])}
+              />
             </FadeUp>
           </>
         )}
