@@ -16,6 +16,7 @@ import { hapticReveal, hapticSuccess, hapticTap } from '../lib/haptics';
 import { useLang } from '../lib/i18n';
 import { normalizeNote } from '../lib/journal';
 import { inLang } from '../lib/lang';
+import { moonSpreadState } from '../lib/moonSpread';
 import { dealSpread, drawnCardLabel, normalizeQuestion, spreadMeaningText, type SpreadDraw } from '../lib/spread';
 import { isBoard } from '../lib/spreadLayout';
 import { useLeaveGuard } from '../lib/useLeaveGuard';
@@ -25,6 +26,7 @@ import { useTheme } from '../theme/useTheme';
 import { ConfirmDialog } from './ConfirmDialog';
 import { CtaButton } from './CtaButton';
 import { FadeUp } from './FadeUp';
+import { PositionCards } from './PositionCards';
 import { Rule } from './Rule';
 import { ScreenBg } from './ScreenBg';
 import { SpreadBoard } from './SpreadBoard';
@@ -114,12 +116,17 @@ export function SpreadScreen({
   // записей дневника нет)
   const positionOf = (i: number) => (spread.positions[i] ? inLang(spread.positions[i], lang) : '');
 
-  const overline = [
-    tr('spread.overline'),
-    tr('spreads.cards', { count: n }).toUpperCase(),
-    ...(view && draw ? [formatDayMonth(draw.date, lang).toUpperCase()] : []),
-  ].join(' · ');
   const board = isBoard(n);
+  // лунный расклад: событие в оверлайне, свой глиф разделителя, своя подпись и перечень позиций
+  // до тасования (спека 51). У обычных восьми раскладов spread.moon нет — всё как было.
+  const moon = spread.moon ? moonSpreadState(spread.moon) : null;
+  const overline = moon
+    ? `${tr('moonSpread.event')} · ${tr(`moon.${moon.kind}`)} ${formatDayMonth(localDateISO(moon.at), lang)}`.toUpperCase()
+    : [
+        tr('spread.overline'),
+        tr('spreads.cards', { count: n }).toUpperCase(),
+        ...(view && draw ? [formatDayMonth(draw.date, lang).toUpperCase()] : []),
+      ].join(' · ');
   // после тасования пустое поле вопроса прячется: писать уже нельзя, показывать нечего
   const showQuestion = !dealt || question.length > 0;
 
@@ -149,18 +156,26 @@ export function SpreadScreen({
         <FadeUp index={0}>
           <Txt style={[st.overline, { color: t.muted }]}>{overline}</Txt>
           <Txt style={[st.title, { color: t.head }]}>{inLang(spread.name, lang)}</Txt>
-          <Rule />
+          <Rule glyph={spread.moon === 'full' ? '○' : spread.moon === 'new' ? '●' : undefined} />
         </FadeUp>
 
         {!view && (!dealt || board) && (
           <FadeUp index={1}>
-            <Txt style={[st.hint, { color: t.muted }]}>{tr('spread.hint')}</Txt>
+            <Txt style={[st.hint, { color: t.muted }]}>
+              {spread.moon ? tr(spread.moon === 'new' ? 'moonSpread.hintNew' : 'moonSpread.hintFull') : tr('spread.hint')}
+            </Txt>
           </FadeUp>
         )}
 
         {showQuestion && (
           <FadeUp index={1}>
             <QuestionField value={question} onChange={setQuestion} editable={!dealt} />
+          </FadeUp>
+        )}
+
+        {!dealt && spread.moon && (
+          <FadeUp index={2}>
+            <PositionCards spread={spread} />
           </FadeUp>
         )}
 
