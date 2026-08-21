@@ -24,6 +24,8 @@ export interface Theme {
   chipBg: string;
   danger: string;
   success: string;
+  /** фон чипа МАСТЕР (`.mastery.m4` эталона) — подложка под текст цвета success */
+  successBg: string;
 }
 
 export const darkTheme: Theme = {
@@ -46,6 +48,7 @@ export const darkTheme: Theme = {
   chipBg: 'rgba(226,189,114,0.10)',
   danger: '#e07a6a',
   success: '#5aa07e',
+  successBg: 'rgba(90,160,126,0.12)',
 };
 
 export const lightTheme: Theme = {
@@ -71,6 +74,7 @@ export const lightTheme: Theme = {
   chipBg: 'rgba(168,128,46,0.10)',
   danger: '#c05a4a',
   success: '#4d9370',
+  successBg: 'rgba(90,160,126,0.12)',
 };
 
 /** Шрифты эталона: Cormorant Garamond для «голоса таро», Manrope для интерфейса.

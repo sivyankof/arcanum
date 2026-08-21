@@ -12,6 +12,7 @@ import { cardImages } from '../lib/cardImages';
 import { setCardOrigin } from '../lib/cardTransition';
 import type { TarotCard } from '../lib/content';
 import { inLang, type Lang } from '../lib/lang';
+import type { MasteryLevel } from '../lib/mastery';
 import { radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { CornerBadge } from './CornerBadge';
@@ -33,6 +34,7 @@ export function CardCell({
   lang,
   badge,
   dimmed,
+  mastery,
 }: {
   card: TarotCard;
   lang: Lang;
@@ -40,6 +42,8 @@ export function CardCell({
   badge?: string;
   /** неизученная карта — картинка приглушена */
   dimmed?: boolean;
+  /** ступень мастерства изученной карты — 4 полоски под миниатюрой; не задана — полосок нет */
+  mastery?: MasteryLevel;
 }) {
   const t = useTheme();
   const imRef = React.useRef<View>(null);
@@ -67,6 +71,19 @@ export function CardCell({
         {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
         {!!badge && <CornerBadge label={badge} />}
       </View>
+      {!!mastery && (
+        <View style={st.mbar}>
+          {([1, 2, 3, 4] as const).map((i) => (
+            <View
+              key={i}
+              style={[
+                st.bar,
+                i <= mastery ? { backgroundColor: t.accent } : { backgroundColor: t.muted, opacity: 0.28 },
+              ]}
+            />
+          ))}
+        </View>
+      )}
       <Txt numberOfLines={2} style={[st.name, { color: t.muted }]}>
         {inLang(card.name, lang)}
       </Txt>
@@ -109,6 +126,9 @@ const st = StyleSheet.create({
   },
   im: { width: '100%', height: '100%' },
   dim: { opacity: DIM_OPACITY },
+  // .gc .mbar эталона: 4 полоски 8×2, зазор 2, по центру, отступ от миниатюры 4
+  mbar: { flexDirection: 'row', gap: 2, justifyContent: 'center', marginTop: 4 },
+  bar: { width: 8, height: 2, borderRadius: 1 },
   // бейдж «ИЗУЧЕНО ✓» — общий CornerBadge (эталон `.st2`, design-system §5)
   name: { fontSize: 9.5, textAlign: 'center', marginTop: 5, fontWeight: '600', letterSpacing: 0.3, lineHeight: 12 },
 });

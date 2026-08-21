@@ -16,6 +16,7 @@ import { collectionSections, filterProgress } from '../../src/lib/collection';
 import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
 import { useLang } from '../../src/lib/i18n';
+import { masteryLevel } from '../../src/lib/mastery';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
@@ -92,6 +93,8 @@ export default function CardsScreen() {
   // карты пройденных уроков — бейдж «ИЗУЧЕНО ✓», приглушение, чип «Изучено» и панель прогресса (спеки 08/46б)
   const lessonsProgress = useApp((s) => s.lessonsProgress);
   const learned = useMemo(() => learnedCardIds(course, lessonsProgress), [lessonsProgress]);
+  // ступень мастерства изученной карты — полоски в ячейке (спека 49)
+  const srs = useApp((s) => s.srs);
 
   // 78 карт фильтруются мгновенно — задержки ввода (debounce) не нужно
   const rows = useMemo(
@@ -167,7 +170,14 @@ export default function CardsScreen() {
           const cells = (
             <CardGridRow count={row.length} style={st.pad}>
               {row.map((c) => (
-                <CardCell key={c.id} card={c} lang={lang} badge={learned.has(c.id) ? tr('cards.learned') : undefined} dimmed={!learned.has(c.id)} />
+                <CardCell
+                  key={c.id}
+                  card={c}
+                  lang={lang}
+                  badge={learned.has(c.id) ? tr('cards.learned') : undefined}
+                  dimmed={!learned.has(c.id)}
+                  mastery={learned.has(c.id) ? masteryLevel(srs[c.id]) : undefined}
+                />
               ))}
             </CardGridRow>
           );

@@ -1808,8 +1808,8 @@ function openShare(){
 
 /* 2. уровни мастерства: 4 ступени по интервалу SM-2 (демо — тап переключает) */
 const MASTERY = [
-  {cls:'m1', dots:0, label:'НОВАЯ'},        /* нет записи srs */
-  {cls:'m2', dots:1, label:'ЗНАКОМАЯ'},     /* intervalDays 1–5 */
+  {cls:'m1', dots:1, label:'НОВАЯ'},        /* нет записи srs */
+  {cls:'m2', dots:2, label:'ЗНАКОМАЯ'},     /* intervalDays 0–5 */
   {cls:'m3', dots:3, label:'УВЕРЕННАЯ'},    /* 6–20 */
   {cls:'m4', dots:4, label:'МАСТЕР'},       /* 21+ */
 ];
@@ -1825,12 +1825,12 @@ function cycleMastery(el){
 /* 2б. индикатор мастерства в ячейках справочника (демо: первые 8 изученных) */
 (function(){
   const cells=[...document.querySelectorAll('#grid .gc')];
-  const demo=[3,4,2,1,0,3,2,1];  /* ступени 0..3 для первых восьми */
+  const demo=[3,4,2,1,2,3,4,1];  /* ступени 1..4 для первых восьми изученных */
   cells.slice(0,8).forEach((c,i)=>{
     const lvl=demo[i];
     const bar=document.createElement('div'); bar.className='mbar';
     bar.innerHTML=[0,1,2,3].map(k=>`<i class="${k<lvl?'on':''}"></i>`).join('');
-    c.appendChild(bar);
+    c.insertBefore(bar, c.querySelector('small'));
   });
 })();
 

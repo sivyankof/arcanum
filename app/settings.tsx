@@ -91,6 +91,7 @@ export default function SettingsScreen() {
   const reviewDay = useApp((s) => s.reviewDay);
   const resetSrs = useApp((s) => s.resetSrs);
   const devAgeSrs = useApp((s) => s.devAgeSrs);
+  const devSeedMastery = useApp((s) => s.devSeedMastery);
   const [queueText, setQueueText] = React.useState<string | null>(null);
   // DEV: сводка очереди повторения (спека 45) — та же сборка, что возьмёт карточка курса в 45б
   const showReviewQueue = () => {
@@ -490,6 +491,9 @@ export default function SettingsScreen() {
             </FadeUp>
             <FadeUp index={16}>
               <SettingsRow icon="refresh-outline" label={tr('settings.devResetSrs')} value="DEV" onPress={resetSrs} />
+            </FadeUp>
+            <FadeUp index={17}>
+              <SettingsRow icon="ribbon-outline" label={tr('settings.devSeedMastery')} value="DEV" onPress={devSeedMastery} />
             </FadeUp>
           </>
         )}

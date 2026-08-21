@@ -4,7 +4,8 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
-import { completeLessonProgress, type LessonProgressMap } from '../lib/courseProgress';
+import { course } from '../lib/content';
+import { completeLessonProgress, learnedCardIds, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO, plusDaysISO } from '../lib/dates';
 import { deviceLocaleTags } from '../lib/deviceLang';
 import { AVAILABLE_LANGS } from '../lib/i18n';
@@ -13,7 +14,7 @@ import { detectLang, type Lang } from '../lib/lang';
 import { applyReview, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from '../lib/review';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { SPREADS_MAX, type SpreadDraw } from '../lib/spread';
-import type { SrsGrade } from '../lib/srs';
+import { EASE_START, type SrsGrade } from '../lib/srs';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
 import { reflectXp, XP_DRAW, XP_SPREAD } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
@@ -91,6 +92,9 @@ export interface AppState {
   /** DEV: «состарить» повторение на день — все due на сутки назад, счётчик новых сброшен;
    *  без этого «ждут завтра» и дневной лимит новых проверяются только календарём. */
   devAgeSrs: () => void;
+  /** DEV: рассадить изученным картам ступени мастерства по кругу (спека 49) — без этого
+   *  УВЕРЕННАЯ и МАСТЕР недостижимы на проверке раньше чем через 6/21 день повторений. */
+  devSeedMastery: () => void;
   resetCourse: () => void;
   setReflectionOn: (on: boolean) => void;
   setPushesOn: (on: boolean) => void;
@@ -214,6 +218,20 @@ export const useApp = create<AppState>()(
           ),
           reviewDay: REVIEW_DAY_DEFAULT,
         }),
+      devSeedMastery: () => {
+        const learned = [...learnedCardIds(course, get().lessonsProgress)];
+        const today = localDateISO();
+        // ступени по кругу: без записи (НОВАЯ) / интервал 1 / 6 / 21; due в будущем,
+        // чтобы после рассадки очередь тренажёра не наводнялась «просроченными»
+        const plans = [null, { reps: 1, iv: 1 }, { reps: 2, iv: 6 }, { reps: 3, iv: 21 }] as const;
+        const srs: SrsMap = { ...get().srs };
+        learned.forEach((id, i) => {
+          const p = plans[i % plans.length];
+          if (!p) delete srs[id];
+          else srs[id] = { reps: p.reps, intervalDays: p.iv, ease: EASE_START, due: plusDaysISO(today, p.iv) };
+        });
+        set({ srs });
+      },
 
       setReflectionOn: (on) => set({ settings: { ...get().settings, reflectionOn: on } }),
       setPushesOn: (on) => set({ settings: { ...get().settings, pushesOn: on } }),

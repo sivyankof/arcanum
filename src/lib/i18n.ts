@@ -51,6 +51,8 @@ export const resources = {
         learnedEmpty: "Изученные карты появятся здесь после первого урока курса",
         subtitle: "СПРАВОЧНИК · РАЙДЕР–УЭЙТ 1909",
       },
+      // ступени мастерства изученной карты по интервалу SM-2 (спека 49)
+      mastery: { new: "НОВАЯ", familiar: "ЗНАКОМАЯ", confident: "УВЕРЕННАЯ", master: "МАСТЕР" },
       card: {
         general: "Общее значение", reversed: "Перевёрнутая", love: "Любовь", career: "Работа",
         finances: "Финансы", health: "Здоровье", day_card: "Как карта дня", symbolism: "Символика",
@@ -168,6 +170,7 @@ export const resources = {
         devReviewQueue: "Очередь повторения",
         devAgeSrs: "Состарить повторение на день",
         devResetSrs: "Сбросить повторение",
+        devSeedMastery: "Рассадить ступени мастерства",
         // «Число: N» без числительных — плюрализация не нужна (урок hf-02)
         reviewQueueText: "В колоде: {{deck}}\nЖдут сегодня: {{due}}\nНовых доступно: {{fresh}}\nЖдут к завтра (вкл. сегодняшние): {{tomorrow}}\nНовых введено сегодня: {{introduced}}",
         // бэкап (спека 11); тон — design-system §8: без «Ошибка!» и приказов
@@ -336,6 +339,7 @@ export const resources = {
         learnedEmpty: "Learned cards will appear here after your first lesson",
         subtitle: "REFERENCE · RIDER–WAITE 1909",
       },
+      mastery: { new: "NEW", familiar: "FAMILIAR", confident: "CONFIDENT", master: "MASTER" },
       card: {
         general: "General meaning", reversed: "Reversed", love: "Love", career: "Career",
         finances: "Finances", health: "Health", day_card: "As card of the day", symbolism: "Symbolism",
@@ -433,6 +437,7 @@ export const resources = {
         devReviewQueue: "Review queue",
         devAgeSrs: "Age reviews by a day",
         devResetSrs: "Reset reviews",
+        devSeedMastery: "Seed mastery levels",
         reviewQueueText: "Deck: {{deck}}\nDue today: {{due}}\nNew available: {{fresh}}\nDue by tomorrow (incl. today): {{tomorrow}}\nNew introduced today: {{introduced}}",
         // бэкап (спека 11)
         exportData: "Export data",
@@ -608,6 +613,8 @@ export const resources = {
         learnedEmpty: "Las cartas aprendidas aparecerán aquí después de tu primera lección",
         subtitle: "REFERENCIA · RIDER–WAITE 1909",
       },
+      // черновик — на вычитку Cowork, хвост в бэклоге
+      mastery: { new: "NUEVA", familiar: "CONOCIDA", confident: "SEGURA", master: "MAESTRA" },
       card: {
         general: "Significado general",
         reversed: "Invertida",
@@ -742,6 +749,7 @@ export const resources = {
         devReviewQueue: "Cola de repaso",
         devAgeSrs: "Adelantar los repasos un día",
         devResetSrs: "Reiniciar los repasos",
+        devSeedMastery: "Repartir niveles de dominio",
         reviewQueueText: "En el mazo: {{deck}}\nPendientes hoy: {{due}}\nNuevas disponibles: {{fresh}}\nPendientes para mañana (incl. hoy): {{tomorrow}}\nNuevas introducidas hoy: {{introduced}}",
         exportData: "Exportar datos",
         importData: "Importar desde archivo",
@@ -926,6 +934,8 @@ export const resources = {
         learnedEmpty: "As cartas aprendidas aparecem aqui depois da sua primeira aula",
         subtitle: "REFERÊNCIA · RIDER–WAITE 1909",
       },
+      // черновик — на вычитку Cowork
+      mastery: { new: "NOVA", familiar: "CONHECIDA", confident: "SEGURA", master: "MESTRA" },
       card: {
         general: "Significado geral",
         reversed: "Invertida",
@@ -1060,6 +1070,7 @@ export const resources = {
         devReviewQueue: "Fila de revisão",
         devAgeSrs: "Adiantar as revisões em um dia",
         devResetSrs: "Zerar revisões",
+        devSeedMastery: "Distribuir níveis de domínio",
         reviewQueueText: "Baralho: {{deck}}\nPara hoje: {{due}}\nNovas disponíveis: {{fresh}}\nPara amanhã (incl. hoje): {{tomorrow}}\nNovas introduzidas hoje: {{introduced}}",
         exportData: "Exportar dados",
         importData: "Importar de um arquivo",
