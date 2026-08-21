@@ -93,6 +93,18 @@ export function learnedCardIds(
   return ids;
 }
 
+/** Впервые изученные карты — вход очереди «момента переворота» в справочнике (спека 46в).
+ *  Разница learnedCardIds ДО и ПОСЛЕ записи прогресса: урок-повторение (все карты уже изучены)
+ *  и уроки М6 без карт дают пустой результат сами по себе, без отдельной ветки. */
+export function newlyLearnedIds(
+  modules: CourseModule[],
+  before: LessonProgressMap,
+  after: LessonProgressMap,
+): string[] {
+  const prev = learnedCardIds(modules, before);
+  return [...learnedCardIds(modules, after)].filter((id) => !prev.has(id));
+}
+
 /** Завершение урока (спека 08). Первое прохождение: done + errors + XP по формуле.
  *  Повтор: обновляются errors/ts (ошибки последнего прохождения — схема logic-spec §7),
  *  +2 XP не чаще раза в день (repeatDate). Чистая функция: стор только применяет результат. */

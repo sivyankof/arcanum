@@ -5,13 +5,14 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
 import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
 import { course } from '../lib/content';
-import { completeLessonProgress, learnedCardIds, type LessonProgressMap } from '../lib/courseProgress';
+import { completeLessonProgress, learnedCardIds, newlyLearnedIds, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO, plusDaysISO } from '../lib/dates';
 import { deviceLocaleTags } from '../lib/deviceLang';
 import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { detectLang, type Lang } from '../lib/lang';
 import { applyReview, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from '../lib/review';
+import { queueReveal } from '../lib/revealQueue';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { SPREADS_MAX, type SpreadDraw } from '../lib/spread';
 import { EASE_START, type SrsGrade } from '../lib/srs';
@@ -197,6 +198,10 @@ export const useApp = create<AppState>()(
       completeLesson: (lessonId, errors) => {
         const { lessonsProgress, xp } = get();
         const r = completeLessonProgress(lessonsProgress, lessonId, errors, localDateISO(), Date.now());
+        // впервые изученные карты — в очередь «момента переворота» справочника (спека 46в);
+        // урок-повторение и уроки без карт дают пустую разницу, очередь не трогается
+        const fresh = newlyLearnedIds(course, lessonsProgress, r.progress);
+        if (fresh.length) queueReveal(fresh);
         set({ lessonsProgress: r.progress, xp: xp + r.gained });
         return r.gained;
       },

@@ -171,6 +171,8 @@ export const resources = {
         devAgeSrs: "Состарить повторение на день",
         devResetSrs: "Сбросить повторение",
         devSeedMastery: "Рассадить ступени мастерства",
+        // момент переворота (спека 46в): волна раскрытия по всем изученным картам
+        devFlipMoment: "Момент переворота",
         // «Число: N» без числительных — плюрализация не нужна (урок hf-02)
         reviewQueueText: "В колоде: {{deck}}\nЖдут сегодня: {{due}}\nНовых доступно: {{fresh}}\nЖдут к завтра (вкл. сегодняшние): {{tomorrow}}\nНовых введено сегодня: {{introduced}}",
         // бэкап (спека 11); тон — design-system §8: без «Ошибка!» и приказов
@@ -438,6 +440,7 @@ export const resources = {
         devAgeSrs: "Age reviews by a day",
         devResetSrs: "Reset reviews",
         devSeedMastery: "Seed mastery levels",
+        devFlipMoment: "Flip moment",
         reviewQueueText: "Deck: {{deck}}\nDue today: {{due}}\nNew available: {{fresh}}\nDue by tomorrow (incl. today): {{tomorrow}}\nNew introduced today: {{introduced}}",
         // бэкап (спека 11)
         exportData: "Export data",
@@ -750,6 +753,7 @@ export const resources = {
         devAgeSrs: "Adelantar los repasos un día",
         devResetSrs: "Reiniciar los repasos",
         devSeedMastery: "Repartir niveles de dominio",
+        devFlipMoment: "Momento de revelación",
         reviewQueueText: "En el mazo: {{deck}}\nPendientes hoy: {{due}}\nNuevas disponibles: {{fresh}}\nPendientes para mañana (incl. hoy): {{tomorrow}}\nNuevas introducidas hoy: {{introduced}}",
         exportData: "Exportar datos",
         importData: "Importar desde archivo",
@@ -1071,6 +1075,7 @@ export const resources = {
         devAgeSrs: "Adiantar as revisões em um dia",
         devResetSrs: "Zerar revisões",
         devSeedMastery: "Distribuir níveis de domínio",
+        devFlipMoment: "Momento da revelação",
         reviewQueueText: "Baralho: {{deck}}\nPara hoje: {{due}}\nNovas disponíveis: {{fresh}}\nPara amanhã (incl. hoje): {{tomorrow}}\nNovas introduzidas hoje: {{introduced}}",
         exportData: "Exportar dados",
         importData: "Importar de um arquivo",

@@ -3,11 +3,23 @@
  *  (спека 46б) — неизученная карта: картинка приглушена до opacity .55, рамка/тень/подпись как
  *  у всех, бейджа нет; тап открывает страницу, как у любой карты — ничего не запирается.
  *  Позицию картинки меряем на нажатии — с неё начнётся перелёт на страницу карты (пункт 6
- *  motion-spec). */
+ *  motion-spec). Проп `reveal` (спека 46в) — «момент переворота»: только что изученная карта
+ *  раскрывается волной из приглушённой, вместо того чтобы просто оказаться яркой молча. */
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React from 'react';
 import { Dimensions, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import Animated, {
+  Easing,
+  Extrapolation,
+  interpolate,
+  ReduceMotion,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { cardImages } from '../lib/cardImages';
 import { setCardOrigin } from '../lib/cardTransition';
 import type { TarotCard } from '../lib/content';
@@ -19,6 +31,15 @@ import { CornerBadge } from './CornerBadge';
 import { PressableScale } from './PressableScale';
 import { Skeleton } from './Skeleton';
 import { Txt } from './Txt';
+
+/** Параметры волны раскрытия (спека 46в, макет `.gc.revealing .im` / `@keyframes cardReveal`).
+ *  Экспортированы — экран справочника считает по ним время жизни своего state волны. */
+export const REVEAL_MS = 520;
+export const REVEAL_STAGGER = 70;
+
+// Кривая CSS применяется К КАЖДОМУ отрезку @keyframes отдельно (0→60% и 60%→100%), поэтому
+// анимация ниже — не один withTiming, а withSequence из двух отрезков с той же кривой на каждом.
+const REVEAL_EASE = Easing.bezier(0.2, 0.9, 0.3, 1.05);
 
 const { width: W } = Dimensions.get('window');
 /** Сетка карт: 3 колонки, зазор 11 в обе стороны (`.grid` эталона), поля экрана 24 (`spacing.xl`). */
@@ -35,6 +56,7 @@ export function CardCell({
   badge,
   dimmed,
   mastery,
+  reveal,
 }: {
   card: TarotCard;
   lang: Lang;
@@ -44,10 +66,40 @@ export function CardCell({
   dimmed?: boolean;
   /** ступень мастерства изученной карты — 4 полоски под миниатюрой; не задана — полосок нет */
   mastery?: MasteryLevel;
+  /** ступенька стаггера «момента переворота» (спека 46в): 0..7, задержка = reveal × REVEAL_STAGGER.
+   *  Не задан — картинка в нейтральном состоянии, анимации нет вовсе. */
+  reveal?: number;
 }) {
   const t = useTheme();
   const imRef = React.useRef<View>(null);
   const [loaded, setLoaded] = React.useState(false);
+
+  // прогресс волны раскрытия: 1 — нейтраль (обычная ячейка), 0 → 1 — раскрытие. Обёртка вокруг
+  // Image держится ВСЕГДА (см. ниже), а не только при reveal != null — условная обёртка
+  // перемонтировала бы Image, и скелетон мигнул бы заново
+  const prog = useSharedValue(1);
+  React.useEffect(() => {
+    if (reveal == null) {
+      prog.value = 1;
+      return;
+    }
+    prog.value = 0;
+    prog.value = withDelay(
+      reveal * REVEAL_STAGGER,
+      withSequence(
+        withTiming(0.6, { duration: REVEAL_MS * 0.6, easing: REVEAL_EASE, reduceMotion: ReduceMotion.System }),
+        withTiming(1, { duration: REVEAL_MS * 0.4, easing: REVEAL_EASE, reduceMotion: ReduceMotion.System }),
+      ),
+    );
+  }, [reveal, prog]);
+
+  // 2D-безопасно (уроки задач 36/42): трансформация только scale, конечные значения нейтральны
+  // (opacity 1, scale 1), стиль с обёртки не снимается никогда — «осиротевших» 3D-пропов тут нет.
+  // Выброс кривой (scale до 1.02 на 60%) без клампа — задуманный пружинный перелёт, как в CSS.
+  const revealStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(prog.value, [0, 0.6, 1], [DIM_OPACITY, 1, 1], Extrapolation.CLAMP),
+    transform: [{ scale: interpolate(prog.value, [0, 0.6, 1], [0.965, 1.02, 1]) }],
+  }));
 
   return (
     <PressableScale
@@ -60,14 +112,16 @@ export function CardCell({
       style={st.cell}
     >
       <View ref={imRef} style={[st.imWrap, { borderColor: t.line }]}>
-        <Image
-          source={cardImages[card.id]}
-          style={[st.im, dimmed && st.dim]}
-          contentFit="cover"
-          transition={180}
-          cachePolicy="memory-disk"
-          onLoad={() => setLoaded(true)}
-        />
+        <Animated.View style={[st.im, revealStyle]}>
+          <Image
+            source={cardImages[card.id]}
+            style={[st.im, dimmed && st.dim]}
+            contentFit="cover"
+            transition={180}
+            cachePolicy="memory-disk"
+            onLoad={() => setLoaded(true)}
+          />
+        </Animated.View>
         {!loaded && <Skeleton style={StyleSheet.absoluteFill} />}
         {!!badge && <CornerBadge label={badge} />}
       </View>

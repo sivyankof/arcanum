@@ -6,6 +6,7 @@ import {
   lessonStates,
   moduleCardCount,
   moduleProgress,
+  newlyLearnedIds,
   nextLessonId,
   nodeXs,
   type LessonProgressMap,
@@ -217,5 +218,30 @@ describe('completeLessonProgress — запись прохождения и XP (
     const src: LessonProgressMap = {};
     completeLessonProgress(src, 'a1', 0, DAY, 1);
     expect(src).toEqual({});
+  });
+});
+
+describe('newlyLearnedIds — впервые изученные карты («момент переворота», спека 46в)', () => {
+  const MODS = [fx('a', 2, 2)]; // у a1 карты a1-card-0/1, у a2 — a2-card-0/1
+
+  it('урок с новыми картами — возвращает ровно их', () => {
+    expect(newlyLearnedIds(MODS, {}, done('a1')).sort()).toEqual(['a1-card-0', 'a1-card-1']);
+  });
+
+  it('повторное завершение того же урока (before уже содержит) — пустой массив', () => {
+    expect(newlyLearnedIds(MODS, done('a1'), done('a1'))).toEqual([]);
+  });
+
+  it('урок без карт — пустой массив', () => {
+    const noCards = [fx('c', 1, 0)];
+    expect(newlyLearnedIds(noCards, {}, done('c1'))).toEqual([]);
+  });
+
+  it('карта, уже изученная другим уроком, второй раз не считается новой', () => {
+    const m = fx('a', 2, 0);
+    m.lessons[0].cards = ['fool'];
+    m.lessons[1].cards = ['fool', 'magician'];
+    // a1 уже пройден (fool изучен) — a2 приносит только magician
+    expect(newlyLearnedIds([m], done('a1'), done('a1', 'a2'))).toEqual(['magician']);
   });
 });

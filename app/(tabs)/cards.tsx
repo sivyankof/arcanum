@@ -1,9 +1,10 @@
+import { useFocusEffect } from 'expo-router';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, View } from 'react-native';
 import Animated, { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CardCell, CardGridRow, GRID_COLS, GRID_GAP } from '../../src/components/CardCell';
+import { CardCell, CardGridRow, GRID_COLS, GRID_GAP, REVEAL_MS, REVEAL_STAGGER } from '../../src/components/CardCell';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
@@ -17,6 +18,7 @@ import { cards, course, type TarotCard } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
 import { useLang } from '../../src/lib/i18n';
 import { masteryLevel } from '../../src/lib/mastery';
+import { REVEAL_CAP, revealOrder, takeReveal } from '../../src/lib/revealQueue';
 import { useScrollAwareBar } from '../../src/lib/useScrollAwareBar';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
@@ -27,6 +29,11 @@ import { useTheme } from '../../src/theme/useTheme';
 const BODY_ROWS = 4;
 /** Шаг каскада для тела списка: на две ступеньки позже шапки, как `.grid d4` против `.d2` эталона. */
 const BODY_STEP = 3;
+
+/** Сколько живёт state волны «момента переворота» (спека 46в): волна целиком (задержка последней
+ *  ступеньки + её длительность) плюс запас. После очистки ряды, домонтированные FlatList позже
+ *  при прокрутке, волну не переигрывают — reveal у них уже не задан. */
+const REVEAL_CLEAR_MS = REVEAL_MS + (REVEAL_CAP - 1) * REVEAL_STAGGER + 200;
 
 /** Заливка панели прогресса: при входе — от нуля с задержкой (тайминг LevelCard), при смене чипа —
  *  перетекание к новому значению без задержки. */
@@ -129,6 +136,31 @@ export default function CardsScreen() {
 
   const filters = { query, onQuery, filter, onFilter: setFilter };
 
+  // момент переворота (спека 46в): на фокусе экрана забрать очередь только что изученных карт,
+  // построить ступеньки стаггера по ТЕКУЩЕЙ сетке и прокрутить к ряду первой новой карты
+  const [reveal, setReveal] = useState<Map<string, number> | null>(null);
+  const revealTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  useFocusEffect(
+    // эффект перезапускается и при смене rows (например, ввод в поиск) — в этом случае
+    // takeReveal() уже пуст (очередь потребляется один раз), и ранний выход достаточен
+    React.useCallback(() => {
+      const ids = takeReveal();
+      if (!ids.length) return;
+      const order = revealOrder(rows, new Set(ids));
+      if (!order.size) return; // новые карты скрыты фильтром/поиском — волна пропускается молча
+      setReveal(order);
+      const rowIndex = rows.findIndex((row) => row.some((c) => order.has(c.id)));
+      // разовое осознанное исключение из правила «позиция скролла между табами сохраняется»
+      // (motion-spec §4/§17, решение Артёма 21.08): волна за кадром — не награда
+      if (rowIndex >= 0) listRef.current?.scrollToIndex({ index: rowIndex, animated: false, viewPosition: 0.25 });
+      clearTimeout(revealTimer.current);
+      revealTimer.current = setTimeout(() => setReveal(null), REVEAL_CLEAR_MS);
+    }, [rows, listRef]),
+  );
+
+  useEffect(() => () => clearTimeout(revealTimer.current), []);
+
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       <ScreenBg />
@@ -145,6 +177,17 @@ export default function CardsScreen() {
         // «не прятать панель, пока поле в фокусе» не срабатывает, а на iOS/Android работает
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
+        // ряды разновысокие (названия карт переносятся на 1–2 строки) — FlatList не знает точный
+        // offset ряда, который ещё не рендерился, и обычный scrollToIndex промахивается; сначала
+        // грубая прикидка по среднему размеру ряда, потом (когда список успел размерить реальные
+        // ряды) повторный точный scrollToIndex тем же вызовом, который его и запросил
+        onScrollToIndexFailed={(info) => {
+          listRef.current?.scrollToOffset({ offset: info.averageItemLength * info.index, animated: false });
+          setTimeout(
+            () => listRef.current?.scrollToIndex({ index: info.index, animated: false, viewPosition: 0.25 }),
+            80,
+          );
+        }}
         contentContainerStyle={{ paddingTop: insets.top, paddingBottom: 120 }}
         ItemSeparatorComponent={() => <View style={{ height: GRID_GAP }} />}
         ListHeaderComponent={
@@ -177,6 +220,7 @@ export default function CardsScreen() {
                   badge={learned.has(c.id) ? tr('cards.learned') : undefined}
                   dimmed={!learned.has(c.id)}
                   mastery={learned.has(c.id) ? masteryLevel(srs[c.id]) : undefined}
+                  reveal={reveal?.get(c.id)}
                 />
               ))}
             </CardGridRow>
