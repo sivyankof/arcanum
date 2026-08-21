@@ -293,6 +293,9 @@ export const resources = {
         due_one: "{{count}} карта ждёт", due_few: "{{count}} карты ждут", due_many: "{{count}} карт ждут",
         new: "Новых карт: {{n}}",
         allDone: "Всё повторено ✓ · завтра: {{n}}",
+        // хвост «завтра: N» печатается только при N ≥ 1: «завтра: 0» — мёртвая строка, которая
+        // ничего не сообщает (интервалы уехали на 6+ дней вперёд — законное состояние, хвост 45б)
+        allDoneNoTomorrow: "Всё повторено ✓",
         overline: "ПОВТОРЕНИЕ · ИНТЕРВАЛЬНЫЙ МЕТОД",
         title: "Тренажёр",
         queue: "К ПОВТОРЕНИЮ · {{n}}",
@@ -540,6 +543,7 @@ export const resources = {
         due_one: "{{count}} card waiting", due_other: "{{count}} cards waiting",
         new: "New cards: {{n}}",
         allDone: "All reviewed ✓ · tomorrow: {{n}}",
+        allDoneNoTomorrow: "All reviewed ✓",
         overline: "REVIEW · SPACED REPETITION",
         title: "Trainer",
         queue: "TO REVIEW · {{n}}",
@@ -860,6 +864,7 @@ export const resources = {
         due_other: "{{count}} cartas esperan",
         new: "Cartas nuevas: {{n}}",
         allDone: "Todo repasado ✓ · mañana: {{n}}",
+        allDoneNoTomorrow: "Todo repasado ✓",
         overline: "REPASO · REPETICIÓN ESPACIADA",
         title: "Entrenador",
         queue: "POR REPASAR · {{n}}",
@@ -1182,6 +1187,7 @@ export const resources = {
         due_other: "{{count}} cartas esperando",
         new: "Cartas novas: {{n}}",
         allDone: "Tudo revisado ✓ · amanhã: {{n}}",
+        allDoneNoTomorrow: "Tudo revisado ✓",
         overline: "REVISÃO · REPETIÇÃO ESPAÇADA",
         title: "Treino",
         queue: "PARA REVISAR · {{n}}",

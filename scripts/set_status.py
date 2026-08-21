@@ -27,7 +27,9 @@ theory — тексты теории уроков (course.json); quiz — вик
 перечисленные в --lang (по умолчанию канон ru,en), и только те из них, чей статус совпал
 с исходным, — иначе «русский вычитан, испанский черновик» схлопнулось бы в одно значение.
 Отсутствующий у блока язык считается todo.
-Формат файлов сохраняется тот же, что пишут build_cards.py и merge_quiz.py (indent=1, LF).
+Формат файлов сохраняется тот же, что пишут build_cards.py и merge_quiz.py (indent=1), и
+переводы строк — те, что уже стоят в конкретном файле на диске (LF у cards.json, CRLF
+у course.json и quiz-*.json на 21.08), а не единый стиль на весь репозиторий.
 """
 import argparse
 import json
@@ -104,12 +106,27 @@ def quiz_text(questions, lang: str) -> bool:
     return True
 
 
+def detect_newline(path: Path) -> str:
+    """Определяет фактический стиль переводов строк файла НА ДИСКЕ, не полагаясь на
+    core.autocrlf (git может как раз держать рабочее дерево не в том стиле, что в блобе).
+    У каждого файла контента свой сложившийся стиль — cards.json чистый LF, а course.json
+    и все content/quiz-*.json на 21.08 лежат в CRLF — берём тот, что преобладает."""
+    raw = path.read_bytes()
+    crlf = raw.count(b"\r\n")
+    lf_only = raw.count(b"\n") - crlf
+    return "\r\n" if crlf > lf_only else "\n"
+
+
 def dump(path: Path, data: object) -> None:
-    """Запись в том же формате, что и остальные скрипты конвейера."""
+    """Запись в том же формате, что и остальные скрипты конвейера, но БЕЗ навязывания
+    своего стиля переводов строк: пишем тем же стилем, что уже стоит в файле (см.
+    detect_newline). Раньше запись всегда форсировала LF — на CRLF-файлах (course.json,
+    quiz-*.json) это меняло КАЖДУЮ строку и раздувало diff на весь файл ради одной правки
+    статуса (хвост 28к)."""
     path.write_text(
         json.dumps(data, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8",
-        newline="\n",
+        newline=detect_newline(path),
     )
 
 

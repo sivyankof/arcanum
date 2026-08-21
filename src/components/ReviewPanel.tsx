@@ -2,7 +2,8 @@
  *  ModuleHeader над первым модулем — Overline «ПОВТОРЕНИЕ», строка состояния, справа иконка.
  *  Состояние считает чистая reviewCardState: 'hidden' — колода пуста, карточки нет вовсе; 'due' —
  *  «N карт ждут» и 'new' — «Новых карт: N» ведут в тренажёр; 'done' — «Всё повторено ✓ · завтра: M»
- *  цветом success и НЕ тап. Числительное due — через count (logic-spec §10). */
+ *  цветом success и НЕ тап (при M = 0 хвост не печатается вовсе). Числительное due — через count
+ *  (logic-spec §10). */
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +27,12 @@ export function ReviewPanel({ summary, onPress }: { summary: ReviewSummary; onPr
       ? tr('review.due', { count: summary.due })
       : state === 'new'
         ? tr('review.new', { n: summary.newAvailable })
-        : tr('review.allDone', { n: summary.dueTomorrow });
+        : // хвост «завтра: N» — только когда завтра действительно кто-то ждёт. Интервалы SM-2
+          // быстро уезжают на 6+ дней, и тогда «завтра: 0» стояло бы неделями, ничего не сообщая
+          // (хвост задачи 45б; макет этот случай не рисует — там демо-состояние «завтра: 4»)
+          tr(summary.dueTomorrow > 0 ? 'review.allDone' : 'review.allDoneNoTomorrow', {
+            n: summary.dueTomorrow,
+          });
 
   const body = (
     <>
