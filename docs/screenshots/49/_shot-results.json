@@ -1,0 +1,20 @@
+{
+  "consoleIssues": [
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents",
+    "[warning] props.pointerEvents is deprecated. Use style.pointerEvents"
+  ],
+  "card-master-dark-vw": 390,
+  "card-master-light-vw": 390,
+  "cards-grid-dark-vw": 390,
+  "cards-grid-light-vw": 390,
+  "card-familiar-es.png-vw": 390,
+  "card-familiar-pt.png-vw": 390,
+  "card-master-es.png-vw": 390,
+  "card-master-pt.png-vw": 390
+}
