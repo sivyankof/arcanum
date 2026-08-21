@@ -63,3 +63,22 @@ describe('isMoonWindowOpen — окно КОНКРЕТНОГО события', 
     expect(isMoonWindowOpen(NEW_AUG, new Date(2026, 7, 14, 0, 1))).toBe(false);
   });
 });
+
+describe('moonSpreadState — источник по умолчанию (без инъекции)', () => {
+  // Все девять тестов выше подсовывают синтетический источник — дефолт `source = moonEvents`
+  // (настоящая астрономия) остаётся ничем не проверенным: подмени его на пустой источник, и оба
+  // лунных расклада навсегда закрылись бы в приложении, а сьют остался бы зелёным. Опорный момент —
+  // из src/lib/__tests__/moon.test.ts (сверен с USNO 20.08, допуск тот же), не выдуман.
+  const NEW_AUG_2026_UTC = new Date('2026-08-12T17:37Z');
+  const TOLERANCE_MIN = 2;
+
+  it('реальное новолуние 12 августа 2026: окно открыто, at рядом с эфемеридой', () => {
+    // «сейчас» = сам момент события (абсолютный instant) — сравнение TZ-независимо, в отличие
+    // от подбора «локального полудня»: тест не должен зависеть от часового пояса машины.
+    const now = new Date(NEW_AUG_2026_UTC.getTime());
+    const s = moonSpreadState('new', now);
+    expect(s?.open).toBe(true);
+    const diffMin = s ? Math.abs(s.at.getTime() - NEW_AUG_2026_UTC.getTime()) / 60000 : Infinity;
+    expect(diffMin).toBeLessThan(TOLERANCE_MIN);
+  });
+});
