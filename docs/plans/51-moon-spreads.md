@@ -437,6 +437,11 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
   const spread = spreads.find((s) => s.moon === kind);
   if (!spread) return null;
   const open = isMoonWindowOpen(at, now);
+  // Событие прошло И окно закрылось — расклад к нему недоступен навсегда, панели нет.
+  // Правило видимости живёт ЗДЕСЬ целиком, а не в экране: иначе экранный гейт и окно
+  // разъезжаются, и в последний день окна (сутки ПОСЛЕ события) панель пропадала бы ровно
+  // тогда, когда обязана звать «ОТКРЫТЬ» (находка ревью задачи 3, дефект был в плане).
+  if (!open && localDateISO(at) < localDateISO(now)) return null;
 
   const right = open
     ? tr('moonSpread.open')
@@ -508,9 +513,10 @@ const st = StyleSheet.create({
                   </Txt>
                 </View>
               </View>
-              {/* панель расклада — только под событием, чьё окно идёт или впереди (спека 51);
-                  момент события передаётся пропом, чтобы панель судила о СВОЁМ событии */}
-              {e.day >= today && <MoonSpreadPanel kind={e.kind} at={e.at} now={now} />}
+              {/* панель расклада: момент события передаётся пропом, чтобы она судила о СВОЁМ
+                  событии. Своего гейта видимости у экрана НЕТ — панель сама прячется под уже
+                  прошедшим событием с закрытым окном (иначе гейт и окно разъезжаются) */}
+              <MoonSpreadPanel kind={e.kind} at={e.at} now={now} />
             </React.Fragment>
           ))}
 ```
