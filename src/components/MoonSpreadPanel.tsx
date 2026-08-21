@@ -29,6 +29,12 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
   if (!spread) return null;
   const open = isMoonWindowOpen(at, now);
 
+  // Событие прошло И окно закрылось — расклад к нему недоступен навсегда, панели нет.
+  // Правило видимости живёт ЗДЕСЬ целиком, а не в экране: иначе экранный гейт и окно
+  // разъезжаются, и в последний день окна (сутки ПОСЛЕ события) панель пропадала бы ровно
+  // тогда, когда обязана звать «ОТКРЫТЬ».
+  if (!open && localDateISO(at) < localDateISO(now)) return null;
+
   const right = open
     ? tr('moonSpread.open')
     : tr('moonSpread.opensOn', { date: formatDayMonth(localDateISO(at), lang) }).toUpperCase();
