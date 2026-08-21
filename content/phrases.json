@@ -157,20 +157,20 @@
    {
     "ru": "Пропущенный день укроет заморозка — откройте карту сегодня, и серия {days} продолжится",
     "en": "A freeze can cover the missed day — open today's card and your {n}-day streak goes on",
-    "es": "La congelación puede cubrir el día que te saltaste: abre la carta de hoy y tu racha de {days} sigue adelante",
-    "pt": "Um congelamento pode cobrir o dia perdido — abra a carta de hoje e sua sequência de {days} continua"
+    "es": "Ese día que te saltaste lo cubre la congelación: abre la carta de hoy y tu racha de {days} sigue adelante",
+    "pt": "O congelamento pode cobrir o dia que você pulou — abra a carta de hoje e sua sequência de {days} continua"
    },
    {
     "ru": "Заморозка прощает один пропуск. Карта уже ждёт ✦",
     "en": "One skipped day, forgiven by the freeze. Your card is waiting ✦",
-    "es": "Un día salteado, perdonado por la congelación. Tu carta ya espera ✦",
-    "pt": "Um dia pulado, perdoado pelo congelamento. Sua carta já espera ✦"
+    "es": "La congelación te perdona un día. Tu carta ya espera ✦",
+    "pt": "Um dia pulado, perdoado pelo congelamento. Sua carta está esperando ✦"
    },
    {
     "ru": "Вчера прошло без карты — заморозка удержит серию, если вернуться сегодня",
     "en": "Yesterday passed without a card — return today and the freeze will hold your streak",
-    "es": "Ayer pasó sin carta: vuelve hoy y la congelación sostendrá tu racha",
-    "pt": "Ontem passou sem carta — volte hoje e o congelamento segura a sua sequência"
+    "es": "Ayer pasó sin carta. Vuelve hoy y la congelación mantendrá tu racha",
+    "pt": "Ontem passou sem carta — volte hoje e o congelamento segura sua sequência"
    }
   ],
   "moon_new": [
@@ -209,8 +209,8 @@
    {
     "ru": "Полнолуние ✦ Загляните, какая карта выпала вам сегодня",
     "en": "Full moon ✦ See which card came to you today",
-    "es": "Luna llena ✦ Mira qué carta llegó a ti hoy",
-    "pt": "Lua cheia ✦ Veja qual carta veio para você hoje"
+    "es": "Luna llena ✦ Mira qué carta te salió hoy",
+    "pt": "Lua cheia ✦ Veja qual carta saiu para você hoje"
    }
   ]
  },
@@ -220,12 +220,12 @@
     "ru": "Серию спасла заморозка",
     "en": "A freeze saved your streak",
     "es": "Una congelación salvó tu racha",
-    "pt": "Um congelamento salvou a sua sequência"
+    "pt": "O congelamento salvou sua sequência"
    },
    {
     "ru": "Пропущенный день укрыла заморозка — серия цела",
     "en": "The freeze covered the missed day — your streak is safe",
-    "es": "La congelación cubrió el día que faltó: tu racha sigue intacta",
+    "es": "La congelación cubrió el día que faltaste: tu racha sigue intacta",
     "pt": "O congelamento cobriu o dia perdido — sua sequência segue intacta"
    }
   ]

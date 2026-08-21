@@ -944,7 +944,7 @@ export const resources = {
         subtitle: "REFERÊNCIA · RIDER–WAITE 1909",
       },
       // черновик — на вычитку Cowork
-      mastery: { new: "NOVA", familiar: "CONHECIDA", confident: "SEGURA", master: "MESTRA" },
+      mastery: { new: "NOVA", familiar: "CONHECIDA", confident: "SÓLIDA", master: "MESTRA" },
       card: {
         general: "Significado geral",
         reversed: "Invertida",
@@ -1131,7 +1131,7 @@ export const resources = {
         titleStreak_one: "Sequência de {{count}} dia",
         titleStreak_other: "Sequência de {{count}} dias",
         titleComeback: "Faz um tempo",
-        titleFreeze: "Seu congelamento está a postos ❄",
+        titleFreeze: "Seu congelamento está pronto ❄",
         titleMoonNew: "Lua nova ✦",
         titleMoonFull: "Lua cheia ✦",
         streakDays_one: "{{count}} dia",
