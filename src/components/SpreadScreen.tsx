@@ -120,7 +120,10 @@ export function SpreadScreen({
   // лунный расклад: событие в оверлайне, свой глиф разделителя, своя подпись и перечень позиций
   // до тасования (спека 51). У обычных восьми раскладов spread.moon нет — всё как было.
   const moon = spread.moon ? moonSpreadState(spread.moon) : null;
-  const overline = moon
+  // Лунная шапка — только в игре. В режиме просмотра (сохранённый расклад из дневника) оверлайн
+  // обязан называть дату САМОЙ ЗАПИСИ, как у остальных раскладов: moonSpreadState считает
+  // актуальное событие, и на записи полугодовой давности он показал бы дату будущего события.
+  const overline = moon && !view
     ? `${tr('moonSpread.event')} · ${tr(`moon.${moon.kind}`)} ${formatDayMonth(localDateISO(moon.at), lang)}`.toUpperCase()
     : [
         tr('spread.overline'),
