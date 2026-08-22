@@ -67,12 +67,16 @@ export function PathNode({
   state,
   title,
   chipLabel,
+  chipLocked,
   onPress,
 }: {
   state: LessonState;
   title: string;
   /** подпись чипа над текущим узлом — приходит снаружи, узел про i18n не знает */
   chipLabel: string;
+  /** узел «current», но модуль заперт подпиской (спека 53) — чип рисуется по `.premchip`
+   *  эталона: мельче «НАЧАТЬ УРОК» и без боба, потому что это не приглашение, а причина замка */
+  chipLocked?: boolean;
   onPress?: () => void;
 }) {
   const t = useTheme();
@@ -96,19 +100,26 @@ export function PathNode({
       ),
       -1,
     );
-    // keyframes bob2: ±5px за 2s
-    bob.value = withRepeat(
-      withSequence(
-        withTiming(-5, { duration: 1000, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
-        withTiming(0, { duration: 1000, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
-      ),
-      -1,
-    );
+    // боб — только у приглашения «НАЧАТЬ УРОК»; чип-причина «✦ ПРЕМИУМ» (.premchip эталона)
+    // неподвижен, поэтому при chipLocked анимацию не запускаем и держим bob на 0
+    if (chipLocked) {
+      cancelAnimation(bob);
+      bob.value = 0;
+    } else {
+      // keyframes bob2: ±5px за 2s
+      bob.value = withRepeat(
+        withSequence(
+          withTiming(-5, { duration: 1000, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+          withTiming(0, { duration: 1000, easing: Easing.inOut(Easing.ease), reduceMotion: ReduceMotion.System }),
+        ),
+        -1,
+      );
+    }
     return () => {
       cancelAnimation(pulse);
       cancelAnimation(bob);
     };
-  }, [state, pulse, bob]);
+  }, [state, chipLocked, pulse, bob]);
 
   // качание замка живёт у заблокированного узла, поэтому отменяется отдельно от пульса и боба:
   // эффект выше выходит рано при state !== 'current' и до shake вообще не доходит
@@ -164,9 +175,21 @@ export function PathNode({
       </PressableScale>
       {state === 'current' && (
         <Animated.View style={[st.chipWrap, bobStyle]}>
-          <View style={[st.chip, { backgroundColor: t.panel, borderColor: t.frame }]}>
-            <Txt style={[st.chipText, { color: t.accent }]}>{chipLabel}</Txt>
-            <View style={[st.chipTail, { backgroundColor: t.panel, borderColor: t.frame }]} />
+          <View
+            style={[
+              st.chip,
+              { backgroundColor: t.panel, borderColor: t.frame },
+              chipLocked && st.chipPrem,
+            ]}
+          >
+            <Txt style={[st.chipText, { color: t.accent }, chipLocked && st.chipTextPrem]}>{chipLabel}</Txt>
+            <View
+              style={[
+                st.chipTail,
+                { backgroundColor: t.panel, borderColor: t.frame },
+                chipLocked && st.chipTailPrem,
+              ]}
+            />
           </View>
         </Animated.View>
       )}
@@ -230,6 +253,11 @@ const st = StyleSheet.create({
     borderBottomWidth: 1,
     transform: [{ rotate: '45deg' }],
   },
+  // премиум-чип «✦ ПРЕМИУМ» (`.premchip` эталона) — мельче «НАЧАТЬ УРОК» и неподвижен:
+  // это не приглашение начать урок, а причина замка (спека 53, задача 6)
+  chipPrem: { borderRadius: 10, paddingVertical: 4, paddingHorizontal: 9 },
+  chipTextPrem: { fontSize: 8.5 },
+  chipTailPrem: { bottom: -5, width: 8, height: 8 },
   // та же причина, что у chipWrap: подпись шире узла, поэтому её тоже несём в обёртке
   labelWrap: {
     position: 'absolute',

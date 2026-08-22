@@ -20,12 +20,15 @@ export function CoursePath({
   states,
   lang,
   chipLabel,
+  chipLocked,
   onLessonPress,
 }: {
   module: CourseModule;
   states: Record<string, LessonState>;
   lang: Lang;
   chipLabel: string;
+  /** модуль заперт подпиской (спека 53) — чип текущего узла рисуется мельче и без боба */
+  chipLocked?: boolean;
   onLessonPress: (lesson: CourseLesson) => void;
 }) {
   const t = useTheme();
@@ -77,6 +80,7 @@ export function CoursePath({
                 state={states[l.id] ?? 'locked'}
                 title={inLang(l.title, lang)}
                 chipLabel={chipLabel}
+                chipLocked={chipLocked}
                 onPress={() => onLessonPress(l)}
               />
             </View>

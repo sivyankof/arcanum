@@ -3,7 +3,7 @@
  *  не сохраняет (product-spec §2). В стор пишет только completeLesson на финале.
  *  Язык шагов фиксируется при входе: пересборка посреди прохождения сбила бы индекс шага. */
 import { Image } from 'expo-image';
-import { router, Stack, useLocalSearchParams } from 'expo-router';
+import { Redirect, router, Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -31,6 +31,7 @@ import { hapticError, hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import { inLang, type Lang } from '../../src/lib/lang';
 import { lessonPlayable, lessonSteps, type LessonStep } from '../../src/lib/lesson';
+import { lessonLocked } from '../../src/lib/premium';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
@@ -83,6 +84,7 @@ export default function LessonScreen() {
 
   const completeLesson = useApp((s) => s.completeLesson);
   const lessonsProgress = useApp((s) => s.lessonsProgress);
+  const premium = useApp((s) => s.premium);
 
   const [stepIdx, setStepIdx] = React.useState(0);
   const [errors, setErrors] = React.useState(0);
@@ -166,6 +168,11 @@ export default function LessonScreen() {
     if (i === picked && picked !== step.question.correct) return 'no';
     return 'idle';
   };
+
+  // premium-модуль без права — на пейвол (прецедент гейта лунного окна в /spreads/[id]):
+  // прямая ссылка не должна обходить замок пути. Ставится ПОСЛЕ всех хуков экрана — правило хуков.
+  const gated = !!found && lessonLocked(found.lesson.id, course, premium);
+  if (gated) return <Redirect href="/paywall?from=course" />;
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
