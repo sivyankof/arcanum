@@ -142,7 +142,9 @@ export default function PaywallScreen() {
                     {o.perMonth && (
                       <Txt style={[st.planSub, { color: t.muted }]}>{tr('paywall.perMonth', { price: o.perMonth })}</Txt>
                     )}
-                    {o.discount && <PremiumBadge label={o.discount} style={st.planBadge} />}
+                    {/* solid: бейдж сидит на верхней рамке карточки — сквозь полупрозрачный
+                        chipBg она просвечивала полосой (лайв-проверка 22.08) */}
+                    {o.discount && <PremiumBadge label={o.discount} style={st.planBadge} solid />}
                   </PressableScale>
                 );
               })}

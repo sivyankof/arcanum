@@ -9,12 +9,28 @@ import { useTranslation } from 'react-i18next';
 import { Txt } from './Txt';
 import { useTheme } from '../theme/useTheme';
 
-export function PremiumBadge({ label, style }: { label?: string; style?: StyleProp<ViewStyle> }) {
+/** `solid` — плашка НЕПРОЗРАЧНАЯ: нужна там, где она лежит ПОВЕРХ линии (бейдж «−40 %» сидит
+ *  на верхней рамке карточки тарифа, `top: -9`). `chipBg` — заливка 10 % (`theme.ts`), сквозь неё
+ *  рамка `line` просвечивала горизонтальной полосой посреди бейджа — нашлось на лайв-проверке
+ *  Артёма 22.08, веб-прогон и скриншоты этого не показали. Плотный слой `bg` кладётся ПОД
+ *  ту же заливку `chipBg`, поэтому оттенок плашки остаётся прежним, а фон под ней перестаёт
+ *  просвечивать. Поднятие z-index не помогло бы: полоса видна не из-за порядка слоёв,
+ *  а из-за прозрачности самой заливки. */
+export function PremiumBadge({
+  label,
+  style,
+  solid,
+}: {
+  label?: string;
+  style?: StyleProp<ViewStyle>;
+  solid?: boolean;
+}) {
   const t = useTheme();
   const { t: tr } = useTranslation();
 
   return (
-    <View style={[st.lk, { borderColor: t.frame, backgroundColor: t.chipBg }, style]}>
+    <View style={[st.lk, { borderColor: t.frame, backgroundColor: solid ? t.bg : t.chipBg }, style]}>
+      {solid && <View style={[StyleSheet.absoluteFill, st.fill, { backgroundColor: t.chipBg }]} />}
       <Txt style={[st.text, { color: t.accent }]}>{label ?? tr('spreads.premium')}</Txt>
     </View>
   );
@@ -22,5 +38,7 @@ export function PremiumBadge({ label, style }: { label?: string; style?: StylePr
 
 const st = StyleSheet.create({
   lk: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3 },
+  // радиус на 1 меньше внешнего: заливка лежит ВНУТРИ рамки в 1px, иначе её углы вылезут за скругление
+  fill: { borderRadius: 9 },
   text: { fontSize: 8.5, letterSpacing: 1.5, fontWeight: '700' },
 });
