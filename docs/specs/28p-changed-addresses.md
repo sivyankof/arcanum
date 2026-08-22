@@ -491,3 +491,18 @@
 ## m6l4-q5[2].pt
 - было: A conversa com certeza vai terminar a seu favor, se você se mantiver firme
 - стало: É provável que a conversa acabe a seu favor, desde que você não ceda
+
+<!-- хвост приёмки 28п (23.08): сняты две родовые формы, внесённые волной;
+     третья правка — тот же дефект в паре к нему, es той же строки -->
+
+## m3l1-q4[1].es
+- было: Volverse demasiado dura y ir perdiendo poco a poco su bondad natural
+- стало: Endurecerse demasiado y ir perdiendo poco a poco la bondad natural
+
+## m3l1-q4[1].pt
+- было: Ficar dura demais e ir perdendo aos poucos a gentileza natural
+- стало: Endurecer demais e ir perdendo aos poucos a gentileza natural
+
+## m3l4-q4[0].es
+- было: Con un corte brusco: renunciar en un solo día a la vida a la que estás acostumbrado
+- стало: Con un corte brusco: renunciar en un solo día a la vida que conoces desde siempre
