@@ -35,6 +35,7 @@ import { localDateISO } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
 import { inLang, presentLang } from '../src/lib/lang';
+import { reviewLimitReached } from '../src/lib/premium';
 import {
   applyGrade,
   buildSession,
@@ -76,15 +77,19 @@ export default function ReviewScreen() {
   const srs = useApp((s) => s.srs);
   const reviewDay = useApp((s) => s.reviewDay);
   const reviewCard = useApp((s) => s.reviewCard);
+  const premium = useApp((s) => s.premium);
 
   const deck = React.useMemo(() => deckOrder(course, lessonsProgress), [lessonsProgress]);
   const today = localDateISO();
+  // дневной лимит бесплатного тренажёра (спека 53): SESSION_MAX карт/день без Premium
+  const limitReached = reviewLimitReached(reviewDay, today, premium);
 
   // Сессия строится один раз при монтировании — ленивый useState, как шаги урока (app/lesson/[id]):
   // пересборка посреди сессии перетасовала бы очередь. «Ещё N» собирает новую порцию из АКТУАЛЬНОГО
-  // стора (getState), не из значений в замыкании
+  // стора (getState), не из значений в замыкании. Лимит исчерпан — сессия не строится вовсе,
+  // иначе открылась бы 11-я карта в обход гейта
   const [queue, setQueue] = React.useState<SessionItem[]>(() =>
-    buildSession(deck, srs, today, reviewDay, Math.random),
+    limitReached ? [] : buildSession(deck, srs, today, reviewDay, Math.random),
   );
   // счётчик показанных карт — ключ флеш-карты. cardId в ключе не годится: после «не помню» в очереди
   // из одной карты та же карта идёт следом, и без нового ключа FlipCard остался бы открытым — ответ
@@ -158,9 +163,15 @@ export default function ReviewScreen() {
   };
 
   // «Ещё N»: новая порция из актуального стора на том же экране. Тот же busy-guard, что у оценки —
-  // двойной тап в одном кадре иначе пересобрал бы порцию дважды
+  // двойной тап в одном кадре иначе пересобрал бы порцию дважды. Лимит перечитывается из СВЕЖЕГО
+  // стора (getState), не из замыкания — иначе право, выданное на пейволе, не подхватилось бы без
+  // перемонтирования экрана
   const onMore = () => {
     if (busy.current) return;
+    if (reviewLimitReached(useApp.getState().reviewDay, localDateISO(), useApp.getState().premium)) {
+      router.push({ pathname: '/paywall', params: { from: 'review' } });
+      return;
+    }
     busy.current = true;
     const s = useApp.getState();
     const next = buildSession(deck, s.srs, localDateISO(), s.reviewDay, Math.random);
@@ -181,8 +192,11 @@ export default function ReviewScreen() {
   // колоды и cards.json — недостижимо при исправном контенте, стережёт контракт-тест курса, но
   // без страховки экран остался бы пустым: ветка ниже рисуется только когда head И card есть оба)
   const cardMissing = !!head && !card;
-  const empty = (!head && log.length === 0) || cardMissing;
-  const result = !head && log.length > 0; // очередь кончилась — итог
+  // лимит исчерпан с порога — это НЕ «нечего повторять» (колода не пуста, очередь просто не
+  // собрана гейтом), поэтому исключён из empty и добавлен в result: панель итога с нулём карт
+  // и запертой «Ещё N» вместо EmptyState
+  const empty = (!head && log.length === 0 && !limitReached) || cardMissing;
+  const result = !head && (log.length > 0 || limitReached); // очередь кончилась или лимит — итог
   const stats = sessionStats(log);
 
   return (
@@ -225,6 +239,7 @@ export default function ReviewScreen() {
             cards={stats.cards}
             firstTry={stats.firstTry}
             more={nextSessionSize(sum)}
+            moreLocked={limitReached}
             onDone={() => router.back()}
             onMore={onMore}
           />
