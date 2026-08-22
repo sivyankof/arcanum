@@ -143,7 +143,13 @@ const st = StyleSheet.create({
   name: { fontFamily: fonts.displaySemi, fontSize: 17 }, // `.sp .tx b`
   desc: { fontSize: 10, lineHeight: 15, marginTop: 3 }, // `.sp .tx small`
   badge: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3 },
-  badgeRow: { flexDirection: 'row', alignItems: 'center' }, // событие + PREMIUM рядом (полнолуние)
-  badgeGap: { marginLeft: 6 }, // зазор `.lk` от `.evbadge` — эталон
+  // ⚠️ Флаг 6а-0 (веб-проверка 22.08): в макете «○ СОБЫТИЕ» и «ПРЕМИУМ» стоят В РЯД, но у карточки
+  // полнолуния — самое длинное название списка — эта пара занимает 184 px из 356, текстовой колонке
+  // остаётся 74 и заголовок рвётся посреди слова («полнолуни»/«я»). Макет ломается там же: бейдж
+  // вылезает за правый край карточки, то есть эталоном этой точки он не является. Кладём бейджи
+  // столбиком: колонка сужается до ~85 px, и текст получает те же ~155 px, что у любой другой
+  // premium-карточки списка. flexShrink: 0 — в RN он по умолчанию 0 только у текста, у контейнера нет.
+  badgeRow: { flexShrink: 0, alignItems: 'flex-end' },
+  badgeGap: { marginTop: 4 },
   dim: { opacity: LOCKED_OPACITY }, // вне окна события — как прошедшие дни лунного календаря
 });
