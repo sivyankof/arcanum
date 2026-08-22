@@ -22,8 +22,8 @@
       {
        "ru": "Противоположность прямого значения той же карты",
        "en": "The opposite of the same card's upright meaning",
-       "es": "Lo opuesto exacto del significado al derecho de esa misma carta",
-       "pt": "O oposto completo do significado em pé da mesma carta"
+       "es": "Lo contrario del significado al derecho de esa misma carta",
+       "pt": "O contrário do significado da mesma carta em pé"
       },
       {
        "ru": "Та же энергия карты, с которой что-то случилось",
@@ -34,8 +34,8 @@
       {
        "ru": "Отдельная карта, не связанная по смыслу с прямым значением",
        "en": "A separate card whose meaning isn't tied to the upright one",
-       "es": "Una carta aparte, con un significado propio y sin relación con el que tiene al derecho",
-       "pt": "Uma carta à parte, com um significado próprio e sem nenhuma ligação com o significado em pé"
+       "es": "Una carta aparte, sin relación de sentido con la del derecho",
+       "pt": "Uma carta separada, sem ligação com o significado em pé"
       }
      ],
      "correct": 1,
@@ -166,14 +166,14 @@
       {
        "ru": "Разрушение уже позади: худшее случилось, дальше только восстановление",
        "en": "The collapse is already behind you: the worst has happened, now it rebuilds",
-       "es": "La crisis ya no va a llegar, así que se puede estar tranquilo",
-       "pt": "A crise com certeza não vai acontecer, dá para relaxar"
+       "es": "El derrumbe ya pasó: lo peor quedó atrás y ahora viene la reconstrucción",
+       "pt": "A destruição já passou: o pior aconteceu e agora vem a reconstrução"
       },
       {
        "ru": "Это мелкая встряска, до настоящих перемен дело не дойдёт",
        "en": "This is a small shake-up that will not reach real change",
-       "es": "La dificultad es del todo imaginaria y en realidad aquí no hay ninguna crisis",
-       "pt": "A dificuldade é totalmente inventada e não existe crise nenhuma de verdade"
+       "es": "Es apenas una sacudida menor que no llegará a un cambio real",
+       "pt": "É um abalo pequeno; a coisa não vai chegar a uma mudança de verdade"
       },
       {
        "ru": "Кризис откладывается: трещины видны, но признать их страшно",
@@ -243,14 +243,14 @@
       {
        "ru": "Описывает ситуацию сам по себе, а младший аркан лишь уточняет дату события",
        "en": "It describes the situation on its own, and the Minor card only pins down a date",
-       "es": "Describe la situación por completo él solo, y el Menor solo precisa la fecha del suceso",
-       "pt": "Descreve sozinho a situação inteira, e o Arcano Menor apenas especifica a data do acontecimento"
+       "es": "Describe la situación por sí solo, y el Menor apenas precisa la fecha del suceso",
+       "pt": "Descreve a situação por si mesmo, e o Menor apenas indica a data do fato"
       },
       {
        "ru": "Отменяет то, что говорит младший аркан, если их смыслы расходятся",
        "en": "It cancels out what the Minor card says whenever their meanings clash",
-       "es": "Anula el significado del Menor cada vez que los dos se contradicen",
-       "pt": "Anula o significado do Arcano Menor sempre que os dois se contradizem"
+       "es": "Anula lo que dice el Menor cuando los significados de ambos se contradicen",
+       "pt": "Cancela o que o Arcano Menor diz quando os sentidos dos dois divergem"
       },
       {
        "ru": "Задаёт общую тему, а младший показывает, как она проживается в жизни",
@@ -279,8 +279,8 @@
       {
        "ru": "Отшельник — про усталость от людей, а Восьмёрка — про обиду на них",
        "en": "The Hermit is about being tired of people, the Eight about resenting them",
-       "es": "No hay diferencia: las dos hablan de una soledad que no se eligió",
-       "pt": "Não há diferença: as duas falam de uma solidão que não foi escolhida"
+       "es": "El Ermitaño habla del cansancio que deja la gente, y el Ocho de Espadas, del rencor que queda hacia ella",
+       "pt": "O Eremita fala do cansaço de conviver com gente, e o Oito de Espadas, da mágoa guardada em relação às pessoas"
       },
       {
        "ru": "Отшельник уходит от шума сам; Восьмёрка — ловушка тревожных мыслей, а не обстоятельств",
@@ -291,8 +291,8 @@
       {
        "ru": "Отшельник обычно про человека рядом, а Восьмёрка Мечей — про вашу собственную роль в происходящем",
        "en": "The Hermit is usually about someone nearby, while the Eight of Swords is about your own role in it",
-       "es": "El Ermitaño siempre habla de alguien cercano y El Ocho de Espadas, siempre de tu propio papel en esto",
-       "pt": "O Eremita é sempre sobre alguém próximo, e o Oito de Espadas é sempre sobre o seu próprio papel nisso"
+       "es": "El Ermitaño suele hablar de alguien cercano, y el Ocho de Espadas, de tu propio papel dentro de lo que está pasando",
+       "pt": "O Eremita costuma falar de alguém próximo de você, e o Oito de Espadas, do seu próprio papel no que está acontecendo"
       }
      ],
      "correct": 1,
@@ -351,14 +351,14 @@
       {
        "ru": "Одна карта отменяет другую, поэтому расклад лучше перетасовать заново",
        "en": "One card cancels the other out, so it's better to reshuffle the spread",
-       "es": "Una carta anula a la otra, así que hay que volver a barajar la tirada",
-       "pt": "Uma carta anula a outra, por isso a tiragem precisa ser embaralhada de novo"
+       "es": "Una carta anula a la otra, así que conviene volver a barajar y repetir la tirada desde el inicio",
+       "pt": "Uma carta anula a outra, então o mais certo é embaralhar de novo e refazer a tiragem"
       },
       {
        "ru": "Карта Кубков перекрывает Рыцаря: спешить в этой ситуации не стоит",
        "en": "The Cups card overrides the Knight, so there's no need to hurry here",
-       "es": "La carta de Copas neutraliza por completo al Caballero: en esta situación no hay que apurarse",
-       "pt": "A carta de Copas neutraliza completamente o Cavaleiro: nessa situação não vale a pena ter pressa"
+       "es": "La carta de Copas se impone sobre el Caballero: en esta situación no hay por qué apurarse",
+       "pt": "A carta de Copas se sobrepõe ao Cavaleiro: nessa situação, correr não vai ajudar"
       },
       {
        "ru": "Обе правдивы сразу: сначала побыть в союзе, потом действовать решительно",
@@ -501,14 +501,14 @@
       {
        "ru": "Потому что за чужой расклад не так страшно ошибиться",
        "en": "Because getting a stranger reading wrong feels less frightening",
-       "es": "Porque para un desconocido está permitido sacar más cartas",
-       "pt": "Porque, para uma pessoa de fora, é permitido tirar mais cartas"
+       "es": "Porque equivocarse en la tirada de un desconocido asusta bastante menos",
+       "pt": "Porque errar na tiragem de outra pessoa dá bem menos medo"
       },
       {
        "ru": "Потому что посторонний сам подскажет, что значит каждая карта",
        "en": "Because the other person will tell you what each card means",
-       "es": "Porque la tirada de Tres cartas no sirve para leerse a uno mismo",
-       "pt": "Porque a tiragem “Três cartas” não serve para ler sobre si mesmo"
+       "es": "Porque el propio desconocido te va indicando qué significa cada carta",
+       "pt": "Porque a própria pessoa de fora vai dizendo o que cada carta significa"
       },
       {
        "ru": "Потому что для себя мешают личные ожидания и предубеждения",
@@ -651,14 +651,14 @@
       {
        "ru": "Как знак, что дальше в раскладе можно уже не разбираться",
        "en": "As a sign that the rest of the spread doesn't need any more digging",
-       "es": "Como señal de que ya no hace falta seguir analizando la tirada",
-       "pt": "Como um sinal de que o resto da tiragem já não precisa ser analisado"
+       "es": "Como una señal de que en el resto de la tirada ya no hace falta profundizar",
+       "pt": "Como sinal de que dá para parar de analisar o resto da tiragem"
       },
       {
        "ru": "Как обещание: раз выпало Солнце, всё в итоге сложится хорошо",
        "en": "As a promise: the Sun turned up, so it will all work out well in the end",
-       "es": "Como una promesa: si salió El Sol, todo va a terminar bien seguro",
-       "pt": "Como uma promessa: se saiu o Sol, tudo com certeza vai acabar bem"
+       "es": "Como una promesa: si salió El Sol, al final la cosa va a terminar bien",
+       "pt": "Como uma promessa: saiu o Sol, então no fim as coisas vão dar certo"
       },
       {
        "ru": "Как направление ситуации сейчас, а не обещанный результат",
@@ -693,14 +693,14 @@
       {
        "ru": "Ничего: придворная карта — это конкретный человек рядом",
        "en": "Nothing to check: a court card is a specific person nearby",
-       "es": "Nada: una carta de la corte siempre es una persona concreta que está cerca",
-       "pt": "Nada: a carta da corte é sempre uma pessoa concreta ao seu lado"
+       "es": "No hay mucho que revisar: la carta de la corte señala a una persona cercana",
+       "pt": "Nada: a carta da corte indica uma pessoa concreta ao seu lado"
       },
       {
        "ru": "Стоит уточнить у карты пол и возраст этого человека",
        "en": "It is worth asking the cards for the person gender and age",
-       "es": "Conviene volver a barajar hasta que salga alguien más claro",
-       "pt": "Vale tirar as cartas de novo, até sair alguém mais claro"
+       "es": "Conviene preguntarle a la carta el género y la edad de esa persona",
+       "pt": "Vale perguntar às cartas o gênero e a idade dessa pessoa"
       }
      ],
      "correct": 0,
@@ -723,8 +723,8 @@
       {
        "ru": "Рядом скоро появится решительная женщина, которая всё расставит по местам",
        "en": "A decisive woman will show up soon and set everything straight",
-       "es": "Cerca va a aparecer una mujer decidida que pondrá todo en su lugar",
-       "pt": "Vai aparecer por perto uma mulher decidida, que vai colocar tudo nos eixos"
+       "es": "Pronto aparecerá cerca de ti una mujer decidida que va a poner las cosas en su lugar",
+       "pt": "Em breve vai surgir por perto uma mulher decidida para pôr ordem na situação"
       },
       {
        "ru": "Пора называть вещи своими именами и говорить прямо, без резкости",
@@ -735,8 +735,8 @@
       {
        "ru": "Разговор, скорее всего, закончится в вашу пользу, если держаться твёрдо",
        "en": "The conversation will probably go your way if you hold firm",
-       "es": "La conversación va a terminar a tu favor seguro si te mantienes firme",
-       "pt": "A conversa com certeza vai terminar a seu favor, se você se mantiver firme"
+       "es": "Lo más probable es que la conversación termine a tu favor si te mantienes firme",
+       "pt": "É provável que a conversa acabe a seu favor, desde que você não ceda"
       }
      ],
      "correct": 1,

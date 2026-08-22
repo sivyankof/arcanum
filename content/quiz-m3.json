@@ -95,14 +95,14 @@
       {
        "ru": "И то, и другое — способ спрятаться от людей, просто поводы разные",
        "en": "Both are a way of hiding from people; only the reason differs",
-       "es": "En nada: la carta supuestamente advierte de un aislamiento peligroso",
-       "pt": "Em nada: dizem que a carta avisa sobre um isolamento perigoso"
+       "es": "Las dos cosas son una manera de esconderse de la gente; lo que cambia es apenas el motivo",
+       "pt": "Nos dois casos a pessoa se esconde dos outros; o que muda é apenas o motivo"
       },
       {
        "ru": "Отшельник просто прячется от мира, который успел его разочаровать",
        "en": "The Hermit is simply hiding from a world that has disappointed him",
-       "es": "El Ermitaño se esconde de un mundo que lo decepcionó",
-       "pt": "O Eremita se esconde de um mundo que o decepcionou"
+       "es": "El Ermitaño simplemente se esconde de un mundo que alcanzó a decepcionarlo",
+       "pt": "O Eremita simplesmente se esconde de um mundo que já teve tempo de decepcioná-lo"
       },
       {
        "ru": "Это осознанная пауза, чтобы услышать себя, — и она выбрана добровольно",
@@ -137,14 +137,14 @@
       {
        "ru": "Стать слишком жёсткой и постепенно растерять природную доброту",
        "en": "Becoming too harsh and gradually losing your natural warmth",
-       "es": "Volverse demasiado dura y ir perdiendo poco a poco toda su bondad",
-       "pt": "Endurecer demais e ir perdendo aos poucos toda a gentileza"
+       "es": "Volverse demasiado dura y ir perdiendo poco a poco su bondad natural",
+       "pt": "Ficar dura demais e ir perdendo aos poucos a gentileza natural"
       },
       {
        "ru": "Отдавать силы другим и постепенно забывать о собственных нуждах и границах",
        "en": "Giving your strength to others and gradually neglecting your own needs and limits",
-       "es": "Entregar todas sus fuerzas a los demás y olvidarse por completo de sí misma",
-       "pt": "Entregar todas as forças aos outros, sem guardar nada, e esquecer completamente de si"
+       "es": "Entregar las fuerzas a los demás y descuidar poco a poco las propias necesidades y límites",
+       "pt": "Doar força aos outros e ir esquecendo das próprias necessidades e limites"
       }
      ],
      "correct": 0,
@@ -250,14 +250,14 @@
       {
        "ru": "Огорчаться, когда перемены оказываются трудными",
        "en": "Getting upset when change turns out to be hard",
-       "es": "Creer que los cambios siempre son para peor",
-       "pt": "Acreditar que as mudanças são sempre para pior"
+       "es": "Desanimarse cuando los cambios resultan difíciles de sobrellevar",
+       "pt": "Ficar chateado quando a mudança se mostra difícil"
       },
       {
        "ru": "Искать в каждом случайном совпадении скрытый смысл судьбы",
        "en": "Searching for a hidden meaning of fate in every coincidence",
-       "es": "Ver en cada coincidencia una señal secreta",
-       "pt": "Enxergar em cada coincidência um sinal secreto"
+       "es": "Buscar en cada coincidencia un sentido oculto del destino",
+       "pt": "Procurar em cada coincidência um sentido oculto do destino"
       }
      ],
      "correct": 0,
@@ -580,8 +580,8 @@
       {
        "ru": "Опущенный факел: власть дьявола со временем слабеет",
        "en": "The lowered torch: it means the devil's grip weakens over time",
-       "es": "La antorcha hacia abajo: la energía se apagó para siempre",
-       "pt": "A tocha voltada para baixo: a energia se apagou para sempre"
+       "es": "La antorcha hacia abajo: el poder del diablo se va debilitando",
+       "pt": "A tocha baixada: o poder do diabo enfraquece com o tempo"
       },
       {
        "ru": "Цепи на шеях висят свободно — их можно снять",
@@ -616,8 +616,8 @@
       {
        "ru": "Многое в жизни сразу — так, что причину бывает трудно понять",
        "en": "Large parts of your life all at once, in ways that feel hard to explain",
-       "es": "Tu vida entera, sin distinguir nada y sin ninguna razón visible",
-       "pt": "A sua vida inteira, sem distinção e sem nenhum motivo visível"
+       "es": "Buena parte de tu vida de una sola vez, de un modo que cuesta explicarse",
+       "pt": "Muita coisa da vida de uma vez, sem que dê para entender a causa"
       },
       {
        "ru": "Планы, которые изначально были слишком смелыми и потому обречены",
@@ -689,8 +689,8 @@
       {
        "ru": "С резкого разрыва: в один день отказаться от привычной жизни",
        "en": "With an abrupt break: giving up your familiar life in a single day",
-       "es": "Con una ruptura brusca: dejarlo todo en un solo día",
-       "pt": "Por um rompimento brusco: largar tudo num único dia"
+       "es": "Con un corte brusco: renunciar en un solo día a la vida a la que estás acostumbrado",
+       "pt": "Por uma ruptura brusca: abandonar a vida conhecida de um dia para o outro"
       },
       {
        "ru": "С честного взгляда без стыда: увидеть, что именно держит",
@@ -701,8 +701,8 @@
       {
        "ru": "С поиска виноватых в том, что не удалось изменить самому",
        "en": "With searching for someone to blame for what you couldn't change yourself",
-       "es": "Con buscar culpables de cómo terminaron las cosas",
-       "pt": "Por procurar culpados pelo jeito que as coisas ficaram"
+       "es": "Con buscar culpables de lo que uno mismo no logró cambiar por su cuenta",
+       "pt": "Por procurar culpados pelo que você não conseguiu mudar sozinho"
       }
      ],
      "correct": 1,
@@ -766,14 +766,14 @@
       {
        "ru": "Довериться первому впечатлению — интуиция редко подводит",
        "en": "Trust your first impression — intuition rarely leads you astray",
-       "es": "Confiar en la primera impresión: siempre es la más certera",
-       "pt": "Confiar na primeira impressão: ela é sempre a mais certeira"
+       "es": "Confiar en la primera impresión: la intuición pocas veces se equivoca",
+       "pt": "Confiar na primeira impressão: a intuição raramente erra"
       },
       {
        "ru": "Отложить важные решения до более спокойного момента",
        "en": "Put off important decisions until things feel calmer",
-       "es": "Dejar absolutamente todos los asuntos para la luna nueva",
-       "pt": "Adiar absolutamente tudo até a lua nova"
+       "es": "Dejar las decisiones importantes para un momento más tranquilo",
+       "pt": "Adiar as decisões importantes para um momento mais calmo"
       },
       {
        "ru": "Не решать вслепую и дать ситуации время проясниться",

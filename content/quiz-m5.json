@@ -58,8 +58,8 @@
       {
        "ru": "Это зависит от пола карты: мужские про людей, женские — про вашу роль",
        "en": "It depends on the card's gender: male cards mean people, female ones mean your role",
-       "es": "Las cartas de la corte solo describen a personas cercanas a ti",
-       "pt": "As cartas da corte falam apenas de pessoas próximas a você"
+       "es": "Depende del género de la carta: las masculinas hablan de personas y las femeninas, de tu papel",
+       "pt": "Depende do gênero da carta: as figuras masculinas falam de pessoas, e as femininas, do seu papel"
       },
       {
        "ru": "Вопрос про отношения — скорее человек, вопрос про решение — скорее роль",
@@ -70,8 +70,8 @@
       {
        "ru": "Масть карты подсказывает: Кубки и Пентакли — про людей, Мечи и Жезлы — про роль",
        "en": "The suit is the clue: Cups and Pentacles point to people, Swords and Wands to a role",
-       "es": "Lo decide únicamente el palo: Copas son personas y Espadas son papeles",
-       "pt": "Quem decide isso é só o naipe da carta: Copas são pessoas, Espadas são papéis"
+       "es": "El palo te lo indica: Copas y Oros hablan de personas; Espadas y Bastos, de un papel",
+       "pt": "O naipe da carta dá a dica: Copas e Ouros apontam pessoas, enquanto Espadas e Paus apontam um papel seu"
       }
      ],
      "correct": 1,
@@ -316,8 +316,8 @@
       {
        "ru": "Довериться сразу: раз чувства искренние, сомневаться незачем",
        "en": "Trust it right away — if the feeling is sincere, there's no reason to doubt it",
-       "es": "Aceptar de inmediato, sin demorar la respuesta ni un día",
-       "pt": "Aceitar na hora, sem adiar a resposta nem um dia"
+       "es": "Confiar de inmediato: si el sentimiento es sincero, dudar está de más",
+       "pt": "Confiar de imediato: se o sentimento é sincero, não há por que duvidar"
       },
       {
        "ru": "Проверять красивые слова делом — и свои, и чужие",
@@ -328,8 +328,8 @@
       {
        "ru": "Ждать, пока чьё-то мнение со стороны подтвердит чувства",
        "en": "Wait until someone else's opinion confirms the feeling",
-       "es": "Esperar a que alguien de afuera te confirme el sentimiento",
-       "pt": "Esperar que alguém de fora confirme o sentimento"
+       "es": "Esperar a que la opinión de alguien más confirme el sentimiento",
+       "pt": "Esperar que a opinião de outra pessoa confirme o sentimento"
       }
      ],
      "correct": 1,
@@ -436,14 +436,14 @@
       {
        "ru": "Она держит дистанцию, потому что разочаровалась в людях",
        "en": "She keeps her distance because people have disappointed her before",
-       "es": "Mantiene a todos a distancia y no deja que nadie se le acerque",
-       "pt": "Ela mantém todo mundo à distância e não deixa ninguém chegar perto dela"
+       "es": "Mantiene distancia porque la gente la decepcionó en algún momento",
+       "pt": "Ela mantém distância porque as pessoas já a decepcionaram antes"
       },
       {
        "ru": "Ей повезло избежать трудностей, поэтому она сохраняет спокойствие",
        "en": "She has been lucky enough to avoid hardship, which is why she stays calm",
-       "es": "Nunca enfrentó dificultades y por eso está tranquila",
-       "pt": "Ela nunca enfrentou dificuldades e por isso está tranquila"
+       "es": "Tuvo la suerte de esquivar las dificultades y por eso conserva la calma",
+       "pt": "Ela teve a sorte de escapar das dificuldades e por isso mantém a calma"
       }
      ],
      "correct": 0,
@@ -580,8 +580,8 @@
       {
        "ru": "Король держит стихию внутри себя, Королева выражает её вовне",
        "en": "The King holds the element within; the Queen expresses it outward",
-       "es": "El Rey domina el elemento dentro de sí y la Reina lo dirige hacia afuera",
-       "pt": "O Rei domina o elemento dentro de si, e a Rainha o dirige para fora"
+       "es": "El Rey guarda el elemento dentro de sí y la Reina lo expresa hacia afuera",
+       "pt": "O Rei guarda o elemento dentro de si, e a Rainha o expressa para fora"
       },
       {
        "ru": "Король распоряжается стихией вовне, Королева — внутри",
@@ -592,8 +592,8 @@
       {
        "ru": "Дело не в направлении стихии, а в возрасте: Король просто старше",
        "en": "It's not about direction at all — the King is simply the elder of the two",
-       "es": "No hay diferencia: es el mismo papel en versión masculina y femenina",
-       "pt": "Não há diferença: é o mesmo papel em versão masculina e feminina"
+       "es": "No es cuestión de dirección, sino de edad: el Rey es sencillamente el mayor",
+       "pt": "Não é questão de direção do elemento, e sim de idade: o Rei é o mais velho"
       }
      ],
      "correct": 1,

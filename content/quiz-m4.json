@@ -652,14 +652,14 @@
       {
        "ru": "Потому что он сбежал от того, что его изматывало",
        "en": "Because he finally fled something that had been wearing him down",
-       "es": "Porque allí de verdad se estaba muy mal todo ese tiempo",
-       "pt": "Porque ali as coisas estavam mesmo muito ruins esse tempo todo"
+       "es": "Porque por fin logró escapar de aquello que lo venía agotando",
+       "pt": "Porque ele fugiu daquilo que vinha esgotando as forças dele"
       },
       {
        "ru": "Потому что оставленное было ошибкой с самого начала",
        "en": "Because what he left behind was a mistake from the very start",
-       "es": "Porque lo que deja atrás nunca tuvo la menor importancia",
-       "pt": "Porque o que ficou para trás nunca teve importância nenhuma"
+       "es": "Porque lo que dejó atrás fue un error desde el inicio",
+       "pt": "Porque o que ficou para trás era um erro desde o começo"
       },
       {
        "ru": "Потому что путник ищет смысл, а не бежит от плохого",
@@ -911,14 +911,14 @@
       {
        "ru": "Побеждать важнее, чем сохранить отношения с соперником",
        "en": "Winning matters more than keeping a relationship with the rival",
-       "es": "Que hay que ganar a cualquier precio, cueste lo que cueste",
-       "pt": "Que vale vencer a qualquer preço, custe o que custar"
+       "es": "Que ganar importa más que la relación con el rival",
+       "pt": "Que vencer importa mais do que a relação com o rival"
       },
       {
        "ru": "Лучше отступить, чтобы не потерять расположение окружающих",
        "en": "It's better to back down than risk losing others' approval",
-       "es": "Que hay que evitar siempre los conflictos, incluso cuando tienes razón",
-       "pt": "Que todo conflito deve ser evitado, mesmo quando você tem razão"
+       "es": "Que conviene ceder para no perder el afecto de los demás",
+       "pt": "Que é melhor recuar do que perder a simpatia dos outros"
       },
       {
        "ru": "Не каждая победа стоит того, чем за неё платят",
@@ -1067,14 +1067,14 @@
       {
        "ru": "Путы туго затянуты, а мечи выстроены плотной стеной вокруг фигуры",
        "en": "The ropes are pulled tight, and the swords form a dense wall around the figure",
-       "es": "Las ataduras están apretadas y las espadas forman una pared sin huecos",
-       "pt": "As amarras estão apertadas e as espadas formam uma parede sem brechas"
+       "es": "Las ataduras están bien apretadas y las espadas rodean a la figura como un muro sin huecos",
+       "pt": "As cordas estão bem apertadas, e as espadas formam um muro fechado em volta da figura"
       },
       {
        "ru": "Повязка снята с глаз, и фигура шагает вперёд, уже не оглядываясь",
        "en": "The blindfold is off her eyes, and the figure walks forward without looking back",
-       "es": "La venda ya está quitada y la figura ve la salida",
-       "pt": "A venda já foi tirada e a figura enxerga a saída"
+       "es": "La venda ya no está en sus ojos y la figura avanza sin mirar atrás",
+       "pt": "A venda já saiu dos olhos e a figura segue em frente sem olhar para trás"
       }
      ],
      "correct": 0,
