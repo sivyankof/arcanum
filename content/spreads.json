@@ -388,17 +388,41 @@
       "cards": 4,
       "name": {
         "ru": "Расклад новолуния",
-        "en": "New Moon Spread"
+        "en": "New Moon Spread",
+        "es": "Tirada de luna nueva",
+        "pt": "Tiragem da lua nova"
       },
       "description": {
         "ru": "Четыре карты о том, что начинается: что зреет, что поддержит, что мешает и с чего начать. Открыт в окно новолуния — сутки до и после.",
-        "en": "Four cards about what is beginning: what is taking seed, what will support it, what gets in the way, and where to start. Open during the new moon window — a day before and after."
+        "en": "Four cards about what is beginning: what is taking seed, what will support it, what gets in the way, and where to start. Open during the new moon window — a day before and after.",
+        "es": "Cuatro cartas sobre lo que empieza: qué está germinando, qué lo sostiene, qué se interpone y por dónde empezar. Disponible en la ventana de la luna nueva: un día antes y uno después.",
+        "pt": "Quatro cartas sobre o que está começando: o que germina, o que sustenta, o que atrapalha e por onde começar. Disponível na janela da lua nova — um dia antes e um depois."
       },
       "positions": [
-        { "ru": "Семя", "en": "The seed" },
-        { "ru": "Почва", "en": "The ground" },
-        { "ru": "Помеха", "en": "The obstacle" },
-        { "ru": "Первый шаг", "en": "First step" }
+        {
+          "ru": "Семя",
+          "en": "The seed",
+          "es": "Semilla",
+          "pt": "Semente"
+        },
+        {
+          "ru": "Почва",
+          "en": "The ground",
+          "es": "Terreno",
+          "pt": "Terreno"
+        },
+        {
+          "ru": "Помеха",
+          "en": "The obstacle",
+          "es": "Obstáculo",
+          "pt": "Obstáculo"
+        },
+        {
+          "ru": "Первый шаг",
+          "en": "First step",
+          "es": "Primer paso",
+          "pt": "Primeiro passo"
+        }
       ]
     },
     {
@@ -408,17 +432,41 @@
       "cards": 4,
       "name": {
         "ru": "Расклад полнолуния",
-        "en": "Full Moon Spread"
+        "en": "Full Moon Spread",
+        "es": "Tirada de luna llena",
+        "pt": "Tiragem da lua cheia"
       },
       "description": {
         "ru": "Четыре карты о завершении цикла: что созрело, что стало ясно, что оставалось в тени и что пора отпустить. Открыт в окно полнолуния — сутки до и после.",
-        "en": "Four cards about a cycle closing: what has ripened, what came clear, what stayed in the shadow, and what it is time to release. Open during the full moon window — a day before and after."
+        "en": "Four cards about a cycle closing: what has ripened, what came clear, what stayed in the shadow, and what it is time to release. Open during the full moon window — a day before and after.",
+        "es": "Cuatro cartas sobre un ciclo que se cierra: qué maduró, qué quedó claro, qué permaneció en la sombra y qué es hora de soltar. Disponible en la ventana de la luna llena: un día antes y uno después.",
+        "pt": "Quatro cartas sobre um ciclo que se fecha: o que amadureceu, o que ficou claro, o que permaneceu na sombra e o que já é hora de soltar. Disponível na janela da lua cheia — um dia antes e um depois."
       },
       "positions": [
-        { "ru": "Урожай", "en": "The harvest" },
-        { "ru": "Что стало ясно", "en": "What came clear" },
-        { "ru": "Тень", "en": "The shadow" },
-        { "ru": "Что отпустить", "en": "What to release" }
+        {
+          "ru": "Урожай",
+          "en": "The harvest",
+          "es": "Cosecha",
+          "pt": "Colheita"
+        },
+        {
+          "ru": "Что стало ясно",
+          "en": "What came clear",
+          "es": "Lo que quedó claro",
+          "pt": "O que ficou claro"
+        },
+        {
+          "ru": "Тень",
+          "en": "The shadow",
+          "es": "Sombra",
+          "pt": "Sombra"
+        },
+        {
+          "ru": "Что отпустить",
+          "en": "What to release",
+          "es": "Qué soltar",
+          "pt": "O que soltar"
+        }
       ]
     }
   ]
