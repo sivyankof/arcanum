@@ -141,6 +141,9 @@ export default function RootLayout() {
               с подписью «Сегодня» на кнопке назад (ставит сам экран); объявлен здесь, чтобы не
               пройти мимо гарда онбординга (урок 09 — незаявленный файловый маршрут роутер добавляет сам) */}
           <Stack.Screen name="moon" options={transparentHeader(t)} />
+          {/* пейвол Premium (спека 53): корневой стек, прозрачная шапка; объявлен здесь, чтобы не
+              пройти мимо гарда онбординга (урок 09: незаявленный маршрут роутер добавляет сам) */}
+          <Stack.Screen name="paywall" options={transparentHeader(t)} />
         </Stack.Protected>
       </Stack>
     </GestureHandlerRootView>
