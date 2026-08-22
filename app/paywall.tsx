@@ -161,7 +161,9 @@ export default function PaywallScreen() {
           </FadeUp>
         )}
 
-        <FadeUp index={3} style={{ marginTop: spacing.m }}>
+        {/* отступа у обёртки нет: в макете «Восстановить покупки» лежит в том же блоке, что тарифы
+            и CTA, и отстоит от кнопки ровно на свои 12 (`.trlink`) */}
+        <FadeUp index={3}>
           <Pressable onPress={() => run(restore)} hitSlop={8}>
             <Txt style={[st.link, { color: t.accent }]}>{tr('paywall.restore')}</Txt>
           </Pressable>
@@ -192,9 +194,11 @@ export default function PaywallScreen() {
 
 const st = StyleSheet.create({
   head: { alignItems: 'center' },
-  overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center', marginBottom: spacing.m }, // .date
-  titleRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: spacing.m },
-  title: { fontFamily: fonts.display, fontSize: 28, marginTop: 3 }, // .h2
+  overline: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center', marginBottom: 10 }, // .date + отступ обёртки эмблемы
+  // зазор эмблема → заголовок 8 (инлайн-стиль .h2 в макете перебивает его собственный margin-top 3);
+  // сам заголовок отступа не несёт — иначе он съехал бы вниз относительно чипа «✦ АКТИВНА» в ряду
+  titleRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 8 },
+  title: { fontFamily: fonts.display, fontSize: 28 }, // .h2
   subtitle: { fontSize: 12, lineHeight: 18.5, textAlign: 'center', marginTop: 8, paddingHorizontal: 6 },
   // панель преимущества — `.pwfeat` принятого макета: panel/line, радиус 14, паддинг 11×14, зазор 8
   row: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, paddingVertical: 11, paddingHorizontal: 14,
