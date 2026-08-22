@@ -13,18 +13,33 @@ check_canon смотрит на КОРПУС в его текущем виде (
 
 Запуск из корня репозитория:
     python scripts/check_edits.py docs/specs/31-changed-addresses.md
+    python scripts/check_edits.py docs/specs/28p-changed-addresses.md --only 9 10
     python scripts/check_edits.py <файл> --only 3 4
     python scripts/check_edits.py --list
 
-Формат входного файла — тот же, каким задача 31 отдала список редактору:
-    ## <card>.<block>.<lang>
+Формат входного файла — тот же, каким задача 31 отдала список редактору, но адрес
+бывает ДВУХ видов:
+
+    ## <card>.<block>.<lang>              — блок карты (content/cards.json)
     - было: <текст>
     - стало: <текст>
+
+    ## <lessonId>-q<N>[<опция>].<lang>    — дистрактор викторины (content/quiz-*.json)
+    - было: <текст>
+    - стало: <текст>
+
+Второй вид — например `m1l1-q2[1].es`: `m1l1` — id урока, `q2` — второй вопрос
+урока (счёт с единицы), `[1]` — второй вариант ответа (счёт с нуля), `es` — язык.
+До 23.08 такой адрес парсер молча пропускал (понимал только три части через точку),
+из-за чего обе волны правок дистракторов (28е — 121 адрес, 28п — 122 адреса) прошли
+приёмку этим скриптом как «0 записей, 0 находок» — ложно-зелёный отчёт при
+непроверенном контенте.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from collections import defaultdict
@@ -42,6 +57,14 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = Path(__file__).resolve().parent.parent
+
+# Адрес дистрактора викторины: m1l1-q2[1].es — урок, вопрос по порядку (с единицы),
+# вариант (с нуля), язык. Границы диапазонов (реальные ли урок/вопрос/вариант)
+# регулярка не проверяет — это дело проверки 1 («нет урока/вопроса/варианта»),
+# у регулярки задача одна: отличить этот вид адреса от карточного и от мусора.
+QUIZ_ADDR_RE = re.compile(
+    r"^(?P<lesson>[a-z0-9]+)-q(?P<qnum>\d+)\[(?P<opt>\d+)\]\.(?P<lang>ru|en|es|pt)$"
+)
 
 # Доля общих слов «было»/«стало» ниже порога = правка сменила мысль, а не формулировку.
 # Такие места читаются глазами: часть из них законна (снятие рамки предсказания требует
@@ -88,24 +111,145 @@ WORD_SET_FIELDS = ("keywords", "search")
 
 # --- разбор входного файла ----------------------------------------------------
 
-def parse_edits(path: Path) -> list[dict]:
-    """Записи «было → стало» из md-файла списка адресов."""
+def parse_edits(path: Path) -> tuple[list[dict], list[str]]:
+    """Записи «было → стало» из md-файла списка адресов + список нераспознанных.
+
+    Каждая запись помечена полем `kind`: `"card"` (`<карта>.<блок>.<язык>`, три
+    части через точку) или `"quiz"` (`QUIZ_ADDR_RE`). Раньше адрес, не подошедший
+    под три-через-точку, просто пропускался (`continue`) — и заодно НЕ сбрасывал
+    `current`, так что следующие строки «было:»/«стало:» тихо приписывались
+    предыдущей распознанной записи. Теперь нераспознанный адрес обнуляет `current`
+    (его тело никуда не приписывается) и попадает в отдельный список — вызывающий
+    код обязан его показать, а не проглотить молча.
+    """
     edits: list[dict] = []
+    unparsed: list[str] = []
     current: dict | None = None
     for raw in path.read_text(encoding="utf-8").splitlines():
         line = raw.rstrip()
         if line.startswith("## "):
             address = line[3:].strip()
-            parts = address.split(".")
-            if len(parts) != 3:
+            quiz_match = QUIZ_ADDR_RE.match(address)
+            if quiz_match:
+                current = {
+                    "addr": address,
+                    "kind": "quiz",
+                    "lesson": quiz_match["lesson"],
+                    "qnum": int(quiz_match["qnum"]),
+                    "opt": int(quiz_match["opt"]),
+                    "lang": quiz_match["lang"],
+                }
+                edits.append(current)
                 continue
-            current = {"addr": address, "card": parts[0], "block": parts[1], "lang": parts[2]}
-            edits.append(current)
+            parts = address.split(".")
+            if len(parts) == 3:
+                current = {"addr": address, "kind": "card",
+                           "card": parts[0], "block": parts[1], "lang": parts[2]}
+                edits.append(current)
+                continue
+            current = None
+            unparsed.append(address)
         elif current is not None and line.startswith("- было: "):
             current["before"] = line[len("- было: "):].strip()
         elif current is not None and line.startswith("- стало: "):
             current["after"] = line[len("- стало: "):].strip()
-    return [e for e in edits if "before" in e and "after" in e]
+    edits = [e for e in edits if "before" in e and "after" in e]
+    return edits, unparsed
+
+
+def load_quiz_lessons() -> dict[str, dict]:
+    """lessonId → урок из ЧЕРНОВИКОВ викторины (content/quiz-*.json).
+
+    Списки правок (28е, 28п) писались по черновикам редактора — там дистракторы
+    правятся ДО сборки. `content/course.json` — уже собранный `merge_quiz.py`
+    результат; сверяться с ним значило бы проверять не тот файл, который редактор
+    держал перед глазами.
+    """
+    lessons: dict[str, dict] = {}
+    for path in sorted((ROOT / "content").glob("quiz-*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for lesson in data.get("lessons") or []:
+            lessons[lesson["lessonId"]] = lesson
+    return lessons
+
+
+def quiz_question(lessons: dict[str, dict], lesson_id: str, qnum: int) -> dict | None:
+    """Вопрос урока по 1-based номеру адреса (q2 → questions[1]), или None."""
+    lesson = lessons.get(lesson_id)
+    if lesson is None:
+        return None
+    questions = lesson.get("questions") or []
+    if not (1 <= qnum <= len(questions)):
+        return None
+    return questions[qnum - 1]
+
+
+def group_key(edit: dict) -> tuple:
+    """Ключ группировки правок по «одному месту, разным языкам» (проверки 5 и 8).
+
+    У карты место — (id карты, блок); у викторины — (урок, номер вопроса, номер
+    варианта). Вынесено сюда, а не продублировано в обеих проверках: правило
+    проекта «повторяется 2+ раза — выносится».
+    """
+    if edit["kind"] == "quiz":
+        return (edit["lesson"], edit["qnum"], edit["opt"])
+    return (edit["card"], edit["block"])
+
+
+def place_label(kind: str, place: tuple) -> str:
+    """Читаемая подпись места для находок проверок 5/8 — без языка на конце."""
+    if kind == "quiz":
+        lesson_id, qnum, opt = place
+        return f"{lesson_id}-q{qnum}[{opt}]"
+    card_id, block = place
+    return f"{card_id}.{block}"
+
+
+def place_text(cards: dict[str, dict], lessons: dict[str, dict], kind: str,
+                place: tuple, lang: str) -> str | None:
+    """Текущий текст «места» на языке lang — общий читатель для проверок 8 и 10.
+
+    Карта смотрит в content/cards.json (через block_text), викторина — в черновики
+    content/quiz-*.json (через quiz_question). Обе ветки уже существовали порознь
+    (в check_8, в check_1) — здесь общий фасад, чтобы не заводить третью копию.
+    """
+    if kind == "quiz":
+        lesson_id, qnum, opt = place
+        question = quiz_question(lessons, lesson_id, qnum)
+        if question is None:
+            return None
+        options = question.get("options") or []
+        if not (0 <= opt < len(options)):
+            return None
+        return (options[opt].get(lang) or "").strip() or None
+    card_id, block = place
+    card = cards.get(card_id)
+    if card is None:
+        return None
+    return block_text(card, block, lang)
+
+
+def family_of(lang: str) -> tuple[str, str]:
+    """Языковая семья: канон (ru, en) или переводы (es, pt) — общая для проверок 5 и 8.
+
+    Канон и переводы живут своей жизнью: правка ОБОИХ переводов при нетронутом
+    каноне — норма волны локализации, а не сигнал (см. калибровку в check_5_pair
+    и check_8_unpaired). Раньше это условие уже стояло внутри check_8; чтобы не
+    завести его копию в check_5, вынесено сюда — правило проекта «повторяется
+    2+ раза».
+    """
+    return ("ru", "en") if lang in ("ru", "en") else ("es", "pt")
+
+
+def family_partner(lang: str) -> str:
+    """Второй язык той же семьи, что lang, независимо от того, тронут он правкой."""
+    family = family_of(lang)
+    return family[1] if lang == family[0] else family[0]
+
+
+def family_complete(langs: dict[str, dict], lang: str) -> bool:
+    """True, если ОБА языка семьи lang присутствуют среди правок этого места."""
+    return all(l in langs for l in family_of(lang))
 
 
 def parse_word_list(value: str) -> list[str]:
@@ -115,10 +259,20 @@ def parse_word_list(value: str) -> list[str]:
 
 # --- вспомогательное ----------------------------------------------------------
 
+def is_significant(word: str, lang: str) -> bool:
+    """Слово достаточно длинное и не служебное, чтобы участвовать в сравнении смысла.
+
+    Общий предикат для тавтологии (`stems`/`stem_counts`) и калибровки проверки 10
+    (значимые слова дистрактора и верного ответа) — раньше условие `len(word) <
+    STEM_MIN or word in STOPWORDS[lang]` было продублировано в двух местах.
+    """
+    return len(word) >= STEM_MIN and word not in STOPWORDS[lang]
+
+
 def stems(text: str, lang: str) -> set[str]:
     out = set()
     for word in words(text):
-        if len(word) < STEM_MIN or word in STOPWORDS[lang]:
+        if not is_significant(word, lang):
             continue
         out.add(word[:STEM_LEN])
     return out
@@ -127,7 +281,7 @@ def stems(text: str, lang: str) -> set[str]:
 def stem_counts(text: str, lang: str) -> dict[str, int]:
     counts: dict[str, int] = defaultdict(int)
     for word in words(text):
-        if len(word) < STEM_MIN or word in STOPWORDS[lang]:
+        if not is_significant(word, lang):
             continue
         counts[word[:STEM_LEN]] += 1
     return counts
@@ -139,6 +293,18 @@ def overlap(before: str, after: str) -> float:
     if not a or not b:
         return 0.0
     return len(a & b) / max(len(a), len(b))
+
+
+def significant_text(text: str, lang: str, question_words: set[str]) -> str:
+    """Текст, очищенный до значимых слов — для сравнения СУТИ, а не каркаса вопроса.
+
+    Проверке 10 нужна не форма (общий шаблон вопроса вроде «what do i need... today»
+    достаётся всем трём вариантам одинаково), а совпадение содержания дистрактора
+    с верным ответом. Убирает слова самого вопроса, служебные (`STOPWORDS`) и
+    короткие (`is_significant`) — калибровка 23.08, см. комментарий в check_10.
+    """
+    return " ".join(w for w in words(text)
+                     if w not in question_words and is_significant(w, lang))
 
 
 def ngrams(text: str, n: int) -> set[tuple[str, ...]]:
@@ -168,18 +334,67 @@ def size_of(text: str, block: str, lang: str) -> tuple[int, tuple[int, int] | No
     return len(words(text)), None, "слов"
 
 
+def last_records(edits: list[dict]) -> list[dict]:
+    """Последняя запись каждого адреса — для проверки 1 (спека 28п, 23.08).
+
+    Адрес в списке может повториться: сначала волна перезалила текст, потом хвост
+    приёмки поправил его же (задача 28л — тот же случай на карточных адресах,
+    где 28б уже правила блок раньше). Порядок записей — история изменений, а не
+    независимые правки одного текста; с КОРПУСОМ имеет смысл сверять только
+    последнюю (текущую) — устаревшая промежуточная запись обязана «разойтись»
+    с сегодняшним текстом, это не дефект, а нормальный ход истории. Порядок
+    появления адреса в файле сохраняется (естественный порядок вывода отчёта).
+    """
+    seen_order: list[str] = []
+    latest: dict[str, dict] = {}
+    for edit in edits:
+        if edit["addr"] not in latest:
+            seen_order.append(edit["addr"])
+        latest[edit["addr"]] = edit
+    return [latest[addr] for addr in seen_order]
+
+
 # --- проверки -----------------------------------------------------------------
 # Каждая возвращает список строк-находок. Пустой список = проверка чиста.
+# ⚠️ Все проверки, кроме 1, смотрят на КАЖДУЮ запись (даже если адрес повторился) —
+# они про саму правку, и промежуточная правка тоже могла внести дефект. Только
+# проверка 1 (сверка с корпусом) и проверка 11 (связность цепочки) знают про
+# повторы адреса — это единственные две, для кого важен ИТОГ, а не транзит.
 
-def check_1_applied(edits: list[dict], cards: dict[str, dict]) -> list[str]:
-    """«Стало» совпадает с корпусом.
+def check_1_applied(edits: list[dict], cards: dict[str, dict],
+                     lessons: dict[str, dict]) -> list[str]:
+    """«Стало» совпадает с корпусом (карта) или с черновиком викторины (quiz).
 
     Список адресов — обещание редактору «вот что изменилось». Если корпус с тех пор
     уехал, точечная перечитка проверяет не тот текст, и об этом надо знать до вычитки,
     а не после.
+
+    ⚠️ Смотрит только на ПОСЛЕДНЮЮ запись каждого адреса (`last_records`) — иначе
+    устаревшая промежуточная запись повторного адреса (хвост приёмки 28п, 23.08)
+    красит отчёт навсегда: её «стало» и есть то самое «было» следующей записи,
+    а не текущий корпус. За саму цепочку истории отвечает проверка 11.
     """
     out = []
-    for edit in edits:
+    for edit in last_records(edits):
+        if edit["kind"] == "quiz":
+            if edit["lesson"] not in lessons:
+                out.append(f"[нет урока] {edit['addr']}")
+                continue
+            question = quiz_question(lessons, edit["lesson"], edit["qnum"])
+            if question is None:
+                out.append(f"[нет вопроса] {edit['addr']}")
+                continue
+            options = question.get("options") or []
+            if not (0 <= edit["opt"] < len(options)):
+                out.append(f"[нет варианта] {edit['addr']}")
+                continue
+            current = (options[edit["opt"]].get(edit["lang"]) or "").strip()
+            expected = edit["after"]
+            if current != expected:
+                out.append(f"[разошлось] {edit['addr']}: корпус ≠ «стало»\n"
+                           f"    корпус: {current}\n"
+                           f"    список: {expected}")
+            continue
         card = cards.get(edit["card"])
         if card is None:
             out.append(f"[нет карты] {edit['addr']}")
@@ -199,15 +414,18 @@ def check_1_applied(edits: list[dict], cards: dict[str, dict]) -> list[str]:
     return out
 
 
-def check_2_limits(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
+def check_2_limits(edits: list[dict], _cards: dict[str, dict],
+                    _lessons: dict[str, dict]) -> list[str]:
     """Правка вывела блок за норму длины (был внутри — стал снаружи).
 
     Печатается только регрессия: блок, который и до правки был вне нормы, — предмет
     отдельной волны (49 таких осталось от задачи 31), а не этой.
+    Только карточные записи: у нормы длины викторины нет — там своя мера
+    (`QUIZ_SPREAD_MAX` в check_canon), проверка 2 её не заменяет.
     """
     out = []
     for edit in edits:
-        if edit["block"] in WORD_SET_FIELDS:
+        if edit["kind"] != "card" or edit["block"] in WORD_SET_FIELDS:
             continue
         n_before, limits, unit = size_of(edit["before"], edit["block"], edit["lang"])
         if limits is None:
@@ -222,15 +440,17 @@ def check_2_limits(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
     return out
 
 
-def check_3_tautology(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
-    """Правка внесла повтор основы внутри блока, которого до неё не было.
+def check_3_tautology(edits: list[dict], _cards: dict[str, dict],
+                       _lessons: dict[str, dict]) -> list[str]:
+    """Правка внесла повтор основы внутри блока (карта) или варианта (викторина).
 
     Пример класса: «Гонорары и повышение приходят следом за ростом — если вы
-    продолжаете расти» (рост/расти в одной фразе).
+    продолжаете расти» (рост/расти в одной фразе). Механика не знает про вид
+    записи — работает по before/after текста независимо от того, откуда он взят.
     """
     out = []
     for edit in edits:
-        if edit["block"] in WORD_SET_FIELDS:
+        if edit["kind"] == "card" and edit["block"] in WORD_SET_FIELDS:
             continue
         lang = edit["lang"]
         before, after = stem_counts(edit["before"], lang), stem_counts(edit["after"], lang)
@@ -241,15 +461,18 @@ def check_3_tautology(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
     return out
 
 
-def check_4_neighbour(edits: list[dict], cards: dict[str, dict]) -> list[str]:
+def check_4_neighbour(edits: list[dict], cards: dict[str, dict],
+                       _lessons: dict[str, dict]) -> list[str]:
     """Внесённая фраза повторяет соседний блок той же карты.
 
     Пользователь листает блоки одной карты подряд, поэтому повтор между ними виден
     сразу — это находка задачи 25 («две сферы об одном»), перенесённая на правки.
+    Только карточные записи: у викторины «соседний блок» не существует — там
+    соседи это варианты того же вопроса, и для них своя проверка 9.
     """
     out = []
     for edit in edits:
-        if edit["block"] in WORD_SET_FIELDS:
+        if edit["kind"] != "card" or edit["block"] in WORD_SET_FIELDS:
             continue
         card = cards.get(edit["card"])
         if card is None:
@@ -275,44 +498,62 @@ def check_4_neighbour(edits: list[dict], cards: dict[str, dict]) -> list[str]:
     return out
 
 
-def check_5_pair(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
-    """Смысловая правка сделана в одном языке, парный остался прежним.
+def check_5_pair(edits: list[dict], _cards: dict[str, dict],
+                  _lessons: dict[str, dict]) -> list[str]:
+    """Смысловая правка сделана в одном языке СЕМЬИ, парный остался прежним.
 
     Грамматическая правка (род читателя, согласование) парного языка не требует —
     поэтому смотрим только на правки, сменившие мысль: доля общих слов ниже порога.
+    Место группировки — карта.блок ИЛИ урок-вопрос[вариант] (`group_key`).
+
+    ⚠️ Калибровка 23.08: сравнение — внутри ЯЗЫКОВОЙ СЕМЬИ (`family_of`/
+    `family_complete`, тот же хелпер, что в check_8_unpaired), а не по всем
+    четырём языкам разом, как было раньше (та версия писалась ещё на двух языках,
+    и «не все четыре тронуты» ошибочно значило «есть находка»). Канон (ru, en) и
+    переводы (es, pt) живут своей жизнью: правка ОБОИХ переводов при нетронутом
+    каноне — норма волны локализации, а не сигнал. БЕЗ семейной логики проверка
+    красила ЛЮБУЮ переводческую волну целиком: на 28п (61 дистрактор × оба
+    перевода) это 85 находок, ВСЕ ложные — смысл менялся в es и pt синхронно,
+    «непарной» её делало только сравнение с нетронутыми ru/en, которых волна и
+    не должна была трогать. Настоящий дефект этого класса («правку сделали в es,
+    а pt забыли») тонул в шуме одной из 85 одинаковых строк — теперь он
+    единственная находка на своём месте.
     """
-    by_block: dict[tuple[str, str], dict[str, dict]] = defaultdict(dict)
+    by_place: dict[tuple, dict[str, dict]] = defaultdict(dict)
     for edit in edits:
-        by_block[(edit["card"], edit["block"])][edit["lang"]] = edit
+        by_place[group_key(edit)][edit["lang"]] = edit
     out = []
-    for (card_id, block), langs in sorted(by_block.items()):
-        if block not in PAIRED_BLOCKS:
+    for place, langs in sorted(by_place.items(), key=lambda kv: tuple(str(x) for x in kv[0])):
+        kind = next(iter(langs.values()))["kind"]
+        if kind == "card" and place[1] not in PAIRED_BLOCKS:
             continue
         if len(langs) == len(LANGS):
             continue
-        # ⚠️ Раньше здесь стояла распаковка ровно одного языка: проверка писалась, когда
-        # языков было два, и «не все» означало «ровно один». С четырьмя языками волна,
-        # тронувшая es и pt (ровно случай L-5), роняла скрипт ValueError. Смысл проверки
-        # прежний: правка сменила мысль в одних языках, а другие остались со старой.
-        untouched = [l for l in LANGS if l not in langs]
+        label = place_label(kind, place)
         for lang, edit in sorted(langs.items()):
+            if family_complete(langs, lang):
+                continue
             drift = overlap(edit["before"], edit["after"])
             if drift < MEANING_DRIFT:
-                out.append(f"[язык без пары] {card_id}.{block}: правка в {lang} "
-                           f"(общих слов {drift:.0%}), не тронуты: {', '.join(untouched)}")
+                out.append(f"[язык без пары] {label}: правка в {lang} "
+                           f"(общих слов {drift:.0%}), не тронут: {family_partner(lang)}")
     return out
 
 
-def check_6_drift(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
+def check_6_drift(edits: list[dict], _cards: dict[str, dict],
+                   _lessons: dict[str, dict]) -> list[str]:
     """Правка сменила мысль, а не формулировку — список для чтения глазами.
 
     Не дефект сам по себе: снятие рамки предсказания обычно требует другой фразы.
     Но именно здесь живёт «замена темы блока», которой редактор не видел ни в каком
-    виде, — поэтому список печатается целиком и разбирается вручную.
+    виде, — поэтому список печатается целиком и разбирается вручную. Применяется
+    и к дистракторам викторины: там смена мысли опаснее вдвойне — дистрактор либо
+    перестаёт быть тем, что задумал автор вопроса, либо (см. проверку 10) вообще
+    подъезжает к верному ответу.
     """
     out = []
     for edit in edits:
-        if edit["block"] in WORD_SET_FIELDS:
+        if edit["kind"] == "card" and edit["block"] in WORD_SET_FIELDS:
             continue
         drift = overlap(edit["before"], edit["after"])
         if drift < MEANING_DRIFT:
@@ -322,11 +563,15 @@ def check_6_drift(edits: list[dict], _cards: dict[str, dict]) -> list[str]:
     return sorted(out)
 
 
-def check_7_words(edits: list[dict], cards: dict[str, dict]) -> list[str]:
-    """Замена в keywords/search: формат, дубли внутри набора и между наборами карты."""
+def check_7_words(edits: list[dict], cards: dict[str, dict],
+                   _lessons: dict[str, dict]) -> list[str]:
+    """Замена в keywords/search: формат, дубли внутри набора и между наборами карты.
+
+    Только карточные записи — у викторины нет полей keywords/search.
+    """
     out = []
     for edit in edits:
-        if edit["block"] not in WORD_SET_FIELDS:
+        if edit["kind"] != "card" or edit["block"] not in WORD_SET_FIELDS:
             continue
         card = cards.get(edit["card"])
         if card is None:
@@ -348,7 +593,8 @@ def check_7_words(edits: list[dict], cards: dict[str, dict]) -> list[str]:
     return out
 
 
-def check_8_unpaired(edits: list[dict], cards: dict[str, dict]) -> list[str]:
+def check_8_unpaired(edits: list[dict], cards: dict[str, dict],
+                      lessons: dict[str, dict]) -> list[str]:
     """Одноязычная правка — парный текст рядом, для сверки глазами.
 
     Не автонаходка, а материал: половина правок задачи 31 (39 блоков из 77) сделана
@@ -358,33 +604,161 @@ def check_8_unpaired(edits: list[dict], cards: dict[str, dict]) -> list[str]:
     с «will come back to you» — регулярка рамки предсказания такого не ловит,
     потому что «will + глагол» слишком общая конструкция, чтобы класть её в словарь.
     Нашли агенты-редакторы; скрипт лишь показывает, ГДЕ смотреть.
+    Место группировки — карта.блок ИЛИ урок-вопрос[вариант] (`group_key`), парный
+    текст читается тем же фасадом `place_text`, что использует проверка 10.
     """
-    by_block: dict[tuple[str, str], dict[str, dict]] = defaultdict(dict)
+    by_place: dict[tuple, dict[str, dict]] = defaultdict(dict)
     for edit in edits:
-        by_block[(edit["card"], edit["block"])][edit["lang"]] = edit
+        by_place[group_key(edit)][edit["lang"]] = edit
     out = []
-    for (card_id, block), langs in sorted(by_block.items()):
-        if block not in PAIRED_BLOCKS or len(langs) == len(LANGS):
+    for place, langs in sorted(by_place.items(), key=lambda kv: tuple(str(x) for x in kv[0])):
+        kind = next(iter(langs.values()))["kind"]
+        if kind == "card" and place[1] not in PAIRED_BLOCKS:
             continue
-        card = cards.get(card_id)
-        if card is None:
+        if len(langs) == len(LANGS):
             continue
-        # то же исправление, что в проверке 5: языков четыре, и «не все» больше не значит
-        # «ровно один» — волна, тронувшая es и pt, роняла скрипт ValueError.
-        # ⚠️ Пара считается внутри СЕМЬИ, а не по всему набору: канон (ru, en) и переводы
-        # (es, pt) живут своей жизнью, и правка ОБОИХ переводов при нетронутом каноне —
-        # норма волны локализации, а не находка. Без этого проверка выдавала по строке
-        # на каждую правку перевода: 216 «находок» на волне, где дефектов нет.
+        if kind == "card" and cards.get(place[0]) is None:
+            continue
+        label = place_label(kind, place)
+        # ⚠️ Пара считается внутри СЕМЬИ (`family_complete`/`family_partner`, общие
+        # хелперы с check_5_pair), а не по всему набору из четырёх языков: канон
+        # (ru, en) и переводы (es, pt) живут своей жизнью, и правка ОБОИХ переводов
+        # при нетронутом каноне — норма волны локализации, а не находка. Без этого
+        # проверка выдавала по строке на каждую правку перевода: 216 «находок» на
+        # волне, где дефектов нет. Для викторины действует тот же принцип:
+        # перезалитые es+pt при нетронутых ru/en — обычный ход волны 28п, не сигнал.
         for lang, edit in sorted(langs.items()):
-            family = ("ru", "en") if lang in ("ru", "en") else ("es", "pt")
-            if all(l in langs for l in family):
+            if family_complete(langs, lang):
                 continue
-            other = family[1] if lang == family[0] else family[0]
-            pair = block_text(card, block, other) or "—"
+            other = family_partner(lang)
+            pair = place_text(cards, lessons, kind, place, other) or "—"
             dropped = [w for w in words(edit["before"]) if w not in set(words(edit["after"]))]
-            out.append(f"[сверить] {card_id}.{block}: правка в {lang}\n"
+            out.append(f"[сверить] {label}: правка в {lang}\n"
                        f"    убрано: {' '.join(dropped) or '—'}\n"
                        f"    {other}: {pair}")
+    return out
+
+
+def check_9_quiz_sibling(edits: list[dict], _cards: dict[str, dict],
+                          lessons: dict[str, dict]) -> list[str]:
+    """Правленый дистрактор начал повторять СОСЕДНИЙ вариант того же вопроса.
+
+    Аналог проверки 4 для викторины: там соседи — блоки одной карты, здесь —
+    варианты одного вопроса, которые пользователь читает подряд секунда в секунду.
+    Смотрим только фразы, ДОБАВЛЕННЫЕ правкой (before не в счёт — то, что уже
+    повторялось до правки, не её вина).
+
+    ⚠️ Калибровка 23.08 по разбору находок 28п/28е: текст вопроса вычитается из
+    added теми же 3-граммами — тот же приём, что в check_4_neighbour для имени
+    карты («имя карты обязано повторяться во всех её блоках — это не повтор, а
+    предмет»). Здесь предмет — сам вопрос: название карты в вопросе-сравнении
+    («El Ermitaño y El Ocho de Espadas»), формула «Maior + Menor», задание вопроса
+    как таковое — не может быть находкой, это то, о чём спрашивают. БЕЗ вычитания
+    вопроса проверка давала 8 находок на 28п и 3 на 28е — ВСЕ ложные (проверено
+    ручным разбором каждой). Часть находок (общий каркас вопроса у всех трёх
+    вариантов, вроде «what do I need... today») текст вопроса не покрывает и
+    после калибровки остаётся видна — это стилистика, её видно глазами.
+    """
+    out = []
+    for edit in edits:
+        if edit["kind"] != "quiz":
+            continue
+        question = quiz_question(lessons, edit["lesson"], edit["qnum"])
+        if question is None:
+            continue
+        options = question.get("options") or []
+        if not (0 <= edit["opt"] < len(options)):
+            continue
+        added = ngrams(edit["after"], 3) - ngrams(edit["before"], 3)
+        if not added:
+            continue
+        q_text = (question.get("q") or {}).get(edit["lang"], "")
+        added -= ngrams(q_text, 3)
+        if not added:
+            continue
+        for i, option in enumerate(options):
+            if i == edit["opt"]:
+                continue
+            other = (option.get(edit["lang"]) or "").strip()
+            if not other:
+                continue
+            shared = added & ngrams(other, 3)
+            if shared:
+                phrases = "; ".join(" ".join(g) for g in sorted(shared)[:3])
+                out.append(f"[повтор с вариантом {i}] {edit['addr']}: {phrases}")
+    return out
+
+
+def check_10_quiz_close_to_correct(edits: list[dict], _cards: dict[str, dict],
+                                    lessons: dict[str, dict]) -> list[str]:
+    """Дистрактор сблизился с ВЕРНЫМ вариантом того же вопроса.
+
+    Главный риск этого класса правок: дистрактор чинят, чтобы он перестал выдавать
+    себя формой (штампом, длиной), а получается перефразировка правильного ответа —
+    тогда у вопроса становится два верных варианта, и это не ловит ни одна другая
+    проверка в этом файле. Смотрим рост доли общих слов с верным вариантом
+    (`overlap`) до и после правки; находка только если ПОСЛЕ правки доля выросла
+    И перевалила порог `MEANING_DRIFT`-совместимый уровень 0.5 — малый рост около
+    низкой базы (5% → 12%) значения не имеет. Правки самого верного варианта
+    (opt == correct) пропускаются — там сближаться не с чем.
+
+    ⚠️ Калибровка 23.08: overlap считается по ЗНАЧИМЫМ словам (`significant_text`),
+    а не по сырому тексту — голый overlap() ловил не суть ответа, а общий каркас
+    вопроса (все варианты одного вопроса законно перефразируют его условие) и
+    служебные слова. БЕЗ этой калибровки проверка давала 2 находки на реальных
+    списках, ОБЕ ложные: общими были «qué, me, hoy» (испанские частицы) и разделяемый
+    всеми тремя вариантами шаблон «what do I need ... today» — не сама суть ответа.
+    """
+    out = []
+    for edit in edits:
+        if edit["kind"] != "quiz":
+            continue
+        question = quiz_question(lessons, edit["lesson"], edit["qnum"])
+        if question is None:
+            continue
+        correct = question.get("correct")
+        if correct is None or edit["opt"] == correct:
+            continue
+        options = question.get("options") or []
+        if not (0 <= correct < len(options)):
+            continue
+        correct_text = (options[correct].get(edit["lang"]) or "").strip()
+        if not correct_text:
+            continue
+        q_words = set(words((question.get("q") or {}).get(edit["lang"], "")))
+        lang = edit["lang"]
+        sig_correct = significant_text(correct_text, lang, q_words)
+        before_overlap = overlap(significant_text(edit["before"], lang, q_words), sig_correct)
+        after_overlap = overlap(significant_text(edit["after"], lang, q_words), sig_correct)
+        if after_overlap > before_overlap and after_overlap >= 0.5:
+            out.append(f"[сблизился с верным] {edit['addr']}: "
+                       f"{before_overlap:.0%} → {after_overlap:.0%}")
+    return out
+
+
+def check_11_chain(edits: list[dict], _cards: dict[str, dict],
+                    _lessons: dict[str, dict]) -> list[str]:
+    """Адрес встретился больше одного раза — цепочка правок обязана быть связной.
+
+    Список адресов документирует ИСТОРИЮ текста, а не только сегодняшний итог:
+    волна перезаливает текст, потом хвост приёмки правит её же результат (28п,
+    23.08). «Стало» записи N обязано дословно совпасть с «было» записи N+1 — иначе
+    между двумя записями текст менял кто-то в обход списка, и «было» второй записи
+    взято не из реального предыдущего состояния. Проверка 1 теперь смотрит только
+    на последнюю запись (см. её докстроку) — эта проверка стережёт ровно то, что
+    проверка 1 больше не видит: саму последовательность истории.
+    """
+    by_addr: dict[str, list[dict]] = defaultdict(list)
+    for edit in edits:
+        by_addr[edit["addr"]].append(edit)
+    out = []
+    for addr, records in by_addr.items():
+        for i in range(len(records) - 1):
+            cur, nxt = records[i], records[i + 1]
+            if cur["after"] != nxt["before"]:
+                out.append(f"[цепочка разорвана] {addr}: «стало» правки {i + 1} ≠ «было» правки {i + 2}\n"
+                           f"    стало (#{i + 1}): {cur['after']}\n"
+                           f"    было (#{i + 2}): {nxt['before']}")
     return out
 
 
@@ -397,6 +771,9 @@ CHECKS = [
     ("сменилась мысль (читать глазами)", check_6_drift),
     ("наборы слов", check_7_words),
     ("одноязычные правки — сверить парный текст", check_8_unpaired),
+    ("дистрактор повторяет другой вариант вопроса", check_9_quiz_sibling),
+    ("дистрактор сблизился с верным ответом", check_10_quiz_close_to_correct),
+    ("цепочка правок разорвана", check_11_chain),
 ]
 
 
@@ -418,16 +795,35 @@ def main() -> int:
     path = Path(args.file)
     if not path.is_absolute():
         path = ROOT / path
-    edits = parse_edits(path)
+    edits, unparsed = parse_edits(path)
     cards = cards_by_id()
-    print(f"Записей «было → стало»: {len(edits)} "
-          f"в {len({e['card'] for e in edits})} картах\n")
+    lessons = load_quiz_lessons()
+
+    # Адрес, не подошедший ни под карточный, ни под викторинный формат, раньше исчезал
+    # молча (см. docstring parse_edits) — печатаем его отдельной строкой ПЕРЕД сводкой,
+    # чтобы дефект списка правок был виден до того, как читатель посмотрит на итоги.
+    print(f"[адрес не разобран] {len(unparsed)}"
+          + (f": {', '.join(unparsed)}" if unparsed else "") + "\n")
+
+    n_cards = len({e["card"] for e in edits if e["kind"] == "card"})
+    n_lessons = len({e["lesson"] for e in edits if e["kind"] == "quiz"})
+    places = []
+    if n_cards:
+        places.append(f"{n_cards} картах")
+    if n_lessons:
+        places.append(f"{n_lessons} уроках викторины")
+    # Адрес может повториться (волна + хвост приёмки по тому же тексту, 28п) — печатаем
+    # ОБА числа: без этого «записей 125» при «уникальных адресов 122» выглядит багом
+    # парсера, а не законным устройством списка (проверка 11 её и стережёт).
+    n_addrs = len({e["addr"] for e in edits})
+    print(f"Записей «было → стало»: {len(edits)} (уникальных адресов: {n_addrs}) "
+          f"в {' и '.join(places) or '—'}\n")
 
     total = 0
     for i, (title, check) in enumerate(CHECKS, start=1):
         if args.only and i not in args.only:
             continue
-        findings = check(edits, cards)
+        findings = check(edits, cards, lessons)
         total += len(findings)
         print(f"--- {i}. {title}: {len(findings)}")
         for line in findings:
