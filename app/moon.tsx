@@ -11,6 +11,7 @@ import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../src/components/FadeUp';
 import { MoonRow } from '../src/components/MoonRow';
+import { MoonSpreadPanel } from '../src/components/MoonSpreadPanel';
 import { Rule } from '../src/components/Rule';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
@@ -20,7 +21,7 @@ import { WEEK_START } from '../src/lib/lang';
 import { moonInfo, type MoonEventKind } from '../src/lib/moon';
 import { monthEvents, monthGrid } from '../src/lib/moonCalendar';
 import { useAppActive } from '../src/lib/useAppActive';
-import { fonts, spacing } from '../src/theme/theme';
+import { fonts, LOCKED_OPACITY, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
 // .mooncal: 7 колонок, зазор 4
@@ -133,20 +134,25 @@ export default function MoonScreen() {
 
         <FadeUp index={2}>
           {events.map((e) => (
-            <View
-              key={e.at.getTime()}
-              style={[st.event, { backgroundColor: t.panel, borderColor: t.frame }, e.day < today && st.dim]}
-            >
-              <EventGlyph kind={e.kind} size={14} />
-              <View style={st.eventTexts}>
-                <Txt style={[st.eventTitle, { color: t.accent }]}>
-                  {`${tr(`moon.${e.kind}`)} · ${formatDayMonth(localDateISO(e.at), lang)} · ${formatTime(e.at, lang)}`.toUpperCase()}
-                </Txt>
-                <Txt style={[st.eventHint, { color: t.head }]}>
-                  {tr(e.kind === 'new' ? 'moon.newHint' : 'moon.fullHint')}
-                </Txt>
+            <React.Fragment key={e.at.getTime()}>
+              <View
+                style={[st.event, { backgroundColor: t.panel, borderColor: t.frame }, e.day < today && st.dim]}
+              >
+                <EventGlyph kind={e.kind} size={14} />
+                <View style={st.eventTexts}>
+                  <Txt style={[st.eventTitle, { color: t.accent }]}>
+                    {`${tr(`moon.${e.kind}`)} · ${formatDayMonth(localDateISO(e.at), lang)} · ${formatTime(e.at, lang)}`.toUpperCase()}
+                  </Txt>
+                  <Txt style={[st.eventHint, { color: t.head }]}>
+                    {tr(e.kind === 'new' ? 'moon.newHint' : 'moon.fullHint')}
+                  </Txt>
+                </View>
               </View>
-            </View>
+              {/* панель расклада: момент события передаётся пропом, чтобы она судила о СВОЁМ
+                  событии. Своего гейта видимости у экрана НЕТ — панель сама прячется под уже
+                  прошедшим событием с закрытым окном (иначе гейт и окно разъезжаются) */}
+              <MoonSpreadPanel kind={e.kind} at={e.at} now={now} />
+            </React.Fragment>
           ))}
         </FadeUp>
       </ScrollView>
@@ -163,7 +169,7 @@ const st = StyleSheet.create({
   cell: { borderWidth: 1, borderColor: 'transparent', borderRadius: 10, alignItems: 'center', justifyContent: 'center' }, // .dcell
   cellNum: { fontSize: 11 },
   cellGlyph: { marginTop: 1 },
-  dim: { opacity: 0.45 }, // .dim — прошедшие дни и события
+  dim: { opacity: LOCKED_OPACITY }, // .dim — прошедшие дни и события
   // .mevent: панель panel/frame, radius 14, паддинг 12/14, отступ 9, ряд gap 12
   event: {
     flexDirection: 'row',

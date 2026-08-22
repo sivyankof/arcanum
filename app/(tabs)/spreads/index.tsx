@@ -1,4 +1,6 @@
 /** Каталог раскладов (product-spec §4): панель `.sp` = мини-схема позиций + имя + описание + PREMIUM.
+ *  У лунных раскладов (спека 51) PREMIUM заменён бейджем события «●/○ СОБЫТИЕ», а вне окна
+ *  события карточка приглушена и не нажимается — причина написана на ней самой датой.
  *  Тап — экран расклада во вложенном стеке этого таба (спека 36); «Карта дня» ведёт на «Сегодня». */
 import { router } from 'expo-router';
 import React from 'react';
@@ -11,11 +13,15 @@ import { ScreenBg } from '../../../src/components/ScreenBg';
 import { SpreadDiagram } from '../../../src/components/SpreadDiagram';
 import { Txt } from '../../../src/components/Txt';
 import { spreads, type Spread } from '../../../src/lib/content';
+import { formatDayMonth, localDateISO } from '../../../src/lib/dates';
 import { hapticTap } from '../../../src/lib/haptics';
 import { useLang } from '../../../src/lib/i18n';
 import { inLang } from '../../../src/lib/lang';
+import { moonSpreadState } from '../../../src/lib/moonSpread';
+import { useDevMoonNow } from '../../../src/lib/useDevMoonNow';
+import { useAppActive } from '../../../src/lib/useAppActive';
 import { useTabTopRef } from '../../../src/lib/useTabScrollToTop';
-import { fonts, spacing } from '../../../src/theme/theme';
+import { fonts, LOCKED_OPACITY, spacing } from '../../../src/theme/theme';
 import { useTheme } from '../../../src/theme/useTheme';
 
 export default function SpreadsScreen() {
@@ -25,7 +31,19 @@ export default function SpreadsScreen() {
   const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
 
-  const open = (s: Spread) => {
+  // «сейчас» — при монтировании и на возврате приложения из фона: таб остаётся смонтированным,
+  // поэтому переход через полночь (и, значит, закрытие окна события) иначе не заметить.
+  // Тот же приём, что на экране луны и на «Сегодня» (правило 06а).
+  const [now, setNow] = React.useState(() => new Date());
+  const devNow = useDevMoonNow();
+  useAppActive(() => setNow(new Date()));
+
+  const open = (s: Spread, locked: boolean) => {
+    if (locked) return; // вне окна карточка не нажимается: причина написана на ней датой
+    // Окно могло закрыться, пока таб висел смонтированным (переход через полночь): `now` в
+    // сторе экрана обновляется только на возврате из фона, а гейт маршрута берёт время заново —
+    // без перепроверки карточка звала бы в закрытый расклад, а маршрут молча редиректил бы назад.
+    if (s.moon && !moonSpreadState(s.moon, devNow ?? new Date())?.open) return;
     hapticTap();
     // «Карта дня» раскладом не играется — это ритуал главного экрана (product-spec §4)
     if (s.id === 'card-of-day') router.navigate('/');
@@ -45,26 +63,49 @@ export default function SpreadsScreen() {
           <Txt style={[st.title, { color: t.head }]}>{tr('spreads.title')}</Txt>
         </FadeUp>
 
-        {spreads.map((s, si) => (
-          <FadeUp key={s.id} index={1 + si}>
-            <PressableScale onPress={() => open(s)} style={[st.item, { backgroundColor: t.panel, borderColor: t.line }]}>
-              <SpreadDiagram spreadId={s.id} />
-              <View style={st.tx}>
-                <Txt style={[st.name, { color: t.head }]}>{inLang(s.name, lang)}</Txt>
-                <Txt style={[st.desc, { color: t.muted }]}>
-                  {tr('spreads.cards', { count: s.cards })} · {inLang(s.description, lang)}
-                </Txt>
-              </View>
-              {!s.free && (
-                <View style={[st.badge, { borderColor: t.frame, backgroundColor: t.chipBg }]}>
-                  <Txt style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.5, fontWeight: '700' }}>
-                    {tr('spreads.premium')}
-                  </Txt>
+        {spreads.map((s, si) => {
+          const moon = s.moon ? moonSpreadState(s.moon, devNow ?? now) : null;
+          const locked = !!s.moon && !moon?.open;
+          const desc = locked && moon
+            ? tr('moonSpread.opensOn', { date: formatDayMonth(localDateISO(moon.at), lang) })
+            : `${tr('spreads.cards', { count: s.cards })} · ${inLang(s.description, lang)}`;
+          return (
+            <FadeUp key={s.id} index={Math.min(1 + si, 8)}>
+              <PressableScale
+                onPress={() => open(s, locked)}
+                disabled={locked}
+                style={[st.item, { backgroundColor: t.panel, borderColor: t.line }, locked && st.dim]}
+              >
+                <SpreadDiagram spreadId={s.id} />
+                <View style={st.tx}>
+                  <Txt style={[st.name, { color: t.head }]}>{inLang(s.name, lang)}</Txt>
+                  <Txt style={[st.desc, { color: t.muted }]}>{desc}</Txt>
                 </View>
-              )}
-            </PressableScale>
-          </FadeUp>
-        ))}
+                {/* у лунных раскладов бейдж события ВМЕСТО PREMIUM: бейдж на карточке один,
+                    и событийный информативнее. free: false у полнолуния остаётся в данных
+                    для будущего пейволла — в v1 он рисует только бейдж (product-spec §4).
+                    Глиф перед текстом — как в мокапе (design-reference.html): ● новолуние,
+                    ○ полнолуние; в перевод не заводим (символ не зависит от языка). */}
+                {s.moon ? (
+                  <View style={[st.badge, { borderColor: t.frame, backgroundColor: t.chipBg }]}>
+                    <Txt style={{ color: t.accent, fontSize: 8, letterSpacing: 1.2, fontWeight: '700' }}>
+                      {s.moon === 'new' ? '● ' : '○ '}
+                      {tr('moonSpread.event')}
+                    </Txt>
+                  </View>
+                ) : (
+                  !s.free && (
+                    <View style={[st.badge, { borderColor: t.frame, backgroundColor: t.chipBg }]}>
+                      <Txt style={{ color: t.accent, fontSize: 8.5, letterSpacing: 1.5, fontWeight: '700' }}>
+                        {tr('spreads.premium')}
+                      </Txt>
+                    </View>
+                  )
+                )}
+              </PressableScale>
+            </FadeUp>
+          );
+        })}
       </ScrollView>
     </View>
   );
@@ -88,4 +129,5 @@ const st = StyleSheet.create({
   name: { fontFamily: fonts.displaySemi, fontSize: 17 }, // `.sp .tx b`
   desc: { fontSize: 10, lineHeight: 15, marginTop: 3 }, // `.sp .tx small`
   badge: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3 },
+  dim: { opacity: LOCKED_OPACITY }, // вне окна события — как прошедшие дни лунного календаря
 });

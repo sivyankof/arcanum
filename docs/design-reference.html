@@ -644,6 +644,8 @@ border-radius:13px;padding:11px 13px;margin-top:8px}
 display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
 .poscard .pcn{font-size:8.5px;letter-spacing:1.8px;color:var(--accent)}
 .poscard .pct{font-family:var(--serif);font-size:14px;color:var(--muted);margin-top:2px}
+.sp.splocked{opacity:.45;cursor:default}
+.moonspread.mslocked{opacity:.45;cursor:default}
 
 /* 4. сезонные события */
 .evbanner{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--frame);
@@ -1169,6 +1171,7 @@ border:.5px solid rgba(226,189,114,.3)}
       <!-- 3. РАСКЛАД ЛУННОГО ЦИКЛА (master-plan п.11): доступен в окно события -->
       <div class="moonspread" onclick="show('v-moonspread')"><span class="ms1">Расклад новолуния · 4 карты</span><span class="ms2">ОТКРЫТЬ →</span></div>
       <div class="mevent"><span class="mi" style="color:var(--accent)">○</span><div><b>ПОЛНОЛУНИЕ · 28 АВГУСТА · 07:18</b><span>Время подводить итоги</span></div></div>
+      <div class="moonspread mslocked"><span class="ms1">Расклад полнолуния · 4 карты</span><span class="ms2">ОТКРОЕТСЯ 28 АВГУСТА</span></div>
     </div>
   </div>
 
@@ -1181,7 +1184,7 @@ border:.5px solid rgba(226,189,114,.3)}
       <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Português</span></div>
     </div>
   </div>
-  <!-- 3б. ЭКРАН РАСКЛАДА ЛУННОГО ЦИКЛА. Состав позиций НЕ выдуман: плейсхолдеры до контента редактора -->
+  <!-- 3б. ЭКРАН РАСКЛАДА ЛУННОГО ЦИКЛА. Позиции новолуния — Семя/Почва/Помеха/Первый шаг (приложение) -->
   <div class="view" id="v-moonspread">
     <div class="backbtn fadeup d1" onclick="show('v-moon')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>ЛУНА</div>
     <div class="date fadeup d2">СОБЫТИЕ · НОВОЛУНИЕ 12 АВГУСТА</div>
@@ -1190,10 +1193,10 @@ border:.5px solid rgba(226,189,114,.3)}
     <p class="fadeup d3" style="text-align:center;color:var(--muted);font-size:12px;margin-top:6px">
       Доступен в окно события — сутки до и после новолуния</p>
     <div class="fadeup d3">
-      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 1</div><div class="pct">Название позиции — контент редактора</div></div></div>
-      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 2</div><div class="pct">Название позиции — контент редактора</div></div></div>
-      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 3</div><div class="pct">Название позиции — контент редактора</div></div></div>
-      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 4</div><div class="pct">Название позиции — контент редактора</div></div></div>
+      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 1</div><div class="pct">Семя</div></div></div>
+      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 2</div><div class="pct">Почва</div></div></div>
+      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 3</div><div class="pct">Помеха</div></div></div>
+      <div class="poscard"><div class="pcimg">✶</div><div><div class="pcn">ПОЗИЦИЯ 4</div><div class="pct">Первый шаг</div></div></div>
     </div>
     <button class="cta fadeup d4" style="margin-top:16px">РАЗЛОЖИТЬ КАРТЫ</button>
   </div>
@@ -1834,16 +1837,25 @@ function cycleMastery(el){
   });
 })();
 
-/* 3. бейдж события у лунных раскладов в списке «Расклады» */
+/* 3. бейдж события у лунных раскладов в списке «Расклады».
+   Две карточки: новолуние в окне (открыта) и полнолуние вне окна (заблокировано с датой) —
+   решение 20, состояние «вне окна» дорисовано задачей 51. */
 (function(){
   const box=document.getElementById('sps'); if(!box) return;
-  const card=document.createElement('div');
-  card.className='sp'; card.onclick=()=>show('v-moonspread');
-  card.innerHTML = `<div class="diag"><i style="left:0;top:11px"></i><i style="left:13px;top:11px"></i>`+
-    `<i style="left:26px;top:11px"></i><i style="left:39px;top:11px"></i></div>`+
+  const diag = `<div class="diag"><i style="left:0;top:11px"></i><i style="left:13px;top:11px"></i>`+
+    `<i style="left:26px;top:11px"></i><i style="left:39px;top:11px"></i></div>`;
+  const open=document.createElement('div');
+  open.className='sp'; open.onclick=()=>show('v-moonspread');
+  open.innerHTML = diag+
     `<div class="tx"><b>Расклад новолуния</b><small>4 карты · открыт в окно события — сутки до и после</small></div>`+
     `<span class="evbadge">● СОБЫТИЕ</span>`;
-  box.appendChild(card);
+  box.appendChild(open);
+  const locked=document.createElement('div');
+  locked.className='sp splocked';
+  locked.innerHTML = diag+
+    `<div class="tx"><b>Расклад полнолуния</b><small>Откроется 28 августа</small></div>`+
+    `<span class="evbadge">○ СОБЫТИЕ</span>`;
+  box.appendChild(locked);
 })();
 
 /* 5. «момент переворота» (46в): карты только что пройденного урока раскрываются волной.

@@ -380,6 +380,46 @@
           "pt": "Resultado final"
         }
       ]
+    },
+    {
+      "id": "new-moon",
+      "free": true,
+      "moon": "new",
+      "cards": 4,
+      "name": {
+        "ru": "Расклад новолуния",
+        "en": "New Moon Spread"
+      },
+      "description": {
+        "ru": "Четыре карты о том, что начинается: что зреет, что поддержит, что мешает и с чего начать. Открыт в окно новолуния — сутки до и после.",
+        "en": "Four cards about what is beginning: what is taking seed, what will support it, what gets in the way, and where to start. Open during the new moon window — a day before and after."
+      },
+      "positions": [
+        { "ru": "Семя", "en": "The seed" },
+        { "ru": "Почва", "en": "The ground" },
+        { "ru": "Помеха", "en": "The obstacle" },
+        { "ru": "Первый шаг", "en": "First step" }
+      ]
+    },
+    {
+      "id": "full-moon",
+      "free": false,
+      "moon": "full",
+      "cards": 4,
+      "name": {
+        "ru": "Расклад полнолуния",
+        "en": "Full Moon Spread"
+      },
+      "description": {
+        "ru": "Четыре карты о завершении цикла: что созрело, что стало ясно, что оставалось в тени и что пора отпустить. Открыт в окно полнолуния — сутки до и после.",
+        "en": "Four cards about a cycle closing: what has ripened, what came clear, what stayed in the shadow, and what it is time to release. Open during the full moon window — a day before and after."
+      },
+      "positions": [
+        { "ru": "Урожай", "en": "The harvest" },
+        { "ru": "Что стало ясно", "en": "What came clear" },
+        { "ru": "Тень", "en": "The shadow" },
+        { "ru": "Что отпустить", "en": "What to release" }
+      ]
     }
   ]
 }

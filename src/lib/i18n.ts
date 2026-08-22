@@ -35,6 +35,15 @@ export const resources = {
         newHint: "Время задумывать новое",
         fullHint: "Время подводить итоги",
       },
+      // строки лунных раскладов каталога (спека 51): панель события в списке и шапка экрана
+      moonSpread: {
+        event: "СОБЫТИЕ",
+        open: "ОТКРЫТЬ →",
+        opensOn: "Откроется {{date}}",
+        position: "ПОЗИЦИЯ {{n}}",
+        hintNew: "Доступен в окно события — сутки до и после новолуния",
+        hintFull: "Доступен в окно события — сутки до и после полнолуния",
+      },
       // титулы уровней — logic-spec §4; шестой титул общий для 6-го и всех следующих
       level: {
         line: "Уровень {{n}} · {{title}}",
@@ -151,6 +160,7 @@ export const resources = {
         language: "Язык", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
+        devMoonOpen: "Лунный расклад: открыть окно",
         devSkipYesterday: "Пропустить вчера",
         pushes: "Напоминания",
         pushMorning: "Утро · карта дня", pushEvening: "Вечер · как прошёл день", pushDenied: "Выключены в системе",
@@ -330,6 +340,14 @@ export const resources = {
         newHint: "A time to begin",
         fullHint: "A time to take stock",
       },
+      moonSpread: {
+        event: "EVENT",
+        open: "OPEN →",
+        opensOn: "Opens {{date}}",
+        position: "POSITION {{n}}",
+        hintNew: "Available around the event — a day before and after the new moon",
+        hintFull: "Available around the event — a day before and after the full moon",
+      },
       level: {
         line: "Level {{n}} · {{title}}",
         t1: "Curious", t2: "Student", t3: "Reader",
@@ -427,6 +445,7 @@ export const resources = {
         language: "Language", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
+        devMoonOpen: "Moon spread: open window",
         devSkipYesterday: "Skip yesterday",
         pushes: "Reminders",
         pushMorning: "Morning · card of the day", pushEvening: "Evening · how was your day", pushDenied: "Off in system settings",
@@ -594,6 +613,14 @@ export const resources = {
         newHint: "Tiempo de comenzar",
         fullHint: "Tiempo de hacer balance",
       },
+      moonSpread: {
+        event: "EVENTO",
+        open: "ABRIR →",
+        opensOn: "Se abre el {{date}}",
+        position: "POSICIÓN {{n}}",
+        hintNew: "Disponible en la ventana del evento: un día antes y uno después de la luna nueva",
+        hintFull: "Disponible en la ventana del evento: un día antes y uno después de la luna llena",
+      },
       level: {
         line: "Nivel {{n}} · {{title}}",
         t1: "Curiosa",
@@ -738,6 +765,7 @@ export const resources = {
         on: "Activado",
         off: "Desactivado",
         reflectNow: "Reflexión: mostrar ahora",
+        devMoonOpen: "Tirada lunar: abrir ventana",
         devSkipYesterday: "Saltar ayer",
         pushes: "Recordatorios",
         pushMorning: "Mañana · carta del día",
@@ -917,6 +945,14 @@ export const resources = {
         newHint: "Hora de começar algo novo",
         fullHint: "Hora de fazer um balanço",
       },
+      moonSpread: {
+        event: "EVENTO",
+        open: "ABRIR →",
+        opensOn: "Abre em {{date}}",
+        position: "POSIÇÃO {{n}}",
+        hintNew: "Disponível na janela do evento: um dia antes e um depois da lua nova",
+        hintFull: "Disponível na janela do evento: um dia antes e um depois da lua cheia",
+      },
       level: {
         line: "Nível {{n}} · {{title}}",
         t1: "Curiosa",
@@ -1061,6 +1097,7 @@ export const resources = {
         on: "Ativado",
         off: "Desativado",
         reflectNow: "Reflexão: mostrar agora",
+        devMoonOpen: "Tiragem lunar: abrir janela",
         devSkipYesterday: "Pular ontem",
         pushes: "Lembretes",
         pushMorning: "Manhã · carta do dia",
