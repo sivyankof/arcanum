@@ -46,7 +46,7 @@ export const VALID: BackupState = {
     },
   ],
   srs: { fool: { reps: 2, intervalDays: 6, ease: 2.5, due: '2026-08-20' }, magician: { reps: 0, intervalDays: 0, ease: 1.96, due: '2026-08-14' } },
-  reviewDay: { date: '2026-08-14', newCount: 3 },
+  reviewDay: { date: '2026-08-14', newCount: 3, doneCount: 1 },
 };
 
 describe('buildBackup — сборка файла (спека 11)', () => {
@@ -272,7 +272,7 @@ describe('parseBackup — повторение (спека 45)', () => {
     const raw = { ...buildBackup(VALID, 9, AT), schemaVersion: 9, state: old };
     const r = parseBackup(JSON.stringify(raw), SCHEMA_VERSION);
     expect(r.ok && r.state.srs).toEqual({});
-    expect(r.ok && r.state.reviewDay).toEqual({ date: '', newCount: 0 });
+    expect(r.ok && r.state.reviewDay).toEqual({ date: '', newCount: 0, doneCount: 0 });
   });
 
   const good = VALID.srs.fool;

@@ -7,7 +7,9 @@ import {
   applyReview,
   buildSession,
   deckOrder,
+  doneToday,
   maskCardName,
+  mergeReviewDay,
   NAME_MASK,
   NEW_PER_DAY,
   nextSessionSize,
@@ -81,11 +83,11 @@ describe('reviewSummary — сводка для карточки курса и D
     expect(reviewSummary(['c3', 'c4'], srs, T, REVIEW_DAY_DEFAULT)).toMatchObject({ due: 0, dueTomorrow: 1 });
   });
   it('newAvailable режется дневным лимитом: сегодняшний счётчик учитывается, вчерашний — нет', () => {
-    const today: ReviewDay = { date: T, newCount: 8 };
-    const yesterday: ReviewDay = { date: '2026-08-18', newCount: 8 };
+    const today: ReviewDay = { date: T, newCount: 8, doneCount: 0 };
+    const yesterday: ReviewDay = { date: '2026-08-18', newCount: 8, doneCount: 0 };
     expect(reviewSummary(deck(20), {}, T, today).newAvailable).toBe(NEW_PER_DAY - 8);
     expect(reviewSummary(deck(20), {}, T, yesterday).newAvailable).toBe(NEW_PER_DAY);
-    expect(reviewSummary(deck(20), {}, T, { date: T, newCount: NEW_PER_DAY }).newAvailable).toBe(0);
+    expect(reviewSummary(deck(20), {}, T, { date: T, newCount: NEW_PER_DAY, doneCount: 0 }).newAvailable).toBe(0);
   });
   it('состояние карты, выпавшей из колоды (сброс курса), не считается', () => {
     expect(reviewSummary(['c1'], { c1: st(T), zzz: st(T) }, T, REVIEW_DAY_DEFAULT).due).toBe(1);
@@ -109,8 +111,8 @@ describe('buildSession — порция ≤ SESSION_MAX', () => {
     expect(fresh.every((i) => i.direction === 'toMeaning')).toBe(true);
   });
   it('лимит новых в день: newCount = 8 → в сессии не больше 2 новых; = 10 → новых нет', () => {
-    expect(buildSession(deck(20), {}, T, { date: T, newCount: 8 }, lcg(3))).toHaveLength(2);
-    expect(buildSession(deck(20), {}, T, { date: T, newCount: NEW_PER_DAY }, lcg(3))).toEqual([]);
+    expect(buildSession(deck(20), {}, T, { date: T, newCount: 8, doneCount: 0 }, lcg(3))).toHaveLength(2);
+    expect(buildSession(deck(20), {}, T, { date: T, newCount: NEW_PER_DAY, doneCount: 0 }, lcg(3))).toEqual([]);
   });
   it('сидированный rng — детерминированный порядок и направления; повторяемым выпадают оба направления', () => {
     const a = buildSession(deck(12), overdue(12), T, REVIEW_DAY_DEFAULT, lcg(5));
@@ -145,16 +147,20 @@ describe('applyReview — единственная запись в srs/reviewDay
   it('новая карта, «помню»: состояние появилось, newCount +1 с сегодняшней датой, +XP_REVIEW', () => {
     const r = applyReview({}, REVIEW_DAY_DEFAULT, 'c1', 2, T);
     expect(r.srs.c1).toMatchObject({ reps: 1, due: '2026-08-20' });
-    expect(r.day).toEqual({ date: T, newCount: 1 });
+    expect(r.day).toEqual({ date: T, newCount: 1, doneCount: 1 });
     expect(r.gained).toBe(XP_REVIEW);
   });
   it('вчерашний счётчик новых сбрасывается, сегодняшний — растёт', () => {
-    expect(applyReview({}, { date: '2026-08-18', newCount: 7 }, 'c1', 2, T).day).toEqual({ date: T, newCount: 1 });
-    expect(applyReview({}, { date: T, newCount: 7 }, 'c1', 2, T).day).toEqual({ date: T, newCount: 8 });
+    expect(applyReview({}, { date: '2026-08-18', newCount: 7, doneCount: 4 }, 'c1', 2, T).day).toEqual({ date: T, newCount: 1, doneCount: 1 });
+    expect(applyReview({}, { date: T, newCount: 7, doneCount: 4 }, 'c1', 2, T).day).toEqual({ date: T, newCount: 8, doneCount: 5 });
   });
   it('повторяемая карта счётчик новых не трогает', () => {
-    const day: ReviewDay = { date: T, newCount: 3 };
-    expect(applyReview({ c1: st(T) }, day, 'c1', 2, T).day).toBe(day);
+    // date уже сегодняшняя, поэтому «day как есть» здесь неотличимо от пересчёта newCount —
+    // но doneCount меняется (карта покинула очередь), так что сравнивать нужно по значению,
+    // не по ссылке (раньше `.toBe(day)` проверял, что prev !== undefined вернул тот же объект —
+    // теперь nextDay строится заново всегда, и это верное поведение, а не дефект)
+    const day: ReviewDay = { date: T, newCount: 3, doneCount: 0 };
+    expect(applyReview({ c1: st(T) }, day, 'c1', 2, T).day).toEqual({ date: T, newCount: 3, doneCount: 1 });
   });
   it('XP: «не помню» — 0; провал и затем «помню» — +1; повторный «помню» карты, уже ушедшей на завтра, — 0', () => {
     const r0 = applyReview({ c1: st(T) }, REVIEW_DAY_DEFAULT, 'c1', 0, T);
@@ -202,7 +208,7 @@ describe('sessionStats и инвариант «xp экрана = xp стора»
     expect(gainedTotal).toBe(stats.xp);
     // после сессии повторять нечего, новых сегодня введено 2
     expect(reviewSummary(deck(6), srs, T, day)).toMatchObject({ due: 0, newAvailable: 0 });
-    expect(day).toEqual({ date: T, newCount: 2 });
+    expect(day).toEqual({ date: T, newCount: 2, doneCount: 6 });
   });
 });
 
@@ -381,7 +387,7 @@ describe('nextSessionSize — число в ссылке «Ещё N»', () => {
     // 12 карт: c1..c3 просрочены, остальные новые; сегодня новых введено 8 → доступно 2
     const d = deck(12);
     const srs = overdue(3);
-    const day = { date: T, newCount: 8 };
+    const day = { date: T, newCount: 8, doneCount: 0 };
     const s = reviewSummary(d, srs, T, day);
     expect(nextSessionSize(s)).toBe(5);
     expect(buildSession(d, srs, T, day, lcg(1)).length).toBe(nextSessionSize(s));
@@ -389,5 +395,37 @@ describe('nextSessionSize — число в ссылке «Ещё N»', () => {
     const s2 = reviewSummary(d, srs, T, REVIEW_DAY_DEFAULT);
     expect(buildSession(d, srs, T, REVIEW_DAY_DEFAULT, lcg(2)).length).toBe(nextSessionSize(s2));
     expect(nextSessionSize(s2)).toBe(SESSION_MAX);
+  });
+});
+
+describe('doneCount — карты, покинувшие очередь за день (спека 53)', () => {
+  const T = '2026-08-22';
+  it('оценка «помню» по карте к повторению увеличивает doneCount на 1', () => {
+    const r = applyReview({}, REVIEW_DAY_DEFAULT, 'fool', 2, T);
+    expect(r.day).toEqual({ date: T, newCount: 1, doneCount: 1 });
+  });
+  it('«не помню» doneCount не трогает — карта вернётся в ту же порцию', () => {
+    const r = applyReview({}, REVIEW_DAY_DEFAULT, 'fool', 0, T);
+    expect(r.day.doneCount).toBe(0);
+    // …а следом «помню» по той же карте считает её один раз
+    const r2 = applyReview(r.srs, r.day, 'fool', 2, T);
+    expect(r2.day.doneCount).toBe(1);
+  });
+  it('повторное «помню» карты, уже ушедшей на завтра, не считается', () => {
+    const r = applyReview({}, REVIEW_DAY_DEFAULT, 'fool', 2, T);
+    const r2 = applyReview(r.srs, r.day, 'fool', 3, T);
+    expect(r2.day.doneCount).toBe(1);
+  });
+  it('новый день обнуляет счётчик', () => {
+    const day: ReviewDay = { date: '2026-08-21', newCount: 3, doneCount: 7 };
+    expect(doneToday(day, T)).toBe(0);
+    const r = applyReview({}, day, 'fool', 2, T);
+    expect(r.day).toEqual({ date: T, newCount: 1, doneCount: 1 });
+  });
+  it('mergeReviewDay доливает doneCount старой записи и не трогает полную', () => {
+    expect(mergeReviewDay({ date: T, newCount: 4 })).toEqual({ date: T, newCount: 4, doneCount: 0 });
+    expect(mergeReviewDay({ date: T, newCount: 4, doneCount: 2 })).toEqual({ date: T, newCount: 4, doneCount: 2 });
+    expect(mergeReviewDay(undefined)).toEqual(REVIEW_DAY_DEFAULT);
+    expect(mergeReviewDay(null)).toEqual(REVIEW_DAY_DEFAULT);
   });
 });
