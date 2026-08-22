@@ -43,6 +43,9 @@ export function ModuleHeader({
   const counters =
     tr('course.lessons', { count: mod.lessons.length }) +
     (cards > 0 ? ` · ${tr('course.cardsCount', { count: cards })}` : '');
+  // показ флага: замок говорит «модуль платный» и остаётся при активной подписке (так в эталоне);
+  // доступ решает не он, а premiumLocked из moduleLocked (спека 53)
+  const paid = !mod.free;
 
   const content = (
     <>
@@ -52,7 +55,7 @@ export function ModuleHeader({
             <Txt style={[st.overline, { color: t.accent }]}>
               {tr('course.moduleOf', { n: index + 1, total })}
             </Txt>
-            {!mod.free && <Ionicons name="lock-closed" size={12} color={t.muted} />}
+            {paid && <Ionicons name="lock-closed" size={12} color={t.muted} />}
           </View>
           {/* отступ 8 — по эталону `.mh2 .lk{margin-left:8px}`, отдельно от gap группы слева */}
           {premiumLocked && <PremiumBadge style={st.badge} />}
