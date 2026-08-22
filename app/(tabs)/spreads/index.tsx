@@ -18,6 +18,7 @@ import { hapticTap } from '../../../src/lib/haptics';
 import { useLang } from '../../../src/lib/i18n';
 import { inLang } from '../../../src/lib/lang';
 import { moonSpreadState } from '../../../src/lib/moonSpread';
+import { useDevMoonNow } from '../../../src/lib/useDevMoonNow';
 import { useAppActive } from '../../../src/lib/useAppActive';
 import { useTabTopRef } from '../../../src/lib/useTabScrollToTop';
 import { fonts, LOCKED_OPACITY, spacing } from '../../../src/theme/theme';
@@ -34,6 +35,7 @@ export default function SpreadsScreen() {
   // поэтому переход через полночь (и, значит, закрытие окна события) иначе не заметить.
   // Тот же приём, что на экране луны и на «Сегодня» (правило 06а).
   const [now, setNow] = React.useState(() => new Date());
+  const devNow = useDevMoonNow();
   useAppActive(() => setNow(new Date()));
 
   const open = (s: Spread, locked: boolean) => {
@@ -41,7 +43,7 @@ export default function SpreadsScreen() {
     // Окно могло закрыться, пока таб висел смонтированным (переход через полночь): `now` в
     // сторе экрана обновляется только на возврате из фона, а гейт маршрута берёт время заново —
     // без перепроверки карточка звала бы в закрытый расклад, а маршрут молча редиректил бы назад.
-    if (s.moon && !moonSpreadState(s.moon)?.open) return;
+    if (s.moon && !moonSpreadState(s.moon, devNow ?? new Date())?.open) return;
     hapticTap();
     // «Карта дня» раскладом не играется — это ритуал главного экрана (product-spec §4)
     if (s.id === 'card-of-day') router.navigate('/');
@@ -62,7 +64,7 @@ export default function SpreadsScreen() {
         </FadeUp>
 
         {spreads.map((s, si) => {
-          const moon = s.moon ? moonSpreadState(s.moon, now) : null;
+          const moon = s.moon ? moonSpreadState(s.moon, devNow ?? now) : null;
           const locked = !!s.moon && !moon?.open;
           const desc = locked && moon
             ? tr('moonSpread.opensOn', { date: formatDayMonth(localDateISO(moon.at), lang) })

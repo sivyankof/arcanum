@@ -70,6 +70,8 @@ export default function SettingsScreen() {
   const setReflectionOn = useApp((s) => s.setReflectionOn);
   const devReflect = useApp((s) => s.devReflect);
   const setDevReflect = useApp((s) => s.setDevReflect);
+  const devMoonOpen = useApp((s) => s.devMoonOpen);
+  const setDevMoonOpen = useApp((s) => s.setDevMoonOpen);
   const devSkipYesterday = useApp((s) => s.devSkipYesterday);
   const pushesOn = useApp((s) => s.settings.pushesOn);
   const pushMorning = useApp((s) => s.settings.pushMorning);
@@ -421,6 +423,16 @@ export default function SettingsScreen() {
                 label={tr('settings.reflectNow')}
                 value={devReflect ? 'DEV · ВКЛ' : 'DEV'}
                 onPress={() => setDevReflect(!devReflect)}
+              />
+            </FadeUp>
+            <FadeUp index={7}>
+              <SettingsRow
+                icon="moon-outline"
+                label={tr('settings.devMoonOpen')}
+                value={devMoonOpen ? 'DEV · ВКЛ' : 'DEV'}
+                // окно лунного расклада открыто трое суток из ~15 — без подмены «сейчас» открытое
+                // состояние на лайв-проверке не увидеть (спека 51, прецедент «Пропустить вчера»)
+                onPress={() => setDevMoonOpen(!devMoonOpen)}
               />
             </FadeUp>
             <FadeUp index={8}>

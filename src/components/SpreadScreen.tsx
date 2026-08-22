@@ -17,6 +17,7 @@ import { useLang } from '../lib/i18n';
 import { normalizeNote } from '../lib/journal';
 import { inLang } from '../lib/lang';
 import { moonSpreadState } from '../lib/moonSpread';
+import { useDevMoonNow } from '../lib/useDevMoonNow';
 import { dealSpread, drawnCardLabel, normalizeQuestion, spreadMeaningText, type SpreadDraw } from '../lib/spread';
 import { isBoard } from '../lib/spreadLayout';
 import { useLeaveGuard } from '../lib/useLeaveGuard';
@@ -49,6 +50,7 @@ export function SpreadScreen({
   const t = useTheme();
   const { t: tr } = useTranslation();
   const lang = useLang();
+  const devNow = useDevMoonNow();
   const insets = useSafeAreaInsets();
   const saveSpread = useApp((s) => s.saveSpread);
 
@@ -122,7 +124,7 @@ export function SpreadScreen({
   // только в игре (оверлайн view берёт дату САМОЙ ЗАПИСИ ниже) — считаем лениво, не в режиме
   // просмотра: иначе на каждом рендере сохранённого расклада из дневника вызывался бы модуль,
   // чей ответ здесь заведомо не используется.
-  const moon = !view && spread.moon ? moonSpreadState(spread.moon) : null;
+  const moon = !view && spread.moon ? moonSpreadState(spread.moon, devNow ?? new Date()) : null;
   // Лунная шапка — только в игре. В режиме просмотра (сохранённый расклад из дневника) оверлайн
   // обязан называть дату САМОЙ ЗАПИСИ, как у остальных раскладов: moonSpreadState считает
   // актуальное событие, и на записи полугодовой давности он показал бы дату будущего события.

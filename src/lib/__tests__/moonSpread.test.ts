@@ -2,7 +2,7 @@
  *  конструктором Date, иначе тест зависел бы от часового пояса машины; ожидания — литералы,
  *  а не вызов проверяемой функции (урок 47б: иначе тест становится тавтологией). */
 import type { EventSource, MoonEvent, MoonEventKind } from '../moon';
-import { isMoonWindowOpen, moonSpreadState } from '../moonSpread';
+import { isMoonWindowOpen, moonSpreadState, nearestMoonEvent } from '../moonSpread';
 
 /** Источник, уважающий границы периода, — как настоящий moonEvents (полуинтервал [from, to)). */
 const sourceOf =
@@ -80,5 +80,23 @@ describe('moonSpreadState — источник по умолчанию (без �
     expect(s?.open).toBe(true);
     const diffMin = s ? Math.abs(s.at.getTime() - NEW_AUG_2026_UTC.getTime()) / 60000 : Infinity;
     expect(diffMin).toBeLessThan(TOLERANCE_MIN);
+  });
+});
+
+describe('nearestMoonEvent — ближайшее событие любого вида (DEV-подмена «сейчас»)', () => {
+  it('вне всех окон — первое будущее событие, даже если оно другого вида', () => {
+    // 20 августа: новолуние 12.08 уже закрыто, ближайшее — полнолуние 28.08
+    const e = nearestMoonEvent(new Date(2026, 7, 20, 12, 0), src);
+    expect(e).toEqual({ kind: 'full', at: new Date(2026, 7, 28, 8, 18), open: false });
+  });
+
+  it('открытое окно побеждает более раннее будущее событие другого вида', () => {
+    // 29 августа: окно полнолуния 28.08 ещё открыто, хотя новолуние 11.09 — тоже впереди
+    const e = nearestMoonEvent(new Date(2026, 7, 29, 23, 0), src);
+    expect(e).toEqual({ kind: 'full', at: new Date(2026, 7, 28, 8, 18), open: true });
+  });
+
+  it('пустой источник — null', () => {
+    expect(nearestMoonEvent(new Date(2026, 7, 20), () => [])).toBeNull();
   });
 });

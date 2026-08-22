@@ -15,6 +15,7 @@ import { useLang } from '../lib/i18n';
 import { inLang } from '../lib/lang';
 import type { MoonEventKind } from '../lib/moon';
 import { isMoonWindowOpen } from '../lib/moonSpread';
+import { useDevMoonNow } from '../lib/useDevMoonNow';
 import { fonts, LOCKED_OPACITY } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { PressableScale } from './PressableScale';
@@ -24,16 +25,17 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
   const t = useTheme();
   const { t: tr } = useTranslation();
   const lang = useLang();
+  const devNow = useDevMoonNow();
 
   const spread = spreads.find((s) => s.moon === kind);
   if (!spread) return null;
-  const open = isMoonWindowOpen(at, now);
+  const open = isMoonWindowOpen(at, devNow ?? now);
 
   // Событие прошло И окно закрылось — расклад к нему недоступен навсегда, панели нет.
   // Правило видимости живёт ЗДЕСЬ целиком, а не в экране: иначе экранный гейт и окно
   // разъезжаются, и в последний день окна (сутки ПОСЛЕ события) панель пропадала бы ровно
   // тогда, когда обязана звать «ОТКРЫТЬ».
-  if (!open && localDateISO(at) < localDateISO(now)) return null;
+  if (!open && localDateISO(at) < localDateISO(devNow ?? now)) return null;
 
   const right = open
     ? tr('moonSpread.open')
@@ -57,7 +59,7 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
         // Окно могло закрыться, пока экран висел смонтированным (переход через полночь):
         // `now` обновляется только на возврате из фона, а гейт маршрута берёт время заново —
         // без этой перепроверки панель звала бы «ОТКРЫТЬ», а маршрут молча редиректил.
-        if (!isMoonWindowOpen(at)) return;
+        if (!isMoonWindowOpen(at, devNow ?? new Date())) return;
         hapticTap();
         router.push({ pathname: '/spreads/[id]', params: { id: spread.id } });
       }}

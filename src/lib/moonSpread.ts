@@ -59,3 +59,15 @@ export function moonSpreadState(
   const next = events.find((e) => localDateISO(e.at) > todayISO);
   return next ? { kind, at: next.at, open: false } : null;
 }
+
+export const MOON_EVENT_KINDS: readonly MoonEventKind[] = ['new', 'full'];
+
+/** Ближайшее событие ЛЮБОГО вида: то, чьё окно открыто сейчас, иначе первое будущее.
+ *  Нужно DEV-подмене «сейчас» (useDevMoonNow): подставив момент этого события вместо текущего
+ *  времени, экраны показывают открытое окно ровно так, как покажут в день события. */
+export function nearestMoonEvent(now: Date = new Date(), source: EventSource = moonEvents): MoonSpreadState | null {
+  const states = MOON_EVENT_KINDS.map((k) => moonSpreadState(k, now, source)).filter(
+    (s): s is MoonSpreadState => s !== null,
+  );
+  return states.find((s) => s.open) ?? states.sort((a, b) => a.at.getTime() - b.at.getTime())[0] ?? null;
+}

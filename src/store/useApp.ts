@@ -71,6 +71,9 @@ export interface AppState {
   profile: Profile;
   /** Только для разработки: показать блок рефлексии, не дожидаясь 18:00. */
   devReflect: boolean;
+  /** Только для разработки: считать окно лунного расклада открытым (спека 51) — «сейчас»
+   *  подменяется моментом ближайшего события, см. useDevMoonNow. */
+  devMoonOpen: boolean;
   setThemeMode: (m: ThemeMode) => void;
   setLang: (l: Lang) => void;
   drawToday: (cardId: string, reversed: boolean) => void;
@@ -109,6 +112,7 @@ export interface AppState {
   /** Только для разработки: вернуть онбординг — гард в _layout сам уведёт на экран. */
   resetOnboarding: () => void;
   setDevReflect: (on: boolean) => void;
+  setDevMoonOpen: (on: boolean) => void;
   resetToday: () => void;
   /** Ленивое начисление заморозок: зовётся на гидрации и при возврате из фона. */
   syncFreezeGrant: () => void;
@@ -126,6 +130,7 @@ export const useApp = create<AppState>()(
       // совпадает с тем, что персистится, и доливает старые файлы теми же значениями
       ...PERSIST_DEFAULTS,
       devReflect: false,
+      devMoonOpen: false,
 
       setThemeMode: (themeMode) => set({ themeMode }),
       setLang: (lang) => set({ lang }),
@@ -255,6 +260,7 @@ export const useApp = create<AppState>()(
         }),
       resetOnboarding: () => set({ profile: { onboarded: false } }),
       setDevReflect: (devReflect) => set({ devReflect }),
+      setDevMoonOpen: (devMoonOpen) => set({ devMoonOpen }),
 
       // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
       // Серия уменьшается на 1 (точное прежнее значение не хранится).
@@ -424,6 +430,6 @@ export const useApp = create<AppState>()(
 type DataKeys = {
   [K in keyof AppState]: AppState[K] extends (...args: never[]) => unknown ? never : K;
 }[keyof AppState];
-type OutsideBackup = Exclude<DataKeys, keyof BackupState | 'devReflect'>;
+type OutsideBackup = Exclude<DataKeys, keyof BackupState | 'devReflect' | 'devMoonOpen'>;
 const backupCovers: OutsideBackup extends never ? true : OutsideBackup = true;
 void backupCovers;
