@@ -60,6 +60,10 @@ export default function AboutScreen() {
         </FadeUp>
 
         <FadeUp index={4}>
+          <Block title={tr('about.termsTitle')} text={tr('about.termsText')} />
+        </FadeUp>
+
+        <FadeUp index={5}>
           <Block title={tr('about.sourcesTitle')} text={tr('about.sourcesText')} />
         </FadeUp>
       </ScrollView>

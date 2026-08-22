@@ -150,14 +150,19 @@ SRS 45, лунный пуш 47б), и окно, закрывающееся в 21
 
 ## 7. Хранение (все данные локально)
 
-AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 10`):
+AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 11`):
 `{ schemaVersion: 3, installSeed, profile: {name?, birthDate?, birthArcanaId?, onboarded}, themeMode, lang,
 streak, lastDrawDate, freezes, freezeMonth, freezeSpentDate, xp, history: DailyDraw[365],
 lessonsProgress: {lessonId: {done, errors, ts, repeatDate?}},
 spreadsHistory: SpreadDraw[100], settings: {reflectionOn: true, pushesOn: true, pushMorning: '09:00',
 pushEvening: '21:00', pushAsked: false},
-srs: {cardId: {reps, intervalDays, ease, due}}, reviewDay: {date, newCount} }`
+srs: {cardId: {reps, intervalDays, ease, due}}, reviewDay: {date, newCount, doneCount},
+premium: {active, source, until} }`
 `DailyDraw = {date, cardId, reversed: false, outcome?, note?}`.
+⚠️ **`premium` — ключ верхнего уровня стора, но НЕ входит в бэкап** (решение спеки 53, §14):
+право на подписку не переносится файлом между устройствами, `BackupState` его не объявляет,
+и тип-страж `OutsideBackup` в `useApp.ts` заставит компилятор упасть, если поле пропадёт из
+исключения без явного решения. Экспорт/импорт `premium` не трогают вовсе.
 **Миграции:** schemaVersion обязателен; при повышении версии — функция migrate в store (без потери history).
 ⚠️ **Ловушка поверхностного слияния `settings`.** `zustand/persist` сливает сохранённое состояние
 с дефолтом ТОЛЬКО по верхнему уровню ключей: сохранённый `settings: {reflectionOn: false}` заменит
@@ -210,7 +215,29 @@ srs: {cardId: {reps, intervalDays, ease, due}}, reviewDay: {date, newCount} }`
 раскладов и колоды (`isSpreadDraw`).
 **45 подняла `version` до 10** ради `srs` и `reviewDay` — ключи ВЕРХНЕГО уровня, дефолты доливаются
 поверхностным слиянием, `migrate` не менялся; ⚠️ `reviewDay` — вложенный объект (ловушка 06а для
-полей внутри него). Следующая задача, меняющая схему, поднимает до 11.
+полей внутри него).
+**53 подняла `version` до 11** ради ДВУХ вещей разного рода. `premium` — новый ключ ВЕРХНЕГО уровня
+состояния (`{active, source, until}`, дефолт `PREMIUM_NONE`), дефолт доливается сам поверхностным
+слиянием persist, `migrate` руками не правился; при этом `premium` НЕ входит в бэкап (см. врезку
+выше) — версия поднята не ради данных бэкапа, а ради самой формы стора. `doneCount` — новое поле
+ВНУТРИ `reviewDay` (лимит бесплатного тренажёра, §14), и здесь как раз бьёт ловушка 06а: сохранённый
+`reviewDay: {date, newCount}` без `doneCount` заменил бы дефолт-объект целиком, `+1` к `undefined`
+дал бы `NaN`. Слияние — чистая функция `mergeReviewDay(saved)` (`src/lib/review.ts`, тот же приём,
+что `mergeSettings`): недостающие поля доливаются дефолтами, `migrate` стора зовёт её напрямую.
+⚠️ **Правило-близнец соблюдено, но с нюансом**: `parseBackup` (`src/lib/backup.ts`) тоже зовёт
+`mergeReviewDay`, но ПЕРЕД этим отдельно проверяет `isObj(src.reviewDay)` — доливка дефолтов
+чужому полю и валидация чужого ФАЙЛА это разные режимы. `mergeReviewDay` сама по себе на не-объект
+молча возвращает дефолт (это ПРАВИЛЬНО для гидрации persist — битая запись читается как отсутствующая,
+09), но для импортированного бэкапа тот же молчаливый дефолт замаскировал бы повреждённый файл
+под валидный; поэтому `parseBackup` отказывает кодом `corrupt` РАНЬШЕ, чем дело доходит до слияния.
+⚠️ **У `migrate` стора до этой задачи не было ни одного теста** — дыра ровно того класса, что
+описан в правиле «пара проверить/применить» (28а): `parseBackup` был под тестами (доливка полей
+проверялась), а параллельный путь — реальная гидрация persist у уже установленного приложения —
+не проверялся ничем. Закрыто тестом `src/store/__tests__/useApp.test.ts`: официальный jest-мок
+`@react-native-async-storage/async-storage`, в хранилище кладётся JSON версии 10 БЕЗ `premium`
+и без `doneCount`, зовётся `useApp.persist.rehydrate()` (не голый `migrate()` — он не показал бы
+доливку `premium` поверхностным слиянием, которая происходит уже ПОСЛЕ `migrate` в конвейере persist).
+Следующая задача, меняющая схему, поднимает `version` до 12.
 ⚠️ **Битую запись хранилища читаем как отсутствующую** (09). С появлением гейта онбординга первый
 экран ЖДЁТ завершения гидрации, а `zustand/persist` на ошибке разбора не поднимает `hasHydrated`
 и не зовёт слушателей вовсе — приложение осталось бы на сплэше навсегда, и вылечить это можно было бы
@@ -408,3 +435,52 @@ filter)` — число под активным чипом справочник�
 Фильтр `'learned'` в `filterCards` оставляет карты из множества; запрос складывается как у других
 фильтров; ввод поиска сбрасывает чип на «Все». Тест-кейсы: тоталы 22/14/14/14/14; m2l1–m2l4 → 8 из 78,
 старшие 8 из 22; +m4l1 → «Жезлы» 5 из 14, «Изучено» 13 карт.
+
+## 14. Premium (спека 53, 22.08)
+
+**Право.** `PremiumState = {active, source: 'none'|'dev'|'store', until}` — ключ верхнего уровня
+стора, ВНЕ бэкапа (§7). `source` объясняет, откуда право: `'store'` — покупка (53б, RevenueCat),
+`'dev'` — тумблер настроек `__DEV__` (единственный способ увидеть запертые/открытые состояния до
+53б), `'none'` — права нет. `until` — конец оплаченного периода (ISO), заполняет только `'store'`;
+у `'dev'`/`'none'` всегда `null`. Дефолт `PREMIUM_NONE = {active: false, source: 'none', until: null}`.
+
+**Источник правды «что платное».** Флаги `free` в контенте: `CourseModule.free`, `Spread.free`.
+Экраны их НЕ читают напрямую для решения о доступе — только через чистые функции
+`src/lib/premium.ts`, и это закрыто контракт-тестом (`premiumSources.test.ts`): в `app/` и
+`src/components/` запрещено сравнивать `.free` (кроме плашки-индикатора, помеченной строчным
+маркером `// показ флага` на той же строке) и запрещено читать `premium.active` где-либо, кроме
+`app/paywall.tsx` и `app/settings.tsx`.
+- `moduleLocked(mod, premium) = !mod.free && !premium.active`.
+- `lessonLocked(lessonId, modules, premium)` — заперт по модулю, которому принадлежит урок;
+  чужой/неизвестный id — НЕ заперт (гейт маршрута не про существование урока, до этой развилки
+  недоходит: чужой id уводит назад раньше).
+- `spreadLocked(spread, premium) = !spread.free && !premium.active`.
+
+**Лимит бесплатного тренажёра.** `FREE_REVIEW_PER_DAY = SESSION_MAX = 10` (§12) — без права
+Premium тренажёр не отдаёт больше 10 карт в день. Считаются карты, ПОКИНУВШИЕ очередь сессии:
+`applyReview` увеличивает `reviewDay.doneCount` ровно при `grade ≥ 1 && wasDue` — том же условии,
+что даёт XP (§12), то есть «не помню» (`grade 0`) счётчик не двигает, а провал и следом «помню»
+засчитываются один раз, повторное «помню» уже ушедшей карты — 0 (накрутка невозможна). Сброс —
+по локальному дню: `doneToday(day, todayISO) = day.date === todayISO ? day.doneCount : 0`, как
+у `newCount`. `reviewLeftToday(day, todayISO, premium) = premium.active ? Infinity :
+max(0, FREE_REVIEW_PER_DAY − doneToday(day, todayISO))`; `reviewLimitReached` = `reviewLeftToday
+=== 0`. Хранение — `reviewDay.doneCount`, §7 (persist 11, доливка `mergeReviewDay`).
+
+**Гейты — сводка (полная таблица со всеми состояниями экранов — product-spec, раздел «Пейвол»
+и разделы курса/раскладов/тренажёра):**
+
+| Место | Правило |
+|---|---|
+| Курс — шапка модуля, узел `current` заблокированного модуля, узлы `locked` | `moduleLocked` |
+| Маршрут `/lesson/[id]` | `lessonLocked` → `<Redirect href="/paywall" />` |
+| Список раскладов, маршрут `/spreads/[id]` | `spreadLocked`, у лунных — ПОСЛЕ проверки окна (вне окна → список независимо от права) → `<Redirect href="/paywall" />` |
+| Сохранённый расклад в дневнике (`/spread/[ts]`) | НЕ заперт — просмотр уже сделанного (решение 5) |
+| Тренажёр, ссылка «Ещё N» / вход в `/review` | `reviewLimitReached` |
+| Настройки, строка «Arcanum Premium» | не гейт — вход в пейвол |
+
+**Адаптер покупок** — `src/lib/purchases.ts`: `PURCHASES_AVAILABLE` (в 53а всегда `false`,
+Expo Go), `getOffers`/`purchase`/`restore`/`refreshEntitlement`. В 53а `purchase`/`restore`
+всегда возвращают `{ok: false, reason: 'unavailable'}` — экран пейвола показывает диалог-объяснение
+вместо покупки. 53б подменит реализацию на RevenueCat за тем же интерфейсом; экран пейвола и
+будущий `usePremiumSync` (синхронизация права при старте/фокусе, 53б) говорят только с этим
+модулем и правок при замене не потребуют.

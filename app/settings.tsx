@@ -72,6 +72,8 @@ export default function SettingsScreen() {
   const setDevReflect = useApp((s) => s.setDevReflect);
   const devMoonOpen = useApp((s) => s.devMoonOpen);
   const setDevMoonOpen = useApp((s) => s.setDevMoonOpen);
+  const premium = useApp((s) => s.premium);
+  const setPremium = useApp((s) => s.setPremium);
   const devSkipYesterday = useApp((s) => s.devSkipYesterday);
   const pushesOn = useApp((s) => s.settings.pushesOn);
   const pushMorning = useApp((s) => s.settings.pushMorning);
@@ -261,6 +263,14 @@ export default function SettingsScreen() {
         }}
       >
         <FadeUp index={0}>
+          {/* Arcanum Premium (спека 53) — первой строкой списка; тот же шаг каскада, что и тема
+              (карточка повторения над первым модулем курса — тот же приём, design-system §5) */}
+          <SettingsRow
+            icon="sparkles-outline"
+            label={tr('settings.premium')}
+            value={premium.active ? tr('settings.premiumActive') : tr('settings.premiumBuy')}
+            onPress={() => router.push({ pathname: '/paywall', params: { from: 'settings' } })}
+          />
           <SettingsRow
             icon={themeMode === 'dark' ? 'moon' : 'sunny'}
             label={tr('settings.theme')}
@@ -433,6 +443,16 @@ export default function SettingsScreen() {
                 // окно лунного расклада открыто трое суток из ~15 — без подмены «сейчас» открытое
                 // состояние на лайв-проверке не увидеть (спека 51, прецедент «Пропустить вчера»)
                 onPress={() => setDevMoonOpen(!devMoonOpen)}
+              />
+            </FadeUp>
+            <FadeUp index={7}>
+              <SettingsRow
+                icon="diamond-outline"
+                label={tr('settings.devPremium')}
+                value={premium.active ? 'DEV · ВКЛ' : 'DEV'}
+                // без права запертые/открытые состояния на лайв-проверке не увидеть; источник 'dev'
+                // отличает тумблер от магазина (53б), чтобы refreshEntitlement его не перетирал
+                onPress={() => setPremium({ active: !premium.active, source: premium.active ? 'none' : 'dev', until: null })}
               />
             </FadeUp>
             <FadeUp index={8}>

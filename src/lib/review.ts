@@ -24,12 +24,24 @@ export interface SessionItem {
   direction: Direction;
   isNew: boolean;
 }
-/** Сколько НОВЫХ карт введено за день: счётчик действителен, только если date === сегодня. */
+/** Счётчики дня: сколько НОВЫХ карт введено и сколько карт ПОКИНУЛО очередь (оценка ≥1 по карте,
+ *  которая была к повторению). Действительны, только если date === сегодня. doneCount — лимит
+ *  бесплатного тренажёра (спека 53): без права Premium в день не больше SESSION_MAX карт. */
 export interface ReviewDay {
   date: string;
   newCount: number;
+  doneCount: number;
 }
-export const REVIEW_DAY_DEFAULT: ReviewDay = { date: '', newCount: 0 };
+export const REVIEW_DAY_DEFAULT: ReviewDay = { date: '', newCount: 0, doneCount: 0 };
+
+/** Доливка старой записи (до спеки 53 поля doneCount не было): persist сливает состояние только
+ *  по верхнему уровню ключей, поэтому вложенный reviewDay старого приложения пришёл бы без
+ *  doneCount, и `+1` дал бы NaN. Зовётся из migrate стора И из parseBackup (правило-близнец
+ *  logic-spec §7). Не-объект — дефолт. */
+export function mergeReviewDay(saved: unknown): ReviewDay {
+  if (typeof saved !== 'object' || saved === null) return REVIEW_DAY_DEFAULT;
+  return { ...REVIEW_DAY_DEFAULT, ...(saved as Partial<ReviewDay>) };
+}
 export interface ReviewLogEntry {
   cardId: string;
   grade: SrsGrade;
@@ -52,6 +64,11 @@ export function deckOrder(modules: CourseModule[], progress: LessonProgressMap):
  *  не разъезжалось по двум местам. */
 export function newToday(day: ReviewDay, todayISO: string): number {
   return day.date === todayISO ? day.newCount : 0;
+}
+
+/** Сколько карт покинуло очередь сегодня — та же оговорка про дату, что у newToday. */
+export function doneToday(day: ReviewDay, todayISO: string): number {
+  return day.date === todayISO ? day.doneCount : 0;
 }
 
 export function reviewSummary(deck: readonly string[], srs: SrsMap, todayISO: string, day: ReviewDay): ReviewSummary {
@@ -146,8 +163,13 @@ export function applyReview(
   const prev = srs[cardId];
   const wasDue = prev === undefined || isDue(prev, todayISO);
   const next: SrsMap = { ...srs, [cardId]: reviewState(prev, grade, todayISO) };
-  const nextDay: ReviewDay = prev === undefined ? { date: todayISO, newCount: newToday(day, todayISO) + 1 } : day;
-  return { srs: next, day: nextDay, gained: grade >= 1 && wasDue ? XP_REVIEW : 0 };
+  const passed = grade >= 1 && wasDue; // карта покинула очередь: то же условие, что даёт XP
+  const nextDay: ReviewDay = {
+    date: todayISO,
+    newCount: newToday(day, todayISO) + (prev === undefined ? 1 : 0),
+    doneCount: doneToday(day, todayISO) + (passed ? 1 : 0),
+  };
+  return { srs: next, day: nextDay, gained: passed ? XP_REVIEW : 0 };
 }
 
 /** Итог сессии для панели результата: уникальных карт, «с первого раза» (первая оценка ≥1),

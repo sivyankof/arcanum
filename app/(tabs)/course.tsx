@@ -17,6 +17,7 @@ import { course, type CourseLesson } from '../../src/lib/content';
 import { lessonStates } from '../../src/lib/courseProgress';
 import { localDateISO } from '../../src/lib/dates';
 import { useLang } from '../../src/lib/i18n';
+import { moduleLocked } from '../../src/lib/premium';
 import { deckOrder, reviewSummary } from '../../src/lib/review';
 import { useAppActive } from '../../src/lib/useAppActive';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
@@ -33,6 +34,7 @@ export default function CourseScreen() {
   const lessonsProgress = useApp((s) => s.lessonsProgress);
   const srs = useApp((s) => s.srs);
   const reviewDay = useApp((s) => s.reviewDay);
+  const premium = useApp((s) => s.premium);
   // день для сводки повторения: по фокусу таба И по возврату из фона — useFocusEffect не ловит ни
   // полночь, ни сворачивание (урок 06а), а таб «Курс» может остаться открытым с вечера: утром
   // «ждут» должны появиться без переключения табов
@@ -64,6 +66,7 @@ export default function CourseScreen() {
   };
 
   const openLesson = (l: CourseLesson) => router.push(`/lesson/${l.id}`);
+  const openPaywall = () => router.push({ pathname: '/paywall', params: { from: 'course' } });
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -86,10 +89,26 @@ export default function CourseScreen() {
         </FadeUp>
 
         {course.map((m, mi) => {
+          const locked = moduleLocked(m, premium);
           const section = (
             <>
-              <ModuleHeader module={m} index={mi} total={course.length} progress={lessonsProgress} lang={lang} />
-              <CoursePath module={m} states={states} lang={lang} chipLabel={chipLabel} onLessonPress={openLesson} />
+              <ModuleHeader
+                module={m}
+                index={mi}
+                total={course.length}
+                progress={lessonsProgress}
+                lang={lang}
+                premiumLocked={locked}
+                onPremiumPress={openPaywall}
+              />
+              <CoursePath
+                module={m}
+                states={states}
+                lang={lang}
+                chipLabel={locked ? tr('course.premiumChip') : chipLabel}
+                chipLocked={locked}
+                onLessonPress={locked ? openPaywall : openLesson}
+              />
             </>
           );
           return (

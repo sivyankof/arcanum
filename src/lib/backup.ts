@@ -12,7 +12,7 @@ import type { LessonProgressMap } from './courseProgress';
 import { localDateISO } from './dates';
 import { HISTORY_MAX, NOTE_MAX, type DailyDraw, type Outcome } from './journal';
 import { isLang, type Lang } from './lang';
-import { REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from './review';
+import { mergeReviewDay, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from './review';
 import { DEFAULT_SETTINGS, mergeSettings, type AppSettings } from './settings';
 import { QUESTION_MAX, SPREADS_MAX, type SpreadDraw } from './spread';
 import { EASE_MAX, EASE_MIN, MAX_INTERVAL_DAYS } from './srs';
@@ -31,8 +31,9 @@ const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на поряд�
 /** Версия персистуемой схемы (logic-spec §7). Единственный источник: стор берёт её отсюда.
  *  v8 → v9 (спека 36): `spreadsHistory` — ключ верхнего уровня, дефолт `[]` доливается сам.
  *  v9 → v10 (спека 45): `srs` и `reviewDay` — ключи верхнего уровня, дефолты доливаются сами.
- *  Следующая задача, меняющая схему, поднимает ЭТУ константу до 11. */
-export const SCHEMA_VERSION = 10;
+ *  v10 → v11 (спека 53): doneCount ВНУТРИ reviewDay — слияние руками (mergeReviewDay) в migrate
+ *  и тут; premium — ключ стора ВНЕ бэкапа. */
+export const SCHEMA_VERSION = 11;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */
@@ -205,7 +206,9 @@ const isSrsMap = (v: unknown): boolean =>
   isObj(v) && Object.keys(v).length <= cardById.size &&
   Object.entries(v).every(([id, s]) => cardById.has(id) && isSrsState(s));
 const isReviewDay = (v: unknown): boolean =>
-  isObj(v) && (v.date === '' || isISODay(v.date)) && isCount(v.newCount) && v.newCount <= cardById.size;
+  isObj(v) && (v.date === '' || isISODay(v.date)) &&
+  isCount(v.newCount) && v.newCount <= cardById.size &&
+  isCount(v.doneCount) && v.doneCount <= cardById.size * 4; // карта может уйти и вернуться несколько раз за день
 
 // после mergeSettings все ключи на месте — проверяем типы значений (слияние типы не проверяет)
 const isSettings = (v: AppSettings): boolean =>
@@ -255,6 +258,10 @@ export function parseBackup(text: string, currentVersion: number): ParsedBackup 
   // противоречит решению спеки «всё или ничего»: чужой тип поля — признак битого файла,
   // а не повод тихо долить дефолты вместо него
   if (src.settings !== undefined && !isObj(src.settings)) return { ok: false, error: 'corrupt' };
+  // та же ловушка для reviewDay (v11): mergeReviewDay не-объект тихо подменяет дефолтом
+  // (это её роль в migrate стора, где persistedState доверенный) — здесь источник чужой,
+  // и non-object обязан остаться corrupt, а не молча долиться до REVIEW_DAY_DEFAULT
+  if (src.reviewDay !== undefined && !isObj(src.reviewDay)) return { ok: false, error: 'corrupt' };
   // доливка — ровно та же, что у гидрации persist: поверхностно по верхнему уровню…
   const state: BackupState = { ...PERSIST_DEFAULTS };
   for (const k of BACKUP_KEYS) {
@@ -262,6 +269,8 @@ export function parseBackup(text: string, currentVersion: number): ParsedBackup 
   }
   // …и mergeSettings для вложенного settings (ловушка поверхностного слияния, logic-spec §7)
   state.settings = mergeSettings(isObj(src.settings) ? (src.settings as Partial<AppSettings>) : null);
+  // …и mergeReviewDay для вложенного reviewDay (v11: doneCount; правило-близнец logic-spec §7)
+  state.reviewDay = mergeReviewDay(state.reviewDay);
 
   if (!validState(state)) return { ok: false, error: 'corrupt' };
   return { ok: true, state, exportedAt: raw.exportedAt };
