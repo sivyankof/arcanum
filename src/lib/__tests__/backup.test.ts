@@ -74,9 +74,6 @@ describe('белый список и дефолты', () => {
     expect(PERSIST_DEFAULTS.settings.pushMorning).toBe('09:00');
     expect(PERSIST_DEFAULTS.profile).toEqual({ onboarded: false });
   });
-  it('версия схемы 10: srs/reviewDay (спека 45) — файл v10 старому ридеру откажет как «новее», а не «повреждён»', () => {
-    expect(SCHEMA_VERSION).toBe(10);
-  });
 });
 
 describe('имя файла и сводка', () => {
@@ -306,5 +303,32 @@ describe('parseBackup — повторение (спека 45)', () => {
 
   it('reviewDay с пустой датой (дефолт) валиден', () => {
     expect(withSrs(VALID.srs, { date: '', newCount: 0 }).ok).toBe(true);
+  });
+});
+
+describe('версия 11 (спека 53)', () => {
+  it('SCHEMA_VERSION = 11', () => {
+    expect(SCHEMA_VERSION).toBe(11);
+  });
+  it('файл версии 10 с reviewDay без doneCount принимается и получает doneCount: 0', () => {
+    const file = buildBackup(VALID, 10, AT);
+    const raw = JSON.parse(JSON.stringify(file));
+    delete raw.state.reviewDay.doneCount;
+    const r = parseBackup(JSON.stringify(raw), SCHEMA_VERSION);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.state.reviewDay.doneCount).toBe(0);
+  });
+  it('doneCount вне коридора — файл битый', () => {
+    const raw = JSON.parse(JSON.stringify(buildBackup(VALID, SCHEMA_VERSION, AT)));
+    raw.state.reviewDay.doneCount = -1;
+    expect(parseBackup(JSON.stringify(raw), SCHEMA_VERSION)).toEqual({ ok: false, error: 'corrupt' });
+  });
+  it('поле premium в файле игнорируется — право из бэкапа не приходит', () => {
+    const raw = JSON.parse(JSON.stringify(buildBackup(VALID, SCHEMA_VERSION, AT)));
+    raw.state.premium = { active: true, source: 'store', until: null };
+    const r = parseBackup(JSON.stringify(raw), SCHEMA_VERSION);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect('premium' in r.state).toBe(false);
+    expect(BACKUP_KEYS).not.toContain('premium');
   });
 });

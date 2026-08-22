@@ -11,7 +11,8 @@ import { deviceLocaleTags } from '../lib/deviceLang';
 import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { detectLang, type Lang } from '../lib/lang';
-import { applyReview, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from '../lib/review';
+import { PREMIUM_NONE, type PremiumState } from '../lib/premium';
+import { applyReview, mergeReviewDay, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from '../lib/review';
 import { queueReveal } from '../lib/revealQueue';
 import { mergeSettings, type AppSettings } from '../lib/settings';
 import { SPREADS_MAX, type SpreadDraw } from '../lib/spread';
@@ -74,6 +75,10 @@ export interface AppState {
   /** Только для разработки: считать окно лунного расклада открытым (спека 51) — «сейчас»
    *  подменяется моментом ближайшего события, см. useDevMoonNow. */
   devMoonOpen: boolean;
+  /** Право Premium (спека 53): единственный источник правды для гейтов; в бэкап НЕ входит
+   *  (право даёт магазин или DEV-тумблер, не файл). Меняется только через setPremium. */
+  premium: PremiumState;
+  setPremium: (next: PremiumState) => void;
   setThemeMode: (m: ThemeMode) => void;
   setLang: (l: Lang) => void;
   drawToday: (cardId: string, reversed: boolean) => void;
@@ -131,6 +136,7 @@ export const useApp = create<AppState>()(
       ...PERSIST_DEFAULTS,
       devReflect: false,
       devMoonOpen: false,
+      premium: PREMIUM_NONE,
 
       setThemeMode: (themeMode) => set({ themeMode }),
       setLang: (lang) => set({ lang }),
@@ -261,6 +267,7 @@ export const useApp = create<AppState>()(
       resetOnboarding: () => set({ profile: { onboarded: false } }),
       setDevReflect: (devReflect) => set({ devReflect }),
       setDevMoonOpen: (devMoonOpen) => set({ devMoonOpen }),
+      setPremium: (premium) => set({ premium }),
 
       // Для разработки: отменяет сегодняшнюю карту, чтобы вытянуть заново.
       // Серия уменьшается на 1 (точное прежнее значение не хранится).
@@ -380,8 +387,9 @@ export const useApp = create<AppState>()(
       // v9 → v10: srs и reviewDay (спека 45) — ключи ВЕРХНЕГО уровня, дефолты {} и
       // {date: '', newCount: 0} доливаются поверхностным слиянием, ветка миграции не нужна.
       // ⚠️ reviewDay — вложенный объект: задача, добавляющая поле ВНУТРЬ него, обязана поднять
-      // версию и дописать слияние руками (ловушка 06а). Следующая задача, меняющая схему,
-      // поднимает до 11.
+      // версию и дописать слияние руками (ловушка 06а).
+      // v10 → v11: doneCount ВНУТРИ reviewDay (спека 53) — слияние руками; premium — ключ
+      // верхнего уровня вне бэкапа, дефолт доливается сам.
       // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
       // файлы из более новых версий приложения. Поднимать — там.
       version: SCHEMA_VERSION,
@@ -391,7 +399,7 @@ export const useApp = create<AppState>()(
       // то же самое, иначе новые настройки не появятся у уже существующих пользователей.
       migrate: (persistedState) => {
         const s = (persistedState ?? {}) as Partial<AppState>;
-        return { ...s, settings: mergeSettings(s.settings) } as AppState;
+        return { ...s, settings: mergeSettings(s.settings), reviewDay: mergeReviewDay(s.reviewDay) } as AppState;
       },
       // После гидрации назначаем личный сид карты дня, если он ещё не назначен (installSeed === 0):
       // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.
@@ -430,6 +438,6 @@ export const useApp = create<AppState>()(
 type DataKeys = {
   [K in keyof AppState]: AppState[K] extends (...args: never[]) => unknown ? never : K;
 }[keyof AppState];
-type OutsideBackup = Exclude<DataKeys, keyof BackupState | 'devReflect' | 'devMoonOpen'>;
+type OutsideBackup = Exclude<DataKeys, keyof BackupState | 'devReflect' | 'devMoonOpen' | 'premium'>;
 const backupCovers: OutsideBackup extends never ? true : OutsideBackup = true;
 void backupCovers;
