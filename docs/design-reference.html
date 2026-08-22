@@ -228,8 +228,42 @@ backdrop-filter:blur(10px);display:flex;gap:14px;align-items:center;cursor:point
 background:var(--chipbg)}
 .sp .tx b{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--head)}
 .sp .tx small{display:block;font-size:10px;color:var(--muted);margin-top:3px;line-height:1.5}
-.sp .lk{margin-left:auto;flex:none;font-size:8.5px;letter-spacing:1.5px;color:var(--accent);
+.lk{flex:none;font-size:8.5px;letter-spacing:1.5px;color:var(--accent);
 border:1px solid var(--frame);border-radius:10px;padding:3px 8px;background:var(--chipbg)}
+.sp .lk{margin-left:auto}
+/* задача 53: пейвол и запертые состояния. Подпись «ПРЕМИУМ» — общий класс .lk (вынесен из .sp),
+   чтобы не дублировать стиль в шапке модуля курса, в тренажёре и на лунной панели. */
+.pwfeat{display:flex;gap:10px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+border-radius:14px;padding:11px 14px;margin-top:8px;backdrop-filter:blur(10px)}
+.pwfeat i{font-style:normal;color:var(--accent);font-size:12px;line-height:1.5;flex:none}
+.pwfeat span{font-size:12.5px;color:var(--text);line-height:1.5}
+.plans{display:flex;gap:10px;margin-top:14px}
+.plan{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px 12px;
+cursor:pointer;position:relative;text-align:center;transition:.2s;backdrop-filter:blur(10px)}
+.plan.sel{border-color:var(--frame);background:var(--chipbg)}
+.plan b{display:block;font-family:var(--serif);font-size:15px;color:var(--head);font-weight:600}
+.plan small{display:block;font-size:10px;color:var(--muted);margin-top:4px;line-height:1.45}
+.plan .lk{position:absolute;top:-9px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.cta2{display:block;width:100%;margin-top:14px;padding:13px;border-radius:16px;cursor:pointer;
+font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:1.6px;
+color:var(--head);background:none;border:1px solid var(--line)}
+.pwstate{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px 16px;
+margin-top:14px;backdrop-filter:blur(10px)}
+.pwstate b{display:block;font-family:var(--serif);font-size:15px;color:var(--head);font-weight:600}
+.pwstate small{display:block;font-size:10.5px;color:var(--muted);margin-top:4px}
+.pwlegal{font-size:9.5px;color:var(--muted);line-height:1.6;text-align:center;margin-top:14px;padding:0 4px}
+.pwlegal a{color:var(--accent);text-decoration:none;cursor:pointer}
+.mh2 .lk{margin-left:8px}
+.node .premchip{position:absolute;top:-46px;left:50%;transform:translateX(-50%);white-space:nowrap;
+font-size:8.5px;letter-spacing:1.5px;color:var(--accent);border:1px solid var(--frame);
+border-radius:10px;padding:4px 9px;background:var(--panel);backdrop-filter:blur(8px)}
+.node .premchip::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%) rotate(45deg);
+width:8px;height:8px;background:var(--panel);border-right:1px solid var(--frame);border-bottom:1px solid var(--frame)}
+/* у первого узла модуля чип не влезает над кружком — уходит под подпись, стрелка переворачивается.
+   ⚠️ Обход геометрии САМОГО МАКЕТА: в приложении путь модуля начинается с отступа под чип (TOP в CoursePath,
+   спека 07) и чип всегда стоит НАД узлом — вариант .below в код не переносить (приёмка 53, 22.08). */
+.node .premchip.below,.node .startchip.below{top:auto;bottom:-52px}
+.node .premchip.below::after,.node .startchip.below::after{bottom:auto;top:-5px;border:none;border-left:1px solid var(--frame);border-top:1px solid var(--frame)}
 
 /* nav */
 .nav{position:absolute;bottom:0;left:0;right:0;height:82px;z-index:9;display:flex;
@@ -769,6 +803,7 @@ border:.5px solid rgba(226,189,114,.3)}
 <button onclick="demo('quest',this)">Событие</button>
 <button onclick="demo('widget',this)">Виджеты</button>
 <button onclick="demo('moon',this)">Луна</button>
+<button onclick="pwDemo(this)">Premium</button>
 </div>
 <div class="phone"><div class="sc" data-mode="dark" id="sc">
   <div class="aur"></div><div class="noise"></div>
@@ -1011,6 +1046,9 @@ border:.5px solid rgba(226,189,114,.3)}
     <div class="date fadeup d2">НАСТРОЙКИ</div>
     <div class="h2 fadeup d2" style="font-size:24px">Приложение</div>
     <div class="fadeup d3" style="margin-top:14px">
+      <div class="prow" id="prowPrem" onclick="openPaywall('v-settings')" style="cursor:pointer">
+        <svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 9l5.9.6-4.4 3.9 1.3 5.8L12 16.2l-5.2 3.1 1.3-5.8L3.7 9.6 9.6 9z"/></svg>
+        <span class="pl">Arcanum Premium</span><span class="pv" id="prowPremVal">Оформить ›</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
         <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
@@ -1047,6 +1085,53 @@ border:.5px solid rgba(226,189,114,.3)}
     <div class="ab fadeup d3"><h6>О КОЛОДЕ</h6><p>В приложении используется классическая колода Райдер–Уэйт. Рисунки карт выполнила художница Памела Колман Смит в 1909 году; сегодня они находятся в общественном достоянии.</p></div>
     <div class="ab fadeup d4"><h6>ДАННЫЕ И КОНФИДЕНЦИАЛЬНОСТЬ</h6><p>Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов и серверов: ничего не отправляется в интернет и не передаётся третьим лицам.</p><p style="margin-top:8px">Резервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.</p></div>
     <div class="ab fadeup d4"><h6>ИСТОЧНИКИ</h6><p>Названия и изображения карт подготовлены на основе открытого проекта tarot-api (лицензия MIT).</p></div>
+  </div>
+
+  <!-- ===== ПОДПИСКА (задача 53) ===== -->
+  <!-- Два состояния одного экрана: #pwOff — не оформлено, #pwOn — активна.
+       Переключает кнопка «Premium» в демобаре (window.__pwState), как __revState у тренажёра.
+       Тон — design-system §8: без таймеров, зачёркнутых цен и предвыбранного пробного периода;
+       «назад» на месте и ведёт туда, откуда пришли. -->
+  <div class="view" id="v-paywall">
+    <div class="backbtn fadeup d1" id="pwback" onclick="show(window.__pwFrom||'v-settings')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>НАЗАД</div>
+    <div class="date fadeup d1">ПОДПИСКА</div>
+    <div style="text-align:center;margin-top:10px" class="fadeup d2">
+      <div class="emb2" style="margin:0 auto"><svg viewBox="0 0 100 100" style="width:56px;height:56px;stroke:var(--accent);fill:none;stroke-width:1.1"><circle cx="50" cy="50" r="33"/><circle cx="50" cy="50" r="41" stroke-dasharray="2 5"/><path d="M50 23 L57 43 L77 50 L57 57 L50 77 L43 57 L23 50 L43 43 Z"/><circle cx="50" cy="50" r="7"/></svg></div>
+    </div>
+    <div class="h2 fadeup d2" style="margin-top:8px">Arcanum Premium<span class="lk" id="pwchip" style="display:none;margin-left:8px;vertical-align:middle;font-family:var(--sans)">✦ АКТИВНА</span></div>
+    <p class="fadeup d2" style="text-align:center;color:var(--muted);font-size:12px;line-height:1.55;margin-top:8px;padding:0 6px">
+      Весь курс, все расклады и тренажёр без лимита. Справочник, карта дня и дневник остаются бесплатными всегда</p>
+
+    <div class="fadeup d3" style="margin-top:16px">
+      <div class="pwfeat"><i>✦</i><span>Курс целиком — 6 модулей, 32 урока</span></div>
+      <div class="pwfeat"><i>✦</i><span>Все расклады — 9, включая Кельтский крест и расклад полнолуния</span></div>
+      <div class="pwfeat"><i>✦</i><span>Тренажёр без лимита — сколько угодно повторений в день</span></div>
+      <div class="pwfeat"><i>✦</i><span>И всё, что появится дальше</span></div>
+    </div>
+
+    <!-- А. не оформлено -->
+    <div id="pwOff" class="fadeup d4">
+      <div class="plans">
+        <div class="plan sel" id="planYear" onclick="pwPick('year')">
+          <span class="lk">−40 %</span>
+          <b>Год · 2 890 ₽</b><small>≈ 241 ₽ в месяц</small>
+        </div>
+        <div class="plan" id="planMonth" onclick="pwPick('month')">
+          <b>Месяц · 399 ₽</b>
+        </div>
+      </div>
+      <button class="cta" id="pwcta">Оформить за 2 890 ₽ в год</button>
+      <span class="trlink" style="margin-top:12px">Восстановить покупки</span>
+      <p class="pwlegal">Подписка продлевается автоматически, пока вы её не отмените в настройках App&nbsp;Store или Google&nbsp;Play — не позже чем за сутки до конца периода. <a>Условия</a> · <a>Конфиденциальность</a></p>
+    </div>
+
+    <!-- Б. активна -->
+    <div id="pwOn" class="fadeup d4" style="display:none">
+      <div class="pwstate"><b>Годовая подписка</b><small>Продлится 22 сентября 2027</small></div>
+      <button class="cta2">Управлять подпиской</button>
+      <span class="trlink" style="margin-top:12px">Восстановить покупки</span>
+      <p class="pwlegal">Подписка продлевается автоматически, пока вы её не отмените в настройках App&nbsp;Store или Google&nbsp;Play — не позже чем за сутки до конца периода. <a>Условия</a> · <a>Конфиденциальность</a></p>
+    </div>
   </div>
 
   <!-- ===== РАСКЛАД: ТРИ КАРТЫ ===== -->
@@ -1148,7 +1233,7 @@ border:.5px solid rgba(226,189,114,.3)}
         <div class="lp" style="margin-top:8px">ПОВТОРЕНО 2 · С ПЕРВОГО РАЗА <span id="trok">1</span></div>
         <div class="xpn" id="trxp" style="margin-top:6px">+2 XP</div>
         <button class="cta" style="margin-top:14px" onclick="show('v-course')">ГОТОВО</button>
-        <span class="trlink" id="tragain" onclick="trRestart()">Ещё 3</span>
+        <span class="trlink" id="tragain" onclick="trAgain()">Ещё 3 <span class="lk" id="tragainlk" style="font-family:var(--sans)">✦ ПРЕМИУМ</span></span>
       </div>
     </div>
     <div class="mean show" id="trempty" style="display:none;text-align:center;margin-top:30px">
@@ -1171,7 +1256,7 @@ border:.5px solid rgba(226,189,114,.3)}
       <!-- 3. РАСКЛАД ЛУННОГО ЦИКЛА (master-plan п.11): доступен в окно события -->
       <div class="moonspread" onclick="show('v-moonspread')"><span class="ms1">Расклад новолуния · 4 карты</span><span class="ms2">ОТКРЫТЬ →</span></div>
       <div class="mevent"><span class="mi" style="color:var(--accent)">○</span><div><b>ПОЛНОЛУНИЕ · 28 АВГУСТА · 07:18</b><span>Время подводить итоги</span></div></div>
-      <div class="moonspread mslocked"><span class="ms1">Расклад полнолуния · 4 карты</span><span class="ms2">ОТКРОЕТСЯ 28 АВГУСТА</span></div>
+      <div class="moonspread mslocked" id="msFull"><span class="ms1">Расклад полнолуния · 4 карты</span><span class="ms2">ОТКРОЕТСЯ 28 АВГУСТА</span><span class="lk" id="msFullLk" style="margin-left:8px">ПРЕМИУМ</span></div>
     </div>
   </div>
 
@@ -1428,36 +1513,49 @@ function nodeIcon(st){
     : '<svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 9l5.9.6-4.4 3.9 1.3 5.8L12 16.2l-5.2 3.1 1.3-5.8L3.7 9.6 9.6 9z"/></svg>';
 }
 const P8=[[50,7],[27,20],[68,33],[40,45],[62,58],[32,70],[64,83],[45,95]];
+/* задача 53: генерация пути вынесена в функцию — демо-кнопка «Premium» перерисовывает курс */
+function renderCourse(){
+  flow.innerHTML='';
 MODS.forEach((m,mi)=>{
-  const opened = mi<=1;
-  let states;
-  if(mi===0) states = m.lessons.map(()=> 'done');
-  else if(mi===1) states = m.lessons.map((_,i)=> i<2?'done': i===2?'cur':'lock');
-  else states = m.lessons.map(()=> 'lock');
-  const names = m.lessons;
-  const pts = names.length>=8?P8 : names.length>=6?P6 : P4;
-  const hgt = names.length>=8?580 : names.length>=6?440 : 320;
-  const pct = mi===0?'100%': mi===1?'33%':'';
-  let d2='';
-  names.forEach((_,i)=>{ const p=pts[i]; d2 += i? ` C ${pts[i-1][0]},${(pts[i-1][1]+p[1])/2} ${p[0]},${(pts[i-1][1]+p[1])/2} ${p[0]},${p[1]}` : `M ${p[0]},${p[1]}`; });
-  const nodes = names.map((t,i)=>{
-    const st = states[i];
-    return `<div class="node ${st==='cur'?'cur':st}" style="left:${pts[i][0]}%;top:${pts[i][1]}%">
-      ${st==='cur'?'<div class="startchip">НАЧАТЬ УРОК</div>':''}
-      <div class="nc" ${st==='cur'?'onclick="show(\'v-lesson\')"':''}>${nodeIcon(st)}</div><div class="nm">${t.length>26?t.slice(0,24)+'…':t}</div></div>`;
-  }).join('');
-  flow.innerHTML += `<div class="msec">
-    <div class="mh2 ${opened?'':'locked'}"><span><small>МОДУЛЬ ${mi+1} ИЗ 6${m.free?'':' · 🔒'}</small><b>${m.title}</b>
-    <small style="color:var(--muted);letter-spacing:1.5px;margin-top:3px">${m.cnt}</small></span>
-    ${pct?`<span class="pct2">${pct}</span>`:''}</div>
-    <div class="path2" style="height:${hgt}px">
-      <svg class="line" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><path d="${d2}" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/></svg>
-      ${nodes}
-    </div></div>`;
-});
-document.querySelectorAll('#courseflow .node.lock .nc').forEach(c=>{
-  c.parentElement.onclick=()=>{ c.classList.remove('wob'); void c.offsetWidth; c.classList.add('wob'); };
-});
+    /* задача 53: с активной подпиской premium-модули открыты как обычные */
+    const paid = window.__pwState===1;
+    const free = m.free || paid;
+    const opened = mi<=1 || paid;
+    let states;
+    /* задача 53: демо-состояние «М1–М2 пройдены, текущий урок — первый в premium-модуле».
+       Переключается кнопкой «Premium» в демобаре: window.__pwCourseAhead. */
+    const ahead = !!window.__pwCourseAhead;
+    if(mi===0) states = m.lessons.map(()=> 'done');
+    else if(mi===1) states = ahead ? m.lessons.map(()=> 'done')
+      : m.lessons.map((_,i)=> i<2?'done': i===2?'cur':'lock');
+    else if(mi===2 && ahead) states = m.lessons.map((_,i)=> i===0?'cur':'lock');
+    else states = m.lessons.map(()=> 'lock');
+    const names = m.lessons;
+    const pts = names.length>=8?P8 : names.length>=6?P6 : P4;
+    const hgt = names.length>=8?580 : names.length>=6?440 : 320;
+    const pct = mi===0?'100%': mi===1?(ahead?'100%':'33%'):'';
+    let d2='';
+    names.forEach((_,i)=>{ const p=pts[i]; d2 += i? ` C ${pts[i-1][0]},${(pts[i-1][1]+p[1])/2} ${p[0]},${(pts[i-1][1]+p[1])/2} ${p[0]},${p[1]}` : `M ${p[0]},${p[1]}`; });
+    const nodes = names.map((t,i)=>{
+      const st = states[i];
+      return `<div class="node ${st==='cur'?'cur':st}" style="left:${pts[i][0]}%;top:${pts[i][1]}%">
+        ${st==='cur'?(free?`<div class="startchip${i===0?' below':''}">НАЧАТЬ УРОК</div>`:`<div class="premchip${i===0?' below':''}">✦ ПРЕМИУМ</div>`):''}
+        <div class="nc" ${st==='cur'?(free?'onclick="show(\'v-lesson\')"':'onclick="openPaywall(\'v-course\')"'):''}>${nodeIcon(st)}</div><div class="nm">${t.length>26?t.slice(0,24)+'…':t}</div></div>`;
+    }).join('');
+    flow.innerHTML += `<div class="msec">
+      <div class="mh2 ${opened?'':'locked'}" ${free?'':`onclick="openPaywall('v-course')" style="cursor:pointer"`}><span><small>МОДУЛЬ ${mi+1} ИЗ 6${free?'':' · 🔒'}</small><b>${m.title}</b>
+      <small style="color:var(--muted);letter-spacing:1.5px;margin-top:3px">${m.cnt}</small></span>
+      ${pct?`<span class="pct2">${pct}</span>`:''}${free?'':'<span class="lk">ПРЕМИУМ</span>'}</div>
+      <div class="path2" style="height:${hgt}px">
+        <svg class="line" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><path d="${d2}" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="1 9" stroke-linecap="round"/></svg>
+        ${nodes}
+      </div></div>`;
+  });
+  document.querySelectorAll('#courseflow .node.lock .nc').forEach(c=>{
+    c.parentElement.onclick=()=>{ c.classList.remove('wob'); void c.offsetWidth; c.classList.add('wob'); };
+  });
+}
+renderCourse();
 /* этап 4: коллекция */
 const OPENED = ['fool','magician','high-priestess','empress','emperor','hierophant','lovers','chariot'];
 /* cards grid */
@@ -1506,7 +1604,11 @@ const SPS=[
 document.getElementById('sps').innerHTML = SPS.map(s=>`
  <div class="sp" onclick="${s.n==='Три карты' ? "show('v-spread3')" : (s.n==='Кельтский крест' ? "show('v-spread10')" : '')}"><div class="diag">${s.pos.map(p=>`<i style="left:${p[0]}px;top:${p[1]}px"></i>`).join('')}</div>
  <div class="tx"><b>${s.n}</b><small>${s.c} карт · ${s.d}</small></div>
- ${s.free?'':'<span class="lk">PREMIUM</span>'}</div>`).join('');
+ ${s.free?'':'<span class="lk">ПРЕМИУМ</span>'}</div>`).join('');
+/* задача 53: тап по запертому раскладу ведёт на пейвол — замок снимает подписка */
+document.querySelectorAll('#sps .sp').forEach(el=>{
+  if(el.querySelector('.lk')) el.onclick = ()=>openPaywall('v-spreads');
+});
 
 /* демо-переключатель */
 function demo(mode, btn){
@@ -1778,6 +1880,64 @@ function trRestart(){
 }
 trLoad();
 
+/* ===== задача 53: подписка =====
+   __pwState: 0 — не оформлено (демо по умолчанию), 1 — активна.
+   Кнопка «Premium» в демобаре ходит по трём шагам, как __revState у тренажёра:
+   пейвол А → пейвол Б → назад в приложение. */
+window.__pwState = 0;
+window.__pwPlan = 'year';
+window.__pwFrom = 'v-settings';
+window.__pwCourseAhead = false;
+
+function openPaywall(from){ window.__pwFrom = from || 'v-settings'; show('v-paywall'); }
+
+function pwPick(plan){
+  window.__pwPlan = plan;
+  const y=document.getElementById('planYear'), m=document.getElementById('planMonth');
+  y.classList.toggle('sel', plan==='year'); m.classList.toggle('sel', plan==='month');
+  document.getElementById('pwcta').textContent =
+    plan==='year' ? 'Оформить за 2 890 ₽ в год' : 'Оформить за 399 ₽ в месяц';
+}
+
+/* Переключает ВСЕ точки входа разом: пейвол, курс, расклады, тренажёр, настройки, луна. */
+function setPremium(active){
+  window.__pwState = active ? 1 : 0;
+  document.getElementById('pwOff').style.display = active ? 'none' : '';
+  document.getElementById('pwOn').style.display  = active ? '' : 'none';
+  document.getElementById('pwchip').style.display = active ? '' : 'none';
+  /* настройки */
+  document.getElementById('prowPremVal').textContent = active ? 'Активна ›' : 'Оформить ›';
+  document.getElementById('prowPremVal').style.color = active ? 'var(--accent)' : '';
+  /* тренажёр: с подпиской лимита нет — подпись уходит */
+  const lk=document.getElementById('tragainlk'); if(lk) lk.style.display = active ? 'none' : '';
+  /* расклады и луна */
+  document.querySelectorAll('#sps .sp .lk').forEach(el=> el.style.display = active ? 'none' : '');
+  const mf=document.getElementById('msFullLk'); if(mf) mf.style.display = active ? 'none' : '';
+  document.querySelectorAll('#courseflow .mh2 .lk').forEach(el=> el.style.display = active ? 'none' : '');
+  /* курс перерисовываем: с подпиской узлы М3 открыты обычным «НАЧАТЬ УРОК» */
+  renderCourse();
+  document.querySelectorAll('#courseflow .mh2 .lk').forEach(el=> el.style.display = active ? 'none' : '');
+}
+
+/* демо-шаг кнопки «Premium» */
+function pwDemo(btn){
+  document.querySelectorAll('.demobar button').forEach(b=>b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  window.__pwStep = ((window.__pwStep||0) + 1) % 3;
+  if(window.__pwStep === 1){
+    window.__pwCourseAhead = true; setPremium(false); openPaywall('v-settings');
+  } else if(window.__pwStep === 2){
+    setPremium(true); show('v-paywall');
+  } else {
+    window.__pwCourseAhead = false; setPremium(false); show('v-today');
+    document.querySelectorAll('.demobar button').forEach(b=>b.classList.remove('on'));
+    const first=document.querySelector('.demobar button'); if(first) first.classList.add('on');
+  }
+}
+
+/* тренажёр: без подписки «Ещё N» ведёт на пейвол, с подпиской — перезапускает порцию */
+function trAgain(){ if(window.__pwState===1) trRestart(); else openPaywall('v-trainer'); }
+
 /* карточка «Повторение» — цикл трёх состояний по тапу на иконку */
 window.__revState = 0;
 function revCycle(){
@@ -1854,7 +2014,7 @@ function cycleMastery(el){
   locked.className='sp splocked';
   locked.innerHTML = diag+
     `<div class="tx"><b>Расклад полнолуния</b><small>Откроется 28 августа</small></div>`+
-    `<span class="evbadge">○ СОБЫТИЕ</span>`;
+    `<span class="evbadge">○ СОБЫТИЕ</span><span class="lk" style="margin-left:6px">ПРЕМИУМ</span>`;
   box.appendChild(locked);
 })();
 

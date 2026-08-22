@@ -482,7 +482,6 @@ export async function refreshEntitlement(): Promise<PremiumState | null> {
 ```
 в `settings` (после `reflectNow`): `premium: "Arcanum Premium", premiumBuy: "Оформить ›", premiumActive: "Активна ›", devPremium: "Premium: переключить",`
 в `course` (после `startLesson`): `premiumChip: "✦ ПРЕМИУМ",`
-в `review` (после `more`): `moreLocked: "Ещё {{n}} · ✦ ПРЕМИУМ",`
 в `about` (после `sourcesText`): `termsTitle: "Условия подписки", termsText: "Arcanum Premium — подписка с автоматическим продлением: месячная или годовая. Оплата списывается через ваш аккаунт App Store или Google Play при подтверждении покупки и продлевается автоматически, пока вы не отмените подписку в настройках аккаунта магазина — не позже чем за сутки до конца текущего периода. Бесплатные функции приложения остаются доступными без подписки.",`
 
 **en:**
@@ -511,7 +510,7 @@ export async function refreshEntitlement(): Promise<PremiumState | null> {
       },
 ```
 settings: `premium: "Arcanum Premium", premiumBuy: "Subscribe ›", premiumActive: "Active ›", devPremium: "Premium: toggle",`
-course: `premiumChip: "✦ PREMIUM",` · review: `moreLocked: "{{n}} more · ✦ PREMIUM",`
+course: `premiumChip: "✦ PREMIUM",`
 about: `termsTitle: "Subscription terms", termsText: "Arcanum Premium is an auto-renewing subscription, monthly or yearly. Payment is charged to your App Store or Google Play account when you confirm the purchase and renews automatically until you cancel it in your store account settings — at least 24 hours before the end of the current period. The free features of the app stay available without a subscription.",`
 
 **es:**
@@ -540,7 +539,7 @@ about: `termsTitle: "Subscription terms", termsText: "Arcanum Premium is an auto
       },
 ```
 settings: `premium: "Arcanum Premium", premiumBuy: "Suscribirme ›", premiumActive: "Activa ›", devPremium: "Premium: alternar",`
-course: `premiumChip: "✦ PREMIUM",` · review: `moreLocked: "{{n}} más · ✦ PREMIUM",`
+course: `premiumChip: "✦ PREMIUM",`
 about: `termsTitle: "Condiciones de la suscripción", termsText: "Arcanum Premium es una suscripción con renovación automática, mensual o anual. El pago se carga a tu cuenta de App Store o Google Play al confirmar la compra y se renueva automáticamente hasta que la canceles en los ajustes de tu cuenta de la tienda, al menos 24 horas antes de que termine el periodo actual. Las funciones gratuitas de la app siguen disponibles sin suscripción.",`
 
 **pt:**
@@ -569,7 +568,7 @@ about: `termsTitle: "Condiciones de la suscripción", termsText: "Arcanum Premiu
       },
 ```
 settings: `premium: "Arcanum Premium", premiumBuy: "Assinar ›", premiumActive: "Ativa ›", devPremium: "Premium: alternar",`
-course: `premiumChip: "✦ PREMIUM",` · review: `moreLocked: "Mais {{n}} · ✦ PREMIUM",`
+course: `premiumChip: "✦ PREMIUM",`
 about: `termsTitle: "Condições da assinatura", termsText: "O Arcanum Premium é uma assinatura com renovação automática, mensal ou anual. O pagamento é cobrado na sua conta da App Store ou do Google Play ao confirmar a compra e renovado automaticamente até que você cancele a assinatura nas configurações da conta da loja, pelo menos 24 horas antes do fim do período atual. Os recursos gratuitos do aplicativo continuam disponíveis sem assinatura.",`
 
 ⚠️ Плейсхолдеры `{{price}}`, `{{n}}`, `{{date}}` — одинаковые во всех языках (контракт паритета
@@ -703,7 +702,7 @@ export default function PaywallScreen() {
 
         <FadeUp index={1} style={{ marginTop: spacing.l }}>
           {benefits.map((k) => (
-            <View key={k} style={[st.row, { borderColor: t.line }]}>
+            <View key={k} style={[st.row, { backgroundColor: t.panel, borderColor: t.line }]}>
               <Txt style={[st.star, { color: t.accent }]}>✦</Txt>
               <Txt style={[st.rowText, { color: t.text }]}>{tr(`paywall.${k}`)}</Txt>
             </View>
@@ -811,24 +810,27 @@ const st = StyleSheet.create({
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: spacing.m },
   title: { fontFamily: fonts.display, fontSize: 26 },
   subtitle: { fontSize: 14, lineHeight: 21, textAlign: 'center', marginTop: spacing.s },
-  // строка преимущества — `.prow` макета без svg-иконки: ✦ слева
-  row: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, paddingVertical: 11, borderBottomWidth: 1 },
+  // панель преимущества — `.pwfeat` принятого макета: panel/line, радиус 14, паддинг 11×14, зазор 8
+  row: { flexDirection: 'row', alignItems: 'flex-start', gap: 10, paddingVertical: 11, paddingHorizontal: 14,
+    borderWidth: 1, borderRadius: 14, marginTop: 8 },
   star: { fontSize: 12, marginTop: 2 },
-  rowText: { flex: 1, fontSize: 14, lineHeight: 20 },
+  rowText: { flex: 1, fontSize: 12.5, lineHeight: 19 },
   plans: { flexDirection: 'row', gap: 10 },
-  plan: { flex: 1, borderWidth: 1, borderRadius: radius.l, padding: 14, minHeight: 84 },
-  planName: { fontFamily: fonts.displaySemi, fontSize: 15 },
-  planSub: { fontSize: 11, marginTop: 4 },
-  planBadge: { position: 'absolute', top: -9, right: 10 },
+  // `.plan` макета: радиус 16, паддинг 13×12, текст по центру; бейдж «−40 %» сверху по центру на −9px
+  plan: { flex: 1, borderWidth: 1, borderRadius: radius.l, paddingVertical: 13, paddingHorizontal: 12, alignItems: 'center', minHeight: 76 },
+  planName: { fontFamily: fonts.displaySemi, fontSize: 15, textAlign: 'center' },
+  planSub: { fontSize: 10, marginTop: 4, textAlign: 'center' },
+  planBadge: { position: 'absolute', top: -9, alignSelf: 'center' },
   // `.lk` макета: 8.5 / ls 1.5, бордер frame, фон chipBg, радиус 10
   lk: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 8, paddingVertical: 3 },
   lkText: { fontSize: 8.5, letterSpacing: 1.5, fontWeight: '700' },
   panel: { borderWidth: 1, borderRadius: radius.l, padding: 14 },
   panelText: { fontSize: 14, textAlign: 'center' },
-  secondary: { marginTop: spacing.m, borderWidth: 1, borderRadius: 16, paddingVertical: 14, alignItems: 'center' },
-  secondaryText: { fontSize: 13, letterSpacing: 1 },
-  link: { fontSize: 10.5, letterSpacing: 1, textAlign: 'center' }, // `.trlink`
-  legal: { fontSize: 11, lineHeight: 16, textAlign: 'center', marginTop: spacing.m }, // `.pcap`
+  // `.cta2` макета: контур line, текст head, 12 / ls 1.6, паддинг 13, радиус 16
+  secondary: { marginTop: spacing.m, borderWidth: 1, borderRadius: 16, paddingVertical: 13, alignItems: 'center' },
+  secondaryText: { fontSize: 12, letterSpacing: 1.6, fontWeight: '700' },
+  link: { fontSize: 10.5, letterSpacing: 1, textAlign: 'center', marginTop: 12 }, // `.trlink`
+  legal: { fontSize: 9.5, lineHeight: 15, textAlign: 'center', marginTop: spacing.m, paddingHorizontal: 4 }, // `.pwlegal`
 });
 ```
 `radius.l = 16`, `formatFullDate(iso, lang)` — проверены по `theme.ts`/`dates.ts`.
@@ -980,7 +982,9 @@ const open = (s: Spread, locked: boolean) => {
 };
 ```
 Плашка «ПРЕМИУМ» остаётся как есть (показывает флаг) — перевести на `PremiumBadge` из задачи 6.
-Карточка НЕ приглушается (приглушение — только «вне окна»).
+Карточка НЕ приглушается (приглушение — только «вне окна»). ⚠️ У лунной карточки полнолуния бейджа ДВА
+(принятый макет): «○ СОБЫТИЕ» + `PremiumBadge` рядом; вне окна карточка по-прежнему не нажимается
+(лунный гейт первый — спека 51), в окне без права → пейвол.
 
 - [ ] **Шаг 2: маршрут `[id].tsx`**
 
@@ -1010,9 +1014,10 @@ const open = (s: Spread, locked: boolean) => {
 **Файлы:**
 - Изменить: `app/review.tsx`, `src/components/ReviewResult.tsx`
 
-- [ ] **Шаг 1: `ReviewResult`** — проп `moreLocked?: boolean`: при `more > 0 && moreLocked` ссылка
-  печатает `tr('review.moreLocked', { n: more })` (тот же стиль `.trlink`), `onMore` — тот же колбэк
-  (экран решает, куда вести).
+- [ ] **Шаг 1: `ReviewResult`** — проп `moreLocked?: boolean`: при `more > 0 && moreLocked` рядом
+  с текстом «Ещё N» (тот же `.trlink`, ключ `review.more` как есть) в ряд рисуется
+  `<PremiumBadge label={tr('course.premiumChip')} />` («✦ ПРЕМИУМ», задача 6) — так в принятом макете
+  (`#tragain` + `.lk`); `onMore` — тот же колбэк (экран решает, куда вести).
 
 - [ ] **Шаг 2: `review.tsx`**
 
