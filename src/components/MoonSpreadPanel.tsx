@@ -1,6 +1,8 @@
 /** Панель лунного расклада под строкой события на экране луны — блок `.moonspread` эталона
  *  (спека 51): пунктирная рамка frame на фоне chipBg, слева название расклада, справа
- *  «ОТКРЫТЬ →» либо «ОТКРОЕТСЯ 28 АВГУСТА».
+ *  «ОТКРЫТЬ →» либо «ОТКРОЕТСЯ 28 АВГУСТА». В окне без права Premium (спека 53) рядом с
+ *  «ОТКРЫТЬ →» появляется плашка «ПРЕМИУМ», тап ведёт на пейвол — панель не приглушается,
+ *  приглушение (`st.dim`) остаётся только для «вне окна».
  *
  *  Панель показывается под событием, чьё окно ИДЁТ или ещё ВПЕРЕДИ; под уже прошедшим событием
  *  месяца её нет — расклад к нему недоступен навсегда, а строка события и так приглушена. */
@@ -15,9 +17,12 @@ import { useLang } from '../lib/i18n';
 import { inLang } from '../lib/lang';
 import type { MoonEventKind } from '../lib/moon';
 import { isMoonWindowOpen } from '../lib/moonSpread';
+import { spreadLocked } from '../lib/premium';
 import { useDevMoonNow } from '../lib/useDevMoonNow';
+import { useApp } from '../store/useApp';
 import { fonts, LOCKED_OPACITY } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
+import { PremiumBadge } from './PremiumBadge';
 import { PressableScale } from './PressableScale';
 import { Txt } from './Txt';
 
@@ -26,10 +31,12 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
   const { t: tr } = useTranslation();
   const lang = useLang();
   const devNow = useDevMoonNow();
+  const premium = useApp((s) => s.premium);
 
   const spread = spreads.find((s) => s.moon === kind);
   if (!spread) return null;
   const open = isMoonWindowOpen(at, devNow ?? now);
+  const locked = spreadLocked(spread, premium);
 
   // Событие прошло И окно закрылось — расклад к нему недоступен навсегда, панели нет.
   // Правило видимости живёт ЗДЕСЬ целиком, а не в экране: иначе экранный гейт и окно
@@ -46,13 +53,21 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
       <Txt style={[st.name, { color: t.head }]}>
         {inLang(spread.name, lang)} · {tr('spreads.cards', { count: spread.cards })}
       </Txt>
-      <Txt style={[st.right, { color: t.accent }]}>{right}</Txt>
+      {open && locked ? (
+        <View style={st.rightRow}>
+          <PremiumBadge />
+          <Txt style={[st.right, { color: t.accent }]}>{right}</Txt>
+        </View>
+      ) : (
+        <Txt style={[st.right, { color: t.accent }]}>{right}</Txt>
+      )}
     </>
   );
   const box = [st.box, { backgroundColor: t.chipBg, borderColor: t.frame }, !open && st.dim];
 
   // вне окна панель не нажимается вовсе: причина написана на ней самой датой, качать нечего
-  // (у закрытого узла курса иначе — там причина неочевидна, спека 07)
+  // (у закрытого узла курса иначе — там причина неочевидна, спека 07). В окне без права —
+  // панель по-прежнему нажимается, тап ведёт на пейвол (спека 53), не приглушается (не «вне окна»).
   return open ? (
     <PressableScale
       onPress={() => {
@@ -61,6 +76,10 @@ export function MoonSpreadPanel({ kind, at, now }: { kind: MoonEventKind; at: Da
         // без этой перепроверки панель звала бы «ОТКРЫТЬ», а маршрут молча редиректил.
         if (!isMoonWindowOpen(at, devNow ?? new Date())) return;
         hapticTap();
+        if (locked) {
+          router.push({ pathname: '/paywall', params: { from: 'moon' } }); // premium без права — пейвол
+          return;
+        }
         router.push({ pathname: '/spreads/[id]', params: { id: spread.id } });
       }}
       style={box}
@@ -88,5 +107,6 @@ const st = StyleSheet.create({
   // сжимаемый текст — flex 1 (в RN flexShrink по умолчанию 0, урок задачи 16)
   name: { flex: 1, fontFamily: fonts.display, fontSize: 13.5 },
   right: { fontSize: 9, letterSpacing: 1.5, fontWeight: '700' },
+  rightRow: { flexDirection: 'row', alignItems: 'center', gap: 8 }, // PREMIUM перед «ОТКРЫТЬ →»
   dim: { opacity: LOCKED_OPACITY }, // тот же токен приглушения, что у прошедших дней календаря
 });
