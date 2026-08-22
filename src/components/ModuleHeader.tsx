@@ -43,9 +43,9 @@ export function ModuleHeader({
   const counters =
     tr('course.lessons', { count: mod.lessons.length }) +
     (cards > 0 ? ` · ${tr('course.cardsCount', { count: cards })}` : '');
-  // показ флага: замок говорит «модуль платный» и остаётся при активной подписке (так в эталоне);
-  // доступ решает не он, а premiumLocked из moduleLocked (спека 53)
-  const paid = !mod.free;
+  // замок говорит «модуль платный» и остаётся при активной подписке (так в эталоне); доступ
+  // решает не он, а premiumLocked из moduleLocked (спека 53)
+  const paid = !mod.free; // показ флага
 
   const content = (
     <>
