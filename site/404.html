@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Страница не найдена · Page not found</title>
+    <link rel="stylesheet" href="/arcanum/style.css" />
+  </head>
+  <body>
+    <!-- GitHub Pages отдаёт этот файл на любой неизвестный адрес внутри сайта, поэтому
+         пути к общим файлам и ссылки здесь АБСОЛЮТНЫЕ (/arcanum/…): относительные
+         сломались бы на вложенном адресе вида /arcanum/что-то/ещё. -->
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/arcanum/index.html">Arcanum</a>
+        <nav class="lang-switch" aria-label="Language switch">
+          <a href="?lang=ru" data-lang-link="ru">RU</a>
+          <a href="?lang=en" data-lang-link="en">EN</a>
+          <a href="?lang=es" data-lang-link="es">ES</a>
+          <a href="?lang=pt" data-lang-link="pt">PT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <!-- Без lang.js видны подряд все четыре секции — это ожидаемо -->
+        <section data-lang="ru" lang="ru">
+          <h1>Страница не найдена</h1>
+          <p>Такой страницы здесь нет. Возможно, адрес набран с опечаткой.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="/arcanum/privacy.html">Политика конфиденциальности</a>
+              <a href="/arcanum/terms.html">Условия использования</a>
+              <a href="/arcanum/support.html">Поддержка</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+
+        <section data-lang="en" lang="en">
+          <h1>Page not found</h1>
+          <p>There is no such page here. The address may contain a typo.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="/arcanum/privacy.html">Privacy Policy</a>
+              <a href="/arcanum/terms.html">Terms of Use</a>
+              <a href="/arcanum/support.html">Support</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+
+        <section data-lang="es" lang="es">
+          <h1>Página no encontrada</h1>
+          <p>Aquí no hay ninguna página así. Puede que la dirección tenga un error.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="/arcanum/privacy.html">Política de privacidad</a>
+              <a href="/arcanum/terms.html">Términos de uso</a>
+              <a href="/arcanum/support.html">Soporte</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+
+        <section data-lang="pt" lang="pt">
+          <h1>Página não encontrada</h1>
+          <p>Não há nenhuma página assim aqui. O endereço pode ter um erro de digitação.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="/arcanum/privacy.html">Política de privacidade</a>
+              <a href="/arcanum/terms.html">Termos de uso</a>
+              <a href="/arcanum/support.html">Suporte</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+      </div>
+    </main>
+
+    <script src="/arcanum/lang.js"></script>
+  </body>
+</html>
