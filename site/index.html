@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arcanum</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Шапка одинаковая на всех четырёх страницах сайта -->
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="index.html">Arcanum</a>
+        <nav class="lang-switch" aria-label="Language switch">
+          <a href="?lang=ru" data-lang-link="ru">RU</a>
+          <a href="?lang=en" data-lang-link="en">EN</a>
+          <a href="?lang=es" data-lang-link="es">ES</a>
+          <a href="?lang=pt" data-lang-link="pt">PT</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <!-- Без lang.js видны подряд все четыре секции — это ожидаемо -->
+        <section data-lang="ru" lang="ru">
+          <h1>Arcanum</h1>
+          <p>Arcanum — приложение для изучения таро.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="privacy.html">Политика конфиденциальности</a>
+              <a href="terms.html">Условия использования</a>
+              <a href="support.html">Поддержка</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+
+        <section data-lang="en" lang="en">
+          <h1>Arcanum</h1>
+          <p>Arcanum — an app for learning tarot.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="privacy.html">Privacy Policy</a>
+              <a href="terms.html">Terms of Use</a>
+              <a href="support.html">Support</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+
+        <section data-lang="es" lang="es">
+          <h1>Arcanum</h1>
+          <p>Arcanum — una app para aprender tarot.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="privacy.html">Política de privacidad</a>
+              <a href="terms.html">Términos de uso</a>
+              <a href="support.html">Soporte</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+
+        <section data-lang="pt" lang="pt">
+          <h1>Arcanum</h1>
+          <p>Arcanum — um app para aprender tarô.</p>
+          <footer class="page-footer">
+            <div class="footer-links">
+              <a href="privacy.html">Política de privacidade</a>
+              <a href="terms.html">Termos de uso</a>
+              <a href="support.html">Suporte</a>
+            </div>
+            <p><a href="mailto:morfiy0393@gmail.com">morfiy0393@gmail.com</a></p>
+          </footer>
+        </section>
+      </div>
+    </main>
+
+    <script src="lang.js"></script>
+  </body>
+</html>

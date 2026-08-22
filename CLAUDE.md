@@ -166,7 +166,7 @@
   «изучено» в справочнике (46/46б/46в), мастерство карты (49). **Локализация ES/PT закрыта (28)**: контент
   100 % на четырёх языках, UI — 4 языка, статусы es/pt `reviewed`; корпус карт 958/958 `reviewed`
   (ru/en после правок 28б/28в — условно, журнал `docs/canon-fixes-applied.md`).
-- **Цифры**: тестов 1521 в 43 сьютах, `tsc` чистый; **persist version 11** (`SCHEMA_VERSION`) —
+- **Цифры**: тестов 1551 в 44 сьютах, `tsc` чистый; **persist version 11** (`SCHEMA_VERSION`) —
   следующая задача, меняющая схему стора, поднимает до 12; схема контента — статус по языкам (28а).
 - **Задача 51 (лунные расклады) ЗАКРЫТА 22.08**: лайв-проверка Артёма на iPhone ✓ («всё отлично»), ветка
   `feat/51-moon-spreads` влита в main. Два лунных расклада (новолуние free / полнолуние premium) открыты
@@ -188,12 +188,20 @@
   цены) — отдельный заход на этапе EAS-сборки**; правило цен на четырёх языках (валюту выбирает
   страна аккаунта магазина, строку отдаёт магазин, «−40 %» считается из фактической пары)
   записано в спеке 53 и в release-checklist.
+- **Задача 54 (юридические страницы) СДЕЛАНА 22.08, ждёт лайв-проверки**: `site/` — четыре
+  страницы на четырёх языках (`index/privacy/terms/support`) на GitHub Pages этого репо,
+  деплой `.github/workflows/pages.yml`; лендинг и домен не нужны. Ссылки пейвола и три ссылки
+  «О приложении» ведут на web-URL из `appInfo.ts` через общий `LinkTxt` (`expo-web-browser`);
+  дисклеймер на первом шаге онбординга. Контракт `site.test.ts` держит равенство «текст страницы
+  = строка приложения» (правишь политику — правь оба места). **Аналитики в v1 нет** (решение
+  22.08): политика утверждает это прямым текстом, события воронки — v1.1. Спека —
+  `docs/specs/54-legal-pages.md`. **Артёму:** Settings → Pages → Source: GitHub Actions, затем 6в.
 - **Открытые хвосты**: 28е (карикатурные дистракторы викторины, список `docs/specs/28e-guessable-questions.md`);
   41 отложена решением 16.08; хвосты 45б (третья копия 3D-переворота у карты дня; «Всё повторено ✓ ·
   завтра: 0»); вопросы редактору — `docs/editor-questions.md`; фразы `push.freeze_saved`/`freeze.saved`/
   `push.moon_*` ждут вычитки; отложенное подтверждение лунного пуша — утром 28.08.2026 баннер обязан
-  сказать «Полнолуние ✦»; юридические ссылки пейвола 53а временно ведут на «О приложении» — до сабмита
-  нужны функциональные web-URL (блокер release-checklist).
+  сказать «Полнолуние ✦»; 28п (перезаливка es/pt дистракторов) сдана Cowork 22.08 — ждёт приёмки
+  сессией; вычитка носителем строк и страниц задачи 54 — следующая волна Cowork.
 - **Решения, чтобы не возвращались**: сезонные события → v2; шаринг-карточка снята; XP в v1 не меняем
   (22); волну появления сетки не делаем (18); «изучи карту, чтобы открыть» отклонено; виджеты ждут
   EAS-сборки; контраст чипа мастерства оставлен как есть (49), контраст мелких подписей — задача 50 ✓.
@@ -203,7 +211,7 @@
 
 - **`src/components/`**: каркас и текст — `Txt`, `Block` (+`paragraphStyle`), `Rule`, `Pill`, `ScreenBg`,
   `BlurSurface`, `GlassPanel`, `Skeleton`, `EmptyState`, `SettingsRow`, `Emblem`, `FadeUp`, `PressableScale`,
-  `Sparks`; кнопки и диалоги — `CtaButton`, `ConfirmDialog`, `ModalPanel`, `OptionPicker`, `TimePicker`(.web),
+  `Sparks`, `LinkTxt` (текст-ссылка на web через `expo-web-browser`); кнопки и диалоги — `CtaButton`, `ConfirmDialog`, `ModalPanel`, `OptionPicker`, `TimePicker`(.web),
   `DatePicker`(.web); карты — `CardBack`, `CardBackSurface`, `CardCorners`, `CornerBadge`, `CardCell`,
   `CardGridRow`, `CardLightbox`, `FlipCard`, `StarBack`, `KeywordChips`, `MasteryChip`, `MeaningPanel`;
   списки и поиск — `SearchField`, `FilterChips`, `JournalRow`, `MonthNav`, `MonthCard`, `NotePlate`, `MoonRow`;
@@ -216,7 +224,7 @@
   `daysInMonth`, `formatTime`), `phrases` (`pickPhrase`/`pickVariant`), `shuffle`, `xp`, `streak`, `journal`,
   `reflection`, `settings`, `backup`/`backupIo`(.web), `pushPlan`/`pushBody`/`pushes`(.web), `moon`/
   `moonCalendar`, `srs`/`review`/`mastery`, `courseProgress`/`lesson`/`collection`, `cardSearch`, `spread`/
-  `spreadLayout`/`composition`, `lightbox`, `birthArcana`, `feedback`, `appInfo`, `revealQueue`/
+  `spreadLayout`/`composition`, `lightbox`, `birthArcana`, `feedback`, `appInfo` (версия + `SITE/PRIVACY/TERMS/SUPPORT_URL`), `revealQueue`/
   `cardTransition`; хуки — `useAppActive`, `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
   `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`.
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`

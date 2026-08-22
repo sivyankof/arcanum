@@ -135,6 +135,8 @@ export const resources = {
       // онбординг (спека 09); birthOverline общий с чипом на странице карты
       ob: {
         sub: "Научитесь читать таро — по 5 минут в день. Без магии из кино, с уважением к традиции.",
+        // дисклеймер шага 1 онбординга (спека 54)
+        disclaimer: "Для развлечения и обучения: приложение не предсказывает будущее и не заменяет консультацию специалиста.",
         start: "НАЧАТЬ ПУТЬ",
         aboutTitle: "Немного о вас",
         aboutLead: "Дата рождения откроет ваш личный аркан — карту-спутницу вашей жизни.",
@@ -220,15 +222,21 @@ export const resources = {
         version: "Версия {{v}}",
         appTitle: "О приложении",
         appText: "Arcanum — спутник в изучении таро: карта дня, курс, справочник всех 78 карт и дневник наблюдений.",
+        // ссылка на support.html (спека 54)
+        openSupport: "Страница поддержки",
         disclaimer: "Приложение создано для развлекательных и образовательных целей. Оно не предсказывает будущее и не заменяет профессиональную консультацию — медицинскую, юридическую, финансовую или психологическую.",
         deckTitle: "О колоде",
         deckText: "В приложении используется классическая колода Райдер–Уэйт. Рисунки карт выполнила художница Памела Колман Смит в 1909 году; сегодня они находятся в общественном достоянии.",
         dataTitle: "Данные и конфиденциальность",
-        dataText: "Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов и серверов: ничего не отправляется в интернет и не передаётся третьим лицам.\n\nРезервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.",
+        dataText: "Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов, серверов, аналитики и рекламы: имя, дата рождения, заметки и прогресс не покидают телефон и не передаются третьим лицам.\n\nЕдинственное исключение — подписка: покупку подтверждает ваш магазин (App Store или Google Play), а право на Premium проверяет сервис RevenueCat — он получает чек покупки и анонимный идентификатор установки, без имени, даты рождения и содержимого дневника.\n\nРезервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.",
+        // ссылка на privacy.html (спека 54)
+        openPrivacy: "Открыть политику в браузере",
         sourcesTitle: "Источники",
         sourcesText: "Названия и изображения карт подготовлены на основе открытого проекта tarot-api (лицензия MIT).",
         termsTitle: "Условия подписки",
         termsText: "Arcanum Premium — подписка с автоматическим продлением: месячная или годовая. Оплата списывается через ваш аккаунт App Store или Google Play при подтверждении покупки и продлевается автоматически, пока вы не отмените подписку в настройках аккаунта магазина — не позже чем за сутки до конца текущего периода. Бесплатные функции приложения остаются доступными без подписки.",
+        // ссылка на terms.html (спека 54)
+        openTerms: "Открыть условия в браузере",
       },
       // пейвол Arcanum Premium (спека 53): экран `app/paywall.tsx` (задача 5). Тексты b1–b4
       // перечисляют, что именно открывает подписка; activeTitle/activeUntil/activeDev — панель
@@ -457,6 +465,8 @@ export const resources = {
       },
       ob: {
         sub: "Learn to read tarot — five minutes a day. No movie magic, with respect for the tradition.",
+        // дисклеймер шага 1 онбординга (спека 54)
+        disclaimer: "For entertainment and learning: the app does not predict the future and is not a substitute for professional advice.",
         start: "BEGIN THE PATH",
         aboutTitle: "About you",
         aboutLead: "Your birth date reveals your personal arcana — the card that walks beside you.",
@@ -530,15 +540,21 @@ export const resources = {
         version: "Version {{v}}",
         appTitle: "About the app",
         appText: "Arcanum is a companion for learning tarot: a card of the day, a course, a reference of all 78 cards, and a journal.",
+        // ссылка на support.html (спека 54)
+        openSupport: "Support page",
         disclaimer: "The app is made for entertainment and educational purposes. It does not predict the future and is not a substitute for professional advice — medical, legal, financial, or psychological.",
         deckTitle: "About the deck",
         deckText: "The app uses the classic Rider–Waite deck. The card illustrations were created by artist Pamela Colman Smith in 1909 and are now in the public domain.",
         dataTitle: "Data and privacy",
-        dataText: "All your data — journal, streak, course progress, and settings — is stored only on this device. The app has no accounts and no servers: nothing is sent to the internet or shared with anyone.\n\nYou create backups yourself — with “Export data” in Settings — and keep them wherever you like. Deleting the app deletes all its data from the device.",
+        dataText: "All your data — journal, streak, course progress, and settings — is stored only on this device. The app has no accounts, servers, analytics, or ads: your name, birth date, notes, and progress never leave the phone and are not shared with anyone.\n\nThe one exception is the subscription: the purchase is confirmed by your store (App Store or Google Play), and your Premium access is verified by RevenueCat, which receives the purchase receipt and an anonymous install identifier — no name, birth date, or journal contents.\n\nYou create backups yourself — with “Export data” in Settings — and keep them wherever you like. Deleting the app deletes all its data from the device.",
+        // ссылка на privacy.html (спека 54)
+        openPrivacy: "Open the policy in a browser",
         sourcesTitle: "Sources",
         sourcesText: "Card names and images are based on the open-source tarot-api project (MIT license).",
         termsTitle: "Subscription terms",
         termsText: "Arcanum Premium is an auto-renewing subscription, monthly or yearly. Payment is charged to your App Store or Google Play account when you confirm the purchase and renews automatically until you cancel it in your store account settings — at least 24 hours before the end of the current period. The free features of the app stay available without a subscription.",
+        // ссылка на terms.html (спека 54)
+        openTerms: "Open the terms in a browser",
       },
       // пейвол Arcanum Premium (спека 53): экран `app/paywall.tsx` (задача 5). Тексты b1–b4
       // перечисляют, что именно открывает подписка; activeTitle/activeUntil/activeDev — панель
@@ -801,6 +817,8 @@ export const resources = {
       },
       ob: {
         sub: "Aprende a leer el tarot — cinco minutos al día. Sin magia de película, con respeto por la tradición.",
+        // дисклеймер шага 1 онбординга (спека 54)
+        disclaimer: "Para entretenimiento y aprendizaje: la app no predice el futuro ni sustituye la consulta con un profesional.",
         start: "EMPEZAR EL CAMINO",
         aboutTitle: "Sobre ti",
         aboutLead: "Tu fecha de nacimiento revela tu arcano personal — la carta que te acompaña.",
@@ -886,15 +904,21 @@ export const resources = {
         version: "Versión {{v}}",
         appTitle: "Sobre la app",
         appText: "Arcanum es tu compañera para aprender tarot: una carta del día, un curso, una referencia de las 78 cartas y un diario de observaciones.",
+        // ссылка на support.html (спека 54)
+        openSupport: "Página de soporte",
         disclaimer: "La app está hecha con fines de entretenimiento y educación. No predice el futuro ni sustituye una consulta profesional — médica, legal, financiera o psicológica.",
         deckTitle: "Sobre el mazo",
         deckText: "La app usa el clásico mazo Rider–Waite. Las ilustraciones de las cartas fueron creadas por la artista Pamela Colman Smith en 1909 y hoy son de dominio público.",
         dataTitle: "Datos y privacidad",
-        dataText: "Todos tus datos — el diario, la racha, el progreso del curso y los ajustes — se guardan solo en este dispositivo. La app no tiene cuentas ni servidores: nada se envía a internet ni se comparte con nadie.\n\nTú creas las copias de seguridad con «Exportar datos» en los ajustes y las guardas donde prefieras. Si borras la app, todos sus datos se eliminan del dispositivo.",
+        dataText: "Todos tus datos — el diario, la racha, el progreso del curso y los ajustes — se guardan solo en este dispositivo. La app no tiene cuentas, servidores, analítica ni publicidad: tu nombre, tu fecha de nacimiento, tus notas y tu progreso no salen del teléfono ni se comparten con nadie.\n\nLa única excepción es la suscripción: la compra la confirma tu tienda (App Store o Google Play) y el acceso Premium lo verifica el servicio RevenueCat, que recibe el recibo de compra y un identificador anónimo de la instalación — sin nombre, fecha de nacimiento ni contenido del diario.\n\nTú creas las copias de seguridad con «Exportar datos» en los ajustes y las guardas donde prefieras. Si borras la app, todos sus datos se eliminan del dispositivo.",
+        // ссылка на privacy.html (спека 54)
+        openPrivacy: "Abrir la política en el navegador",
         sourcesTitle: "Fuentes",
         sourcesText: "Los nombres y las imágenes de las cartas se basan en el proyecto de código abierto tarot-api (licencia MIT).",
         termsTitle: "Condiciones de la suscripción",
         termsText: "Arcanum Premium es una suscripción con renovación automática, mensual o anual. El pago se carga a tu cuenta de App Store o Google Play al confirmar la compra y se renueva automáticamente hasta que la canceles en los ajustes de tu cuenta de la tienda, al menos 24 horas antes de que termine el periodo actual. Las funciones gratuitas de la app siguen disponibles sin suscripción.",
+        // ссылка на terms.html (спека 54)
+        openTerms: "Abrir los términos en el navegador",
       },
       // пейвол Arcanum Premium (спека 53): экран `app/paywall.tsx` (задача 5). Тексты b1–b4
       // перечисляют, что именно открывает подписка; activeTitle/activeUntil/activeDev — панель
@@ -1167,6 +1191,8 @@ export const resources = {
       },
       ob: {
         sub: "Aprenda a ler tarô — cinco minutos por dia. Sem magia de cinema, com respeito à tradição.",
+        // дисклеймер шага 1 онбординга (спека 54)
+        disclaimer: "Para entretenimento e aprendizado: o app não prevê o futuro nem substitui a orientação de um profissional.",
         start: "COMEÇAR O CAMINHO",
         aboutTitle: "Sobre você",
         aboutLead: "Sua data de nascimento revela seu arcano pessoal — a carta que caminha ao seu lado.",
@@ -1252,15 +1278,21 @@ export const resources = {
         version: "Versão {{v}}",
         appTitle: "Sobre o app",
         appText: "O Arcanum é um companheiro no estudo do tarô: carta do dia, curso, referência das 78 cartas e um diário de observações.",
+        // ссылка на support.html (спека 54)
+        openSupport: "Página de suporte",
         disclaimer: "O app foi criado para fins de entretenimento e educação. Ele não prevê o futuro e não substitui orientação profissional — médica, jurídica, financeira ou psicológica.",
         deckTitle: "Sobre o baralho",
         deckText: "O app usa o clássico baralho Rider–Waite. As ilustrações das cartas foram feitas pela artista Pamela Colman Smith em 1909 e hoje estão em domínio público.",
         dataTitle: "Dados e privacidade",
-        dataText: "Todos os seus dados — diário, sequência, progresso do curso e configurações — ficam guardados apenas neste dispositivo. O app não tem contas nem servidores: nada é enviado para a internet nem compartilhado com ninguém.\n\nVocê cria as cópias de segurança por conta própria — com “Exportar dados” nas configurações — e guarda onde preferir. Desinstalar o app apaga todos os dados dele do dispositivo.",
+        dataText: "Todos os seus dados — diário, sequência, progresso do curso e configurações — ficam guardados apenas neste dispositivo. O app não tem contas, servidores, análise de uso nem publicidade: seu nome, data de nascimento, anotações e progresso não saem do telefone nem são compartilhados com ninguém.\n\nA única exceção é a assinatura: a compra é confirmada pela sua loja (App Store ou Google Play), e o acesso Premium é verificado pelo serviço RevenueCat, que recebe o recibo da compra e um identificador anônimo da instalação — sem nome, data de nascimento nem conteúdo do diário.\n\nVocê cria as cópias de segurança por conta própria — com “Exportar dados” nas configurações — e guarda onde preferir. Desinstalar o app apaga todos os dados dele do dispositivo.",
+        // ссылка на privacy.html (спека 54)
+        openPrivacy: "Abrir a política no navegador",
         sourcesTitle: "Fontes",
         sourcesText: "Os nomes e as imagens das cartas são baseados no projeto aberto tarot-api (licença MIT).",
         termsTitle: "Condições da assinatura",
         termsText: "O Arcanum Premium é uma assinatura com renovação automática, mensal ou anual. O pagamento é cobrado na sua conta da App Store ou do Google Play ao confirmar a compra e renovado automaticamente até que você cancele a assinatura nas configurações da conta da loja, pelo menos 24 horas antes do fim do período atual. Os recursos gratuitos do aplicativo continuam disponíveis sem assinatura.",
+        // ссылка на terms.html (спека 54)
+        openTerms: "Abrir os termos no navegador",
       },
       // пейвол Arcanum Premium (спека 53): экран `app/paywall.tsx` (задача 5). Тексты b1–b4
       // перечисляют, что именно открывает подписка; activeTitle/activeUntil/activeDev — панель

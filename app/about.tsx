@@ -1,6 +1,8 @@
 /** Экран «О приложении» (спека 12): версия, дисклеймер, атрибуция колоды Райдер–Уэйт
- *  и источника карт (tarot-api), политика конфиденциальности — текстом внутри приложения
- *  (решение Артёма 14.08: лендинга с политикой ещё нет). Вход — строка в app/settings.tsx.
+ *  и источника карт (tarot-api). Политика конфиденциальности и условия подписки теперь
+ *  живут в двух местах сразу (спека 54): текстом здесь же, в приложении, И отдельной
+ *  web-страницей на GitHub Pages — на неё и на страницу поддержки ведут ссылки `LinkTxt`
+ *  под соответствующими блоками. Вход — строка в app/settings.tsx.
  *  Макета экрана в design-reference.html нет (хвост в задачу 15), композиция — по спеке. */
 import { Stack } from 'expo-router';
 import React from 'react';
@@ -10,9 +12,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Block, paragraphStyle } from '../src/components/Block';
 import { Emblem } from '../src/components/Emblem';
 import { FadeUp } from '../src/components/FadeUp';
+import { LinkTxt } from '../src/components/LinkTxt';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
-import { appVersion } from '../src/lib/appInfo';
+import { appVersion, PRIVACY_URL, SUPPORT_URL, TERMS_URL } from '../src/lib/appInfo';
 import { fonts, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -48,6 +51,9 @@ export default function AboutScreen() {
             <Txt style={[paragraphStyle, { color: t.muted, marginTop: spacing.m }]}>
               {tr('about.disclaimer')}
             </Txt>
+            <LinkTxt href={SUPPORT_URL} style={[paragraphStyle, { marginTop: spacing.m }]}>
+              {tr('about.openSupport')}
+            </LinkTxt>
           </Block>
         </FadeUp>
 
@@ -56,11 +62,21 @@ export default function AboutScreen() {
         </FadeUp>
 
         <FadeUp index={3}>
-          <Block title={tr('about.dataTitle')} text={tr('about.dataText')} />
+          <Block title={tr('about.dataTitle')}>
+            <Txt style={[paragraphStyle, { color: t.text, marginTop: 7 }]}>{tr('about.dataText')}</Txt>
+            <LinkTxt href={PRIVACY_URL} style={[paragraphStyle, { marginTop: spacing.m }]}>
+              {tr('about.openPrivacy')}
+            </LinkTxt>
+          </Block>
         </FadeUp>
 
         <FadeUp index={4}>
-          <Block title={tr('about.termsTitle')} text={tr('about.termsText')} />
+          <Block title={tr('about.termsTitle')}>
+            <Txt style={[paragraphStyle, { color: t.text, marginTop: 7 }]}>{tr('about.termsText')}</Txt>
+            <LinkTxt href={TERMS_URL} style={[paragraphStyle, { marginTop: spacing.m }]}>
+              {tr('about.openTerms')}
+            </LinkTxt>
+          </Block>
         </FadeUp>
 
         <FadeUp index={5}>

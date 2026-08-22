@@ -7,3 +7,11 @@ import Constants from 'expo-constants';
 export function appVersion(): string {
   return Constants.expoConfig?.version ?? '—';
 }
+
+/** Единственный источник адресов публичных страниц (спека 54: GitHub Pages этого репозитория).
+ *  Лежит здесь, а не в feedback.ts: appInfo — метаданные приложения (версия, адреса страниц),
+ *  а feedback.ts — про письмо поддержки (адрес и сборка mailto). */
+export const SITE_URL = 'https://sivyankof.github.io/arcanum';
+export const PRIVACY_URL = `${SITE_URL}/privacy.html`;
+export const TERMS_URL = `${SITE_URL}/terms.html`;
+export const SUPPORT_URL = `${SITE_URL}/support.html`;

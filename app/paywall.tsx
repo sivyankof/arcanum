@@ -2,7 +2,7 @@
  *  В 53а покупки недоступны (Expo Go): CTA/«Восстановить»/«Управлять» открывают диалог-объяснение,
  *  сам экран и гейты проверяются с DEV-тумблером в настройках. Маршрут корневого стека под
  *  гардом онбординга (app/_layout.tsx). Композиция — макет v-paywall. */
-import { router, Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -11,10 +11,12 @@ import { ConfirmDialog } from '../src/components/ConfirmDialog';
 import { CtaButton } from '../src/components/CtaButton';
 import { Emblem } from '../src/components/Emblem';
 import { FadeUp } from '../src/components/FadeUp';
+import { LinkTxt } from '../src/components/LinkTxt';
 import { PremiumBadge } from '../src/components/PremiumBadge';
 import { PressableScale } from '../src/components/PressableScale';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
+import { PRIVACY_URL, TERMS_URL } from '../src/lib/appInfo';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
@@ -171,13 +173,9 @@ export default function PaywallScreen() {
           </Pressable>
           <Txt style={[st.legal, { color: t.muted }]}>
             {tr('paywall.legal')}{' '}
-            <Txt style={{ color: t.accent }} onPress={() => router.push('/about')}>
-              {tr('paywall.terms')}
-            </Txt>
+            <LinkTxt href={TERMS_URL}>{tr('paywall.terms')}</LinkTxt>
             {' · '}
-            <Txt style={{ color: t.accent }} onPress={() => router.push('/about')}>
-              {tr('paywall.privacy')}
-            </Txt>
+            <LinkTxt href={PRIVACY_URL}>{tr('paywall.privacy')}</LinkTxt>
           </Txt>
         </FadeUp>
       </ScrollView>

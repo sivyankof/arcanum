@@ -1,0 +1,45 @@
+# Деплой публичных юридических страниц (политика, условия, поддержка) на GitHub Pages
+# из папки `site/` (спека 54). Срабатывает на пуш в main, если изменился сам `site/` или
+# этот workflow, плюс можно запустить вручную (workflow_dispatch) — например, после первого
+# включения Pages, когда содержимое `site/` уже лежит в main, но само действие ещё не бежало.
+# Артёму нужно один раз включить: Settings → Pages → Source: GitHub Actions.
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site/ as Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

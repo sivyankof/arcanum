@@ -127,6 +127,9 @@ export default function Onboarding() {
                 </FadeUp>
                 <FadeUp index={3} style={st.ctaWrap}>
                   <CtaButton label={tr('ob.start')} onPress={() => goStep(2)} />
+                  {/* дисклеймер первого шага (release-checklist, спека 54): в макете v-onboarding
+                      его нет — решение Д3, дорисовка макета отложена в бэклог */}
+                  <Txt style={[st.disclaimer, { color: t.muted }]}>{tr('ob.disclaimer')}</Txt>
                 </FadeUp>
               </>
             )}
@@ -242,6 +245,7 @@ const st = StyleSheet.create({
   h1: { fontFamily: fonts.display, fontSize: 32, textAlign: 'center' },
   h2: { fontFamily: fonts.display, fontSize: 26, marginTop: 30, textAlign: 'center' },
   lead: { fontSize: 14, lineHeight: 24, textAlign: 'center', marginTop: 12, maxWidth: 270 },
+  disclaimer: { fontSize: 11.5, lineHeight: 17, textAlign: 'center', paddingHorizontal: 8, marginTop: 12 },
   fieldWrap: { width: '100%' },
   field: { borderWidth: 1, borderRadius: 14, paddingVertical: 14, paddingHorizontal: 16, marginTop: 12 },
   fieldLabel: { fontSize: 9, letterSpacing: 2 },
