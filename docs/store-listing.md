@@ -186,7 +186,7 @@ A 32-lesson course, all 78 cards with meanings and symbolism, a daily card with 
 
 ---
 
-# Español (черновик — носитель не читал)
+# Español (вычитан носителем, задача 57н)
 
 ### es · название (30)
 Arcanum — Aprende Tarot
@@ -195,57 +195,57 @@ Arcanum — Aprende Tarot
 Curso, significados y tiradas
 
 ### es · короткое описание Google (80)
-Aprende a leer el tarot: curso de 32 lecciones, 78 cartas y carta del día
+Aprende a leer el tarot: curso de 32 lecciones, 78 cartas y tu carta del día
 
 ### es · ключевые слова iOS (100)
-adivinacion,cartas,tirada,lectura,mazo,arcanos,luna,principiantes,diario,dia,waite,simbolismo
+adivinacion,cartomancia,cartas,lectura,mazo,baraja,arcanos,luna,principiantes,diario,dia,rider,waite
 
 ### es · промо-текст iOS (170)
-Novedades en 1.0: curso de 32 lecciones, las 78 cartas explicadas, diez tiradas, entrenador de memoria y calendario lunar. Todo funciona sin conexión.
+Arcanum 1.0 ya está aquí: curso de 32 lecciones, las 78 cartas explicadas, diez tiradas, entrenador de memoria y calendario lunar. Funciona sin conexión y sin cuenta.
 
 ### es · полное описание (4000)
-Arcanum te enseña a leer el tarot desde cero, con calma y cinco minutos al día.
+Arcanum te enseña a leer el tarot desde cero: con calma, cinco minutos al día.
 
-Es un curso, no una máquina de adivinar: entiendes de dónde vienen los significados y poco a poco empiezas a leer las cartas por tu cuenta.
+Aquí no hay una bola de cristal. Hay un curso: entiendes de dónde salen los significados y, poco a poco, empiezas a leer las cartas por tu cuenta.
 
 QUÉ INCLUYE
 
-• Un curso de 6 módulos y 32 lecciones. Teoría, análisis de cartas y una prueba corta al final de cada lección: 160 preguntas en total. Cada lección abre la siguiente, y la racha de días te ayuda a no abandonar.
+• Un curso de 6 módulos y 32 lecciones. Teoría, análisis de cartas y una prueba corta al final de cada lección: 160 preguntas en total. Cada lección desbloquea la siguiente y tu racha de días te ayuda a no perder el ritmo.
 
-• Un manual con las 78 cartas. Cada una con su significado al derecho y al revés, su lectura por áreas de la vida (amor, trabajo, dinero, salud), el simbolismo del dibujo y su sentido como carta del día. Con búsqueda y filtros por arcanos y palos.
+• Un manual con las 78 cartas. De cada carta tienes su significado derecho e invertido, su lectura por áreas de la vida (amor, trabajo, dinero, salud), el simbolismo de la ilustración y lo que quiere decir como carta del día. Incluye búsqueda y filtros por arcanos y palos.
 
-• Carta del día. Una carta cada mañana con su lectura y una pregunta para afianzarla; por la noche, una reflexión breve sobre si resonó. Todo queda guardado en tu diario con notas.
+• Carta del día. Una carta cada mañana, con su lectura y una pregunta para fijar lo aprendido; por la noche, una reflexión corta sobre si te resonó o no. Todo se guarda en tu Diario, junto con tus notas.
 
-• Diez tiradas: tres cartas, cruz celta, herradura, de pareja, de elección, del mes y más. Cada posición tiene nombre y explicación, así que ves qué significa cada lugar.
+• Diez tiradas: la de tres cartas, la cruz celta, la herradura, la de pareja, la de elección, la del mes y más. Cada posición lleva nombre y explicación, para que sepas qué significa cada lugar de la mesa.
 
-• Entrenador de memoria. Tarjetas con repetición espaciada: la aplicación decide qué carta mostrarte hoy para que los significados se queden contigo.
+• Entrenador de memoria. Tarjetas con repetición espaciada: la app elige qué carta te toca hoy para que los significados se te queden.
 
-• Calendario lunar. Las fases, las lunas nuevas y las llenas se calculan con un algoritmo astronómico, no con una tabla aproximada. La luna nueva y la llena tienen sus propias tiradas.
+• Calendario lunar. Las fases, las lunas nuevas y las llenas se calculan con un algoritmo astronómico, no con una tabla aproximada. La luna nueva y la luna llena tienen sus propias tiradas.
 
-• Diario. Todas tus cartas del día y tiradas con notas, estadísticas del mes, exportación y restauración desde un archivo.
+• Diario. Guarda todas tus cartas del día y tus tiradas con notas, te muestra las estadísticas del mes y te deja exportar y restaurar todo desde un archivo.
 
 CÓMO FUNCIONA
 
-La aplicación funciona sin conexión: todo el contenido viene dentro y solo necesitas internet para comprar la suscripción. Sin cuenta y sin recopilación de datos: tu progreso y tus notas se quedan en tu dispositivo.
+Arcanum funciona sin conexión: todo el contenido ya viene en la app y solo necesitas internet para comprar la suscripción. No hace falta crear una cuenta y no recopilamos datos: tu progreso y tus notas se quedan en tu dispositivo.
 
-Cuatro idiomas: español, inglés, ruso y portugués.
+Disponible en cuatro idiomas: español, inglés, ruso y portugués.
 
 ARCANUM PREMIUM
 
-Gratis para siempre: la carta del día con su lectura, el manual completo de 78 cartas con todas sus secciones, el diario sin límites, los dos primeros módulos del curso, las tiradas «Tres cartas» y «Luna nueva», y una sesión de entrenador al día.
+Gratis para siempre: la carta del día con su lectura, el manual completo de las 78 cartas con todas sus secciones, el Diario sin límites, los dos primeros módulos del curso, las tiradas “Tres cartas” y “Luna nueva”, y una sesión del Entrenador al día.
 
-Premium abre los módulos 3-6 del curso, el resto de las tiradas y el entrenador sin límites. La suscripción se renueva automáticamente y puedes cancelarla en los ajustes de la tienda. Si caduca, todo lo que ya hayas completado se queda contigo.
+Premium desbloquea los módulos 3 a 6 del curso, el resto de las tiradas y el Entrenador sin límites. La suscripción se renueva automáticamente y puedes cancelarla cuando quieras desde los ajustes de tu cuenta en la tienda. Si algún día se vence, todo lo que ya hayas completado se queda contigo.
 
-Esta aplicación es para aprender y entretenerse. No predice el futuro ni sustituye la consulta con un profesional.
+Arcanum es una app para aprender y entretenerte. No predice el futuro ni sustituye la consulta con un profesional.
 
 ### es · что нового (4000)
-La primera versión de Arcanum.
+Esta es la primera versión de Arcanum.
 
-Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la carta del día con diario y reflexión de la noche, diez tiradas, entrenador de memoria y calendario lunar. Todo funciona sin conexión, en cuatro idiomas.
+Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la carta del día con Diario y reflexión por la noche, diez tiradas, entrenador de memoria y calendario lunar. Funciona sin conexión y está disponible en cuatro idiomas.
 
 ---
 
-# Português do Brasil (черновик — носитель не читал)
+# Português do Brasil (вычитан носителем, задача 57н)
 
 ### pt · название (30)
 Arcanum — Aprenda Tarô
@@ -254,50 +254,50 @@ Arcanum — Aprenda Tarô
 Curso, significados e tiragens
 
 ### pt · короткое описание Google (80)
-Aprenda a ler tarô: curso de 32 lições, 78 cartas e carta do dia
+Aprenda a ler tarô: curso de 32 lições, as 78 cartas e a carta do dia
 
 ### pt · ключевые слова iOS (100)
-taro,tarot,cartas,tiragem,leitura,baralho,arcanos,lua,adivinhacao,iniciantes,diario,waite
+taro,tarot,cartas,tiragem,leitura,baralho,arcanos,lua,adivinhacao,iniciantes,diario,waite,rider
 
 ### pt · промо-текст iOS (170)
-Novidades na 1.0: curso de 32 lições, as 78 cartas explicadas, dez tiragens, treinador de memória e calendário lunar. Tudo funciona sem internet.
+Novidades da versão 1.0: curso de 32 lições, as 78 cartas explicadas, dez tiragens, treinador de memória e calendário lunar. Funciona offline, sem cadastro.
 
 ### pt · полное описание (4000)
-O Arcanum ensina você a ler tarô do zero, com calma e cinco minutos por dia.
+O Arcanum ensina você a ler tarô do zero, com calma, cinco minutos por dia.
 
-É um curso, não uma máquina de adivinhação: você entende de onde vêm os significados e aos poucos passa a ler as cartas sozinho.
+É um curso, não uma bola de cristal: você entende de onde vêm os significados e, aos poucos, passa a ler as cartas por conta própria.
 
-O QUE TEM DENTRO
+O QUE VOCÊ ENCONTRA NO APP
 
-• Um curso de 6 módulos e 32 lições. Teoria, análise das cartas e um teste curto ao fim de cada lição: 160 perguntas no total. Cada lição abre a seguinte, e a sequência de dias ajuda a não desistir.
+• Um curso de 6 módulos e 32 lições. Teoria, análise das cartas e um teste curto no fim de cada lição, 160 perguntas no total. Cada lição libera a seguinte, e a sequência de dias ajuda a manter o ritmo.
 
-• Um guia com as 78 cartas. Cada uma com o significado normal e invertido, a leitura por áreas da vida (amor, trabalho, dinheiro, saúde), o simbolismo do desenho e o sentido como carta do dia. Com busca e filtros por arcanos e naipes.
+• Um guia com as 78 cartas. Cada carta traz o significado normal e o invertido, a leitura por áreas da vida (amor, trabalho, dinheiro, saúde), o simbolismo da imagem e o sentido como carta do dia. Tem busca e filtros por arcanos e naipes.
 
-• Carta do dia. Uma carta toda manhã com a leitura e uma pergunta para fixar; à noite, uma reflexão curta sobre se ela fez sentido. Tudo fica salvo no seu diário, com anotações.
+• Carta do dia. Uma carta toda manhã, com a interpretação e uma pergunta para fixar o que você aprendeu; à noite, uma reflexão rápida: fez sentido ou não? Tudo fica salvo no seu diário, com espaço para anotações.
 
-• Dez tiragens: três cartas, cruz celta, ferradura, de relacionamento, de escolha, do mês e outras. Cada posição tem nome e explicação, então você vê o que cada lugar significa.
+• Dez tiragens: Três Cartas, Cruz Celta, Ferradura, Relacionamento, Escolha, Mês e outras. Cada posição tem nome e explicação, assim você entende o que cada uma representa na leitura.
 
-• Treinador de memória. Cartões com repetição espaçada: o aplicativo decide qual carta mostrar hoje para que os significados fiquem com você.
+• Treinador de memória. Cartões com repetição espaçada: o app escolhe qual carta mostrar hoje para os significados ficarem na memória de vez.
 
-• Calendário lunar. As fases, as luas novas e as cheias são calculadas por um algoritmo astronômico, não por uma tabela aproximada. A lua nova e a cheia têm tiragens próprias.
+• Calendário lunar. As fases, as luas novas e as luas cheias são calculadas com um algoritmo astronômico, e não com uma tabela aproximada. A lua nova e a lua cheia têm tiragens próprias.
 
-• Diário. Todas as cartas do dia e tiragens com anotações, estatísticas do mês, exportação e restauração por arquivo.
+• Diário. Todas as cartas do dia e todas as tiragens com suas anotações, as estatísticas do mês e backup em arquivo, para exportar e restaurar quando quiser.
 
 COMO FUNCIONA
 
-O aplicativo funciona sem internet: todo o conteúdo já vem dentro dele, e a conexão só é necessária para comprar a assinatura. Sem conta e sem coleta de dados: seu progresso e suas anotações ficam no seu aparelho.
+O app funciona offline: todo o conteúdo já vem instalado, e a internet só é necessária para assinar. Não precisa criar conta e nada é coletado: seu progresso e suas anotações ficam no seu aparelho.
 
 Quatro idiomas: português, inglês, russo e espanhol.
 
 ARCANUM PREMIUM
 
-Grátis para sempre: a carta do dia com a leitura, o guia completo das 78 cartas com todas as seções, o diário sem limites, os dois primeiros módulos do curso, as tiragens «Três cartas» e «Lua nova», e uma sessão do treinador por dia.
+Grátis para sempre: a carta do dia com a interpretação, o guia completo das 78 cartas com todas as seções, o diário sem limites, os dois primeiros módulos do curso, as tiragens Três Cartas e Lua Nova e uma sessão do Treinador por dia.
 
-O Premium abre os módulos 3-6 do curso, as demais tiragens e o treinador sem limites. A assinatura é renovada automaticamente e pode ser cancelada nas configurações da loja. Se ela terminar, tudo o que você já concluiu continua com você.
+O Premium libera os módulos 3 a 6 do curso, as outras tiragens e o Treinador sem limites. A assinatura é renovada automaticamente e pode ser cancelada nas configurações da loja. Se ela acabar, tudo o que você já concluiu continua com você.
 
 Este aplicativo é para aprendizado e entretenimento. Ele não prevê o futuro e não substitui a consulta com um profissional.
 
 ### pt · что нового (4000)
-A primeira versão do Arcanum.
+Esta é a primeira versão do Arcanum.
 
-Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do dia com diário e reflexão à noite, dez tiragens, treinador de memória e calendário lunar. Tudo funciona sem internet, em quatro idiomas.
+Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do dia com diário e reflexão à noite, dez tiragens, treinador de memória e calendário lunar. Funciona tudo offline, em quatro idiomas.
