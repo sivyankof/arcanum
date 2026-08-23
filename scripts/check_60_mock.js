@@ -1,11 +1,12 @@
-/* Приёмка задачи 60 — восемь дорисовок `docs/design-reference.html` по итогам аудита 56.
+/* Приёмка задачи 60 — дорисовки `docs/design-reference.html` по итогам аудита 56 (пункты 1–8)
+ * и по задаче 59 (пункт 9 — две строки вместо одной).
  *
  * Проверяет САМ макет, а не приложение: открывает файл в Chromium, ходит по всем вью и
  * сверяет то, что перечислено в `docs/prompts/56-mockup-tails.md`.
  *
  * Запуск (playwright в проекте не установлен, берётся из кэша npx — см. AGENTS.md):
  *   NODE_PATH=<путь к node_modules с playwright> node scripts/check_60_mock.js
- *   --mutate <1..8>  — испортить макет В ПАМЯТИ и убедиться, что проверка N краснеет
+ *   --mutate <1..9>  — испортить макет В ПАМЯТИ и убедиться, что проверка N краснеет
  *                      (правило проекта: зелёный с первого раза — искать ошибку в проверке).
  */
 const path = require('path');
@@ -60,6 +61,12 @@ const check = (n, title, ok, detail = '') => results.push({ n, title, ok, detail
       if (m === 7) {
         [...document.querySelectorAll('#v-settings .pv')]
           .find((x) => x.textContent.trim() === 'Вкл').style.color = 'var(--accent)';
+      }
+      if (m === 9) {
+        const rows = [...document.querySelectorAll('#v-settings .prow')];
+        const date = rows.find((r) => r.textContent.includes('Дата рождения'));
+        date.querySelector('.pl').textContent = 'Имя и дата рождения';
+        rows.find((r) => r.textContent.trim().startsWith('Имя')).remove();
       }
       if (m === 8) {
         [...document.querySelectorAll('#v-settings .pl')]
@@ -142,6 +149,13 @@ const check = (n, title, ok, detail = '') => results.push({ n, title, ok, detail
   check(8, 'настройки: «Экспорт данных» и «Импорт из файла» двумя строками',
     idx('Экспорт данных') > -1 && idx('Импорт из файла') === idx('Экспорт данных') + 1
       && !order.some((x) => x.includes('Экспорт дневника')),
+    order.join(' · '));
+
+  // 9. имя и дата рождения — ДВЕ строки (задача 59: у строки настройки справа одно значение;
+  //    product-spec §5 переписан под две, макет обязан идти следом)
+  check(9, 'настройки: «Имя» и «Дата рождения» двумя строками',
+    idx('Имя') > -1 && idx('Дата рождения') === idx('Имя') + 1
+      && !order.some((x) => x.includes('Имя и дата')),
     order.join(' · '));
 
   await browser.close();
