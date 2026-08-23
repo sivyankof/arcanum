@@ -392,8 +392,8 @@
      },
      "options": [
       {
-       "ru": "Чувства нужно сначала проверить и только потом впустить",
-       "en": "Feelings must be tested first and only then let in",
+       "ru": "Чувства нужно сначала проверить, а потом впустить",
+       "en": "Feelings must be tested first, and then let in",
        "es": "Los sentimientos hay que probarlos primero y solo después dejarlos entrar",
        "pt": "Que o sentimento precisa ser testado antes de ser deixado entrar"
       },
@@ -404,8 +404,8 @@
        "pt": "Que um sentimento novo chega sozinho — e vale simplesmente acolhê-lo"
       },
       {
-       "ru": "Хорошее достаётся только тем, кто этого добивается трудом",
-       "en": "Good things come only to those who work hard for them",
+       "ru": "Хорошее обычно достаётся тем, кто добивается его своим трудом",
+       "en": "Good things usually come to those who work hard for them",
        "es": "Lo bueno les llega solo a quienes lo consiguen con esfuerzo",
        "pt": "Que o bom só chega para quem conquista com muito esforço"
       }
@@ -501,7 +501,7 @@
      "options": [
       {
        "ru": "Не задерживаться на горе, а сразу двигаться дальше",
-       "en": "Skip the grief entirely and simply move on right away",
+       "en": "Skip the grief and simply move on right away",
        "es": "No detenerse en el dolor y seguir adelante de inmediato",
        "pt": "Não se demorar no luto e seguir em frente na mesma hora"
       },
@@ -590,8 +590,8 @@
        "pt": "Aproveitar o calor das lembranças sem fugir para dentro delas"
       },
       {
-       "ru": "Отказаться от воспоминаний вовсе, чтобы не размякнуть",
-       "en": "Cutting memories off entirely so they don't soften you",
+       "ru": "Отказаться от воспоминаний, чтобы не размякнуть",
+       "en": "Cutting memories off so they don't soften you",
        "es": "Renunciar del todo a los recuerdos para no ablandarse",
        "pt": "Abrir mão das lembranças por completo, para não amolecer"
       }
@@ -620,14 +620,14 @@
        "pt": "Que, enquanto você remexe nas fantasias, a vida fica parada"
       },
       {
-       "ru": "Мечтать вредно, поэтому от всех планов лучше отказаться",
-       "en": "Dreaming is harmful, so every plan is better dropped",
+       "ru": "Мечтать вредно, и от таких планов лучше отказаться",
+       "en": "Dreaming is harmful, so such plans are better dropped",
        "es": "Soñar hace daño, así que mejor abandonar todos los planes",
        "pt": "Que sonhar faz mal, então é melhor abandonar todos os planos"
       },
       {
-       "ru": "Все семь видений одинаково стоит воплотить по очереди",
-       "en": "All seven visions are equally worth chasing in turn",
+       "ru": "Хорошая идея — попробовать несколько видений и выбрать позже",
+       "en": "A good idea is to try a few visions and decide later",
        "es": "Las siete visiones valen lo mismo y conviene perseguirlas todas por turno",
        "pt": "Que as sete visões merecem igualmente ser realizadas, uma a uma"
       }
@@ -776,8 +776,8 @@
        "pt": "Ele trata do pensamento, da palavra e do preço da clareza para a mente"
       },
       {
-       "ru": "Она про деньги и заботу о теле, как Пентакли",
-       "en": "It's about money and the body, like Pentacles",
+       "ru": "Она про чувства и отношения между людьми, совсем как Кубки",
+       "en": "It's about feelings and relationships between people, like Cups",
        "es": "Trata del dinero y del cuidado del cuerpo, como Oros",
        "pt": "Ele trata de dinheiro e do cuidado com o corpo, como os Ouros"
       }
@@ -879,8 +879,8 @@
        "pt": "Que a dor reconhecida vai aos poucos passando, como a chuva da carta"
       },
       {
-       "ru": "Боль лучше скрывать ото всех и делать вид, что всё в порядке",
-       "en": "Pain is best hidden and never spoken about",
+       "ru": "Боль лучше прятать и делать вид, что вы в порядке",
+       "en": "It's better to hide the pain and act as if you are just fine",
        "es": "Que el dolor conviene esconderlo de todos y aparentar que todo está bien",
        "pt": "Que a dor é melhor escondida de todos, fingindo que está tudo bem"
       },
@@ -950,7 +950,7 @@
      },
      "options": [
       {
-       "ru": "О новой победе, которая наконец расставит всё по местам",
+       "ru": "О новой победе, которая наконец расставит вещи по местам",
        "en": "Winning a new argument that finally settles things",
        "es": "De una nueva victoria que por fin pondrá todo en su lugar",
        "pt": "De uma nova vitória que finalmente vai colocar tudo no lugar"
@@ -962,8 +962,8 @@
        "pt": "Da travessia rumo à calma, mesmo que a tristeza ainda esteja por perto"
       },
       {
-       "ru": "О полном и мгновенном забвении всего, что случилось раньше",
-       "en": "Instantly forgetting everything that happened before",
+       "ru": "О быстром забвении того, что случилось раньше",
+       "en": "Forgetting what happened before almost right away",
        "es": "De olvidar por completo y al instante todo lo que pasó antes",
        "pt": "Do esquecimento total e imediato de tudo o que aconteceu antes"
       }
@@ -992,14 +992,14 @@
        "pt": "Para um caminho indireto: a esperteza alheia ou a sua própria esquiva"
       },
       {
-       "ru": "На честный разговор, который наконец состоялся",
-       "en": "An honest conversation that finally happened",
+       "ru": "На честный разговор, который наконец состоялся между людьми",
+       "en": "An honest conversation that finally got resolved between them",
        "es": "A una conversación honesta que por fin sucedió",
        "pt": "Para uma conversa honesta que finalmente aconteceu"
       },
       {
-       "ru": "На выгодную сделку, которая устраивает все стороны",
-       "en": "A deal that suits every side",
+       "ru": "На выгодную сделку, которая устроила обе стороны спора",
+       "en": "A profitable deal that works out nicely for both sides involved",
        "es": "A un buen trato que le conviene a todas las partes",
        "pt": "Para um acordo vantajoso que agrada a todos os lados"
       }
@@ -1136,8 +1136,8 @@
      },
      "options": [
       {
-       "ru": "Гарантию, что деньги придут сами по себе, без ваших усилий",
-       "en": "A guarantee that money will show up on its own, no effort needed",
+       "ru": "Мысль о том, что деньги придут сами, если немного подождать",
+       "en": "A sense that money will show up on its own if you simply wait",
        "es": "La garantía de que el dinero llegará solo, sin esfuerzo de tu parte",
        "pt": "A garantia de que o dinheiro vem sozinho, sem nenhum esforço seu"
       },
@@ -1178,8 +1178,8 @@
        "pt": "Manter a flexibilidade e o equilíbrio em pleno movimento"
       },
       {
-       "ru": "Довести все дела до идеального порядка, а уже потом расслабиться",
-       "en": "Bring every task to perfect order before you finally allow yourself to relax",
+       "ru": "Довести дела до порядка, а потом наконец расслабиться",
+       "en": "Bring your tasks to order before you finally allow yourself to relax",
        "es": "A dejar todos los asuntos en orden perfecto y recién entonces relajarse",
        "pt": "Deixar tudo em ordem perfeita e só então relaxar"
       },
@@ -1244,8 +1244,8 @@
      },
      "options": [
       {
-       "ru": "Что помощи ждать неоткуда, и рассчитывать можно только на себя",
-       "en": "That there is nowhere to expect help from and you're entirely on your own",
+       "ru": "Что помощи ждать неоткуда, и разумнее рассчитывать на себя самого",
+       "en": "That there is nowhere to expect help from, and it's better to rely on yourself",
        "es": "Que no hay ayuda de dónde esperarla y solo puedes contar contigo",
        "pt": "Que não há de onde esperar ajuda e só dá para contar consigo mesmo"
       },
@@ -1328,14 +1328,14 @@
        "pt": "Quando a ajuda vem com condições invisíveis"
       },
       {
-       "ru": "Когда дающий использует весы, чтобы всё было честно и по справедливости",
-       "en": "When the giver uses scales to make sure everything stays fair",
+       "ru": "Когда дающий использует весы, показывая свою честность окружающим",
+       "en": "When the giver uses the scales to show off their fairness to others",
        "es": "Cuando quien da usa una balanza para que todo sea justo y parejo",
        "pt": "Quando quem dá usa a balança para que tudo fique justo e equilibrado"
       },
       {
-       "ru": "Когда в обмене вообще участвуют деньги, а не только внимание и время",
-       "en": "When money is involved in the exchange at all, not just attention and time",
+       "ru": "Когда в обмене участвуют деньги, а не внимание и время",
+       "en": "When money is involved in the exchange, rather than attention and time",
        "es": "Cuando en el intercambio hay dinero de por medio y no solo atención y tiempo",
        "pt": "Quando há dinheiro envolvido na troca, e não só atenção e tempo"
       }

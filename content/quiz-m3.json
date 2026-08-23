@@ -315,14 +315,14 @@
      },
      "options": [
       {
-       "ru": "Жизнь несправедлива, и с этим нужно смириться",
-       "en": "Life is unfair and must be accepted",
+       "ru": "Итог всё равно решится сам, независимо от ваших действий",
+       "en": "It resolves on its own anyway, no matter what you do",
        "es": "Que la vida es injusta y hay que resignarse",
        "pt": "Que a vida é injusta e é preciso se conformar com isso"
       },
       {
-       "ru": "Каждому в жизни достаётся случайная доля удачи",
-       "en": "Everyone gets a random share of luck",
+       "ru": "Итог зависит от случайности, а не от ваших усилий",
+       "en": "The outcome depends on chance, not on your efforts",
        "es": "Que a cada quien le toca una porción de suerte al azar",
        "pt": "Que cada pessoa recebe na vida uma parcela aleatória de sorte"
       },
@@ -351,14 +351,14 @@
      },
      "options": [
       {
-       "ru": "Что в этой ситуации было вам приятно, а что оказалось неприятно и вызвало досаду",
-       "en": "What in the situation felt pleasant to you, and what felt unpleasant and left you upset",
+       "ru": "Где решала Справедливость без вас, а где Колесо шло за вашим выбором",
+       "en": "Where Justice decided without you, and where the Wheel followed your choice",
        "es": "Lo que en ella te resultó agradable y lo que te resultó desagradable y te dejó con fastidio",
        "pt": "O que nela foi agradável para você e o que foi desagradável e causou aborrecimento"
       },
       {
-       "ru": "Что в ней случилось раньше по времени, а что случилось намного позже, под конец",
-       "en": "What in it happened first, and what happened much later, closer to the very end",
+       "ru": "Где вы проявили слабость, а где вам помогли со стороны",
+       "en": "Where you showed weakness, and where someone helped you from outside",
        "es": "Lo que en ella ocurrió primero y lo que ocurrió mucho después, ya sobre el final",
        "pt": "O que nela aconteceu antes no tempo e o que aconteceu bem depois, já no fim"
       },
@@ -399,13 +399,13 @@
       },
       {
        "ru": "О буквальной опасности, которую надо предотвратить",
-       "en": "A literal danger to prevent",
+       "en": "A literal danger that must be prevented",
        "es": "De un peligro literal que hay que evitar",
        "pt": "De um perigo literal que precisa ser evitado"
       },
       {
        "ru": "О чужом дурном влиянии, от которого стоит защититься",
-       "en": "Someone else's bad influence",
+       "en": "Someone else's bad influence, best avoided",
        "es": "De la mala influencia ajena, de la que conviene protegerse",
        "pt": "De uma má influência alheia da qual convém se proteger"
       }
@@ -507,14 +507,14 @@
        "pt": "Do ajuste fino da vida nova: gota a gota, sem extremos nem arrancos"
       },
       {
-       "ru": "Строгим самоограничением и запретами почти во всём сразу, без пощады к себе",
-       "en": "Imposes strict self-denial in almost everything at once, with no mercy for yourself",
+       "ru": "Поиском новых впечатлений и развлечений, чтобы отвлечься от случившегося",
+       "en": "Looking for new impressions and distractions to take your mind off what happened",
        "es": "De una autolimitación estricta, con prohibiciones en casi todo a la vez y sin darse ninguna tregua",
        "pt": "De uma autolimitação severa, com proibições em quase tudo de uma vez e sem piedade consigo"
       },
       {
-       "ru": "Быстрым и решительным стартом с чистого листа, без оглядки на прошлое",
-       "en": "Makes a fast, decisive start from a clean slate, with no glance back at the past",
+       "ru": "Подробным разбором того, что пошло не так, и поиском виноватых",
+       "en": "A detailed review of what went wrong, and looking for someone to blame",
        "es": "De un arranque rápido y decidido desde cero, sin mirar atrás al pasado",
        "pt": "De um começo rápido e decidido do zero, sem olhar para o passado"
       }
@@ -843,14 +843,14 @@
        "pt": "Ela é direta, e não refletida: a situação é vista como ela é"
       },
       {
-       "ru": "Он ярче обычного, но при этом гораздо быстрее гаснет",
-       "en": "It is brighter, but it fades much faster than usual",
+       "ru": "Он такой же переменчивый и обманчивый, как свет Луны",
+       "en": "It is just as changeable and misleading as the Moon's light",
        "es": "Es más brillante de lo habitual, pero se apaga mucho más rápido",
        "pt": "Ela é mais intensa que o normal, mas em compensação se apaga bem mais depressa"
       },
       {
-       "ru": "Ничем: обе карты в этом уроке ровно про одну и ту же ясность",
-       "en": "Nothing at all: both cards in this lesson mean the very same clarity",
+       "ru": "Он тоже отражённый, только более яркий и сильный",
+       "en": "It's also reflected light, just brighter and stronger",
        "es": "En nada: en esta lección las dos cartas hablan exactamente de la misma claridad",
        "pt": "Em nada: nesta lição as duas cartas falam exatamente da mesma clareza"
       }
@@ -909,8 +909,8 @@
      },
      "options": [
       {
-       "ru": "«Кто вообще во всём этом виноват?»",
-       "en": "\"Who is to blame for this?\"",
+       "ru": "«Что подскажет мне опыт?»",
+       "en": "\"What does experience suggest?\"",
        "es": "«¿Quién tiene la culpa de todo esto?»",
        "pt": "“Afinal, quem é o culpado de tudo isso?”"
       },
@@ -921,8 +921,8 @@
        "pt": "“Isto é um fato — ou eu preenchi as lacunas?”"
       },
       {
-       "ru": "«Что самое худшее может случиться?»",
-       "en": "\"What is the worst that could happen?\"",
+       "ru": "«Как скоро это закончится?»",
+       "en": "\"How soon will this be over?\"",
        "es": "«¿Qué es lo peor que puede pasar?»",
        "pt": "“Qual é a pior coisa que pode acontecer?”"
       }
@@ -1071,8 +1071,8 @@
        "pt": "No fim, o conhecimento não serviu para ninguém e acabou esquecido"
       },
       {
-       "ru": "Это разные фигуры, и их совпадение случайно",
-       "en": "They are different figures; the match is a coincidence",
+       "ru": "Путь героя окончен насовсем, и дальше идти уже некуда",
+       "en": "The hero's journey is over for good, with nowhere left to go",
        "es": "Que son figuras distintas y su parecido es casualidad",
        "pt": "São figuras diferentes, e a coincidência é casual"
       }
@@ -1095,14 +1095,14 @@
      },
      "options": [
       {
-       "ru": "Потому что в конце долгого пути герой теряет всё, что успел приобрести",
-       "en": "Because at the very end of the road the hero loses everything",
+       "ru": "Потому что герой возвращается туда же, откуда начал, ничего не изменив",
+       "en": "Because the hero ends up in the same place, unchanged inside",
        "es": "Porque al final del largo camino el héroe pierde todo lo que alcanzó a ganar",
        "pt": "Porque no fim de um longo caminho o herói perde tudo o que tinha conquistado"
       },
       {
-       "ru": "Потому что весь путь Дурака с самого начала был одной большой ошибкой",
-       "en": "Because the Fool's whole journey was a mistake from the start",
+       "ru": "Потому что после Мира начинается другая, отдельная история",
+       "en": "Because after The World, a different, separate story begins",
        "es": "Porque todo el camino del Loco fue, desde el principio, un gran error",
        "pt": "Porque o caminho do Louco foi, desde o início, um grande erro"
       },

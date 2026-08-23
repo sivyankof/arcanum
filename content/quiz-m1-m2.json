@@ -99,7 +99,7 @@
       },
       {
        "ru": "Принять решение за вас, чтобы вы наконец перестали мучиться сомнениями",
-       "en": "Make the decision for you, so you never have to agonise over it ever again",
+       "en": "Make the decision for you, so you can finally stop agonising over it",
        "es": "Tomar la decisión por ti, para que dejes de atormentarte con las dudas de una vez",
        "pt": "Tomar a decisão no seu lugar, para você enfim parar de sofrer com a dúvida"
       },
@@ -170,14 +170,14 @@
        "pt": "Um espelho e um interlocutor para conversas honestas com você"
       },
       {
-       "ru": "Оракулом, который сообщает готовое будущее",
-       "en": "An oracle that hands you a ready-made future",
+       "ru": "Оракулом, который заранее подскажет, чем всё закончится",
+       "en": "An oracle that tells you how your story is going to end",
        "es": "Un oráculo que te entrega el futuro ya resuelto",
        "pt": "Um oráculo que anuncia um futuro já pronto"
       },
       {
-       "ru": "Магическим шаром, который всё сделает сам",
-       "en": "A crystal ball that does all the work for you",
+       "ru": "Магическим шаром, который сам сделает всю работу",
+       "en": "A crystal ball that does all the work and makes every choice for you",
        "es": "Una bola mágica que hace todo el trabajo por ti",
        "pt": "Uma bola mágica que faz tudo sozinha"
       }
@@ -247,14 +247,14 @@
        "pt": "Está em jogo algo realmente importante — grandes temas e momentos de virada"
       },
       {
-       "ru": "Расклад не получился — лучше перемешать и вытянуть заново",
-       "en": "The reading misfired — better shuffle and draw again",
+       "ru": "Расклад не получился — стоит перемешать колоду и вытянуть карты заново",
+       "en": "The reading didn't work out — you should reshuffle and draw the cards again",
        "es": "Que la tirada no salió bien: mejor barajar y sacar de nuevo",
        "pt": "A tiragem não deu certo — melhor embaralhar e tirar de novo"
       },
       {
-       "ru": "Вопрос был о бытовых мелочах",
-       "en": "The question was about small everyday things",
+       "ru": "Вопрос был о повседневных мелочах — покупках, уборке, привычных делах",
+       "en": "The question was about small everyday things — errands, chores, routine stuff",
        "es": "Que la pregunta era sobre pequeñeces de todos los días",
        "pt": "A pergunta era sobre miudezas do dia a dia"
       }
@@ -433,7 +433,7 @@
       },
       {
        "ru": "Отложить колоду и пропустить этот день",
-       "en": "Put the whole deck away and skip today's card entirely",
+       "en": "Put the whole deck away and skip today's card",
        "es": "Guardar el mazo y saltarte la carta de hoy",
        "pt": "Guardar o baralho e pular a carta de hoje"
       },
@@ -982,14 +982,14 @@
      },
      "options": [
       {
-       "ru": "Цветущий сад, где живёт сама Императрица",
-       "en": "The Empress's own blooming garden where she lives",
+       "ru": "Дверь в дальние покои, куда входят только жрецы",
+       "en": "A door to inner chambers open only to priests",
        "es": "El jardín florido donde vive La Emperatriz",
        "pt": "O jardim florido onde vive a própria Imperatriz"
       },
       {
-       "ru": "Трон Императора среди суровых гор",
-       "en": "The Emperor's throne among the stern mountains",
+       "ru": "Библиотеку свитков, которые Жрица уже прочитала",
+       "en": "A library of scrolls the Priestess has already read",
        "es": "El trono del Emperador entre montañas ásperas",
        "pt": "O trono do Imperador entre montanhas severas"
       },
@@ -1061,8 +1061,8 @@
        "pt": "A Sacerdotisa recebe e escuta; a Imperatriz entrega e faz crescer"
       },
       {
-       "ru": "Обе карты учат нас только молчанию и терпению без действий",
-       "en": "Both cards only teach silence and patience, never action",
+       "ru": "Обе карты учат паузе и терпению, а не действию",
+       "en": "Both of these cards teach pause and patience, not action",
        "es": "Que ambas cartas solo enseñan silencio y paciencia, nunca acción",
        "pt": "As duas cartas ensinam apenas silêncio e paciência, nunca a ação"
       },
@@ -1138,8 +1138,8 @@
        "pt": "Dentro de muros firmes de ordem, dá para relaxar"
       },
       {
-       "ru": "Он избавляет вас от всех правил и обязательств",
-       "en": "He frees you completely from every rule and obligation",
+       "ru": "Он освобождает вас от правил, которые кажутся неудобными",
+       "en": "He frees you from rules that feel inconvenient",
        "es": "Que te libera por completo de toda regla y de toda obligación",
        "pt": "Ele livra você por completo de toda regra e obrigação"
       },
@@ -1318,8 +1318,8 @@
      },
      "options": [
       {
-       "ru": "Победа над соперниками в борьбе за сердце",
-       "en": "Victory over rivals for someone's heart",
+       "ru": "Умение убеждать и нравиться людям",
+       "en": "The skill of persuading and charming people",
        "es": "La victoria sobre los rivales en la disputa por un corazón",
        "pt": "A vitória sobre os rivais na disputa por um coração"
       },
@@ -1463,14 +1463,14 @@
      },
      "options": [
       {
-       "ru": "Сначала доехать, потом решить, куда хотелось",
-       "en": "First arrive, then decide where you wanted to go",
+       "ru": "Двигаться вперёд — а куда именно, неважно",
+       "en": "Just keep moving forward — the direction doesn't matter",
        "es": "Primero llegar y después decidir a dónde querías ir",
        "pt": "Primeiro chegar, depois decidir aonde você queria ir"
       },
       {
-       "ru": "Выбор и движение не связаны между собой",
-       "en": "Choice and movement have nothing to do with each other",
+       "ru": "Сначала действовать волей, а сердце разберётся потом",
+       "en": "Act with your will first, and let your heart decide later",
        "es": "La elección y el movimiento no tienen relación entre sí",
        "pt": "Escolha e movimento não têm relação um com o outro"
       },
@@ -1626,8 +1626,8 @@
        "pt": "Esqueceu uma carta? Lembre a etapa do herói, e o significado volta sozinho"
       },
       {
-       "ru": "Список значений сложно удержать в памяти целиком",
-       "en": "A full list of meanings is hard to hold in memory all at once",
+       "ru": "Список значений трудно запомнить без постоянного повторения",
+       "en": "A list of meanings is hard to remember without constant repetition",
        "es": "Porque cuesta bastante retener en la memoria la lista de significados completa",
        "pt": "É difícil manter na memória a lista de significados por completo"
       }
@@ -1703,8 +1703,8 @@
        "pt": "Ler cada carta em separado pelo glossário, sem ligar uma à outra"
       },
       {
-       "ru": "Выбрать только ту карту, что нравится больше остальных",
-       "en": "Pick only the card that you personally like more than the rest",
+       "ru": "Сложить номера карт и получить одно число-подсказку",
+       "en": "Add up the cards' numbers to get a single clue",
        "es": "Elegir solo la carta que te guste más que las demás",
        "pt": "Escolher só a carta de que você gosta mais do que das outras"
       }
@@ -1763,14 +1763,14 @@
      },
      "options": [
       {
-       "ru": "Нет, пара читается одинаково в любом порядке",
-       "en": "No, a pair reads the same in any order",
+       "ru": "Нет, порядок почти не меняет смысл пары",
+       "en": "No, the order barely changes the pair's meaning",
        "es": "No, un par se lee igual en cualquier orden",
        "pt": "Não, a dupla se lê igual em qualquer ordem"
       },
       {
-       "ru": "Порядок важен только для Старших арканов",
-       "en": "Order matters only for the Major Arcana",
+       "ru": "Порядок важнее для Старших арканов, чем прочих",
+       "en": "Order matters more for Major Arcana than for others",
        "es": "El orden importa solo para los Arcanos Mayores",
        "pt": "A ordem só importa para os Arcanos Maiores"
       },

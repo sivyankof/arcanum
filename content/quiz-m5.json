@@ -99,7 +99,7 @@
       },
       {
        "ru": "Хладнокровным стратегом, который не показывает чувств",
-       "en": "A cool strategist who never shows feelings",
+       "en": "A cool strategist who keeps their feelings hidden",
        "es": "Una estratega de sangre fría que nunca muestra lo que siente",
        "pt": "Um estrategista frio, que nunca mostra o que sente"
       },
@@ -128,8 +128,8 @@
      },
      "options": [
       {
-       "ru": "Сразу делать выводы и без промедления делиться ими со всеми",
-       "en": "Draw conclusions at once and share them with everyone right away",
+       "ru": "Довериться первому впечатлению вместо проверки фактов",
+       "en": "Trust the first impression instead of checking facts",
        "es": "Sacar conclusiones de inmediato y compartirlas enseguida con todos",
        "pt": "Tirar conclusões na hora e compartilhá-las com todos sem demora"
       },
@@ -392,8 +392,8 @@
      },
      "options": [
       {
-       "ru": "Королева сильнее и потому побеждает Рыцаря в раскладе",
-       "en": "The Queen is stronger and so outranks the Knight in any spread",
+       "ru": "Королева выше по рангу и потому командует Рыцарем",
+       "en": "The Queen outranks the Knight and gives the orders",
        "es": "La Reina es más fuerte y por eso le gana al Caballero en la tirada",
        "pt": "A Rainha é mais forte e por isso vence o Cavaleiro na tiragem"
       },
@@ -471,7 +471,7 @@
       },
       {
        "ru": "Она живёт идеями и вдохновляет, не касаясь быта",
-       "en": "She lives on ideas and inspires, never touching daily life",
+       "en": "She lives on ideas and inspires, without touching daily life",
        "es": "Vive de ideas e inspira, sin tocar lo cotidiano",
        "pt": "Ela vive de ideias e inspira, sem tocar no dia a dia"
       },
@@ -500,8 +500,8 @@
      },
      "options": [
       {
-       "ru": "Излишняя холодность и полное безразличие к чувствам других",
-       "en": "Excessive coldness and total indifference to other people's feelings",
+       "ru": "Обида на тех, кто чувствует не так глубоко, как она",
+       "en": "Resentment toward people who don't feel as deeply as she does",
        "es": "Frialdad excesiva e indiferencia total ante los sentimientos ajenos",
        "pt": "Frieza excessiva e total indiferença aos sentimentos dos outros"
       },
@@ -698,8 +698,8 @@
        "pt": "Deixar a emoção de lado, pesar os fatos e decidir pela consciência"
       },
       {
-       "ru": "Спросить всех вокруг и выбрать самый популярный вариант",
-       "en": "Ask everyone around you and go with the most popular option",
+       "ru": "Подождать, пока решение примет кто-то другой",
+       "en": "Wait for someone else to make the decision instead",
        "es": "Preguntarle a todo el mundo y elegir la opción más popular",
        "pt": "Perguntar a todo mundo em volta e escolher a opção mais popular"
       }

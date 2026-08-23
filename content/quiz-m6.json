@@ -211,8 +211,8 @@
        "pt": "Um mesmo elemento, números diferentes: o par mostra como o sentimento muda no tempo"
       },
       {
-       "ru": "Ничего особенного: карты одной масти рядом не связаны между собой",
-       "en": "Nothing in particular: same-suit cards side by side aren't connected",
+       "ru": "Их связывает совпадение чисел: два и шесть в сумме дают восемь",
+       "en": "They're connected by a numeric coincidence: two and six add up to eight",
        "es": "Nada en particular: dos cartas del mismo palo juntas no se relacionan entre sí",
        "pt": "Nada de especial: cartas do mesmo naipe lado a lado não têm ligação entre si"
       },
@@ -463,8 +463,8 @@
      },
      "options": [
       {
-       "ru": "Подсчёт числовых значений всех трёх карт",
-       "en": "Adding up the numeric value of all three cards drawn",
+       "ru": "Подсчёт перевёрнутых и прямых карт в раскладе",
+       "en": "Counting how many cards landed reversed versus upright",
        "es": "Sumar el valor numérico de las tres cartas que salieron",
        "pt": "Somar os valores numéricos das três cartas abertas"
       },
@@ -475,8 +475,8 @@
        "pt": "Uma ponte armada com as conjunções “porque”, “para” e “mas”"
       },
       {
-       "ru": "Чтение карт в обратном порядке, от «Будущего» к «Прошлому»",
-       "en": "Reading the cards backwards, from 'Future' through to 'Past'",
+       "ru": "Повторение значения каждой карты вслух ещё раз",
+       "en": "Repeating each card's meaning out loud one more time",
        "es": "Leer las cartas al revés, del «Futuro» hacia el «Pasado»",
        "pt": "Ler as cartas na ordem inversa, do “Futuro” para o “Passado”"
       }
@@ -577,8 +577,8 @@
      },
      "options": [
       {
-       "ru": "Всё в порядке: связывать карты нужно только в раскладах для других людей",
-       "en": "Nothing's wrong: bridging the cards only matters in readings done for other people",
+       "ru": "Просто выучить значения карт получше — сюжет сложится сам",
+       "en": "Just learn the card meanings better — the story will come together on its own",
        "es": "Todo está bien: solo hace falta conectar las cartas en las tiradas para otras personas",
        "pt": "Está tudo certo: ligar as cartas só é preciso em tiragens para outras pessoas"
       },
@@ -589,8 +589,8 @@
        "pt": "Armar uma ponte entre as cartas: assim sai uma história, e não uma lista de palavras"
       },
       {
-       "ru": "Стоит читать карты в обратном порядке — сначала «Будущее», потом «Прошлое»",
-       "en": "It helps to read the cards in reverse order — Future first, then Past",
+       "ru": "Перечитать вслух названия позиций: «Прошлое», «Настоящее», «Будущее»",
+       "en": "Reread the position names out loud: 'Past', 'Present', 'Future'",
        "es": "Conviene leer las cartas al revés: primero el «Futuro» y después el «Pasado»",
        "pt": "Vale ler as cartas na ordem inversa — primeiro o “Futuro”, depois o “Passado”"
       }
@@ -619,14 +619,14 @@
        "pt": "Ela perdeu a pergunta, e sem pergunta as cartas se desfazem em palavras genéricas"
       },
       {
-       "ru": "Ему стоило выбрать расклад попроще, чем «Три карты»",
-       "en": "They should have picked a simpler spread than Three Cards",
+       "ru": "Он не заметил, что одна из карт легла перевёрнутой",
+       "en": "He didn't notice that one of the cards had landed reversed",
        "es": "Debió elegir una tirada más simple que la de Tres cartas",
        "pt": "Ela deveria ter escolhido uma tiragem mais simples do que a “Três cartas”"
       },
       {
-       "ru": "Ничего страшного: расклад одинаково работает и без исходного вопроса",
-       "en": "Nothing serious: a spread works just as well without the original question in mind",
+       "ru": "Ему не хватило точных слов, чтобы описать каждую карту",
+       "en": "He didn't have precise enough words to describe each card",
        "es": "No pasa nada: la tirada funciona igual sin la pregunta inicial",
        "pt": "Ela não tem com que se preocupar: a tiragem funciona igual sem a pergunta inicial"
       }
