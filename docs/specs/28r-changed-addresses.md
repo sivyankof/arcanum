@@ -467,3 +467,49 @@
 ## m6l4-q2[2].ru
 - было: Ничего страшного: расклад одинаково работает и без исходного вопроса
 - стало: Ему не хватило точных слов, чтобы описать каждую карту
+
+---
+
+**Второй проход (по итогам слепого прогона 23.08).** Пять пометок слепого решателя
+оказались настоящими: разбор — в отчёте спеки.
+
+## m3l5-q3[1].ru
+- было: Он такой же переменчивый и обманчивый, как свет Луны
+- стало: Он ярче, но показывает только то, что хочется увидеть
+
+## m3l5-q3[1].en
+- было: It is just as changeable and misleading as the Moon's light
+- стало: It is brighter, but it shows only what you want to see
+
+## m3l5-q3[2].ru
+- было: Он тоже отражённый, только более яркий и сильный
+- стало: Он тёплый, а лунный холодный — в этом вся разница
+
+## m3l5-q3[2].en
+- было: It's also reflected light, just brighter and stronger
+- стало: It is warm and the Moon's is cold — that's the whole difference
+
+## m4l5-q1[0].ru
+- было: Она сразу зовёт к делу, как Жезлы, и не оставляет времени думать
+- стало: Она про порыв и действие раньше размышления
+
+## m4l5-q1[0].en
+- было: It calls you to act at once, like Wands, leaving no time to think
+- стало: It's about impulse and acting before thinking
+
+## m4l5-q1[2].ru
+- было: Она про чувства и отношения между людьми, совсем как Кубки
+- стало: Она про чувства, которые важнее доводов и слов
+
+## m4l5-q1[2].en
+- было: It's about feelings and relationships between people, like Cups
+- стало: It's about feelings that matter more than arguments
+
+## m6l3-q3[2].ru
+- было: Повторение значения каждой карты вслух ещё раз
+- стало: Выбрать из трёх карт главную и читать историю по ней
+
+## m6l3-q3[2].en
+- было: Repeating each card's meaning out loud one more time
+- стало: Pick the main card of the three and build the story on it
+

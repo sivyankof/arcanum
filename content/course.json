@@ -3136,14 +3136,14 @@
          "pt": "Ela é direta, e não refletida: a situação é vista como ela é"
         },
         {
-         "ru": "Он такой же переменчивый и обманчивый, как свет Луны",
-         "en": "It is just as changeable and misleading as the Moon's light",
+         "ru": "Он ярче, но показывает только то, что хочется увидеть",
+         "en": "It is brighter, but it shows only what you want to see",
          "es": "Es más brillante de lo habitual, pero se apaga mucho más rápido",
          "pt": "Ela é mais intensa que o normal, mas em compensação se apaga bem mais depressa"
         },
         {
-         "ru": "Он тоже отражённый, только более яркий и сильный",
-         "en": "It's also reflected light, just brighter and stronger",
+         "ru": "Он тёплый, а лунный холодный — в этом вся разница",
+         "en": "It is warm and the Moon's is cold — that's the whole difference",
          "es": "En nada: en esta lección las dos cartas hablan exactamente de la misma claridad",
          "pt": "Em nada: nesta lição as duas cartas falam exatamente da mesma clareza"
         }
@@ -4368,8 +4368,8 @@
        },
        "options": [
         {
-         "ru": "Она сразу зовёт к делу, как Жезлы, и не оставляет времени думать",
-         "en": "It calls you to act at once, like Wands, leaving no time to think",
+         "ru": "Она про порыв и действие раньше размышления",
+         "en": "It's about impulse and acting before thinking",
          "es": "Llama a actuar de inmediato, como Bastos, y no deja tiempo para pensar",
          "pt": "Ele chama para a ação na hora, como os Paus, e não deixa tempo para pensar"
         },
@@ -4380,8 +4380,8 @@
          "pt": "Ele trata do pensamento, da palavra e do preço da clareza para a mente"
         },
         {
-         "ru": "Она про чувства и отношения между людьми, совсем как Кубки",
-         "en": "It's about feelings and relationships between people, like Cups",
+         "ru": "Она про чувства, которые важнее доводов и слов",
+         "en": "It's about feelings that matter more than arguments",
          "es": "Trata del dinero y del cuidado del cuerpo, como Oros",
          "pt": "Ele trata de dinheiro e do cuidado com o corpo, como os Ouros"
         }
@@ -6623,8 +6623,8 @@
          "pt": "Uma ponte armada com as conjunções “porque”, “para” e “mas”"
         },
         {
-         "ru": "Повторение значения каждой карты вслух ещё раз",
-         "en": "Repeating each card's meaning out loud one more time",
+         "ru": "Выбрать из трёх карт главную и читать историю по ней",
+         "en": "Pick the main card of the three and build the story on it",
          "es": "Leer las cartas al revés, del «Futuro» hacia el «Pasado»",
          "pt": "Ler as cartas na ordem inversa, do “Futuro” para o “Passado”"
         }
