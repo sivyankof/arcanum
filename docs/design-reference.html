@@ -49,11 +49,10 @@ animation:drift 18s ease-in-out infinite alternate}
 .status{position:relative;z-index:6;display:flex;justify-content:space-between;padding:15px 28px 0;
 font-size:12.5px;font-weight:700;color:var(--head)}
 .isl{position:absolute;left:50%;top:13px;transform:translateX(-50%);width:96px;height:27px;background:#000;border-radius:16px;z-index:7}
-.mode{position:absolute;right:20px;top:52px;z-index:8;width:34px;height:34px;border-radius:50%;cursor:pointer;
-border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(8px);
-display:flex;align-items:center;justify-content:center;color:var(--accent);transition:.3s}
-.mode:hover{transform:rotate(24deg)}
-.mode svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round}
+/* переключатель темы — СЛУЖЕБНАЯ кнопка макета, поэтому стоит в демобаре, вне экрана телефона
+   (задача 60, п. 5): в приложении её нет, а на профиле это место занимает шестерёнка настроек */
+.demobar button.svc{margin-left:auto;display:inline-flex;align-items:center;gap:7px;border-style:dashed}
+.demobar button.svc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round}
 
 /* screens */
 .view{position:absolute;inset:0;padding:64px 22px 96px;overflow-y:auto;scrollbar-width:none;z-index:4;display:none}
@@ -277,6 +276,8 @@ color:var(--muted);cursor:pointer;transition:.22s;position:relative}
 background:linear-gradient(90deg,transparent,var(--accent),transparent)}
 .nav>div.on svg{filter:drop-shadow(0 0 7px var(--glow))}
 .nav>div:active{transform:translateY(-4px) scale(1.06)}
+/* экраны вне группы (tabs) таб-бара не имеют — открываются поверх, с кнопкой «назад» (задача 60) */
+.sc.notabs .nav{display:none}
 .spark{position:absolute;pointer-events:none;color:var(--accent);z-index:8;animation:fly 1.05s ease-out forwards;
 text-shadow:0 0 9px var(--glow)}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
@@ -793,7 +794,7 @@ border:.5px solid rgba(226,189,114,.3)}
 <body>
 <div class="kicker">Полный макет · направление «Небесное золото»</div>
 <h1>Arcanum</h1>
-<p class="sub">Все пять экранов в одном телефоне — ходите по <b>нижней навигации</b>. Вытяните карту дня · откройте <b>путь курса</b> · в справочнике тапните <b>Дурака</b> — откроется страница карты с вкладками по сферам · загляните в расклады. Кнопка ☾/☀ справа сверху переключает тёмную и светлую тему.</p>
+<p class="sub">Все пять экранов в одном телефоне — ходите по <b>нижней навигации</b>. Вытяните карту дня · откройте <b>путь курса</b> · в справочнике тапните <b>Дурака</b> — откроется страница карты с вкладками по сферам · загляните в расклады. Кнопка «Тема» справа в этом ряду переключает тёмную и светлую — она служебная, в приложении её нет.</p>
 
 <div class="demobar">
 <button class="on" onclick="demo('app',this)">Приложение</button>
@@ -804,6 +805,7 @@ border:.5px solid rgba(226,189,114,.3)}
 <button onclick="demo('widget',this)">Виджеты</button>
 <button onclick="demo('moon',this)">Луна</button>
 <button onclick="pwDemo(this)">Premium</button>
+<button class="svc" id="modebtn" title="Служебная кнопка макета — в приложении её нет"><svg viewBox="0 0 24 24"><path d="M19.5 13.5A7.8 7.8 0 1 1 10.5 4a6.2 6.2 0 0 0 9 9.5z"/></svg>Тема</button>
 </div>
 <div class="phone"><div class="sc" data-mode="dark" id="sc">
   <div class="aur"></div><div class="noise"></div>
@@ -814,7 +816,6 @@ border:.5px solid rgba(226,189,114,.3)}
   </div>
   <div class="isl"></div>
   <div class="status"><span>9:41</span><span style="letter-spacing:2px">▪▪▪</span></div>
-  <div class="mode" id="modebtn"><svg viewBox="0 0 24 24"><path d="M19.5 13.5A7.8 7.8 0 1 1 10.5 4a6.2 6.2 0 0 0 9 9.5z"/></svg></div>
 
   <!-- ===== СЕГОДНЯ ===== -->
   <div class="view on" id="v-today">
@@ -966,8 +967,9 @@ border:.5px solid rgba(226,189,114,.3)}
 
   <!-- ===== УРОК ===== -->
   <div class="view" id="v-lesson">
-    <div class="date fadeup d1">МОДУЛЬ 2 · УРОК 1</div>
-    <div class="h2 fadeup d1" style="font-size:22px">Дурак и Маг</div>
+    <div class="backbtn fadeup d1" onclick="show('v-course')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>КУРС</div>
+    <div class="date fadeup d2">МОДУЛЬ 2 · УРОК 1</div>
+    <div class="h2 fadeup d2" style="font-size:22px">Дурак и Маг</div>
     <div class="prog fadeup d2"><div class="bar"><i></i></div><b>4/9</b></div>
     <div class="theory fadeup d3"><h5 style="font-size:8.5px;letter-spacing:2.5px;color:var(--accent);margin-bottom:6px">ТЕОРИЯ</h5><p>Все 22 Старших аркана — это одна большая история: путешествие героя по имени Дурак. Сегодня она начинается: герой делает первый шаг — и тут же встречает первого учителя.
 
@@ -1053,17 +1055,19 @@ border:.5px solid rgba(226,189,114,.3)}
         <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
         <span class="pl" onclick="openLang()" style="cursor:pointer">Язык</span><span class="pv" onclick="openLang()" style="cursor:pointer">Русский ›</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3.5 2"/></svg>
+        <span class="pl">Вечерняя рефлексия</span><span class="pv">Вкл</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
-        <span class="pl">Напоминания</span><span class="pv" style="color:var(--accent)">Вкл</span></div>
+        <span class="pl">Напоминания</span><span class="pv">Вкл</span></div>
       <div class="subrow"><span>Утро · карта дня</span><span>9:00</span></div>
       <div class="subrow"><span>Вечер · как прошёл день</span><span>21:00</span></div>
       <div class="pcap">Ещё напомним, если серия под угрозой, и один раз — если вы давно не заходили</div>
-      <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3.5 2"/></svg>
-        <span class="pl">Вечерняя рефлексия</span><span class="pv" style="color:var(--accent)">Вкл</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg>
         <span class="pl">Имя и дата рождения</span><span class="pv">Анна · 01.02.1990</span></div>
-      <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 17.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg>
-        <span class="pl">Экспорт дневника</span><span class="pv">JSON</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 15V4M8.5 7.5 12 4l3.5 3.5"/><path d="M4.5 14.5v4a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-4"/></svg>
+        <span class="pl">Экспорт данных</span><span class="pv"></span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M3.5 19V6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v1"/><path d="m3.5 19 3-8h16l-3 8z"/></svg>
+        <span class="pl">Импорт из файла</span><span class="pv"></span></div>
       <div class="prow" onclick="this.querySelector('.pv').textContent='Откроется письмо ✉'">
         <svg viewBox="0 0 24 24"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v10a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 17V7A1.5 1.5 0 0 1 4 5.5z"/><path d="m3 7 9 6.5L21 7"/></svg>
         <span class="pl">Обратная связь и ошибки</span><span class="pv">Написать нам</span></div>
@@ -1137,7 +1141,7 @@ border:.5px solid rgba(226,189,114,.3)}
   <!-- ===== РАСКЛАД: ТРИ КАРТЫ ===== -->
   <div class="view" id="v-spread3">
     <div class="backbtn fadeup d1" onclick="show('v-spreads')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>РАСКЛАДЫ</div>
-    <div class="date fadeup d2">РАСКЛАД</div>
+    <div class="date fadeup d2">РАСКЛАД · 3 КАРТЫ</div>
     <div class="h2 fadeup d2">Три карты</div>
     <div class="rule fadeup d2"><span>✦</span></div>
     <p class="fadeup d3" style="text-align:center;color:var(--muted);font-size:12px;margin-top:6px">
@@ -1462,16 +1466,25 @@ document.getElementById('modebtn').onclick = () =>
   sc.dataset.mode = sc.dataset.mode === 'dark' ? 'light' : 'dark';
 
 /* navigation */
+/* Экраны ВНЕ группы (tabs): в приложении открываются поверх, с кнопкой «назад», и таб-бара
+   не имеют. Аудит 56 назвал четыре (урок, тренажёр, карта, луна); список полный по дереву
+   `app/` — иначе следующая сверка найдёт таб-бар на настройках и пейволе (задача 60, п. 1). */
+const STACK_VIEWS = ['v-detail','v-lesson','v-trainer','v-moon','v-moonspread',
+                     'v-settings','v-about','v-paywall','v-spread3','v-spread10'];
+/* Какому табу принадлежит вью: подсветка обязана совпадать с открытым экраном (п. 2). */
+const TAB_OF = {'v-today':'v-today','v-course':'v-course','v-cards':'v-cards',
+                'v-spreads':'v-spreads','v-profile':'v-profile'};
+
 function show(id){
   sc.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
   const v = document.getElementById(id); v.classList.add('on');
   v.querySelectorAll('.fadeup').forEach(f=>{f.style.animation='none';void f.offsetWidth;f.style.animation='';});
   v.scrollTop = 0;
+  sc.classList.toggle('notabs', STACK_VIEWS.includes(id));
+  const tab = TAB_OF[id];
+  if (tab) document.querySelectorAll('#nav>div').forEach(x=>x.classList.toggle('on', x.dataset.v === tab));
 }
-document.querySelectorAll('#nav>div').forEach(n=>{
-  n.onclick=()=>{document.querySelectorAll('#nav>div').forEach(x=>x.classList.remove('on'));
-    n.classList.add('on'); show(n.dataset.v);};
-});
+document.querySelectorAll('#nav>div').forEach(n=>{ n.onclick=()=>show(n.dataset.v); });
 
 /* today: flip */
 const stage=document.getElementById('stage');
