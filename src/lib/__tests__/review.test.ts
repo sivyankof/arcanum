@@ -1,4 +1,6 @@
-import type { CourseModule } from '../content';
+import fs from 'fs';
+import path from 'path';
+import type { CourseModule, TarotCard } from '../content';
 import { cards } from '../content';
 import type { LessonProgressMap } from '../courseProgress';
 import { inLang, LANGS, presentLang, type Localized } from '../lang';
@@ -18,6 +20,7 @@ import {
   promptSentence,
   reviewCardState,
   REVIEW_DAY_DEFAULT,
+  reviewPrompt,
   reviewSummary,
   SESSION_MAX,
   sessionStats,
@@ -308,17 +311,31 @@ describe('maskCardName — имя карты в подсказке toCard зам
   // что и сам текст, — то есть для непереведённых языков тест проверяет РОВНО ТО, что покажет экран
   // прямо сейчас (комбинацию en/en), а не притворяется, что проверил испанский или пропускает его
   // молча.
-  it.each(LANGS)('корпус %s: promptSentence(general) после маски не содержит имени карты', (lang) => {
+  // считается ЧЕРЕЗ reviewPrompt — ту же функцию, что зовёт экран: до 23.08 тест держал независимую
+  // копию формулы (blockText → promptSentence → presentLang → maskCardName), и откат любой её строки
+  // в app/review.tsx не ловился ничем (хвост 45б)
+  it.each(LANGS)('корпус %s: подсказка reviewPrompt не содержит имени карты', (lang) => {
     const leaks = cards
       .map((c) => {
-        const textLang = presentLang(c.content.general, lang);
-        const name = inLang(c.name, textLang);
-        const hint = maskCardName(promptSentence(inLang(c.content.general, lang)), name);
+        const { hint } = reviewPrompt(c, lang);
+        const name = inLang(c.name, presentLang(c.content.general, lang));
         const bare = name.replace(/^the\s+/i, '');
         return new RegExp(bare.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(hint) ? `${c.id}: ${hint}` : null;
       })
       .filter(Boolean);
     expect(leaks).toEqual([]);
+  });
+
+  // пустая подсказка формально «не содержит имени» — проверка выше прошла бы и на функции,
+  // возвращающей '' всегда. Корпус вычитан на всех четырёх языках (958/958 reviewed), значит
+  // подсказка обязана быть непустой у каждой карты; статус todo здесь — не «нет текста», а сигнал
+  // о поломке контента
+  it.each(LANGS)('корпус %s: подсказка и предложение непустые у всех 78 карт', (lang) => {
+    const empty = cards.filter((c) => {
+      const { sentence, hint } = reviewPrompt(c, lang);
+      return !sentence || !hint;
+    });
+    expect(empty.map((c) => c.id)).toEqual([]);
   });
 
   // синтетика: воспроизводит ровно тот сценарий, который сегодняшний корпус показать не может
@@ -335,9 +352,14 @@ describe('maskCardName — имя карты в подсказке toCard зам
       en: 'The Fool is the card of beginnings.',
       // es намеренно нет: presentLang(general, 'es') падает на 'en'
     };
+    // карта-синтетика: reviewPrompt читает ровно эти два поля, остальное для типа
+    const card = {
+      id: 'fool',
+      name,
+      content: { general: { ...general, status: { ru: 'reviewed', en: 'reviewed' } } },
+    } as unknown as TarotCard;
 
-    const textLang = presentLang(general, 'es');
-    const correctHint = maskCardName(promptSentence(inLang(general, 'es')), inLang(name, textLang));
+    const correctHint = reviewPrompt(card, 'es').hint;
     expect(correctHint).not.toMatch(/fool/i);
     expect(correctHint).toContain(NAME_MASK);
 
@@ -427,5 +449,30 @@ describe('doneCount — карты, покинувшие очередь за д�
     expect(mergeReviewDay({ date: T, newCount: 4, doneCount: 2 })).toEqual({ date: T, newCount: 4, doneCount: 2 });
     expect(mergeReviewDay(undefined)).toEqual(REVIEW_DAY_DEFAULT);
     expect(mergeReviewDay(null)).toEqual(REVIEW_DAY_DEFAULT);
+  });
+});
+
+/** Страж хвоста 45б: формула подсказки тренажёра живёт ТОЛЬКО в reviewPrompt. До 23.08 её держал
+ *  app/review.tsx, а тесты — независимую копию (blockText → promptSentence → presentLang →
+ *  maskCardName), поэтому откат любой строки в экране не ронял ни один тест. Приём — из
+ *  langSources.test.ts: запрещённое выражение ищется прямо в исходнике.
+ *  Красный прогон 23.08: возврат `maskCardName(` в app/review.tsx роняет ровно этот блок. */
+describe('подсказка тренажёра собирается одной функцией (хвост 45б)', () => {
+  const SCREEN = path.join(__dirname, '../../../app/review.tsx');
+  const src = () => fs.readFileSync(SCREEN, 'utf8');
+
+  it('экран найден (иначе тест проверял бы пустоту)', () => {
+    expect(fs.existsSync(SCREEN)).toBe(true);
+    expect(src().length).toBeGreaterThan(1000);
+  });
+
+  it('экран не собирает подсказку сам — нет прямых вызовов promptSentence/maskCardName/presentLang', () => {
+    // скобка обязательна: в комментарии эти имена перечислены через слэш и находкой быть не должны
+    const banned = ['promptSentence(', 'maskCardName(', 'presentLang('];
+    expect(banned.filter((b) => src().includes(b))).toEqual([]);
+  });
+
+  it('экран берёт тексты у reviewPrompt', () => {
+    expect(src()).toContain('reviewPrompt(');
   });
 });

@@ -30,19 +30,18 @@ import { ReviewResult } from '../src/components/ReviewResult';
 import { Rule } from '../src/components/Rule';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
-import { blockText, cardById, course } from '../src/lib/content';
+import { cardById, course } from '../src/lib/content';
 import { localDateISO } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
-import { inLang, presentLang } from '../src/lib/lang';
+import { inLang } from '../src/lib/lang';
 import { reviewLimitReached } from '../src/lib/premium';
 import {
   applyGrade,
   buildSession,
   deckOrder,
-  maskCardName,
   nextSessionSize,
-  promptSentence,
+  reviewPrompt,
   reviewSummary,
   sessionStats,
   type ReviewLogEntry,
@@ -123,20 +122,11 @@ export default function ReviewScreen() {
   const card = head ? cardById.get(head.cardId) : undefined;
   const keywords = card ? inLang(card.keywords, lang) : [];
   const name = card ? inLang(card.name, lang) : '';
-  // первое предложение общего значения через blockText: при todo — только чипы (keywords у всех 78
-  // вычитаны, «Текст готовится» на флеш-карте не бывает). На рубашке toCard — с именем под маской
-  // «···» (первое предложение general у всех карт начинается с имени — иначе вопрос выдавал бы
-  // ответ), в панели «ЗНАЧЕНИЕ» после ответа — целиком
-  const meaning = card ? blockText(card.content.general, lang) : { text: '', todo: true };
-  const sentence = meaning.todo ? '' : promptSentence(meaning.text);
-  // маска берёт имя НА ЯЗЫКЕ ПОКАЗАННОГО ТЕКСТА (presentLang), а не языка интерфейса: name и текст
-  // general переводятся РАЗНЫМИ единицами (wordsStatus у слов, статус блока — отдельно, спека 28а),
-  // и у каждой inLang падает на английский независимо от другой. Испанское имя без испанского
-  // general (или наоборот) не совпало бы по языку с текстом — маска не нашла бы вхождение, и
-  // рубашка-вопрос напечатала бы ответ прямо под чипами. Плашка с именем (она — ОТВЕТ, не подсказка)
-  // языка показанного текста не спрашивает и остаётся на языке интерфейса — см. `name` выше
-  const maskName = card ? inLang(card.name, presentLang(card.content.general, lang)) : '';
-  const backHint = sentence ? maskCardName(sentence, maskName) : '';
+  // тексты флеш-карты одной функцией: `sentence` — в панель «ЗНАЧЕНИЕ» после ответа, `hint` —
+  // на рубашку toCard с именем карты под маской «···». Формула (какой блок, какой язык у имени
+  // для маски, что при статусе todo) живёт в reviewPrompt, здесь её копии быть не должно —
+  // контракт-тест запрещает звать promptSentence/maskCardName/presentLang прямо отсюда
+  const { sentence, hint: backHint } = card ? reviewPrompt(card, lang) : { sentence: '', hint: '' };
 
   const onReveal = () => {
     if (!head || revealed) return;

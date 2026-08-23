@@ -2,9 +2,10 @@
  *  курса и DEV-диалога, правило начисления XP. Чистый модуль без импортов react/expo.
  *  Единственная функция, меняющая srs/reviewDay/XP, — applyReview; стор только применяет её
  *  результат (как completeLessonProgress у уроков). */
-import type { CourseModule } from './content';
+import { blockText, type CourseModule, type TarotCard } from './content';
 import { learnedCardIds, type LessonProgressMap } from './courseProgress';
 import { plusDaysISO } from './dates';
+import { inLang, presentLang, type Lang } from './lang';
 import { shuffle } from './shuffle';
 import { isDue, reviewState, type SrsGrade, type SrsState } from './srs';
 import { XP_REVIEW } from './xp';
@@ -255,4 +256,26 @@ export function maskCardName(text: string, name: string): string {
     if (out !== text) return dropArticle(out);
   }
   return text;
+}
+
+/** Пара текстов флеш-карты: `sentence` — первое предложение general (панель «ЗНАЧЕНИЕ» после
+ *  ответа), `hint` — оно же с именем карты под маской (рубашка направления toCard).
+ *  Формула живёт здесь, а не в экране: до 23.08 её держал `app/review.tsx`, а тесты — независимую
+ *  копию, и откат строки в экране не поймал бы ни один тест (хвост 45б). Экран зовёт только эту
+ *  функцию, прямые вызовы promptSentence/maskCardName/presentLang там запрещены контракт-тестом.
+ *
+ *  Текст берётся через blockText: при статусе todo подсказки нет вовсе — на флеш-карте остаются
+ *  только чипы keywords (они вычитаны у всех 78 карт, «Текст готовится» на карточке не бывает).
+ *
+ *  ⚠️ Имя для маски берётся НА ЯЗЫКЕ ПОКАЗАННОГО ТЕКСТА (presentLang), а не языка интерфейса:
+ *  name и general — разные единицы перевода (wordsStatus у слов, статус блока отдельно, спека 28а),
+ *  и у каждой inLang падает на английский НЕЗАВИСИМО от другой. Испанское имя при английском
+ *  general не совпало бы по языку с текстом — маска не нашла бы вхождение, и рубашка-вопрос
+ *  напечатала бы ответ прямо под чипами. Плашка с именем на экране — это ОТВЕТ, а не подсказка,
+ *  она языка показанного текста не спрашивает и остаётся на языке интерфейса. */
+export function reviewPrompt(card: TarotCard, lang: Lang): { sentence: string; hint: string } {
+  const meaning = blockText(card.content.general, lang);
+  const sentence = meaning.todo ? '' : promptSentence(meaning.text);
+  const maskName = inLang(card.name, presentLang(card.content.general, lang));
+  return { sentence, hint: sentence ? maskCardName(sentence, maskName) : '' };
 }
