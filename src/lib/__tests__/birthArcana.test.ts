@@ -1,4 +1,4 @@
-import { birthArcanaId, birthNumber, buildProfile } from '../birthArcana';
+import { birthArcanaId, birthNumber, buildProfile, NAME_MAX, normalizeName } from '../birthArcana';
 import { cardById } from '../content';
 
 describe('birthNumber — сумма цифр даты со свёрткой (logic-spec §5)', () => {
@@ -40,4 +40,29 @@ describe('buildProfile — сборка профиля онбордингом', 
     expect(buildProfile('   ')).toStrictEqual({ onboarded: true }));
   test('без даты → ни birthDate, ни birthArcanaId', () =>
     expect(buildProfile('Анна')).toStrictEqual({ name: 'Анна', onboarded: true }));
+});
+
+// Спека 59: до неё онбординг длину имени не ограничивал вовсе — имя видно заголовком
+// профиля в одну строку, и строка любой длины уезжала в персист как есть.
+describe('normalizeName — общая нормализация имени (спека 59)', () => {
+  test('снимает пробелы по краям', () => expect(normalizeName('  Анна ')).toBe('Анна'));
+  test('пустая строка остаётся пустой', () => expect(normalizeName('   ')).toBe(''));
+  test('длинное имя обрезается до NAME_MAX', () => {
+    expect(normalizeName('я'.repeat(NAME_MAX + 5))).toHaveLength(NAME_MAX);
+  });
+  test('имя ровно в NAME_MAX не трогается', () => {
+    const exact = 'я'.repeat(NAME_MAX);
+    expect(normalizeName(exact)).toBe(exact);
+  });
+  test('обрезка идёт ПОСЛЕ trim, а не до него', () => {
+    // если сначала обрезать, пробелы съедят часть знаков и имя окажется короче лимита
+    expect(normalizeName('   ' + 'я'.repeat(NAME_MAX))).toHaveLength(NAME_MAX);
+  });
+});
+
+describe('buildProfile — длина имени (спека 59)', () => {
+  test('имя длиннее NAME_MAX обрезается и в онбординге', () => {
+    const p = buildProfile('я'.repeat(NAME_MAX + 10));
+    expect(p.name).toHaveLength(NAME_MAX);
+  });
 });

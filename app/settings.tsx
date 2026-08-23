@@ -1,7 +1,7 @@
 /** Экран «Настройки» (product-spec §5): всё утилитарное уехало сюда из профиля, чтобы профиль
  *  остался «путём» — уровень, статистика, дневник. Вход — шестерёнка в правом верхнем углу профиля.
- *  Порядок строк по спеке: Тема · Язык · напоминания · рефлексия · экспорт/импорт (уже здесь,
- *  задача 11); имя и «о приложении» остаются на очереди — задачи 12 и 13. */
+ *  Порядок строк по спеке: Premium · Тема · Язык · рефлексия · напоминания · имя и дата
+ *  рождения (спека 59) · экспорт/импорт · обратная связь · о приложении. */
 import * as Clipboard from 'expo-clipboard';
 import { router, Stack } from 'expo-router';
 import React from 'react';
@@ -9,10 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { Linking, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ConfirmDialog } from '../src/components/ConfirmDialog';
+import { DatePicker } from '../src/components/DatePicker';
 import { FadeUp } from '../src/components/FadeUp';
 import { OptionPicker } from '../src/components/OptionPicker';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { SettingsRow } from '../src/components/SettingsRow';
+import { TextPrompt } from '../src/components/TextPrompt';
 import { TimePicker } from '../src/components/TimePicker';
 import { Txt } from '../src/components/Txt';
 import {
@@ -25,6 +27,7 @@ import {
   type ParseError,
 } from '../src/lib/backup';
 import { pickBackupText, shareBackup } from '../src/lib/backupIo';
+import { NAME_MAX } from '../src/lib/birthArcana';
 import { course } from '../src/lib/content';
 import { learnedCardIds, nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
@@ -80,6 +83,10 @@ export default function SettingsScreen() {
   const pushEvening = useApp((s) => s.settings.pushEvening);
   const setPushesOn = useApp((s) => s.setPushesOn);
   const setPushTime = useApp((s) => s.setPushTime);
+  const name = useApp((s) => s.profile.name);
+  const birthDate = useApp((s) => s.profile.birthDate);
+  const setName = useApp((s) => s.setName);
+  const setBirthDate = useApp((s) => s.setBirthDate);
   // весь settings/streak/freezes/lastDrawDate — только для DEV-строки «План пушей»
   // (planInputFromStore хочет их целиком, а не по отдельному полю, как остальной экран);
   // history читает ещё и обратная связь — в письмо уходит только его ДЛИНА, не содержимое
@@ -97,6 +104,8 @@ export default function SettingsScreen() {
   const resetSrs = useApp((s) => s.resetSrs);
   const devAgeSrs = useApp((s) => s.devAgeSrs);
   const devSeedMastery = useApp((s) => s.devSeedMastery);
+  const [namePrompt, setNamePrompt] = React.useState(false);
+  const [birthPicker, setBirthPicker] = React.useState(false);
   const [queueText, setQueueText] = React.useState<string | null>(null);
   // DEV: сводка очереди повторения (спека 45) — та же сборка, что возьмёт карточка курса в 45б
   const showReviewQueue = () => {
@@ -382,6 +391,25 @@ export default function SettingsScreen() {
             </FadeUp>
           </>
         )}
+        {/* Имя и дата рождения (спека 59) — двумя строками, а не одной: справа у строки
+            настройки ровно одно значение, объединённая показала бы половину состояния.
+            product-spec §5 записывает пункт одной строкой — расхождение осознанное (6а-0). */}
+        <FadeUp index={6}>
+          <SettingsRow
+            icon="person-outline"
+            label={tr('settings.name')}
+            value={name ?? tr('settings.nameEmpty')}
+            onPress={() => setNamePrompt(true)}
+          />
+        </FadeUp>
+        <FadeUp index={6}>
+          <SettingsRow
+            icon="calendar-outline"
+            label={tr('settings.birthDate')}
+            value={birthDate ? formatFullDate(birthDate, lang) : tr('settings.birthEmpty')}
+            onPress={() => setBirthPicker(true)}
+          />
+        </FadeUp>
         <FadeUp index={6}>
           <SettingsRow icon="share-outline" label={tr('settings.exportData')} value="" onPress={onExport} />
         </FadeUp>
@@ -541,6 +569,26 @@ export default function SettingsScreen() {
             </FadeUp>
           </>
         )}
+        <TextPrompt
+          visible={namePrompt}
+          title={tr('settings.name')}
+          initial={name ?? ''}
+          placeholder={tr('ob.namePlaceholder')}
+          maxLength={NAME_MAX}
+          confirmLabel={tr('settings.save')}
+          cancelLabel={tr('settings.cancel')}
+          onSubmit={setName}
+          onClose={() => setNamePrompt(false)}
+        />
+        {/* тот же DatePicker, что у карточки-приглашения профиля; здесь у него есть value —
+            то есть режим «сменить уже заданную дату», которого на профиле нет (спека 59) */}
+        <DatePicker
+          visible={birthPicker}
+          value={birthDate ?? null}
+          title={tr('settings.birthDate')}
+          onPick={setBirthDate}
+          onClose={() => setBirthPicker(false)}
+        />
         <TimePicker
           visible={picker !== null}
           value={picker === 'evening' ? pushEvening : pushMorning}

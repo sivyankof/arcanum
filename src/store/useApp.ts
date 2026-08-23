@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { PERSIST_DEFAULTS, resolveImportedLang, SCHEMA_VERSION, type BackupState } from '../lib/backup';
-import { birthArcanaId, buildProfile, type Profile } from '../lib/birthArcana';
+import { birthArcanaId, buildProfile, normalizeName, type Profile } from '../lib/birthArcana';
 import { course } from '../lib/content';
 import { completeLessonProgress, learnedCardIds, newlyLearnedIds, type LessonProgressMap } from '../lib/courseProgress';
 import { daysAgoISO, localDateISO, plusDaysISO } from '../lib/dates';
@@ -111,9 +111,13 @@ export interface AppState {
   setPushAsked: () => void;
   /** Финальная CTA онбординга: профиль пишется одним куском (buildProfile). */
   completeOnboarding: (name: string, birthDate?: string) => void;
-  /** Дата рождения, пропущенная в онбординге, — из карточки-приглашения профиля (спека 16).
+  /** Дата рождения, пропущенная в онбординге, — из карточки-приглашения профиля (спека 16)
+   *  и строки настроек (спека 59, там же смена уже заданной даты).
    *  Заполняет СУЩЕСТВУЮЩИЕ опциональные поля profile — persist version не меняется. */
   setBirthDate: (iso: string) => void;
+  /** Имя из строки настроек (спека 59). Пустое имя УДАЛЯЕТ ключ, а не пишет пустую строку:
+   *  заголовок профиля читает `name ?? tr('profile.title')`, и с `''` показал бы пустоту. */
+  setName: (name: string) => void;
   /** Только для разработки: вернуть онбординг — гард в _layout сам уведёт на экран. */
   resetOnboarding: () => void;
   setDevReflect: (on: boolean) => void;
@@ -264,6 +268,12 @@ export const useApp = create<AppState>()(
         set({
           profile: { ...get().profile, birthDate: iso, birthArcanaId: birthArcanaId(iso) },
         }),
+      setName: (name) => {
+        const trimmed = normalizeName(name);
+        // ключ собирается заново: спред `...profile` пустое имя бы не удалил, а перезаписал ''
+        const { name: _prev, ...rest } = get().profile;
+        set({ profile: trimmed ? { ...rest, name: trimmed } : rest });
+      },
       resetOnboarding: () => set({ profile: { onboarded: false } }),
       setDevReflect: (devReflect) => set({ devReflect }),
       setDevMoonOpen: (devMoonOpen) => set({ devMoonOpen }),
