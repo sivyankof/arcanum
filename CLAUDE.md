@@ -166,7 +166,7 @@
   «изучено» в справочнике (46/46б/46в), мастерство карты (49). **Локализация ES/PT закрыта (28)**: контент
   100 % на четырёх языках, UI — 4 языка, статусы es/pt `reviewed`; корпус карт 958/958 `reviewed`
   (ru/en после правок 28б/28в — условно, журнал `docs/canon-fixes-applied.md`).
-- **Цифры**: тестов 1551 в 44 сьютах, `tsc` чистый; **persist version 11** (`SCHEMA_VERSION`) —
+- **Цифры**: тестов 1561 в 45 сьютах, `tsc` чистый, `expo-doctor` 18/18; **persist version 11** (`SCHEMA_VERSION`) —
   следующая задача, меняющая схему стора, поднимает до 12; схема контента — статус по языкам (28а).
 - **Задача 51 (лунные расклады) ЗАКРЫТА 22.08**: лайв-проверка Артёма на iPhone ✓ («всё отлично»), ветка
   `feat/51-moon-spreads` влита в main. Два лунных расклада (новолуние free / полнолуние premium) открыты
@@ -208,9 +208,12 @@
   (второй заход по 35 вопросам раздела C списка 28е — вердикт по каждому, без правки списком) →
   **56** (плановая сверка приложения с макетом, 16 пар) → **57** (тексты сторов на 4 языках + тест
   лимитов). Промт сессии реализации — `docs/prompts/55-57-implementation-session.md`.
+  **55 ВЫПОЛНЕНА 23.08** (ждёт лайв-проверки): `expo-doctor` 18/18, хвост 45б закрыт
+  (`reviewPrompt` + контракт по исходнику), иконка пуша Android нарисована скриптом и подключена
+  плагином. Артёму нужен `npm install` и перезапуск `--tunnel` (менялись `package.json`/`app.json`).
+  Следующая в очереди — 28р.
 - **Открытые хвосты**: 28е → задача 28р (раздел C списка `docs/specs/28e-guessable-questions.md`);
-  41 отложена решением 16.08; хвосты 45б (третья копия 3D-переворота у карты дня; «Всё повторено ✓ ·
-  завтра: 0»); вопросы редактору — `docs/editor-questions.md`; фразы `push.freeze_saved`/`freeze.saved`/
+  41 отложена решением 16.08; вопросы редактору — `docs/editor-questions.md`; фразы `push.freeze_saved`/`freeze.saved`/
   `push.moon_*` ждут вычитки; отложенное подтверждение лунного пуша — утром 28.08.2026 баннер обязан
   сказать «Полнолуние ✦»; вычитка носителем строк и страниц задачи 54 — следующая волна Cowork.
 - **Решения, чтобы не возвращались**: сезонные события → v2; шаринг-карточка снята; XP в v1 не меняем
@@ -234,7 +237,7 @@
   `localeTag`), `i18n` (`useLang`, `AVAILABLE_LANGS`), `dates` (границы дня, `localMidnight`, `plusDaysISO`,
   `daysInMonth`, `formatTime`), `phrases` (`pickPhrase`/`pickVariant`), `shuffle`, `xp`, `streak`, `journal`,
   `reflection`, `settings`, `backup`/`backupIo`(.web), `pushPlan`/`pushBody`/`pushes`(.web), `moon`/
-  `moonCalendar`, `srs`/`review`/`mastery`, `courseProgress`/`lesson`/`collection`, `cardSearch`, `spread`/
+  `moonCalendar`, `srs`/`review` (+`reviewPrompt` — тексты флеш-карты, экран своей копии формулы держать не вправе)/`mastery`, `courseProgress`/`lesson`/`collection`, `cardSearch`, `spread`/
   `spreadLayout`/`composition`, `lightbox`, `birthArcana`, `feedback`, `appInfo` (версия + `SITE/PRIVACY/TERMS/SUPPORT_URL`), `revealQueue`/
   `cardTransition`; хуки — `useAppActive`, `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
   `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`.
