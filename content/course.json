@@ -124,8 +124,8 @@
         {
          "ru": "Принять решение за вас, чтобы вы наконец перестали мучиться сомнениями",
          "en": "Make the decision for you, so you can finally stop agonising over it",
-         "es": "Tomar la decisión por ti, para que dejes de atormentarte con las dudas de una vez",
-         "pt": "Tomar a decisão no seu lugar, para você enfim parar de sofrer com a dúvida"
+         "es": "Tomar la decisión en tu lugar, para que por fin dejes de darle vueltas a lo mismo",
+         "pt": "Escolher por você qual caminho seguir, para essa hesitação enfim parar de te desgastar"
         },
         {
          "ru": "Помочь сформулировать то, что вы уже чувствуете, но не проговаривали",
@@ -196,14 +196,14 @@
         {
          "ru": "Оракулом, который заранее подскажет, чем всё закончится",
          "en": "An oracle that tells you how your story is going to end",
-         "es": "Un oráculo que te entrega el futuro ya resuelto",
-         "pt": "Um oráculo que anuncia um futuro já pronto"
+         "es": "Un oráculo que se adelanta y cuenta cómo termina tu historia",
+         "pt": "Um oráculo que informa de antemão como a sua história vai terminar"
         },
         {
          "ru": "Магическим шаром, который сам сделает всю работу",
          "en": "A crystal ball that does all the work and makes every choice for you",
-         "es": "Una bola mágica que hace todo el trabajo por ti",
-         "pt": "Uma bola mágica que faz tudo sozinha"
+         "es": "Una bola de cristal que hace el trabajo por ti y elige en tu lugar",
+         "pt": "Uma bola de cristal que assume o trabalho e decide por você"
         }
        ],
        "correct": 0,
@@ -298,14 +298,14 @@
         {
          "ru": "Расклад не получился — стоит перемешать колоду и вытянуть карты заново",
          "en": "The reading didn't work out — you should reshuffle and draw the cards again",
-         "es": "Que la tirada no salió bien: mejor barajar y sacar de nuevo",
-         "pt": "A tiragem não deu certo — melhor embaralhar e tirar de novo"
+         "es": "Que la tirada falló y conviene volver a barajar el mazo y sacar otras cartas",
+         "pt": "A tiragem não funcionou — vale embaralhar o baralho de novo e tirar outras cartas"
         },
         {
          "ru": "Вопрос был о повседневных мелочах — покупках, уборке, привычных делах",
          "en": "The question was about small everyday things — errands, chores, routine stuff",
-         "es": "Que la pregunta era sobre pequeñeces de todos los días",
-         "pt": "A pergunta era sobre miudezas do dia a dia"
+         "es": "Que preguntaste por asuntos menores del día: compras, limpieza, rutina",
+         "pt": "A pergunta era sobre coisas miúdas do dia: compras, limpeza, rotina"
         }
        ],
        "correct": 0,
@@ -508,8 +508,8 @@
         {
          "ru": "Отложить колоду и пропустить этот день",
          "en": "Put the whole deck away and skip today's card",
-         "es": "Guardar el mazo y saltarte la carta de hoy",
-         "pt": "Guardar o baralho e pular a carta de hoje"
+         "es": "Dejar el mazo a un lado y saltarte la lectura del día de hoy",
+         "pt": "Deixar o baralho de lado e passar o dia de hoje sem nenhuma carta"
         },
         {
          "ru": "Оставить её: неудобные карты учат лучше всего",
@@ -1151,14 +1151,14 @@
         {
          "ru": "Дверь в дальние покои, куда входят только жрецы",
          "en": "A door to inner chambers open only to priests",
-         "es": "El jardín florido donde vive La Emperatriz",
-         "pt": "O jardim florido onde vive a própria Imperatriz"
+         "es": "Una puerta a las cámaras interiores, reservadas a los sacerdotes",
+         "pt": "Uma porta para as câmaras internas, reservadas aos sacerdotes"
         },
         {
          "ru": "Библиотеку свитков, которые Жрица уже прочитала",
          "en": "A library of scrolls the Priestess has already read",
-         "es": "El trono del Emperador entre montañas ásperas",
-         "pt": "O trono do Imperador entre montanhas severas"
+         "es": "Una biblioteca de pergaminos que La Suma Sacerdotisa ya leyó",
+         "pt": "Uma biblioteca de rolos que a Sacerdotisa já leu"
         },
         {
          "ru": "Тайну — знание, открытое не сразу",
@@ -1230,8 +1230,8 @@
         {
          "ru": "Обе карты учат паузе и терпению, а не действию",
          "en": "Both of these cards teach pause and patience, not action",
-         "es": "Que ambas cartas solo enseñan silencio y paciencia, nunca acción",
-         "pt": "As duas cartas ensinam apenas silêncio e paciência, nunca a ação"
+         "es": "Que ambas cartas enseñan la pausa y la paciencia, más que la acción",
+         "pt": "As duas cartas ensinam pausa e paciência, e não ação"
         },
         {
          "ru": "Императрица слушает тишину, а Жрица действует немедленно",
@@ -1335,8 +1335,8 @@
         {
          "ru": "Он освобождает вас от правил, которые кажутся неудобными",
          "en": "He frees you from rules that feel inconvenient",
-         "es": "Que te libera por completo de toda regla y de toda obligación",
-         "pt": "Ele livra você por completo de toda regra e obrigação"
+         "es": "Que te libera de aquellas reglas que te resultan incómodas",
+         "pt": "Ele dispensa você das regras que incomodam"
         },
         {
          "ru": "Он дарит вам вдохновение и внезапную спонтанность",
@@ -1543,8 +1543,8 @@
         {
          "ru": "Умение убеждать и нравиться людям",
          "en": "The skill of persuading and charming people",
-         "es": "La victoria sobre los rivales en la disputa por un corazón",
-         "pt": "A vitória sobre os rivais na disputa por um coração"
+         "es": "La habilidad de convencer y caer bien a la gente",
+         "pt": "A habilidade de convencer e cair no gosto das pessoas"
         },
         {
          "ru": "Выбор, который определяет, кем вы станете",
@@ -1688,14 +1688,14 @@
         {
          "ru": "Двигаться вперёд — а куда именно, неважно",
          "en": "Just keep moving forward — the direction doesn't matter",
-         "es": "Primero llegar y después decidir a dónde querías ir",
-         "pt": "Primeiro chegar, depois decidir aonde você queria ir"
+         "es": "Avanzar sin detenerse: el rumbo importa menos que el movimiento",
+         "pt": "Seguir em frente de qualquer jeito — a direção não faz muita diferença"
         },
         {
          "ru": "Сначала действовать волей, а сердце разберётся потом",
          "en": "Act with your will first, and let your heart decide later",
-         "es": "La elección y el movimiento no tienen relación entre sí",
-         "pt": "Escolha e movimento não têm relação um com o outro"
+         "es": "Actuar primero con la voluntad y que el corazón decida después",
+         "pt": "Agir pela vontade primeiro; o coração resolve depois"
         },
         {
          "ru": "Выбрать направление сердцем — и доехать туда волей",
@@ -1885,8 +1885,8 @@
         {
          "ru": "Список значений трудно запомнить без постоянного повторения",
          "en": "A list of meanings is hard to remember without constant repetition",
-         "es": "Porque cuesta bastante retener en la memoria la lista de significados completa",
-         "pt": "É difícil manter na memória a lista de significados por completo"
+         "es": "Porque una lista de significados cuesta retenerla sin repasarla una y otra vez",
+         "pt": "Uma lista de significados é difícil de fixar na memória sem repetir toda hora"
         }
        ],
        "correct": 1,
@@ -1987,8 +1987,8 @@
         {
          "ru": "Сложить номера карт и получить одно число-подсказку",
          "en": "Add up the cards' numbers to get a single clue",
-         "es": "Elegir solo la carta que te guste más que las demás",
-         "pt": "Escolher só a carta de que você gosta mais do que das outras"
+         "es": "Sumar los números de las dos cartas para obtener una sola pista",
+         "pt": "Somar os números das duas cartas para chegar a um único valor que serve de dica"
         }
        ],
        "correct": 0,
@@ -2047,14 +2047,14 @@
         {
          "ru": "Нет, порядок почти не меняет смысл пары",
          "en": "No, the order barely changes the pair's meaning",
-         "es": "No, un par se lee igual en cualquier orden",
-         "pt": "Não, a dupla se lê igual em qualquer ordem"
+         "es": "No, el orden apenas cambia el sentido que forma el par",
+         "pt": "Não, a ordem quase não altera o sentido da dupla"
         },
         {
          "ru": "Порядок важнее для Старших арканов, чем прочих",
          "en": "Order matters more for Major Arcana than for others",
-         "es": "El orden importa solo para los Arcanos Mayores",
-         "pt": "A ordem só importa para os Arcanos Maiores"
+         "es": "El orden pesa más en los Arcanos Mayores que en los demás",
+         "pt": "A ordem pesa mais nos Arcanos Maiores do que nas outras cartas"
         },
         {
          "ru": "Да — как порядок слов меняет фразу",
@@ -2524,14 +2524,14 @@
         {
          "ru": "Итог всё равно решится сам, независимо от ваших действий",
          "en": "It resolves on its own anyway, no matter what you do",
-         "es": "Que la vida es injusta y hay que resignarse",
-         "pt": "Que a vida é injusta e é preciso se conformar com isso"
+         "es": "Que el desenlace se define por su cuenta, sin importar lo que tú hagas",
+         "pt": "Que o resultado acaba se resolvendo por si só, independentemente do que você faça"
         },
         {
          "ru": "Итог зависит от случайности, а не от ваших усилий",
          "en": "The outcome depends on chance, not on your efforts",
-         "es": "Que a cada quien le toca una porción de suerte al azar",
-         "pt": "Que cada pessoa recebe na vida uma parcela aleatória de sorte"
+         "es": "Que el resultado depende del azar y no del esfuerzo que pongas",
+         "pt": "Que o resultado depende do acaso, e não do seu esforço"
         },
         {
          "ru": "Усилия вознаграждаются, а срезанные углы дают о себе знать",
@@ -2560,14 +2560,14 @@
         {
          "ru": "Где решала Справедливость без вас, а где Колесо шло за вашим выбором",
          "en": "Where Justice decided without you, and where the Wheel followed your choice",
-         "es": "Lo que en ella te resultó agradable y lo que te resultó desagradable y te dejó con fastidio",
-         "pt": "O que nela foi agradável para você e o que foi desagradável e causou aborrecimento"
+         "es": "Lo que en ella decidió La Justicia sin contar contigo y lo que La Rueda hizo siguiendo tu elección",
+         "pt": "O que nela a Justiça decidiu sem você e o que a Roda conduziu conforme a sua escolha"
         },
         {
          "ru": "Где вы проявили слабость, а где вам помогли со стороны",
          "en": "Where you showed weakness, and where someone helped you from outside",
-         "es": "Lo que en ella ocurrió primero y lo que ocurrió mucho después, ya sobre el final",
-         "pt": "O que nela aconteceu antes no tempo e o que aconteceu bem depois, já no fim"
+         "es": "Lo que en ella fue debilidad tuya y lo que en ella fue ayuda que llegó de afuera",
+         "pt": "O que nela foi fraqueza sua e o que veio como ajuda de fora"
         },
         {
          "ru": "Что в ней от Колеса (не зависело от вас) и что от Справедливости (ваши выборы)",
@@ -2636,14 +2636,14 @@
         {
          "ru": "О буквальной опасности, которую надо предотвратить",
          "en": "A literal danger that must be prevented",
-         "es": "De un peligro literal que hay que evitar",
-         "pt": "De um perigo literal que precisa ser evitado"
+         "es": "De un peligro literal que conviene prevenir a tiempo",
+         "pt": "De um risco literal que se deve prevenir a tempo"
         },
         {
          "ru": "О чужом дурном влиянии, от которого стоит защититься",
          "en": "Someone else's bad influence, best avoided",
-         "es": "De la mala influencia ajena, de la que conviene protegerse",
-         "pt": "De uma má influência alheia da qual convém se proteger"
+         "es": "De una mala influencia ajena de la que cuidarse",
+         "pt": "Da influência nociva de alguém de quem é melhor se afastar"
         }
        ],
        "correct": 0,
@@ -2745,14 +2745,14 @@
         {
          "ru": "Поиском новых впечатлений и развлечений, чтобы отвлечься от случившегося",
          "en": "Looking for new impressions and distractions to take your mind off what happened",
-         "es": "De una autolimitación estricta, con prohibiciones en casi todo a la vez y sin darse ninguna tregua",
-         "pt": "De uma autolimitação severa, com proibições em quase tudo de uma vez e sem piedade consigo"
+         "es": "De buscar experiencias nuevas y distracciones para no pensar en lo ocurrido",
+         "pt": "Da busca por novas emoções e distrações para tirar da cabeça o que aconteceu"
         },
         {
          "ru": "Подробным разбором того, что пошло не так, и поиском виноватых",
          "en": "A detailed review of what went wrong, and looking for someone to blame",
-         "es": "De un arranque rápido y decidido desde cero, sin mirar atrás al pasado",
-         "pt": "De um começo rápido e decidido do zero, sem olhar para o passado"
+         "es": "De analizar en detalle qué fue lo que salió mal y quién tuvo la culpa",
+         "pt": "De destrinchar o que deu errado e procurar os culpados"
         }
        ],
        "correct": 0,
@@ -3138,14 +3138,14 @@
         {
          "ru": "Он ярче, но показывает только то, что хочется увидеть",
          "en": "It is brighter, but it shows only what you want to see",
-         "es": "Es más brillante de lo habitual, pero se apaga mucho más rápido",
-         "pt": "Ela é mais intensa que o normal, mas em compensação se apaga bem mais depressa"
+         "es": "Es más brillante, pero te muestra solo lo que quieres ver",
+         "pt": "Ela brilha mais forte, mas revela apenas aquilo que você quer enxergar"
         },
         {
          "ru": "Он тёплый, а лунный холодный — в этом вся разница",
          "en": "It is warm and the Moon's is cold — that's the whole difference",
-         "es": "En nada: en esta lección las dos cartas hablan exactamente de la misma claridad",
-         "pt": "Em nada: nesta lição as duas cartas falam exatamente da mesma clareza"
+         "es": "Es cálida y la de La Luna es fría: en eso está la diferencia",
+         "pt": "Ela é quente e a da Lua é fria — a diferença está nisso"
         }
        ],
        "correct": 0,
@@ -3204,8 +3204,8 @@
         {
          "ru": "«Что подскажет мне опыт?»",
          "en": "\"What does experience suggest?\"",
-         "es": "«¿Quién tiene la culpa de todo esto?»",
-         "pt": "“Afinal, quem é o culpado de tudo isso?”"
+         "es": "«¿Qué me sugiere mi propia experiencia?»",
+         "pt": "“O que a minha própria experiência me diz aqui?”"
         },
         {
          "ru": "«Это факт — или додумано?»",
@@ -3216,8 +3216,8 @@
         {
          "ru": "«Как скоро это закончится?»",
          "en": "\"How soon will this be over?\"",
-         "es": "«¿Qué es lo peor que puede pasar?»",
-         "pt": "“Qual é a pior coisa que pode acontecer?”"
+         "es": "«¿Falta mucho para que esto termine?»",
+         "pt": "“Falta quanto tempo para isso acabar?”"
         }
        ],
        "correct": 1,
@@ -3394,8 +3394,8 @@
         {
          "ru": "Путь героя окончен насовсем, и дальше идти уже некуда",
          "en": "The hero's journey is over for good, with nowhere left to go",
-         "es": "Que son figuras distintas y su parecido es casualidad",
-         "pt": "São figuras diferentes, e a coincidência é casual"
+         "es": "Que el camino del héroe llegó a su fin y ya no queda a dónde ir",
+         "pt": "O caminho do herói acabou, e não há mais aonde ir"
         }
        ],
        "correct": 0,
@@ -3418,14 +3418,14 @@
         {
          "ru": "Потому что герой возвращается туда же, откуда начал, ничего не изменив",
          "en": "Because the hero ends up in the same place, unchanged inside",
-         "es": "Porque al final del largo camino el héroe pierde todo lo que alcanzó a ganar",
-         "pt": "Porque no fim de um longo caminho o herói perde tudo o que tinha conquistado"
+         "es": "Porque el héroe regresa al punto de partida sin haber cambiado por dentro",
+         "pt": "Porque o herói volta ao mesmo ponto de partida, sem ter mudado por dentro"
         },
         {
          "ru": "Потому что после Мира начинается другая, отдельная история",
          "en": "Because after The World, a different, separate story begins",
-         "es": "Porque todo el camino del Loco fue, desde el principio, un gran error",
-         "pt": "Porque o caminho do Louco foi, desde o início, um grande erro"
+         "es": "Porque después de El Mundo empieza otra historia aparte",
+         "pt": "Porque depois do Mundo começa outra história, separada desta"
         },
         {
          "ru": "Потому что круг замыкается, чтобы начаться заново — на новой высоте",
@@ -3936,8 +3936,8 @@
         {
          "ru": "Чувства нужно сначала проверить, а потом впустить",
          "en": "Feelings must be tested first, and then let in",
-         "es": "Los sentimientos hay que probarlos primero y solo después dejarlos entrar",
-         "pt": "Que o sentimento precisa ser testado antes de ser deixado entrar"
+         "es": "Un sentimiento primero se pone a prueba y después se deja entrar",
+         "pt": "Que o sentimento primeiro precisa ser posto à prova, e depois ser acolhido"
         },
         {
          "ru": "Новое чувство приходит само — и его стоит просто принять",
@@ -3948,8 +3948,8 @@
         {
          "ru": "Хорошее обычно достаётся тем, кто добивается его своим трудом",
          "en": "Good things usually come to those who work hard for them",
-         "es": "Lo bueno les llega solo a quienes lo consiguen con esfuerzo",
-         "pt": "Que o bom só chega para quem conquista com muito esforço"
+         "es": "Lo bueno suele llegarle a quien se lo gana trabajando",
+         "pt": "Que o bom costuma chegar a quem conquista com trabalho"
         }
        ],
        "correct": 1,
@@ -4044,8 +4044,8 @@
         {
          "ru": "Не задерживаться на горе, а сразу двигаться дальше",
          "en": "Skip the grief and simply move on right away",
-         "es": "No detenerse en el dolor y seguir adelante de inmediato",
-         "pt": "Não se demorar no luto e seguir em frente na mesma hora"
+         "es": "No quedarse demasiado tiempo en la pena y seguir adelante cuanto antes",
+         "pt": "Deixar a tristeza de lado e seguir adiante o quanto antes, sem se prender a ela"
         },
         {
          "ru": "Погоревать честно, заметив две целые чаши за спиной",
@@ -4165,8 +4165,8 @@
         {
          "ru": "Отказаться от воспоминаний, чтобы не размякнуть",
          "en": "Cutting memories off so they don't soften you",
-         "es": "Renunciar del todo a los recuerdos para no ablandarse",
-         "pt": "Abrir mão das lembranças por completo, para não amolecer"
+         "es": "Dejar de lado los recuerdos para no ablandarse con ellos",
+         "pt": "Deixar as lembranças de lado para não amolecer o coração"
         }
        ],
        "correct": 1,
@@ -4195,14 +4195,14 @@
         {
          "ru": "Мечтать вредно, и от таких планов лучше отказаться",
          "en": "Dreaming is harmful, so such plans are better dropped",
-         "es": "Soñar hace daño, así que mejor abandonar todos los planes",
-         "pt": "Que sonhar faz mal, então é melhor abandonar todos os planos"
+         "es": "Soñar hace daño y conviene dejar esos planes de lado",
+         "pt": "Que sonhar faz mal e é melhor desistir desses planos"
         },
         {
          "ru": "Хорошая идея — попробовать несколько видений и выбрать позже",
          "en": "A good idea is to try a few visions and decide later",
-         "es": "Las siete visiones valen lo mismo y conviene perseguirlas todas por turno",
-         "pt": "Que as sete visões merecem igualmente ser realizadas, uma a uma"
+         "es": "Conviene ir probando varias visiones y elegir más adelante",
+         "pt": "Que a boa saída é experimentar várias dessas visões e escolher depois"
         }
        ],
        "correct": 0,
@@ -4370,8 +4370,8 @@
         {
          "ru": "Она про порыв и действие раньше размышления",
          "en": "It's about impulse and acting before thinking",
-         "es": "Llama a actuar de inmediato, como Bastos, y no deja tiempo para pensar",
-         "pt": "Ele chama para a ação na hora, como os Paus, e não deixa tempo para pensar"
+         "es": "Trata del impulso y de la acción que se adelanta a la reflexión",
+         "pt": "Ele trata do impulso e da ação que vem antes da reflexão"
         },
         {
          "ru": "Она про мысль, слово и цену ясности для разума",
@@ -4382,8 +4382,8 @@
         {
          "ru": "Она про чувства, которые важнее доводов и слов",
          "en": "It's about feelings that matter more than arguments",
-         "es": "Trata del dinero y del cuidado del cuerpo, como Oros",
-         "pt": "Ele trata de dinheiro e do cuidado com o corpo, como os Ouros"
+         "es": "Trata de los sentimientos, que importan más que los razonamientos y las palabras",
+         "pt": "Ele trata dos sentimentos, que pesam mais do que os argumentos e as palavras"
         }
        ],
        "correct": 1,
@@ -4485,8 +4485,8 @@
         {
          "ru": "Боль лучше прятать и делать вид, что вы в порядке",
          "en": "It's better to hide the pain and act as if you are just fine",
-         "es": "Que el dolor conviene esconderlo de todos y aparentar que todo está bien",
-         "pt": "Que a dor é melhor escondida de todos, fingindo que está tudo bem"
+         "es": "Que al dolor conviene guardárselo y mostrarse entero por fuera",
+         "pt": "Que o melhor é esconder a dor e mostrar aos outros que você está inteiro"
         },
         {
          "ru": "Нужно сразу найти виноватого и свести счёты",
@@ -4587,8 +4587,8 @@
         {
          "ru": "О новой победе, которая наконец расставит вещи по местам",
          "en": "Winning a new argument that finally settles things",
-         "es": "De una nueva victoria que por fin pondrá todo en su lugar",
-         "pt": "De uma nova vitória que finalmente vai colocar tudo no lugar"
+         "es": "De una nueva victoria que por fin pondrá las cosas en su lugar",
+         "pt": "De mais uma discussão vencida, que enfim vai pôr as coisas nos seus lugares"
         },
         {
          "ru": "О переходе к спокойствию, даже если грусть ещё рядом",
@@ -4599,8 +4599,8 @@
         {
          "ru": "О быстром забвении того, что случилось раньше",
          "en": "Forgetting what happened before almost right away",
-         "es": "De olvidar por completo y al instante todo lo que pasó antes",
-         "pt": "Do esquecimento total e imediato de tudo o que aconteceu antes"
+         "es": "De olvidar en poco tiempo lo que había pasado antes",
+         "pt": "De esquecer depressa aquilo que ficou para trás"
         }
        ],
        "correct": 1,
@@ -4629,14 +4629,14 @@
         {
          "ru": "На честный разговор, который наконец состоялся между людьми",
          "en": "An honest conversation that finally got resolved between them",
-         "es": "A una conversación honesta que por fin sucedió",
-         "pt": "Para uma conversa honesta que finalmente aconteceu"
+         "es": "A una conversación franca que por fin llegó a darse entre las personas",
+         "pt": "Para uma conversa franca que enfim aconteceu entre as pessoas envolvidas"
         },
         {
          "ru": "На выгодную сделку, которая устроила обе стороны спора",
          "en": "A profitable deal that works out nicely for both sides involved",
-         "es": "A un buen trato que le conviene a todas las partes",
-         "pt": "Para um acordo vantajoso que agrada a todos os lados"
+         "es": "A un trato conveniente que dejó conformes a ambos lados",
+         "pt": "Para um trato vantajoso que deixou os dois lados satisfeitos"
         }
        ],
        "correct": 0,
@@ -4804,8 +4804,8 @@
         {
          "ru": "Мысль о том, что деньги придут сами, если немного подождать",
          "en": "A sense that money will show up on its own if you simply wait",
-         "es": "La garantía de que el dinero llegará solo, sin esfuerzo de tu parte",
-         "pt": "A garantia de que o dinheiro vem sozinho, sem nenhum esforço seu"
+         "es": "La idea de que el dinero llegará por su cuenta si esperas un poco",
+         "pt": "A ideia de que o dinheiro chega sozinho, bastando esperar um pouco"
         },
         {
          "ru": "Семя новой возможности, которому нужны конкретные шаги",
@@ -4846,8 +4846,8 @@
         {
          "ru": "Довести дела до порядка, а потом наконец расслабиться",
          "en": "Bring your tasks to order before you finally allow yourself to relax",
-         "es": "A dejar todos los asuntos en orden perfecto y recién entonces relajarse",
-         "pt": "Deixar tudo em ordem perfeita e só então relaxar"
+         "es": "A poner los asuntos en orden y después permitirse descansar",
+         "pt": "Colocar as tarefas em ordem para enfim poder relaxar"
         },
         {
          "ru": "Отказаться сразу от одной из двух задач, чтобы не распыляться",
@@ -4912,8 +4912,8 @@
         {
          "ru": "Что помощи ждать неоткуда, и разумнее рассчитывать на себя самого",
          "en": "That there is nowhere to expect help from, and it's better to rely on yourself",
-         "es": "Que no hay ayuda de dónde esperarla y solo puedes contar contigo",
-         "pt": "Que não há de onde esperar ajuda e só dá para contar consigo mesmo"
+         "es": "Que no hay de dónde esperar ayuda y que es más sensato contar contigo mismo",
+         "pt": "Que ajuda não virá de fora e é melhor se virar por conta própria"
         },
         {
          "ru": "Что светящееся окно рядом — это помощь, которую легко не заметить",
@@ -5027,14 +5027,14 @@
         {
          "ru": "Когда дающий использует весы, показывая свою честность окружающим",
          "en": "When the giver uses the scales to show off their fairness to others",
-         "es": "Cuando quien da usa una balanza para que todo sea justo y parejo",
-         "pt": "Quando quem dá usa a balança para que tudo fique justo e equilibrado"
+         "es": "Cuando quien da usa la balanza para lucirse",
+         "pt": "Quando quem dá exibe a balança para mostrar aos outros a própria justiça"
         },
         {
          "ru": "Когда в обмене участвуют деньги, а не внимание и время",
          "en": "When money is involved in the exchange, rather than attention and time",
-         "es": "Cuando en el intercambio hay dinero de por medio y no solo atención y tiempo",
-         "pt": "Quando há dinheiro envolvido na troca, e não só atenção e tempo"
+         "es": "Cuando lo que cambia de manos es dinero y no tiempo ni atención",
+         "pt": "Quando entra dinheiro na troca, e não tempo"
         }
        ],
        "correct": 0,
@@ -5327,8 +5327,8 @@
         {
          "ru": "Хладнокровным стратегом, который не показывает чувств",
          "en": "A cool strategist who keeps their feelings hidden",
-         "es": "Una estratega de sangre fría que nunca muestra lo que siente",
-         "pt": "Um estrategista frio, que nunca mostra o que sente"
+         "es": "Una estratega fría que no muestra lo que siente",
+         "pt": "Um estrategista frio, que não se abre"
         },
         {
          "ru": "Резким и прямолинейным критиком чужих слов",
@@ -5357,8 +5357,8 @@
         {
          "ru": "Довериться первому впечатлению вместо проверки фактов",
          "en": "Trust the first impression instead of checking facts",
-         "es": "Sacar conclusiones de inmediato y compartirlas enseguida con todos",
-         "pt": "Tirar conclusões na hora e compartilhá-las com todos sem demora"
+         "es": "Confiar en la primera impresión sin revisar los hechos",
+         "pt": "Seguir a primeira impressão, sem checar os fatos"
         },
         {
          "ru": "Проверять факты, а не спешить с выводами",
@@ -5681,8 +5681,8 @@
         {
          "ru": "Королева выше по рангу и потому командует Рыцарем",
          "en": "The Queen outranks the Knight and gives the orders",
-         "es": "La Reina es más fuerte y por eso le gana al Caballero en la tirada",
-         "pt": "A Rainha é mais forte e por isso vence o Cavaleiro na tiragem"
+         "es": "La Reina está por encima en rango y por eso le da órdenes al Caballero",
+         "pt": "A Rainha tem posto mais alto e por isso manda no Cavaleiro"
         },
         {
          "ru": "Рыцарь мчится вовне, Королева владеет стихией внутри",
@@ -5759,8 +5759,8 @@
         {
          "ru": "Она живёт идеями и вдохновляет, не касаясь быта",
          "en": "She lives on ideas and inspires, without touching daily life",
-         "es": "Vive de ideas e inspira, sin tocar lo cotidiano",
-         "pt": "Ela vive de ideias e inspira, sem tocar no dia a dia"
+         "es": "Se mueve entre ideas e inspira, sin ocuparse de lo cotidiano",
+         "pt": "Ela se move por ideias e inspira, longe do cotidiano"
         },
         {
          "ru": "Она соединяет дом и дело: изобилие, стоящее на земле",
@@ -5789,8 +5789,8 @@
         {
          "ru": "Обида на тех, кто чувствует не так глубоко, как она",
          "en": "Resentment toward people who don't feel as deeply as she does",
-         "es": "Frialdad excesiva e indiferencia total ante los sentimientos ajenos",
-         "pt": "Frieza excessiva e total indiferença aos sentimentos dos outros"
+         "es": "Resentirse con quienes no sienten tan hondo como ella",
+         "pt": "Mágoa com quem não sente as coisas tão fundo quanto ela"
         },
         {
          "ru": "Зависимость от чужих эмоций и потеря собственных границ",
@@ -6017,8 +6017,8 @@
         {
          "ru": "Подождать, пока решение примет кто-то другой",
          "en": "Wait for someone else to make the decision instead",
-         "es": "Preguntarle a todo el mundo y elegir la opción más popular",
-         "pt": "Perguntar a todo mundo em volta e escolher a opção mais popular"
+         "es": "Esperar a que sea otra persona la que termine tomando la decisión por ti",
+         "pt": "Esperar de braços cruzados até que outra pessoa tome a decisão por você"
         }
        ],
        "correct": 1,
@@ -6336,8 +6336,8 @@
         {
          "ru": "Их связывает совпадение чисел: два и шесть в сумме дают восемь",
          "en": "They're connected by a numeric coincidence: two and six add up to eight",
-         "es": "Nada en particular: dos cartas del mismo palo juntas no se relacionan entre sí",
-         "pt": "Nada de especial: cartas do mesmo naipe lado a lado não têm ligação entre si"
+         "es": "Las une una coincidencia numérica: el dos y el seis suman ocho, y ese ocho explica la pareja",
+         "pt": "O que liga o par é uma coincidência entre os números: dois e seis somados resultam em oito"
         },
         {
          "ru": "Карты спорят между собой: одна про начало отношений, другая — про их разрыв",
@@ -6613,8 +6613,8 @@
         {
          "ru": "Подсчёт перевёрнутых и прямых карт в раскладе",
          "en": "Counting how many cards landed reversed versus upright",
-         "es": "Sumar el valor numérico de las tres cartas que salieron",
-         "pt": "Somar os valores numéricos das três cartas abertas"
+         "es": "El conteo de las cartas invertidas y las derechas",
+         "pt": "A contagem das cartas que caíram invertidas e das que ficaram de pé"
         },
         {
          "ru": "Мостик через союзы «потому что», «чтобы», «но»",
@@ -6625,8 +6625,8 @@
         {
          "ru": "Выбрать из трёх карт главную и читать историю по ней",
          "en": "Pick the main card of the three and build the story on it",
-         "es": "Leer las cartas al revés, del «Futuro» hacia el «Pasado»",
-         "pt": "Ler as cartas na ordem inversa, do “Futuro” para o “Passado”"
+         "es": "Elegir la carta principal de las tres y leer desde ella",
+         "pt": "Eleger a carta principal das três e ler a história nela"
         }
        ],
        "correct": 1,
@@ -6752,8 +6752,8 @@
         {
          "ru": "Просто выучить значения карт получше — сюжет сложится сам",
          "en": "Just learn the card meanings better — the story will come together on its own",
-         "es": "Todo está bien: solo hace falta conectar las cartas en las tiradas para otras personas",
-         "pt": "Está tudo certo: ligar as cartas só é preciso em tiragens para outras pessoas"
+         "es": "Aprender mejor los significados de cada carta: el relato se arma por sí mismo",
+         "pt": "Simplesmente estudar melhor os significados de cada carta: a história se forma sozinha"
         },
         {
          "ru": "Навести мостик между картами: тогда выйдет история, а не список слов",
@@ -6764,8 +6764,8 @@
         {
          "ru": "Перечитать вслух названия позиций: «Прошлое», «Настоящее», «Будущее»",
          "en": "Reread the position names out loud: 'Past', 'Present', 'Future'",
-         "es": "Conviene leer las cartas al revés: primero el «Futuro» y después el «Pasado»",
-         "pt": "Vale ler as cartas na ordem inversa — primeiro o “Futuro”, depois o “Passado”"
+         "es": "Releer en voz alta los nombres de las posiciones: «Pasado», «Presente», «Futuro»",
+         "pt": "Reler em voz alta os nomes das posições: “Passado”, “Presente”, “Futuro”"
         }
        ],
        "correct": 1,
@@ -6794,14 +6794,14 @@
         {
          "ru": "Он не заметил, что одна из карт легла перевёрнутой",
          "en": "He didn't notice that one of the cards had landed reversed",
-         "es": "Debió elegir una tirada más simple que la de Tres cartas",
-         "pt": "Ela deveria ter escolhido uma tiragem mais simples do que a “Três cartas”"
+         "es": "No se fijó en que una de las cartas de la tirada quedó invertida",
+         "pt": "Ela não reparou que uma das cartas da tiragem tinha caído invertida"
         },
         {
          "ru": "Ему не хватило точных слов, чтобы описать каждую карту",
          "en": "He didn't have precise enough words to describe each card",
-         "es": "No pasa nada: la tirada funciona igual sin la pregunta inicial",
-         "pt": "Ela não tem com que se preocupar: a tiragem funciona igual sem a pergunta inicial"
+         "es": "Le faltaron palabras más precisas para describir cada una de las cartas que salieron",
+         "pt": "Faltaram a ela palavras mais precisas para descrever cada uma das cartas abertas na mesa"
         }
        ],
        "correct": 0,

@@ -100,8 +100,8 @@
       {
        "ru": "Принять решение за вас, чтобы вы наконец перестали мучиться сомнениями",
        "en": "Make the decision for you, so you can finally stop agonising over it",
-       "es": "Tomar la decisión por ti, para que dejes de atormentarte con las dudas de una vez",
-       "pt": "Tomar a decisão no seu lugar, para você enfim parar de sofrer com a dúvida"
+       "es": "Tomar la decisión en tu lugar, para que por fin dejes de darle vueltas a lo mismo",
+       "pt": "Escolher por você qual caminho seguir, para essa hesitação enfim parar de te desgastar"
       },
       {
        "ru": "Помочь сформулировать то, что вы уже чувствуете, но не проговаривали",
@@ -172,14 +172,14 @@
       {
        "ru": "Оракулом, который заранее подскажет, чем всё закончится",
        "en": "An oracle that tells you how your story is going to end",
-       "es": "Un oráculo que te entrega el futuro ya resuelto",
-       "pt": "Um oráculo que anuncia um futuro já pronto"
+       "es": "Un oráculo que se adelanta y cuenta cómo termina tu historia",
+       "pt": "Um oráculo que informa de antemão como a sua história vai terminar"
       },
       {
        "ru": "Магическим шаром, который сам сделает всю работу",
        "en": "A crystal ball that does all the work and makes every choice for you",
-       "es": "Una bola mágica que hace todo el trabajo por ti",
-       "pt": "Uma bola mágica que faz tudo sozinha"
+       "es": "Una bola de cristal que hace el trabajo por ti y elige en tu lugar",
+       "pt": "Uma bola de cristal que assume o trabalho e decide por você"
       }
      ],
      "correct": 0,
@@ -249,14 +249,14 @@
       {
        "ru": "Расклад не получился — стоит перемешать колоду и вытянуть карты заново",
        "en": "The reading didn't work out — you should reshuffle and draw the cards again",
-       "es": "Que la tirada no salió bien: mejor barajar y sacar de nuevo",
-       "pt": "A tiragem não deu certo — melhor embaralhar e tirar de novo"
+       "es": "Que la tirada falló y conviene volver a barajar el mazo y sacar otras cartas",
+       "pt": "A tiragem não funcionou — vale embaralhar o baralho de novo e tirar outras cartas"
       },
       {
        "ru": "Вопрос был о повседневных мелочах — покупках, уборке, привычных делах",
        "en": "The question was about small everyday things — errands, chores, routine stuff",
-       "es": "Que la pregunta era sobre pequeñeces de todos los días",
-       "pt": "A pergunta era sobre miudezas do dia a dia"
+       "es": "Que preguntaste por asuntos menores del día: compras, limpieza, rutina",
+       "pt": "A pergunta era sobre coisas miúdas do dia: compras, limpeza, rotina"
       }
      ],
      "correct": 0,
@@ -434,8 +434,8 @@
       {
        "ru": "Отложить колоду и пропустить этот день",
        "en": "Put the whole deck away and skip today's card",
-       "es": "Guardar el mazo y saltarte la carta de hoy",
-       "pt": "Guardar o baralho e pular a carta de hoje"
+       "es": "Dejar el mazo a un lado y saltarte la lectura del día de hoy",
+       "pt": "Deixar o baralho de lado e passar o dia de hoje sem nenhuma carta"
       },
       {
        "ru": "Оставить её: неудобные карты учат лучше всего",
@@ -984,14 +984,14 @@
       {
        "ru": "Дверь в дальние покои, куда входят только жрецы",
        "en": "A door to inner chambers open only to priests",
-       "es": "El jardín florido donde vive La Emperatriz",
-       "pt": "O jardim florido onde vive a própria Imperatriz"
+       "es": "Una puerta a las cámaras interiores, reservadas a los sacerdotes",
+       "pt": "Uma porta para as câmaras internas, reservadas aos sacerdotes"
       },
       {
        "ru": "Библиотеку свитков, которые Жрица уже прочитала",
        "en": "A library of scrolls the Priestess has already read",
-       "es": "El trono del Emperador entre montañas ásperas",
-       "pt": "O trono do Imperador entre montanhas severas"
+       "es": "Una biblioteca de pergaminos que La Suma Sacerdotisa ya leyó",
+       "pt": "Uma biblioteca de rolos que a Sacerdotisa já leu"
       },
       {
        "ru": "Тайну — знание, открытое не сразу",
@@ -1063,8 +1063,8 @@
       {
        "ru": "Обе карты учат паузе и терпению, а не действию",
        "en": "Both of these cards teach pause and patience, not action",
-       "es": "Que ambas cartas solo enseñan silencio y paciencia, nunca acción",
-       "pt": "As duas cartas ensinam apenas silêncio e paciência, nunca a ação"
+       "es": "Que ambas cartas enseñan la pausa y la paciencia, más que la acción",
+       "pt": "As duas cartas ensinam pausa e paciência, e não ação"
       },
       {
        "ru": "Императрица слушает тишину, а Жрица действует немедленно",
@@ -1140,8 +1140,8 @@
       {
        "ru": "Он освобождает вас от правил, которые кажутся неудобными",
        "en": "He frees you from rules that feel inconvenient",
-       "es": "Que te libera por completo de toda regla y de toda obligación",
-       "pt": "Ele livra você por completo de toda regra e obrigação"
+       "es": "Que te libera de aquellas reglas que te resultan incómodas",
+       "pt": "Ele dispensa você das regras que incomodam"
       },
       {
        "ru": "Он дарит вам вдохновение и внезапную спонтанность",
@@ -1320,8 +1320,8 @@
       {
        "ru": "Умение убеждать и нравиться людям",
        "en": "The skill of persuading and charming people",
-       "es": "La victoria sobre los rivales en la disputa por un corazón",
-       "pt": "A vitória sobre os rivais na disputa por um coração"
+       "es": "La habilidad de convencer y caer bien a la gente",
+       "pt": "A habilidade de convencer e cair no gosto das pessoas"
       },
       {
        "ru": "Выбор, который определяет, кем вы станете",
@@ -1465,14 +1465,14 @@
       {
        "ru": "Двигаться вперёд — а куда именно, неважно",
        "en": "Just keep moving forward — the direction doesn't matter",
-       "es": "Primero llegar y después decidir a dónde querías ir",
-       "pt": "Primeiro chegar, depois decidir aonde você queria ir"
+       "es": "Avanzar sin detenerse: el rumbo importa menos que el movimiento",
+       "pt": "Seguir em frente de qualquer jeito — a direção não faz muita diferença"
       },
       {
        "ru": "Сначала действовать волей, а сердце разберётся потом",
        "en": "Act with your will first, and let your heart decide later",
-       "es": "La elección y el movimiento no tienen relación entre sí",
-       "pt": "Escolha e movimento não têm relação um com o outro"
+       "es": "Actuar primero con la voluntad y que el corazón decida después",
+       "pt": "Agir pela vontade primeiro; o coração resolve depois"
       },
       {
        "ru": "Выбрать направление сердцем — и доехать туда волей",
@@ -1628,8 +1628,8 @@
       {
        "ru": "Список значений трудно запомнить без постоянного повторения",
        "en": "A list of meanings is hard to remember without constant repetition",
-       "es": "Porque cuesta bastante retener en la memoria la lista de significados completa",
-       "pt": "É difícil manter na memória a lista de significados por completo"
+       "es": "Porque una lista de significados cuesta retenerla sin repasarla una y otra vez",
+       "pt": "Uma lista de significados é difícil de fixar na memória sem repetir toda hora"
       }
      ],
      "correct": 1,
@@ -1705,8 +1705,8 @@
       {
        "ru": "Сложить номера карт и получить одно число-подсказку",
        "en": "Add up the cards' numbers to get a single clue",
-       "es": "Elegir solo la carta que te guste más que las demás",
-       "pt": "Escolher só a carta de que você gosta mais do que das outras"
+       "es": "Sumar los números de las dos cartas para obtener una sola pista",
+       "pt": "Somar os números das duas cartas para chegar a um único valor que serve de dica"
       }
      ],
      "correct": 0,
@@ -1765,14 +1765,14 @@
       {
        "ru": "Нет, порядок почти не меняет смысл пары",
        "en": "No, the order barely changes the pair's meaning",
-       "es": "No, un par se lee igual en cualquier orden",
-       "pt": "Não, a dupla se lê igual em qualquer ordem"
+       "es": "No, el orden apenas cambia el sentido que forma el par",
+       "pt": "Não, a ordem quase não altera o sentido da dupla"
       },
       {
        "ru": "Порядок важнее для Старших арканов, чем прочих",
        "en": "Order matters more for Major Arcana than for others",
-       "es": "El orden importa solo para los Arcanos Mayores",
-       "pt": "A ordem só importa para os Arcanos Maiores"
+       "es": "El orden pesa más en los Arcanos Mayores que en los demás",
+       "pt": "A ordem pesa mais nos Arcanos Maiores do que nas outras cartas"
       },
       {
        "ru": "Да — как порядок слов меняет фразу",

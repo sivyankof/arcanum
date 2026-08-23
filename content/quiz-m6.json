@@ -213,8 +213,8 @@
       {
        "ru": "Их связывает совпадение чисел: два и шесть в сумме дают восемь",
        "en": "They're connected by a numeric coincidence: two and six add up to eight",
-       "es": "Nada en particular: dos cartas del mismo palo juntas no se relacionan entre sí",
-       "pt": "Nada de especial: cartas do mesmo naipe lado a lado não têm ligação entre si"
+       "es": "Las une una coincidencia numérica: el dos y el seis suman ocho, y ese ocho explica la pareja",
+       "pt": "O que liga o par é uma coincidência entre os números: dois e seis somados resultam em oito"
       },
       {
        "ru": "Карты спорят между собой: одна про начало отношений, другая — про их разрыв",
@@ -465,8 +465,8 @@
       {
        "ru": "Подсчёт перевёрнутых и прямых карт в раскладе",
        "en": "Counting how many cards landed reversed versus upright",
-       "es": "Sumar el valor numérico de las tres cartas que salieron",
-       "pt": "Somar os valores numéricos das três cartas abertas"
+       "es": "El conteo de las cartas invertidas y las derechas",
+       "pt": "A contagem das cartas que caíram invertidas e das que ficaram de pé"
       },
       {
        "ru": "Мостик через союзы «потому что», «чтобы», «но»",
@@ -477,8 +477,8 @@
       {
        "ru": "Выбрать из трёх карт главную и читать историю по ней",
        "en": "Pick the main card of the three and build the story on it",
-       "es": "Leer las cartas al revés, del «Futuro» hacia el «Pasado»",
-       "pt": "Ler as cartas na ordem inversa, do “Futuro” para o “Passado”"
+       "es": "Elegir la carta principal de las tres y leer desde ella",
+       "pt": "Eleger a carta principal das três e ler a história nela"
       }
      ],
      "correct": 1,
@@ -579,8 +579,8 @@
       {
        "ru": "Просто выучить значения карт получше — сюжет сложится сам",
        "en": "Just learn the card meanings better — the story will come together on its own",
-       "es": "Todo está bien: solo hace falta conectar las cartas en las tiradas para otras personas",
-       "pt": "Está tudo certo: ligar as cartas só é preciso em tiragens para outras pessoas"
+       "es": "Aprender mejor los significados de cada carta: el relato se arma por sí mismo",
+       "pt": "Simplesmente estudar melhor os significados de cada carta: a história se forma sozinha"
       },
       {
        "ru": "Навести мостик между картами: тогда выйдет история, а не список слов",
@@ -591,8 +591,8 @@
       {
        "ru": "Перечитать вслух названия позиций: «Прошлое», «Настоящее», «Будущее»",
        "en": "Reread the position names out loud: 'Past', 'Present', 'Future'",
-       "es": "Conviene leer las cartas al revés: primero el «Futuro» y después el «Pasado»",
-       "pt": "Vale ler as cartas na ordem inversa — primeiro o “Futuro”, depois o “Passado”"
+       "es": "Releer en voz alta los nombres de las posiciones: «Pasado», «Presente», «Futuro»",
+       "pt": "Reler em voz alta os nomes das posições: “Passado”, “Presente”, “Futuro”"
       }
      ],
      "correct": 1,
@@ -621,14 +621,14 @@
       {
        "ru": "Он не заметил, что одна из карт легла перевёрнутой",
        "en": "He didn't notice that one of the cards had landed reversed",
-       "es": "Debió elegir una tirada más simple que la de Tres cartas",
-       "pt": "Ela deveria ter escolhido uma tiragem mais simples do que a “Três cartas”"
+       "es": "No se fijó en que una de las cartas de la tirada quedó invertida",
+       "pt": "Ela não reparou que uma das cartas da tiragem tinha caído invertida"
       },
       {
        "ru": "Ему не хватило точных слов, чтобы описать каждую карту",
        "en": "He didn't have precise enough words to describe each card",
-       "es": "No pasa nada: la tirada funciona igual sin la pregunta inicial",
-       "pt": "Ela não tem com que se preocupar: a tiragem funciona igual sem a pergunta inicial"
+       "es": "Le faltaron palabras más precisas para describir cada una de las cartas que salieron",
+       "pt": "Faltaram a ela palavras mais precisas para descrever cada uma das cartas abertas na mesa"
       }
      ],
      "correct": 0,

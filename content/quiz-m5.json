@@ -100,8 +100,8 @@
       {
        "ru": "Хладнокровным стратегом, который не показывает чувств",
        "en": "A cool strategist who keeps their feelings hidden",
-       "es": "Una estratega de sangre fría que nunca muestra lo que siente",
-       "pt": "Um estrategista frio, que nunca mostra o que sente"
+       "es": "Una estratega fría que no muestra lo que siente",
+       "pt": "Um estrategista frio, que não se abre"
       },
       {
        "ru": "Резким и прямолинейным критиком чужих слов",
@@ -130,8 +130,8 @@
       {
        "ru": "Довериться первому впечатлению вместо проверки фактов",
        "en": "Trust the first impression instead of checking facts",
-       "es": "Sacar conclusiones de inmediato y compartirlas enseguida con todos",
-       "pt": "Tirar conclusões na hora e compartilhá-las com todos sem demora"
+       "es": "Confiar en la primera impresión sin revisar los hechos",
+       "pt": "Seguir a primeira impressão, sem checar os fatos"
       },
       {
        "ru": "Проверять факты, а не спешить с выводами",
@@ -394,8 +394,8 @@
       {
        "ru": "Королева выше по рангу и потому командует Рыцарем",
        "en": "The Queen outranks the Knight and gives the orders",
-       "es": "La Reina es más fuerte y por eso le gana al Caballero en la tirada",
-       "pt": "A Rainha é mais forte e por isso vence o Cavaleiro na tiragem"
+       "es": "La Reina está por encima en rango y por eso le da órdenes al Caballero",
+       "pt": "A Rainha tem posto mais alto e por isso manda no Cavaleiro"
       },
       {
        "ru": "Рыцарь мчится вовне, Королева владеет стихией внутри",
@@ -472,8 +472,8 @@
       {
        "ru": "Она живёт идеями и вдохновляет, не касаясь быта",
        "en": "She lives on ideas and inspires, without touching daily life",
-       "es": "Vive de ideas e inspira, sin tocar lo cotidiano",
-       "pt": "Ela vive de ideias e inspira, sem tocar no dia a dia"
+       "es": "Se mueve entre ideas e inspira, sin ocuparse de lo cotidiano",
+       "pt": "Ela se move por ideias e inspira, longe do cotidiano"
       },
       {
        "ru": "Она соединяет дом и дело: изобилие, стоящее на земле",
@@ -502,8 +502,8 @@
       {
        "ru": "Обида на тех, кто чувствует не так глубоко, как она",
        "en": "Resentment toward people who don't feel as deeply as she does",
-       "es": "Frialdad excesiva e indiferencia total ante los sentimientos ajenos",
-       "pt": "Frieza excessiva e total indiferença aos sentimentos dos outros"
+       "es": "Resentirse con quienes no sienten tan hondo como ella",
+       "pt": "Mágoa com quem não sente as coisas tão fundo quanto ela"
       },
       {
        "ru": "Зависимость от чужих эмоций и потеря собственных границ",
@@ -700,8 +700,8 @@
       {
        "ru": "Подождать, пока решение примет кто-то другой",
        "en": "Wait for someone else to make the decision instead",
-       "es": "Preguntarle a todo el mundo y elegir la opción más popular",
-       "pt": "Perguntar a todo mundo em volta e escolher a opção mais popular"
+       "es": "Esperar a que sea otra persona la que termine tomando la decisión por ti",
+       "pt": "Esperar de braços cruzados até que outra pessoa tome a decisão por você"
       }
      ],
      "correct": 1,
