@@ -25,7 +25,14 @@
 
 ⚠️ Чего в текстах быть НЕ должно (проверяет тест): обещаний предсказать будущее, гарантий,
 медицинских и финансовых советов, слова «бесплатно» в заголовке (правило App Store),
-названий конкурентов.
+названий конкурентов. Дисклеймер последней строкой описания — исключение: там эти слова
+стоят С ОТРИЦАНИЕМ и обязательны по правилам Apple 1.4.1 (тест смотрит на отрицание
+в том же предложении).
+
+⚠️ **Ключевые слова iOS не повторяют слов из названия и подзаголовка** того же языка:
+Apple индексирует название и подзаголовок и так, а дубль тратит лимит в 100 символов впустую.
+Первая редакция черновика теряла так до четырёх слов из двенадцати — теперь это держит тест.
+Вычитка es/pt носителем — `docs/prompts/57-store-native.md`.
 
 ---
 
@@ -69,7 +76,7 @@ Arcanum — обучение таро
 Учитесь читать таро: курс из 32 уроков, 78 карт со значениями и карта дня
 
 ### ru · ключевые слова iOS (100)
-таро,обучение,карты,значения,расклад,гадание,карта дня,колода,арканы,курс,символика,луна
+гадание,расклад,колода,арканы,старшие,символика,луна,таролог,карта дня,уэйт,новичкам,интуиция
 
 ### ru · промо-текст iOS (170)
 Новое в 1.0: курс из 32 уроков, справочник 78 карт, десять раскладов, тренажёр памяти и лунный календарь. Всё работает офлайн, без регистрации.
@@ -128,7 +135,7 @@ Course, card meanings, spreads
 Learn to read tarot: a 32-lesson course, all 78 cards explained, daily card
 
 ### en · ключевые слова iOS (100)
-tarot,learn,cards,meanings,spread,reading,daily card,deck,arcana,course,symbolism,moon
+divination,deck,arcana,symbolism,moon,reading,daily,journal,flashcards,beginners,rider,waite
 
 ### en · промо-текст iOS (170)
 New in 1.0: a 32-lesson course, all 78 cards explained, ten spreads, a memory trainer and a moon calendar. Everything works offline, no sign-up needed.
@@ -187,7 +194,7 @@ Curso, significados y tiradas
 Aprende a leer el tarot: curso de 32 lecciones, 78 cartas y carta del día
 
 ### es · ключевые слова iOS (100)
-tarot,aprender,cartas,significados,tirada,lectura,carta del dia,mazo,arcanos,curso,luna
+adivinacion,cartas,tirada,lectura,mazo,arcanos,luna,principiantes,diario,dia,waite,simbolismo
 
 ### es · промо-текст iOS (170)
 Novedades en 1.0: curso de 32 lecciones, las 78 cartas explicadas, diez tiradas, entrenador de memoria y calendario lunar. Todo funciona sin conexión.
@@ -246,7 +253,7 @@ Curso, significados e tiragens
 Aprenda a ler tarô: curso de 32 lições, 78 cartas e carta do dia
 
 ### pt · ключевые слова iOS (100)
-taro,tarot,aprender,cartas,significados,tiragem,leitura,carta do dia,baralho,arcanos,curso,lua
+taro,tarot,cartas,tiragem,leitura,baralho,arcanos,lua,adivinhacao,iniciantes,diario,waite
 
 ### pt · промо-текст iOS (170)
 Novidades na 1.0: curso de 32 lições, as 78 cartas explicadas, dez tiragens, treinador de memória e calendário lunar. Tudo funciona sem internet.
