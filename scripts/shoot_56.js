@@ -29,6 +29,31 @@ const M12 = ['m1l1', 'm1l2', 'm1l3', 'm1l4', 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2
 const DECK = ['fool', 'magician', 'high-priestess', 'empress', 'emperor', 'hierophant', 'lovers', 'chariot'];
 const TODAY = new Date().toISOString().slice(0, 10);
 
+/** Записи дневника за текущий месяц: DailyDraw из src/lib/journal.ts
+ *  ({date, cardId, reversed, note?, outcome?}); outcome — 'yes' | 'partly' | 'no'. */
+const JOURNAL = (() => {
+  // ⚠️ Повтор карты обязателен: MonthCard рисует «КАРТА МЕСЯЦА» только при topCount > 1
+  // (осознанное решение — при одном выпадении подпись обещала бы закономерность, которой нет).
+  // Сид из восьми РАЗНЫХ карт прятал половину карточки от аудита — находка 23.08
+  const cards = ['high-priestess', 'empress', 'high-priestess', 'magician', 'high-priestess', 'lovers', 'chariot', 'hierophant'];
+  const outcomes = ['yes', 'partly', 'no', 'yes', 'yes', undefined, 'partly', 'yes'];
+  const notes = ['Разговор прошёл мягче, чем ждала', undefined, 'День вышел лёгким', undefined, undefined, undefined, 'Пришлось подождать', undefined];
+  const day = Number(TODAY.slice(8, 10));
+  return cards
+    .map((cardId, i) => {
+      const d = day - i;
+      if (d < 1) return null;
+      return {
+        date: `${TODAY.slice(0, 8)}${String(d).padStart(2, '0')}`,
+        cardId,
+        reversed: i % 3 === 0,
+        ...(notes[i] ? { note: notes[i] } : {}),
+        ...(outcomes[i] ? { outcome: outcomes[i] } : {}),
+      };
+    })
+    .filter(Boolean);
+})();
+
 /** Состояние приложения. Форма взята из scripts/check_53_web.js — сочинять сид нельзя. */
 function seed(extra = {}) {
   return JSON.stringify({
@@ -36,11 +61,18 @@ function seed(extra = {}) {
       themeMode: 'dark',
       lang: 'ru',
       installSeed: 12345,
-      profile: { onboarded: true, name: 'Артём', birthDate: '1990-05-14' },
+      // ⚠️ birthArcanaId ОБЯЗАТЕЛЕН рядом с birthDate: карточку аркана рождения рисует
+      // BirthArcanaCard по profile.birthArcanaId, а не по дате — сид только с датой давал
+      // пустую плашку «Указать дату рождения» и прятал целый блок от аудита (находка 23.08).
+      // Значение — birthArcanaId('1990-05-14') из src/lib/birthArcana.ts
+      profile: { onboarded: true, name: 'Артём', birthDate: '1990-05-14', birthArcanaId: 'justice' },
       premium: { active: false, source: 'none', until: null },
       lessonsProgress: Object.fromEntries(M12.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }])),
       srs: Object.fromEntries(DECK.map((id) => [id, { reps: 2, intervalDays: 3, ease: 2.5, due: '2026-01-01' }])),
       reviewDay: { date: '', newCount: 0, doneCount: 0 },
+      // дневник наполнен: без записей блок «ДНЕВНИК» на профиле показывает пустое состояние,
+      // и аудит его композиции не видит вовсе (находка 23.08 — сид решает, что попадёт в кадр)
+      history: JOURNAL,
       spreadsHistory: [],
       xp: 400,
       streak: 5,
@@ -62,9 +94,19 @@ const PAIRS = [
   { name: 'lesson',     route: '/lesson/m1l1',             mock: 'v-lesson',    marker: 'УРОК' },
   { name: 'trainer',    route: '/review',                  mock: 'v-trainer',   marker: 'Тренажёр' },
   { name: 'moon',       route: '/moon',                    mock: 'v-moon',      marker: 'ЛУНА' },
-  { name: 'spread3',    route: '/spreads/three-card',      mock: 'v-spread3',   marker: 'Три карты' },
-  { name: 'spread10',   route: '/spreads/celtic-cross',    mock: 'v-spread10',  marker: 'Кельтский крест', extra: { premium: PREMIUM } },
-  { name: 'moonspread', route: '/spreads/new-moon',        mock: 'v-moonspread', marker: 'новолуния' },
+  { name: 'spread3',    route: '/spreads/three-card',      mock: 'v-spread3',   marker: 'РАЗЛОЖИТЬ' },
+  { name: 'spread10',   route: '/spreads/celtic-cross',    mock: 'v-spread10',  marker: 'РАЗЛОЖИТЬ', extra: { premium: PREMIUM } },
+  // ⚠️ devMoonOpen обязателен: вне окна события гейт уводит на список раскладов. Маркер здесь
+  // ДОЛЖЕН быть уникален для целевого экрана — первая редакция искала «новолуния», а это слово
+  // есть и в карточке списка, поэтому подменённый экран прошёл проверку незамеченным (находка
+  // агента-сверщика 23.08). «РАЗЛОЖИТЬ» есть только на самом экране расклада
+  // ⚠️ Снимается ПОЛНОЛУНИЕ, хотя макет v-moonspread рисует новолуние: devMoonOpen подставляет
+  // «сейчас» = момент БЛИЖАЙШЕГО события (useDevMoonNow → nearestMoonEvent), а на 23.08.2026
+  // ближайшее — полнолуние 28.08. Расклад новолуния при этом закрыт законно, и гейт уводит
+  // на список. Композиция обоих лунных раскладов одна, сверять её можно на любом из них;
+  // полнолуние premium — отсюда PREMIUM в сиде
+  { name: 'moonspread', route: '/spreads/full-moon',       mock: 'v-moonspread', marker: 'РАЗЛОЖИТЬ',
+    extra: { devMoonOpen: true, premium: PREMIUM } },
   { name: 'paywall',    route: '/paywall',                 mock: 'v-paywall',   marker: 'Premium' },
   { name: 'settings',   route: '/settings',                mock: 'v-settings',  marker: 'Настройки' },
   { name: 'about',      route: '/about',                   mock: 'v-about',     marker: 'О приложении' },
