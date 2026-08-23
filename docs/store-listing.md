@@ -212,7 +212,7 @@ QUÉ INCLUYE
 
 • Un curso de 6 módulos y 32 lecciones. Teoría, análisis de cartas y una prueba corta al final de cada lección: 160 preguntas en total. Cada lección desbloquea la siguiente y tu racha de días te ayuda a no perder el ritmo.
 
-• Un manual con las 78 cartas. De cada carta tienes su significado derecho e invertido, su lectura por áreas de la vida (amor, trabajo, dinero, salud), el simbolismo de la ilustración y lo que quiere decir como carta del día. Incluye búsqueda y filtros por arcanos y palos.
+• Una guía con las 78 cartas. De cada carta tienes su significado derecho e invertido, su lectura por áreas de la vida (amor, trabajo, dinero, salud), el simbolismo de la ilustración y lo que quiere decir como carta del día. Incluye búsqueda y filtros por arcanos y palos.
 
 • Carta del día. Una carta cada mañana, con su lectura y una pregunta para fijar lo aprendido; por la noche, una reflexión corta sobre si te resonó o no. Todo se guarda en tu Diario, junto con tus notas.
 
@@ -232,7 +232,7 @@ Disponible en cuatro idiomas: español, inglés, ruso y portugués.
 
 ARCANUM PREMIUM
 
-Gratis para siempre: la carta del día con su lectura, el manual completo de las 78 cartas con todas sus secciones, el Diario sin límites, los dos primeros módulos del curso, las tiradas “Tres cartas” y “Luna nueva”, y una sesión del Entrenador al día.
+Gratis para siempre: la carta del día con su lectura, la guía completa de las 78 cartas con todas sus secciones, el Diario sin límites, los dos primeros módulos del curso, las tiradas “Tres cartas” y “Luna nueva”, y una sesión del Entrenador al día.
 
 Premium desbloquea los módulos 3 a 6 del curso, el resto de las tiradas y el Entrenador sin límites. La suscripción se renueva automáticamente y puedes cancelarla cuando quieras desde los ajustes de tu cuenta en la tienda. Si algún día se vence, todo lo que ya hayas completado se queda contigo.
 
@@ -248,7 +248,7 @@ Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la
 # Português do Brasil (вычитан носителем, задача 57н)
 
 ### pt · название (30)
-Arcanum — Aprenda Tarô
+Arcanum — Aprenda a Ler Tarô
 
 ### pt · подзаголовок iOS (30)
 Curso, significados e tiragens
@@ -269,7 +269,7 @@ O Arcanum ensina você a ler tarô do zero, com calma, cinco minutos por dia.
 
 O QUE VOCÊ ENCONTRA NO APP
 
-• Um curso de 6 módulos e 32 lições. Teoria, análise das cartas e um teste curto no fim de cada lição, 160 perguntas no total. Cada lição libera a seguinte, e a sequência de dias ajuda a manter o ritmo.
+• Um curso de 6 módulos e 32 lições. Teoria, análise das cartas e um teste curto no fim de cada lição, 160 perguntas no total. Cada lição libera a seguinte, e a ofensiva de dias ajuda a manter o ritmo.
 
 • Um guia com as 78 cartas. Cada carta traz o significado normal e o invertido, a leitura por áreas da vida (amor, trabalho, dinheiro, saúde), o simbolismo da imagem e o sentido como carta do dia. Tem busca e filtros por arcanos e naipes.
 
@@ -277,7 +277,7 @@ O QUE VOCÊ ENCONTRA NO APP
 
 • Dez tiragens: Três Cartas, Cruz Celta, Ferradura, Relacionamento, Escolha, Mês e outras. Cada posição tem nome e explicação, assim você entende o que cada uma representa na leitura.
 
-• Treinador de memória. Cartões com repetição espaçada: o app escolhe qual carta mostrar hoje para os significados ficarem na memória de vez.
+• Treino de memória. Flashcards com repetição espaçada: o app escolhe qual carta mostrar hoje para os significados ficarem na memória de vez.
 
 • Calendário lunar. As fases, as luas novas e as luas cheias são calculadas com um algoritmo astronômico, e não com uma tabela aproximada. A lua nova e a lua cheia têm tiragens próprias.
 
@@ -291,9 +291,9 @@ Quatro idiomas: português, inglês, russo e espanhol.
 
 ARCANUM PREMIUM
 
-Grátis para sempre: a carta do dia com a interpretação, o guia completo das 78 cartas com todas as seções, o diário sem limites, os dois primeiros módulos do curso, as tiragens Três Cartas e Lua Nova e uma sessão do Treinador por dia.
+Grátis para sempre: a carta do dia com a interpretação, o guia completo das 78 cartas com todas as seções, o diário sem limites, os dois primeiros módulos do curso, as tiragens Três Cartas e Lua Nova e uma sessão do Treino por dia.
 
-O Premium libera os módulos 3 a 6 do curso, as outras tiragens e o Treinador sem limites. A assinatura é renovada automaticamente e pode ser cancelada nas configurações da loja. Se ela acabar, tudo o que você já concluiu continua com você.
+O Premium libera os módulos 3 a 6 do curso, as outras tiragens e o Treino sem limites. A assinatura é renovada automaticamente e pode ser cancelada nas configurações da loja. Se ela acabar, tudo o que você já concluiu continua com você.
 
 Este aplicativo é para aprendizado e entretenimento. Ele não prevê o futuro e não substitui a consulta com um profissional.
 

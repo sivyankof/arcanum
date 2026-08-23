@@ -130,13 +130,13 @@
     "ru": "Серия {days} — ещё можно сохранить",
     "en": "Your {n}-day streak can still be saved",
     "es": "Tu racha de {days} todavía se puede salvar",
-    "pt": "Sua sequência de {days} ainda pode ser salva"
+    "pt": "Sua ofensiva de {days} ainda pode ser salva"
    },
    {
     "ru": "Осталось немного до полуночи — серия ждёт",
     "en": "A little time before midnight — your streak awaits",
     "es": "Queda un poco para la medianoche: tu racha espera",
-    "pt": "Falta pouco para a meia-noite — sua sequência espera"
+    "pt": "Falta pouco para a meia-noite — sua ofensiva espera"
    }
   ],
   "winback": [
@@ -158,7 +158,7 @@
     "ru": "Пропущенный день укроет заморозка — откройте карту сегодня, и серия {days} продолжится",
     "en": "A freeze can cover the missed day — open today's card and your {n}-day streak goes on",
     "es": "Ese día que te saltaste lo cubre la congelación: abre la carta de hoy y tu racha de {days} sigue adelante",
-    "pt": "O congelamento pode cobrir o dia que você pulou — abra a carta de hoje e sua sequência de {days} continua"
+    "pt": "O congelamento pode cobrir o dia que você pulou — abra a carta de hoje e sua ofensiva de {days} continua"
    },
    {
     "ru": "Заморозка прощает один пропуск. Карта уже ждёт ✦",
@@ -170,7 +170,7 @@
     "ru": "Вчера прошло без карты — заморозка удержит серию, если вернуться сегодня",
     "en": "Yesterday passed without a card — return today and the freeze will hold your streak",
     "es": "Ayer pasó sin carta. Vuelve hoy y la congelación mantendrá tu racha",
-    "pt": "Ontem passou sem carta — volte hoje e o congelamento segura sua sequência"
+    "pt": "Ontem passou sem carta — volte hoje e o congelamento segura sua ofensiva"
    }
   ],
   "moon_new": [
@@ -220,13 +220,13 @@
     "ru": "Серию спасла заморозка",
     "en": "A freeze saved your streak",
     "es": "Una congelación salvó tu racha",
-    "pt": "O congelamento salvou sua sequência"
+    "pt": "O congelamento salvou sua ofensiva"
    },
    {
     "ru": "Пропущенный день укрыла заморозка — серия цела",
     "en": "The freeze covered the missed day — your streak is safe",
     "es": "La congelación cubrió el día que faltaste: tu racha sigue intacta",
-    "pt": "O congelamento cobriu o dia perdido — sua sequência segue intacta"
+    "pt": "O congelamento cobriu o dia perdido — sua ofensiva segue intacta"
    }
   ]
  },
@@ -261,7 +261,7 @@
    "ru": "Серия {n}! Постоянство — тоже магия",
    "en": "A {n}-day streak! Consistency is its own kind of magic",
    "es": "¡Racha de {n} días! La constancia también es su propia magia",
-   "pt": "Sequência de {n} dias! Constância também é uma forma de magia"
+   "pt": "Ofensiva de {n} dias! Constância também é uma forma de magia"
   }
  ],
  "empty": {
