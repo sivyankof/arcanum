@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../../src/components/FadeUp';
 import { PremiumBadge } from '../../../src/components/PremiumBadge';
 import { PressableScale } from '../../../src/components/PressableScale';
+import { Rule } from '../../../src/components/Rule';
 import { ScreenBg } from '../../../src/components/ScreenBg';
 import { SpreadDiagram } from '../../../src/components/SpreadDiagram';
 import { Txt } from '../../../src/components/Txt';
@@ -75,6 +76,9 @@ export default function SpreadsScreen() {
         <FadeUp index={0}>
           <Txt style={[st.sub, { color: t.muted }]}>{tr('spreads.overline')}</Txt>
           <Txt style={[st.title, { color: t.head }]}>{tr('spreads.title')}</Txt>
+          {/* разделитель шапки, как на «Сегодня», «Курсе» и в «Профиле» (макет `v-spreads`,
+              аудит 56): без него этот экран был единственным из четырёх, где шапка обрывалась */}
+          <Rule />
         </FadeUp>
 
         {spreads.map((s, si) => {
