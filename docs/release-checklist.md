@@ -14,7 +14,10 @@
       (эмулятор не считается, у Артёма iPhone — нужен чужой телефон один раз); (3) номер
       телефона — открывается после (1). «Создать приложение» недоступно до конца проверок.
 - [ ] RuStore (бесплатно) — сборка APK через EAS
-- [ ] EAS Build настроен (eas.json: preview + production), версии: app.json version + runtimeVersion
+- [~] EAS Build настроен (eas.json: preview + production), версии: app.json version + runtimeVersion —
+      **25.08 (задача 61)**: проект `@art9/arcanum`, `eas.json` (`preview` APK/ad hoc, `production` AAB,
+      номера сборок в EAS — `appVersionSource: remote`, `runtimeVersion` не нужен без EAS Update).
+      Осталось: первая Android-сборка интерактивно (keystore), iOS после Apple. Спека `docs/specs/61-eas-build.md`.
 - [ ] **Подписка (задача 53б, решение 22.08 — живая с v1):** аккаунт RevenueCat, продукты
       в App Store Connect и Google Play Console (годовая + месячная, цены — решение Артёма),
       entitlement `premium`, API-ключи в сборке; тестовые покупки в Sandbox/внутреннем треке;
