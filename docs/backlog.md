@@ -1772,9 +1772,8 @@ Push — после настройки remote (отложено решением
       `storeAssets.test.ts` (10 проверок), общий парсер заголовков `src/lib/imageHeaders.ts`.
       Тестов **1860 в 48 сьютах**, `tsc` чист. Полный прогон на финальном коде: 28 снято / 0 не
       снято, `verify` зелёный. Остаются два человеческих критерия: Артём смотрит 7 кадров ru +
-      баннер ru на ноутбуке (замечания по композиции — в `frame.html`/`feature.html`, по текстам —
-      в `captions.json`, после правок обязателен полный повторный прогон конвейера), и материалы
-      грузятся в Play Console (Store presence → Main store listing → Graphics, затем Translations
+      баннер ru на ноутбуке — **сделано 26.08, Артём принял без замечаний** («кадры нравятся»);
+      осталось одно: материалы грузятся в Play Console (Store presence → Main store listing → Graphics, затем Translations
       для en/es/pt). Apple-набор (`--store apple`, 1290×2796) снимается тем же скриптом, но
       `docs/store/apple/` — в `.gitignore` до аккаунта Apple; вопрос про `supportsTablet` в
       `app.json` — отдельная задача **63б**. Отчёт с числами и мутациями — в конце спеки.
