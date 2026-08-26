@@ -9,24 +9,12 @@
  *  скрипт, — цветной пиксель тест не поймает, поэтому иконка перерисовывается только скриптом. */
 import fs from 'fs';
 import path from 'path';
+import { pngHeader } from '../imageHeaders';
 
 const ROOT = path.join(__dirname, '../../..');
 const ICON = path.join(ROOT, 'assets/images/notification-icon.png');
-const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
-/** Размеры и формат PNG из IHDR — он обязан быть первым чанком: [8 сигнатура][4 длина]
- *  [4 "IHDR"][4 ширина][4 высота][1 глубина][1 тип цвета]. Родня jpegSize из cardAssets.test.ts,
- *  где то же самое читается из SOF-маркера JPEG. */
-function pngHeader(buf: Buffer): { w: number; h: number; depth: number; colorType: number } {
-  if (!buf.subarray(0, 8).equals(PNG_SIGNATURE)) throw new Error('не PNG: сигнатура не совпала');
-  if (buf.toString('ascii', 12, 16) !== 'IHDR') throw new Error('первый чанк не IHDR');
-  return {
-    w: buf.readUInt32BE(16),
-    h: buf.readUInt32BE(20),
-    depth: buf.readUInt8(24),
-    colorType: buf.readUInt8(25),
-  };
-}
+// размер и формат — pngHeader из imageHeaders.ts
 
 describe('иконка пуша Android (спека 55)', () => {
   it('файл существует и это PNG 96×96 RGBA', () => {
