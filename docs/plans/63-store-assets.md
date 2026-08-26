@@ -196,7 +196,8 @@ GOOGLE_SHOT = (1080, 1920)
 APPLE_SHOT = (1290, 2796)
 SHOTS_MIN, SHOTS_MAX = 2, 8
 # бюджет строки подписи при кеглях frame.html (72 / 34 px на холсте 1080) — калибровка в задаче 4
-TITLE_MAX, SUB_MAX = 26, 48
+# ⚠️ 26/48 были плейсхолдером; фактические, измеренные рендером frame.html значения — 25/46
+TITLE_MAX, SUB_MAX = 25, 46
 
 
 def fail(msg: str) -> int:
@@ -796,8 +797,8 @@ const ROOT = path.join(__dirname, '../../..');
 const STORE = path.join(ROOT, 'docs/store');
 const GOOGLE = { w: 1080, h: 1920, min: 2, max: 8 };
 const APPLE = { w: 1290, h: 2796, min: 1, max: 10 };
-const TITLE_MAX = 26; // бюджет строки при кеглях frame.html — тот же, что в store_assets.py
-const SUB_MAX = 48;
+const TITLE_MAX = 25; // измерено рендером frame.html; то же число, что в store_assets.py
+const SUB_MAX = 46;
 
 const captions = JSON.parse(fs.readFileSync(path.join(STORE, 'captions.json'), 'utf8')) as {
   tagline: Record<string, string>;
@@ -856,7 +857,7 @@ describe('подписи кадров (captions.json)', () => {
       expect({ lang, tagline: captions.tagline[lang] }).toEqual({ lang, tagline: m?.[1] });
     }
   });
-  it('каждый экран несёт все языки, заголовок ≤ 26 и подстрока ≤ 48 символов', () => {
+  it('каждый экран несёт все языки, заголовок ≤ 25 и подстрока ≤ 46 символов', () => {
     for (const [id, byLang] of Object.entries(captions.screens)) {
       for (const lang of LANGS) {
         const pair = byLang[lang];
