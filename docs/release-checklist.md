@@ -22,7 +22,9 @@
 - [~] EAS Build настроен (eas.json: preview + production), версии: app.json version + runtimeVersion —
       **25.08 (задача 61)**: проект `@art9/arcanum`, `eas.json` (`preview` APK/ad hoc, `production` AAB,
       номера сборок в EAS — `appVersionSource: remote`, `runtimeVersion` не нужен без EAS Update).
-      Осталось: первая Android-сборка интерактивно (keystore), iOS после Apple. Спека `docs/specs/61-eas-build.md`.
+      **26.08: первая Android-сборка `preview` ПРОШЛА** (подробности — раздел «Сборка (EAS Build)»
+      ниже). Осталось: установка и лайв-проверка APK, `production` (AAB), iOS после Apple.
+      Спека `docs/specs/61-eas-build.md`.
 - [ ] **Подписка (задача 53б, решение 22.08 — живая с v1):** аккаунт RevenueCat, продукты
       в App Store Connect и Google Play Console (годовая + месячная, цены — решение Артёма),
       entitlement `premium`, API-ключи в сборке; тестовые покупки в Sandbox/внутреннем треке;
@@ -297,6 +299,26 @@ Android-разрешений в `app.json` не объявлено. Как то�
 package `app.arcanum.tarot`, язык по умолчанию ru-RU, бесплатное, подписание Play принято).
 Панель управления показывает четыре шага: внутреннее тестирование, завершение настройки,
 закрытое тестирование (0 из 12 участников), заявка на рабочую версию.
+
+## Сборка (EAS Build)
+
+- [x] **Первая Android-сборка прошла 26.08.2026** — профиль `preview` (internal, APK),
+      `finished` за 41 минуту, keystore сгенерирован в облаке Expo (локальный `keytool`
+      не нужен). Версия 1.0.0, `versionCode` 1, SDK 54.
+      APK: `https://expo.dev/artifacts/eas/m-gIAy4Au5ctlm8mBIzcKiJM-7AmWsvCht8CsXRTk2k.apk`
+      ⚠️ **Команда — `npx eas-cli@latest build -p android --profile preview`.** Просто
+      `npx eas` падает с `could not determine executable to run`: пакет называется `eas-cli`,
+      а `eas` — только имя бинарника внутри него. Статус — `npx eas-cli@latest build:list --limit 1`.
+- [x] `.easignore` заведён 26.08 — архив сборки 305 МБ → 31.7 МБ. ⚠️ Он **отменяет
+      `.gitignore` для EAS целиком**, поэтому секретные шаблоны продублированы в нём;
+      страж — `python scripts/check_easignore.py`. Подтвердится на следующей сборке.
+- [~] APK установлен и проверен вживую. **Можно на эмуляторе, не дожидаясь телефона**:
+      сборка идёт под `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, а эмулятор Android —
+      x86_64. Эмулятор закрывает то, чего веб-проверка не видит никогда: иконку приложения,
+      иконку пуша (спека 55) и русские числительные с датами (тот же Hermes с урезанным ICU).
+      Хаптика, нативные тени во всей полноте и резкость на плотном экране — только устройство.
+- [ ] Android `production` (AAB) — для внутреннего теста, после лайв-проверки APK.
+- [ ] iOS `preview` — после одобрения Apple (`eas device:create` с UDID iPhone).
 
 ## Магазины: тексты и материалы
 
