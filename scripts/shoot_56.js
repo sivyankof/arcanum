@@ -83,7 +83,8 @@ function seed(extra = {}) {
 }
 const PREMIUM = { active: true, source: 'dev', until: null };
 
-/** Пары. mock — id вью в макете; marker — текст, обязанный быть на экране приложения. */
+/** Пары. mock — id вью в макете; marker — текст, обязанный быть на экране приложения.
+ *  mockSetup — JS, выполняемый в макете после show(id) (состояния, которых демобар не показывает). */
 const PAIRS = [
   { name: 'today',      route: '/',                        mock: 'v-today',     marker: 'КАРТА ДНЯ' },
   { name: 'course',     route: '/course',                  mock: 'v-course',    marker: 'Курс' },
@@ -107,7 +108,9 @@ const PAIRS = [
   // полнолуние premium — отсюда PREMIUM в сиде
   { name: 'moonspread', route: '/spreads/full-moon',       mock: 'v-moonspread', marker: 'РАЗЛОЖИТЬ',
     extra: { devMoonOpen: true, premium: PREMIUM } },
-  { name: 'paywall',    route: '/paywall',                 mock: 'v-paywall',   marker: 'Premium' },
+  // после 62 приложение без SDK покупок показывает состояние В «скоро» — макет переключается
+  // в него тем же скриптом (mockSetup); витрина А с ценами вернётся в 53б
+  { name: 'paywall',    route: '/paywall',                 mock: 'v-paywall',   marker: 'Premium', mockSetup: 'pwSoon(true)' },
   { name: 'settings',   route: '/settings',                mock: 'v-settings',  marker: 'Настройки' },
   { name: 'about',      route: '/about',                   mock: 'v-about',     marker: 'О приложении' },
   { name: 'onboarding', route: '/onboarding',              mock: 'v-ob',        marker: 'Arcanum',
@@ -157,6 +160,7 @@ const PAIRS = [
         },
         [p.mock, theme],
       );
+      if (p.mockSetup) await mock.evaluate(p.mockSetup);
       await mock.waitForTimeout(600);
       await mock.locator('#sc').screenshot({ path: path.join(OUT, `${p.name}-mock-${theme}.png`) });
       shotBoth++;

@@ -1096,6 +1096,7 @@ border:.5px solid rgba(226,189,114,.3)}
 
   <!-- ===== ПОДПИСКА (задача 53) ===== -->
   <!-- Два состояния одного экрана: #pwOff — не оформлено, #pwOn — активна.
+       #pwSoon — предложений нет («скоро», спека 62), включается только pwSoon(true).
        Переключает кнопка «Premium» в демобаре (window.__pwState), как __revState у тренажёра.
        Тон — design-system §8: без таймеров, зачёркнутых цен и предвыбранного пробного периода;
        «назад» на месте и ведёт туда, откуда пришли. -->
@@ -1137,6 +1138,14 @@ border:.5px solid rgba(226,189,114,.3)}
       <div class="pwstate"><b>Годовая подписка</b><small>Продлится 22 сентября 2027</small></div>
       <button class="cta2">Управлять подпиской</button>
       <span class="trlink" style="margin-top:12px">Восстановить покупки</span>
+      <p class="pwlegal">Подписка продлевается автоматически, пока вы её не отмените в настройках App&nbsp;Store или Google&nbsp;Play — не позже чем за сутки до конца периода. <a>Условия</a> · <a>Конфиденциальность</a></p>
+    </div>
+
+    <!-- В. предложений нет — «скоро» (спека 62): без SDK покупок (53а/62) или магазин не ответил
+         (53б). Та же .pwstate, что у Б; ни цен, ни CTA, ни «Восстановить»; ссылки условий остаются.
+         Демобар по-прежнему ходит А → Б (цены вернутся в 53б); В включает скрипт сверки: pwSoon(true) -->
+    <div id="pwSoon" class="fadeup d4" style="display:none">
+      <div class="pwstate"><b>Оформить подписку пока нельзя</b><small>Попробуйте позже — всё, что уже открыто, останется доступным</small></div>
       <p class="pwlegal">Подписка продлевается автоматически, пока вы её не отмените в настройках App&nbsp;Store или Google&nbsp;Play — не позже чем за сутки до конца периода. <a>Условия</a> · <a>Конфиденциальность</a></p>
     </div>
   </div>
@@ -1920,6 +1929,7 @@ function setPremium(active){
   window.__pwState = active ? 1 : 0;
   document.getElementById('pwOff').style.display = active ? 'none' : '';
   document.getElementById('pwOn').style.display  = active ? '' : 'none';
+  document.getElementById('pwSoon').style.display = 'none'; // В живёт только по pwSoon(true)
   document.getElementById('pwchip').style.display = active ? '' : 'none';
   /* настройки */
   document.getElementById('prowPremVal').textContent = active ? 'Активна ›' : 'Оформить ›';
@@ -1933,6 +1943,13 @@ function setPremium(active){
   /* курс перерисовываем: с подпиской узлы М3 открыты обычным «НАЧАТЬ УРОК» */
   renderCourse();
   document.querySelectorAll('#courseflow .mh2 .lk').forEach(el=> el.style.display = active ? 'none' : '');
+}
+
+/* Состояние В «скоро» (спека 62) — для сверки 6а (scripts/shoot_56.js, пара paywall).
+   При on прячет витрину А; Б не трогает (у активной подписки состояния «скоро» нет). */
+function pwSoon(on){
+  document.getElementById('pwSoon').style.display = on ? '' : 'none';
+  document.getElementById('pwOff').style.display = (on || window.__pwState) ? 'none' : '';
 }
 
 /* демо-шаг кнопки «Premium» */
