@@ -269,8 +269,13 @@ export const resources = {
         activeDev: "DEV-режим",
         manage: "Управлять подпиской",
         unavailableTitle: "Пока недоступно",
-        unavailableText: "Покупки появятся в сборке из App Store и Google Play. В Expo Go оформить подписку нельзя.",
+        unavailableText: "Покупки пока недоступны. Попробуйте позже.",
         ok: "Понятно",
+        // состояние «предложений нет» (спека 62): без SDK покупок (53а/62) и когда магазин
+        // не ответил (53б) — панель вместо тарифов, без цифр и без кнопки. Текст нейтральный,
+        // без обещания срока (решение Артёма 26.08): после 53б та же панель значит «нет сети»
+        soonTitle: "Оформить подписку пока нельзя",
+        soonSub: "Попробуйте позже — всё, что уже открыто, останется доступным",
       },
       // обратная связь (спека 13): mailto-письмо с автоблоком диагностики.
       // «Записей истории: N» — форма без склонений, плюрализация не нужна (урок hf-02)
@@ -593,8 +598,10 @@ export const resources = {
         activeDev: "DEV mode",
         manage: "Manage subscription",
         unavailableTitle: "Not available yet",
-        unavailableText: "Purchases will be available in the App Store and Google Play build. You can't subscribe inside Expo Go.",
+        unavailableText: "Purchases aren't available yet. Please try again later.",
         ok: "Got it",
+        soonTitle: "Subscribing isn't available yet",
+        soonSub: "Try again later — everything that's already open stays available",
       },
       feedback: {
         subject: "Arcanum: feedback",
@@ -963,8 +970,10 @@ export const resources = {
         activeDev: "Modo DEV",
         manage: "Gestionar suscripción",
         unavailableTitle: "Aún no disponible",
-        unavailableText: "Las compras estarán disponibles en la versión de App Store y Google Play. En Expo Go no es posible suscribirse.",
+        unavailableText: "Las compras aún no están disponibles. Inténtalo más tarde.",
         ok: "Entendido",
+        soonTitle: "Aún no es posible suscribirse",
+        soonSub: "Inténtalo más tarde: todo lo que ya está abierto seguirá disponible",
       },
       feedback: {
         subject: "Arcanum: comentarios",
@@ -1343,8 +1352,10 @@ export const resources = {
         activeDev: "Modo DEV",
         manage: "Gerenciar assinatura",
         unavailableTitle: "Ainda não disponível",
-        unavailableText: "As compras estarão disponíveis na versão da App Store e do Google Play. No Expo Go não é possível assinar.",
+        unavailableText: "As compras ainda não estão disponíveis. Tente mais tarde.",
         ok: "Entendi",
+        soonTitle: "Ainda não é possível assinar",
+        soonSub: "Tente mais tarde: tudo o que já está aberto continua disponível",
       },
       feedback: {
         subject: "Arcanum: sua opinião",
