@@ -19,7 +19,14 @@
    ⚠️ Шрифты и кадр передаются шаблону data-URI: file://-страница не грузит file://-шрифты без флага.
    ⚠️ Сид — форма scripts/shoot_56.js (урок 54: сид не сочинять).
    ⚠️ Таб-бар перед съёмкой получает нижний safe-area inset (fixTabBarSafeArea) — на вебе он
-   прижат к самой кромке вьюпорта, и без этого подписи вкладок срезаны (находка ревью 63/1).
+   прижат к самой кромке вьюпорта. Это НЕ чинит обрезанные подписи вкладок (первая правка ревью
+   63/1 лечила именно кромку и не помогла): контейнер подписи сам высотой ровно 10 px при
+   font-size 10 px и line-height:normal, а реальная строка Manrope в 10 px занимает ~13.5 px —
+   overflow:hidden контейнера режет нижние ~3.5 px глифов независимо от отступа снизу. Вторым
+   проходом та же функция снимает это ограничение с самих подписей (fixTabBarLabels) и
+   самопроверяется: overflow обязан перестать быть hidden, высота — превысить кегль, найденных
+   подписей на экране с таб-баром — ровно пять; иначе кадр падает в failed с причиной, а не
+   снимается обрезанным (находка ревью 63/1, вторая часть).
    ⚠️ --only принимает список id через запятую; незнакомый id роняет прогон с его именем и
    списком допустимых, а не тихо снимает ноль кадров (находка ревью 63/6). */
 const { chromium } = require('playwright');
@@ -334,29 +341,75 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
 
 /** Таб-бар на вебе не получает нижний safe-area inset (на устройстве ~34 px поднимает бар над
  *  кромкой экрана — системная зона под жест/индикатор). Без него подписи вкладок срезаются
- *  нижней кромкой вьюпорта («Расклады» → «Раскла», «Hoje» → «Hoie») — находка ревью 63/1.
- *  Контейнер ищем по геометрии (прижат к низу вьюпорта, во всю ширину, высота 20–150 px —
- *  по факту 48–49), а не по классу/тексту: атомарные классы RN Web у него безымянные и меняются
- *  от сборки к сборке; `querySelectorAll('*')` возвращает элементы в порядке документа, поэтому
- *  первое совпадение — самый ВНЕШНИЙ (сам таб-бар), а не один из его внутренних слоёв фона.
- *  На экранах без таб-бара (карта, расклад, тренажёр, луна) подходящего элемента нет — функция
- *  молча ничего не делает (проверено на всех четырёх). `!important` обязателен: без него
- *  инлайн-правило `height`, выставленное один раз, при следующем ререндере RN Web перезатирается
- *  атомарным классом той же специфичности — замерено 26.08. */
+ *  нижней кромкой вьюпорта. Контейнер ищем по геометрии (прижат к низу вьюпорта, во всю ширину,
+ *  высота 20–150 px — по факту 48–49), а не по классу/тексту: атомарные классы RN Web у него
+ *  безымянные и меняются от сборки к сборке; `querySelectorAll('*')` возвращает элементы в
+ *  порядке документа, поэтому первое совпадение — самый ВНЕШНИЙ (сам таб-бар), а не один из
+ *  его внутренних слоёв фона. На экранах без таб-бара (карта, расклад, тренажёр, луна)
+ *  подходящего элемента нет — функция молча ничего не делает (проверено на всех четырёх).
+ *  `!important` обязателен: без него инлайн-правило `height`, выставленное один раз, при
+ *  следующем ререндере RN Web перезатирается атомарным классом той же специфичности —
+ *  замерено 26.08.
+ *
+ *  Второй, независимый дефект — сама подпись, а не кромка вьюпорта (находка ревью 63/1,
+ *  первая правка выше её не лечит): контейнер подписи высотой ровно 10 px при font-size 10 px
+ *  и line-height:normal, а реальная строка Manrope в 10 px занимает ~13.5 px — «Расклады» читается
+ *  как «Расклалы», у «Профиль» отрезан хвост «ь». Подписи ищем ВНУТРИ уже найденного bar по
+ *  ФАКТИЧЕСКОМУ тексту вкладки для языка кадра (labels, из i18n.ts через i18nText), а не по
+ *  классу (тот же довод, что выше) и не по всей странице: на экране «Курс» тем же текстом
+ *  «Курс» может быть заголовок, и без ограничения поиска контейнером таб-бара это была бы
+ *  вторая находка, а не одна. */
 const TAB_BAR_INSET = 34; // типичный safe-area inset снизу на iPhone с Home Indicator
-async function fixTabBarSafeArea(page) {
-  await page.evaluate((inset) => {
+const TAB_LABEL_LINE_HEIGHT = 1.35; // при этом реальная высота строки Manrope 10px ≈ 13.5px — измерено 26.08
+async function fixTabBarSafeArea(page, lang) {
+  const labels = ['today', 'course', 'cards', 'spreads', 'profile'].map((key) => i18nText(lang, 'tabs', key));
+  const r = await page.evaluate(({ inset, labels, lineHeight }) => {
     const W = window.innerWidth, H = window.innerHeight;
     const bar = [...document.querySelectorAll('*')].find((el) => {
-      const r = el.getBoundingClientRect();
-      return r.bottom >= H - 2 && r.width >= W - 4 && r.height > 20 && r.height < 150;
+      const rect = el.getBoundingClientRect();
+      return rect.bottom >= H - 2 && rect.width >= W - 4 && rect.height > 20 && rect.height < 150;
     });
-    if (!bar) return; // экран без таб-бара
+    if (!bar) return { hasBar: false };
     const h = bar.getBoundingClientRect().height;
     bar.style.setProperty('height', `${h + inset}px`, 'important');
     bar.style.setProperty('padding-bottom', `${inset}px`, 'important');
     bar.style.setProperty('box-sizing', 'border-box', 'important');
-  }, TAB_BAR_INSET);
+
+    // подписи — листовые узлы ВНУТРИ бара с точным текстом вкладки на языке кадра
+    const found = [...bar.querySelectorAll('*')].filter(
+      (el) => el.children.length === 0 && labels.includes((el.textContent || '').trim()),
+    );
+    for (const el of found) {
+      el.style.setProperty('height', 'auto', 'important');
+      el.style.setProperty('overflow', 'visible', 'important');
+      el.style.setProperty('line-height', String(lineHeight), 'important');
+    }
+    // самопроверка в том же evaluate — без второго похода в браузер
+    const checked = found.map((el) => {
+      const cs = getComputedStyle(el);
+      return {
+        text: (el.textContent || '').trim(),
+        overflow: cs.overflow,
+        heightPx: el.getBoundingClientRect().height,
+        fontPx: parseFloat(cs.fontSize),
+      };
+    });
+    return { hasBar: true, foundCount: found.length, checked };
+  }, { inset: TAB_BAR_INSET, labels, lineHeight: TAB_LABEL_LINE_HEIGHT });
+
+  if (!r.hasBar) return; // экран без таб-бара — молча ничего не делаем
+  // На экране с таб-баром подписей РОВНО пять (today/course/cards/spreads/profile) — молчаливое
+  // «не нашли» недопустимо (находка ревью 63/1): расхождение в числе кадр не снимает, а роняет.
+  if (r.foundCount !== 5) {
+    throw new Error(`подписей вкладок найдено ${r.foundCount} вместо 5 (искали: ${labels.join(' / ')})`);
+  }
+  for (const c of r.checked) {
+    if (c.overflow === 'hidden' || !(c.heightPx > c.fontPx)) {
+      throw new Error(
+        `подпись «${c.text}» всё ещё обрезана контейнером (overflow=${c.overflow}, высота ${c.heightPx.toFixed(1)}px ≤ кегль ${c.fontPx}px)`,
+      );
+    }
+  }
 }
 
 (async () => {
@@ -392,7 +445,7 @@ async function fixTabBarSafeArea(page) {
         await app.waitForTimeout(1800);
         if ((await app.evaluate(() => window.innerWidth)) !== 390) throw new Error('вьюпорт не 390 — кадр недостоверен');
         stage = 'safe-area';
-        await fixTabBarSafeArea(app);
+        await fixTabBarSafeArea(app, lang);
         stage = 'prepare';
         if (s.prepare) await s.prepare(app);
         stage = 'check';
