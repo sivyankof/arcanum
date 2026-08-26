@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- Баннер витрины Google Play 1024×500 (спека 63). Данные — scripts/shoot_63.js:
+     window.render({title, tagline, icon}); шрифты — data-URI через addStyleTag (см. frame.html).
+     Безопасная зона: всё значимое в центральных 80 % ширины (Play подрезает края в части раскладок).
+     Запрещено: цены, рейтинги, «бесплатно», «новинка», корпус телефона. -->
+<html lang="ru"><head><meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #0a0c1d; overflow: hidden; }
+  #canvas { position: relative; width: 1024px; height: 500px; overflow: hidden;
+    background: radial-gradient(90% 120% at 30% 40%, #1b2140 0%, #0a0c1d 75%);
+    display: flex; align-items: center; justify-content: center; gap: 56px;
+    font-family: 'Manrope', sans-serif; }
+  #icon { width: 236px; height: 236px; border-radius: 48px; border: 2px solid #8f7439;
+    box-shadow: 0 24px 56px rgba(226,189,114,0.22); display: block; }
+  #text { display: flex; flex-direction: column; }
+  #title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 124px; line-height: 1;
+    color: #f5eacb; margin: 0; letter-spacing: 2px; }
+  #rule { width: 120px; height: 1px; background: #8f7439; margin: 22px 0 18px; }
+  #tagline { font-size: 34px; letter-spacing: 1px; color: #848cb2; margin: 0; }
+</style></head>
+<body>
+  <div id="canvas">
+    <img id="icon" alt="">
+    <div id="text"><h1 id="title"></h1><div id="rule"></div><p id="tagline"></p></div>
+  </div>
+<script>
+  window.render = function ({ title, tagline, icon }) {
+    document.getElementById('title').textContent = title;
+    document.getElementById('tagline').textContent = tagline;
+    document.getElementById('icon').src = icon;
+    return true;
+  };
+</script>
+</body></html>

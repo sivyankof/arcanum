@@ -1,0 +1,52 @@
+{
+  "tagline": {
+    "ru": "Курс, значения карт, расклады",
+    "en": "Course, card meanings, spreads",
+    "es": "Curso, significados y tiradas",
+    "pt": "Curso, significados e tiragens"
+  },
+  "screens": {
+    "today": {
+      "ru": ["Карта дня", "Каждое утро — новая карта и её значение"],
+      "en": ["Card of the day", "A new card and its meaning every morning"],
+      "es": ["Carta del día", "Cada mañana, una carta y su significado"],
+      "pt": ["Carta do dia", "Toda manhã, uma carta e seu significado"]
+    },
+    "course": {
+      "ru": ["Курс из 32 уроков", "6 модулей, викторины, прогресс"],
+      "en": ["A 32-lesson course", "6 modules, quizzes, progress"],
+      "es": ["Curso de 32 lecciones", "6 módulos, cuestionarios, progreso"],
+      "pt": ["Curso de 32 lições", "6 módulos, quizzes, progresso"]
+    },
+    "detail": {
+      "ru": ["78 карт со значениями", "Общее, любовь, работа, финансы, здоровье"],
+      "en": ["All 78 cards explained", "General, love, career, finances, health"],
+      "es": ["78 cartas explicadas", "General, amor, trabajo, finanzas, salud"],
+      "pt": ["78 cartas explicadas", "Geral, amor, trabalho, finanças, saúde"]
+    },
+    "spread": {
+      "ru": ["Расклады", "Три карты, Кельтский крест и лунные"],
+      "en": ["Spreads", "Three cards, Celtic Cross and moon spreads"],
+      "es": ["Tiradas", "Tres cartas, Cruz Celta y tiradas lunares"],
+      "pt": ["Tiragens", "Três cartas, Cruz Celta e tiragens lunares"]
+    },
+    "trainer": {
+      "ru": ["Тренажёр памяти", "Интервальные повторения"],
+      "en": ["Memory trainer", "Spaced repetition"],
+      "es": ["Entrenador de memoria", "Repaso espaciado"],
+      "pt": ["Treino de memória", "Repetição espaçada"]
+    },
+    "moon": {
+      "ru": ["Лунный календарь", "Новолуния и полнолуния"],
+      "en": ["Moon calendar", "New moons and full moons"],
+      "es": ["Calendario lunar", "Lunas nuevas y lunas llenas"],
+      "pt": ["Calendário lunar", "Luas novas e luas cheias"]
+    },
+    "today-light": {
+      "ru": ["Светлая тема", "И тёмная — на выбор"],
+      "en": ["Light theme", "Or dark — your choice"],
+      "es": ["Tema claro", "U oscuro, a tu elección"],
+      "pt": ["Tema claro", "Ou escuro, você escolhe"]
+    }
+  }
+}
