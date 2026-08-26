@@ -1,7 +1,8 @@
-/** Экран Arcanum Premium (спека 53): два состояния — «не оформлено» (тарифы + CTA) и «активна».
- *  В 53а покупки недоступны (Expo Go): CTA/«Восстановить»/«Управлять» открывают диалог-объяснение,
- *  сам экран и гейты проверяются с DEV-тумблером в настройках. Маршрут корневого стека под
- *  гардом онбординга (app/_layout.tsx). Композиция — макет v-paywall. */
+/** Экран Arcanum Premium (спеки 53, 62): три состояния — «активна» (панель + «Управлять»),
+ *  «тарифы» (предложения магазина + CTA, 53б) и «скоро» (предложений нет: без SDK покупок
+ *  в 53а/62 или магазин не ответил в 53б — панель без цифр и кнопки). Диалог «Пока недоступно»
+ *  остаётся у «Управлять подпиской» и «Восстановить». Маршрут корневого стека под гардом
+ *  онбординга (app/_layout.tsx). Композиция — макет v-paywall (состояния А/Б/В). */
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +21,7 @@ import { PRIVACY_URL, TERMS_URL } from '../src/lib/appInfo';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
-import { getOffers, purchase, restore, type Offer, type PlanId } from '../src/lib/purchases';
+import { getOffers, purchase, PURCHASES_AVAILABLE, restore, type Offer, type PlanId } from '../src/lib/purchases';
 import { useBackHaptic } from '../src/lib/useBackHaptic';
 import { useApp } from '../src/store/useApp';
 import { fonts, radius, spacing } from '../src/theme/theme';
@@ -46,7 +47,11 @@ export default function PaywallScreen() {
   // откуда пришли — подпись кнопки «назад» (приём card/[id]: BACK_TITLES по параметру from)
   const { from } = useLocalSearchParams<{ from?: string }>();
 
-  const [offers, setOffers] = React.useState<Offer[]>([]);
+  // null — предложения ещё не запрошены (первый кадр), [] — их нет (без SDK покупок в 53а/62;
+  // магазин не ответил в 53б) → панель «скоро», непустой — тарифы + CTA. Различать «ещё не
+  // запрошено» и «нет» обязательно: иначе в 53б первый кадр мигнул бы панелью «скоро» до
+  // ответа магазина (класс «нет данных» ≠ «нет совпадений», урок 46)
+  const [offers, setOffers] = React.useState<Offer[] | null>(null);
   const [plan, setPlan] = React.useState<PlanId>('year');
   const [unavailable, setUnavailable] = React.useState(false);
   React.useEffect(() => {
@@ -57,7 +62,8 @@ export default function PaywallScreen() {
     };
   }, []);
 
-  const chosen = offers.find((o) => o.id === plan);
+  const chosen = offers?.find((o) => o.id === plan);
+  const noOffers = offers !== null && offers.length === 0;
   // один обработчик на все три действия: результат 'unavailable' — диалог, успех — право в стор
   const run = async (action: () => ReturnType<typeof purchase>) => {
     const r = await action();
@@ -66,6 +72,16 @@ export default function PaywallScreen() {
   };
 
   const benefits = ['b1', 'b2', 'b3', 'b4'] as const;
+
+  // «Восстановить покупки» живёт ВНУТРИ каждого состояния, как `.trlink` внутри #pwOff/#pwOn
+  // макета; в состоянии «скоро» — только когда есть SDK магазина (53б): без него
+  // восстанавливать нечего, а тап вёл бы в диалог-заглушку (спека 62, Д3). В 53б при пустых
+  // предложениях ссылка нужна: восстановление права не зависит от витрины
+  const restoreLink = (
+    <Pressable onPress={() => run(restore)} hitSlop={8}>
+      <Txt style={[st.link, { color: t.accent }]}>{tr('paywall.restore')}</Txt>
+    </Pressable>
+  );
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
@@ -120,57 +136,69 @@ export default function PaywallScreen() {
             >
               <Txt style={[st.secondaryText, { color: t.head }]}>{tr('paywall.manage')}</Txt>
             </PressableScale>
+            {restoreLink}
           </FadeUp>
         ) : (
           <FadeUp index={2} style={{ marginTop: 14 }}>
-            <View style={st.plans}>
-              {offers.map((o) => {
-                const on = o.id === plan;
-                return (
-                  <PressableScale
-                    key={o.id}
-                    onPress={() => {
-                      hapticTap();
-                      setPlan(o.id);
-                    }}
-                    style={[
-                      st.plan,
-                      { backgroundColor: on ? t.chipBg : t.panel, borderColor: on ? t.frame : t.line },
-                    ]}
-                  >
-                    <Txt style={[st.planName, { color: t.head }]}>
-                      {o.id === 'year' ? tr('paywall.planYear') : tr('paywall.planMonth')} · {o.price}
-                    </Txt>
-                    {o.perMonth && (
-                      <Txt style={[st.planSub, { color: t.muted }]}>{tr('paywall.perMonth', { price: o.perMonth })}</Txt>
-                    )}
-                    {/* solid: бейдж сидит на верхней рамке карточки — сквозь полупрозрачный
-                        chipBg она просвечивала полосой (лайв-проверка 22.08) */}
-                    {o.discount && <PremiumBadge label={o.discount} style={st.planBadge} solid />}
-                  </PressableScale>
-                );
-              })}
-            </View>
-            <CtaButton
-              label={
-                chosen
-                  ? plan === 'year'
-                    ? tr('paywall.ctaYear', { price: chosen.price })
-                    : tr('paywall.ctaMonth', { price: chosen.price })
-                  : tr('paywall.title')
-              }
-              disabled={!chosen}
-              onPress={() => run(() => purchase(plan))}
-            />
+            {/* обёртка смонтирована всегда, меняется только содержимое (урок 39: условные
+                блоки FadeUp дают мини-каскад при каждом возврате) */}
+            {offers === null ? null : noOffers ? (
+              // состояние В «скоро» (спека 62; макет `#pwSoon`): та же панель, что «активна»,
+              // ни цифр, ни кнопки, ни диалога
+              <View style={[st.panel, { backgroundColor: t.panel, borderColor: t.line }]}>
+                <Txt style={[st.panelTitle, { color: t.head }]}>{tr('paywall.soonTitle')}</Txt>
+                <Txt style={[st.panelSub, { color: t.muted }]}>{tr('paywall.soonSub')}</Txt>
+              </View>
+            ) : (
+              <>
+                <View style={st.plans}>
+                  {offers.map((o) => {
+                    const on = o.id === plan;
+                    return (
+                      <PressableScale
+                        key={o.id}
+                        onPress={() => {
+                          hapticTap();
+                          setPlan(o.id);
+                        }}
+                        style={[
+                          st.plan,
+                          { backgroundColor: on ? t.chipBg : t.panel, borderColor: on ? t.frame : t.line },
+                        ]}
+                      >
+                        <Txt style={[st.planName, { color: t.head }]}>
+                          {o.id === 'year' ? tr('paywall.planYear') : tr('paywall.planMonth')} · {o.price}
+                        </Txt>
+                        {o.perMonth && (
+                          <Txt style={[st.planSub, { color: t.muted }]}>{tr('paywall.perMonth', { price: o.perMonth })}</Txt>
+                        )}
+                        {/* solid: бейдж сидит на верхней рамке карточки — сквозь полупрозрачный
+                            chipBg она просвечивала полосой (лайв-проверка 22.08) */}
+                        {o.discount && <PremiumBadge label={o.discount} style={st.planBadge} solid />}
+                      </PressableScale>
+                    );
+                  })}
+                </View>
+                <CtaButton
+                  label={
+                    chosen
+                      ? plan === 'year'
+                        ? tr('paywall.ctaYear', { price: chosen.price })
+                        : tr('paywall.ctaMonth', { price: chosen.price })
+                      : tr('paywall.title')
+                  }
+                  disabled={!chosen}
+                  onPress={() => run(() => purchase(plan))}
+                />
+              </>
+            )}
+            {noOffers ? PURCHASES_AVAILABLE && restoreLink : offers !== null && restoreLink}
           </FadeUp>
         )}
 
-        {/* отступа у обёртки нет: в макете «Восстановить покупки» лежит в том же блоке, что тарифы
-            и CTA, и отстоит от кнопки ровно на свои 12 (`.trlink`) */}
+        {/* ссылки условий — вне состояний: Apple 3.1.2 требует их на экране подписки всегда
+            (спека 62, Д3); в макете `.pwlegal` отстоит от предыдущего блока на свои 14 */}
         <FadeUp index={3}>
-          <Pressable onPress={() => run(restore)} hitSlop={8}>
-            <Txt style={[st.link, { color: t.accent }]}>{tr('paywall.restore')}</Txt>
-          </Pressable>
           <Txt style={[st.legal, { color: t.muted }]}>
             {tr('paywall.legal')}{' '}
             <LinkTxt href={TERMS_URL}>{tr('paywall.terms')}</LinkTxt>
