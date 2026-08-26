@@ -258,40 +258,44 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
     for (const [n, s] of SCREENS.entries()) {
       if (ONLY && s.id !== ONLY) continue;
       const tag = `${lang}/${s.id}`;
-      await app.goto(`${BASE}${s.route}`, { waitUntil: 'domcontentloaded' });
-      await app.evaluate((v) => localStorage.setItem('arcanum-app', v), seed(lang, s.extra));
-      await app.reload({ waitUntil: 'networkidle' });
-      await app.waitForTimeout(1800);
-      if ((await app.evaluate(() => window.innerWidth)) !== 390) throw new Error('вьюпорт не 390 — кадр недостоверен');
-      // prepare() и check() исполняют код самого экрана (скролл, клики, чтение DOM данных
-      // контента) и могут упасть при перевёрстке — не глушим ошибку молча, но и не роняем весь
-      // прогон: находка ревью 63/4 (позже повторилась на prepare — тот же класс дефекта) требует,
-      // чтобы упавший кадр остался диагностируемым в failed, с языком и именем экрана в сообщении
-      // (tag уже несёт то и другое — см. failed.push ниже), а не обрывал цикл по остальным кадрам
-      let problems;
-      let stage = 'prepare';
+      // Один try на ВЕСЬ кадр — от перехода до записи файла на диск. Раньше защита стояла только
+      // вокруг prepare()/check() (находка ревью 63/4, повторилась дважды на разных стадиях): падение
+      // навигации, сида или самой съёмки/компоновки уходило мимо failed во внешний `.catch`, роняя
+      // process.exit(2) и обрывая прогон по остальным языкам без указания, где именно и для кого
+      // упало. Стадия называется явно в сообщении — это единственное, что меняется по ходу try.
+      let stage = 'goto';
       try {
+        await app.goto(`${BASE}${s.route}`, { waitUntil: 'domcontentloaded' });
+        stage = 'сид';
+        await app.evaluate((v) => localStorage.setItem('arcanum-app', v), seed(lang, s.extra));
+        await app.reload({ waitUntil: 'networkidle' });
+        await app.waitForTimeout(1800);
+        if ((await app.evaluate(() => window.innerWidth)) !== 390) throw new Error('вьюпорт не 390 — кадр недостоверен');
+        stage = 'prepare';
         if (s.prepare) await s.prepare(app);
         stage = 'check';
-        problems = await s.check(app, lang);
+        const problems = await s.check(app, lang);
+        if (problems.length) {
+          failed.push(`${tag}: ${problems.join('; ')} (url ${app.url().replace(BASE, '')})`);
+          console.log(`  ✗ ${tag}`);
+          continue;
+        }
+        stage = 'съёмка';
+        const raw = await app.screenshot({ type: 'png' });
+        const [title, sub] = captions.screens[s.id][lang];
+        stage = 'компоновка';
+        await frame.evaluate((a) => window.compose(a), {
+          w: CANVAS.w, h: CANVAS.h, img: `data:image/png;base64,${raw.toString('base64')}`, title, sub,
+        });
+        await frame.waitForTimeout(150);
+        const file = path.join(OUT, lang, `${String(n + 1).padStart(2, '0')}-${s.id}.jpg`);
+        await frame.screenshot({ path: file, type: 'jpeg', quality: 92 });
+        shots++;
+        console.log(`  ✓ ${tag} → ${path.relative(ROOT, file)}`);
       } catch (e) {
-        problems = [`ИСКЛЮЧЕНИЕ в ${stage}(): ${e.message}`];
-      }
-      if (problems.length) {
-        failed.push(`${tag}: ${problems.join('; ')} (url ${app.url().replace(BASE, '')})`);
+        failed.push(`${tag}: ИСКЛЮЧЕНИЕ на стадии «${stage}»: ${e.message} (url ${app.url().replace(BASE, '')})`);
         console.log(`  ✗ ${tag}`);
-        continue;
       }
-      const raw = await app.screenshot({ type: 'png' });
-      const [title, sub] = captions.screens[s.id][lang];
-      await frame.evaluate((a) => window.compose(a), {
-        w: CANVAS.w, h: CANVAS.h, img: `data:image/png;base64,${raw.toString('base64')}`, title, sub,
-      });
-      await frame.waitForTimeout(150);
-      const file = path.join(OUT, lang, `${String(n + 1).padStart(2, '0')}-${s.id}.jpg`);
-      await frame.screenshot({ path: file, type: 'jpeg', quality: 92 });
-      shots++;
-      console.log(`  ✓ ${tag} → ${path.relative(ROOT, file)}`);
     }
   }
 

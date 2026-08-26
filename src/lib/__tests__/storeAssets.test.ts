@@ -38,9 +38,22 @@ describe('баннер 1024×500 на каждом языке', () => {
   });
 });
 
+/** Список файлов кадров языка — сырой ENOENT на отсутствующем каталоге читать невозможно:
+ *  сообщение обязано назвать язык и путь, а не только упасть (упасть оно и так обязано). */
+function readShotDir(dir: string, lang: string): string[] {
+  try {
+    return fs.readdirSync(path.join(dir, lang));
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new Error(`нет каталога кадров ${path.join(dir, lang)} — язык «${lang}» не снят`);
+    }
+    throw e;
+  }
+}
+
 function checkShots(dir: string, spec: { w: number; h: number; min: number; max: number }) {
   for (const lang of LANGS) {
-    const files = fs.readdirSync(path.join(dir, lang)).filter((f) => f.endsWith('.jpg')).sort();
+    const files = readShotDir(dir, lang).filter((f) => f.endsWith('.jpg')).sort();
     expect({ lang, ok: files.length >= spec.min && files.length <= spec.max, n: files.length })
       .toEqual({ lang, ok: true, n: files.length });
     for (const f of files) {

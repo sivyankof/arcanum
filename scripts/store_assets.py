@@ -160,7 +160,10 @@ def verify_captions() -> list[str]:
     errors: list[str] = []
     if not CAPTIONS.exists():
         return [f"нет {CAPTIONS}"]
-    data = json.loads(CAPTIONS.read_text(encoding="utf-8"))
+    try:
+        data = json.loads(CAPTIONS.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        return [f"{CAPTIONS}: битый JSON ({e})"]
     for lang in LANGS:
         if lang not in data.get("tagline", {}):
             errors.append(f"tagline: нет языка {lang}")
