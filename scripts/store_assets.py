@@ -50,6 +50,14 @@ SHOTS_MIN, SHOTS_MAX = 2, 8
 # (заголовок «Карта дня» ru/today — 37 px/симв, подпись «Интервальные повторения» ru/trainer —
 # 20.3 px/симв); округлено вниз, поэтому это гарантированный, а не оптимистичный потолок
 TITLE_MAX, SUB_MAX = 25, 46
+# безопасная зона баннера (находка ревью 63/4): Play показывает feature graphic в нескольких
+# раскладках и подрезает часть краёв — по факту 10 % с каждой стороны холста 1024, то есть
+# всё значимое обязано лежать в x 102…922. Порог яркости отделяет контент от фона: фон —
+# радиальный градиент #1b2140→#0a0c1d (максимальная яркость ≈ 35), контент — кремовый заголовок
+# #f5eacb (≈235), серо-синий слоган #848cb2 (≈140), золотая рамка иконки #8f7439 (≈115); 90
+# лежит с запасом посередине и не путает одно с другим.
+FEATURE_SAFE_MIN, FEATURE_SAFE_MAX = 102, 922
+FEATURE_LUM_THRESHOLD = 90
 
 
 def fail(msg: str) -> int:
@@ -119,6 +127,23 @@ def strip_feature_alpha() -> int:
     return 0
 
 
+def _content_x_range(im: Image.Image) -> tuple[int, int] | None:
+    """Крайние по X пиксели значимого содержимого (не фона), по порогу яркости FEATURE_LUM_THRESHOLD.
+    Каждая вторая строка по Y — достаточно для границы безопасной зоны, не нужен честный обход
+    всех пикселей. None — на холсте нет ни одного пикселя ярче фона (пустой рендер)."""
+    px = im.convert("RGB").load()
+    w, h = im.size
+    minx, maxx = None, None
+    for x in range(w):
+        for y in range(0, h, 2):
+            r, g, b = px[x, y]
+            if 0.299 * r + 0.587 * g + 0.114 * b > FEATURE_LUM_THRESHOLD:
+                minx = x if minx is None else minx
+                maxx = x
+                break
+    return None if minx is None else (minx, maxx)
+
+
 def verify_feature() -> list[str]:
     errors: list[str] = []
     for lang in LANGS:
@@ -131,6 +156,14 @@ def verify_feature() -> list[str]:
                 errors.append(f"{f.name}: размер {im.size}, ожидается {FEATURE}")
             if im.mode != "RGB":
                 errors.append(f"{f.name}: режим {im.mode}, ожидается RGB (24-bit без альфы)")
+            rng = _content_x_range(im)
+            if rng is None:
+                errors.append(f"{f.name}: не нашёл значимого содержимого (пустой рендер?)")
+            elif rng[0] < FEATURE_SAFE_MIN or rng[1] > FEATURE_SAFE_MAX:
+                errors.append(
+                    f"{f.name}: содержимое x {rng[0]}..{rng[1]} выходит за безопасную зону "
+                    f"{FEATURE_SAFE_MIN}..{FEATURE_SAFE_MAX} (Play подрезает края баннера)"
+                )
     return errors
 
 

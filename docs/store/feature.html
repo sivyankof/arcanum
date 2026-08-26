@@ -13,11 +13,17 @@
     font-family: 'Manrope', sans-serif; }
   #icon { width: 236px; height: 236px; border-radius: 48px; border: 2px solid #8f7439;
     box-shadow: 0 24px 56px rgba(226,189,114,0.22); display: block; }
-  #text { display: flex; flex-direction: column; }
+  /* max-width — граница безопасной зоны Play (нарезка 80% ширины: x 102…922 при холсте 1024,
+     находка ревью 63/4): бюджет под текст = 820 (безопасная ширина) − 236 (icon) − 56 (gap) = 528.
+     Даже более длинный слоган, чем у нынешних четырёх языков, уйдёт в перенос, а не за кромку. */
+  #text { display: flex; flex-direction: column; max-width: 528px; }
   #title { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 124px; line-height: 1;
     color: #f5eacb; margin: 0; letter-spacing: 2px; }
   #rule { width: 120px; height: 1px; background: #8f7439; margin: 22px 0 18px; }
-  #tagline { font-size: 34px; letter-spacing: 1px; color: #848cb2; margin: 0; }
+  /* 34 → 30: при 34 px слоган en/ru пересекал безопасную зону по ширине (измерено 26.08, находка
+     ревью 63/4) — самая длинная строка из четырёх языков, а не заголовок «Arcanum», упирается
+     в правый край первой. */
+  #tagline { font-size: 30px; letter-spacing: 0.6px; color: #848cb2; margin: 0; }
 </style></head>
 <body>
   <div id="canvas">

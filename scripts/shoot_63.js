@@ -1,7 +1,7 @@
 /* Скриншоты и баннеры витрины (спека 63) — снимаются БЕЗ телефона.
    Запуск (dev-сервер поднят ЗАНОВО с --clear, рецепт AGENTS.md):
      NODE_PATH="C:/Users/Artem/AppData/Local/npm-cache/_npx/705bc6b22212b352/node_modules" \
-       node scripts/shoot_63.js [--store google|apple] [--lang ru,en,es,pt] [--only today]
+       node scripts/shoot_63.js [--store google|apple] [--lang ru,en,es,pt] [--only today,course]
 
    Как устроено: приложение снимается как есть (390×844 @3× = 1170×2532, PNG в памяти) и кладётся
    с подписью на холст магазина шаблоном docs/store/frame.html → JPEG q92 (у JPEG нет альфы, которую
@@ -14,9 +14,14 @@
    localDateISO(), а UTC-срез toISOString() в аудите 56 оставил карту дня закрытой.
    ⚠️ У каждого кадра маркеры (имя карты на языке кадра из cards.json, заголовок из i18n.ts, видимый
    <img> карты): нет маркера — FAIL с именем кадра, пустой кадр в набор не идёт (урок 56).
-   ⚠️ Карты на кадрах — только вне списка наготы (правила Play к графике витрины): проверяется списком.
+   ⚠️ Карты на кадрах — только вне списка наготы (правила Play к графике витрины): проверяется по
+   ТОМУ, что реально может попасть в кадр/сессию (REAL_DECK), а не только по константам кадров.
    ⚠️ Шрифты и кадр передаются шаблону data-URI: file://-страница не грузит file://-шрифты без флага.
-   ⚠️ Сид — форма scripts/shoot_56.js (урок 54: сид не сочинять). */
+   ⚠️ Сид — форма scripts/shoot_56.js (урок 54: сид не сочинять).
+   ⚠️ Таб-бар перед съёмкой получает нижний safe-area inset (fixTabBarSafeArea) — на вебе он
+   прижат к самой кромке вьюпорта, и без этого подписи вкладок срезаны (находка ревью 63/1).
+   ⚠️ --only принимает список id через запятую; незнакомый id роняет прогон с его именем и
+   списком допустимых, а не тихо снимает ноль кадров (находка ревью 63/6). */
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
@@ -28,7 +33,11 @@ const opt = (name, def) => {
 };
 const STORE = opt('--store', 'google');
 const LANGS = opt('--lang', 'ru,en,es,pt').split(',');
-const ONLY = opt('--only', '');
+// AGENTS.md обещает список через запятую («--only id,…») — до находки ревью 63/6 код понимал
+// только одиночное строгое равенство, и опечатка/незнакомый id тихо пропускали ВСЕ кадры
+// («кадров снято: 0, не снято: 0», код выхода 0 — нулевая работа под видом успеха). Валидация
+// списка — ниже, сразу после объявления SCREENS (там же известен список допустимых id).
+const ONLY_IDS = opt('--only', '').split(',').map((s) => s.trim()).filter(Boolean);
 const CANVAS = { google: { w: 1080, h: 1920 }, apple: { w: 1290, h: 2796 } }[STORE];
 if (!CANVAS) throw new Error(`неизвестный магазин ${STORE}`);
 
@@ -45,15 +54,71 @@ const cards = require('../content/cards.json').cards;
 const spreads = require('../content/spreads.json').spreads;
 const modules = require('../content/course.json').modules;
 const I18N = fs.readFileSync(path.join(ROOT, 'src/lib/i18n.ts'), 'utf8');
+const THEME_TS = fs.readFileSync(path.join(ROOT, 'src/theme/theme.ts'), 'utf8');
+
+/** hex-цвет темы из первоисточника токенов (не хардкод): вырезает блок `export const <name>: Theme
+ *  = {…}` до следующего `export const`/конца файла и ищет в нём `<key>: '#rrggbb'`. */
+function themeHex(name, key) {
+  const start = THEME_TS.search(new RegExp(`^export const ${name}: Theme = \\{`, 'm'));
+  if (start < 0) throw new Error(`нет темы ${name} в theme.ts`);
+  const rest = THEME_TS.slice(start + 1);
+  const nextRel = rest.search(/^export const /m);
+  const chunk = THEME_TS.slice(start, nextRel < 0 ? undefined : start + 1 + nextRel);
+  const m = chunk.match(new RegExp(`\\b${key}: '(#[0-9a-fA-F]{6})'`));
+  if (!m) throw new Error(`ключа ${key} нет в теме ${name} (theme.ts)`);
+  return m[1];
+}
+const hexToRgb = (hex) => {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
+};
+// фон градиента ScreenBg — цвет темы, а не хардкод (находка ревью 63/5: доказать нужно ИМЕННО
+// применение светлой темы, а не только видимость карты дня, которая видна в обеих темах)
+const LIGHT_BG_RGB = hexToRgb(themeHex('lightTheme', 'bg'));
 
 const NUDITY = ['star', 'sun', 'lovers', 'devil', 'judgement', 'world'];
 const DAY_CARD = 'magician';
 const DETAIL_CARD = 'moon';
 const SPREAD_CARDS = ['empress', 'chariot', 'strength'];
+// Только семь карт без наготы, годных лечь на кадр витрины (порядок случаен, любая из семи
+// допустима). РЕАЛЬНАЯ колода тренажёра шире — см. REAL_DECK ниже (находка ревью 63/3).
 const DECK = ['fool', 'magician', 'high-priestess', 'empress', 'emperor', 'hierophant', 'chariot'];
 const M12 = ['m1l1', 'm1l2', 'm1l3', 'm1l4', 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2l5', 'm2l6'];
+const M12_SET = new Set(M12);
 const ALL_LANGS = ['ru', 'en', 'es', 'pt']; // канонический порядок языков — как в i18n.ts
-for (const id of [DAY_CARD, DETAIL_CARD, ...SPREAD_CARDS, ...DECK]) {
+
+/** Колода тренажёра строится ВО ВРЕМЯ ИСПОЛНЕНИЯ из карт пройденных уроков (learnedCardIds
+ *  в src/lib/courseProgress.ts), а не из DECK — урок «Повторение» модуля 2 (m2l5) тащит карты
+ *  модуля целиком, и среди них — lovers (список наготы), которой в DECK нет. Пересчитываем
+ *  то же множество здесь на сиде M12 (первоисточник — сид, как и modulePct ниже); TS-модуль
+ *  в голый node-скрипт не импортируем (см. i18nText выше). Находка ревью 63/3. */
+const REAL_DECK = new Set();
+for (const m of modules) for (const l of m.lessons) if (M12_SET.has(l.id)) l.cards.forEach((c) => REAL_DECK.add(c));
+
+/** SRS-сид тренажёра (единственный источник — используется в seed() ниже, дублировать нельзя):
+ *  карты DECK — «просрочены» (due в прошлом, попадают в сессию как повторение, как раньше).
+ *  Карты из REAL_DECK, которых в DECK нет (сейчас — только lovers), — из списка наготы: на них
+ *  сеется due ДАЛЕКО в будущем. Карта остаётся в колоде (deckOrder её видит, «8 карт» — правда),
+ *  но не попадает в сессию НИ новой (запись в srs уже есть), НИ просроченной (due не наступил) —
+ *  buildSession/reviewSummary (src/lib/review.ts) фильтруют ровно по этому due. Это исключение,
+ *  а не маскировка карты. */
+const FUTURE_DUE = '2099-01-01';
+const SRS_SEED = Object.fromEntries(
+  [...REAL_DECK].map((id) => [
+    id,
+    { reps: 2, intervalDays: 3, ease: 2.5, due: NUDITY.includes(id) ? FUTURE_DUE : '2026-01-01' },
+  ]),
+);
+/** Реально ли карта может попасть в сессию при сиде выше — та же формула, что у
+ *  buildSession/reviewSummary: свежая (записи в SRS_SEED нет) или уже просрочена (due наступил).
+ *  Гвард наготы ниже проверяет по НЕЙ, а не по константам кадров — иначе он слеп к тому, что
+ *  тренажёр берёт колоду из прогресса курса (находка ревью 63/3, вторая половина). */
+const entersSession = (id) => {
+  const s = SRS_SEED[id];
+  return !s || s.due <= TODAY;
+};
+
+for (const id of [DAY_CARD, DETAIL_CARD, ...SPREAD_CARDS, ...DECK, ...[...REAL_DECK].filter(entersSession)]) {
   if (NUDITY.includes(id)) throw new Error(`карта ${id} из списка наготы — в витрину нельзя`);
   if (!cards.find((c) => c.id === id)) throw new Error(`карты ${id} нет в колоде`);
 }
@@ -84,8 +149,8 @@ const cardName = (id, lang) => cards.find((c) => c.id === id).name[lang];
 const spreadName = (id, lang) => spreads.find((s) => s.id === id).name[lang];
 // прогресс модуля курса для кадра «Курс» — та же формула, что moduleProgress() в
 // src/lib/courseProgress.ts (не импортируем TS-модуль в голый node-скрипт, см. i18nText выше:
-// здесь принят тот же приём «читать из первоисточника», только первоисточник — сид, а не файл)
-const M12_SET = new Set(M12);
+// здесь принят тот же приём «читать из первоисточника», только первоисточник — сид, а не файл;
+// M12_SET объявлен выше, вместе с DECK/REAL_DECK)
 const modulePct = (mod, doneIds) => {
   const total = mod.lessons.length;
   const done = mod.lessons.filter((l) => doneIds.has(l.id)).length;
@@ -113,7 +178,7 @@ function seed(lang, extra = {}) {
       profile: { onboarded: true, name: 'Артём', birthDate: '1990-05-14', birthArcanaId: 'justice' },
       premium: { active: false, source: 'none', until: null },
       lessonsProgress: Object.fromEntries(M12.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }])),
-      srs: Object.fromEntries(DECK.map((id) => [id, { reps: 2, intervalDays: 3, ease: 2.5, due: '2026-01-01' }])),
+      srs: SRS_SEED,
       reviewDay: { date: '', newCount: 0, doneCount: 0 },
       history: JOURNAL,
       spreadsHistory: [SAVED_SPREAD],
@@ -189,14 +254,18 @@ const SCREENS = [
       const t = await text(page);
       const problems = [];
       if (!t.includes(i18nText(lang, 'review', 'title'))) problems.push('нет заголовка тренажёра');
-      // какая карта выпала — узнаём по src видимой картинки, ключевое слово оборота — из cards.json
-      const src = await page.evaluate(() => {
-        const im = [...document.querySelectorAll('img[src*="cards/"]')].find((el) => el.offsetParent !== null);
-        return im ? im.getAttribute('src') : '';
-      });
-      const id = DECK.find((d) => src.includes(`/${d}`));
-      if (!id) problems.push('не видно карты тренажёра');
-      else if (!t.includes(cards.find((c) => c.id === id).keywords[lang][0])) problems.push('оборот карточки не открыт (нет ключевого слова)');
+      // Доказательство переворота — три кнопки оценки: они рисуются ТОЛЬКО после ответа
+      // (`{revealed && (...)}` в app/review.tsx), а НЕ первое ключевое слово — оно нарисовано
+      // на ОБЕИХ гранях FlipCard в направлении toMeaning (KeywordChips есть уже на лицевой
+      // стороне, ReviewFlashcard/CardBack), и маркер был зелёным примерно в половине прогонов
+      // БЕЗ тапа по карточке (находка ревью 63/2). Заголовок панели «ЗНАЧЕНИЕ» сюда НЕ годится
+      // тем же способом: подсказка «ВСПОМНИТЕ ЗНАЧЕНИЕ · НАЖМИТЕ» ДО ответа (направление
+      // toMeaning) уже содержит слово «ЗНАЧЕНИЕ»/«MEANING» как подстроку — с ним маркер был бы
+      // зелёным раньше времени ровно в тех же случаях, которые правит эта находка. Тексты
+      // оценок — существующим чтецом i18n.ts, не хардкодом.
+      for (const key of ['gradeForgot', 'gradeGood', 'gradeEasy']) {
+        if (!t.includes(i18nText(lang, 'review', key))) problems.push(`нет кнопки оценки «${key}»`);
+      }
       return problems;
     } },
   { id: 'moon', route: '/moon',
@@ -208,8 +277,32 @@ const SCREENS = [
       return problems;
     } },
   { id: 'today-light', route: '/', extra: { themeMode: 'light' },
-    check: async (page, lang) => (await visible(page, `img[src*="/${DAY_CARD}"]`)) ? [] : ['нет лица карты дня'] },
+    check: async (page) => {
+      const problems = [];
+      if (!(await visible(page, `img[src*="/${DAY_CARD}"]`))) problems.push('нет лица карты дня');
+      // маркер самой темы (находка ревью 63/5): карта дня видна в ОБЕИХ темах, поэтому её
+      // видимость не доказывает, что применилась именно светлая — смотрим цвет фона ScreenBg
+      // напрямую (градиент несёт lightTheme.bg из theme.ts третьей остановкой)
+      const hasLightBg = await page.evaluate((rgb) => {
+        const W = window.innerWidth, H = window.innerHeight;
+        return [...document.querySelectorAll('div')].some((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.width < W - 4 || r.height < H - 4) return false;
+          return getComputedStyle(el).backgroundImage.includes(rgb);
+        });
+      }, LIGHT_BG_RGB);
+      if (!hasLightBg) problems.push(`фон не светлой темы (нет ${LIGHT_BG_RGB} в градиенте на весь экран)`);
+      return problems;
+    } },
 ];
+const SCREEN_IDS = SCREENS.map((s) => s.id);
+// Находка ревью 63/6: неизвестный --only обязан ронять прогон с именем экрана и списком
+// допустимых, а не молча снять ноль кадров под кодом выхода 0.
+for (const id of ONLY_IDS) {
+  if (!SCREEN_IDS.includes(id)) {
+    throw new Error(`--only: неизвестный экран «${id}», допустимые: ${SCREEN_IDS.join(', ')}`);
+  }
+}
 if (Object.keys(captions.screens).join() !== SCREENS.map((s) => s.id).join()) {
   throw new Error('порядок экранов в captions.json не совпадает со списком SCREENS');
 }
@@ -239,6 +332,33 @@ const FONTS = [
 ].join('\n');
 const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
 
+/** Таб-бар на вебе не получает нижний safe-area inset (на устройстве ~34 px поднимает бар над
+ *  кромкой экрана — системная зона под жест/индикатор). Без него подписи вкладок срезаются
+ *  нижней кромкой вьюпорта («Расклады» → «Раскла», «Hoje» → «Hoie») — находка ревью 63/1.
+ *  Контейнер ищем по геометрии (прижат к низу вьюпорта, во всю ширину, высота 20–150 px —
+ *  по факту 48–49), а не по классу/тексту: атомарные классы RN Web у него безымянные и меняются
+ *  от сборки к сборке; `querySelectorAll('*')` возвращает элементы в порядке документа, поэтому
+ *  первое совпадение — самый ВНЕШНИЙ (сам таб-бар), а не один из его внутренних слоёв фона.
+ *  На экранах без таб-бара (карта, расклад, тренажёр, луна) подходящего элемента нет — функция
+ *  молча ничего не делает (проверено на всех четырёх). `!important` обязателен: без него
+ *  инлайн-правило `height`, выставленное один раз, при следующем ререндере RN Web перезатирается
+ *  атомарным классом той же специфичности — замерено 26.08. */
+const TAB_BAR_INSET = 34; // типичный safe-area inset снизу на iPhone с Home Indicator
+async function fixTabBarSafeArea(page) {
+  await page.evaluate((inset) => {
+    const W = window.innerWidth, H = window.innerHeight;
+    const bar = [...document.querySelectorAll('*')].find((el) => {
+      const r = el.getBoundingClientRect();
+      return r.bottom >= H - 2 && r.width >= W - 4 && r.height > 20 && r.height < 150;
+    });
+    if (!bar) return; // экран без таб-бара
+    const h = bar.getBoundingClientRect().height;
+    bar.style.setProperty('height', `${h + inset}px`, 'important');
+    bar.style.setProperty('padding-bottom', `${inset}px`, 'important');
+    bar.style.setProperty('box-sizing', 'border-box', 'important');
+  }, TAB_BAR_INSET);
+}
+
 (async () => {
   const browser = await chromium.launch();
   const app = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3 });
@@ -256,7 +376,7 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
   for (const lang of LANGS) {
     fs.mkdirSync(path.join(OUT, lang), { recursive: true });
     for (const [n, s] of SCREENS.entries()) {
-      if (ONLY && s.id !== ONLY) continue;
+      if (ONLY_IDS.length && !ONLY_IDS.includes(s.id)) continue;
       const tag = `${lang}/${s.id}`;
       // Один try на ВЕСЬ кадр — от перехода до записи файла на диск. Раньше защита стояла только
       // вокруг prepare()/check() (находка ревью 63/4, повторилась дважды на разных стадиях): падение
@@ -271,6 +391,8 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
         await app.reload({ waitUntil: 'networkidle' });
         await app.waitForTimeout(1800);
         if ((await app.evaluate(() => window.innerWidth)) !== 390) throw new Error('вьюпорт не 390 — кадр недостоверен');
+        stage = 'safe-area';
+        await fixTabBarSafeArea(app);
         stage = 'prepare';
         if (s.prepare) await s.prepare(app);
         stage = 'check';
@@ -299,7 +421,7 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
     }
   }
 
-  if (!ONLY && STORE === 'google') {
+  if (!ONLY_IDS.length && STORE === 'google') {
     fs.mkdirSync(FEATURE_OUT, { recursive: true });
     const icon = `data:image/png;base64,${fs.readFileSync(path.join(ROOT, 'assets/images/icon.png')).toString('base64')}`;
     const banner = await browser.newPage({ viewport: { width: 1024, height: 500 }, deviceScaleFactor: 1 });
