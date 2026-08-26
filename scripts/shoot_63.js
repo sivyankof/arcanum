@@ -263,16 +263,19 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
       await app.reload({ waitUntil: 'networkidle' });
       await app.waitForTimeout(1800);
       if ((await app.evaluate(() => window.innerWidth)) !== 390) throw new Error('вьюпорт не 390 — кадр недостоверен');
-      if (s.prepare) await s.prepare(app);
-      // check() опирается на данные контента (карты/расклады/модули/i18n) — не глушим ошибку
-      // молча, но и не роняем весь прогон: находка ревью 63/4 требует, чтобы упавшая проверка
-      // осталась диагностируемым кадром в failed, с языком и именем экрана в сообщении (tag
-      // уже несёт то и другое — см. failed.push ниже), а не обрывала цикл по всем языкам/экранам
+      // prepare() и check() исполняют код самого экрана (скролл, клики, чтение DOM данных
+      // контента) и могут упасть при перевёрстке — не глушим ошибку молча, но и не роняем весь
+      // прогон: находка ревью 63/4 (позже повторилась на prepare — тот же класс дефекта) требует,
+      // чтобы упавший кадр остался диагностируемым в failed, с языком и именем экрана в сообщении
+      // (tag уже несёт то и другое — см. failed.push ниже), а не обрывал цикл по остальным кадрам
       let problems;
+      let stage = 'prepare';
       try {
+        if (s.prepare) await s.prepare(app);
+        stage = 'check';
         problems = await s.check(app, lang);
       } catch (e) {
-        problems = [`ИСКЛЮЧЕНИЕ в check(): ${e.message}`];
+        problems = [`ИСКЛЮЧЕНИЕ в ${stage}(): ${e.message}`];
       }
       if (problems.length) {
         failed.push(`${tag}: ${problems.join('; ')} (url ${app.url().replace(BASE, '')})`);
