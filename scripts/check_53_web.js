@@ -2,7 +2,18 @@
    Проверяет таблицу гейтов спеки docs/specs/53-premium.md целиком.
    Запуск: NODE_PATH=<кэш npx> node check-53.js [каталог-скриншотов]
    Сид: goto → evaluate → reload (addInitScript срабатывает на каждой навигации, урок 39).
-   installSeed НЕ 0 — нулевой это признак свежей установки, onRehydrateStorage затирает язык (урок 47). */
+   installSeed НЕ 0 — нулевой это признак свежей установки, onRehydrateStorage затирает язык (урок 47).
+   ⚠️ С задачи 62 «Восстановить покупки» живёт ВНУТРИ состояний пейвола, а не отдельной ссылкой
+   на экране: на сиде без права Premium (seed()) её нет вовсе — проверяется через count() === 0,
+   а не кликом; положительная пара — сид с правом (seed({ premium: DEV })).
+   ⚠️ С задачи 54 ссылки «Условия»/«Конфиденциальность» пейвола ведут на внешний сайт через
+   expo-web-browser, а не на экран «О приложении» — перехват открытия см. armOpenSpy (форма
+   scripts/check_62_web.js).
+   ⚠️ Секция 6 (панель полнолуния) зависит от календаря: devMoonOpen подставляет «сейчас» =
+   момент БЛИЖАЙШЕГО лунного события, и когда ближайшим оказывается новолуние (free), панель
+   полнолуния закрыта законно — красный прогон не по вине кода. Лечится page.clock.setFixedTime
+   на дату, где ближайшее событие — полнолуние (см. scripts/check_62_web.js); в этом файле
+   правка не сделана — не входит в эту волну. */
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
@@ -41,6 +52,21 @@ function seed(extra = {}) {
       ...extra,
     },
     version: 11,
+  });
+}
+
+/** Перехват внешних ссылок: window.open и клик по <a href> (форма scripts/check_62_web.js). */
+async function armOpenSpy(page) {
+  await page.evaluate(() => {
+    window.__opened = [];
+    if (!window.__spyArmed) {
+      window.__spyArmed = true;
+      window.open = (u) => { window.__opened.push(String(u)); return null; };
+      document.addEventListener('click', (e) => {
+        const a = e.target && e.target.closest && e.target.closest('a[href]');
+        if (a) { window.__opened.push(a.href); e.preventDefault(); }
+      }, true);
+    }
   });
 }
 
@@ -203,17 +229,23 @@ function check(name, ok, detail) {
 
   console.log('\n=== 9. Пейвол: юридические ссылки и «Восстановить покупки» ===');
   await open('/paywall', seed());
-  await page.locator('text=Условия').first().click({ force: true });
-  await page.waitForTimeout(1200);
-  check('ссылка «Условия» ведёт на «О приложении»', page.url().includes('/about'), `фактически ${page.url().replace(BASE, '')}`);
-  const terms = await page.locator('text=Условия подписки').count();
-  check('на «О приложении» есть раздел «Условия подписки»', terms > 0);
-  await shotFull('about-terms-dark');
+  await armOpenSpy(page);
+  await page.getByText('Условия', { exact: true }).first().click({ force: true });
+  await page.waitForTimeout(600);
+  const opened9 = await page.evaluate(() => window.__opened || []);
+  check('ссылка «Условия» ведёт на внешний сайт (terms.html)', opened9.some((u) => u.includes('/terms.html')), JSON.stringify(opened9));
 
+  // с задачи 62 «Восстановить покупки» живёт ВНУТРИ состояний пейвола: на сиде без права
+  // Premium её на экране нет вовсе — отрицательная проверка, а не клик по несуществующей ссылке
   await open('/paywall', seed());
+  const restoreAbsent = await page.locator('text=Восстановить покупки').count();
+  check('без права «Восстановить покупки» на экране нет', restoreAbsent === 0, `найдено ${restoreAbsent}`);
+
+  // положительная пара: состояние «активна» (право DEV) несёт ссылку и рабочий диалог-заглушку
+  await open('/paywall', seed({ premium: DEV }));
   await page.locator('text=Восстановить покупки').first().click({ force: true });
   await page.waitForTimeout(1000);
-  check('«Восстановить покупки» → диалог «Пока недоступно»', (await page.locator('text=Пока недоступно').count()) > 0);
+  check('с правом «Восстановить покупки» → диалог «Пока недоступно»', (await page.locator('text=Пока недоступно').count()) > 0);
   await shot('paywall-dialog-dark');
 
   console.log('\n=== 10. Светлая тема ===');

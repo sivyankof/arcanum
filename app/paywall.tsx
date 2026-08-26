@@ -56,7 +56,11 @@ export default function PaywallScreen() {
   const [unavailable, setUnavailable] = React.useState(false);
   React.useEffect(() => {
     let alive = true;
-    getOffers().then((o) => alive && setOffers(o));
+    // реджект = «предложений нет»: без этого сбой магазина в 53б оставил бы offers === null
+    // навсегда, то есть пустой слот вместо панели «скоро» (заглушка 62 реджектить не умеет)
+    getOffers()
+      .then((o) => alive && setOffers(o))
+      .catch(() => alive && setOffers([]));
     return () => {
       alive = false;
     };
