@@ -100,6 +100,95 @@ def verify_icon() -> list[str]:
     return errors
 
 
+# ── feature ─────────────────────────────────────────────────────────────────────────────
+
+def strip_feature_alpha() -> int:
+    """Баннеры из Playwright — RGBA; Play требует 24-bit PNG без альфы. Перезаписать в RGB."""
+    files = sorted(FEATURE_DIR.glob("*.png"))
+    if not files:
+        return fail(f"нет баннеров в {FEATURE_DIR} — сначала node scripts/shoot_63.js")
+    for f in files:
+        with Image.open(f) as im:
+            im.convert("RGB").save(f, "PNG")
+    errors = verify_feature()
+    if errors:
+        for e in errors:
+            print(f"  - {e}", file=sys.stderr)
+        return fail("баннеры")
+    print(f"[OK] баннеры без альфы: {', '.join(f.name for f in files)}")
+    return 0
+
+
+def verify_feature() -> list[str]:
+    errors: list[str] = []
+    for lang in LANGS:
+        f = FEATURE_DIR / f"{lang}.png"
+        if not f.exists():
+            errors.append(f"нет баннера {f}")
+            continue
+        with Image.open(f) as im:
+            if im.size != FEATURE:
+                errors.append(f"{f.name}: размер {im.size}, ожидается {FEATURE}")
+            if im.mode != "RGB":
+                errors.append(f"{f.name}: режим {im.mode}, ожидается RGB (24-bit без альфы)")
+    return errors
+
+
+# ── verify ──────────────────────────────────────────────────────────────────────────────
+
+def verify_shots(root: Path, size: tuple[int, int], lo: int, hi: int) -> list[str]:
+    errors: list[str] = []
+    for lang in LANGS:
+        d = root / lang
+        files = sorted(d.glob("*.jpg")) if d.exists() else []
+        if not lo <= len(files) <= hi:
+            errors.append(f"{root.name}/{lang}: кадров {len(files)}, допустимо {lo}–{hi}")
+        for f in files:
+            with Image.open(f) as im:
+                if im.format != "JPEG":
+                    errors.append(f"{f}: формат {im.format}, ожидается JPEG")
+                if im.size != size:
+                    errors.append(f"{f}: размер {im.size}, ожидается {size}")
+                if im.mode != "RGB":
+                    errors.append(f"{f}: режим {im.mode}, ожидается RGB")
+            if f.stat().st_size > 8 * 1024 * 1024:
+                errors.append(f"{f}: больше 8 МБ")
+    return errors
+
+
+def verify_captions() -> list[str]:
+    errors: list[str] = []
+    if not CAPTIONS.exists():
+        return [f"нет {CAPTIONS}"]
+    data = json.loads(CAPTIONS.read_text(encoding="utf-8"))
+    for lang in LANGS:
+        if lang not in data.get("tagline", {}):
+            errors.append(f"tagline: нет языка {lang}")
+    for sid, by_lang in data.get("screens", {}).items():
+        for lang in LANGS:
+            pair = by_lang.get(lang)
+            if not (isinstance(pair, list) and len(pair) == 2):
+                errors.append(f"{sid}: нет подписи для {lang}")
+                continue
+            if len(pair[0]) > TITLE_MAX or len(pair[1]) > SUB_MAX:
+                errors.append(f"{sid}/{lang}: подпись длиннее бюджета {TITLE_MAX}/{SUB_MAX}")
+    return errors
+
+
+def verify_all() -> int:
+    errors = verify_icon() + verify_feature() + verify_captions()
+    errors += verify_shots(GOOGLE_DIR, GOOGLE_SHOT, SHOTS_MIN, SHOTS_MAX)
+    if APPLE_DIR.exists():
+        errors += verify_shots(APPLE_DIR, APPLE_SHOT, 1, 10)
+    if errors:
+        for e in errors:
+            print(f"  - {e}", file=sys.stderr)
+        return fail(f"находок: {len(errors)}")
+    n = sum(len(list((GOOGLE_DIR / l).glob("*.jpg"))) for l in LANGS)
+    print(f"[OK] витрина: иконка, {len(LANGS)} баннера, {n} кадров Google, подписи полны")
+    return 0
+
+
 def main(argv: list[str]) -> int:
     if not Path("app.json").exists():
         print("Запускать из корня репозитория (рядом с app.json)", file=sys.stderr)
@@ -107,6 +196,10 @@ def main(argv: list[str]) -> int:
     cmd = argv[1] if len(argv) > 1 else ""
     if cmd == "icon":
         return make_icon()
+    if cmd == "feature":
+        return strip_feature_alpha()
+    if cmd == "verify":
+        return verify_all()
     print(__doc__)
     return 2
 
