@@ -52,19 +52,28 @@ const DETAIL_CARD = 'moon';
 const SPREAD_CARDS = ['empress', 'chariot', 'strength'];
 const DECK = ['fool', 'magician', 'high-priestess', 'empress', 'emperor', 'hierophant', 'chariot'];
 const M12 = ['m1l1', 'm1l2', 'm1l3', 'm1l4', 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2l5', 'm2l6'];
+const ALL_LANGS = ['ru', 'en', 'es', 'pt']; // канонический порядок языков — как в i18n.ts
 for (const id of [DAY_CARD, DETAIL_CARD, ...SPREAD_CARDS, ...DECK]) {
   if (NUDITY.includes(id)) throw new Error(`карта ${id} из списка наготы — в витрину нельзя`);
   if (!cards.find((c) => c.id === id)) throw new Error(`карты ${id} нет в колоде`);
 }
+// то же самое для раскладов и модуля курса, которых спрашивают маркеры check() ниже: переименуют
+// расклад или пересоберут курс — тут упадёт со внятной причиной, а не «Cannot read properties of
+// undefined» посреди прогона (находка ревью 63/4 — там не было списка, крах ронял весь скрипт)
+const SPREAD_IDS = ['three-card', 'full-moon'];
+for (const id of SPREAD_IDS) {
+  if (!spreads.find((sp) => sp.id === id)) throw new Error(`расклада «${id}» нет в spreads.json`);
+}
+const COURSE_MODULE_INDEX = 0; // кадр «Курс» показывает модуль 1 (пройден целиком) — см. экран course
+if (!modules[COURSE_MODULE_INDEX]) throw new Error(`нет модуля с индексом ${COURSE_MODULE_INDEX} в course.json`);
 
 /** Строка i18n для языка: файл режется на языковые блоки по `  <lang>: {`, внутри блока —
  *  первый `key: "…"` после `      <section>: {`. Маркеры берутся из исходника, не из памяти. */
 function i18nText(lang, section, key) {
-  const order = ['ru', 'en', 'es', 'pt'];
-  const starts = order.map((l) => I18N.search(new RegExp(`^  ${l}: \\{`, 'm')));
+  const starts = ALL_LANGS.map((l) => I18N.search(new RegExp(`^  ${l}: \\{`, 'm')));
   if (starts.some((s) => s < 0)) throw new Error('не нашёл языковые блоки i18n.ts');
-  const i = order.indexOf(lang);
-  const chunk = I18N.slice(starts[i], i + 1 < order.length ? starts[i + 1] : undefined);
+  const i = ALL_LANGS.indexOf(lang);
+  const chunk = I18N.slice(starts[i], i + 1 < ALL_LANGS.length ? starts[i + 1] : undefined);
   const sec = chunk.search(new RegExp(`^      ${section}: \\{`, 'm'));
   if (sec < 0) throw new Error(`секции ${section} нет в блоке ${lang}`);
   const m = chunk.slice(sec).match(new RegExp(`\\b${key}: "([^"]+)"`));
@@ -73,6 +82,16 @@ function i18nText(lang, section, key) {
 }
 const cardName = (id, lang) => cards.find((c) => c.id === id).name[lang];
 const spreadName = (id, lang) => spreads.find((s) => s.id === id).name[lang];
+// прогресс модуля курса для кадра «Курс» — та же формула, что moduleProgress() в
+// src/lib/courseProgress.ts (не импортируем TS-модуль в голый node-скрипт, см. i18nText выше:
+// здесь принят тот же приём «читать из первоисточника», только первоисточник — сид, а не файл)
+const M12_SET = new Set(M12);
+const modulePct = (mod, doneIds) => {
+  const total = mod.lessons.length;
+  const done = mod.lessons.filter((l) => doneIds.has(l.id)).length;
+  return total === 0 ? 0 : Math.round((done / total) * 100);
+};
+const COURSE_PCT = modulePct(modules[COURSE_MODULE_INDEX], M12_SET);
 
 /** Дневник: сегодня (по пришпиленным часам) — Маг, четыре прошлых дня — серия 5 (форма shoot_56). */
 const JOURNAL = ['magician', 'high-priestess', 'empress', 'high-priestess', 'chariot'].map((cardId, i) => ({
@@ -116,10 +135,33 @@ const SCREENS = [
       ...((await text(page)).toUpperCase().includes(cardName(DAY_CARD, lang).toUpperCase()) ? [] : [`нет имени «${cardName(DAY_CARD, lang)}»`]),
     ] },
   { id: 'course', route: '/course',
+    // экран сам автоскроллит к ТЕКУЩЕМУ уроку (первый непройденный — «дырка» lessonStates),
+    // а в сиде это модуль 3: витрине такой кадр не годится (все узлы заперты, прогресса не
+    // видно, хвост модуля 2 обрезан сверху — находка ревью 63/4). Возвращаем скролл к началу,
+    // чтобы в кадр попал пройденный модуль 1 с прогрессом.
+    prepare: async (page) => {
+      await page.evaluate(() => {
+        const scroller = [...document.querySelectorAll('div')].find(
+          (el) => el.scrollHeight > el.clientHeight + 4 && /auto|scroll/.test(getComputedStyle(el).overflowY),
+        );
+        if (!scroller) throw new Error('не нашёл скролл-контейнер курса');
+        // scrollTo({behavior:'instant'}) на этом узле всё равно доигрывает CSS scroll-behavior:
+        // smooth (замерено — плавный откат от старой позиции к 0 растянут почти на 1.5с), поэтому
+        // снимаем smooth явно и двигаем свойством scrollTop — оно применяется мгновенно
+        scroller.style.scrollBehavior = 'auto';
+        scroller.scrollTop = 0;
+      });
+      await page.waitForTimeout(300);
+    },
     check: async (page, lang) => {
       const t = await text(page);
-      const m3 = modules[2].title[lang];
-      return t.includes(m3) ? [] : [`нет заголовка модуля 3 «${m3}»`];
+      const problems = [];
+      const m1 = modules[COURSE_MODULE_INDEX].title[lang];
+      if (!t.includes(m1)) problems.push(`нет заголовка модуля 1 «${m1}»`);
+      // признак пройденности: без lessonsProgress модуль 1 показал бы 0%, а не COURSE_PCT —
+      // маркер обязан упасть на сломанном состоянии (проверено мутацией, см. отчёт задачи)
+      if (!t.includes(`${COURSE_PCT}%`)) problems.push(`нет отметки прогресса модуля 1 (ожидали ${COURSE_PCT}%)`);
+      return problems;
     } },
   { id: 'detail', route: `/card/${DETAIL_CARD}`,
     check: async (page, lang) => [
@@ -171,6 +213,21 @@ const SCREENS = [
 if (Object.keys(captions.screens).join() !== SCREENS.map((s) => s.id).join()) {
   throw new Error('порядок экранов в captions.json не совпадает со списком SCREENS');
 }
+// полнота подписей на старте (находка ревью 63/4): без этой проверки неполный captions.json
+// молча кладёт на холст undefined вместо заголовка/подписи — и это не поймает даже глаз на
+// скриншоте языка, для которого пара действительно нашлась
+for (const s of SCREENS) {
+  for (const lang of ALL_LANGS) {
+    const pair = captions.screens[s.id]?.[lang];
+    const ok = Array.isArray(pair) && pair.length === 2 && pair.every((x) => typeof x === 'string' && x.trim());
+    if (!ok) throw new Error(`captions.json: нет пары «заголовок/подпись» для экрана «${s.id}», язык «${lang}»`);
+  }
+}
+for (const lang of ALL_LANGS) {
+  if (typeof captions.tagline?.[lang] !== 'string' || !captions.tagline[lang].trim()) {
+    throw new Error(`captions.json: нет tagline для языка «${lang}»`);
+  }
+}
 
 const text = (page) => page.locator('body').innerText();
 const visible = (page, sel) => page.locator(sel).first().isVisible().catch(() => false);
@@ -207,7 +264,16 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
       await app.waitForTimeout(1800);
       if ((await app.evaluate(() => window.innerWidth)) !== 390) throw new Error('вьюпорт не 390 — кадр недостоверен');
       if (s.prepare) await s.prepare(app);
-      const problems = await s.check(app, lang);
+      // check() опирается на данные контента (карты/расклады/модули/i18n) — не глушим ошибку
+      // молча, но и не роняем весь прогон: находка ревью 63/4 требует, чтобы упавшая проверка
+      // осталась диагностируемым кадром в failed, с языком и именем экрана в сообщении (tag
+      // уже несёт то и другое — см. failed.push ниже), а не обрывала цикл по всем языкам/экранам
+      let problems;
+      try {
+        problems = await s.check(app, lang);
+      } catch (e) {
+        problems = [`ИСКЛЮЧЕНИЕ в check(): ${e.message}`];
+      }
       if (problems.length) {
         failed.push(`${tag}: ${problems.join('; ')} (url ${app.url().replace(BASE, '')})`);
         console.log(`  ✗ ${tag}`);
