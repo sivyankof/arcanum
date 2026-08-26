@@ -38,7 +38,7 @@ Python 3.10+ с Pillow (уже используется `gen_notification_icon.p
 
 | Файл | Ответственность |
 |---|---|
-| `src/lib/__tests__/imageHeaders.ts` | **новый** — `jpegSize`, `pngHeader` (вынос из двух тестов) |
+| `src/lib/imageHeaders.ts` | **новый** — `jpegSize`, `pngHeader` (вынос из двух тестов) |
 | `src/lib/__tests__/cardAssets.test.ts`, `notificationIcon.test.ts` | импортируют парсеры из `imageHeaders.ts` |
 | `scripts/store_assets.py` | **новый** — `icon` / `feature` / `verify` |
 | `docs/store/captions.json` | **новый** — подписи кадров ×4 языка (единственный источник текста кадров) |
@@ -55,7 +55,7 @@ Python 3.10+ с Pillow (уже используется `gen_notification_icon.p
 ### Задача 1: общий парсер заголовков картинок `imageHeaders.ts`
 
 **Файлы:**
-- Создать: `src/lib/__tests__/imageHeaders.ts`
+- Создать: `src/lib/imageHeaders.ts` (⚠️ НЕ в `__tests__/`: preset `jest-expo` считает сьютом любой файл этой папки — файл падал «must contain at least one test» и ронял `npm test`; проверено 26.08)
 - Изменить: `src/lib/__tests__/cardAssets.test.ts` (удалить локальный `jpegSize`, импорт),
   `src/lib/__tests__/notificationIcon.test.ts` (удалить локальные `PNG_SIGNATURE`/`pngHeader`, импорт)
 
@@ -111,9 +111,9 @@ export function pngHeader(buf: Buffer): { w: number; h: number; depth: number; c
 - [ ] **Шаг 2: перевести оба теста на импорт**
 
 В `cardAssets.test.ts`: удалить функцию `jpegSize` (строки `function jpegSize … }`), добавить
-`import { jpegSize } from './imageHeaders';`; в doc-комментарии фразу «Парсер SOF-заголовка — без
+`import { jpegSize } from '../imageHeaders';`; в doc-комментарии фразу «Парсер SOF-заголовка — без
 библиотек…» заменить на «Парсер заголовка — общий `imageHeaders.ts`». В `notificationIcon.test.ts`:
-удалить `PNG_SIGNATURE` и `pngHeader`, добавить `import { pngHeader } from './imageHeaders';`,
+удалить `PNG_SIGNATURE` и `pngHeader`, добавить `import { pngHeader } from '../imageHeaders';`,
 в комментарии над бывшей функцией оставить одну строку «размер и формат — `pngHeader` из
 `imageHeaders.ts`».
 
@@ -127,7 +127,7 @@ Expected: tsc чист; 79 + 3 теста зелёные, число сьюто�
 - [ ] **Шаг 4: коммит**
 
 ```bash
-git add src/lib/__tests__/imageHeaders.ts src/lib/__tests__/cardAssets.test.ts src/lib/__tests__/notificationIcon.test.ts
+git add src/lib/imageHeaders.ts src/lib/__tests__/cardAssets.test.ts src/lib/__tests__/notificationIcon.test.ts
 git commit -m "test: общий парсер заголовков JPEG/PNG для контрактов ассетов (spec 63)"
 ```
 
@@ -790,7 +790,7 @@ git commit -m "feat: съёмка и компоновка скриншотов �
 import fs from 'fs';
 import path from 'path';
 import { LANGS } from '../lang';
-import { jpegSize, pngHeader } from './imageHeaders';
+import { jpegSize, pngHeader } from '../imageHeaders';
 
 const ROOT = path.join(__dirname, '../../..');
 const STORE = path.join(ROOT, 'docs/store');
