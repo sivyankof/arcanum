@@ -150,8 +150,21 @@ describe('mergeEntitlement — правило 7 спеки', () => {
 });
 
 describe('samePremium', () => {
-  it('сравнивает по полям, не по ссылке', () => {
+  // единственная точка входа ответа магазина в стор: ложное «одинаково» по любому полю значит
+  // «запись не произойдёт» — и не произойдёт при каждой следующей синхронизации тоже, то есть
+  // пропущенное поле в сравнении оставит платящего пользователя без доступа навсегда.
+  const BASE: PremiumState = { active: true, source: 'store', until: '2027-09-22', plan: 'year', willRenew: true };
+  it('одинаковые состояния (разные ссылки) → true', () => {
     expect(samePremium(PREMIUM_NONE, { ...PREMIUM_NONE })).toBe(true);
-    expect(samePremium(PREMIUM_NONE, { ...PREMIUM_NONE, willRenew: true })).toBe(false);
+    expect(samePremium(BASE, { ...BASE })).toBe(true);
+  });
+  it.each([
+    ['willRenew', { willRenew: false }],
+    ['active', { active: false }],
+    ['source', { source: 'dev' as const }],
+    ['until', { until: '2027-10-01' }],
+    ['plan', { plan: 'month' as const }],
+  ])('различие ровно в поле %s → false', (_field, patch) => {
+    expect(samePremium(BASE, { ...BASE, ...patch })).toBe(false);
   });
 });

@@ -90,6 +90,16 @@ describe('с ключом — SDK (мок)', () => {
     expect(mockSdk.setLogLevel).toHaveBeenCalledTimes(1);
   });
 
+  it('configure бросает на первом вызове → следующий init() пробует configure снова, а не считает себя настроенным', async () => {
+    const a = load({ key: 'goog_test' });
+    mockSdk.configure.mockImplementationOnce(() => {
+      throw new Error('billing unavailable');
+    });
+    await expect(a.init()).rejects.toThrow('billing unavailable');
+    await a.init();
+    expect(mockSdk.configure).toHaveBeenCalledTimes(2);
+  });
+
   it('getOffers: current → пара тарифов; сбой SDK → []', async () => {
     const a = load({ key: 'goog_test' });
     mockSdk.getOfferings.mockResolvedValueOnce({ current: OFFERING });

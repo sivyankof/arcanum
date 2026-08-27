@@ -23,15 +23,31 @@ export function usePremiumSync(): void {
   React.useEffect(() => {
     let alive = true;
     let unsubscribe: () => void = () => undefined;
+    let unsubHydration: () => void = () => undefined;
     (async () => {
       await init();
       if (!alive) return;
       unsubscribe = onEntitlementChange(applyEntitlement);
-      applyEntitlement(await refreshEntitlement());
+      const fromStore = await refreshEntitlement();
+      if (!alive) return;
+      // Этот эффект может отработать ДО конца гидрации persist (тот же приём-образец, что
+      // app/_layout.tsx:46-50, — там по той же причине держат отдельную перепроверку hasHydrated).
+      // Завершая гидрацию, persist сливает файл поверхностно: `set(merge(persisted, get()), true)`
+      // отдаёт ключу `premium` содержимое ФАЙЛА, если запись из магазина легла раньше слияния —
+      // «магазин говорит АКТИВНА, а в файле ещё НЕТ» тогда проживёт до следующего сворачивания
+      // приложения. Поэтому первый ответ магазина применяем не раньше, чем гидрация кончится.
+      if (useApp.persist.hasHydrated()) {
+        applyEntitlement(fromStore);
+      } else {
+        unsubHydration = useApp.persist.onFinishHydration(() => {
+          if (alive) applyEntitlement(fromStore);
+        });
+      }
     })().catch((err) => console.warn('[purchases] синхронизация права не удалась:', err));
     return () => {
       alive = false;
       unsubscribe();
+      unsubHydration();
     };
   }, []);
   useAppActive(() => {

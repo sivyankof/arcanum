@@ -306,7 +306,7 @@ describe('parseBackup — повторение (спека 45)', () => {
   });
 });
 
-describe('версия 11 (спека 53)', () => {
+describe('SCHEMA_VERSION 12: миграция doneCount, premium вне бэкапа (спеки 53, 53б)', () => {
   it('SCHEMA_VERSION = 12', () => {
     expect(SCHEMA_VERSION).toBe(12);
   });

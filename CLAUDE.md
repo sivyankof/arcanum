@@ -318,7 +318,7 @@
   persist **12** (`plan`/`willRenew` внутри `premium`, `mergePremium`). `src/lib/purchases.ts`
   переписан на `react-native-purchases` (единственный импорт SDK), `purchases.web.ts` — заглушка,
   чистые преобразования в `purchasesMap.ts`, `usePremiumSync` держит право в синхроне с магазином
-  (старт/фокус/push SDK). Пейвол называет тариф и различает продление/истечение из магазина,
+  (старт/возврат из фона/push SDK). Пейвол называет тариф и различает продление/истечение из магазина,
   бейдж скидки считается из цен, четыре исхода покупки/восстановления — свои диалоги. Тестов
   **1917 в 52 сьютах**, `tsc` чист. Веб-регресс 62 переснят на новом коде — 58 из 58 без правок
   сценария, SDK в веб-бандле — 0 вхождений (веб и Expo Go остаются в состоянии «скоро»). Спека
@@ -385,7 +385,7 @@
   веб-заглушка без SDK), `purchasesMap` (чистые преобразования ответов магазина в типы приложения),
   `purchasesEnv` (ключ SDK по платформе, признак Expo Go); хуки — `useAppActive`, `useScrollAwareBar`,
   `useTabScrollToTop`, `useLeaveGuard`, `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`,
-  `usePremiumSync` (право Premium в синхроне с магазином: старт/фокус/push SDK).
+  `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
   (`transparentHeader`), `webInput.ts` (`noOutline`).
 

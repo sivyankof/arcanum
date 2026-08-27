@@ -12,7 +12,13 @@
  *   - у каждого имени совпадает `typeof` (функция против константы);
  *   - у функций совпадает арность `fn.length` — это и ловит выброшенные параметры
  *     (найдено в ревью: веб-заглушка `purchase()`/`onEntitlementChange()` растеряла параметры);
- *   - `PURCHASES_AVAILABLE` в веб-версии — всегда `false` (на вебе покупок нет по определению). */
+ *   - `PURCHASES_AVAILABLE` в веб-версии — всегда `false` (на вебе покупок нет по определению);
+ *   - у purchases.web.ts нет импорта react-native-purchases: не теория — `react-native-purchases@10.8`
+ *     тянет `@revenuecat/purchases-js`, и лишний импорт здесь — живой web-SDK в веб-бандле,
+ *     а не просто лишний вес (приём чтения исходника — `purchases.test.ts`). */
+import fs from 'fs';
+import path from 'path';
+
 jest.mock('../purchasesEnv', () => ({
   apiKey: () => 'goog_test',
   isExpoGo: () => false,
@@ -62,5 +68,12 @@ describe('контракт сигнатур: purchases.ts ⟺ purchases.web.ts (
 
   it('PURCHASES_AVAILABLE веб-версии — всегда false', () => {
     expect(web.PURCHASES_AVAILABLE).toBe(false);
+  });
+
+  it('исходник purchases.web.ts не импортирует react-native-purchases', () => {
+    const src = fs.readFileSync(path.join(__dirname, '../purchases.web.ts'), 'utf8');
+    // имя пакета в комментарии — законно (см. шапку файла), ищем именно импорт/require
+    expect(src).not.toMatch(/from\s+['"]react-native-purchases['"]/);
+    expect(src).not.toMatch(/require\(\s*['"]react-native-purchases['"]\s*\)/);
   });
 });

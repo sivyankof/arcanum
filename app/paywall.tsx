@@ -146,13 +146,18 @@ export default function PaywallScreen() {
                     : tr('paywall.activeTitle')}
               </Txt>
               {/* «Продлится» — только при включённом продлении; отменённая, но действующая —
-                  «Действует до» (иначе панель врала бы, спека 53б, решение 9) */}
+                  «Действует до» (иначе панель врала бы, спека 53б, решение 9). Развилка ведётся
+                  ПО ИСТОЧНИКУ, а не по наличию даты: `until: null` у `source: 'store'` — законное
+                  бессрочное промо-право из консоли магазина (toPremium/purchasesMap.ts), а не
+                  DEV-тумблер, — такому праву нейтральный «Подписка активна», а не «DEV-режим». */}
               <Txt style={[st.panelSub, { color: t.muted }]}>
-                {premium.source === 'store' && premium.until
-                  ? tr(premium.willRenew ? 'paywall.activeUntil' : 'paywall.activeExpires', {
-                      date: formatFullDate(premium.until, lang),
-                    })
-                  : tr('paywall.activeDev')}
+                {premium.source !== 'store'
+                  ? tr('paywall.activeDev')
+                  : premium.until
+                    ? tr(premium.willRenew ? 'paywall.activeUntil' : 'paywall.activeExpires', {
+                        date: formatFullDate(premium.until, lang),
+                      })
+                    : tr('paywall.activeTitle')}
               </Txt>
             </View>
             <PressableScale
