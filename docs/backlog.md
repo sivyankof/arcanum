@@ -1751,7 +1751,9 @@ Push — после настройки remote (отложено решением
       Сценарий 6б `scripts/check_62_web.js`: красный 31 из 58 → зелёный 58 из 58, мутация
       роняет 24. Тестов 1704 в 47 сьютах. Отчёт — в спеке.
 
-- [~] **64 · `ACTIVITY_RECOGNITION` в манифесте Android — убрать через `blockedPermissions`** —
+- [x] **64 · `ACTIVITY_RECOGNITION` в манифесте Android — убрать через `blockedPermissions`** — **ЗАКРЫТА 27.08**:
+      сборка `versionCode` 3 (id `f7ee427c`), манифест 12 разрешений без ACTIVITY_RECOGNITION, выпуск 3 (1.0.0)
+      во внутреннем тесте, «Контент приложения» → «Все декларации заполнены». История:
       найдено 27.08 при закрытии задач Play Console: декларация «Здоровье» открыта не из-за функций
       приложения, а потому что AAB запрашивает `android.permission.ACTIVITY_RECOGNITION` — его
       добавляет манифест `expo-sensors` (ради `Pedometer`), а мы используем только `DeviceMotion`
