@@ -24,7 +24,12 @@
       «Pending User Info»: [x] **банк добавлен 27.08** (`SIVIANKOU ARTSIOM (3346)`, Georgia,
       USD, «Processing» — обработка до 24 ч, на это время правки банка заперты) и [ ] Add Tax
       Form (W-8BEN) — **вводит Артём сам** (финансовые данные, из сессии не вводятся),
-      Business → Agreements.
+      Business → Agreements. ⚠️ W-8BEN один на аккаунт (не на приложение), действует 3 года;
+      строка 2 «Country of Citizenship» у Apple **заперта на страну аккаунта** (в списке только
+      Georgia, хотя гражданство — Беларусь) — изменить нельзя, существенные утверждения формы
+      («не лицо США», «резидент Грузии») верны, подписывается как есть; строка 9 — галочка
+      (на Грузию действует договор США–СССР 1973), строка 10 — Article III, paragraph 1, 0 %,
+      «Income from the sale of applications».
       ⚠️ Форма банка для Грузии (27.08): Apple сверяет IBAN с частями — `GE` + 2 контрольные
       цифры + **Georgia Bank Code = 2 буквы из IBAN** (Bank of Georgia — `BG`, не SWIFT
       `BAGAGE22`) + **Account Number = 16 цифр после кода банка**, не весь IBAN; иначе
