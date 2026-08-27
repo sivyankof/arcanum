@@ -8,7 +8,9 @@ import { Platform } from 'react-native';
 export const platform: string = Platform.OS;
 
 export function apiKey(): string | undefined {
-  const key = Platform.OS === 'android' ? process.env.EXPO_PUBLIC_RC_ANDROID_KEY : process.env.EXPO_PUBLIC_RC_IOS_KEY;
+  let key: string | undefined;
+  if (Platform.OS === 'android') key = process.env.EXPO_PUBLIC_RC_ANDROID_KEY;
+  else if (Platform.OS === 'ios') key = process.env.EXPO_PUBLIC_RC_IOS_KEY;
   return key ? key : undefined;
 }
 
