@@ -233,8 +233,11 @@
   Agreement Active** (банк Bank of Georgia USD Active, W-8BEN + Certificate of Foreign Status
   Active — вводил Артём), Bundle ID `app.arcanum.tarot` зарегистрирован, приложение «Arcanum —
   обучение таро» создано (короткое `Arcanum` в App Store занято), DSA «трейдер» подан — In Review.
-  Дальше: iOS `preview`-сборка (нужен UDID iPhone) → 63б → продукты подписки + API key
-  RevenueCat (порядок — release-checklist п. 1);
+  **28.08: iPhone зарегистрирован в EAS, первая iOS `preview`-сборка прошла** (`23daec5d`,
+  1.0.0 (1), ad hoc; лайв на iPhone — за Артёмом); **63б: Apple-набор 28 кадров 1290×2796
+  снят и закоммичен** (`docs/store/apple/`, стражи обязательны). Дальше: заливка витрины
+  в App Store Connect (тексты `store-listing.md`, кадры, URL политики/условий/поддержки,
+  возрастной рейтинг) → продукты подписки + API key RevenueCat (release-checklist п. 1);
   Google Play — **аккаунт полностью верифицирован 25.08** (личность, Android-устройство, телефон),
   «Создать приложение» открыто; Expo — `art9`. **Задача 61 (EAS Build): ПЕРВАЯ СБОРКА ПРОШЛА 26.08**:
   проект `@art9/arcanum`, `eas.json` (`preview` APK/ad hoc, `production` AAB,

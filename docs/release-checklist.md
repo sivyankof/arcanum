@@ -419,7 +419,13 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       активен.
       ⚠️ Файл в консоль кладёт Артём руками (перетаскиванием): артефакт EAS отдаётся без CORS,
       `fetch` со страницы консоли его не возьмёт, а загрузка файлов из сессии ограничена 10 МБ.
-- [~] iOS `preview` — **iPhone Артёма зарегистрирован 28.08** (`eas device:create` → Website →
+- [x] iOS `preview` — **ПЕРВАЯ iOS-СБОРКА ПРОШЛА 28.08**: id `23daec5d`, 1.0.0 (1), ad hoc на iPhone
+      Артёма, сертификат дистрибуции и профиль созданы EAS в облаке (Apple login в отдельном
+      PowerShell), Push Notifications — «No»; EAS сам дописал в `app.json`
+      `ITSAppUsesNonExemptEncryption: false` (закоммичено). Установка: страница сборки
+      `https://expo.dev/accounts/art9/projects/arcanum/builds/23daec5d-a3b4-4d87-aa93-62c49d8b1821`
+      → «Install» в Safari на iPhone. Лайв-проверка на устройстве — ждёт Артёма.
+      **iPhone Артёма зарегистрирован 28.08** (`eas device:create` → Website →
       QR → профиль на телефоне; UDID `00008120-00067D900C70201E`, команда `52QV87WW73`).
       ⚠️ `eas device:create` и первая iOS-сборка — только в ОТДЕЛЬНОМ окне PowerShell: им нужен
       интерактив (Apple ID + двухфакторка), из сессии и через `!` падают «stdin is not readable».
@@ -449,7 +455,9 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       принял кадры, всё **загружено и сохранено в Play Console 26.08** (см. «Заливка витрины:
       как прошла 26.08»). **iOS 6.7"** — тот же конвейер флагом
       `--store apple` (холст 1290×2796), снимается после появления аккаунта Apple; набор
-      пока не коммитится (`docs/store/apple/` в `.gitignore`). **iPad — не нужен: решение
+      **снят и ЗАКОММИЧЕН 28.08 (63б)**: 28 кадров 1290×2796 на 4 языках, `docs/store/apple/`
+      (11 МБ; страж `store_assets.py verify` и `storeAssets.test.ts` — Apple-набор теперь
+      обязателен). Заливка в App Store Connect — следующий шаг 63б. **iPad — не нужен: решение
       Артёма 27.08 — `supportsTablet: false` в `app.json`** до первого сабмита (iPhone-only,
       кадры 2064×2752 не требуются, ревью на iPad не будет); включить можно любым обновлением.
 - [~] Возрастной рейтинг: **Google — анкета IARC заполнена и сохранена 26.08.2026**
