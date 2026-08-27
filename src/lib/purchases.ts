@@ -34,11 +34,13 @@ const MANAGE_FALLBACK =
     : 'https://apps.apple.com/account/subscriptions';
 
 let configured = false;
-/** configure — синхронный и ровно один раз; повторный вызов SDK считает ошибкой. */
+/** configure — синхронный и ровно один раз; повторный вызов SDK считает ошибкой. Флаг поднимаем
+ *  ПОСЛЕ успешного вызова: между проверкой и вызовом нет await, гонки нет, а если configure
+ *  бросит — модуль не должен навсегда решить, что настроен, и запереть себе следующую попытку. */
 export async function init(): Promise<void> {
   if (!PURCHASES_AVAILABLE || configured) return;
-  configured = true;
   Purchases.configure({ apiKey: KEY as string });
+  configured = true;
   await Purchases.setLogLevel(__DEV__ ? LOG_LEVEL.DEBUG : LOG_LEVEL.ERROR);
 }
 
