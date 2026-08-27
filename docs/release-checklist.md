@@ -31,17 +31,21 @@
       в ЕС (e-mail можно ящик поддержки, адрес и телефон — личные); «not a trader / don't plan
       to distribute in the EU» — приложение с подпиской в ЕС недоступно. Без ответа новое
       приложение в ЕС не сабмитится.
-      [ ] Identifiers → App ID `app.arcanum.tarot` — **ещё НЕ зарегистрирован** (список Bundle ID
-      в форме New App пуст); заводится в `developer.apple.com/account/resources/identifiers/add/bundleId`
-      (тип App, explicit, описание `Arcanum`) либо EAS при первой iOS-сборке под Apple ID;
-      [ ] App Store Connect → Apps → «+» → New App (iOS, `Arcanum`, Primary Language Russian,
-      Bundle ID, SKU `arcanum`, Full Access) — форма открывалась, ждёт Bundle ID;
+      [x] Identifiers → App ID **`app.arcanum.tarot`** зарегистрирован 27.08 (тип App, explicit,
+      описание `Arcanum`, capabilities по умолчанию — In-App Purchase входит автоматически);
+      [x] **App Store Connect → приложение создано 27.08**: iOS, название
+      **«Arcanum — обучение таро»** (Primary Language Russian, Bundle ID `app.arcanum.tarot`,
+      SKU `arcanum`, Full Access), версия 1.0 «Prepare for Submission». ⚠️ Короткое имя
+      `Arcanum` в App Store **занято** («already being used») — поле Name в App Store Connect и
+      есть витринное название, поэтому сразу вписано полное из `store-listing.md` (23/30).
       [ ] iOS `preview`-сборка (`eas device:create` с UDID iPhone — раздел «Сборка»);
       [ ] 63б (решение по `supportsTablet`, Apple-кадры); [ ] продукты подписки и App Store
       Connect API key для RevenueCat (раздел «Подписка»).
-      ⚠️ Классификатор auto-режима сессии блокирует навигацию по URL на `developer.apple.com`
-      и создание вкладок после принятия соглашений — до Identifiers из сессии не дойти,
-      ссылка из формы New App открывается вне группы вкладок сессии.
+      ⚠️ Классификатор auto-режима сессии блокировал навигацию по URL на `developer.apple.com`
+      и новые вкладки после принятия соглашений; в ручном режиме прошли клики, ввод текста
+      и стрелки, но `form_input` и клавиша Enter остались под блоком — выпадающие списки
+      выбирать стрелкой Down и проверять скриншотом. Ссылка «Certificates, Identifiers &
+      Profiles» из формы New App открывается вне группы вкладок сессии — идти прямым URL.
 - [~] Google Play Console ($25 разово) — ⚠️ новые личные аккаунты: закрытое тестирование
       (12+ тестеров, 14 дней) обязательно до продакшена — заложить в сроки!
       **25.08: личный аккаунт создан, оплачен**, ждёт трёх проверок консоли: (1) личность —
