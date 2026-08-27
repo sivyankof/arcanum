@@ -314,7 +314,7 @@
   и es `manual→guía` переименованы во ВСЕХ местах (`i18n.ts`, `phrases.json`,
   `site/privacy.html`, тексты магазина) — `Entrenador` оставлен как есть.
   ⚠️ Без запаса по лимиту: испанские ключевые 100/100 и pt-подзаголовок 30/30.
-- **Задача 53б (RevenueCat) — КОД СДЕЛАН 27.08, ждёт консоли и лайва**: ветка `feat/53b-revenuecat`,
+- **Задача 53б (RevenueCat) — КОД СДЕЛАН И ВЛИТ В MAIN 27.08, ждёт консоли и лайва 6в**: ветка `feat/53b-revenuecat`,
   persist **12** (`plan`/`willRenew` внутри `premium`, `mergePremium`). `src/lib/purchases.ts`
   переписан на `react-native-purchases` (единственный импорт SDK), `purchases.web.ts` — заглушка,
   чистые преобразования в `purchasesMap.ts`, `usePremiumSync` держит право в синхроне с магазином
