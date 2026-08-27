@@ -229,11 +229,12 @@
   EAS dev-сборка → 53б, виджеты, скриншоты сторов, технический прогон release-checklist.
   **Аккаунты 25.08**: Apple — **АКТИВИРОВАН 27.08 20:36** (веб-заявка + PDF документов, регион
   Грузия; сканер приложения отклонял паспорт Беларуси по несовпадению страны с регионом), доступ
-  в App Store Connect есть; **27.08 вечером из сессии**: Team ID `52QV87WW73`, Paid Apps
-  Agreement принят (статус «Pending User Info» — банк и налоговая форма за Артёмом), Bundle ID
-  `app.arcanum.tarot` зарегистрирован, приложение «Arcanum — обучение таро» создано (короткое
-  `Arcanum` в App Store занято). Ждёт Артёма: банк, налоговая форма, ответ DSA (трейдер в ЕС);
-  дальше iOS-сборка → 63б (порядок — release-checklist п. 1);
+  в App Store Connect есть; **27.08 вечером закрыто целиком**: Team ID `52QV87WW73`, **Paid Apps
+  Agreement Active** (банк Bank of Georgia USD Active, W-8BEN + Certificate of Foreign Status
+  Active — вводил Артём), Bundle ID `app.arcanum.tarot` зарегистрирован, приложение «Arcanum —
+  обучение таро» создано (короткое `Arcanum` в App Store занято), DSA «трейдер» подан — In Review.
+  Дальше: iOS `preview`-сборка (нужен UDID iPhone) → 63б → продукты подписки + API key
+  RevenueCat (порядок — release-checklist п. 1);
   Google Play — **аккаунт полностью верифицирован 25.08** (личность, Android-устройство, телефон),
   «Создать приложение» открыто; Expo — `art9`. **Задача 61 (EAS Build): ПЕРВАЯ СБОРКА ПРОШЛА 26.08**:
   проект `@art9/arcanum`, `eas.json` (`preview` APK/ad hoc, `production` AAB,

@@ -24,8 +24,8 @@
       «Pending User Info»: [x] **банк добавлен 27.08** (`SIVIANKOU ARTSIOM (3346)`, Georgia,
       USD, «Processing» — обработка до 24 ч, на это время правки банка заперты) и [x] **налоговые
       формы поданы 27.08, обе Active** (W-8BEN `W-8BEN 2026` + Certificate of Foreign Status
-      Apple) — **Paid Apps Agreement → «Processing»**, станет Active сам после банка; вводил
-      Артём (финансовые данные из сессии не вводятся). ⚠️ W-8BEN один на аккаунт (не на приложение), действует 3 года;
+      Apple) — **Paid Apps Agreement и банк ACTIVE в тот же вечер 27.08** (не сутки — минуты);
+      вводил Артём (финансовые данные из сессии не вводятся). ⚠️ W-8BEN один на аккаунт (не на приложение), действует 3 года;
       строка 2 «Country of Citizenship» у Apple **заперта на страну аккаунта** (в списке только
       Georgia, хотя гражданство — Беларусь) — изменить нельзя, существенные утверждения формы
       («не лицо США», «резидент Грузии») верны, подписывается как есть; строка 9 — галочка
@@ -38,12 +38,11 @@
       в долларах, счёт мультивалютный). «Address couldn't be verified» — косметика, Confirm;
       после активации Paid Apps — App Store Small Business Program (комиссия 15 % вместо 30 %,
       `developer.apple.com/app-store/small-business-program/`).
-      [ ] **DSA (Digital Services Act) — решение Артёма**: Business показывает красный баннер
-      «trader status must be provided or your apps will be removed from the App Store in the EU».
-      Варианты: «I'm a trader» — адрес, телефон и e-mail публикуются на странице приложения
-      в ЕС (e-mail можно ящик поддержки, адрес и телефон — личные); «not a trader / don't plan
-      to distribute in the EU» — приложение с подпиской в ЕС недоступно. Без ответа новое
-      приложение в ЕС не сабмитится.
+      [~] **DSA (Digital Services Act) — «I'm a trader», подано 27.08, статус «In Review»**
+      (27 стран ЕС): адрес, телефон и e-mail будут показаны на странице приложения в ЕС.
+      Мастер просил: документ с именем (тот же PDF паспорт + ВНЖ, что принимала регистрация,
+      здесь лимит 10 МБ, язык English (US)), подтверждение адреса, SMS на телефон, код на
+      e-mail. Результат — письмом; до него сабмит в ЕС не открывается, остальному не мешает.
       [x] Identifiers → App ID **`app.arcanum.tarot`** зарегистрирован 27.08 (тип App, explicit,
       описание `Arcanum`, capabilities по умолчанию — In-App Purchase входит автоматически);
       [x] **App Store Connect → приложение создано 27.08**: iOS, название
