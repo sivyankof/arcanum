@@ -276,6 +276,7 @@ export const resources = {
         // без обещания срока (решение Артёма 26.08): после 53б та же панель значит «нет сети»
         soonTitle: "Оформить подписку пока нельзя",
         soonSub: "Попробуйте позже — всё, что уже открыто, останется доступным",
+        discount: "−{{pct}} %",
       },
       // обратная связь (спека 13): mailto-письмо с автоблоком диагностики.
       // «Записей истории: N» — форма без склонений, плюрализация не нужна (урок hf-02)
@@ -602,6 +603,7 @@ export const resources = {
         ok: "Got it",
         soonTitle: "Subscribing isn't available yet",
         soonSub: "Try again later — everything that's already open stays available",
+        discount: "−{{pct}}%",
       },
       feedback: {
         subject: "Arcanum: feedback",
@@ -974,6 +976,7 @@ export const resources = {
         ok: "Entendido",
         soonTitle: "Aún no es posible suscribirse",
         soonSub: "Inténtalo más tarde: todo lo que ya está abierto seguirá disponible",
+        discount: "−{{pct}} %",
       },
       feedback: {
         subject: "Arcanum: comentarios",
@@ -1356,6 +1359,7 @@ export const resources = {
         ok: "Entendi",
         soonTitle: "Ainda não é possível assinar",
         soonSub: "Tente mais tarde: tudo o que já está aberto continua disponível",
+        discount: "−{{pct}} %",
       },
       feedback: {
         subject: "Arcanum: sua opinião",

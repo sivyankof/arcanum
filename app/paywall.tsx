@@ -178,7 +178,9 @@ export default function PaywallScreen() {
                         )}
                         {/* solid: бейдж сидит на верхней рамке карточки — сквозь полупрозрачный
                             chipBg она просвечивала полосой (лайв-проверка 22.08) */}
-                        {o.discount && <PremiumBadge label={o.discount} style={st.planBadge} solid />}
+                        {o.discountPct !== undefined && (
+                          <PremiumBadge label={tr('paywall.discount', { pct: o.discountPct })} style={st.planBadge} solid />
+                        )}
                       </PressableScale>
                     );
                   })}
