@@ -21,6 +21,17 @@ EAS «один файл правил в корне» — и у git спраши�
 Рабочее дерево не трогается: `git check-ignore` работает со строками путей, файлам
 существовать не обязательно.
 
+⚠️ У архива ДВА источника, а не один (найдено 27.08 на первой `production`-сборке: в логе
+180 МБ при расчёте 31.7). eas-cli (22.6, `build/vcs/clients/git.js`) делает
+`git clone --no-checkout --depth 1` и поверх копирует рабочую папку по правилам `.easignore`;
+в архив уходит и `.git` этого клона — упакованное дерево HEAD, у нас 152 МБ (119 МБ
+tracked-скриншотов не сжимаются). Удаляется он ТОЛЬКО если правила исключают строку `.git`
+буквально: eas-cli спрашивает у npm-пакета `ignore` `ignores('.git')` — без слэша, и правило
+`.git/` (только каталоги) её не матчит, тогда как `git check-ignore` в нашем матчере `.git/`
+принял бы (git не знает, каталог это или файл). Поэтому строка `.git` проверяется разбором
+файла правил, а не через git (`git_metadata_rule`). Воспроизведено функцией самого eas-cli
+`makeProjectTarballAsync`: без строки — 181.0 МиБ (из них `.git` 152.3), со строкой — 28.7.
+
 ⚠️ Две ловушки, на которых проверка молча притворяется успешной (обе пойманы 26.08):
   1. `git check-ignore` НЕ понимает `--exclude-from` — это опция `ls-files`. С ней он
      исключает ноль файлов, и отчёт выглядит нормальным.
@@ -39,7 +50,9 @@ import tempfile
 
 ROOT = os.path.abspath('.')
 IGNORE_FILE = sys.argv[1] if len(sys.argv) > 1 else '.easignore'
-ALWAYS_SKIP = {'.git', 'node_modules'}  # EAS исключает их независимо от файла правил
+# Из РАБОЧЕЙ папки EAS их не копирует никогда (defaultIgnore в local.js). Про .git shallow-клона
+# это НЕ так — см. git_metadata_rule.
+ALWAYS_SKIP = {'.git', 'node_modules'}
 
 # Без чего сборка не соберётся вовсе.
 MUST_KEEP = [
@@ -94,6 +107,33 @@ def ask_git(files, rules_path):
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+def git_metadata_rule(rules_path):
+    """Исключают ли правила `.git` так, как это понимает eas-cli: 'ok' | 'slash' | 'missing'.
+
+    Считается только правило `.git` или `/.git`. Правило `.git/` — ловушка: git его принял бы,
+    eas-cli (пакет `ignore`, запрос `ignores('.git')`) — нет, и .git клона уедет в архив.
+    """
+    found_slash = False
+    with open(rules_path, encoding='utf-8') as fh:
+        for raw in fh:
+            line = raw.strip()
+            if not line or line.startswith('#') or line.startswith('!'):
+                continue
+            if line.lstrip('/') == '.git':
+                return 'ok'
+            if line.lstrip('/') == '.git/':
+                found_slash = True
+    return 'slash' if found_slash else 'missing'
+
+
+def tracked_size():
+    """Размер дерева HEAD — столько весит .git shallow-клона, если его не исключили."""
+    proc = subprocess.run(['git', 'ls-files', '-z'], capture_output=True, check=True)
+    names = [p.decode('utf-8') for p in proc.stdout.split(b'\0') if p]
+    paths = [os.path.join(ROOT, n) for n in names]
+    return sum(os.path.getsize(p) for p in paths if os.path.isfile(p))
+
+
 def size(paths):
     return sum(os.path.getsize(os.path.join(ROOT, p)) for p in paths)
 
@@ -122,6 +162,17 @@ def main():
         print(f'  {top:22} {size(fs) / MB:8.2f} МБ  {len(fs):5} файл(ов)')
 
     problems = []
+
+    git_rule = git_metadata_rule(rules)
+    clone_git = 0 if git_rule == 'ok' else tracked_size()
+    if git_rule == 'ok':
+        print('\n.git shallow-клона : исключён строкой `.git`')
+    else:
+        why = ('правило `.git/` eas-cli не понимает — нужно `.git` без слэша'
+               if git_rule == 'slash' else 'строки `.git` в правилах нет')
+        print(f'\n.git shallow-клона : УЕДЕТ ~{clone_git / MB:.1f} МБ (дерево HEAD) — {why}')
+        problems.append('.git клона уедет в архив')
+    print(f'ИТОГО архив        : ≈ {(size(kept) + clone_git) / MB:.1f} МБ')
 
     missing = [p for p in MUST_KEEP if p not in kept_set]
     print('\nОбязательные файлы :', 'все на месте' if not missing else f'ПОТЕРЯНЫ {missing}')
