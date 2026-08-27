@@ -419,7 +419,15 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       активен.
       ⚠️ Файл в консоль кладёт Артём руками (перетаскиванием): артефакт EAS отдаётся без CORS,
       `fetch` со страницы консоли его не возьмёт, а загрузка файлов из сессии ограничена 10 МБ.
-- [ ] iOS `preview` — после одобрения Apple (`eas device:create` с UDID iPhone).
+- [~] iOS `preview` — **iPhone Артёма зарегистрирован 28.08** (`eas device:create` → Website →
+      QR → профиль на телефоне; UDID `00008120-00067D900C70201E`, команда `52QV87WW73`).
+      ⚠️ `eas device:create` и первая iOS-сборка — только в ОТДЕЛЬНОМ окне PowerShell: им нужен
+      интерактив (Apple ID + двухфакторка), из сессии и через `!` падают «stdin is not readable».
+      Проверка без интерактива: `npx eas-cli@latest device:list --apple-team-id 52QV87WW73`.
+      Сборка: `npx eas-cli@latest build --platform ios --profile preview` → Apple login Y →
+      сертификат дистрибуции — сгенерировать → устройство — iPhone → Push Notifications key —
+      **No** (пуши только локальные, APNs не нужен). Установка: ссылка/QR со страницы сборки
+      в Safari на iPhone.
 
 ## Магазины: тексты и материалы
 
