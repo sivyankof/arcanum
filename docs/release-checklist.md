@@ -22,7 +22,12 @@
       приняты; [x] Legal Entity подтверждён (тот же адрес Батуми, автопроверка адреса «couldn't be
       verified» — подтверждён как есть); [x] **Paid Apps Agreement принят** → статус
       «Pending User Info»: [ ] Add Bank Account (грузинский счёт, IBAN) и [ ] Add Tax Form —
-      **вводит Артём сам** (финансовые данные, из сессии не вводятся), Business → Agreements;
+      **вводит Артём сам** (финансовые данные, из сессии не вводятся), Business → Agreements.
+      ⚠️ Форма банка для Грузии (27.08): Apple сверяет IBAN с частями — `GE` + 2 контрольные
+      цифры + **Georgia Bank Code = 2 буквы из IBAN** (Bank of Georgia — `BG`, не SWIFT
+      `BAGAGE22`) + **Account Number = 16 цифр после кода банка**, не весь IBAN; иначе
+      «Bank account number format is incorrect». Валюта — USD, если есть в списке (выплаты
+      в долларах, счёт мультивалютный). «Address couldn't be verified» — косметика, Confirm;
       после активации Paid Apps — App Store Small Business Program (комиссия 15 % вместо 30 %,
       `developer.apple.com/app-store/small-business-program/`).
       [ ] **DSA (Digital Services Act) — решение Артёма**: Business показывает красный баннер
