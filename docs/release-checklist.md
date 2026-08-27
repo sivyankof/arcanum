@@ -19,7 +19,7 @@
       на продакшен — список e-mail собирать заранее. Свой недорогой Android (13+) Артём всё равно
       покупает: он же «слабый Android» технического прогона и приёмник APK задачи 61.
 - [ ] RuStore (бесплатно) — сборка APK через EAS
-- [~] EAS Build настроен (eas.json: preview + production), версии: app.json version + runtimeVersion —
+- [x] EAS Build настроен (eas.json: preview + production; **27.08 `production` AAB прошла**, `versionCode` 2, 86.6 МиБ), версии: app.json version + runtimeVersion —
       **25.08 (задача 61)**: проект `@art9/arcanum`, `eas.json` (`preview` APK/ad hoc, `production` AAB,
       номера сборок в EAS — `appVersionSource: remote`, `runtimeVersion` не нужен без EAS Update).
       **26.08: первая Android-сборка `preview` ПРОШЛА** (подробности — раздел «Сборка (EAS Build)»
