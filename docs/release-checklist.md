@@ -425,7 +425,11 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       PowerShell), Push Notifications — «No»; EAS сам дописал в `app.json`
       `ITSAppUsesNonExemptEncryption: false` (закоммичено). Установка: страница сборки
       `https://expo.dev/accounts/art9/projects/arcanum/builds/23daec5d-a3b4-4d87-aa93-62c49d8b1821`
-      → «Install» в Safari на iPhone. Лайв-проверка на устройстве — ждёт Артёма.
+      → «Install» в Safari на iPhone. **Лайв-проверка Артёма на iPhone 28.08 ✓** («всё
+      работает»; ⚠️ ad hoc-сборке на iOS 16+ нужен Режим разработчика: Настройки →
+      Конфиденциальность и безопасность → Режим разработчика → перезагрузка). Пейвол показывает
+      «пока нельзя» — ожидаемо: в `preview` нет ключа RevenueCat и продуктов в App Store Connect
+      (консольная часть 53б).
       **iPhone Артёма зарегистрирован 28.08** (`eas device:create` → Website →
       QR → профиль на телефоне; UDID `00008120-00067D900C70201E`, команда `52QV87WW73`).
       ⚠️ `eas device:create` и первая iOS-сборка — только в ОТДЕЛЬНОМ окне PowerShell: им нужен
