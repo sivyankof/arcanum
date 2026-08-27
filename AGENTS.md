@@ -76,6 +76,14 @@ Read the exact versioned docs at https://docs.expo.dev/versions/v54.0.0/ before 
   и выходит с кодом **0** — выглядит успехом при нуле скачанного. Ответ подавать через `yes |`.
   ⚠️ Прогресс `sdkmanager` не увидеть, если пропустить вывод через `tail`/`grep` без `--line-buffered`:
   они копят весь текст до конца команды. Писать лог прямо в файл и читать его отдельно.
+  ⚠️ **Магазинную сборку (AAB) на эмулятор ставить только через Play Store** (`adb install` AAB не
+  умеет): образ `google_apis_playstore`, вход в Google-аккаунт делает Артём руками, дальше
+  `adb shell am start -a android.intent.action.VIEW -d <ссылка внутреннего теста>` → в Chrome
+  «Download test app» → в Play Store «Установить» (тапы `input tap`, координаты со `screencap`);
+  проверка — `dumpsys package app.arcanum.tarot | grep -E "versionCode|installer|splits"`, ожидаются
+  `installerPackageName=com.android.vending` и сплиты `base, config.ru, config.x86_64, config.xxhdpi`.
+  Если на эмуляторе стоит APK, поставленный вручную, магазин показывает только «Удалить» —
+  сначала `adb shell pm uninstall app.arcanum.tarot`. Шум Finsky в logcat к приложению не относится.
   ⚠️ Системную локаль эмулятора не сменить (`setprop persist.sys.locale` требует root, а образ
   `google_apis_playstore` не рутуется) — язык переключать пикером в самом приложении;
   для проверки числительных этого достаточно, i18n читает язык из стора, а не из системы.
