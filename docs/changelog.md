@@ -2602,3 +2602,24 @@ Outlook: «Account creation has been blocked… unusual activity»). Два се
 
 **Что дальше.** Лайв-проверка Артёма на устройстве через внутренний трек → закрытый тест
 12 × 14 дней (нужны email тестеров) → 53б (RevenueCat) → заявка на рабочую версию.
+
+## 64 · `ACTIVITY_RECOGNITION` в манифесте Android — 27.08.2026 (в работе)
+
+При закрытии задач Play Console единственным открытым остался пункт «Здоровье». Форма
+объяснила причину сама: «Ваше приложение использует разрешение `android.permission.ACTIVITY_RECOGNITION`
+и должно соответствовать правилам для приложений для здоровья. Если функций нет — удалите
+разрешение из манифеста». Разрешение приносит `node_modules/expo-sensors/android/src/main/AndroidManifest.xml`
+(одна строка, ради `Pedometer`); в коде из `expo-sensors` используется только `DeviceMotion`
+(`useDeviceTilt`). Ответ «функций нет» сдать нельзя — «Далее» без выбранных функций неактивна.
+
+Правка: `expo.android.blockedPermissions: ["android.permission.ACTIVITY_RECOGNITION"]` в `app.json`
+(по докам SDK 54 — `tools:node="remove"` при prebuild). Страж `src/lib/__tests__/androidPermissions.test.ts`
+держит три факта: разрешение заблокировано; `expo-sensors` действительно его добавляет (иначе строка
+мёртвая); `Pedometer` в `src/`/`app/` не используется (иначе блокировка ломала бы фичу молча).
+Проверка результата — манифест нового AAB (`zipfile` → `base/manifest/AndroidManifest.xml`, регулярка
+по `android.permission.*`): в сборке `versionCode` 2 было 13 разрешений, среди них лишнее.
+
+⚠️ Урок: декларации контента консоль включает **по манифесту сборки**, а не по описанию приложения —
+поэтому список «что сдавать» из release-checklist полон только после первой залитой сборки.
+Попутно в том же манифесте: `SYSTEM_ALERT_WINDOW`, `DUMP`, `READ/WRITE_EXTERNAL_STORAGE` —
+декларации не требуют, разобрать отдельно.
