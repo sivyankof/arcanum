@@ -16,17 +16,32 @@
       «documents received» 15:06. **27.08 20:36 — АККАУНТ АКТИВИРОВАН** («Welcome to the Apple
       Developer Program» на почту через 5.5 часа после расписки, 22:03 — доступ в App Store Connect).
       Итого путь: заявка через веб + PDF документов → одобрение в тот же день.
-      **Осталось после активации (по порядку):** [ ] `developer.apple.com/account` — принять
-      лицензионное соглашение программы (без него не открываются Certificates и сборка);
-      [ ] записать сюда Team ID (Membership details); [ ] App Store Connect → Business →
-      Agreements — **Paid Applications Agreement** (нужен для подписки 53б; требует налоговую
-      форму и банковский счёт — грузинский; самый долгий таймер, запускать первым); после него —
-      App Store Small Business Program (комиссия 15 % вместо 30 %, `developer.apple.com/app-store/small-business-program/`);
-      [ ] Identifiers → App ID `app.arcanum.tarot` (EAS заведёт сам при первой iOS-сборке под
-      Apple ID, руками не обязательно); [ ] App Store Connect → My Apps → New App (`Arcanum`, iOS,
-      Bundle ID, SKU `arcanum`); [ ] iOS `preview`-сборка (`eas device:create` с UDID iPhone —
-      раздел «Сборка»); [ ] 63б (решение по `supportsTablet`, Apple-кадры); [ ] продукты подписки
-      и App Store Connect API key для RevenueCat (раздел «Подписка»).
+      **Сделано из сессии через браузер 27.08 вечером:** [x] лицензионное соглашение программы —
+      принято 27.08 при регистрации (Apple Developer Agreement — 25.08); [x] **Team ID
+      `52QV87WW73`**, Individual, продление 28.08.2027; [x] Terms of Service App Store Connect
+      приняты; [x] Legal Entity подтверждён (тот же адрес Батуми, автопроверка адреса «couldn't be
+      verified» — подтверждён как есть); [x] **Paid Apps Agreement принят** → статус
+      «Pending User Info»: [ ] Add Bank Account (грузинский счёт, IBAN) и [ ] Add Tax Form —
+      **вводит Артём сам** (финансовые данные, из сессии не вводятся), Business → Agreements;
+      после активации Paid Apps — App Store Small Business Program (комиссия 15 % вместо 30 %,
+      `developer.apple.com/app-store/small-business-program/`).
+      [ ] **DSA (Digital Services Act) — решение Артёма**: Business показывает красный баннер
+      «trader status must be provided or your apps will be removed from the App Store in the EU».
+      Варианты: «I'm a trader» — адрес, телефон и e-mail публикуются на странице приложения
+      в ЕС (e-mail можно ящик поддержки, адрес и телефон — личные); «not a trader / don't plan
+      to distribute in the EU» — приложение с подпиской в ЕС недоступно. Без ответа новое
+      приложение в ЕС не сабмитится.
+      [ ] Identifiers → App ID `app.arcanum.tarot` — **ещё НЕ зарегистрирован** (список Bundle ID
+      в форме New App пуст); заводится в `developer.apple.com/account/resources/identifiers/add/bundleId`
+      (тип App, explicit, описание `Arcanum`) либо EAS при первой iOS-сборке под Apple ID;
+      [ ] App Store Connect → Apps → «+» → New App (iOS, `Arcanum`, Primary Language Russian,
+      Bundle ID, SKU `arcanum`, Full Access) — форма открывалась, ждёт Bundle ID;
+      [ ] iOS `preview`-сборка (`eas device:create` с UDID iPhone — раздел «Сборка»);
+      [ ] 63б (решение по `supportsTablet`, Apple-кадры); [ ] продукты подписки и App Store
+      Connect API key для RevenueCat (раздел «Подписка»).
+      ⚠️ Классификатор auto-режима сессии блокирует навигацию по URL на `developer.apple.com`
+      и создание вкладок после принятия соглашений — до Identifiers из сессии не дойти,
+      ссылка из формы New App открывается вне группы вкладок сессии.
 - [~] Google Play Console ($25 разово) — ⚠️ новые личные аккаунты: закрытое тестирование
       (12+ тестеров, 14 дней) обязательно до продакшена — заложить в сроки!
       **25.08: личный аккаунт создан, оплачен**, ждёт трёх проверок консоли: (1) личность —
