@@ -92,6 +92,8 @@
   приложение продолжает работать (Preview API Mode), dev-сервер перезапустить с `--clear`
   (новый файл `.web.ts`, урок 06б).
 - `.env.example` (коммитится): две строки с пустыми значениями и комментарием, откуда брать.
+  ⚠️ Файл добавляется и в `.easignore`: страж `check_easignore.py` считает секретом любой `.env.*`,
+  а сборке образец не нужен — исключаем файл, а не ослабляем детектор секретов (рулинг 27.08).
 - `src/lib/purchasesEnv.ts` (крошечный, без SDK): чтение `process.env.EXPO_PUBLIC_RC_*` по платформе
   и признак Expo Go (`Constants.executionEnvironment === ExecutionEnvironment.StoreClient`).
   Отдельный файл — чтобы `purchasesMap.ts` оставался чистым, а `purchases.ts` не зависел от

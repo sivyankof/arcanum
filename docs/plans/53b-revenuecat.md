@@ -524,8 +524,10 @@ export function isExpoGo(): boolean {
 }
 ```
 
-- [ ] **Шаг 5:** `npx tsc --noEmit` — пусто; `python scripts/check_easignore.py` — код 0, `.env` в списке
-  исключённых, `.env.example` — в архиве (это норма: значений в нём нет).
+- [ ] **Шаг 5:** `npx tsc --noEmit` — пусто; в `.easignore` рядом с `.env` / `.env*.local` добавить
+  строку `.env.example` с русским комментарием (образец без значений, сборке не нужен, а страж
+  считает секретом ЛЮБОЙ `.env.*` — исключаем файл, а не ослабляем проверку);
+  `python scripts/check_easignore.py` — код 0, утечек 0.
 
 - [ ] **Шаг 6: коммит.**
 ```bash
