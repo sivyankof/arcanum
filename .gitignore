@@ -54,5 +54,3 @@ __pycache__/
 # кэш оригиналов сканов Commons (scripts/fetch_card_scans.py, спека 42) — 70 МБ, в репо не нужны
 .cache/
 
-# Apple-набор скриншотов витрины (scripts/shoot_63.js --store apple) — до аккаунта Apple (63б) не коммитится
-docs/store/apple/

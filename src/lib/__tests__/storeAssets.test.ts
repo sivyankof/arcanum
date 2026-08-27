@@ -69,10 +69,8 @@ describe('скриншоты телефона', () => {
     const sets = LANGS.map((l) => fs.readdirSync(path.join(STORE, 'google', l)).sort().join());
     expect(new Set(sets).size).toBe(1);
   });
-  it('Apple (если каталог есть — до 63б не коммитится): 1–10 JPEG 1290×2796', () => {
-    const dir = path.join(STORE, 'apple');
-    if (!fs.existsSync(dir)) return;
-    checkShots(dir, APPLE);
+  it('Apple (набор закоммичен задачей 63б): 1–10 JPEG 1290×2796 на каждый язык', () => {
+    checkShots(path.join(STORE, 'apple'), APPLE);
   });
   it('число кадров = число экранов в captions.json', () => {
     const n = fs.readdirSync(path.join(STORE, 'google', 'ru')).filter((f) => f.endsWith('.jpg')).length;
