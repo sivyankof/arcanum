@@ -21,8 +21,10 @@
       `52QV87WW73`**, Individual, продление 28.08.2027; [x] Terms of Service App Store Connect
       приняты; [x] Legal Entity подтверждён (тот же адрес Батуми, автопроверка адреса «couldn't be
       verified» — подтверждён как есть); [x] **Paid Apps Agreement принят** → статус
-      «Pending User Info»: [ ] Add Bank Account (грузинский счёт, IBAN) и [ ] Add Tax Form —
-      **вводит Артём сам** (финансовые данные, из сессии не вводятся), Business → Agreements.
+      «Pending User Info»: [x] **банк добавлен 27.08** (`SIVIANKOU ARTSIOM (3346)`, Georgia,
+      USD, «Processing» — обработка до 24 ч, на это время правки банка заперты) и [ ] Add Tax
+      Form (W-8BEN) — **вводит Артём сам** (финансовые данные, из сессии не вводятся),
+      Business → Agreements.
       ⚠️ Форма банка для Грузии (27.08): Apple сверяет IBAN с частями — `GE` + 2 контрольные
       цифры + **Georgia Bank Code = 2 буквы из IBAN** (Bank of Georgia — `BG`, не SWIFT
       `BAGAGE22`) + **Account Number = 16 цифр после кода банка**, не весь IBAN; иначе
