@@ -25,24 +25,28 @@ export function usePremiumSync(): void {
     let unsubscribe: () => void = () => undefined;
     let unsubHydration: () => void = () => undefined;
     (async () => {
-      await init();
-      if (!alive) return;
-      unsubscribe = onEntitlementChange(applyEntitlement);
-      const fromStore = await refreshEntitlement();
-      if (!alive) return;
       // Этот эффект может отработать ДО конца гидрации persist (тот же приём-образец, что
       // app/_layout.tsx:46-50, — там по той же причине держат отдельную перепроверку hasHydrated).
       // Завершая гидрацию, persist сливает файл поверхностно: `set(merge(persisted, get()), true)`
       // отдаёт ключу `premium` содержимое ФАЙЛА, если запись из магазина легла раньше слияния —
       // «магазин говорит АКТИВНА, а в файле ещё НЕТ» тогда проживёт до следующего сворачивания
-      // приложения. Поэтому первый ответ магазина применяем не раньше, чем гидрация кончится.
-      if (useApp.persist.hasHydrated()) {
-        applyEntitlement(fromStore);
-      } else {
-        unsubHydration = useApp.persist.onFinishHydration(() => {
-          if (alive) applyEntitlement(fromStore);
+      // приложения. У этой гонки два входа: прямой ответ (`refreshEntitlement`) и push-событие
+      // SDK (`onEntitlementChange` зовёт `applyEntitlement` напрямую, в том числе из кеша, ещё
+      // до завершения `init`) — заплатка на один из них оставляла бы второй живым. Поэтому ждём
+      // гидрацию ОДИН раз здесь, В САМОМ НАЧАЛЕ, и только потом заводим init/подписку/первый
+      // ответ — так негейченных входов не остаётся по построению. Ждать не для кого: корневой
+      // layout не рисует ни кадра, пока `hydrated` ложно (app/_layout.tsx), так что до конца
+      // гидрации синхронизировать право просто некому.
+      if (!useApp.persist.hasHydrated()) {
+        await new Promise<void>((resolve) => {
+          unsubHydration = useApp.persist.onFinishHydration(() => resolve());
         });
       }
+      if (!alive) return;
+      await init();
+      if (!alive) return;
+      unsubscribe = onEntitlementChange(applyEntitlement);
+      applyEntitlement(await refreshEntitlement());
     })().catch((err) => console.warn('[purchases] синхронизация права не удалась:', err));
     return () => {
       alive = false;
