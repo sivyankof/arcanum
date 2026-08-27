@@ -150,14 +150,14 @@ SRS 45, лунный пуш 47б), и окно, закрывающееся в 21
 
 ## 7. Хранение (все данные локально)
 
-AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 11`):
+AsyncStorage, ключ `arcanum-app` (zustand persist), схема (сейчас `version: 12`):
 `{ schemaVersion: 3, installSeed, profile: {name?, birthDate?, birthArcanaId?, onboarded}, themeMode, lang,
 streak, lastDrawDate, freezes, freezeMonth, freezeSpentDate, xp, history: DailyDraw[365],
 lessonsProgress: {lessonId: {done, errors, ts, repeatDate?}},
 spreadsHistory: SpreadDraw[100], settings: {reflectionOn: true, pushesOn: true, pushMorning: '09:00',
 pushEvening: '21:00', pushAsked: false},
 srs: {cardId: {reps, intervalDays, ease, due}}, reviewDay: {date, newCount, doneCount},
-premium: {active, source, until} }`
+premium: {active, source, until, plan, willRenew} }`
 `DailyDraw = {date, cardId, reversed: false, outcome?, note?}`.
 ⚠️ **`premium` — ключ верхнего уровня стора, но НЕ входит в бэкап** (решение спеки 53, §14):
 право на подписку не переносится файлом между устройствами, `BackupState` его не объявляет,
@@ -237,7 +237,14 @@ premium: {active, source, until} }`
 `@react-native-async-storage/async-storage`, в хранилище кладётся JSON версии 10 БЕЗ `premium`
 и без `doneCount`, зовётся `useApp.persist.rehydrate()` (не голый `migrate()` — он не показал бы
 доливку `premium` поверхностным слиянием, которая происходит уже ПОСЛЕ `migrate` в конвейере persist).
-Следующая задача, меняющая схему, поднимает `version` до 12.
+**53б подняла `version` до 12** ради `plan` и `willRenew` — новых полей ВНУТРИ `premium` (§14),
+здесь снова бьёт ловушка 06а: сохранённый `premium: {active, source, until}` версии ≤ 11 без этих
+двух полей заменил бы дефолт-объект целиком, а не слился бы с ним. Слияние — чистая функция
+`mergePremium(saved)` (`src/lib/premium.ts`, тот же приём, что `mergeReviewDay`): недостающие поля
+доливаются дефолтами `PREMIUM_NONE`, `migrate` стора зовёт её напрямую. `parseBackup` не трогается —
+`premium` в файл бэкапа не входит (решение 4 спеки 53, врезка выше), правило-близнец здесь
+неприменимо: дублировать миграцию некуда, потому что бэкап это поле вообще не несёт.
+Следующая задача, меняющая схему, поднимает `version` до 13.
 ⚠️ **Битую запись хранилища читаем как отсутствующую** (09). С появлением гейта онбординга первый
 экран ЖДЁТ завершения гидрации, а `zustand/persist` на ошибке разбора не поднимает `hasHydrated`
 и не зовёт слушателей вовсе — приложение осталось бы на сплэше навсегда, и вылечить это можно было бы
@@ -436,13 +443,27 @@ filter)` — число под активным чипом справочник�
 фильтров; ввод поиска сбрасывает чип на «Все». Тест-кейсы: тоталы 22/14/14/14/14; m2l1–m2l4 → 8 из 78,
 старшие 8 из 22; +m4l1 → «Жезлы» 5 из 14, «Изучено» 13 карт.
 
-## 14. Premium (спека 53, 22.08)
+## 14. Premium (спека 53, 22.08; RevenueCat — 53б, 27.08)
 
-**Право.** `PremiumState = {active, source: 'none'|'dev'|'store', until}` — ключ верхнего уровня
-стора, ВНЕ бэкапа (§7). `source` объясняет, откуда право: `'store'` — покупка (53б, RevenueCat),
-`'dev'` — тумблер настроек `__DEV__` (единственный способ увидеть запертые/открытые состояния до
-53б), `'none'` — права нет. `until` — конец оплаченного периода (ISO), заполняет только `'store'`;
-у `'dev'`/`'none'` всегда `null`. Дефолт `PREMIUM_NONE = {active: false, source: 'none', until: null}`.
+**Право.** `PremiumState = {active, source: 'none'|'dev'|'store', until, plan, willRenew}` — ключ
+верхнего уровня стора, ВНЕ бэкапа (§7). `source` объясняет, откуда право: `'store'` — покупка
+(53б, RevenueCat), `'dev'` — тумблер настроек `__DEV__` (единственный способ увидеть
+запертые/открытые состояния без магазина), `'none'` — права нет. `until` — конец оплаченного
+периода ЛОКАЛЬНОЙ датой `YYYY-MM-DD` (`localDateISO` от `expirationDate` магазина —
+`formatFullDate` другой формы не разбирает, урок hf-02), заполняет только `'store'`; у
+`'dev'`/`'none'` всегда `null`. `plan: 'year' | 'month' | null` (53б) — тариф из магазина; у
+`'dev'`/`'none'` — `null`. `willRenew: boolean` (53б) — включено ли продление; у отменённой, но
+ещё действующей подписки — `false` при `active: true`; у `'dev'`/`'none'` — `false`. Дефолт
+`PREMIUM_NONE = {active: false, source: 'none', until: null, plan: null, willRenew: false}`.
+Persist **12** (53б): `plan`/`willRenew` — новые поля ВНУТРИ `premium`, `mergePremium`
+(`src/lib/premium.ts`) доливает их сохранённому объекту версий ≤ 11 (ловушка 06а, §7).
+
+**Слияние с магазином.** `mergeEntitlement(current, fromStore, todayISO)` (`purchasesMap.ts`,
+53б): `current.source === 'dev'` — магазин право не трогает; `fromStore !== null` — ответ есть, он
+и есть правда (замена целиком); `fromStore === null` — SDK не ответил, store-право живёт до
+`until` (кроме `null`), после `until` снимается локально до следующего удачного ответа. Пишется
+в стор только при реальной перемене (`samePremium`) — иначе каждый старт и каждый возврат из
+фона клали бы в persist одно и то же.
 
 **Источник правды «что платное».** Флаги `free` в контенте: `CourseModule.free`, `Spread.free`.
 Экраны их НЕ читают напрямую для решения о доступе — только через чистые функции
@@ -478,9 +499,22 @@ max(0, FREE_REVIEW_PER_DAY − doneToday(day, todayISO))`; `reviewLimitReached` 
 | Тренажёр, ссылка «Ещё N» / вход в `/review` | `reviewLimitReached` |
 | Настройки, строка «Arcanum Premium» | не гейт — вход в пейвол |
 
-**Адаптер покупок** — `src/lib/purchases.ts`: `PURCHASES_AVAILABLE` (в 53а всегда `false`,
-Expo Go), `getOffers`/`purchase`/`restore`/`refreshEntitlement`. В 53а `purchase`/`restore`
-всегда возвращают `{ok: false, reason: 'unavailable'}` — экран пейвола показывает диалог-объяснение
-вместо покупки. 53б подменит реализацию на RevenueCat за тем же интерфейсом; экран пейвола и
-будущий `usePremiumSync` (синхронизация права при старте/фокусе, 53б) говорят только с этим
-модулем и правок при замене не потребуют.
+**Адаптер покупок** — `src/lib/purchases.ts` на `react-native-purchases` (53б, единственный файл
+с импортом SDK в проекте), `src/lib/purchases.web.ts` — веб-заглушка без SDK (родня
+`pushes.web.ts`). `PURCHASES_AVAILABLE = purchasesAvailable({platform, expoGo, apiKey})` —
+натив ∧ не Expo Go ∧ есть ключ `EXPO_PUBLIC_RC_*` (Expo Go считается «магазина нет»: SDK там
+уходит в Preview API Mode, но `configure` с боевым ключом бросает). Без магазина (Expo Go, веб,
+сборка без ключа) — честная деградация приёма 62: `getOffers` → `[]`, `purchase`/`restore` →
+`{ok: false, reason: 'unavailable'}`, `refreshEntitlement` → `null`. Экспорты:
+`getOffers`/`purchase`/`restore`/`refreshEntitlement`/`init`/`onEntitlementChange`/`manageUrl`.
+`PurchaseResult` — `{ok: true, premium} | {ok: false, reason: 'unavailable'|'cancelled'|'error'|
+'none'}`; `'none'` только у `restore` («магазин ответил, подписки нет» — отличается от
+`'unavailable'`, «магазина нет вовсе»); `refreshEntitlement` отдаёт `null` ТОЛЬКО при сбое
+ответа, `PREMIUM_NONE` — при честном ответе «не куплено» (разница важна для `mergeEntitlement`
+выше). `onEntitlementChange` подписывается на push SDK (покупка/продление/отмена сторонним
+устройством). Хук `src/lib/usePremiumSync.ts` — три точки синхронизации: монтирование
+корневого layout, возврат из фона (`useAppActive`, правило 10 — истечение подписки тоже
+временнóе), push SDK; пишет в стор через `mergeEntitlement`, только если право реально
+изменилось. ⚠️ `tsc` НЕ проверяет пару `purchases.ts`/`purchases.web.ts` (в `tsconfig.json` нет
+`moduleSuffixes`) — расхождение сигнатур ловит только контракт-тест по именам/типам/арности
+(`purchasesWeb.test.ts`).
