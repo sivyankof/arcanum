@@ -167,8 +167,8 @@
   «изучено» в справочнике (46/46б/46в), мастерство карты (49). **Локализация ES/PT закрыта (28)**: контент
   100 % на четырёх языках, UI — 4 языка, статусы es/pt `reviewed`; корпус карт 958/958 `reviewed`
   (ru/en после правок 28б/28в — условно, журнал `docs/canon-fixes-applied.md`).
-- **Цифры**: тестов 1849 в 47 сьютах, `tsc` чистый, `expo-doctor` 18/18; **persist version 11** (`SCHEMA_VERSION`) —
-  следующая задача, меняющая схему стора, поднимает до 12; схема контента — статус по языкам (28а).
+- **Цифры**: тестов 1917 в 52 сьютах, `tsc` чистый, `expo-doctor` 18/18; **persist version 12** (`SCHEMA_VERSION`) —
+  следующая задача, меняющая схему стора, поднимает до 13; схема контента — статус по языкам (28а).
 - **Задача 51 (лунные расклады) ЗАКРЫТА 22.08**: лайв-проверка Артёма на iPhone ✓ («всё отлично»), ветка
   `feat/51-moon-spreads` влита в main. Два лунных расклада (новолуние free / полнолуние premium) открыты
   сутки до и после события (календарными днями); DEV-строка настроек «Лунный расклад: открыть окно»
@@ -380,8 +380,12 @@
   `reflection`, `settings`, `backup`/`backupIo`(.web), `pushPlan`/`pushBody`/`pushes`(.web), `moon`/
   `moonCalendar`, `srs`/`review` (+`reviewPrompt` — тексты флеш-карты, экран своей копии формулы держать не вправе)/`mastery`, `courseProgress`/`lesson`/`collection`, `cardSearch`, `spread`/
   `spreadLayout`/`composition`, `lightbox`, `birthArcana`, `feedback`, `appInfo` (версия + `SITE/PRIVACY/TERMS/SUPPORT_URL`), `revealQueue`/
-  `cardTransition`; хуки — `useAppActive`, `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
-  `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`.
+  `cardTransition`, `premium` (гейты `moduleLocked`/`lessonLocked`/`spreadLocked`, лимит тренажёра),
+  `purchases`/`purchases.web` (адаптер покупок — единственный файл с импортом `react-native-purchases`,
+  веб-заглушка без SDK), `purchasesMap` (чистые преобразования ответов магазина в типы приложения),
+  `purchasesEnv` (ключ SDK по платформе, признак Expo Go); хуки — `useAppActive`, `useScrollAwareBar`,
+  `useTabScrollToTop`, `useLeaveGuard`, `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`,
+  `usePremiumSync` (право Premium в синхроне с магазином: старт/фокус/push SDK).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
   (`transparentHeader`), `webInput.ts` (`noOutline`).
 

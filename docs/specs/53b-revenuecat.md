@@ -306,15 +306,18 @@ es/pt — написаны сессией, в очередь вычитки но
   покупки/восстановления через `DIALOG_TEXT`, «Управлять подпиской» → `manageUrl()`. Семь новых
   ключей ×4 языка. Макет `docs/design-reference.html` правлен под `#pwOn`.
 
-**Тесты:** было **1860 в 48 сьютах** (задача 63, 26.08) → стало **1917 в 52 сьютах** — 4 новых
-файла (`purchasesMap.test.ts` 31 кейс, `purchasesEnv.test.ts` 5, `purchasesWeb.test.ts` 4,
-`purchases.test.ts` переписан на мок SDK — 11 своих кейсов адаптера поверх унаследованного
-контракта «цен в коде нет», который теперь считает и `purchasesMap.ts`/`purchasesEnv.ts`/
-`purchasesWeb.test.ts` в периметре) плюс точечные правки `premium.test.ts`, `backup.test.ts`,
-`useApp.test.ts` (гидрация версии 11→12: файл без `plan`/`willRenew` получает дефолты, красный
-без `mergePremium` — `toEqual` не прощает `null` против отсутствующего ключа). `npx tsc --noEmit`
-чист, `python scripts/check_easignore.py` (под `PYTHONIOENCODING=utf-8` — иначе `UnicodeEncodeError`
-на «≈» в cp1251-консоли) — 308 файлов / 31.8 МБ в архиве, секретов не утекает.
+**Тесты:** было **1860 в 48 сьютах** (задача 63, 26.08) → **49 сьютов** к моменту старта ветки
+53б (между 63 и 53б на `main` легла задача 64 — она добавила один новый сьют
+`androidPermissions.test.ts`, проверено `git log --follow` на этот файл) → **1917 в 52 сьютах**
+сейчас: три НОВЫХ сьюта задач 2–4 плана (`purchasesMap.test.ts` 31 кейс, `purchasesEnv.test.ts` 5,
+`purchasesWeb.test.ts` 4; 49 + 3 = 52, сходится) плюс `purchases.test.ts` ПЕРЕПИСАН на мок SDK
+(не новый файл — 11 своих кейсов адаптера поверх унаследованного контракта «цен в коде нет»,
+который теперь считает и три новых модуля в периметре), плюс точечные правки `premium.test.ts`,
+`backup.test.ts`, `useApp.test.ts` (гидрация версии 11→12: файл без `plan`/`willRenew` получает
+дефолты, красный без `mergePremium` — `toEqual` не прощает `null` против отсутствующего ключа).
+`npx tsc --noEmit` чист, `python scripts/check_easignore.py` (под `PYTHONIOENCODING=utf-8` —
+иначе `UnicodeEncodeError` на «≈» в cp1251-консоли) — 308 файлов / 31.8 МБ в архиве, секретов
+не утекает.
 
 **Веб-регресс задачи 7 (27.08, dev-сервер `--clear`):**
 
