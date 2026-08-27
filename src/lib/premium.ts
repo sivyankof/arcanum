@@ -6,14 +6,28 @@ import type { CourseModule, Spread } from './content';
 import { doneToday, SESSION_MAX, type ReviewDay } from './review';
 
 export type PremiumSource = 'none' | 'dev' | 'store';
+/** Тариф подписки. Тип живёт здесь (чистый модуль), адаптер покупок его реэкспортирует. */
+export type PlanId = 'year' | 'month';
 export interface PremiumState {
   active: boolean;
   /** откуда право: магазин (53б), DEV-тумблер настроек, нет права */
   source: PremiumSource;
-  /** конец оплаченного периода, ISO (53б); у dev/none — null */
+  /** конец оплаченного периода ЛОКАЛЬНОЙ датой YYYY-MM-DD (formatFullDate другой формы не разбирает);
+   *  у dev/none — null */
   until: string | null;
+  /** тариф из магазина (53б); у dev/none — null */
+  plan: PlanId | null;
+  /** продление включено (магазин); у отменённой, но действующей — false; у dev/none — false */
+  willRenew: boolean;
 }
-export const PREMIUM_NONE: PremiumState = { active: false, source: 'none', until: null };
+export const PREMIUM_NONE: PremiumState = { active: false, source: 'none', until: null, plan: null, willRenew: false };
+
+/** Доливка сохранённого `premium` версий ≤ 11 (без plan/willRenew): persist сливает состояние
+ *  только по верхнему уровню ключей (ловушка 06а), поля внутри объекта дописываем руками. */
+export function mergePremium(saved: unknown): PremiumState {
+  if (typeof saved !== 'object' || saved === null) return PREMIUM_NONE;
+  return { ...PREMIUM_NONE, ...(saved as Partial<PremiumState>) };
+}
 
 /** Бесплатный тренажёр: не больше одной порции в день. Понятия «сессия» у повторения нет
  *  намеренно (спека 45), поэтому считаем карты, покинувшие очередь, — doneCount. */

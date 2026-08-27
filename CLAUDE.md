@@ -167,8 +167,8 @@
   «изучено» в справочнике (46/46б/46в), мастерство карты (49). **Локализация ES/PT закрыта (28)**: контент
   100 % на четырёх языках, UI — 4 языка, статусы es/pt `reviewed`; корпус карт 958/958 `reviewed`
   (ru/en после правок 28б/28в — условно, журнал `docs/canon-fixes-applied.md`).
-- **Цифры**: тестов 1849 в 47 сьютах, `tsc` чистый, `expo-doctor` 18/18; **persist version 11** (`SCHEMA_VERSION`) —
-  следующая задача, меняющая схему стора, поднимает до 12; схема контента — статус по языкам (28а).
+- **Цифры**: тестов 1917 в 52 сьютах, `tsc` чистый, `expo-doctor` 18/18; **persist version 12** (`SCHEMA_VERSION`) —
+  следующая задача, меняющая схему стора, поднимает до 13; схема контента — статус по языкам (28а).
 - **Задача 51 (лунные расклады) ЗАКРЫТА 22.08**: лайв-проверка Артёма на iPhone ✓ («всё отлично»), ветка
   `feat/51-moon-spreads` влита в main. Два лунных расклада (новолуние free / полнолуние premium) открыты
   сутки до и после события (календарными днями); DEV-строка настроек «Лунный расклад: открыть окно»
@@ -314,6 +314,17 @@
   и es `manual→guía` переименованы во ВСЕХ местах (`i18n.ts`, `phrases.json`,
   `site/privacy.html`, тексты магазина) — `Entrenador` оставлен как есть.
   ⚠️ Без запаса по лимиту: испанские ключевые 100/100 и pt-подзаголовок 30/30.
+- **Задача 53б (RevenueCat) — КОД СДЕЛАН 27.08, ждёт консоли и лайва**: ветка `feat/53b-revenuecat`,
+  persist **12** (`plan`/`willRenew` внутри `premium`, `mergePremium`). `src/lib/purchases.ts`
+  переписан на `react-native-purchases` (единственный импорт SDK), `purchases.web.ts` — заглушка,
+  чистые преобразования в `purchasesMap.ts`, `usePremiumSync` держит право в синхроне с магазином
+  (старт/возврат из фона/push SDK). Пейвол называет тариф и различает продление/истечение из магазина,
+  бейдж скидки считается из цен, четыре исхода покупки/восстановления — свои диалоги. Тестов
+  **1917 в 52 сьютах**, `tsc` чист. Веб-регресс 62 переснят на новом коде — 58 из 58 без правок
+  сценария, SDK в веб-бандле — 0 вхождений (веб и Expo Go остаются в состоянии «скоро»). Спека
+  и отчёт — `docs/specs/53b-revenuecat.md`. **Ждёт Артёма**: аккаунт RevenueCat, продукты
+  `premium`/`year`/`month` и цены в App Store Connect/Google Play, лицензионный тестер,
+  `eas env:set` для ключей → `production`-сборка → лайв 6в (сценарий в спеке) → слияние ветки.
 - **Открытые хвосты**: **28е ЗАКРЫТ ЦЕЛИКОМ 23.08** задачей 28р (раздел C разобран, 41 дефект
   исправлен); её хвосты — 28с (es/pt, Cowork) и задача 58 (картинка выдаёт ответ в 25 карточных
   вопросах, ждёт решения Артёма);
@@ -342,8 +353,12 @@
   закрытый тест активен с 27.08 15:50**;
   задача Артёма — 12+ человек в группе на 14 дней подряд (аудитория жены, r/AndroidClosedTesting),
   opt-in `https://play.google.com/apps/testing/app.arcanum.tarot`; лайв-проверка на устройстве через внутренний трек
-  — **61 ЗАКРЫТА 27.08** (лайв-проверка Артёма ✓; iOS-сборка — хвост 63б); (4) затем 53б (RevenueCat) → закрытый тест 12 × 14 дней (список email тестеров
-  собирать заранее; после RevenueCat переписать анкету «Безопасность данных»). Apple: веб-заявка подана 27.08, ждём активацию до 31.08 (затем 63б и iOS).
+  — **61 ЗАКРЫТА 27.08** (лайв-проверка Артёма ✓; iOS-сборка — хвост 63б); (4) **53б: код сделан
+  27.08** (ветка `feat/53b-revenuecat`, детали — бюллет «Задача 53б» выше) → **теперь консоль**:
+  аккаунт RevenueCat, продукты и цены, лицензионный тестер, `eas env:set` → `production`-сборка →
+  лайв 6в → слияние ветки → затем закрытый тест 12 × 14 дней (список email тестеров
+  собирать заранее; после RevenueCat переписать анкету «Безопасность данных» — чек-лист готов
+  в release-checklist). Apple: веб-заявка подана 27.08, ждём активацию до 31.08 (затем 63б и iOS).
   Эмулятор Android на машине Артёма уже настроен — рецепт в AGENTS.md.
 - Подробности по каждой задаче — `docs/changelog.md` и `docs/specs/`; уроки — `docs/lessons.md`.
 
@@ -365,8 +380,12 @@
   `reflection`, `settings`, `backup`/`backupIo`(.web), `pushPlan`/`pushBody`/`pushes`(.web), `moon`/
   `moonCalendar`, `srs`/`review` (+`reviewPrompt` — тексты флеш-карты, экран своей копии формулы держать не вправе)/`mastery`, `courseProgress`/`lesson`/`collection`, `cardSearch`, `spread`/
   `spreadLayout`/`composition`, `lightbox`, `birthArcana`, `feedback`, `appInfo` (версия + `SITE/PRIVACY/TERMS/SUPPORT_URL`), `revealQueue`/
-  `cardTransition`; хуки — `useAppActive`, `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
-  `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`.
+  `cardTransition`, `premium` (гейты `moduleLocked`/`lessonLocked`/`spreadLocked`, лимит тренажёра),
+  `purchases`/`purchases.web` (адаптер покупок — единственный файл с импортом `react-native-purchases`,
+  веб-заглушка без SDK), `purchasesMap` (чистые преобразования ответов магазина в типы приложения),
+  `purchasesEnv` (ключ SDK по платформе, признак Expo Go); хуки — `useAppActive`, `useScrollAwareBar`,
+  `useTabScrollToTop`, `useLeaveGuard`, `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`,
+  `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
   (`transparentHeader`), `webInput.ts` (`noOutline`).
 

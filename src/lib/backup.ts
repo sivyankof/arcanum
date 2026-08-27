@@ -32,8 +32,10 @@ const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на поряд�
  *  v8 → v9 (спека 36): `spreadsHistory` — ключ верхнего уровня, дефолт `[]` доливается сам.
  *  v9 → v10 (спека 45): `srs` и `reviewDay` — ключи верхнего уровня, дефолты доливаются сами.
  *  v10 → v11 (спека 53): doneCount ВНУТРИ reviewDay — слияние руками (mergeReviewDay) в migrate
- *  и тут; premium — ключ стора ВНЕ бэкапа. */
-export const SCHEMA_VERSION = 11;
+ *  и тут; premium — ключ стора ВНЕ бэкапа.
+ *  v11 → v12 (спека 53б): plan и willRenew ВНУТРИ premium — слияние руками (mergePremium) в migrate;
+ *  parseBackup не трогается — premium в файл бэкапа не входит (решение 4 спеки 53). */
+export const SCHEMA_VERSION = 12;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */

@@ -13,7 +13,7 @@ import {
 } from '../premium';
 import { REVIEW_DAY_DEFAULT, SESSION_MAX } from '../review';
 
-const ACTIVE: PremiumState = { active: true, source: 'dev', until: null };
+const ACTIVE: PremiumState = { ...PREMIUM_NONE, active: true, source: 'dev' };
 const mod = (id: string, free: boolean, lessons: string[]): CourseModule =>
   ({ id, free, title: { ru: id, en: id }, lessons: lessons.map((l) => ({ id: l, title: { ru: l, en: l }, cards: [] })) }) as unknown as CourseModule;
 const MODS = [mod('m1', true, ['m1l1', 'm1l2']), mod('m3', false, ['m3l1'])];

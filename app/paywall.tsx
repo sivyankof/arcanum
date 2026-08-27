@@ -1,12 +1,13 @@
-/** Экран Arcanum Premium (спеки 53, 62): три состояния — «активна» (панель + «Управлять»),
- *  «тарифы» (предложения магазина + CTA, 53б) и «скоро» (предложений нет: без SDK покупок
- *  в 53а/62 или магазин не ответил в 53б — панель без цифр и кнопки). Диалог «Пока недоступно»
- *  остаётся у «Управлять подпиской» и «Восстановить». Маршрут корневого стека под гардом
- *  онбординга (app/_layout.tsx). Композиция — макет v-paywall (состояния А/Б/В). */
+/** Экран Arcanum Premium (спеки 53, 62, 53б): три состояния — «активна» (панель с тарифом
+ *  и продлением + «Управлять»), «тарифы» (предложения магазина + CTA) и «скоро» (предложений
+ *  нет: без SDK покупок в 53а/62 или магазин не ответил в 53б — панель без цифр и кнопки).
+ *  У «Управлять подпиской» и «Восстановить» — свой диалог на ответ магазина (недоступно /
+ *  ошибка / подписки нет, DIALOG_TEXT). Маршрут корневого стека под гардом онбординга
+ *  (app/_layout.tsx). Композиция — макет v-paywall (состояния А/Б/В). */
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ConfirmDialog } from '../src/components/ConfirmDialog';
 import { CtaButton } from '../src/components/CtaButton';
@@ -21,7 +22,7 @@ import { PRIVACY_URL, TERMS_URL } from '../src/lib/appInfo';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
-import { getOffers, purchase, PURCHASES_AVAILABLE, restore, type Offer, type PlanId } from '../src/lib/purchases';
+import { getOffers, manageUrl, purchase, PURCHASES_AVAILABLE, restore, type Offer, type PlanId } from '../src/lib/purchases';
 import { useBackHaptic } from '../src/lib/useBackHaptic';
 import { useApp } from '../src/store/useApp';
 import { fonts, radius, spacing } from '../src/theme/theme';
@@ -35,6 +36,14 @@ const BACK_TITLES: Record<string, string> = {
   moon: 'moon.title',
   review: 'review.title',
 };
+
+/** Тексты диалога по ответу магазина (спека 53б): нет магазина / не ответил / подписки нет. */
+const DIALOG_TEXT = {
+  unavailable: { title: 'paywall.unavailableTitle', text: 'paywall.unavailableText' },
+  error: { title: 'paywall.errorTitle', text: 'paywall.errorText' },
+  none: { title: 'paywall.restoreNoneTitle', text: 'paywall.restoreNoneText' },
+} as const;
+type DialogKind = keyof typeof DIALOG_TEXT;
 
 export default function PaywallScreen() {
   const t = useTheme();
@@ -53,7 +62,14 @@ export default function PaywallScreen() {
   // ответа магазина (класс «нет данных» ≠ «нет совпадений», урок 46)
   const [offers, setOffers] = React.useState<Offer[] | null>(null);
   const [plan, setPlan] = React.useState<PlanId>('year');
-  const [unavailable, setUnavailable] = React.useState(false);
+  // один диалог на три ответа магазина; вид хранится отдельно от «открыт», чтобы текст не
+  // пропадал на кадре закрытия
+  const [dialog, setDialog] = React.useState<DialogKind>('unavailable');
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const showDialog = (kind: DialogKind) => {
+    setDialog(kind);
+    setDialogOpen(true);
+  };
   React.useEffect(() => {
     let alive = true;
     // реджект = «предложений нет»: без этого сбой магазина в 53б оставил бы offers === null
@@ -68,11 +84,12 @@ export default function PaywallScreen() {
 
   const chosen = offers?.find((o) => o.id === plan);
   const noOffers = offers !== null && offers.length === 0;
-  // один обработчик на все три действия: результат 'unavailable' — диалог, успех — право в стор
+  // один обработчик на покупку и восстановление: успех — право в стор; закрытый лист оплаты
+  // (cancelled) — тишина; unavailable / error / none — свой диалог (спека 53б, решение 10)
   const run = async (action: () => ReturnType<typeof purchase>) => {
     const r = await action();
     if (r.ok) setPremium(r.premium);
-    else if (r.reason === 'unavailable') setUnavailable(true);
+    else if (r.reason !== 'cancelled') showDialog(r.reason);
   };
 
   const benefits = ['b1', 'b2', 'b3', 'b4'] as const;
@@ -119,22 +136,38 @@ export default function PaywallScreen() {
 
         {premium.active ? (
           <FadeUp index={2} style={{ marginTop: 14 }}>
-            {/* `.pwstate` макета: панель ДВЕ строки, выравнивание по левому краю (флаг 6а-0 —
-                план рисовал одну центрированную строку с ключом paywall.activeLine, которого
-                больше нет). Тарифа («годовая»/«месячная») в PremiumState 53а нет — первая строка
-                нейтральная, тариф придёт из RevenueCat в 53б (решение Артёма 22.08) */}
             <View style={[st.panel, { backgroundColor: t.panel, borderColor: t.line }]}>
-              <Txt style={[st.panelTitle, { color: t.head }]}>{tr('paywall.activeTitle')}</Txt>
+              {/* тариф из магазина (53б); без плана (DEV) — нейтральный заголовок 53а */}
+              <Txt style={[st.panelTitle, { color: t.head }]}>
+                {premium.plan === 'year'
+                  ? tr('paywall.activeYear')
+                  : premium.plan === 'month'
+                    ? tr('paywall.activeMonth')
+                    : tr('paywall.activeTitle')}
+              </Txt>
+              {/* «Продлится» — только при включённом продлении; отменённая, но действующая —
+                  «Действует до» (иначе панель врала бы, спека 53б, решение 9). Развилка ведётся
+                  ПО ИСТОЧНИКУ, а не по наличию даты: `until: null` у `source: 'store'` — законное
+                  бессрочное промо-право из консоли магазина (toPremium/purchasesMap.ts), а не
+                  DEV-тумблер, — такому праву нейтральный «Подписка активна», а не «DEV-режим». */}
               <Txt style={[st.panelSub, { color: t.muted }]}>
-                {premium.source === 'store' && premium.until
-                  ? tr('paywall.activeUntil', { date: formatFullDate(premium.until, lang) })
-                  : tr('paywall.activeDev')}
+                {premium.source !== 'store'
+                  ? tr('paywall.activeDev')
+                  : premium.until
+                    ? tr(premium.willRenew ? 'paywall.activeUntil' : 'paywall.activeExpires', {
+                        date: formatFullDate(premium.until, lang),
+                      })
+                    : tr('paywall.activeTitle')}
               </Txt>
             </View>
             <PressableScale
               onPress={() => {
                 hapticTap();
-                setUnavailable(true); // 53б: deep link в подписки магазина
+                // страница подписок магазина (managementURL SDK или страница платформы);
+                // null — магазина нет (Expo Go) → прежний диалог «Пока недоступно»
+                manageUrl()
+                  .then((url) => (url ? Linking.openURL(url) : showDialog('unavailable')))
+                  .catch(() => showDialog('error'));
               }}
               style={[st.secondary, { borderColor: t.line }]}
             >
@@ -178,7 +211,9 @@ export default function PaywallScreen() {
                         )}
                         {/* solid: бейдж сидит на верхней рамке карточки — сквозь полупрозрачный
                             chipBg она просвечивала полосой (лайв-проверка 22.08) */}
-                        {o.discount && <PremiumBadge label={o.discount} style={st.planBadge} solid />}
+                        {o.discountPct !== undefined && (
+                          <PremiumBadge label={tr('paywall.discount', { pct: o.discountPct })} style={st.planBadge} solid />
+                        )}
                       </PressableScale>
                     );
                   })}
@@ -213,12 +248,12 @@ export default function PaywallScreen() {
       </ScrollView>
 
       <ConfirmDialog
-        visible={unavailable}
-        title={tr('paywall.unavailableTitle')}
-        message={tr('paywall.unavailableText')}
+        visible={dialogOpen}
+        title={tr(DIALOG_TEXT[dialog].title)}
+        message={tr(DIALOG_TEXT[dialog].text)}
         confirmLabel={tr('paywall.ok')}
         confirmTone="accent"
-        onConfirm={() => setUnavailable(false)}
+        onConfirm={() => setDialogOpen(false)}
       />
     </View>
   );
