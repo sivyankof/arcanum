@@ -50,9 +50,10 @@
       SKU `arcanum`, Full Access), версия 1.0 «Prepare for Submission». ⚠️ Короткое имя
       `Arcanum` в App Store **занято** («already being used») — поле Name в App Store Connect и
       есть витринное название, поэтому сразу вписано полное из `store-listing.md` (23/30).
-      [ ] iOS `preview`-сборка (`eas device:create` с UDID iPhone — раздел «Сборка»);
-      [ ] 63б (Apple-кадры iPhone 6.7"; `supportsTablet: false` — решение 27.08); [ ] продукты
-      подписки и App Store Connect API key для RevenueCat (раздел «Подписка»).
+      [x] iOS `preview`-сборка — **прошла 28.08** (`23daec5d`, раздел «Сборка»; лайв на iPhone
+      за Артёмом); [~] 63б — Apple-кадры сняты и закоммичены 28.08, **осталась заливка витрины
+      в App Store Connect**; [ ] продукты подписки и App Store Connect API key для RevenueCat
+      (раздел «Подписка»).
       ⚠️ Классификатор auto-режима сессии блокировал навигацию по URL на `developer.apple.com`
       и новые вкладки после принятия соглашений; в ручном режиме прошли клики, ввод текста
       и стрелки, но `form_input` и клавиша Enter остались под блоком — выпадающие списки
