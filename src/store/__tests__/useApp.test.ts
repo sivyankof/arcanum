@@ -12,6 +12,7 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SCHEMA_VERSION } from '../../lib/backup';
 import { birthArcanaId, NAME_MAX } from '../../lib/birthArcana';
 import { PREMIUM_NONE } from '../../lib/premium';
 import { useApp } from '../useApp';
@@ -26,6 +27,22 @@ describe('useApp — гидрация persist версии 11 (спека 53)', 
     const s = useApp.getState();
     expect(s.reviewDay).toEqual({ date: '2026-08-22', newCount: 4, doneCount: 0 });
     expect(s.premium).toEqual(PREMIUM_NONE);
+  });
+});
+
+describe('useApp — гидрация persist версии 12 (спека 53б)', () => {
+  it('файл версии 11 с premium без plan/willRenew получает plan: null, willRenew: false, остальное сохраняет', async () => {
+    await AsyncStorage.setItem(
+      'arcanum-app',
+      JSON.stringify({ state: { premium: { active: true, source: 'dev', until: null } }, version: 11 }),
+    );
+    await useApp.persist.rehydrate();
+    // toEqual НЕ прощает null против отсутствующего ключа — без mergePremium тест красный
+    expect(useApp.getState().premium).toEqual({ active: true, source: 'dev', until: null, plan: null, willRenew: false });
+  });
+
+  it('версия схемы поднята до 12', () => {
+    expect(SCHEMA_VERSION).toBe(12);
   });
 });
 

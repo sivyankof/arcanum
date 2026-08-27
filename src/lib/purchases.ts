@@ -14,10 +14,11 @@
  *  приложения, и форматировать число самим нельзя (у Hermes на телефоне урезанный ICU, урок hf-02);
  *  `discount` считается из фактической пары «год / месяц × 12», а не константой: ценовые уровни
  *  Apple и Google по странам непропорциональны. Тип `price: string` менять не придётся. */
-import type { PremiumState } from './premium';
+import type { PlanId, PremiumState } from './premium';
 
 export const PURCHASES_AVAILABLE = false;
-export type PlanId = 'year' | 'month';
+// пейвол продолжает импортировать PlanId из адаптера — тип живёт в premium.ts
+export type { PlanId };
 export interface Offer {
   id: PlanId;
   price: string;

@@ -307,8 +307,8 @@ describe('parseBackup — повторение (спека 45)', () => {
 });
 
 describe('версия 11 (спека 53)', () => {
-  it('SCHEMA_VERSION = 11', () => {
-    expect(SCHEMA_VERSION).toBe(11);
+  it('SCHEMA_VERSION = 12', () => {
+    expect(SCHEMA_VERSION).toBe(12);
   });
   it('файл версии 10 с reviewDay без doneCount принимается и получает doneCount: 0', () => {
     const file = buildBackup(VALID, 10, AT);

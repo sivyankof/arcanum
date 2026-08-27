@@ -11,7 +11,7 @@ import { deviceLocaleTags } from '../lib/deviceLang';
 import { AVAILABLE_LANGS } from '../lib/i18n';
 import { canEditEntry, HISTORY_MAX, normalizeNote, type DailyDraw, type Outcome } from '../lib/journal';
 import { detectLang, type Lang } from '../lib/lang';
-import { PREMIUM_NONE, type PremiumState } from '../lib/premium';
+import { mergePremium, PREMIUM_NONE, type PremiumState } from '../lib/premium';
 import { applyReview, mergeReviewDay, REVIEW_DAY_DEFAULT, type ReviewDay, type SrsMap } from '../lib/review';
 import { queueReveal } from '../lib/revealQueue';
 import { mergeSettings, type AppSettings } from '../lib/settings';
@@ -400,6 +400,7 @@ export const useApp = create<AppState>()(
       // версию и дописать слияние руками (ловушка 06а).
       // v10 → v11: doneCount ВНУТРИ reviewDay (спека 53) — слияние руками; premium — ключ
       // верхнего уровня вне бэкапа, дефолт доливается сам.
+      // v11 → v12: plan и willRenew ВНУТРИ premium (спека 53б) — слияние руками (mergePremium).
       // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
       // файлы из более новых версий приложения. Поднимать — там.
       version: SCHEMA_VERSION,
@@ -409,7 +410,12 @@ export const useApp = create<AppState>()(
       // то же самое, иначе новые настройки не появятся у уже существующих пользователей.
       migrate: (persistedState) => {
         const s = (persistedState ?? {}) as Partial<AppState>;
-        return { ...s, settings: mergeSettings(s.settings), reviewDay: mergeReviewDay(s.reviewDay) } as AppState;
+        return {
+          ...s,
+          settings: mergeSettings(s.settings),
+          reviewDay: mergeReviewDay(s.reviewDay),
+          premium: mergePremium(s.premium),
+        } as AppState;
       },
       // После гидрации назначаем личный сид карты дня, если он ещё не назначен (installSeed === 0):
       // срабатывает и на свежей установке, и у уже существующих пользователей после обновления.

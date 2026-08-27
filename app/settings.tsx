@@ -35,6 +35,7 @@ import { deviceLocaleTags } from '../src/lib/deviceLang';
 import { buildMailto, SUPPORT_EMAIL } from '../src/lib/feedback';
 import { AVAILABLE_LANGS, useLang } from '../src/lib/i18n';
 import { detectLang, LANG_NAMES } from '../src/lib/lang';
+import { PREMIUM_NONE } from '../src/lib/premium';
 import { planInputFromStore, planPushes } from '../src/lib/pushPlan';
 import { queueReveal } from '../src/lib/revealQueue';
 import { deckOrder, newToday, reviewSummary } from '../src/lib/review';
@@ -480,7 +481,7 @@ export default function SettingsScreen() {
                 value={premium.active ? 'DEV · ВКЛ' : 'DEV'}
                 // без права запертые/открытые состояния на лайв-проверке не увидеть; источник 'dev'
                 // отличает тумблер от магазина (53б), чтобы refreshEntitlement его не перетирал
-                onPress={() => setPremium({ active: !premium.active, source: premium.active ? 'none' : 'dev', until: null })}
+                onPress={() => setPremium(premium.active ? PREMIUM_NONE : { ...PREMIUM_NONE, active: true, source: 'dev' })}
               />
             </FadeUp>
             <FadeUp index={8}>
