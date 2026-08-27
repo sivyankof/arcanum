@@ -277,6 +277,15 @@ export const resources = {
         soonTitle: "Оформить подписку пока нельзя",
         soonSub: "Попробуйте позже — всё, что уже открыто, останется доступным",
         discount: "−{{pct}} %",
+        // 53б: панель «активна» называет тариф и различает продление/истечение (willRenew);
+        // error/none — ответы магазина (бейдж discount — из цен магазина, см. purchasesMap)
+        activeYear: "Годовая подписка",
+        activeMonth: "Месячная подписка",
+        activeExpires: "Действует до {{date}}",
+        errorTitle: "Не получилось",
+        errorText: "Магазин не ответил. Проверьте связь и попробуйте ещё раз.",
+        restoreNoneTitle: "Подписка не найдена",
+        restoreNoneText: "У этого аккаунта App Store / Google Play нет активной подписки Arcanum Premium.",
       },
       // обратная связь (спека 13): mailto-письмо с автоблоком диагностики.
       // «Записей истории: N» — форма без склонений, плюрализация не нужна (урок hf-02)
@@ -604,6 +613,13 @@ export const resources = {
         soonTitle: "Subscribing isn't available yet",
         soonSub: "Try again later — everything that's already open stays available",
         discount: "−{{pct}}%",
+        activeYear: "Annual subscription",
+        activeMonth: "Monthly subscription",
+        activeExpires: "Valid until {{date}}",
+        errorTitle: "Something went wrong",
+        errorText: "The store didn't respond. Check your connection and try again.",
+        restoreNoneTitle: "No subscription found",
+        restoreNoneText: "This App Store / Google Play account has no active Arcanum Premium subscription.",
       },
       feedback: {
         subject: "Arcanum: feedback",
@@ -977,6 +993,13 @@ export const resources = {
         soonTitle: "Aún no es posible suscribirse",
         soonSub: "Inténtalo más tarde: todo lo que ya está abierto seguirá disponible",
         discount: "−{{pct}} %",
+        activeYear: "Suscripción anual",
+        activeMonth: "Suscripción mensual",
+        activeExpires: "Válida hasta {{date}}",
+        errorTitle: "Algo salió mal",
+        errorText: "La tienda no respondió. Revisa tu conexión e inténtalo de nuevo.",
+        restoreNoneTitle: "No se encontró la suscripción",
+        restoreNoneText: "Esta cuenta de App Store / Google Play no tiene una suscripción activa de Arcanum Premium.",
       },
       feedback: {
         subject: "Arcanum: comentarios",
@@ -1360,6 +1383,13 @@ export const resources = {
         soonTitle: "Ainda não é possível assinar",
         soonSub: "Tente mais tarde: tudo o que já está aberto continua disponível",
         discount: "−{{pct}} %",
+        activeYear: "Assinatura anual",
+        activeMonth: "Assinatura mensal",
+        activeExpires: "Válida até {{date}}",
+        errorTitle: "Algo deu errado",
+        errorText: "A loja não respondeu. Verifique sua conexão e tente de novo.",
+        restoreNoneTitle: "Assinatura não encontrada",
+        restoreNoneText: "Esta conta da App Store / Google Play não tem uma assinatura ativa do Arcanum Premium.",
       },
       feedback: {
         subject: "Arcanum: sua opinião",
