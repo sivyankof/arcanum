@@ -319,5 +319,19 @@ Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do 
 | es-MX | Premium — Anual | Premium — Mensual | Todo el curso, tiradas, Entrenador ilimitado |
 | pt-BR | Premium — Anual | Premium — Mensal | Todo o curso, tiragens e Treino sem limites |
 
+**Google Play (Play Console → Подписки → `premium` → Сведения; залито 28.08).** Имя подписки
+(≤ 55) везде `Arcanum Premium`; преимущества (≤ 40 каждое, по три на язык; ru — по умолчанию,
+переводы en-US / es-419 / pt-BR); описание (≤ 200, покупателям не показывается) только для ru.
+
+| Язык | Преимущество 1 | Преимущество 2 | Преимущество 3 |
+|---|---|---|---|
+| ru | Курс целиком — 6 модулей, 32 урока | Тренажёр без дневного лимита | Все расклады, включая Кельтский крест |
+| en-US | Full course — 6 modules, 32 lessons | Trainer with no daily limit | All spreads, including Celtic Cross |
+| es-419 | Curso completo: 6 módulos, 32 lecciones | Entrenador sin límite diario | Todas las tiradas, incl. Cruz Celta |
+| pt-BR | Curso completo: 6 módulos, 32 lições | Treino sem limite diário | Todas as tiragens, incl. Cruz Celta |
+
+Описание (ru): `Premium: весь курс, все расклады, тренажёр без лимита`. Базовые планы: `year`
+(каждый год, $34.99) и `month` (каждый месяц, $5.99), цены по странам — автопересчёт Google.
+
 Заголовки этого раздела намеренно не в формате `### lang · поле (лимит)` — парсер
 `storeListing.test.ts` считает такие заголовки полями витрины и сверяет периметр языков.
