@@ -138,10 +138,17 @@
       `goog_APhZjlZlpcqJbfIOJmhZecvZPNa` → `eas env:set` (production + preview) и `.env`.
       ⚠️ Кнопки RevenueCat/Google Cloud/Play Console надёжнее нажимать через
       `browser_run_code_unsafe` (`page.evaluate` + JS `click()` по тексту): у MUI/Angular кнопок
-      `getByRole` часто ловит невидимый дубль. Осталось по Google: [ ] AAB с BILLING и ключом во
-      внутреннем треке (сборка №2 `production` запущена после `env:set`; №1 `f12b6183` без ключа —
-      не заливать), [ ] подписка `premium` с планами `year` P1Y $34.99 / `month` P1M $5.99 в Play
-      Console, [ ] лайв Android, [ ] RTDN (Pub/Sub) — рекомендация RevenueCat, не блокирует.
+      `getByRole` часто ловит невидимый дубль. **Сделано 28.08 вечером**: [x] AAB №2 `6cf48d53`
+      (с ключом; в бандле `goog_`, в манифесте BILLING — проверено zipfile до заливки) → выпуск 5
+      (1.0.0) во внутреннем треке (Артём); [x] подписка `premium` в Play Console: планы `year`
+      (каждый год, $34.99, обратная совместимость) и `month` (каждый месяц, $5.99) — оба АКТИВНЫ,
+      174 страны, льготный период 7 дней; сведения: имя `Arcanum Premium`, три преимущества
+      (курс целиком / все расклады / тренажёр без лимита), описание. ⚠️ Форма «Set prices»:
+      чекбокс «все страны» появляется только после кнопки «Set prices», поле цены принимает
+      запятую (`34,99`), «Активировать» — на странице плана после сохранения; поля преимуществ
+      и описания при добавлении переиндексируются — заполнять по списку `input, textarea` с
+      проверкой после reload. Осталось: [ ] лайв Android (эмулятор с Play Store, лицензионный
+      тестер), [ ] RTDN (Pub/Sub) — рекомендация RevenueCat, не блокирует.
       ⚠️ Форма платёжного профиля живёт в iframe `payments.google.com` (`merchant-sign-up-popupIframe`):
       кросс-доменный, `browser_evaluate` его не видит, снимок и клики — только через
       `iframe[name=…] >> internal:control=enter-frame >> …`; списки страны/типа — `[role=menuitem]`
