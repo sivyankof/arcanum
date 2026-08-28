@@ -163,7 +163,7 @@ EN после правок RU: Claude обновляет английский, �
 | перевёрнутая карта | carta invertida | carta invertida |
 | расклад | tirada | tiragem |
 | карта дня | carta del día | carta do dia |
-| серия (streak) | racha | sequência |
+| серия (streak) | racha | ofensiva (до 24.08 — sequência; решение 57н, заменено во всех местах) |
 | заморозка серии | congelación | congelamento |
 | колода | mazo | baralho |
 | повторение (SRS) | repaso | revisão |

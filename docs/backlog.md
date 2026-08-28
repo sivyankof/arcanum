@@ -1566,6 +1566,17 @@ Push — после настройки remote (отложено решением
       с якорем `id="deletion-<lang>"`, `lang.js` ведёт `#deletion` к якорю текущего языка, контракт
       `site.test.ts` — по абзацам + якорь в секции + строка `lang.js`. Затем Play Console → Data Safety →
       «Да» + `https://sivyankof.github.io/arcanum/privacy.html#deletion`. Спека — `docs/specs/67-data-deletion.md`.
+- [ ] **68 · Вычитка носителем хвостов es/pt — строки задач 53/54/59/62/53б/67 и страницы `site/`
+      (заведена 28.08 ~23:10, Cowork)** — после волны 28н (21.08) сессии написали ~25 UI-строк
+      (`ob.disclaimer`, `about.*` включая `dataText`/`termsText`, `settings.name`/`birthDate`
+      и диалог, `paywall.soon*`/`unavailableText`, `paywall.active*`/`error*`/`restoreNone*`)
+      и пять страниц `site/` на четырёх языках — es/pt в них не читал ни один носитель.
+      Промт готов: `docs/prompts/68-native-tails.md` (периметр таблицей, контракт `site.test.ts`
+      «страница = приложение» — правка абзаца обязана идти в два места, термины решений 24.08,
+      сдача — `docs/specs/68-changed-addresses.md` + зелёные `npm test`/`tsc`, ветка
+      `feat/68-native-tails`, патч). Не блокирует релиз: строки грамматически верны, вопрос —
+      калька. Попутно 28.08 исправлен глоссарий `content-guide.md`: pt «серия» = `ofensiva`
+      (стояло `sequência` с волны L-1, хотя термин переименован 24.08).
 - [ ] **66 · Аккаунт продавца Google Play: страна выплат (заведена 28.08)** — найдено в консольной
       части 53б: страница «Подписки» Play Console закрыта до платёжного профиля продавца, а профиль
       привязан к стране: **Беларусь — продавцом можно, Грузия — нет** (официальная таблица Google),
