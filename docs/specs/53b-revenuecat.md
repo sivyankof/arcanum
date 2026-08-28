@@ -66,7 +66,20 @@
 
 ### Артём — до кода (консоли, ~1 час)
 
-- [ ] RevenueCat: аккаунт → проект `Arcanum` → приложение Google Play (`app.arcanum.tarot`).
+- [~] **RevenueCat 28.08**: аккаунт Артёма, проект `Arcanum` (id `1478061f`); мастер «Let's get
+      Arcanum ready» пропущен («Go to dashboard») — он не даёт задать разные ID продуктов для Apple
+      и Google и ничего не сохраняет, пока не нажат Continue; всё заведено руками: entitlement
+      `premium` (`entlf5f5076e48`), приложение App Store `Arcanum (App Store)` (`appf047232a4a`,
+      bundle `app.arcanum.tarot`, In-App Purchase Key `67VRFKU59T` + Issuer ID загружены), продукты
+      `premium.year` / `premium.month` (App Store) привязаны к `premium`, offering `default`
+      (`ofrng701668146c`) с пакетами `$rc_annual` → `premium.year`, `$rc_monthly` → `premium.month`.
+      ⚠️ Файл `.p8` Playwright-браузер кладёт в `.playwright-mcp/` репозитория (папка в
+      `.gitignore`, `*.p8` в `.easignore`) под именем с ДЕФИСОМ `SubscriptionKey-XXXX.p8`, а форма
+      RevenueCat требует имя `SubscriptionKey_XXXX.p8` — переименовать; загрузка через
+      `browser_file_upload` работает только из корня репо/`.playwright-mcp`, копии оттуда удалены,
+      ключ хранится в `C:\Users\Artem\Documents\keys\` (вне репо). Play Store-приложение в
+      RevenueCat — после аккаунта продавца Google.
+- [ ] RevenueCat: приложение Google Play (`app.arcanum.tarot`).
       Service-account JSON для проверки покупок — по мастеру RevenueCat (Google Cloud → сервисный
       аккаунт → Play Console «Пользователи и разрешения» → финансовые данные + управление заказами).
       RTDN (Pub/Sub) — по тому же мастеру, рекомендуется, не блокирует.
