@@ -301,3 +301,23 @@ Este aplicativo é para aprendizado e entretenimento. Ele não prevê o futuro e
 Esta é a primeira versão do Arcanum.
 
 Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do dia com diário e reflexão à noite, dez tiragens, treinador de memória e calendário lunar. Funciona tudo offline, em quatro idiomas.
+
+---
+
+## Подписки (App Store Connect, залито 28.08; Play Console — те же тексты)
+
+Группа подписок `Premium`, отображаемое название группы на всех языках — `Arcanum Premium`,
+название приложения — из App Store. Лимиты Apple: название 35, описание 55 символов
+(форма ASC показывает счётчик; в справке значились 30/45 — форма шире). Описание у годовой и
+месячной одно и то же. Цены — решение 28.08: **$5.99/мес, $34.99/год** (США выставлены вручную,
+остальное — автопересчёт магазина от витрины Грузии).
+
+| Язык | `premium.year` | `premium.month` | Описание |
+|---|---|---|---|
+| ru | Premium — год | Premium — месяц | Весь курс, все расклады, тренажёр без лимита |
+| en-US | Premium — Yearly | Premium — Monthly | Full course, all spreads, unlimited trainer |
+| es-MX | Premium — Anual | Premium — Mensual | Todo el curso, tiradas, Entrenador ilimitado |
+| pt-BR | Premium — Anual | Premium — Mensal | Todo o curso, tiragens e Treino sem limites |
+
+Заголовки этого раздела намеренно не в формате `### lang · поле (лимит)` — парсер
+`storeListing.test.ts` считает такие заголовки полями витрины и сверяет периметр языков.
