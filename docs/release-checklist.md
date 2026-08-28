@@ -456,6 +456,12 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       Конфиденциальность и безопасность → Режим разработчика → перезагрузка). Пейвол показывает
       «пока нельзя» — ожидаемо: в `preview` нет ключа RevenueCat и продуктов в App Store Connect
       (консольная часть 53б).
+      **Вторая iOS `preview`-сборка — 28.08, с ключом RevenueCat** (`EXPO_PUBLIC_RC_IOS_KEY` из
+      среды `preview` EAS): id `a320c6dd`, запущена из сессии `--non-interactive` без единого
+      вопроса, страница сборки
+      `https://expo.dev/accounts/art9/projects/arcanum/builds/a320c6dd-33a7-42c3-96c2-12e00d5ab178`.
+      Для живой проверки покупок нужен **Sandbox-тестер** (ASC → Пользователи и доступ → Sandbox),
+      сценарий — конец спеки 53б.
       **iPhone Артёма зарегистрирован 28.08** (`eas device:create` → Website →
       QR → профиль на телефоне; UDID `00008120-00067D900C70201E`, команда `52QV87WW73`).
       ⚠️ `eas device:create` и первая iOS-сборка — только в ОТДЕЛЬНОМ окне PowerShell: им нужен
