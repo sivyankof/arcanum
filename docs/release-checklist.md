@@ -123,9 +123,14 @@
       «Подписки» открыты, но ждут AAB с разрешением BILLING (сборка запущена). Выплаты: форма
       принимает только белорусский USD-счёт — Bank of Georgia отвергнут по SWIFT и IBAN, Wise не
       пройдёт; выручка копится у Google до появления белорусского счёта (хвост 66).
-      [ ] AAB с покупками во внутреннем треке, [ ] подписка `premium` (`year`/`month`) в Play
-      Console, [ ] лицензионный тестер, [ ] service-account + Play Store-приложение в RevenueCat,
-      [ ] `EXPO_PUBLIC_RC_ANDROID_KEY`, [ ] лайв Android.
+      [ ] AAB с покупками и ключом во внутреннем треке (сборка №2 запущена; №1 `f12b6183` — без
+      ключа, не заливать), [ ] подписка `premium` (`year` P1Y $34.99 / `month` P1M $5.99) в Play
+      Console, [x] лицензионный тестер (список «Внутренние тестировщики»), [x] service-account
+      `revenuecat@arcanum-play.iam.gserviceaccount.com` (проект GCP `arcanum-play`, ключ в
+      `Documents\keys`) + Play Store-приложение в RevenueCat, продукты, offering,
+      [x] `EXPO_PUBLIC_RC_ANDROID_KEY` в EAS и `.env`, [ ] лайв Android. Выплаты: карта Сбер Банка
+      РБ не годится — банк в SDN США и под санкциями ЕС, долларовый SWIFT до него не доходит;
+      нужен несанкционный белорусский банк (задача 66).
       Пакеты в RevenueCat — `year`/`month`, entitlement — `premium` (те же имена, что в коде);
       тестовые покупки — в Sandbox (Apple) / лицензионный тестер (Google); «Восстановить покупки»
       проверено на втором устройстве. ⚠️ Apple 3.1.2: на экране покупки

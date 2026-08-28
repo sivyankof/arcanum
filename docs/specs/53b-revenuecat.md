@@ -122,8 +122,26 @@
       ⚠️ Выплаты: форма способа оплаты для белорусского профиля принимает ТОЛЬКО белорусский
       USD-счёт — Bank of Georgia (`BAGAGE22` / `GE…`) отвергнут на клиенте «Недопустимые данные»
       по SWIFT и IBAN; Wise (US/EU-реквизиты) не пройдёт так же. Продавать можно, выручка копится
-      у Google; вывод — хвост задачи 66. Дальше по Google: подписка `premium` (`year`/`month`),
-      лицензионный тестер, Play Store-приложение в RevenueCat (service-account JSON), ключ `goog_…`.
+      у Google; вывод — хвост задачи 66. **Сделано 28.08 вечером (решение Артёма «доводим»)**:
+      [x] лицензионный тестер — список «Внутренние тестировщики» (аккаунт Артёма) в Настройки →
+      Тестирование лицензий (сохранение требует подтверждения в модалке «Эти изменения затронут
+      все ваши приложения»); [x] Google Cloud: проект `arcanum-play`, включён Google Play Android
+      Developer API, сервисный аккаунт `revenuecat@arcanum-play.iam.gserviceaccount.com`, JSON-ключ
+      сохранён в `C:\Users\Artem\Documents\keys\arcanum-play-revenuecat.json` (через
+      `download.saveAs` в `browser_run_code_unsafe` — минуя `.playwright-mcp`; копия оттуда удалена);
+      [x] Play Console → Пользователи и разрешения: сервисный аккаунт приглашён с правами
+      «Просмотр информации о приложении», «Просмотр финансовых данных…», «Управление заказами и
+      подписками» — статус «Активно» сразу; [x] RevenueCat: приложение `Arcanum (Play Store)`
+      (`app58f9b33ee5`, пакет `app.arcanum.tarot`, JSON загружен `setInputFiles` из `Documents\keys`),
+      продукты `premium:year` (base plan `year`, backwards compatible) и `premium:month` (`month`)
+      привязаны к `premium` и к пакетам `$rc_annual`/`$rc_monthly` (Play-колонка); ключ
+      `goog_APhZjlZlpcqJbfIOJmhZecvZPNa` → `eas env:set` (production + preview) и `.env`.
+      ⚠️ Кнопки RevenueCat/Google Cloud/Play Console надёжнее нажимать через
+      `browser_run_code_unsafe` (`page.evaluate` + JS `click()` по тексту): у MUI/Angular кнопок
+      `getByRole` часто ловит невидимый дубль. Осталось по Google: [ ] AAB с BILLING и ключом во
+      внутреннем треке (сборка №2 `production` запущена после `env:set`; №1 `f12b6183` без ключа —
+      не заливать), [ ] подписка `premium` с планами `year` P1Y $34.99 / `month` P1M $5.99 в Play
+      Console, [ ] лайв Android, [ ] RTDN (Pub/Sub) — рекомендация RevenueCat, не блокирует.
       ⚠️ Форма платёжного профиля живёт в iframe `payments.google.com` (`merchant-sign-up-popupIframe`):
       кросс-доменный, `browser_evaluate` его не видит, снимок и клики — только через
       `iframe[name=…] >> internal:control=enter-frame >> …`; списки страны/типа — `[role=menuitem]`
