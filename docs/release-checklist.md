@@ -107,11 +107,18 @@
       адаптер `src/lib/purchases.ts` на `react-native-purchases` за интерфейсом задачи 53
       (единственный файл с импортом SDK), ключи `EXPO_PUBLIC_RC_ANDROID_KEY`/`EXPO_PUBLIC_RC_IOS_KEY`
       через `eas env:set` (команда — AGENTS.md), без dev-client, `usePremiumSync` синхронизирует
-      право при старте/возврате из фона/push SDK. **Осталось — консоль (Артём):** [ ] аккаунт
-      RevenueCat + связка service-account с Google Play, [ ] продукты `premium` с пакетами
-      `year`/`month` + цены в App Store Connect и Google Play Console, [ ] лицензионный тестер
-      Google Play, [ ] `eas env:set` для `production` и `preview` (ANDROID; iOS — после активации
-      аккаунта Apple), [ ] `production`-сборка с ключом → лайв 6в по сценарию спеки 53б.
+      право при старте/возврате из фона/push SDK. **Консоль 28.08 — Apple ГОТОВ:** [x] аккаунт
+      RevenueCat (проект `Arcanum`, entitlement `premium`, App Store-приложение с `.p8`, продукты,
+      offering `default`), [x] продукты `premium.year`/`premium.month` + цены в App Store Connect
+      ($5.99 / $34.99, все страны, без триала), [x] Sandbox-тестер Apple, [x] `eas env:set`
+      `EXPO_PUBLIC_RC_IOS_KEY` (production + preview), [x] iOS `preview`-сборка с ключом `a320c6dd`
+      (пейвол показывает цены магазина — лайв Артёма), [ ] лайв покупок Sandbox-тестером по сценарию
+      спеки 53б. **Google — ОТЛОЖЕН, задача 66** (решение Артёма 28.08): продавцом Google
+      пускает только Беларусь, выплаты — только на счёт в стране профиля, белорусского счёта нет;
+      форма платёжного профиля не отправлена (страна и тип необратимы). [ ] service-account,
+      [ ] подписка `premium` (`year`/`month`) в Play Console, [ ] лицензионный тестер,
+      [ ] `EXPO_PUBLIC_RC_ANDROID_KEY` — всё после 66; до этого Android живёт с пейволом
+      «пока нельзя» (62).
       Пакеты в RevenueCat — `year`/`month`, entitlement — `premium` (те же имена, что в коде);
       тестовые покупки — в Sandbox (Apple) / лицензионный тестер (Google); «Восстановить покупки»
       проверено на втором устройстве. ⚠️ Apple 3.1.2: на экране покупки
@@ -461,7 +468,13 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       вопроса, страница сборки
       `https://expo.dev/accounts/art9/projects/arcanum/builds/a320c6dd-33a7-42c3-96c2-12e00d5ab178`.
       Для живой проверки покупок нужен **Sandbox-тестер** (ASC → Пользователи и доступ → Sandbox),
-      сценарий — конец спеки 53б.
+      сценарий — конец спеки 53б. **Sandbox-тестер заведён 28.08** (Gmail Артёма с суффиксом
+      `+sandbox`, страна Грузия; логин и пароль — `Documents\keys\apple-sandbox-tester.txt`, в репо
+      их нет). ⚠️ Адрес тестера не может быть Apple ID или его псевдонимом: `@icloud.com`-псевдоним
+      отклонён («already have an Apple Account»), `+sandbox@icloud.com` — тоже (для iCloud Apple
+      проверяет имя ящика, плюс-адреса не проходят); Gmail с плюсом принят, подтверждать почту
+      тестеру не нужно. Аккаунт жены как тестер не годится — это реальный Apple ID. На iPhone:
+      Настройки → App Store → Sandbox-аккаунт → войти тестером, только потом покупать в сборке.
       **iPhone Артёма зарегистрирован 28.08** (`eas device:create` → Website →
       QR → профиль на телефоне; UDID `00008120-00067D900C70201E`, команда `52QV87WW73`).
       ⚠️ `eas device:create` и первая iOS-сборка — только в ОТДЕЛЬНОМ окне PowerShell: им нужен
