@@ -75,8 +75,24 @@
     }
   }
 
+  // Якорь без языка (#deletion) ведёт к элементу текущего языка (#deletion-ru): id на странице
+  // обязан быть уникальным, поэтому секция каждого языка несёт свой, а к элементу внутри
+  // скрытой (hidden) секции браузер сам не скроллит — переход делаем после выбора языка.
+  function jumpToAnchor(lang) {
+    var hash = window.location.hash.slice(1);
+    if (!hash) {
+      return;
+    }
+
+    var target = document.getElementById(hash + '-' + lang);
+    if (target) {
+      target.scrollIntoView();
+    }
+  }
+
   var lang = detectLang();
   showLang(lang);
   highlightSwitch(lang);
   carryLang(lang);
+  jumpToAnchor(lang);
 })();

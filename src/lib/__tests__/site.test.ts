@@ -72,8 +72,24 @@ describe('textOf/norm — логика проверена на инлайн-фи
 describe.each(LANGS)('%s: контракт «страница = приложение»', (lang) => {
   const about = resources[lang].translation.about;
 
-  it('privacy.html содержит about.dataText дословно', () => {
-    expect(textOf(read('privacy.html'), lang)).toContain(norm(about.dataText));
+  /** По абзацам, а не одной строкой (спека 67): в приложении `dataText` — один текст, на
+   *  странице абзацы 1–3 лежат в §2 «Какие данные», а абзац про удаление данных RevenueCat —
+   *  в §8 «Ваши права». Дословность каждого абзаца контракт держит, порядок на странице — нет. */
+  it('privacy.html содержит каждый абзац about.dataText дословно', () => {
+    const page = textOf(read('privacy.html'), lang);
+    const paragraphs = about.dataText.split('\n\n');
+    expect(paragraphs.length).toBeGreaterThanOrEqual(4);
+    for (const paragraph of paragraphs) expect(page).toContain(norm(paragraph));
+  });
+
+  /** Якорь инструкции удаления (URL для Data Safety — `privacy.html#deletion`): `id` на
+   *  странице уникален, поэтому у каждой языковой секции свой `deletion-<lang>`, и стоять он
+   *  обязан ВНУТРИ секции своего языка — `lang.js` ведёт `#deletion` к `#deletion-<lang>`. */
+  it('privacy.html: якорь deletion-<lang> стоит внутри секции языка', () => {
+    const html = read('privacy.html');
+    const re = new RegExp(`<section[^>]*data-lang="${lang}"[^>]*>([\\s\\S]*?)</section>`, 'i');
+    const section = html.match(re)?.[1] ?? '';
+    expect(section).toContain(`id="deletion-${lang}"`);
   });
 
   it('terms.html содержит about.termsText дословно', () => {
@@ -116,6 +132,13 @@ it('index.html ссылается на все три страницы', () => {
   expect(html).toContain('privacy.html');
   expect(html).toContain('terms.html');
   expect(html).toContain('support.html');
+});
+
+/** Контракт по исходнику (спека 67): секции чужих языков `lang.js` прячет атрибутом `hidden`,
+ *  а к скрытому элементу браузер не скроллит — поэтому переход `#deletion` → `#deletion-<lang>`
+ *  обязан делать сам скрипт, и без этой строки ссылка из Data Safety откроет верх страницы. */
+it('lang.js ведёт якорь без языка к якорю текущего языка', () => {
+  expect(read('lang.js')).toContain("getElementById(hash + '-' + lang)");
 });
 
 describe('нет внешних ресурсов в <link>/<script> (шрифты системные, CDN нет)', () => {
