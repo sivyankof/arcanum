@@ -480,7 +480,12 @@ package `app.arcanum.tarot`, язык по умолчанию ru-RU, беспл�
       вопроса, страница сборки
       `https://expo.dev/accounts/art9/projects/arcanum/builds/a320c6dd-33a7-42c3-96c2-12e00d5ab178`.
       Для живой проверки покупок нужен **Sandbox-тестер** (ASC → Пользователи и доступ → Sandbox),
-      сценарий — конец спеки 53б. **Sandbox-тестер заведён 28.08** (Gmail Артёма с суффиксом
+      сценарий — конец спеки 53б.
+      **Android `production` 28.08 вечером — две сборки**: №1 `f12b6183` (без ключа RevenueCat,
+      запущена до `env:set` — НЕ заливать) и №2 `6cf48d53` с `EXPO_PUBLIC_RC_ANDROID_KEY` —
+      артефакт `https://expo.dev/artifacts/eas/gksH-V_koDt-D6JzquZ7Js65z6PhNmzM7p4VyqbC98s.aab`,
+      для внутреннего трека (AAB кладёт Артём руками; до заливки проверены `goog_` в
+      `index.android.bundle` и `com.android.vending.BILLING` в манифесте — рецепт AGENTS.md). **Sandbox-тестер заведён 28.08** (Gmail Артёма с суффиксом
       `+sandbox`, страна Грузия; логин и пароль — `Documents\keys\apple-sandbox-tester.txt`, в репо
       их нет). ⚠️ Адрес тестера не может быть Apple ID или его псевдонимом: `@icloud.com`-псевдоним
       отклонён («already have an Apple Account»), `+sandbox@icloud.com` — тоже (для iCloud Apple
