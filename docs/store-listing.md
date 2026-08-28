@@ -333,5 +333,18 @@ Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do 
 Описание (ru): `Premium: весь курс, все расклады, тренажёр без лимита`. Базовые планы: `year`
 (каждый год, $34.99) и `month` (каждый месяц, $5.99), цены по странам — автопересчёт Google.
 
+**Информация для проверки подписок (App Store Connect, залито 28.08 вечером):** у `premium.year`
+и `premium.month` — кадр пейвола с iPhone Артёма (1290×2796, обе цены магазина, «Восстановить
+покупки» на экране) и одна заметка ревьюеру (en, 483 симв.; Sandbox-тестер не упоминается —
+у ревью свой):
+
+```
+Screenshot shows the in-app subscription screen (Settings -> Arcanum Premium; it also opens from
+any locked course module or spread). Both plans (yearly and monthly) are listed with store prices,
+and 'Restore Purchases' is on the same screen. Premium unlocks course modules 3-6, the remaining
+spreads and unlimited trainer sessions; the daily card, the full 78-card reference and the journal
+stay free. Purchases go through StoreKit (RevenueCat SDK); no account or sign-in is needed.
+```
+
 Заголовки этого раздела намеренно не в формате `### lang · поле (лимит)` — парсер
 `storeListing.test.ts` считает такие заголовки полями витрины и сверяет периметр языков.
