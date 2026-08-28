@@ -35,7 +35,7 @@ const MONTH_EUR = product({ price: 4.99, priceString: '4,99 €', currencyCode: 
 const YEAR_BRL = product({ identifier: 'premium:year', price: 89.9, priceString: 'R$ 89,90', currencyCode: 'BRL', pricePerMonth: 7.49, pricePerMonthString: 'R$ 7,49' });
 const MONTH_BRL = product({ price: 12.9, priceString: 'R$ 12,90', currencyCode: 'BRL', pricePerMonth: 12.9, pricePerMonthString: 'R$ 12,90' });
 
-const info = (e: { productIdentifier: string; expirationDate: string | null; willRenew: boolean } | null): CustomerInfoLike => ({
+const info = (e: { productIdentifier: string; productPlanIdentifier?: string | null; expirationDate: string | null; willRenew: boolean } | null): CustomerInfoLike => ({
   entitlements: { active: e ? { premium: e } : {} },
 });
 
@@ -120,6 +120,13 @@ describe('toPremium', () => {
     expect(toPremium(info({ productIdentifier: 'premium:month', expirationDate: '2026-09-27T12:00:00Z', willRenew: false }))).toEqual({
       active: true, source: 'store', until: '2026-09-27', plan: 'month', willRenew: false,
     });
+  });
+  it('Android: id подписки в productIdentifier, план — в productPlanIdentifier (лайв 28.08)', () => {
+    expect(toPremium(info({ productIdentifier: 'premium', productPlanIdentifier: 'month', expirationDate: '2026-09-27T12:00:00Z', willRenew: true })).plan).toBe('month');
+    expect(toPremium(info({ productIdentifier: 'premium', productPlanIdentifier: 'year', expirationDate: '2027-09-22T12:00:00Z', willRenew: true })).plan).toBe('year');
+  });
+  it('iOS: productPlanIdentifier null — план по productIdentifier', () => {
+    expect(toPremium(info({ productIdentifier: 'premium.month', productPlanIdentifier: null, expirationDate: '2026-09-27T12:00:00Z', willRenew: true })).plan).toBe('month');
   });
   it('права нет → PREMIUM_NONE (магазин ответил: не куплено)', () => {
     expect(toPremium(info(null))).toBe(PREMIUM_NONE);

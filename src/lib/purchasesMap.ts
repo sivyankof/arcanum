@@ -38,6 +38,9 @@ export interface OfferingLike {
 }
 export interface EntitlementLike {
   productIdentifier: string;
+  /** Базовый план Google (`month`/`year`): на Android SDK кладёт в productIdentifier только id
+   *  подписки (`premium`), а план — сюда; на iOS и у потребляемых — null (док SDK). */
+  productPlanIdentifier?: string | null;
   expirationDate: string | null;
   willRenew: boolean;
 }
@@ -97,7 +100,8 @@ export function toPremium(info: CustomerInfoLike): PremiumState {
     active: true,
     source: 'store',
     until: e.expirationDate ? localDateISO(new Date(e.expirationDate)) : null,
-    plan: planOf(e.productIdentifier),
+    // Android: `premium` + `month` → `premium:month` (лайв 28.08: без плана панель теряла название тарифа)
+    plan: planOf([e.productIdentifier, e.productPlanIdentifier].filter(Boolean).join(':')),
     willRenew: e.willRenew,
   };
 }
