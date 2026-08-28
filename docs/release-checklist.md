@@ -134,7 +134,9 @@
       [x] лицензионный тестер (список «Внутренние тестировщики»), [x] service-account
       `revenuecat@arcanum-play.iam.gserviceaccount.com` (проект GCP `arcanum-play`, ключ в
       `Documents\keys`) + Play Store-приложение в RevenueCat, продукты, offering,
-      [x] `EXPO_PUBLIC_RC_ANDROID_KEY` в EAS и `.env`, [ ] лайв Android. Выплаты: карта Сбер Банка
+      [x] `EXPO_PUBLIC_RC_ANDROID_KEY` в EAS и `.env`, [x] переводы подписки en-US/es-419/pt-BR,
+      [ ] лайв Android на эмуляторе (ждёт распространения выпуска 5 — на 16:45 магазин отдавал
+      versionCode 3; рецепт — `docs/prompts/next-session-29-08.md`). Выплаты: карта Сбер Банка
       РБ не годится — банк в SDN США и под санкциями ЕС, долларовый SWIFT до него не доходит;
       нужен несанкционный белорусский банк (задача 66).
       Пакеты в RevenueCat — `year`/`month`, entitlement — `premium` (те же имена, что в коде);
