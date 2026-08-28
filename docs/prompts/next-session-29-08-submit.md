@@ -39,17 +39,17 @@ Siviankou`), «Информация о приложении» (название/
 
 ## Главная задача — релизная iOS-сборка и сабмит
 
-1. **Сборка `production` для iOS — только интерактивно** (28.08 `--non-interactive` упал:
-   «Distribution Certificate is not validated for non-interactive builds»). Артём в строке сессии:
-   `! npx eas-cli@latest build --platform ios --profile production` — EAS создаст distribution
-   certificate и App Store provisioning profile через Apple ID (вопросы «Generate a new
-   certificate?» → Yes). buildNumber уже инкрементирован до 2 неудачной попыткой — станет 3, это
-   нормально (`appVersionSource: remote`). Сборка идёт ~15–30 мин; `--no-wait` и ждать по ссылке.
-2. **Android — новая сборка тоже нужна**: исправление `planOf` (`5a16379`) не попало в AAB №2
-   (versionCode 5). `npx eas-cli@latest build --platform android --profile production
-   --non-interactive --no-wait` → AAB versionCode 6 → Артём кладёт руками во внутренний трек
-   (и в закрытый Alpha) → на эмуляторе проверить, что панель пейвола называет «Месячная/Годовая
-   подписка». Порядок ставим/удаляем — рецепт в AGENTS.md.
+1. **Обе сборки уже запущены 28.08 поздно вечером** — сначала проверить их исход:
+   iOS `production` **`9d27418f-558c-47a8-a575-65c692c6c7e7`** (buildNumber 3; Артём запускал
+   интерактивно — сертификат `98PR42H89R`, App Store provisioning profile `Y3B4UW7278`, Apple Push
+   Key; интерактив нужен был один раз, дальше `--non-interactive` работает) и Android
+   `production` **`ca680d94-64ad-4829-aaf5-5352657ca548`** (versionCode 6, с правкой `planOf`
+   `5a16379`). `npx eas-cli@latest build:list --limit 3` или ссылки
+   `expo.dev/accounts/art9/projects/arcanum/builds/<id>`. Если iOS упала — читать лог, чинить,
+   перезапускать уже без интерактива.
+2. **Android AAB versionCode 6** → Артём кладёт руками во внутренний трек (и в закрытый Alpha)
+   → на эмуляторе проверить, что панель пейвола называет «Месячная/Годовая подписка»
+   (рецепт установки из магазина — AGENTS.md; магазин раздаёт выпуск ~час).
 3. **Сабмит iOS** — ТОЛЬКО с явного «ок» Артёма: `npx eas-cli@latest submit --platform ios
    --profile production --latest` (ключ из `eas.json`), затем в ASC → версия 1.0 → выбрать сборку
    → «Добавить для проверки» ВМЕСТЕ с группой подписок `Premium` (первая подписка уходит только с

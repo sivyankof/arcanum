@@ -73,9 +73,13 @@
       «Идентификаторы → ID пользователя» (Функциональность), не связаны с личностью, без
       отслеживания; [x] **ASC API key `V55RK5Z8R9`** («EAS Submit», App Manager, Issuer
       `e719c52a-3121-47eb-8d2a-768a1843d1c0`, `.p8` в `Documents\keys`, доступ к API одобрен
-      мгновенно) → submit-профиль в `eas.json`; [ ] **релизная iOS-сборка** — `--non-interactive`
-      падает («Distribution Certificate is not validated for non-interactive builds»), запускать
-      интерактивно Артёму (`! npx eas-cli@latest build --platform ios --profile production`);
+      мгновенно) → submit-профиль в `eas.json`; [~] **релизная iOS-сборка ЗАПУЩЕНА 28.08 поздно
+      вечером** — id `9d27418f-558c-47a8-a575-65c692c6c7e7`, buildNumber 3 (`--non-interactive`
+      падал: «Distribution Certificate is not validated for non-interactive builds» — Артём запустил
+      интерактивно: вход Apple ID, сертификат `98PR42H89R` переиспользован, создан App Store
+      provisioning profile `Y3B4UW7278` и Apple Push Key; пароль Apple лёг в локальный Keychain
+      EAS, на серверах не хранится); [~] **Android-сборка versionCode 6** с правкой `5a16379` —
+      id `ca680d94-64ad-4829-aaf5-5352657ca548`, AAB кладёт Артём во внутренний трек руками;
       [ ] сабмит — с явного «ок» Артёма, вместе с группой подписок; [~] продукты подписки — **созданы 28.08** (группа `Premium`
       id `22341582`; `premium.year` Apple ID `6806201993`, 1 год, **34,99 $**; `premium.month`
       Apple ID `6806205400`, 1 месяц, **5,99 $**; статус «Подготовка к отправке» — первая
