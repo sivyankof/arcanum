@@ -101,6 +101,17 @@
   Чинить — только новой сборкой; Apple этого не назвал, оставить до 1.0.1 (в i18n сделать
   строку платформо-зависимой).
 
+### Сборка для видео — решено 29.08: ad hoc `a320c6dd`
+
+TestFlight не сработал: группа `Internal` (тестер `morfiy0393@gmail.com`, сборка 3 → «Testing»)
+создана, но письмо не пришло и в TestFlight на iPhone под тем же Apple ID приложение не появилось
+(статус тестера «No Builds Available», кнопки «Resend Invite» у внутренних тестеров нет).
+Решение Артёма — запасной вариант: ad hoc `preview` `a320c6dd-33a7-42c3-96c2-12e00d5ab178`
+(28.08, с ключом RevenueCat), страница `https://expo.dev/accounts/art9/projects/arcanum/builds/<id>`
+→ «Install» в Safari; покупка — Sandbox-тестером. В Notes пункт 2 — только «ad hoc distribution»
+(«and TestFlight» убрано, факт должен совпадать с видео). Разобраться с TestFlight — к закрытой
+бете (release-checklist «Запуск»), не сейчас.
+
 ## Что осталось Артёму (по порядку)
 
 1. Записать видео по сценарию ниже (файл `.mp4`/`.mov`, 3–6 минут).
