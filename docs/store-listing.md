@@ -50,21 +50,35 @@ Apple индексирует название и подзаголовок и т�
 
 ## Заметки для ревьюера (en, поле App Review Notes)
 
+Версия 29.08 (задача 69): переписаны под восемь пунктов запроса App Review «Guideline 2.1 —
+Information Needed» и залиты в ASC (3933 символа при лимите 4000; лимит — по счётчику поля,
+`storeListing.test.ts` этот блок не парсит). Тот же текст — тело ответа в треде заявки
+(`docs/specs/69-apple-review-reply.md`). Меняя факты (устройства, цены, что свободно), править
+здесь, потом копировать в ASC.
+
 ```
-Arcanum is an offline tarot learning app. No account or sign-up is required and no user data
-leaves the device: progress, journal entries and settings are stored locally.
+Arcanum is an offline tarot learning app: a course, a 78-card reference, a daily card with a journal, spreads, flashcards and a moon calendar. No account or sign-up; nothing is sent to a server: progress, journal and settings live on the device only.
 
-Free content: daily card with its meaning, the full 78-card reference (all sections), unlimited
-journal, course modules 1-2, two spreads (Three Cards, New Moon), one flashcard session per day.
+1. SCREEN RECORDING. Attached to the App Review thread (physical iPhone). It starts with launching the app and shows onboarding, the daily card, a lesson with its quiz, a locked module opening the paywall, the subscription purchase (plan title, duration, price, Terms of Use and Privacy Policy links), the unlocked content, Restore Purchases, the reference, spreads, flashcards and moon calendar. The only system prompt is the notification permission. The renewal date shown equals the purchase date because Sandbox compresses periods.
 
-Premium subscription unlocks course modules 3-6, the remaining spreads and unlimited flashcard
-sessions. Subscriptions are handled by RevenueCat over StoreKit; restore is available on the
-paywall screen.
+2. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max, both on the latest public iOS release (iOS 26); builds installed via ad hoc distribution and TestFlight, purchases tested with a Sandbox tester account.
 
-The app is educational and entertainment content about tarot symbolism. It does not claim to
-predict the future and does not give medical, legal or financial advice; a disclaimer appears
-during onboarding and on the About screen.
+3. FUNCTIONS AND AUDIENCE. Arcanum teaches how to read tarot step by step: 32 lessons in 6 modules with quizzes, all 78 cards (upright and reversed meanings, life areas, symbolism), a daily card with journal and reflection, 10 spreads with every position explained, flashcards and a moon calendar. Audience: adults and teens (13+) learning tarot symbolism as a hobby or self-reflection practice. Problem solved: tarot resources are scattered; Arcanum gives a structured course and a daily practice in one offline app. It is educational and entertainment content: it does not predict the future and gives no medical, legal or financial advice (disclaimer in onboarding and on About).
+
+4. ACCESS. No login. First launch: 3-step onboarding (intro with disclaimer -> optional name and birth date -> first card) -> Today tab. Tabs: Today (daily card; a reminder dialog on the first daily card requests the notification permission), Course (modules 1-2 free), Cards (reference), Spreads, Profile (Settings, About). Moon calendar: the moon row on Today. Flashcards: the "Review" card at the top of the Course tab.
+
+5. EXTERNAL SERVICES. Purchases: StoreKit through the RevenueCat SDK (subscription status only; the only network service the app uses). Notifications are local, scheduled on the device; no remote push server. Privacy policy, Terms of Use and support are static pages on GitHub Pages. No analytics, ads, authentication, AI or data providers; moon phases are computed on the device.
+
+6. REGIONAL DIFFERENCES. None: features and content are identical in every country. UI in English, Russian, Spanish and Portuguese (from the device language, switchable in Settings). Prices are set per storefront by the App Store.
+
+7. REGULATED INDUSTRY / THIRD-PARTY MATERIAL. Not a regulated industry. Card images: the Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, scans from Wikimedia Commons. Some symbolism passages are based on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain. All other text is original, written by the app's editor.
+
+8. IN-APP PURCHASES. One auto-renewable subscription group "Arcanum Premium" with two plans: Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no free trial or introductory offer. Premium unlocks course modules 3-6, the remaining 8 of 10 spreads and unlimited flashcard sessions. Free forever: daily card, the 78-card reference, journal, modules 1-2, the Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or tap any locked module or spread. The paywall lists both plans with title, duration and store price, the Terms of Use and Privacy Policy links and "Restore Purchases". After purchase it shows the active plan and renewal date; "Manage subscription" opens the App Store subscription sheet.
+
+Contact: arcanum.tarot@icloud.com.
 ```
+
+Прежняя короткая версия (483 символа, до 29.08) — в истории git.
 
 ---
 

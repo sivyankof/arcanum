@@ -1566,6 +1566,15 @@ Push — после настройки remote (отложено решением
       с якорем `id="deletion-<lang>"`, `lang.js` ведёт `#deletion` к якорю текущего языка, контракт
       `site.test.ts` — по абзацам + якорь в секции + строка `lang.js`. Затем Play Console → Data Safety →
       «Да» + `https://sivyankof.github.io/arcanum/privacy.html#deletion`. Спека — `docs/specs/67-data-deletion.md`.
+- [ ] **69 · Ответ App Review на «Guideline 2.1 — Information Needed» (заведена 29.08)** — письмо
+      Apple 29.08 04:11: версия 1.0 Rejected «2.1.0 App Completeness», подписки и группа — Ready
+      for Review; ревьюер запросил 8 пунктов (видео с физического iPhone на последней iOS, устройства,
+      описание/аудитория, доступ, внешние сервисы, регионы, чужие материалы, что покупается) — не
+      отказ по существу, пересборка не нужна. **Сделано 29.08 сессией**: Primary Language →
+      English (U.S.) (решение Артёма: фолбэк витрины для стран без локализации), Notes версии
+      переписаны под 8 пунктов (3933/4000, источник — `store-listing.md`). **Осталось Артёму**:
+      видео по сценарию из спеки → Reply с вложением → Resubmit (отправку жмёт сам). Спека и
+      сценарий — `docs/specs/69-apple-review-reply.md`.
 - [ ] **68 · Вычитка носителем хвостов es/pt — строки задач 53/54/59/62/53б/67 и страницы `site/`
       (заведена 28.08 ~23:10, Cowork)** — после волны 28н (21.08) сессии написали ~25 UI-строк
       (`ob.disclaimer`, `about.*` включая `dataText`/`termsText`, `settings.name`/`birthDate`
