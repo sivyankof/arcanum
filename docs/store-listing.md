@@ -51,7 +51,7 @@ Apple индексирует название и подзаголовок и т�
 ## Заметки для ревьюера (en, поле App Review Notes)
 
 Версия 29.08 (задача 69): переписаны под восемь пунктов запроса App Review «Guideline 2.1 —
-Information Needed» и залиты в ASC (3933 символа при лимите 4000; лимит — по счётчику поля,
+Information Needed» и залиты в ASC (3944 символа при лимите 4000; лимит — по счётчику поля,
 `storeListing.test.ts` этот блок не парсит). Тот же текст — тело ответа в треде заявки
 (`docs/specs/69-apple-review-reply.md`). Меняя факты (устройства, цены, что свободно), править
 здесь, потом копировать в ASC.
@@ -63,13 +63,13 @@ Arcanum is an offline tarot learning app: a course, a 78-card reference, a daily
 
 2. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max, both on the latest public iOS release (iOS 26); builds installed via ad hoc distribution and TestFlight, purchases tested with a Sandbox tester account.
 
-3. FUNCTIONS AND AUDIENCE. Arcanum teaches how to read tarot step by step: 32 lessons in 6 modules with quizzes, all 78 cards (upright and reversed meanings, life areas, symbolism), a daily card with journal and reflection, 10 spreads with every position explained, flashcards and a moon calendar. Audience: adults and teens (13+) learning tarot symbolism as a hobby or self-reflection practice. Problem solved: tarot resources are scattered; Arcanum gives a structured course and a daily practice in one offline app. It is educational and entertainment content: it does not predict the future and gives no medical, legal or financial advice (disclaimer in onboarding and on About).
+3. FUNCTIONS AND AUDIENCE. Arcanum is a learning app, not a fortune-telling app: a step-by-step course of 32 lessons in 6 modules with quizzes, all 78 cards (upright and reversed meanings, life areas, symbolism), a daily card with journal and reflection, 10 spreads with every position explained, spaced-repetition flashcards and a moon calendar computed astronomically. Audience: adults and teens (13+) learning tarot symbolism as a hobby or self-reflection practice. Problem solved: tarot resources are scattered; Arcanum gives a structured curriculum and a daily practice in one offline app. It is educational and entertainment content: it does not predict the future and gives no medical, legal or financial advice (disclaimer in onboarding and on About).
 
 4. ACCESS. No login. First launch: 3-step onboarding (intro with disclaimer -> optional name and birth date -> first card) -> Today tab. Tabs: Today (daily card; a reminder dialog on the first daily card requests the notification permission), Course (modules 1-2 free), Cards (reference), Spreads, Profile (Settings, About). Moon calendar: the moon row on Today. Flashcards: the "Review" card at the top of the Course tab.
 
-5. EXTERNAL SERVICES. Purchases: StoreKit through the RevenueCat SDK (subscription status only; the only network service the app uses). Notifications are local, scheduled on the device; no remote push server. Privacy policy, Terms of Use and support are static pages on GitHub Pages. No analytics, ads, authentication, AI or data providers; moon phases are computed on the device.
+5. EXTERNAL SERVICES. Purchases: StoreKit through the RevenueCat SDK (subscription status only; the only network service the app uses). Notifications are local, scheduled on the device; no remote push server. Privacy policy, Terms of Use and support are static pages on GitHub Pages. No analytics, ads, authentication, AI or data providers.
 
-6. REGIONAL DIFFERENCES. None: features and content are identical in every country. UI in English, Russian, Spanish and Portuguese (from the device language, switchable in Settings). Prices are set per storefront by the App Store.
+6. REGIONAL DIFFERENCES. None: features and content are identical in every country. UI in English, Russian, Spanish and Portuguese (device language, switchable in Settings); prices are set per storefront.
 
 7. REGULATED INDUSTRY / THIRD-PARTY MATERIAL. Not a regulated industry. Card images: the Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, scans from Wikimedia Commons. Some symbolism passages are based on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain. All other text is original, written by the app's editor.
 
