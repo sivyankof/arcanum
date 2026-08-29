@@ -134,6 +134,9 @@ Premium открывает модули 3–6 курса, остальные р�
 
 Приложение создано для обучения и развлечения. Оно не предсказывает будущее и не заменяет консультацию специалиста.
 
+Условия использования: https://sivyankof.github.io/arcanum/terms.html
+Политика конфиденциальности: https://sivyankof.github.io/arcanum/privacy.html
+
 ### ru · что нового (4000)
 Первая версия Arcanum.
 
@@ -192,6 +195,9 @@ Free forever: the daily card with its reading, the complete 78-card reference wi
 Premium unlocks course modules 3-6, the remaining spreads and the trainer without limits. The subscription renews automatically and can be cancelled in your store settings. If it lapses, everything you have already completed stays with you.
 
 This app is made for learning and entertainment. It does not predict the future and is not a substitute for professional advice.
+
+Terms of Use: https://sivyankof.github.io/arcanum/terms.html
+Privacy Policy: https://sivyankof.github.io/arcanum/privacy.html
 
 ### en · что нового (4000)
 The first release of Arcanum.
@@ -252,6 +258,9 @@ Premium desbloquea los módulos 3 a 6 del curso, el resto de las tiradas y el En
 
 Arcanum es una app para aprender y entretenerte. No predice el futuro ni sustituye la consulta con un profesional.
 
+Términos de uso: https://sivyankof.github.io/arcanum/terms.html
+Política de privacidad: https://sivyankof.github.io/arcanum/privacy.html
+
 ### es · что нового (4000)
 Esta es la primera versión de Arcanum.
 
@@ -310,6 +319,9 @@ Grátis para sempre: a carta do dia com a interpretação, o guia completo das 7
 O Premium libera os módulos 3 a 6 do curso, as outras tiragens e o Treino sem limites. A assinatura é renovada automaticamente e pode ser cancelada nas configurações da loja. Se ela acabar, tudo o que você já concluiu continua com você.
 
 Este aplicativo é para aprendizado e entretenimento. Ele não prevê o futuro e não substitui a consulta com um profissional.
+
+Termos de uso: https://sivyankof.github.io/arcanum/terms.html
+Política de privacidade: https://sivyankof.github.io/arcanum/privacy.html
 
 ### pt · что нового (4000)
 Esta é a primeira versão do Arcanum.
