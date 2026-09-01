@@ -264,3 +264,66 @@ Settings → Arcanum Premium: строка «Valid until <дата>» вмест
 - Видео 720 МБ HEVC → `ffmpeg -vf scale=1080:-2,fps=30 -c:v libx264 -crf 26 -an` → 81 МБ,
   7 минут кодирования; `drawtext` в ffmpeg на этой машине падает (fontconfig), таймкоды
   считать по позиции кадра в контакт-листе.
+
+## 01.09 — отказ 4.3(b) Design: Spam и ответ-возражение
+
+Вердикт по ресабмиту 29.08: **Rejected «4.3.0 Design: Spam»** (01.09 16:55, устройства ревью —
+iPhone 17 Pro Max и iPad Air 11″ M3). Шаблон: «The app primarily features astrology, horoscopes,
+palm reading, fortune telling or zodiac reports that duplicate the content and functionality of
+similar apps… there are already enough of these apps on the App Store». Подписки и группа —
+Ready for Review, отклонена только версия. «Next Steps» шаблонные (новое приложение / веб-апп) —
+сам гайдлайн 4.3(b) допускает нишу при «meaningfully different or improved experience», на этом
+и строится возражение.
+
+**Стратегия (решение Артёма 01.09)**: сначала ответ в треде (та же команда ревью, 1–3 дня);
+Resubmit той же сборки без ответа НЕ жать — риск автоповтора отказа. Подтвердят отказ →
+формальная апелляция в App Review Board (ссылка «submit an appeal to the App Review Board» —
+прямо в модалке Reply). Обе дороги аккаунту не вредят.
+
+### Проверка фактов черновика (поиск + ASC живьём) — что сняли и почему
+
+- «Duolingo-style progression» — убрано: в переписке с ревью чужой бренд не запрещён (2.3.7 — про
+  метаданные витрины), но сравнение с чужим приложением подрывает тезис об уникальности.
+- «Курсов таро в App Store нет» — НЕПРАВДА: Labyrinthos (уроки+квизы+энциклопедия; но EN-only,
+  Entertainment, требует аккаунт и сеть), TarotLingo, Raka (90 уроков, AI-native),
+  Learn Tarot: Rider Waite Cards, Tarot Flashcards: Rider-Waite (даже с SRS). Кандидаты и на
+  ru/pt («Школа Таро: колода Тота», «Meu Tarot») — абсолют «no course in RU/PT» тоже снят,
+  заменён на «four languages with full content parity — rare in this niche».
+- Упор «символика по Уэйту 1911» — ОПАСЕН: чужие приложения (Tarot! от Fool's Dog, My Tarot Deck,
+  Tarot Simple) вшивают public-domain-текст Уэйта целиком; перепаковка public domain — ровно
+  паттерн 4.3(b). Аргумент развёрнут: «многие перепаковывают Уэйта — мы наоборот, ~950
+  оригинальных текстов редактора, первоисточник только для сверки символики».
+- «Nothing is AI-generated» — снято (es/pt переводились с ИИ-инструментами; вычитка носителем —
+  задача 68). Заменено на правду: «в приложении нет ИИ-функций, тексты не из API и не по шаблонам».
+- «Ничего не покидает устройство» — сужено до «прогресс и дневник» (RevenueCat передаёт статус
+  подписки; согласовано с Notes п. 5 и App Privacy).
+- «Написаны с нуля редактором» → «созданы для этого приложения его редактором» (канон ru/en — её,
+  es/pt — локализации).
+- Категория Education — подтверждена в ASC живьём (App Information → Primary Category = Education).
+
+### Отправленный текст (01.09 19:01, 2565/4000, без вложений; Reply жал Артём)
+
+```
+Hello,
+
+Thank you for the further review. We respectfully ask you to reconsider the 4.3(b) decision: we believe Arcanum does not match the group described in the rejection, and it offers the "meaningfully different or improved experience" that guideline 4.3(b) allows for.
+
+1. Arcanum contains none of the features listed in the rejection. There is no astrology, no horoscopes, no palm reading and no zodiac reports anywhere in the app, and it does not tell fortunes: the App Store description says directly that it is "a course, not a fortune-telling machine", and our editorial rules forbid predictive claims - cards are always explained as symbols and prompts for reflection, never as predictions of the future.
+
+2. Arcanum is an education app (its App Store category is Education). Its core is a structured course of 6 modules and 32 lessons with a short quiz after every lesson (160 questions in total), lesson-by-lesson progression and streaks; a spaced-repetition flashcard trainer (SM-2 algorithm) for memorizing the 78 cards; a complete reference of all 78 cards; a journal with evening reflection; and an astronomical moon calendar (new and full moon times are computed on the device with the Meeus algorithm - astronomy, not horoscopes).
+
+3. Compared to the tarot apps already on the App Store, Arcanum is meaningfully different:
+- Many apps in this niche simply repackage the public-domain text of A. E. Waite's "The Pictorial Key to the Tarot" (1911) as their card meanings. Arcanum does the opposite: its roughly 950 editorial texts are original, created for this app by its editor, a professional tarot practitioner - the historical source is used only to verify the symbolism descriptions.
+- The app ships in four languages with full content parity: English, Russian, Spanish and Portuguese - rare in this niche, where learning apps are typically English-only. It has no AI features: card meanings and lessons are not pulled from an API or generated from templates.
+- It combines in one offline app what elsewhere is split across several: the course, the 78-card reference, spaced-repetition flashcards, a journal with reflection, and spreads - with no account, no sign-up, no ads and no analytics; progress and the journal never leave the device, while the leading tarot-learning apps require an account and a connection.
+
+We built Arcanum as a calm, private way to study tarot as a cultural and historical practice. A video walkthrough of the whole app was attached to our previous reply in this thread.
+
+Thank you for your time and consideration.
+```
+
+Механика отправки: текст без вложений — расширение Chrome справляется (Playwright не нужен,
+его сессия ASC протухла); поле Reply заполняется `form_input` одним вызовом (React принимает,
+счётчик и кнопка оживают), «Reply» жмёт Артём. Дальше: ждать ответа в треде; если снова отказ —
+App Review Board, аргументы те же + при необходимости убрать `divination` из ключевых слов en
+и поставить кадр курса первым в наборе скриншотов (вторая линия, пока не трогаем).
