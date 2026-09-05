@@ -50,30 +50,32 @@ Apple индексирует название и подзаголовок и т�
 
 ## Заметки для ревьюера (en, поле App Review Notes)
 
-Версия 29.08 (задача 69): переписаны под восемь пунктов запроса App Review «Guideline 2.1 —
-Information Needed» и залиты в ASC (3944 символа при лимите 4000; лимит — по счётчику поля,
-`storeListing.test.ts` этот блок не парсит). Тот же текст — тело ответа в треде заявки
-(`docs/specs/69-apple-review-reply.md`). Меняя факты (устройства, цены, что свободно), править
-здесь, потом копировать в ASC.
+Версия 05.09 (задача 69, ресабмит после отказа 4.3(b)): первым абзацем — возражение по
+4.3(b) из ответа в треде 01.09 (сжатое), дальше те же восемь пунктов запроса «Guideline 2.1 —
+Information Needed» короче. Залито в ASC (3992 символа при лимите 4000; лимит — по счётчику поля,
+`storeListing.test.ts` этот блок не парсит). Меняя факты (устройства, цены, что свободно), править
+здесь, потом копировать в ASC. Версия 29.08 (восемь пунктов без 4.3(b), 3944 симв.) — в истории git.
 
 ```
-Arcanum is an offline tarot learning app: a course, a 78-card reference, a daily card with a journal, spreads, flashcards and a moon calendar. No account or sign-up; nothing is sent to a server: progress, journal and settings live on the device only.
+Arcanum is an offline tarot LEARNING app: a course, a 78-card reference, spaced-repetition flashcards, a daily card with a journal, spreads and a moon calendar. No account or sign-up; progress, journal and settings stay on the device.
 
-1. SCREEN RECORDING. Attached to the App Review thread (physical iPhone). It starts with launching the app and shows onboarding, the daily card, a lesson with its quiz, a locked module opening the paywall, the subscription purchase (plan title, duration, price, Terms of Use and Privacy Policy links), the unlocked content, Restore Purchases, the reference, spreads, flashcards and moon calendar. The only system prompt is the notification permission. The renewal date shown equals the purchase date because Sandbox compresses periods.
+ON GUIDELINE 4.3(b). The previous review cited 4.3(b) quoting "astrology, horoscopes, palm reading, fortune telling or zodiac reports". We ask you to reconsider: Arcanum has none of those features and does not tell fortunes - the description calls it "a course, not a fortune-telling machine", and our editorial rules forbid predictive claims: cards are explained as symbols and prompts for reflection, never as predictions. Its category is Education; its core is a course of 6 modules and 32 lessons with a quiz after each (160 questions), streaks and an SM-2 flashcard trainer for the 78 cards. Compared with existing tarot apps it is meaningfully different: (a) many of them repackage the public-domain text of A. E. Waite (1911) as their card meanings - Arcanum's roughly 950 texts are original, created for this app by its editor, a professional tarot practitioner; the 1911 source is used for symbolism reference only; (b) full content parity in English, Russian, Spanish and Portuguese, rare in a niche of English-only learning apps; (c) course, reference, flashcards, journal and spreads in one offline app with no account, ads, analytics or AI features, while the leading tarot-learning apps require an account and a connection.
 
-2. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max, both on the latest public iOS release (iOS 26); builds installed via ad hoc distribution, purchases tested with a Sandbox tester account.
+1. SCREEN RECORDING. A full walkthrough from a physical iPhone (onboarding, lessons, paywall, Sandbox purchase, unlocked content, Restore Purchases, every section) is attached to the App Review thread. The only system prompt is the notification permission; the renewal date equals the purchase date because Sandbox compresses periods.
 
-3. FUNCTIONS AND AUDIENCE. Arcanum is a learning app, not a fortune-telling app: a step-by-step course of 32 lessons in 6 modules with quizzes, all 78 cards (upright and reversed meanings, life areas, symbolism), a daily card with journal and reflection, 10 spreads with every position explained, spaced-repetition flashcards and a moon calendar computed astronomically. Audience: adults and teens (13+) learning tarot symbolism as a hobby or self-reflection practice. Problem solved: tarot resources are scattered; Arcanum gives a structured curriculum and a daily practice in one offline app. It is educational and entertainment content: it does not predict the future and gives no medical, legal or financial advice (disclaimer in onboarding and on About).
+2. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max on iOS 26; ad hoc builds; purchases tested with a Sandbox tester.
 
-4. ACCESS. No login. First launch: 3-step onboarding (intro with disclaimer -> optional name and birth date -> first card) -> Today tab. Tabs: Today (daily card; a reminder dialog on the first daily card requests the notification permission), Course (modules 1-2 free), Cards (reference), Spreads, Profile (Settings, About). Moon calendar: the moon row on Today. Flashcards: the "Review" card at the top of the Course tab.
+3. AUDIENCE. Adults and teens (13+) studying tarot symbolism as a hobby or self-reflection practice; disclaimer (no predictions, no medical, legal or financial advice) in onboarding and on About.
 
-5. EXTERNAL SERVICES. Purchases: StoreKit through the RevenueCat SDK (subscription status only; the only network service the app uses). Notifications are local, scheduled on the device; no remote push server. Privacy policy, Terms of Use and support are static pages on GitHub Pages. No analytics, ads, authentication, AI or data providers.
+4. ACCESS. No login. First launch: 3-step onboarding (intro with disclaimer -> optional name and birth date -> first card) -> Today tab. Tabs: Today (daily card; its first reminder dialog requests the notification permission), Course (modules 1-2 free), Cards, Spreads, Profile (Settings, About). Moon calendar: the moon row on Today; flashcards: the "Review" card atop the Course tab.
 
-6. REGIONAL DIFFERENCES. None: features and content are identical in every country. UI in English, Russian, Spanish and Portuguese (device language, switchable in Settings); prices are set per storefront.
+5. EXTERNAL SERVICES. Purchases: StoreKit via the RevenueCat SDK (subscription status only; the app's only network service). Notifications are local. Privacy Policy, Terms of Use and support: static pages on GitHub Pages. No analytics, ads, authentication, AI or data providers.
 
-7. REGULATED INDUSTRY / THIRD-PARTY MATERIAL. Not a regulated industry. Card images: the Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, scans from Wikimedia Commons. Some symbolism passages are based on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain. All other text is original, written by the app's editor.
+6. REGIONAL DIFFERENCES. None. UI in English, Russian, Spanish and Portuguese; prices per storefront.
 
-8. IN-APP PURCHASES. One auto-renewable subscription group "Arcanum Premium" with two plans: Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no free trial or introductory offer. Premium unlocks course modules 3-6, the remaining 8 of 10 spreads and unlimited flashcard sessions. Free forever: daily card, the 78-card reference, journal, modules 1-2, the Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or tap any locked module or spread. The paywall lists both plans with title, duration and store price, the Terms of Use and Privacy Policy links and "Restore Purchases". After purchase it shows the active plan and renewal date; "Manage subscription" opens the App Store subscription sheet.
+7. THIRD-PARTY MATERIAL. Not a regulated industry. Card images: Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, Wikimedia Commons scans. Some symbolism passages draw on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain; all other text is original, written by the app's editor.
+
+8. IN-APP PURCHASES. One auto-renewable group "Arcanum Premium": Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no trial or introductory offer. Premium unlocks modules 3-6, 8 of 10 spreads and unlimited flashcard sessions; free forever: daily card, 78-card reference, journal, modules 1-2, the Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or any locked module or spread. The paywall lists both plans (title, duration, store price), Terms of Use and Privacy Policy links and "Restore Purchases"; after purchase it shows the active plan and renewal date; "Manage subscription" opens the App Store sheet.
 
 Contact: arcanum.tarot@icloud.com.
 ```
@@ -94,7 +96,7 @@ Arcanum — обучение таро
 Учитесь читать таро: курс из 32 уроков, 78 карт со значениями и карта дня
 
 ### ru · ключевые слова iOS (100)
-гадание,расклад,колода,арканы,старшие,символика,луна,таролог,карта дня,уэйт,новичкам,интуиция
+уроки,расклад,колода,арканы,старшие,символика,луна,таролог,карта дня,уэйт,новичкам,интуиция
 
 ### ru · промо-текст iOS (170)
 Новое в 1.0: курс из 32 уроков, справочник 78 карт, десять раскладов, тренажёр памяти и лунный календарь. Всё работает офлайн, без регистрации.
@@ -156,7 +158,7 @@ Course, card meanings, spreads
 Learn to read tarot: a 32-lesson course, all 78 cards explained, daily card
 
 ### en · ключевые слова iOS (100)
-divination,deck,arcana,symbolism,moon,reading,daily,journal,flashcards,beginners,rider,waite
+lessons,quiz,deck,arcana,symbolism,moon,reading,daily,journal,flashcards,beginners,rider,waite
 
 ### en · промо-текст iOS (170)
 New in 1.0: a 32-lesson course, all 78 cards explained, ten spreads, a memory trainer and a moon calendar. Everything works offline, no sign-up needed.
@@ -218,7 +220,7 @@ Curso, significados y tiradas
 Aprende a leer el tarot: curso de 32 lecciones, 78 cartas y tu carta del día
 
 ### es · ключевые слова iOS (100)
-adivinacion,cartomancia,cartas,lectura,mazo,baraja,arcanos,luna,principiantes,diario,dia,rider,waite
+lecciones,simbolismo,cartas,lectura,mazo,baraja,arcanos,luna,principiantes,diario,dia,rider,waite
 
 ### es · промо-текст iOS (170)
 Arcanum 1.0 ya está aquí: curso de 32 lecciones, las 78 cartas explicadas, diez tiradas, entrenador de memoria y calendario lunar. Funciona sin conexión y sin cuenta.
@@ -280,7 +282,7 @@ Curso, significados e tiragens
 Aprenda a ler tarô: curso de 32 lições, as 78 cartas e a carta do dia
 
 ### pt · ключевые слова iOS (100)
-taro,tarot,cartas,tiragem,leitura,baralho,arcanos,lua,adivinhacao,iniciantes,diario,waite,rider
+taro,tarot,cartas,tiragem,leitura,baralho,arcanos,lua,licoes,iniciantes,diario,waite,rider
 
 ### pt · промо-текст iOS (170)
 Novidades da versão 1.0: curso de 32 lições, as 78 cartas explicadas, dez tiragens, treinador de memória e calendário lunar. Funciona offline, sem cadastro.
