@@ -374,3 +374,29 @@ Rejected → Ready for Review) → страница заявки → **«Resubmi
 Manager часто падает по таймауту CDP (страница тяжёлая) — состояние читать `get_page_text`/`find`
 и зумом области, а не полным кадром; поле Notes и ключевые слова — на странице версии, локали
 переключаются выпадашкой справа («English (U.S.)»), Notes — общие для всех локалей.
+
+### Аудит перед ресабмитом (05.09, вторая проверка по просьбе Артёма)
+
+Проверено живьём: версия 1.0 — сборка 1.0.0 (3) прикреплена, 4 локали × 7 кадров 6,9″, промо-текст,
+описания (длины = `store-listing.md`: ru 2376 / en 2462 / es 2775 / pt 2606, ссылки Terms/Privacy на
+месте), Support/Marketing URL, копирайт, «Sign-in required» выключен, контакт ревью заполнен, релиз
+вручную; App Information — категория Education/Lifestyle, рейтинг 13+ (172 страны; Вьетнам/Корея 12+,
+Бразилия A12), анкета возраста отвечена целиком (шаг 1 — 8 групп, Social Media = No, «новые вопросы»
+из баннера закрыты), Content Rights «да», DSA трейдер указан, Primary Language en; App Privacy —
+опубликована (Identifiers: User ID; Purchases — App Functionality + Analytics, «not linked»);
+Pricing — 175 стран, Free; подписки — группа Premium (2), обе Ready for Review.
+
+**Найдено и исправлено (без сборки, сохранено в ASC + `store-listing.md`, тест 122/122):**
+- Описание на 4 языках утверждало «данные не собираются / no data collection», а опубликованный
+  App Privacy декларирует Identifiers и Purchases — противоречие метаданных и privacy-лейбла
+  (класс 2.3.1 / 5.1.1). Заменено на «без аккаунта, рекламы и слежки» (en «no ads, no tracking»,
+  es «no hay publicidad ni rastreo», pt «não há anúncios nem rastreamento»); строка таблицы фактов
+  переписана с объяснением, почему «без сбора данных» писать нельзя.
+- Notes п. 5: «No analytics» → «No analytics SDK» (App Privacy у Purchases отмечает Analytics —
+  это RevenueCat, а не SDK аналитики в приложении); 3996/4000.
+
+**Остаточный риск, требующий НОВОЙ сборки (не делали, решение — 1.0.1):** строки `paywall.legal`,
+`termsText`, `dataText`, `restoreNoneText` в `i18n.ts` на всех языках говорят «App Store или
+Google Play» внутри iOS-сборки — 2.3.10 (упоминание другой платформы). Два ревьюера (2.1 и 4.3(b))
+видели пейвол и не отметили; чинится платформенной подстановкой имени магазина + новая сборка
+(buildNumber 4) + заливка Артёмом. К 4.3(b) отношения не имеет.

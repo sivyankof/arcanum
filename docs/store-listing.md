@@ -20,7 +20,7 @@
 | лунный календарь: фазы, новолуние и полнолуние по алгоритму Меюса | `src/lib/moon.ts` |
 | дневник карт дня с заметками и вечерней рефлексией | product-spec §5 |
 | 4 языка интерфейса и контента: ru, en, es, pt | `src/lib/i18n.ts` |
-| работает офлайн, без аккаунта и без сбора данных | master-plan §4, решение 22.08 |
+| работает офлайн, без аккаунта, рекламы и слежки (App Privacy: Identifiers + Purchases «not linked», поэтому «без сбора данных» писать нельзя — 05.09) | master-plan §4, решение 22.08 |
 | версия 1.0.0 | `app.json` |
 
 ⚠️ Чего в текстах быть НЕ должно (проверяет тест): обещаний предсказать будущее, гарантий,
@@ -52,7 +52,7 @@ Apple индексирует название и подзаголовок и т�
 
 Версия 05.09 (задача 69, ресабмит после отказа 4.3(b)): первым абзацем — возражение по
 4.3(b) из ответа в треде 01.09 (сжатое), дальше те же восемь пунктов запроса «Guideline 2.1 —
-Information Needed» короче. Залито в ASC (3992 символа при лимите 4000; лимит — по счётчику поля,
+Information Needed» короче. Залито в ASC (3996 символов при лимите 4000; лимит — по счётчику поля,
 `storeListing.test.ts` этот блок не парсит). Меняя факты (устройства, цены, что свободно), править
 здесь, потом копировать в ASC. Версия 29.08 (восемь пунктов без 4.3(b), 3944 симв.) — в истории git.
 
@@ -69,7 +69,7 @@ ON GUIDELINE 4.3(b). The previous review cited 4.3(b) quoting "astrology, horosc
 
 4. ACCESS. No login. First launch: 3-step onboarding (intro with disclaimer -> optional name and birth date -> first card) -> Today tab. Tabs: Today (daily card; its first reminder dialog requests the notification permission), Course (modules 1-2 free), Cards, Spreads, Profile (Settings, About). Moon calendar: the moon row on Today; flashcards: the "Review" card atop the Course tab.
 
-5. EXTERNAL SERVICES. Purchases: StoreKit via the RevenueCat SDK (subscription status only; the app's only network service). Notifications are local. Privacy Policy, Terms of Use and support: static pages on GitHub Pages. No analytics, ads, authentication, AI or data providers.
+5. EXTERNAL SERVICES. Purchases: StoreKit via the RevenueCat SDK (subscription status only; the app's only network service). Notifications are local. Privacy Policy, Terms of Use and support: static pages on GitHub Pages. No analytics SDK, ads, authentication, AI or data providers.
 
 6. REGIONAL DIFFERENCES. None. UI in English, Russian, Spanish and Portuguese; prices per storefront.
 
@@ -124,7 +124,7 @@ Arcanum учит читать таро с нуля — спокойно, по 5 
 
 КАК УСТРОЕНО
 
-Приложение работает офлайн: весь контент лежит внутри, интернет нужен только для покупки подписки. Аккаунт не нужен, данные не собираются — прогресс и записи хранятся на вашем устройстве.
+Приложение работает офлайн: весь контент лежит внутри, интернет нужен только для покупки подписки. Аккаунт не нужен, рекламы и слежки нет — прогресс и записи хранятся на вашем устройстве.
 
 Четыре языка: русский, английский, испанский, португальский.
 
@@ -186,7 +186,7 @@ WHAT'S INSIDE
 
 HOW IT WORKS
 
-The app works offline: all content is bundled inside, and the internet is only needed to buy a subscription. No account, no data collection — your progress and notes stay on your device.
+The app works offline: all content is bundled inside, and the internet is only needed to buy a subscription. No account, no ads, no tracking — your progress and notes stay on your device.
 
 Four languages: English, Russian, Spanish and Portuguese.
 
@@ -248,7 +248,7 @@ QUÉ INCLUYE
 
 CÓMO FUNCIONA
 
-Arcanum funciona sin conexión: todo el contenido ya viene en la app y solo necesitas internet para comprar la suscripción. No hace falta crear una cuenta y no recopilamos datos: tu progreso y tus notas se quedan en tu dispositivo.
+Arcanum funciona sin conexión: todo el contenido ya viene en la app y solo necesitas internet para comprar la suscripción. No hace falta crear una cuenta, y no hay publicidad ni rastreo: tu progreso y tus notas se quedan en tu dispositivo.
 
 Disponible en cuatro idiomas: español, inglés, ruso y portugués.
 
@@ -310,7 +310,7 @@ O QUE VOCÊ ENCONTRA NO APP
 
 COMO FUNCIONA
 
-O app funciona offline: todo o conteúdo já vem instalado, e a internet só é necessária para assinar. Não precisa criar conta e nada é coletado: seu progresso e suas anotações ficam no seu aparelho.
+O app funciona offline: todo o conteúdo já vem instalado, e a internet só é necessária para assinar. Não precisa criar conta, e não há anúncios nem rastreamento: seu progresso e suas anotações ficam no seu aparelho.
 
 Quatro idiomas: português, inglês, russo e espanhol.
 
