@@ -415,6 +415,13 @@ Google Play» внутри iOS-сборки — 2.3.10 (упоминание д�
 ничего не даст). Письмо короткое, по фактам, без напора; напоминает, что в треде 4.3(b) лежит
 неотвеченное возражение от 01.09.
 
+**ОТПРАВЛЕНО 16.09 (кнопку жал Артём), Case ID `102965528039`.** Канал уточнён живьём: в форме
+`developer.apple.com/contact/app-store/` («I would like to») пункта «статус» НЕТ — только апелляция,
+ускорение, технический вопрос, App Store Connect, жалоба. Нужный путь — общая форма
+`developer.apple.com/contact/topic/select` → App Review → **App Review Status** → Email: поля
+App name / Apple Account of the App (9–10 цифр, `6805994267`) / Related Apps / Platform / Message;
+имя и Apple Account подставлены из сессии. Ответ — письмом на почту аккаунта.
+
 ### Текст письма (английский, отправляет Артём)
 
 Subject: Status of App Review — Arcanum — Learn Tarot (Apple ID 6805994267), waiting 11 days
