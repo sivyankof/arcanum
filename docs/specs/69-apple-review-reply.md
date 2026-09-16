@@ -404,3 +404,40 @@ Pricing — 175 стран, Free; подписки — группа Premium (2),
 Google Play» внутри iOS-сборки — 2.3.10 (упоминание другой платформы). Два ревьюера (2.1 и 4.3(b))
 видели пейвол и не отметили; чинится платформенной подстановкой имени магазина + новая сборка
 (buildNumber 4) + заливка Артёмом. К 4.3(b) отношения не имеет.
+
+## 16.09 — запрос статуса: 11 дней Waiting for Review
+
+`node scripts/asc_status.js` 16.09: версия 1.0 `WAITING_FOR_REVIEW`, reviewSubmission `485992cd…`
+от 05.09 10:04 UTC — движения нет 11 календарных дней (типичный срок Apple — 1–3 дня, наш первый заход
+28.08 → 29.08 занял сутки). Решение Артёма 16.09: спросить, в чём задержка. Канал — форма
+`developer.apple.com/contact/app-store/` → App Review (обращение «о статусе», не Expedited Review:
+ускорение просят под срочное событие или критический баг, у нас ни того ни другого, отказ в ускорении
+ничего не даст). Письмо короткое, по фактам, без напора; напоминает, что в треде 4.3(b) лежит
+неотвеченное возражение от 01.09.
+
+### Текст письма (английский, отправляет Артём)
+
+Subject: Status of App Review — Arcanum — Learn Tarot (Apple ID 6805994267), waiting 11 days
+
+Hello,
+
+I'm writing to ask about the status of the review for Arcanum — Learn Tarot (Apple ID 6805994267,
+bundle ID app.arcanum.tarot), version 1.0, build 3.
+
+Timeline:
+- Aug 28 — first submission; Aug 29 — 2.1 Information Needed, answered the same day with a video and
+  the requested details.
+- Sep 1 — rejected under 4.3(b) Design: Spam. We replied in the Resolution Center thread the same day
+  explaining why we believe the app does not fall under that guideline (an educational tarot course —
+  32 lessons, spaced-repetition trainer, original editorial texts in four languages, no astrology or
+  horoscopes; category Education). That message has not received a reply.
+- Sep 5 — resubmitted the same build with updated review notes and metadata. The submission has been
+  in "Waiting for Review" since then — 11 days as of today.
+
+Could you let me know whether anything further is needed from our side, and whether the resubmission
+is still in the queue? I'm happy to provide any additional information or a demo video.
+
+Thank you for your time.
+
+Artsiom Siviankou
+Team ID 52QV87WW73
