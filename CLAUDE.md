@@ -108,13 +108,15 @@
 
 ## Структура
 
-- `app/` — экраны (expo-router): (tabs)/ = Сегодня, Курс, Карты, Расклады, Профиль; card/[id] — страница карты
+- `app/` — экраны (expo-router): (tabs)/ = Учёба, Курс, Карты, Практика, Профиль; `daily.tsx` — карта дня
+  (вынесена с первой вкладки задачей 72); `fragment.tsx` — игра «Угадай карту»; `card/[id]` — страница карты
 - `src/theme/` — токены и useTheme; `src/store/useApp.ts` — Zustand-состояние (тема, язык, серия, история)
 - `src/lib/content.ts` — доступ к контенту; `src/lib/cardImages.ts` — АВТОГЕНЕРИРУЕТСЯ (`scripts/gen_card_images.py`), не править руками
 - `src/lib/srs.ts` — алгоритм интервальных повторений SM-2 (для флеш-карт, этап 4)
 - `content/*.json` — 78 карт (cards) / 10 раскладов (spreads, из них 2 лунных — задача 51) / курс 6 модулей (course) /
-  фразы «Состава расклада» (composition) / вариативные системные фразы (phrases) — все на четырёх языках
-  ru/en/es/pt (статусы готовности — по языкам, спека 28а).
+  фразы «Состава расклада» (composition) / вариативные системные фразы (phrases) / 61 фрагмент карт для
+  игры «Угадай карту» (fragments, задача 72) — все на четырёх языках ru/en/es/pt (статусы готовности —
+  по языкам, спека 28а; fragments языка не несёт — только координаты вырезки).
   Правило вариативности: повторяющийся текст = минимум 2–3 формулировки одного смысла (content-guide)
 - `assets/cards/` — 78 изображений Райдер–Уэйт (public domain)
 
@@ -392,7 +394,8 @@
   → Reply с вложением → Resubmit (жмёт сам). Устройства тестов: iPhone 14 Pro Max, iPhone 17 Pro Max.
   Вторая сверка с доками Apple: **в описание витрины на 4 языках добавлены ссылки Terms of Use /
   Privacy Policy** (требование страницы подписок Apple, типовой отказ 3.1.2) — сохранено в ASC и в
-  `store-listing.md`. Риск на 1.0.1: `paywall.legal` упоминает Google Play внутри iOS (2.3.10).
+  `store-listing.md`. Риск на 1.0.1: `paywall.legal` упоминает Google Play внутри iOS (2.3.10)
+  (исправлено задачей 72, см. запись ниже).
   **29.08 ~16:40 — ответ Apple ОТПРАВЛЕН**: видео (iPhone, ad hoc `a320c6dd`, 6:56, проверено по
   кадрам, сжато до 81 МБ) + 8 пунктов в треде, «Обновить данные для проверки» + «Повторно
   отправить» нажаты Артёмом → **версия 1.0 «Ожидание проверки»**. Грабли отправки — конец спеки 69.
@@ -413,7 +416,8 @@
   не автоматизируется). **Ресабмит ОТПРАВЛЕН 05.09 ~14:04** (кнопки жала сессия по указанию Артёма) — заявка «Waiting for
   Review», сборка 1.0.0 (3); аудитом перед отправкой описания на 4 языках приведены в согласие с App
   Privacy («без сбора данных» → «без аккаунта, рекламы и слежки»). Второй отказ тем же шаблоном →
-  апелляция в App Review Board; риск 2.3.10 («Google Play» в строках пейвола на iOS) — в 1.0.1. Попутно: письмо Google Play о регистрации приложений/ключей
+  апелляция в App Review Board; риск 2.3.10 («Google Play» в строках пейвола на iOS) — в 1.0.1
+  (исправлено задачей 72, см. запись ниже). Попутно: письмо Google Play о регистрации приложений/ключей
   до 30.09 (проверка разработчиков Android) — глянуть статус пакета на главной Play Console.
 - **18.09 — Apple: ВТОРОЙ отказ 4.3(b) тем же шаблоном** (сборка 3, ревью на iPad Air; на возражение
   01.09 по существу не ответили) **+ предупреждение Extended Review**: повторные отправки без изменений
@@ -482,6 +486,22 @@
   в release-checklist). Apple: **активирован 27.08 вечером** — открыты 63б и iOS-сборка
   (соглашения и Paid Applications Agreement первыми, порядок — release-checklist п. 1).
   Эмулятор Android на машине Артёма уже настроен — рецепт в AGENTS.md.
+- **Задача 72 («Учебный главный экран» + игра «Угадай карту») — КОД СДЕЛАН 19.09, ждёт 6в и сабмита**:
+  ветка `feat/72-learning-home` (не влита). Первая вкладка — «Учёба» (герой следующего урока,
+  «Повторение», вход в игру, компактная строка карты дня); карта дня переехала на отдельный экран
+  `app/daily.tsx`; лунная строка — на «Практике» (бывшая пятая вкладка «Расклады» переименована).
+  Новая игра «Угадай карту»: `app/fragment.tsx`, `content/fragments.json`, 10 вопросов по фрагменту
+  рисунка, 61 фрагмент на 78 карт (17 карт по 3, 5 по 2 — младшие арканы пока не участвуют, кандидат
+  в 1.0.1), каждый прошёл слепую проверку 3-агентной комиссией (~200 агентов за 5 раундов). Заодно
+  исправлен риск 2.3.10 (Apple): строки пейвола больше не называют магазин по имени напрямую —
+  `{{store}}` подставляется из `STORE_NAME` (App Store/Google Play по платформе). Цифры: тестов
+  **1970 в 54 сьютах**, `tsc` чист, persist остался **12** (схема стора не менялась), веб-регресс
+  `check_72_web.js` **80/80** (3 мутации красные), витрина — 8 кадров × 4 языка × 2 магазина.
+  Контакт-лист фрагментов одобрен Артёмом 19.09 («в целом да»). Осталось: iOS `preview`-сборка →
+  лайв-проверка Артёма на iPhone (6в, сценарий в плане, задача 17 шаг 5) → merge в `main` →
+  `production`-сборка (buildNumber 4) → заливка IPA Артёмом → витрина в ASC (сборка 4, 8 кадров ×
+  4 языка, тексты из `store-listing.md`, категория Reference вторая, Review Notes) → Resubmit жмёт
+  Артём. Спека — `docs/specs/72-learning-home.md`, план — `docs/plans/72-learning-home.md`.
 - Подробности по каждой задаче — `docs/changelog.md` и `docs/specs/`; уроки — `docs/lessons.md`.
 
 ## Общие модули и компоненты (проверь ЗДЕСЬ, прежде чем писать новое)
@@ -489,13 +509,18 @@
 - **`src/components/`**: каркас и текст — `Txt`, `Block` (+`paragraphStyle`), `Rule`, `Pill`, `ScreenBg`,
   `BlurSurface`, `GlassPanel`, `Skeleton`, `EmptyState`, `SettingsRow`, `Emblem`, `FadeUp`, `PressableScale`,
   `Sparks`, `LinkTxt` (текст-ссылка на web через `expo-web-browser`); кнопки и диалоги — `CtaButton`, `ConfirmDialog`, `ModalPanel`, `OptionPicker`, `TimePicker`(.web),
-  `DatePicker`(.web); карты — `CardBack`, `CardBackSurface`, `CardCorners`, `CornerBadge`, `CardCell`,
+  `DatePicker`(.web), `OptionButton` (вариант ответа — вынесен из урока задачей 72, второй потребитель
+  игра «Угадай карту»); карты — `CardBack`, `CardBackSurface`, `CardCorners`, `CornerBadge`, `CardCell`,
   `CardGridRow`, `CardLightbox`, `FlipCard`, `StarBack`, `KeywordChips`, `MasteryChip`, `MeaningPanel`;
   списки и поиск — `SearchField`, `FilterChips`, `JournalRow`, `MonthNav`, `MonthCard`, `NotePlate`, `MoonRow`;
-  прогресс и итоги — `ProgressBar` (+`PROGRESS_EASE`), `XpPill`, `StreakPill`, `LevelCard`, `StatBox`,
+  прогресс и итоги — `ProgressBar` (+`PROGRESS_EASE`, `PROGRESS_FILL_DELAY`/`PROGRESS_FILL_MS` — тайминг
+  заполнения 400/1400, задача 72 свела третью копию из `LevelCard`/`cards.tsx`), `XpPill`, `StreakPill`,
+  `LevelCard`, `StatBox`, `StatsPills` (ряд «серия + уровень», задача 72 — «Учёба» и карта дня),
   `BirthArcanaCard`, `ResultPanel`, `LessonResult`, `ReviewResult`, `ReviewPanel`, `ReviewFlashcard`;
-  курс — `CoursePath`, `PathNode`, `ModuleHeader`; расклады — `SpreadBoard/Card/Cells/Diagram/Fields/
-  Meaning/Row/Screen`; `Reflection`, `TabIcons`.
+  учебный экран (задача 72) — `NextLessonCard` (герой следующего урока), `DailyCardRow` (компактная
+  строка карты дня), `FragmentPanel` (вход в игру «Угадай карту»); курс — `CoursePath`, `PathNode`,
+  `ModuleHeader`; расклады — `SpreadBoard/Card/Cells/Diagram/Fields/Meaning/Row/Screen`; `Reflection`,
+  `TabIcons`.
 - **`src/lib/`** (чистые модули под тестами): `content` (`statusIn`, `blockText`), `lang` (`Lang`, `inLang`,
   `localeTag`), `i18n` (`useLang`, `AVAILABLE_LANGS`), `dates` (границы дня, `localMidnight`, `plusDaysISO`,
   `daysInMonth`, `formatTime`), `phrases` (`pickPhrase`/`pickVariant`), `shuffle`, `xp`, `streak`, `journal`,
@@ -505,10 +530,14 @@
   `cardTransition`, `premium` (гейты `moduleLocked`/`lessonLocked`/`spreadLocked`, лимит тренажёра),
   `purchases`/`purchases.web` (адаптер покупок — единственный файл с импортом `react-native-purchases`,
   веб-заглушка без SDK), `purchasesMap` (чистые преобразования ответов магазина в типы приложения),
-  `purchasesEnv` (ключ SDK по платформе, признак Expo Go); хуки — `useAppActive`, `useScrollAwareBar`,
-  `useTabScrollToTop`, `useLeaveGuard`, `usePushScheduler`, `useDeviceTilt`, `useBackHaptic`,
-  `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK).
+  `purchasesEnv` (ключ SDK по платформе, признак Expo Go, `STORE_NAME` — «App Store»/«Google Play» для
+  подстановки `{{store}}` в тексты пейвола), `fragmentGame` (чистая логика игры «Угадай карту», задача 72:
+  сборка сессии, геометрия кропа по `content/fragments.json`, счёт); хуки — `useAppActive`,
+  `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`, `usePushScheduler`, `useDeviceTilt`,
+  `useBackHaptic`, `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK),
+  `useReviewSummary` (сводка «Повторения» для `ReviewPanel`, общая для табов «Курс» и «Учёба», задача 72).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
-  (`transparentHeader`), `webInput.ts` (`noOutline`).
+  (`transparentHeader`, `stackTopPad`/`STACK_HEADER_H` — единый отступ под прозрачную шапку 64px,
+  задача 72 свела дубли по стек-экранам), `webInput.ts` (`noOutline`).
 
 Полный план этапов, фичи удержания, монетизация и метрики — в `docs/master-plan.md`.

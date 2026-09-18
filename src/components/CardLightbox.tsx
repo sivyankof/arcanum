@@ -406,7 +406,7 @@ const st = StyleSheet.create({
   // На устройстве (touch) этого механизма нет, это не дефект жестов, а веб-плоскости.
   // boxShadow — на этом контейнере, а не на лицевой грани (I3): у грани overflow:'hidden'
   // (обрезка изображения по borderRadius), и на iOS это срезает собственную тень вчистую —
-  // тот же паттерн, что st.face/st.faceClip в app/(tabs)/index.tsx.
+  // тот же паттерн, что st.face/st.faceClip в app/daily.tsx.
   card: { width: CARD_W, height: CARD_H, pointerEvents: 'none' as const, boxShadow: CARD_SHADOW },
   face: {
     ...StyleSheet.absoluteFillObject,
