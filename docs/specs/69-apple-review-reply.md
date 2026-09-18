@@ -448,3 +448,22 @@ Thank you for your time.
 
 Artsiom Siviankou
 Team ID 52QV87WW73
+
+## 18.09 — второй отказ 4.3(b), тем же шаблоном, + предупреждение Extended Review
+
+Письмо Apple 18.09 15:01, заявка `485992cd…`, сборка 1.0 (3), устройство ревью — iPad Air 11″ (M3)
+(у нас `supportsTablet: false`, то есть смотрели в режиме совместимости iPhone). Статус версии
+`REJECTED`, заявки — `UNRESOLVED_ISSUES`; подписки и группа — Ready for Review. К отказу приложен
+кадр ревьюера `Screenshot-0918-120103.png` (не скачан — скачивание файла требует «ок» Артёма).
+
+Текст: «The issues we previously identified still need your attention… We still found the app
+primarily features astrology, horoscopes, palm reading, fortune telling or zodiac reports that
+duplicate the content and functionality of similar apps… there are already enough of these apps».
+Next Steps — «reconsider the app concept and submit a new app that provides a unique experience».
+На возражение от 01.09 и на Notes от 05.09 по существу не ответили.
+
+⚠️ **Новое — абзац Extended Review**: «Repeated submissions of apps with these issues will result in
+extended review times. Accounts that repeatedly submit apps that do not follow the Guidelines… face
+removal from the Apple Developer Program». Вывод: **ту же сборку с теми же метаданными больше НЕ
+отправлять** — третий ресабмит без изменений даёт только срок и риск для аккаунта. Апелляция в
+App Review Board повторной отправкой не считается.
