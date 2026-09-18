@@ -54,7 +54,8 @@ export default function CourseScreen() {
     scrollRef.current?.scrollTo({ y: Math.max(0, target - spacing.m), animated: false });
   };
 
-  const openLesson = (l: CourseLesson) => router.push(`/lesson/${l.id}`);
+  const openLesson = (l: CourseLesson) =>
+    router.push({ pathname: '/lesson/[id]', params: { id: l.id, from: 'course' } });
   const openPaywall = () => router.push({ pathname: '/paywall', params: { from: 'course' } });
 
   return (
@@ -112,7 +113,10 @@ export default function CourseScreen() {
                 <FadeUp index={1}>
                   {/* карточка «Повторение» (спека 45) — над первым модулем, в ТОМ ЖЕ шаге каскада:
                       нового индекса FadeUp не добавляем (design-system §5) */}
-                  <ReviewPanel summary={reviewSum} onPress={() => router.push('/review')} />
+                  <ReviewPanel
+                    summary={reviewSum}
+                    onPress={() => router.push({ pathname: '/review', params: { from: 'course' } })}
+                  />
                   {section}
                 </FadeUp>
               ) : (

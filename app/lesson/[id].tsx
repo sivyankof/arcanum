@@ -21,10 +21,11 @@ import { CtaButton } from '../../src/components/CtaButton';
 import { EmptyState } from '../../src/components/EmptyState';
 import { FadeUp } from '../../src/components/FadeUp';
 import { LessonResult } from '../../src/components/LessonResult';
-import { OptionButton } from '../../src/components/OptionButton';
+import { OptionButton, type OptionState } from '../../src/components/OptionButton';
 import { ProgressBar } from '../../src/components/ProgressBar';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
+import { backTitleKey } from '../../src/lib/backTitle';
 import { cardById, cardImages, course, type CourseLesson, type CourseModule } from '../../src/lib/content';
 import { moduleProgress } from '../../src/lib/courseProgress';
 import { hapticError, hapticTap } from '../../src/lib/haptics';
@@ -57,14 +58,19 @@ function findLesson(
   return null;
 }
 
-type OptState = 'idle' | 'ok' | 'no';
+/** Подпись «назад» по источнику перехода (спека 72, финальное ревью F2/F5): /lesson/[id] открывается
+ *  и с героя «Учёбы», и с тропы курса — неизвестный/пустой from (прямая ссылка) считаем «Курсом». */
+const BACK_TITLES: Record<string, string> = {
+  learn: 'tabs.learn',
+  course: 'tabs.course',
+};
 
 export default function LessonScreen() {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = useLang();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, from } = useLocalSearchParams<{ id: string; from?: string }>();
 
   // вибрация на уходе с экрана — общий хук (как card/[id])
   useBackHaptic();
@@ -163,7 +169,7 @@ export default function LessonScreen() {
     }
   };
 
-  const optState = (i: number): OptState => {
+  const optState = (i: number): OptionState => {
     if (!step || step.kind !== 'quiz' || picked === null) return 'idle';
     if (i === step.question.correct && (picked === step.question.correct || showCorrect)) return 'ok';
     if (i === picked && picked !== step.question.correct) return 'no';
@@ -177,7 +183,7 @@ export default function LessonScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.course') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'tabs.course')) }} />
       <ScreenBg />
       <ScrollView
         ref={scrollRef}

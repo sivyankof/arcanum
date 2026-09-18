@@ -19,6 +19,7 @@ import { PressableScale } from '../src/components/PressableScale';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
 import { PRIVACY_URL, TERMS_URL } from '../src/lib/appInfo';
+import { backTitleKey } from '../src/lib/backTitle';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
@@ -33,6 +34,7 @@ import { useTheme } from '../src/theme/useTheme';
 /** Подпись «назад» по источнику перехода; неизвестный/пустой from — «Настройки». */
 const BACK_TITLES: Record<string, string> = {
   settings: 'settings.title',
+  learn: 'tabs.learn',
   course: 'tabs.course',
   spreads: 'tabs.practice',
   moon: 'moon.title',
@@ -55,7 +57,7 @@ export default function PaywallScreen() {
   useBackHaptic();
   const premium = useApp((s) => s.premium);
   const setPremium = useApp((s) => s.setPremium);
-  // откуда пришли — подпись кнопки «назад» (приём card/[id]: BACK_TITLES по параметру from)
+  // откуда пришли — подпись кнопки «назад» (общий backTitleKey, приём card/[id]/fragment)
   const { from } = useLocalSearchParams<{ from?: string }>();
 
   // null — предложения ещё не запрошены (первый кадр), [] — их нет (без SDK покупок в 53а/62;
@@ -108,7 +110,7 @@ export default function PaywallScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr(BACK_TITLES[from ?? ''] ?? 'settings.title') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'settings.title')) }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
