@@ -57,7 +57,10 @@ export function DailyCardRow({
 }
 
 const st = StyleSheet.create({
-  box: { ...moduleBox, marginTop: 12 },
+  // без собственного отступа сверху: зазор до соседней панели задаёт тот, кто стоит перед строкой
+  // (обёртка «Учёбы» — 12, когда ReviewPanel скрыт, либо marginBottom самого ReviewPanel — тоже 12,
+  // когда виден). Свой marginTop тут удваивал бы зазор во втором случае (найдено веб-проверкой 72б)
+  box: { ...moduleBox },
   thumb: { width: THUMB_W, height: THUMB_H, borderRadius: 11, borderWidth: 1, overflow: 'hidden' },
   img: { width: '100%', height: '100%' },
   title: { fontFamily: fonts.displaySemi, fontSize: 20, lineHeight: 26 },

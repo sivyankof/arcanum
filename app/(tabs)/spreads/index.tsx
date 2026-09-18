@@ -3,7 +3,7 @@
  *  ещё и PREMIUM, спека 53), а вне окна события карточка приглушена и не нажимается — причина
  *  написана на ней самой датой. Доступ к premium-раскладу решает `spreadLocked` (спека 53):
  *  без права — пейвол; лунный гейт окна проверяется ПЕРВЫМ.
- *  Тап — экран расклада во вложенном стеке этого таба (спека 36); «Карта дня» ведёт на «Сегодня». */
+ *  Тап — экран расклада во вложенном стеке этого таба (спека 36); «Карта дня» ведёт на /daily. */
 import { router } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -53,9 +53,9 @@ export default function SpreadsScreen() {
     // ⚠️ Лунный гейт ПЕРВЫЙ: вне окна расклад не играется независимо от подписки (спека 51).
     if (s.moon && !moonSpreadState(s.moon, devNow ?? new Date())?.open) return;
     hapticTap();
-    // «Карта дня» раскладом не играется — это ритуал главного экрана (product-spec §4)
+    // «Карта дня» раскладом не играется — у карты дня свой экран (спека 72)
     if (s.id === 'card-of-day') {
-      router.navigate('/');
+      router.push('/daily');
       return;
     }
     if (spreadLocked(s, premium)) {
