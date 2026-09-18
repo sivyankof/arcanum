@@ -2,6 +2,7 @@
 import cardsJson from "../../content/cards.json";
 import spreadsJson from "../../content/spreads.json";
 import courseJson from "../../content/course.json";
+import fragmentsJson from "../../content/fragments.json";
 import { inLang, presentLang, type Lang, type Localized } from "./lang";
 // тип языка живёт в src/lib/lang.ts; реэкспорт — чтобы cardSearch/lesson/компоненты не меняли импорт
 export type { Lang };
@@ -110,6 +111,10 @@ export interface Spread {
 export const cards = (cardsJson as any).cards as TarotCard[];
 export const spreads = (spreadsJson as any).spreads as Spread[];
 export const course = (courseJson as any).modules as CourseModule[];
+
+/** фрагменты карт для игры «Угадай карту» (спека 72); тип повторяет FragmentBox структурно,
+ *  чтобы content.ts не зависел от fragmentGame.ts */
+export const fragments = fragmentsJson as Record<string, { cx: number; cy: number; size: number }[]>;
 
 export const cardById = new Map(cards.map((c) => [c.id, c]));
 export const spreadById = new Map(spreads.map((s) => [s.id, s]));
