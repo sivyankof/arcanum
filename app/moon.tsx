@@ -81,7 +81,7 @@ export default function MoonScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.today') }} />
+      <Stack.Screen options={{ headerBackTitle: tr('tabs.learn') }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{

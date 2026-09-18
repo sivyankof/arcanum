@@ -362,7 +362,7 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
 const TAB_BAR_INSET = 34; // типичный safe-area inset снизу на iPhone с Home Indicator
 const TAB_LABEL_LINE_HEIGHT = 1.35; // при этом реальная высота строки Manrope 10px ≈ 13.5px — измерено 26.08
 async function fixTabBarSafeArea(page, lang) {
-  const labels = ['today', 'course', 'cards', 'spreads', 'profile'].map((key) => i18nText(lang, 'tabs', key));
+  const labels = ['learn', 'course', 'cards', 'practice', 'profile'].map((key) => i18nText(lang, 'tabs', key));
   const r = await page.evaluate(({ inset, labels, lineHeight }) => {
     const W = window.innerWidth, H = window.innerHeight;
     const bar = [...document.querySelectorAll('*')].find((el) => {

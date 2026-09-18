@@ -16,7 +16,7 @@ import { availableLangs, toLang, type Lang } from "./lang";
 export const resources = {
   ru: {
     translation: {
-      tabs: { today: "Сегодня", course: "Курс", cards: "Карты", spreads: "Расклады", profile: "Профиль" },
+      tabs: { learn: "Учёба", course: "Курс", cards: "Карты", practice: "Практика", profile: "Профиль" },
       today: {
         title: "Карта дня", draw: "Вытянуть карту", drawn: "Ваша карта на сегодня",
         // подписи «Сегодня», раньше стоявшие тернаром lang === 'ru' мимо i18n (спека 27, раздел З)
@@ -389,7 +389,7 @@ export const resources = {
   },
   en: {
     translation: {
-      tabs: { today: "Today", course: "Course", cards: "Cards", spreads: "Spreads", profile: "Profile" },
+      tabs: { learn: "Learn", course: "Course", cards: "Cards", practice: "Practice", profile: "Profile" },
       today: {
         title: "Card of the Day", draw: "Draw a card", drawn: "Your card for today",
         tapToReveal: "TAP TO REVEAL",
@@ -709,10 +709,10 @@ export const resources = {
   es: {
     translation: {
       tabs: {
-        today: "Hoy",
+        learn: "Aprender",
         course: "Curso",
         cards: "Cartas",
-        spreads: "Tiradas",
+        practice: "Práctica",
         profile: "Perfil",
       },
       today: {
@@ -1099,10 +1099,10 @@ export const resources = {
   pt: {
     translation: {
       tabs: {
-        today: "Hoje",
+        learn: "Aprender",
         course: "Curso",
         cards: "Cartas",
-        spreads: "Tiragens",
+        practice: "Prática",
         profile: "Perfil",
       },
       today: {

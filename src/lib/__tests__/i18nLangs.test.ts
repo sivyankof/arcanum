@@ -35,9 +35,9 @@ describe('языки, включённые L-0: t() отдаёт строки С
   it.each(['es', 'pt'] as const)('%s — language выставлен, t() не английский', (lng) => {
     i18n.changeLanguage(lng);
     expect(i18n.language).toBe(lng);
-    const own = (resources[lng].translation as { tabs: { today: string } }).tabs.today;
-    expect(i18n.t('tabs.today')).toBe(own);
-    expect(own).not.toBe('Today');
+    const own = (resources[lng].translation as { tabs: { learn: string } }).tabs.learn;
+    expect(i18n.t('tabs.learn')).toBe(own);
+    expect(own).not.toBe('Learn');
     // плюральный ключ тоже резолвится в самом языке (формы _one/_other есть — сьют i18nPlurals)
     expect(i18n.t('course.lessons', { count: 2 })).not.toBe('2 LESSONS');
   });
@@ -80,4 +80,14 @@ describe('плейсхолдеры совпадают с en во всех язы
       expect(`${fam}: [${[...ownSet].sort()}]`).toBe(`${fam}: [${[...enSet].sort()}]`);
     }
   });
+});
+
+/** Переименование вкладок «Сегодня»/«Расклады» → «Учёба»/«Практика» (спека 72): проверяем
+ *  РЕСУРСЫ напрямую, а не через t() — фолбэк на английский тихо спрятал бы пропавший ключ
+ *  (то же правило hf-02, что и выше). */
+it('подписи вкладок: у каждого языка ровно пять ключей, старых нет (спека 72)', () => {
+  for (const lng of Object.keys(resources)) {
+    const tabs = (resources as any)[lng].translation.tabs;
+    expect(Object.keys(tabs).sort()).toEqual(['cards', 'course', 'learn', 'practice', 'profile']);
+  }
 });

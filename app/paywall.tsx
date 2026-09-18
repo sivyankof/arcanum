@@ -33,7 +33,7 @@ import { useTheme } from '../src/theme/useTheme';
 const BACK_TITLES: Record<string, string> = {
   settings: 'settings.title',
   course: 'tabs.course',
-  spreads: 'tabs.spreads',
+  spreads: 'tabs.practice',
   moon: 'moon.title',
   review: 'review.title',
 };
