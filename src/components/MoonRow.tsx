@@ -1,5 +1,5 @@
-/** Строка луны «☽ Растущая луна · 8-й лунный день» (.moonrow эталона) — на «Сегодня» и в шапке
- *  лунного календаря (спека 47; вынесена из app/(tabs)/index.tsx вторым потребителем).
+/** Строка луны «☽ Растущая луна» (.moonrow эталона) — на вкладке «Практика» и в шапке лунного
+ *  календаря; номер лунного дня снят задачей 72 (фазы — астрономия, нумерованные дни — астрология).
  *  Символ ☽ рисуем системным шрифтом: в Manrope его нет, поэтому обёртка — обычный Text без
  *  fontFamily. С `onPress` строка нажимаема (PressableScale — единая замена самодельным нажатиям)
  *  и несёт справа шеврон — вход в календарь; без `onPress` — просто текст (сам календарь). */
@@ -14,13 +14,12 @@ import { Txt } from './Txt';
 
 type Props = {
   phase: MoonPhase;
-  day: number;
   /** тап по строке (вход в лунный календарь); без него строка не нажимаема и без шеврона */
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
 };
 
-export function MoonRow({ phase, day, onPress, style }: Props) {
+export function MoonRow({ phase, onPress, style }: Props) {
   const t = useTheme();
   const { t: tr } = useTranslation();
 
@@ -28,7 +27,6 @@ export function MoonRow({ phase, day, onPress, style }: Props) {
     <Text style={[st.text, { color: t.muted }]}>
       <Text>☽ </Text>
       <Txt style={{ color: t.head, fontWeight: '600' }}>{tr(`moon.${phase}`)}</Txt>
-      <Txt style={{ color: t.muted }}>{` · ${tr('moon.day', { n: day })}`}</Txt>
     </Text>
   );
 

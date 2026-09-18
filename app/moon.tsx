@@ -81,7 +81,7 @@ export default function MoonScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.learn') }} />
+      <Stack.Screen options={{ headerBackTitle: tr('tabs.practice') }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
@@ -99,7 +99,7 @@ export default function MoonScreen() {
         </FadeUp>
 
         <FadeUp index={1}>
-          <MoonRow phase={moon.phase} day={moon.day} />
+          <MoonRow phase={moon.phase} />
           <View style={st.grid}>
             {labels.map((l) => (
               <Txt key={l} style={[st.weekday, { width: cellSize, color: t.muted }]}>

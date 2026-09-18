@@ -48,11 +48,10 @@ export const resources = {
         resultLine: "ВЕРНО {{right}} ИЗ {{total}}",
         again: "Ещё раз",
       },
-      // фазы луны и лунный день — строка под разделителем на «Сегодня» (logic-spec §6);
-      // title/newHint/fullHint — экран лунного календаря (спека 47)
+      // фазы луны — строка на вкладке «Практика» (logic-spec §6); title/newHint/fullHint —
+      // экран лунного календаря (спека 47); лунный день снят из интерфейса задачей 72
       moon: {
         new: "Новолуние", waxing: "Растущая луна", full: "Полнолуние", waning: "Убывающая луна",
-        day: "{{n}}-й лунный день",
         title: "Лунный календарь",
         newHint: "Время задумывать новое",
         fullHint: "Время подводить итоги",
@@ -446,7 +445,6 @@ export const resources = {
       },
       moon: {
         new: "New moon", waxing: "Waxing moon", full: "Full moon", waning: "Waning moon",
-        day: "lunar day {{n}}",
         title: "Moon calendar",
         newHint: "A time to begin",
         fullHint: "A time to take stock",
@@ -802,7 +800,6 @@ export const resources = {
         waxing: "Luna creciente",
         full: "Luna llena",
         waning: "Luna menguante",
-        day: "día lunar {{n}}",
         title: "Calendario lunar",
         newHint: "Tiempo de comenzar",
         fullHint: "Tiempo de hacer balance",
@@ -1218,7 +1215,6 @@ export const resources = {
         waxing: "Lua crescente",
         full: "Lua cheia",
         waning: "Lua minguante",
-        day: "{{n}}º dia lunar",
         title: "Calendário lunar",
         newHint: "Hora de começar algo novo",
         fullHint: "Hora de fazer um balanço",
