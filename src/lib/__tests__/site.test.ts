@@ -8,6 +8,14 @@ import path from 'path';
 import { PRIVACY_URL, SITE_URL, SUPPORT_URL, TERMS_URL } from '../appInfo';
 import { SUPPORT_EMAIL } from '../feedback';
 import { resources } from '../i18n';
+import { storeNameFor } from '../purchasesEnv';
+
+/** about.dataText/termsText параметризованы `{{store}}` (спека 72, финальное ревью, находка F8:
+ *  Apple 2.3.10 — iOS-сборка не должна называть Google Play). У сайта аккаунта нет, поэтому
+ *  страница остаётся с ОБОИМИ магазинами — тем же значением, что и веб-сборка приложения
+ *  (`storeNameFor('web')`), и сравнение подставляет его в сырую строку ресурса перед проверкой. */
+const STORE_WEB = storeNameFor('web');
+const withStore = (s: string) => s.replace(/\{\{store\}\}/g, STORE_WEB);
 
 const SITE = path.resolve(__dirname, '../../../site');
 
@@ -79,7 +87,7 @@ describe.each(LANGS)('%s: контракт «страница = приложен
     const page = textOf(read('privacy.html'), lang);
     const paragraphs = about.dataText.split('\n\n');
     expect(paragraphs.length).toBeGreaterThanOrEqual(4);
-    for (const paragraph of paragraphs) expect(page).toContain(norm(paragraph));
+    for (const paragraph of paragraphs) expect(page).toContain(norm(withStore(paragraph)));
   });
 
   /** Якорь инструкции удаления (URL для Data Safety — `privacy.html#deletion`): `id` на
@@ -93,7 +101,7 @@ describe.each(LANGS)('%s: контракт «страница = приложен
   });
 
   it('terms.html содержит about.termsText дословно', () => {
-    expect(textOf(read('terms.html'), lang)).toContain(norm(about.termsText));
+    expect(textOf(read('terms.html'), lang)).toContain(norm(withStore(about.termsText)));
   });
 
   it('terms.html содержит about.disclaimer дословно', () => {

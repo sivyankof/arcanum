@@ -233,9 +233,21 @@ describe('цены не зашиты в код (спека 62)', () => {
   );
 });
 
-describe('строки пейвола не называют магазин литералом (спека 72)', () => {
+describe('строки пейвола и «О приложении» не называют магазин литералом (спека 72)', () => {
+  // about.dataText/termsText — находка финального ревью F8/F23: параметризованы {{store}} тем же
+  // приёмом, что paywall.legal, иначе iOS-сборка называла бы Google Play (Apple 2.3.10)
   it.each(Object.keys(resources))('%s: только {{store}}, ни Google Play, ни App Store текстом', (lng) => {
-    const flat = JSON.stringify((resources as Record<string, { translation: { paywall: unknown } }>)[lng].translation.paywall);
+    const translation = (resources as Record<string, { translation: { paywall: unknown; about: unknown } }>)[lng]
+      .translation;
+    const flat = JSON.stringify({ paywall: translation.paywall, about: translation.about });
     expect(flat).not.toMatch(/Google Play|App Store/);
+  });
+
+  it.each(Object.keys(resources))('%s: about.dataText и about.termsText несут {{store}}', (lng) => {
+    const about = (resources as Record<string, { translation: { about: { dataText: string; termsText: string } } }>)[
+      lng
+    ].translation.about;
+    expect(about.dataText).toMatch(/\{\{store\}\}/);
+    expect(about.termsText).toMatch(/\{\{store\}\}/);
   });
 });

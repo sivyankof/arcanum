@@ -19,7 +19,15 @@ export function isExpoGo(): boolean {
   return Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 }
 
-/** Имя магазина в текстах пейвола (спека 72; Apple 2.3.10 — в iOS-сборке не называть чужой магазин).
- *  Не переводится. На вебе магазина нет — называем оба. */
-export const STORE_NAME: string =
-  Platform.OS === 'ios' ? 'App Store' : Platform.OS === 'android' ? 'Google Play' : 'App Store / Google Play';
+/** Имя магазина по платформе (спека 72, финальное ревью: раньше решение жило прямо в присвоении
+ *  STORE_NAME и не тестировалось — подмена веток («ios» → «Google Play») прошла бы tsc и весь
+ *  jest молча). Не переводится. На вебе магазина нет — называем оба. */
+export function storeNameFor(os: string): string {
+  if (os === 'ios') return 'App Store';
+  if (os === 'android') return 'Google Play';
+  return 'App Store / Google Play';
+}
+
+/** Имя магазина в текстах пейвола и «О приложении» (Apple 2.3.10 — в iOS-сборке не называть
+ *  чужой магазин): `{{store}}` в переводах, паралель paywall.legal/about.dataText/termsText. */
+export const STORE_NAME: string = storeNameFor(Platform.OS);
