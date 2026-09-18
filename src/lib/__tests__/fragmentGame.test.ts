@@ -44,6 +44,21 @@ describe('buildFragmentSession', () => {
     for (let seed = 1; seed <= 20; seed++)
       expect(buildFragmentSession(p, lcg(seed)).some((q) => q.cardId === 'empty')).toBe(false);
   });
+
+  it('фрагмент карты выбирается случайно, а не всегда один и тот же (спека 72, находка F10)', () => {
+    // у каждой карты пула ровно 2 бокса — за 150 сидов по 10 вопросов оба обязаны прозвучать
+    // хотя бы раз на каждую карту. Мутация «всегда boxes[0]» (или «всегда последний») даёт
+    // размер множества индексов 1 и красит проверку — проверено вручную на копии в памяти.
+    const p = pool(22);
+    const seenIndex: Record<string, Set<number>> = {};
+    for (let seed = 1; seed <= 150; seed++) {
+      for (const q of buildFragmentSession(p, lcg(seed))) {
+        (seenIndex[q.cardId] ??= new Set()).add(p[q.cardId].indexOf(q.box));
+      }
+    }
+    expect(Object.keys(seenIndex).length).toBe(22); // периметр: у сессий побывали все карты пула
+    for (const id of Object.keys(seenIndex)) expect(seenIndex[id].size).toBeGreaterThan(1);
+  });
 });
 
 describe('boxEdges и fragmentLayout', () => {
@@ -64,6 +79,14 @@ describe('boxEdges и fragmentLayout', () => {
     expect(r.left).toBeLessThanOrEqual(0);
     expect(r.top).toBeLessThanOrEqual(0);
     expect(r.left + r.width).toBeGreaterThanOrEqual(300);
+  });
+
+  it('t = 0: у ПРАВОГО/НИЖНЕГО края скана картинка тоже не оголяет квадрат (зеркало предыдущего — иначе клампится только левый/верхний край)', () => {
+    const r = fragmentLayout({ cx: 0.95, cy: 0.95, size: 0.3 }, 300);
+    expect(r.left).toBeLessThanOrEqual(0);
+    expect(r.top).toBeLessThanOrEqual(0);
+    expect(r.left + r.width).toBeGreaterThanOrEqual(300);
+    expect(r.top + r.height).toBeGreaterThanOrEqual(300);
   });
   it('t = 1: карта целиком вписана по высоте и стоит по центру', () => {
     const r = fragmentLayout({ cx: 0.2, cy: 0.8, size: 0.3 }, 300, CARD_RATIO, 1);
