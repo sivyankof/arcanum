@@ -10,11 +10,8 @@ import { ReduceMotion, useSharedValue, withDelay, withTiming } from 'react-nativ
 import { levelFromXp, levelTitleKey, nextLevelXp } from '../lib/xp';
 import { fonts, radius, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
-import { PROGRESS_EASE, ProgressBar } from './ProgressBar';
+import { PROGRESS_EASE, PROGRESS_FILL_DELAY, PROGRESS_FILL_MS, ProgressBar } from './ProgressBar';
 import { Txt } from './Txt';
-
-const FILL_DELAY = 400; // эталон fill2: задержка .4s
-const FILL_MS = 1400; // эталон fill2: ход 1.4s
 
 export function LevelCard({ xp }: { xp: number }) {
   const t = useTheme();
@@ -26,8 +23,8 @@ export function LevelCard({ xp }: { xp: number }) {
   const fill = useSharedValue(0);
   React.useEffect(() => {
     fill.value = withDelay(
-      FILL_DELAY,
-      withTiming(xp / next, { duration: FILL_MS, easing: PROGRESS_EASE, reduceMotion: ReduceMotion.System }),
+      PROGRESS_FILL_DELAY,
+      withTiming(xp / next, { duration: PROGRESS_FILL_MS, easing: PROGRESS_EASE, reduceMotion: ReduceMotion.System }),
     );
   }, [fill, xp, next]);
 
