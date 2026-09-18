@@ -1347,7 +1347,7 @@ export const resources = {
         disclaimer: "Para entretenimento e aprendizado: o app não prevê o futuro nem substitui a orientação de um profissional.",
         start: "COMEÇAR A APRENDER",
         howTitle: "Como o curso funciona",
-        // «aula», não «lição» — termo já usado em course.lessons/startLesson deste idioma
+        // «aula», не «lição» — термин уже занят course.lessons/startLesson этого языка
         how1: "32 aulas de cinco minutos — da estrutura do baralho às tiragens",
         how2: "Um quiz curto depois de cada aula",
         how3: "O treino lembra quais cartas está na hora de revisar",
