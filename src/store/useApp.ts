@@ -47,7 +47,8 @@ export interface AppState {
   lastDrawDate: string | null;
   /** Заморозки серии (logic-spec §2, спека 10): запас (0..FREEZE_MAX), месяц последнего
    *  начисления ('YYYY-MM', null до первой синхронизации) и день последней траты —
-   *  по нему «Сегодня» весь день спасения показывает строку «Серию спасла заморозка». */
+   *  по нему StatsPills («Учёба», карта дня) весь день спасения показывает строку
+   *  «Серию спасла заморозка». */
   freezes: number;
   freezeMonth: string | null;
   freezeSpentDate: string | null;

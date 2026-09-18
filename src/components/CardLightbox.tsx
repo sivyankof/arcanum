@@ -40,8 +40,8 @@ const CARD_SHADOW = '0px 30px 80px rgba(0,0,0,0.65)';
 // закрытие делят panY и closing — оба ехали с одинаковым конфигом, дублировавшимся дважды (задача 6)
 const CLOSE_ANIM = { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System };
 
-// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare из «Сегодня»;
-// геометрия GLARE_ANGLE/COLORS/LOCATIONS — общая с домашним экраном, theme/glow.ts)
+// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare карты дня,
+// `v-daily` эталона; геометрия GLARE_ANGLE/COLORS/LOCATIONS — общая с app/daily.tsx, theme/glow.ts)
 const GLARE_DELAY = OPEN_MS + 120;
 const GLARE_MS = 900;
 

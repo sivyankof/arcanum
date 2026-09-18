@@ -35,7 +35,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const t = useTheme();
   const lang = useApp((s) => s.lang);
-  // сплэш держится до гидрации persist: иначе у нового пользователя мигнёт «Сегодня»
+  // сплэш держится до гидрации persist: иначе у нового пользователя мигнёт «Учёба»
   // до редиректа на онбординг, а у старого — наоборот (спека 09)
   const [hydrated, setHydrated] = useState(() => useApp.persist.hasHydrated());
   const onboarded = useApp((s) => s.profile.onboarded);
@@ -124,7 +124,7 @@ export default function RootLayout() {
               animation: 'fade',
             }}
           />
-          {/* заметка к карте дня — модалка: экран ввода не должен уводить с «Сегодня»,
+          {/* заметка к карте дня — модалка: экран ввода не должен уводить с карты дня,
               а свайп вниз читается как «закрыть» (перехватывается на beforeRemove, спека 05) */}
           <Stack.Screen
             name="note/[date]"
