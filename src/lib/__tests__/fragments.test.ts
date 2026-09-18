@@ -6,9 +6,9 @@ import {
 const majors = cards.filter((c) => c.arcana === 'major').map((c) => c.id);
 
 describe('content/fragments.json (спека 72)', () => {
-  it('у каждого старшего аркана не меньше двух фрагментов', () => {
+  it('у каждого старшего аркана не меньше трёх фрагментов', () => {
     expect(majors).toHaveLength(22);
-    for (const id of majors) expect([id, (fragments[id] ?? []).length >= 2]).toEqual([id, true]);
+    for (const id of majors) expect([id, (fragments[id] ?? []).length >= 3]).toEqual([id, true]);
   });
   it('все id существуют в колоде', () => {
     const ids = new Set(cards.map((c) => c.id));
