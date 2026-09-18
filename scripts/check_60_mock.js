@@ -8,7 +8,7 @@
  *
  * Запуск (playwright в проекте не установлен, берётся из кэша npx — см. AGENTS.md):
  *   NODE_PATH=<путь к node_modules с playwright> node scripts/check_60_mock.js
- *   --mutate <1..10>  — испортить макет В ПАМЯТИ и убедиться, что проверка N краснеет
+ *   --mutate <1..12>  — испортить макет В ПАМЯТИ и убедиться, что проверка N краснеет
  *                       (правило проекта: зелёный с первого раза — искать ошибку в проверке).
  */
 const path = require('path');
@@ -77,6 +77,23 @@ const check = (n, title, ok, detail = '') => results.push({ n, title, ok, detail
       // задача 72: регрессия — таб-бар снова зовёт первую вкладку «Сегодня» (проверка 12)
       if (m === 10) {
         document.querySelector('#nav [data-v="v-home"] small').textContent = 'Сегодня';
+      }
+      // задача 72: регрессия — один из новых экранов пропал (проверка 10). Проверка 1 тоже
+      // ходит по v-fragment (он есть в STACK) РАНЬШЕ проверки 10 — прятать элемент сразу
+      // нельзя, иначе show('v-fragment') упадёт на null раньше, чем мы доберёмся до нужной
+      // проверки. Прячем только со ВТОРОГО обращения к id: первое — та самая навигация
+      // проверки 1, второе — собственный getElementById проверки 10.
+      if (m === 11) {
+        const orig = document.getElementById.bind(document);
+        let hits = 0;
+        document.getElementById = (id) => {
+          if (id === 'v-fragment') { hits += 1; if (hits > 1) return null; }
+          return orig(id);
+        };
+      }
+      // задача 72: регрессия — «лунный день» вернулся в текст макета (проверка 11)
+      if (m === 12) {
+        document.body.insertAdjacentHTML('beforeend', '<span style="display:none">лунный день</span>');
       }
     }, mutation);
   }

@@ -307,9 +307,6 @@ padding:14px 16px;margin-top:12px;text-align:left;backdrop-filter:blur(8px)}
 border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px;text-align:left;backdrop-filter:blur(8px)}
 .ob .how svg{width:18px;height:18px;flex:none;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .ob .how span{font-size:13px;line-height:1.5;color:var(--text)}
-.ob .reveal{width:150px;border-radius:12px;border:1px solid var(--frame);overflow:hidden;
-margin:26px 0 16px;box-shadow:0 20px 50px var(--glow);animation:hov 4s ease-in-out infinite}
-.ob .reveal img{width:100%;display:block}
 .ob .btn{width:100%;padding:15px;border:none;border-radius:16px;cursor:pointer;margin-top:auto;
 background:linear-gradient(120deg,#caa45a,#efd9a2 50%,#caa45a);color:#241c0d;font-weight:800;
 font-size:13px;letter-spacing:1.5px;font-family:var(--sans);box-shadow:0 12px 30px var(--glow)}
@@ -694,14 +691,6 @@ display:flex;align-items:center;justify-content:center;color:var(--muted);font-s
 .sp.splocked{opacity:.45;cursor:default}
 .moonspread.mslocked{opacity:.45;cursor:default}
 
-/* 4. сезонные события */
-.evbanner{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--frame);
-border-radius:16px;padding:12px 15px;margin-top:14px;backdrop-filter:blur(10px);cursor:pointer}
-.evbanner .evi{font-size:19px;color:var(--accent)}
-.evbanner .evt{flex:1}
-.evbanner .evt small{display:block;font-size:8.5px;letter-spacing:2px;color:var(--accent)}
-.evbanner .evt b{font-family:var(--serif);font-size:15px;color:var(--head);font-weight:600;display:block;margin-top:1px}
-.evbanner .evt span{font-size:10px;color:var(--muted)}
 .qbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:9px}
 .qbar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 .qstep{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--text)}
@@ -854,7 +843,7 @@ border:.5px solid rgba(226,189,114,.3)}
       <span class="ri"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.9-3M4 13a8 8 0 0 0 14.9 3"/><path d="M20 4v4h-4M4 20v-4h4"/></svg></span>
     </div>
     <!-- игра «Угадай карту по фрагменту» (спека 72, раздел 10) -->
-    <div class="revcard fadeup d5" onclick="show('v-fragment')">
+    <div class="revcard fadeup d5" onclick="fragRestart();show('v-fragment')">
       <span><small>ИГРА</small><b>Угадай карту</b>
         <span style="display:block;font-size:12px;color:var(--muted);margin-top:2px">Узнайте аркан по детали рисунка</span></span>
       <span class="ri"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></span>
@@ -884,7 +873,7 @@ border:.5px solid rgba(226,189,114,.3)}
       <div class="lbl" style="text-align:center">ИГРА</div>
       <div class="lp" id="fraglp">ВЕРНО 0 ИЗ 0</div>
       <div class="xpn" id="fragxp">+0 XP</div>
-      <button class="cta" style="margin-top:14px" onclick="fragRestart()">ГОТОВО</button>
+      <button class="cta" style="margin-top:14px" onclick="show('v-home')">ГОТОВО</button>
       <span class="trlink" onclick="fragRestart()">Ещё раз</span>
     </div>
   </div>
@@ -1001,7 +990,7 @@ border:.5px solid rgba(226,189,114,.3)}
     <div class="rule fadeup d2"><span>✦</span></div>
     <div class="moonrow fadeup d3" onclick="show('v-moon')" style="cursor:pointer">☽ <b>Убывающая луна</b> <svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></div>
     <!-- игра «Угадай карту по фрагменту» (спека 72, раздел 10) — первым блоком ленты, под луной -->
-    <div class="revcard fadeup d3" style="margin-top:12px" onclick="show('v-fragment')">
+    <div class="revcard fadeup d3" style="margin-top:12px" onclick="fragRestart();show('v-fragment')">
       <span><small>ИГРА</small><b>Угадай карту</b>
         <span style="display:block;font-size:12px;color:var(--muted);margin-top:2px">Узнайте аркан по детали рисунка</span></span>
       <span class="ri"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></span>
