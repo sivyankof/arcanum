@@ -18,3 +18,8 @@ export function apiKey(): string | undefined {
 export function isExpoGo(): boolean {
   return Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 }
+
+/** Имя магазина в текстах пейвола (спека 72; Apple 2.3.10 — в iOS-сборке не называть чужой магазин).
+ *  Не переводится. На вебе магазина нет — называем оба. */
+export const STORE_NAME: string =
+  Platform.OS === 'ios' ? 'App Store' : Platform.OS === 'android' ? 'Google Play' : 'App Store / Google Play';

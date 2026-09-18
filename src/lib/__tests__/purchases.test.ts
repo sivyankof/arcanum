@@ -232,3 +232,10 @@ describe('цены не зашиты в код (спека 62)', () => {
     },
   );
 });
+
+describe('строки пейвола не называют магазин литералом (спека 72)', () => {
+  it.each(Object.keys(resources))('%s: только {{store}}, ни Google Play, ни App Store текстом', (lng) => {
+    const flat = JSON.stringify((resources as Record<string, { translation: { paywall: unknown } }>)[lng].translation.paywall);
+    expect(flat).not.toMatch(/Google Play|App Store/);
+  });
+});
