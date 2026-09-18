@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../../src/components/FadeUp';
+import { FragmentPanel } from '../../../src/components/FragmentPanel';
 import { MoonRow } from '../../../src/components/MoonRow';
 import { PremiumBadge } from '../../../src/components/PremiumBadge';
 import { PressableScale } from '../../../src/components/PressableScale';
@@ -92,6 +93,12 @@ export default function SpreadsScreen() {
           <MoonRow phase={moonInfo(devNow ?? now).phase} onPress={() => router.push('/moon')} />
         </FadeUp>
 
+        <FadeUp index={2}>
+          <View style={{ marginTop: spacing.l }}>
+            <FragmentPanel onPress={() => router.push({ pathname: '/fragment', params: { from: 'practice' } })} />
+          </View>
+        </FadeUp>
+
         {spreads.map((s, si) => {
           const moon = s.moon ? moonSpreadState(s.moon, devNow ?? now) : null;
           const locked = !!s.moon && !moon?.open;
@@ -101,7 +108,7 @@ export default function SpreadsScreen() {
           // доступ решает spreadLocked внутри open(), а не флаг сам по себе (тот же приём, что в ModuleHeader)
           const paid = !s.free; // показ флага
           return (
-            <FadeUp key={s.id} index={Math.min(2 + si, 8)}>
+            <FadeUp key={s.id} index={Math.min(3 + si, 8)}>
               <PressableScale
                 onPress={() => open(s, locked)}
                 disabled={locked}

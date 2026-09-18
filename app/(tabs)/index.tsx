@@ -7,6 +7,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DailyCardRow } from '../../src/components/DailyCardRow';
 import { FadeUp } from '../../src/components/FadeUp';
+import { FragmentPanel } from '../../src/components/FragmentPanel';
 import { NextLessonCard } from '../../src/components/NextLessonCard';
 import { ReviewPanel } from '../../src/components/ReviewPanel';
 import { Rule } from '../../src/components/Rule';
@@ -81,7 +82,11 @@ export default function LearnScreen() {
         </FadeUp>
         <FadeUp index={3} style={st.panels}>
           <ReviewPanel summary={reviewSum} onPress={() => router.push('/review')} />
-          {/* панель игры «Угадай карту» встаёт сюда задачей 12 плана */}
+          {/* обёртка держит зазор до «Карты дня» (12, как у ReviewPanel выше): у самой FragmentPanel
+              своего marginBottom нет — на «Практике» её сосед снизу несёт отступ сам (спека 72) */}
+          <View style={{ marginBottom: spacing.m }}>
+            <FragmentPanel onPress={() => router.push({ pathname: '/fragment', params: { from: 'learn' } })} />
+          </View>
           <DailyCardRow
             card={drawn ? cardById.get(drawn.cardId) ?? null : null}
             reflect={reflect}

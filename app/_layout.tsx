@@ -151,6 +151,8 @@ export default function RootLayout() {
           {/* пейвол Premium (спека 53): корневой стек, прозрачная шапка; объявлен здесь, чтобы не
               пройти мимо гарда онбординга (урок 09: незаявленный маршрут роутер добавляет сам) */}
           <Stack.Screen name="paywall" options={transparentHeader(t)} />
+          {/* игра «Угадай карту» (спека 72): корневой стек, прозрачная шапка; под гардом онбординга (урок 09) */}
+          <Stack.Screen name="fragment" options={transparentHeader(t)} />
         </Stack.Protected>
       </Stack>
     </GestureHandlerRootView>

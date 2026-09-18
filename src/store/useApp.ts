@@ -18,7 +18,7 @@ import { mergeSettings, type AppSettings } from '../lib/settings';
 import { SPREADS_MAX, type SpreadDraw } from '../lib/spread';
 import { EASE_START, type SrsGrade } from '../lib/srs';
 import { advanceStreak, FREEZE_MAX, grantFreezes } from '../lib/streak';
-import { reflectXp, XP_DRAW, XP_SPREAD } from '../lib/xp';
+import { reflectXp, XP_DRAW, XP_REVIEW, XP_SPREAD } from '../lib/xp';
 import type { ThemeMode } from '../theme/theme';
 
 // тип языка живёт в src/lib/lang.ts рядом со словарями и детекцией; здесь — реэкспорт
@@ -96,6 +96,8 @@ export interface AppState {
   /** Оценка карты в тренажёре: SM-2 + счётчик новых + XP по правилу applyReview; возвращает
    *  начисленный XP (0 или XP_REVIEW). */
   reviewCard: (cardId: string, grade: SrsGrade) => number;
+  /** Игра «Угадай карту» (спека 72): +XP_REVIEW за верный ответ. Persist не меняется — поле xp уже есть. */
+  gainFragmentXp: () => void;
   /** DEV: обнулить повторение (состояния и счётчик дня). */
   resetSrs: () => void;
   /** DEV: «состарить» повторение на день — все due на сутки назад, счётчик новых сброшен;
@@ -231,6 +233,7 @@ export const useApp = create<AppState>()(
         return r.gained;
       },
       resetSrs: () => set({ srs: {}, reviewDay: REVIEW_DAY_DEFAULT }),
+      gainFragmentXp: () => set({ xp: get().xp + XP_REVIEW }),
       devAgeSrs: () =>
         set({
           srs: Object.fromEntries(

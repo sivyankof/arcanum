@@ -21,7 +21,7 @@ import { CtaButton } from '../../src/components/CtaButton';
 import { EmptyState } from '../../src/components/EmptyState';
 import { FadeUp } from '../../src/components/FadeUp';
 import { LessonResult } from '../../src/components/LessonResult';
-import { PressableScale } from '../../src/components/PressableScale';
+import { OptionButton } from '../../src/components/OptionButton';
 import { ProgressBar } from '../../src/components/ProgressBar';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
@@ -248,24 +248,9 @@ export default function LessonScreen() {
                     </View>
                   )}
                   <Txt style={[st.q, { color: t.head }]}>{inLang(step.question.q, lang)}</Txt>
-                  {step.question.options.map((o, i) => {
-                    const state = optState(i);
-                    return (
-                      <PressableScale
-                        key={i}
-                        onPress={() => onPick(i)}
-                        style={[
-                          st.opt,
-                          { backgroundColor: t.panel, borderColor: t.line },
-                          // фон верного — success с альфой 0.12 (1F), как rgba(90,160,126,.12) эталона
-                          state === 'ok' && { borderColor: t.success, backgroundColor: `${t.success}1F` },
-                          state === 'no' && { borderColor: t.danger, opacity: 0.6 },
-                        ]}
-                      >
-                        <Txt style={[st.optTxt, { color: t.text }]}>{inLang(o, lang)}</Txt>
-                      </PressableScale>
-                    );
-                  })}
+                  {step.question.options.map((o, i) => (
+                    <OptionButton key={i} label={inLang(o, lang)} state={optState(i)} onPress={() => onPick(i)} />
+                  ))}
                   {answered && (
                     <Txt style={[st.explain, { color: t.text }]}>
                       <Txt
@@ -335,9 +320,6 @@ const st = StyleSheet.create({
     marginBottom: spacing.l,
   },
   qIm: { width: '100%', height: '100%' },
-  // вариант ответа (.opt): бордер 1.5, radius 14, паддинг 13×16, Body 14
-  opt: { borderWidth: 1.5, borderRadius: 14, paddingVertical: 13, paddingHorizontal: 16, marginTop: 9 },
-  optTxt: { fontSize: 14, lineHeight: 20 },
   explain: { fontFamily: fonts.display, fontSize: 15, lineHeight: 22, textAlign: 'center', marginTop: spacing.l },
   // шаг карты (.lcard)
   lcard: { flexDirection: 'row', alignItems: 'center', gap: 14, borderWidth: 1, borderRadius: radius.l, padding: 14, marginTop: spacing.m },
