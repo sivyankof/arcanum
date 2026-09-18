@@ -86,7 +86,14 @@ const PREMIUM = { active: true, source: 'dev', until: null };
 /** Пары. mock — id вью в макете; marker — текст, обязанный быть на экране приложения.
  *  mockSetup — JS, выполняемый в макете после show(id) (состояния, которых демобар не показывает). */
 const PAIRS = [
-  { name: 'today',      route: '/',                        mock: 'v-today',     marker: 'КАРТА ДНЯ' },
+  // ⚠️ Маркер НЕ «УЧЁБА» (спека 72, урок 2 ui-verification.md): таб-бар рисует все пять подписей
+  // на КАЖДОМ табе разом, и «Учёба» видна даже на «Профиле» — по такому маркеру подмена
+  // маршрута (редирект на чужой таб) прошла бы незамеченной. Берёт CTA героя: сид ниже (М1+М2
+  // пройдены, без Premium) даёт состояние `locked` → «ОТКРЫТЬ PREMIUM», текста нет ни в
+  // таб-баре, ни на соседних экранах.
+  { name: 'home',       route: '/',                        mock: 'v-home',      marker: 'ОТКРЫТЬ PREMIUM' },
+  { name: 'daily',      route: '/daily',                   mock: 'v-daily',     marker: 'КАРТА ДНЯ' },
+  { name: 'fragment',   route: '/fragment',                mock: 'v-fragment',  marker: 'Какая это карта?' },
   { name: 'course',     route: '/course',                  mock: 'v-course',    marker: 'Курс' },
   { name: 'cards',      route: '/cards',                   mock: 'v-cards',     marker: 'Карты' },
   { name: 'spreads',    route: '/spreads',                 mock: 'v-spreads',   marker: 'Расклады' },
