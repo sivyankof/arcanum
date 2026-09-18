@@ -170,7 +170,7 @@ export const resources = {
       },
       profile: {
         // огонёк у серии рисуется ИКОНКОЙ рядом с подписью (StatBox), а не эмодзи в строке:
-        // на «Сегодня» та же серия уже иконочная, два разных огня выглядели бы небрежностью
+        // в StatsPills та же серия уже иконочная, два разных огня выглядели бы небрежностью
         title: "Профиль", overline: "ВАШ ПУТЬ", streak: "СЕРИЯ", cards: "КАРТ ДНЯ",
         freeze: "ЗАМОРОЗКА",
         arcana: "АРКАН РОЖДЕНИЯ", arcanaCta: "Указать дату рождения",
@@ -253,13 +253,13 @@ export const resources = {
         deckTitle: "О колоде",
         deckText: "В приложении используется классическая колода Райдер–Уэйт. Рисунки карт выполнила художница Памела Колман Смит в 1909 году; сегодня они находятся в общественном достоянии.",
         dataTitle: "Данные и конфиденциальность",
-        dataText: "Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов, серверов, аналитики и рекламы: имя, дата рождения, заметки и прогресс не покидают телефон и не передаются третьим лицам.\n\nЕдинственное исключение — подписка: покупку подтверждает ваш магазин (App Store или Google Play), а право на Premium проверяет сервис RevenueCat — он получает чек покупки и анонимный идентификатор установки, без имени, даты рождения и содержимого дневника.\n\nРезервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.\n\nДанные о подписке у RevenueCat — историю покупок Arcanum и анонимный идентификатор установки — можно удалить по запросу: напишите на arcanum.tarot@icloud.com с темой «Удаление данных» и приложите номер заказа из чека App Store или Google Play, чтобы мы нашли вашу запись (имени и аккаунта в ней нет). Удалим в течение 30 дней и подтвердим письмом. Сама подписка остаётся у магазина, а право на Premium можно вернуть кнопкой «Восстановить покупки» на экране подписки.",
+        dataText: "Все ваши данные — дневник, серия, прогресс курса и настройки — хранятся только на этом устройстве. У приложения нет аккаунтов, серверов, аналитики и рекламы: имя, дата рождения, заметки и прогресс не покидают телефон и не передаются третьим лицам.\n\nЕдинственное исключение — подписка: покупку подтверждает ваш магазин ({{store}}), а право на Premium проверяет сервис RevenueCat — он получает чек покупки и анонимный идентификатор установки, без имени, даты рождения и содержимого дневника.\n\nРезервную копию вы создаёте сами — кнопкой «Экспорт данных» в настройках — и храните где удобно. Удаление приложения удаляет все его данные с устройства.\n\nДанные о подписке у RevenueCat — историю покупок Arcanum и анонимный идентификатор установки — можно удалить по запросу: напишите на arcanum.tarot@icloud.com с темой «Удаление данных» и приложите номер заказа из чека {{store}}, чтобы мы нашли вашу запись (имени и аккаунта в ней нет). Удалим в течение 30 дней и подтвердим письмом. Сама подписка остаётся у магазина, а право на Premium можно вернуть кнопкой «Восстановить покупки» на экране подписки.",
         // ссылка на privacy.html (спека 54)
         openPrivacy: "Открыть политику в браузере",
         sourcesTitle: "Источники",
         sourcesText: "Названия и изображения карт подготовлены на основе открытого проекта tarot-api (лицензия MIT).",
         termsTitle: "Условия подписки",
-        termsText: "Arcanum Premium — подписка с автоматическим продлением: месячная или годовая. Оплата списывается через ваш аккаунт App Store или Google Play при подтверждении покупки и продлевается автоматически, пока вы не отмените подписку в настройках аккаунта магазина — не позже чем за сутки до конца текущего периода. Бесплатные функции приложения остаются доступными без подписки.",
+        termsText: "Arcanum Premium — подписка с автоматическим продлением: месячная или годовая. Оплата списывается через ваш аккаунт {{store}} при подтверждении покупки и продлевается автоматически, пока вы не отмените подписку в настройках аккаунта магазина — не позже чем за сутки до конца текущего периода. Бесплатные функции приложения остаются доступными без подписки.",
         // ссылка на terms.html (спека 54)
         openTerms: "Открыть условия в браузере",
       },
@@ -402,6 +402,9 @@ export const resources = {
         more: "Ещё {{n}}",
         emptyDeck: "Повторять пока нечего — пройдите урок, и карты появятся здесь.",
         toCourse: "К КУРСУ",
+        // тренажёр открывается и с «Курса», и с «Учёбы» (спека 72, финальное ревью F2/F5) — подпись
+        // пустого состояния следует за тем же from, что и подпись кнопки «назад»
+        toLearn: "К УЧЁБЕ",
       },
     },
   },
@@ -608,13 +611,13 @@ export const resources = {
         deckTitle: "About the deck",
         deckText: "The app uses the classic Rider–Waite deck. The card illustrations were created by artist Pamela Colman Smith in 1909 and are now in the public domain.",
         dataTitle: "Data and privacy",
-        dataText: "All your data — journal, streak, course progress, and settings — is stored only on this device. The app has no accounts, servers, analytics, or ads: your name, birth date, notes, and progress never leave the phone and are not shared with anyone.\n\nThe one exception is the subscription: the purchase is confirmed by your store (App Store or Google Play), and your Premium access is verified by RevenueCat, which receives the purchase receipt and an anonymous install identifier — no name, birth date, or journal contents.\n\nYou create backups yourself — with “Export data” in Settings — and keep them wherever you like. Deleting the app deletes all its data from the device.\n\nSubscription data held by RevenueCat — Arcanum purchase history and the anonymous install identifier — can be deleted on request: write to arcanum.tarot@icloud.com with the subject “Data deletion” and attach the order number from your App Store or Google Play receipt so we can find your record (it contains no name or account). We will delete it within 30 days and confirm by email. The subscription itself stays with your store, and Premium access can be brought back with “Restore purchases” on the subscription screen.",
+        dataText: "All your data — journal, streak, course progress, and settings — is stored only on this device. The app has no accounts, servers, analytics, or ads: your name, birth date, notes, and progress never leave the phone and are not shared with anyone.\n\nThe one exception is the subscription: the purchase is confirmed by your store ({{store}}), and your Premium access is verified by RevenueCat, which receives the purchase receipt and an anonymous install identifier — no name, birth date, or journal contents.\n\nYou create backups yourself — with “Export data” in Settings — and keep them wherever you like. Deleting the app deletes all its data from the device.\n\nSubscription data held by RevenueCat — Arcanum purchase history and the anonymous install identifier — can be deleted on request: write to arcanum.tarot@icloud.com with the subject “Data deletion” and attach the order number from your {{store}} receipt so we can find your record (it contains no name or account). We will delete it within 30 days and confirm by email. The subscription itself stays with your store, and Premium access can be brought back with “Restore purchases” on the subscription screen.",
         // ссылка на privacy.html (спека 54)
         openPrivacy: "Open the policy in a browser",
         sourcesTitle: "Sources",
         sourcesText: "Card names and images are based on the open-source tarot-api project (MIT license).",
         termsTitle: "Subscription terms",
-        termsText: "Arcanum Premium is an auto-renewing subscription, monthly or yearly. Payment is charged to your App Store or Google Play account when you confirm the purchase and renews automatically until you cancel it in your store account settings — at least 24 hours before the end of the current period. The free features of the app stay available without a subscription.",
+        termsText: "Arcanum Premium is an auto-renewing subscription, monthly or yearly. Payment is charged to your {{store}} account when you confirm the purchase and renews automatically until you cancel it in your store account settings — at least 24 hours before the end of the current period. The free features of the app stay available without a subscription.",
         // ссылка на terms.html (спека 54)
         openTerms: "Open the terms in a browser",
       },
@@ -732,6 +735,7 @@ export const resources = {
         more: "{{n}} more",
         emptyDeck: "Nothing to review yet — finish a lesson and cards will appear here.",
         toCourse: "TO THE COURSE",
+        toLearn: "TO LEARN",
       },
     },
   },
@@ -1004,13 +1008,13 @@ export const resources = {
         deckTitle: "Sobre el mazo",
         deckText: "La app usa el clásico mazo Rider–Waite. Las ilustraciones de las cartas fueron creadas por la artista Pamela Colman Smith en 1909 y hoy son de dominio público.",
         dataTitle: "Datos y privacidad",
-        dataText: "Todos tus datos — el diario, la racha, el progreso del curso y los ajustes — se guardan solo en este dispositivo. La app no tiene cuentas, servidores, analítica ni publicidad: tu nombre, tu fecha de nacimiento, tus notas y tu progreso no salen del teléfono ni se comparten con nadie.\n\nLa única excepción es la suscripción: la compra la confirma tu tienda (App Store o Google Play) y el acceso Premium lo verifica el servicio RevenueCat, que recibe el recibo de compra y un identificador anónimo de la instalación — sin nombre, fecha de nacimiento ni contenido del diario.\n\nTú creas las copias de seguridad con «Exportar datos» en los ajustes y las guardas donde prefieras. Si borras la app, todos sus datos se eliminan del dispositivo.\n\nLos datos de la suscripción que guarda RevenueCat — el historial de compras de Arcanum y el identificador anónimo de la instalación — se pueden eliminar a petición: escríbenos a arcanum.tarot@icloud.com con el asunto «Eliminación de datos» y adjunta el número de pedido del recibo de App Store o Google Play para que podamos encontrar tu registro (no contiene nombre ni cuenta). Lo eliminaremos en un plazo de 30 días y te lo confirmaremos por correo. La suscripción en sí se queda en tu tienda, y el acceso Premium se puede recuperar con «Restaurar compras» en la pantalla de suscripción.",
+        dataText: "Todos tus datos — el diario, la racha, el progreso del curso y los ajustes — se guardan solo en este dispositivo. La app no tiene cuentas, servidores, analítica ni publicidad: tu nombre, tu fecha de nacimiento, tus notas y tu progreso no salen del teléfono ni se comparten con nadie.\n\nLa única excepción es la suscripción: la compra la confirma tu tienda ({{store}}) y el acceso Premium lo verifica el servicio RevenueCat, que recibe el recibo de compra y un identificador anónimo de la instalación — sin nombre, fecha de nacimiento ni contenido del diario.\n\nTú creas las copias de seguridad con «Exportar datos» en los ajustes y las guardas donde prefieras. Si borras la app, todos sus datos se eliminan del dispositivo.\n\nLos datos de la suscripción que guarda RevenueCat — el historial de compras de Arcanum y el identificador anónimo de la instalación — se pueden eliminar a petición: escríbenos a arcanum.tarot@icloud.com con el asunto «Eliminación de datos» y adjunta el número de pedido del recibo de {{store}} para que podamos encontrar tu registro (no contiene nombre ni cuenta). Lo eliminaremos en un plazo de 30 días y te lo confirmaremos por correo. La suscripción en sí se queda en tu tienda, y el acceso Premium se puede recuperar con «Restaurar compras» en la pantalla de suscripción.",
         // ссылка на privacy.html (спека 54)
         openPrivacy: "Abrir la política en el navegador",
         sourcesTitle: "Fuentes",
         sourcesText: "Los nombres y las imágenes de las cartas se basan en el proyecto de código abierto tarot-api (licencia MIT).",
         termsTitle: "Condiciones de la suscripción",
-        termsText: "Arcanum Premium es una suscripción con renovación automática, mensual o anual. El pago se carga a tu cuenta de App Store o Google Play al confirmar la compra y se renueva automáticamente hasta que la canceles en los ajustes de tu cuenta de la tienda, al menos 24 horas antes de que termine el periodo actual. Las funciones gratuitas de la app siguen disponibles sin suscripción.",
+        termsText: "Arcanum Premium es una suscripción con renovación automática, mensual o anual. El pago se carga a tu cuenta de {{store}} al confirmar la compra y se renueva automáticamente hasta que la canceles en los ajustes de tu cuenta de la tienda, al menos 24 horas antes de que termine el periodo actual. Las funciones gratuitas de la app siguen disponibles sin suscripción.",
         // ссылка на terms.html (спека 54)
         openTerms: "Abrir los términos en el navegador",
       },
@@ -1138,6 +1142,7 @@ export const resources = {
         more: "{{n}} más",
         emptyDeck: "Todavía no hay nada que repasar — termina una lección y las cartas aparecerán aquí.",
         toCourse: "AL CURSO",
+        toLearn: "A APRENDER",
       },
     },
   },
@@ -1412,13 +1417,13 @@ export const resources = {
         deckTitle: "Sobre o baralho",
         deckText: "O app usa o clássico baralho Rider–Waite. As ilustrações das cartas foram feitas pela artista Pamela Colman Smith em 1909 e hoje estão em domínio público.",
         dataTitle: "Dados e privacidade",
-        dataText: "Todos os seus dados — diário, ofensiva, progresso do curso e configurações — ficam guardados apenas neste dispositivo. O app não tem contas, servidores, análise de uso nem publicidade: seu nome, data de nascimento, anotações e progresso não saem do telefone nem são compartilhados com ninguém.\n\nA única exceção é a assinatura: a compra é confirmada pela sua loja (App Store ou Google Play), e o acesso Premium é verificado pelo serviço RevenueCat, que recebe o recibo da compra e um identificador anônimo da instalação — sem nome, data de nascimento nem conteúdo do diário.\n\nVocê cria as cópias de segurança por conta própria — com “Exportar dados” nas configurações — e guarda onde preferir. Desinstalar o app apaga todos os dados dele do dispositivo.\n\nOs dados da assinatura guardados pelo RevenueCat — o histórico de compras do Arcanum e o identificador anônimo da instalação — podem ser apagados a pedido: escreva para arcanum.tarot@icloud.com com o assunto “Exclusão de dados” e anexe o número do pedido do recibo da App Store ou do Google Play para que possamos encontrar seu registro (ele não contém nome nem conta). Vamos apagá-lo em até 30 dias e confirmar por e-mail. A assinatura em si continua na sua loja, e o acesso Premium pode ser recuperado com “Restaurar compras” na tela de assinatura.",
+        dataText: "Todos os seus dados — diário, ofensiva, progresso do curso e configurações — ficam guardados apenas neste dispositivo. O app não tem contas, servidores, análise de uso nem publicidade: seu nome, data de nascimento, anotações e progresso não saem do telefone nem são compartilhados com ninguém.\n\nA única exceção é a assinatura: a compra é confirmada pela sua loja ({{store}}), e o acesso Premium é verificado pelo serviço RevenueCat, que recebe o recibo da compra e um identificador anônimo da instalação — sem nome, data de nascimento nem conteúdo do diário.\n\nVocê cria as cópias de segurança por conta própria — com “Exportar dados” nas configurações — e guarda onde preferir. Desinstalar o app apaga todos os dados dele do dispositivo.\n\nOs dados da assinatura guardados pelo RevenueCat — o histórico de compras do Arcanum e o identificador anônimo da instalação — podem ser apagados a pedido: escreva para arcanum.tarot@icloud.com com o assunto “Exclusão de dados” e anexe o número do pedido do recibo de {{store}} para que possamos encontrar seu registro (ele não contém nome nem conta). Vamos apagá-lo em até 30 dias e confirmar por e-mail. A assinatura em si continua na sua loja, e o acesso Premium pode ser recuperado com “Restaurar compras” na tela de assinatura.",
         // ссылка на privacy.html (спека 54)
         openPrivacy: "Abrir a política no navegador",
         sourcesTitle: "Fontes",
         sourcesText: "Os nomes e as imagens das cartas são baseados no projeto aberto tarot-api (licença MIT).",
         termsTitle: "Condições da assinatura",
-        termsText: "O Arcanum Premium é uma assinatura com renovação automática, mensal ou anual. O pagamento é cobrado na sua conta da App Store ou do Google Play ao confirmar a compra e renovado automaticamente até que você cancele a assinatura nas configurações da conta da loja, pelo menos 24 horas antes do fim do período atual. Os recursos gratuitos do aplicativo continuam disponíveis sem assinatura.",
+        termsText: "O Arcanum Premium é uma assinatura com renovação automática, mensal ou anual. O pagamento é cobrado na sua conta de {{store}} ao confirmar a compra e renovado automaticamente até que você cancele a assinatura nas configurações da conta da loja, pelo menos 24 horas antes do fim do período atual. Os recursos gratuitos do aplicativo continuam disponíveis sem assinatura.",
         // ссылка на terms.html (спека 54)
         openTerms: "Abrir os termos no navegador",
       },
@@ -1546,6 +1551,7 @@ export const resources = {
         more: "Mais {{n}}",
         emptyDeck: "Ainda não há o que revisar — conclua uma aula e as cartas aparecerão aqui.",
         toCourse: "IR AO CURSO",
+        toLearn: "IR PARA APRENDER",
       },
     },
   },
