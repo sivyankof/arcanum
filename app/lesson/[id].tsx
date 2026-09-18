@@ -33,6 +33,7 @@ import { inLang, type Lang } from '../../src/lib/lang';
 import { lessonPlayable, lessonSteps, type LessonStep } from '../../src/lib/lesson';
 import { lessonLocked } from '../../src/lib/premium';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
+import { stackTopPad } from '../../src/theme/navHeader';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { useApp } from '../../src/store/useApp';
@@ -181,8 +182,7 @@ export default function LessonScreen() {
       <ScrollView
         ref={scrollRef}
         contentContainerStyle={{
-          // как card/[id]: insets.top + высота системной шапки, иначе контент уедет под неё
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}

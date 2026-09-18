@@ -41,6 +41,7 @@ import { inLang } from '../../src/lib/lang';
 import { masteryLevel } from '../../src/lib/mastery';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { useApp } from '../../src/store/useApp';
+import { stackTopPad } from '../../src/theme/navHeader';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -304,9 +305,7 @@ export default function CardDetail() {
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          // insets.top + высота системной шапки (64) — со значением поменьше контент уедет под неё,
-          // такая ошибка уже была
-          paddingTop: insets.top + 64,
+          paddingTop: stackTopPad(insets, 0),
           paddingHorizontal: spacing.xl,
           paddingBottom: 60,
         }}

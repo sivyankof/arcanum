@@ -50,6 +50,7 @@ import {
 import type { SrsGrade } from '../src/lib/srs';
 import { useBackHaptic } from '../src/lib/useBackHaptic';
 import { useApp } from '../src/store/useApp';
+import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -196,8 +197,7 @@ export default function ReviewScreen() {
       <ScrollView
         ref={scrollRef}
         contentContainerStyle={{
-          // как урок и страница карты: insets.top + высота системной шапки, иначе контент уедет под неё
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}

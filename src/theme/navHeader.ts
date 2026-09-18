@@ -6,7 +6,7 @@
  *  у play-маршрута расклада — `headerShown: true`, потому что родительский Stack прячет шапку
  *  по умолчанию), доливают поле поверх результата в самом вызове.
  */
-import type { Theme } from './theme';
+import { spacing, type Theme } from './theme';
 
 export function transparentHeader(t: Theme) {
   return {
@@ -16,4 +16,13 @@ export function transparentHeader(t: Theme) {
     headerShadowVisible: false,
     headerTintColor: t.accent,
   };
+}
+
+/** Высота системной шапки стек-экрана. Контент под ПРОЗРАЧНОЙ шапкой начинается с этого отступа,
+ *  иначе уезжает под кнопку «назад». До задачи 72 число 64 стояло копиями в пяти экранах. */
+export const STACK_HEADER_H = 64;
+
+/** paddingTop контента стек-экрана с прозрачной шапкой: safe area + шапка + воздух. */
+export function stackTopPad(insets: { top: number }, gap: number = spacing.l): number {
+  return insets.top + STACK_HEADER_H + gap;
 }

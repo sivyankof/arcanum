@@ -1,7 +1,7 @@
 /** Экран курса — «путь» как в Duolingo (спека 07): все 6 модулей одной лентой,
  *  шапка модуля + тропа-змейка. Узлы ведут в урок (спека 08); над первым модулем — карточка
  *  «Повторение» (спека 45). */
-import { router, useFocusEffect } from 'expo-router';
+import { router } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -15,11 +15,9 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { course, type CourseLesson } from '../../src/lib/content';
 import { lessonStates } from '../../src/lib/courseProgress';
-import { localDateISO } from '../../src/lib/dates';
 import { useLang } from '../../src/lib/i18n';
 import { moduleLocked } from '../../src/lib/premium';
-import { deckOrder, reviewSummary } from '../../src/lib/review';
-import { useAppActive } from '../../src/lib/useAppActive';
+import { useReviewSummary } from '../../src/lib/useReviewSummary';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
 import { fonts, spacing } from '../../src/theme/theme';
@@ -32,19 +30,10 @@ export default function CourseScreen() {
   const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
   const lessonsProgress = useApp((s) => s.lessonsProgress);
-  const srs = useApp((s) => s.srs);
-  const reviewDay = useApp((s) => s.reviewDay);
   const premium = useApp((s) => s.premium);
-  // день для сводки повторения: по фокусу таба И по возврату из фона — useFocusEffect не ловит ни
-  // полночь, ни сворачивание (урок 06а), а таб «Курс» может остаться открытым с вечера: утром
-  // «ждут» должны появиться без переключения табов
-  const [today, setToday] = React.useState(() => localDateISO());
-  useFocusEffect(React.useCallback(() => setToday(localDateISO()), []));
-  useAppActive(() => setToday(localDateISO()));
-  const reviewSum = React.useMemo(
-    () => reviewSummary(deckOrder(course, lessonsProgress), srs, today, reviewDay),
-    [lessonsProgress, srs, reviewDay, today],
-  );
+  // день для сводки повторения (полночь, сворачивание) — внутри общего хука (спека 72:
+  // второй потребитель — таб «Учёба»)
+  const reviewSum = useReviewSummary();
 
   const states = React.useMemo(() => lessonStates(course, lessonsProgress), [lessonsProgress]);
   const lessonsTotal = course.reduce((n, m) => n + m.lessons.length, 0);

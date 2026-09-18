@@ -21,6 +21,7 @@ import { WEEK_START } from '../src/lib/lang';
 import { moonInfo, type MoonEventKind } from '../src/lib/moon';
 import { monthEvents, monthGrid } from '../src/lib/moonCalendar';
 import { useAppActive } from '../src/lib/useAppActive';
+import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, LOCKED_OPACITY, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -84,8 +85,7 @@ export default function MoonScreen() {
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          // как тренажёр и урок: insets.top + высота системной шапки, иначе контент уедет под неё
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}

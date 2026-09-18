@@ -25,6 +25,7 @@ import { useLang } from '../src/lib/i18n';
 import { getOffers, manageUrl, purchase, PURCHASES_AVAILABLE, restore, type Offer, type PlanId } from '../src/lib/purchases';
 import { useBackHaptic } from '../src/lib/useBackHaptic';
 import { useApp } from '../src/store/useApp';
+import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, radius, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -110,7 +111,7 @@ export default function PaywallScreen() {
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: insets.bottom + spacing.xxl,
         }}
