@@ -11,43 +11,21 @@
    навигации, урок 39) — состояния героя и игры не переиспользуют друг друга.
    ⚠️ Игра случайна (Math.random внутри buildFragmentSession): для кадра «отвечено» и «итог»
    кликаем ПЕРВЫЙ показанный вариант — правильность ответа для скриншота не важна, важен факт,
-   что рамка успеха/неудачи и итоговая панель отрисованы (форма — check_72_web.js). */
+   что рамка успеха/неудачи и итоговая панель отрисованы (форма — check_72_web.js).
+   Списки уроков и seed() — общий scripts/lib/seed72.js (правка финального ревью, находка F12):
+   раньше были продублированы дословно с check_72_web.js. */
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { M1, M12, M3, M4, M5, M6, ALL32, progress, seed: seedState } = require('./lib/seed72');
 
 const BASE = 'http://localhost:8081';
 const OUT = path.resolve(__dirname, '../docs/screenshots/72');
 
-const PREMIUM_NONE = { active: false, source: 'none', until: null, plan: null, willRenew: false };
-const progress = (ids) => Object.fromEntries(ids.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }]));
-const M1 = ['m1l1', 'm1l2', 'm1l3', 'm1l4'];
-const M12 = [...M1, 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2l5', 'm2l6'];
-const M3 = ['m3l1', 'm3l2', 'm3l3', 'm3l4', 'm3l5', 'm3l6'];
-const M4 = ['m4l1', 'm4l2', 'm4l3', 'm4l4', 'm4l5', 'm4l6', 'm4l7', 'm4l8'];
-const M5 = ['m5l1', 'm5l2', 'm5l3', 'm5l4'];
-const M6 = ['m6l1', 'm6l2', 'm6l3', 'm6l4'];
-const ALL32 = [...M12, ...M3, ...M4, ...M5, ...M6];
-
+/** seed72.js берёт themeMode полем `extra`, а не отдельным позиционным аргументом — обёртка
+ *  сохраняет прежний вызов `seed(theme, extra)` этого скрипта. */
 function seed(themeMode, extra = {}) {
-  return JSON.stringify({
-    state: {
-      themeMode,
-      lang: 'ru',
-      installSeed: 12345,
-      profile: { onboarded: true, name: 'Артём' },
-      premium: PREMIUM_NONE,
-      lessonsProgress: {},
-      srs: {},
-      reviewDay: { date: '', newCount: 0, doneCount: 0 },
-      history: [],
-      spreadsHistory: [],
-      xp: 400,
-      streak: 5,
-      ...extra,
-    },
-    version: 12,
-  });
+  return seedState({ themeMode, ...extra });
 }
 
 (async () => {

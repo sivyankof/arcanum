@@ -61,24 +61,9 @@ const cards = require('../content/cards.json').cards;
 const spreads = require('../content/spreads.json').spreads;
 const modules = require('../content/course.json').modules;
 const I18N = fs.readFileSync(path.join(ROOT, 'src/lib/i18n.ts'), 'utf8');
-const THEME_TS = fs.readFileSync(path.join(ROOT, 'src/theme/theme.ts'), 'utf8');
-
-/** hex-цвет темы из первоисточника токенов (не хардкод): вырезает блок `export const <name>: Theme
- *  = {…}` до следующего `export const`/конца файла и ищет в нём `<key>: '#rrggbb'`. */
-function themeHex(name, key) {
-  const start = THEME_TS.search(new RegExp(`^export const ${name}: Theme = \\{`, 'm'));
-  if (start < 0) throw new Error(`нет темы ${name} в theme.ts`);
-  const rest = THEME_TS.slice(start + 1);
-  const nextRel = rest.search(/^export const /m);
-  const chunk = THEME_TS.slice(start, nextRel < 0 ? undefined : start + 1 + nextRel);
-  const m = chunk.match(new RegExp(`\\b${key}: '(#[0-9a-fA-F]{6})'`));
-  if (!m) throw new Error(`ключа ${key} нет в теме ${name} (theme.ts)`);
-  return m[1];
-}
-const hexToRgb = (hex) => {
-  const n = parseInt(hex.slice(1), 16);
-  return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
-};
+// themeHex/hexToRgb — общий scripts/lib/seed72.js (правка финального ревью, находка F12):
+// раньше эта пара жила только здесь копией, теперь ей пользуется и check_72_web.js
+const { themeHex, hexToRgb } = require('./lib/seed72');
 // фон градиента ScreenBg — цвет темы, а не хардкод (находка ревью 63/5: доказать нужно ИМЕННО
 // применение светлой темы, а не только видимость карты дня, которая видна в обеих темах)
 const LIGHT_BG_RGB = hexToRgb(themeHex('lightTheme', 'bg'));

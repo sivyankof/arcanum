@@ -30,52 +30,25 @@
    варианта на этом экране (у текстового потомка cursor наследуется, но рамки у него нет; у
    кнопок без рамки, вроде «ДАЛЕЕ», cursor есть, а рамки нет). Цвета рамки — accent-независимые
    токены темы (dark): success #63ab89 = rgb(99,171,137), danger #e07a6a = rgb(224,122,106).
-   ⚠️ XP за верный ответ начисляется СРАЗУ в `onPick` (см. src/lib/fragmentGame.ts, gainFragmentXp),
+   ⚠️ XP за верный ответ начисляется СРАЗУ в `onPick` (см. src/store/useApp.ts, gainFragmentXp),
    а не по завершении анимации счётчика ResultPanel — поэтому дельту XP можно читать из
    localStorage сразу после последнего «ДАЛЕЕ», без ожидания подсчёта «+N XP» на экране.
    ⚠️ Сид — форма scripts/check_62_web.js, версия персиста 12 (SCHEMA_VERSION, спека 72 её
-   не поднимает): `premium` несёt `plan`/`willRenew` (задача 53б). */
+   не поднимает): `premium` несёт `plan`/`willRenew` (задача 53б). Общее с shoot_72.js/shoot_63.js —
+   scripts/lib/seed72.js (правка финального ревью, находка F12): списки уроков курса, seed()
+   и цвета темы читаются из ОДНОГО источника, а не хардкодятся в каждом скрипте отдельно. */
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+const { PREMIUM_NONE, progress, M1, M12, M3, M4, M5, M6, ALL32, seed, themeRgb, XP_REVIEW } = require('./lib/seed72');
 
 const OUT = process.argv[2] || 'docs/screenshots/72';
 const BASE = 'http://localhost:8081';
 
-const SUCCESS_RGB = 'rgb(99, 171, 137)'; // t.success тёмной темы
-const DANGER_RGB = 'rgb(224, 122, 106)'; // t.danger тёмной темы
+const SUCCESS_RGB = themeRgb('darkTheme', 'success');
+const DANGER_RGB = themeRgb('darkTheme', 'danger');
 
-const PREMIUM_NONE = { active: false, source: 'none', until: null, plan: null, willRenew: false };
 const PREMIUM_DEV = { active: true, source: 'dev', until: null, plan: null, willRenew: false };
-const progress = (ids) => Object.fromEntries(ids.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }]));
-const M1 = ['m1l1', 'm1l2', 'm1l3', 'm1l4'];
-const M12 = [...M1, 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2l5', 'm2l6'];
-const M3 = ['m3l1', 'm3l2', 'm3l3', 'm3l4', 'm3l5', 'm3l6'];
-const M4 = ['m4l1', 'm4l2', 'm4l3', 'm4l4', 'm4l5', 'm4l6', 'm4l7', 'm4l8'];
-const M5 = ['m5l1', 'm5l2', 'm5l3', 'm5l4'];
-const M6 = ['m6l1', 'm6l2', 'm6l3', 'm6l4'];
-const ALL32 = [...M12, ...M3, ...M4, ...M5, ...M6];
-
-function seed(extra = {}) {
-  return JSON.stringify({
-    state: {
-      themeMode: 'dark',
-      lang: 'ru',
-      installSeed: 12345,
-      profile: { onboarded: true, name: 'Артём' },
-      premium: PREMIUM_NONE,
-      lessonsProgress: {},
-      srs: {},
-      reviewDay: { date: '', newCount: 0, doneCount: 0 },
-      history: [],
-      spreadsHistory: [],
-      xp: 400,
-      streak: 5,
-      ...extra,
-    },
-    version: 12,
-  });
-}
 
 let pass = 0;
 const fails = [];
@@ -156,7 +129,8 @@ function check(name, ok, detail) {
   check('заголовок «Учёба»', b.includes('Учёба'));
   check('CTA «НАЧАТЬ УРОК»', b.includes('НАЧАТЬ УРОК'));
   await tap('НАЧАТЬ УРОК');
-  check('start: CTA ведёт на /lesson/m1l1', here() === '/lesson/m1l1', `фактически ${here()}`);
+  // ?from=learn — подпись «назад» (находки F1/F2/F5/T1 финального ревью), путь проверяем startsWith
+  check('start: CTA ведёт на /lesson/m1l1', here().startsWith('/lesson/m1l1'), `фактически ${here()}`);
 
   console.log('\n=== 3. Герой: состояние continue (пройден М1) ===');
   href = await open('/', seed({ lessonsProgress: progress(M1) }));
@@ -164,7 +138,7 @@ function check(name, ok, detail) {
   check('overline «УРОК 5 ИЗ 32»', b.includes('УРОК 5 ИЗ 32'), b.slice(0, 260));
   check('CTA «ПРОДОЛЖИТЬ КУРС»', b.includes('ПРОДОЛЖИТЬ КУРС'));
   await tap('ПРОДОЛЖИТЬ КУРС');
-  check('continue: CTA ведёт на /lesson/m2l1', here() === '/lesson/m2l1', `фактически ${here()}`);
+  check('continue: CTA ведёт на /lesson/m2l1', here().startsWith('/lesson/m2l1'), `фактически ${here()}`);
 
   console.log('\n=== 4. Герой: состояние locked (пройдены М1+М2, модуль 3 — premium) ===');
   href = await open('/', seed({ lessonsProgress: progress(M12) }));
@@ -177,7 +151,7 @@ function check(name, ok, detail) {
   b = await body();
   check('locked с правом: CTA снова «ПРОДОЛЖИТЬ КУРС»', b.includes('ПРОДОЛЖИТЬ КУРС'));
   await tap('ПРОДОЛЖИТЬ КУРС');
-  check('locked с правом → /lesson/m3l1', here() === '/lesson/m3l1', `фактически ${here()}`);
+  check('locked с правом → /lesson/m3l1', here().startsWith('/lesson/m3l1'), `фактически ${here()}`);
 
   console.log('\n=== 5. Герой: состояние done (курс пройден) ===');
   href = await open('/', seed({ lessonsProgress: progress(ALL32) }));
@@ -185,14 +159,14 @@ function check(name, ok, detail) {
   check('done: «Курс пройден»', b.includes('Курс пройден'));
   check('done: CTA «К ТРЕНАЖЁРУ»', b.includes('К ТРЕНАЖЁРУ'));
   await tap('К ТРЕНАЖЁРУ');
-  check('done: CTA ведёт на /review', here() === '/review', `фактически ${here()}`);
+  check('done: CTA ведёт на /review', here().startsWith('/review'), `фактически ${here()}`);
 
   console.log('\n=== 6. Строка «Карта дня» → /daily → карта → назад → назад ===');
   href = await open('/', seed());
   b = await body();
   check('на «Учёбе» строка «Карта дня» есть', b.includes('Карта дня'));
   await tap('Карта дня');
-  check('строка ведёт на /daily', here() === '/daily', `фактически ${here()}`);
+  check('строка ведёт на /daily', here().startsWith('/daily'), `фактически ${here()}`);
   b = await body();
   check('на /daily нет «лун» (до открытия)', !/лун/i.test(b), b.slice(0, 200));
   // карта дня качается ±6px бесконечно (правило AGENTS.md) — тут force обязателен
@@ -211,7 +185,7 @@ function check(name, ok, detail) {
   check('ведёт на страницу карты', here().startsWith('/card/'), `фактически ${here()}`);
   await page.goBack();
   await page.waitForTimeout(800);
-  check('назад со страницы карты → /daily', here() === '/daily', `фактически ${here()}`);
+  check('назад со страницы карты → /daily', here().startsWith('/daily'), `фактически ${here()}`);
   await page.goBack();
   await page.waitForTimeout(800);
   check('назад с /daily → /', here() === '/', `фактически ${here()}`);
@@ -246,7 +220,15 @@ function check(name, ok, detail) {
   await page.waitForTimeout(800);
   check('назад с /moon → /spreads', here() === '/spreads', `фактически ${here()}`);
   await tap('Карта дня');
-  check('«Карта дня» в ленте раскладов → /daily', here() === '/daily', `фактически ${here()}`);
+  check('«Карта дня» в ленте раскладов → /daily', here().startsWith('/daily'), `фактически ${here()}`);
+  // назад с /daily (вход с «Практики») обязан вернуть на /spreads (находки F1/T1 финального
+  // ревью — раньше этот вход вовсе не проверялся, ни назначением, ни параметром from в URL).
+  // Подпись самой кнопки «назад» — предмет 6в на устройстве (веб не рисует нативный текст шапки
+  // в DOM отдельно от таб-бара, смонтированного ПОД /daily, см. шапку файла)
+  check('/daily (вход с «Практики») открыт с from=practice', here() === '/daily?from=practice', `фактически ${here()}`);
+  await page.goBack();
+  await page.waitForTimeout(800);
+  check('назад с /daily (вход с «Практики») → /spreads', here() === '/spreads', `фактически ${here()}`);
 
   console.log('\n=== 9. Игра «Угадай карту по фрагменту» ===');
   href = await open('/', seed());
@@ -294,7 +276,11 @@ function check(name, ok, detail) {
       check('total в итоге — 10', Number(m[2]) === 10, m[2]);
     }
     const xpAfter = await xpNow();
-    check('XP вырос ровно на число верных ответов', xpAfter - xpBefore === rightCount, `было ${xpBefore}, стало ${xpAfter}, верных ${rightCount}`);
+    check(
+      'XP вырос ровно на rightCount × XP_REVIEW',
+      xpAfter - xpBefore === rightCount * XP_REVIEW,
+      `было ${xpBefore}, стало ${xpAfter}, верных ${rightCount}, XP_REVIEW ${XP_REVIEW}`,
+    );
 
     await tap('Ещё раз');
     const afterAgain = await body();
