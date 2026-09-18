@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { router, Stack, useFocusEffect } from 'expo-router';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
@@ -26,10 +26,11 @@ import { FadeUp } from '../src/components/FadeUp';
 import { MeaningPanel } from '../src/components/MeaningPanel';
 import { NotePlate } from '../src/components/NotePlate';
 import { Reflection } from '../src/components/Reflection';
-import { Rule } from '../src/components/Rule';
 import { ScreenBg } from '../src/components/ScreenBg';
+import { ScreenHeader } from '../src/components/ScreenHeader';
 import { Sparks } from '../src/components/Sparks';
 import { StatsPills } from '../src/components/StatsPills';
+import { backTitleKey } from '../src/lib/backTitle';
 import type { Rect } from '../src/lib/cardTransition';
 import { blockText, cardById, cardImages, cardNumeral, cardOfDay } from '../src/lib/content';
 import { daysAgoISO, formatEntryDate, localDateISO } from '../src/lib/dates';
@@ -37,10 +38,10 @@ import { hapticReveal, hapticSuccess } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
 import type { Outcome } from '../src/lib/journal';
 import { inLang } from '../src/lib/lang';
-import { pingPong, startSpin, sweepLoop } from '../src/lib/loops';
+import { CSS_EASE, pingPong, startSpin, sweepLoop } from '../src/lib/loops';
 import { requestPermission } from '../src/lib/pushes';
 import { reflectionVisible } from '../src/lib/reflection';
-import { useAppActive } from '../src/lib/useAppActive';
+import { useNow } from '../src/lib/useNow';
 import { useApp } from '../src/store/useApp';
 import { faceShadow, GLARE_ANGLE, GLARE_COLORS, GLARE_LOCATIONS } from '../src/theme/glow';
 import { stackTopPad } from '../src/theme/navHeader';
@@ -83,9 +84,6 @@ const PLATE_DELAY = 500;
 const PLATE_SHIFT = 8;
 const MEAN_DELAY = 600;
 const MEAN_SHIFT = 12;
-
-// кривая CSS-дефолта `ease` — им в эталоне идут и блик, и всплывание текста
-const EASE = Easing.bezier(0.25, 0.1, 0.25, 1);
 
 /** Медленно вращающееся пунктирное кольцо вокруг карты дня (по эталону). */
 function Ring({
@@ -149,11 +147,20 @@ function Ring({
   );
 }
 
+/** Подпись «назад» по источнику перехода (спека 72, финальное ревью F1/F5): /daily открывается
+ *  и со строки «Карта дня» на «Учёбе», и с одноимённого пункта ленты «Практики» — неизвестный/
+ *  пустой from (прямая ссылка) считаем «Учёбой», как было до правки. */
+const BACK_TITLES: Record<string, string> = {
+  learn: 'tabs.learn',
+  practice: 'tabs.practice',
+};
+
 export default function DailyScreen() {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = useLang();
+  const { from } = useLocalSearchParams<{ from?: string }>();
 
   const streak = useApp((s) => s.streak);
   const drawToday = useApp((s) => s.drawToday);
@@ -188,17 +195,14 @@ export default function DailyScreen() {
   // ре-рендеру он не нужен, поэтому обычный ref, а не state
   const lbOpenRef = React.useRef(false);
 
-  // час пересчитываем при возврате на таб, а не таймером каждую минуту: сидеть в приложении
-  // ровно в 17:59:59 — не тот случай, ради которого стоит держать интервал
-  const [hour, setHour] = React.useState(() => new Date().getHours());
-  useFocusEffect(React.useCallback(() => setHour(new Date().getHours()), []));
-
-  // возврат из фона фокус экрана не меняет — час обновляем ещё и по AppState (06а)
-  useAppActive(() => setHour(new Date().getHours()));
+  // «сейчас» — общий useNow (фокус экрана и возврат из фона, правило 06а): час для рефлексии
+  // и дата шапки читаются из ОДНОГО значения, а не из двух копий, разошедшихся до правки (задача 72,
+  // финальное ревью, находка F13)
+  const now = useNow();
 
   const showReflection = reflectionVisible({
     drawn: !!drawn,
-    hour,
+    hour: now.getHours(),
     enabled: reflectionOn,
     devForce: __DEV__ && devReflect,
   });
@@ -257,7 +261,7 @@ export default function DailyScreen() {
       return;
     }
     // Карта дня появилась в сторе БЕЗ тапа — импорт бэкапа с сегодняшней записью при
-    // смонтированном табе (таб «Сегодня» жив, пока настройки открыты поверх него). Ставим сразу
+    // смонтированном экране (/daily жив, пока настройки открыты поверх него стеком). Ставим сразу
     // конечное состояние без анимации: всплывание положено только переходу «рубашка → лицо»
     // тапом, а вход на таб с уже открытой картой его не играет — см. инициализацию выше.
     // settledSV=true обязателен: иначе лицо осталось бы в 3D-контексте и рисовалось бы через
@@ -276,7 +280,7 @@ export default function DailyScreen() {
   React.useEffect(() => {
     glare.value = 0;
     if (!isDrawn) return;
-    glare.value = withDelay(GLARE_DELAY, sweepLoop(GLARE_MS, GLARE_PAUSE, EASE));
+    glare.value = withDelay(GLARE_DELAY, sweepLoop(GLARE_MS, GLARE_PAUSE, CSS_EASE));
   }, [isDrawn, glare]);
 
   // покачивание карты: ход 6 px вверх и обратно, полный цикл 4.2 с (.flip/hov из эталона).
@@ -342,7 +346,7 @@ export default function DailyScreen() {
   }));
 
   const reveal = (delay: number) =>
-    withDelay(delay, withTiming(1, { duration: REVEAL_MS, easing: EASE, reduceMotion: ReduceMotion.System }));
+    withDelay(delay, withTiming(1, { duration: REVEAL_MS, easing: CSS_EASE, reduceMotion: ReduceMotion.System }));
 
   const onDraw = () => {
     if (drawn) {
@@ -404,24 +408,19 @@ export default function DailyScreen() {
   const { text: dayText, todo: dayTodo } = blockText(card.content.day_card, lang);
   const hasText = !dayTodo;
 
-  const now = new Date();
   // «Пятница · 1 августа» — та же сборка, что строка записи дневника (formatEntryDate, weekday long);
   // регистр — в стиле .date
   const dateStr = formatEntryDate(localDateISO(now), lang, 'long');
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.learn') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'tabs.learn')) }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{ paddingTop: stackTopPad(insets), paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
       >
-        <FadeUp index={0}>
-          <Txt style={[st.date, { color: t.muted }]}>{dateStr.toUpperCase()}</Txt>
-          <Txt style={[st.title, { color: t.head }]}>{tr('today.title')}</Txt>
-          <Rule />
-        </FadeUp>
+        <ScreenHeader overline={dateStr.toUpperCase()} title={tr('today.title')} />
 
         <StatsPills index={1} burst={burst} />
 
@@ -571,8 +570,6 @@ export default function DailyScreen() {
 const st = StyleSheet.create({
   // хотфикс дефект 2: прячет живые грани карты дня на время полноэкранного просмотра
   hidden: { opacity: 0 },
-  date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
-  title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
   // тёплое свечение вокруг карты дня — значение в faceShadow (theme/glow.ts),
   // задаётся инлайн через boxShadow, т.к. зависит от темы
   face: {

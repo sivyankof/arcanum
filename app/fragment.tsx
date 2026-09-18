@@ -6,7 +6,7 @@ import { router, Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, Pressable, ScrollView, StyleSheet, View } from 'react-native';
-import Animated, { Easing, ReduceMotion, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { ReduceMotion, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CtaButton } from '../src/components/CtaButton';
 import { FadeUp } from '../src/components/FadeUp';
@@ -14,11 +14,13 @@ import { OptionButton } from '../src/components/OptionButton';
 import { ResultPanel } from '../src/components/ResultPanel';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
+import { backTitleKey } from '../src/lib/backTitle';
 import { cardById, cardImages, fragments } from '../src/lib/content';
 import { buildFragmentSession, fragmentLayout, sessionScore } from '../src/lib/fragmentGame';
 import { hapticSuccess, hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
 import { inLang } from '../src/lib/lang';
+import { CSS_EASE } from '../src/lib/loops';
 import { useApp } from '../src/store/useApp';
 import { glowShadow } from '../src/theme/glow';
 import { stackTopPad } from '../src/theme/navHeader';
@@ -27,7 +29,6 @@ import { useTheme } from '../src/theme/useTheme';
 
 const VIEW = Math.min(Dimensions.get('window').width - 48, 300);
 const ZOOM_MS = 300;
-const EASE = Easing.bezier(0.25, 0.1, 0.25, 1);
 
 export default function FragmentScreen() {
   const t = useTheme();
@@ -59,7 +60,7 @@ export default function FragmentScreen() {
     setPicked(i);
     setLog((l) => [...l, right]);
     if (right) { hapticSuccess(); gainFragmentXp(); } else hapticTap();
-    zoom.value = withTiming(1, { duration: ZOOM_MS, easing: EASE, reduceMotion: ReduceMotion.System });
+    zoom.value = withTiming(1, { duration: ZOOM_MS, easing: CSS_EASE, reduceMotion: ReduceMotion.System });
   };
   const onNext = () => { zoom.value = 0; setPicked(null); setAt((n) => n + 1); };
   const onAgain = () => { zoom.value = 0; setQuestions(buildFragmentSession(fragments)); setAt(0); setPicked(null); setLog([]); };

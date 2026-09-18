@@ -1,6 +1,6 @@
 /** Экран «Учёба» — первая вкладка (спека 72): следующий урок курса, «Повторение», игра «Угадай
  *  карту» и компактная строка карты дня. До задачи 72 первой вкладкой была карта дня (app/daily.tsx). */
-import { router, useFocusEffect } from 'expo-router';
+import { router } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -10,21 +10,21 @@ import { FadeUp } from '../../src/components/FadeUp';
 import { FragmentPanel } from '../../src/components/FragmentPanel';
 import { NextLessonCard } from '../../src/components/NextLessonCard';
 import { ReviewPanel } from '../../src/components/ReviewPanel';
-import { Rule } from '../../src/components/Rule';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { ScreenHeader } from '../../src/components/ScreenHeader';
 import { StatsPills } from '../../src/components/StatsPills';
-import { Txt } from '../../src/components/Txt';
 import { cardById, course } from '../../src/lib/content';
 import { nextLessonState, nextLessonSummary } from '../../src/lib/courseProgress';
 import { formatEntryDate, localDateISO } from '../../src/lib/dates';
+import { hapticTap } from '../../src/lib/haptics';
 import { useLang } from '../../src/lib/i18n';
 import { lessonLocked } from '../../src/lib/premium';
 import { reflectionVisible } from '../../src/lib/reflection';
-import { useAppActive } from '../../src/lib/useAppActive';
+import { useNow } from '../../src/lib/useNow';
 import { useReviewSummary } from '../../src/lib/useReviewSummary';
 import { useTabTopRef } from '../../src/lib/useTabScrollToTop';
 import { useApp } from '../../src/store/useApp';
-import { fonts, spacing } from '../../src/theme/theme';
+import { spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
 export default function LearnScreen() {
@@ -41,10 +41,8 @@ export default function LearnScreen() {
   const devReflect = useApp((s) => s.devReflect);
   const reviewSum = useReviewSummary();
 
-  // час (вечерняя рефлексия) и дата шапки — по фокусу таба и по возврату из фона (правило 06а)
-  const [now, setNow] = React.useState(() => new Date());
-  useFocusEffect(React.useCallback(() => setNow(new Date()), []));
-  useAppActive(() => setNow(new Date()));
+  // час (вечерняя рефлексия) и дата шапки — общий useNow (фокус таба и возврат из фона, правило 06а)
+  const now = useNow();
 
   const summary = React.useMemo(() => nextLessonSummary(course, lessonsProgress), [lessonsProgress]);
   const state = nextLessonState(
@@ -52,9 +50,10 @@ export default function LearnScreen() {
     !!summary.lesson && lessonLocked(summary.lesson.id, course, premium),
   );
   const onHero = () => {
-    if (state === 'done') router.push('/review');
-    else if (state === 'locked') router.push({ pathname: '/paywall', params: { from: 'course' } });
-    else router.push(`/lesson/${summary.lesson!.id}`);
+    hapticTap();
+    if (state === 'done') router.push({ pathname: '/review', params: { from: 'learn' } });
+    else if (state === 'locked') router.push({ pathname: '/paywall', params: { from: 'learn' } });
+    else router.push({ pathname: '/lesson/[id]', params: { id: summary.lesson!.id, from: 'learn' } });
   };
 
   const reflect =
@@ -69,29 +68,36 @@ export default function LearnScreen() {
         contentContainerStyle={{ paddingTop: insets.top + spacing.xl, paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
       >
-        <FadeUp index={0}>
-          <Txt style={[st.date, { color: t.muted }]}>
-            {formatEntryDate(localDateISO(now), lang, 'long').toUpperCase()}
-          </Txt>
-          <Txt style={[st.title, { color: t.head }]}>{tr('home.title')}</Txt>
-          <Rule />
-        </FadeUp>
+        <ScreenHeader overline={formatEntryDate(localDateISO(now), lang, 'long').toUpperCase()} title={tr('home.title')} />
         <StatsPills index={1} />
         <FadeUp index={2}>
           <NextLessonCard summary={summary} state={state} lang={lang} onPress={onHero} />
         </FadeUp>
         <FadeUp index={3} style={st.panels}>
-          <ReviewPanel summary={reviewSum} onPress={() => router.push('/review')} />
-          {/* обёртка держит зазор до «Карты дня» (12, как у ReviewPanel выше): у самой FragmentPanel
-              своего marginBottom нет — на «Практике» её сосед снизу несёт отступ сам (спека 72) */}
-          <View style={{ marginBottom: spacing.m }}>
-            <FragmentPanel onPress={() => router.push({ pathname: '/fragment', params: { from: 'learn' } })} />
-          </View>
+          <ReviewPanel
+            summary={reviewSum}
+            onPress={() => {
+              hapticTap();
+              router.push({ pathname: '/review', params: { from: 'learn' } });
+            }}
+          />
+          {/* зазор до «Карты дня» (12, как у ReviewPanel выше) — через style FragmentPanel:
+              на «Практике» её сосед снизу несёт отступ сам (спека 72) */}
+          <FragmentPanel
+            style={{ marginBottom: spacing.m }}
+            onPress={() => {
+              hapticTap();
+              router.push({ pathname: '/fragment', params: { from: 'learn' } });
+            }}
+          />
           <DailyCardRow
             card={drawn ? cardById.get(drawn.cardId) ?? null : null}
             reflect={reflect}
             lang={lang}
-            onPress={() => router.push('/daily')}
+            onPress={() => {
+              hapticTap();
+              router.push({ pathname: '/daily', params: { from: 'learn' } });
+            }}
           />
         </FadeUp>
       </ScrollView>
@@ -100,7 +106,5 @@ export default function LearnScreen() {
 }
 
 const st = StyleSheet.create({
-  date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
-  title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
   panels: { marginTop: 12 },
 });
