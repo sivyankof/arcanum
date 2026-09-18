@@ -1,6 +1,6 @@
 /** Чистая логика экрана курса (спека 07): состояния узлов пути, прогресс модуля,
  *  x-координаты змейки. Ни одного импорта react/expo — модуль целиком под юнит-тестами. */
-import type { CourseModule } from './content';
+import type { CourseLesson, CourseModule } from './content';
 import { lessonXp, REPEAT_XP } from './xp';
 
 /** Прогресс одного урока — схема logic-spec §7. В 07 пишется только DEV-строками
@@ -49,6 +49,47 @@ export function lessonStates(
 export function nextLessonId(modules: CourseModule[], progress: LessonProgressMap): string | null {
   const states = lessonStates(modules, progress);
   return Object.keys(states).find((id) => states[id] === 'current') ?? null;
+}
+
+/** Сводка «что учить дальше» для героя экрана «Учёба» (спека 72): первый непройденный урок,
+ *  его СКВОЗНОЙ номер по курсу («урок 5 из 32») и общий процент. Правило «первый непройденный» —
+ *  то же, что у lessonStates (через nextLessonId), а не вторая копия. */
+export interface NextLessonSummary {
+  /** null — курс пройден целиком */
+  lesson: CourseLesson | null;
+  /** модуль урока, с нуля; у пройденного курса — последний модуль */
+  moduleIndex: number;
+  /** сквозной номер урока по курсу, с единицы; у пройденного курса — total */
+  lessonNumber: number;
+  total: number;
+  doneCount: number;
+  /** целые проценты, обычное округление (как moduleProgress) */
+  pct: number;
+}
+
+export function nextLessonSummary(
+  modules: CourseModule[],
+  progress: LessonProgressMap,
+): NextLessonSummary {
+  const flat = modules.flatMap((m, mi) => m.lessons.map((lesson) => ({ lesson, mi })));
+  const total = flat.length;
+  const doneCount = flat.filter((x) => progress[x.lesson.id]?.done).length;
+  const pct = total === 0 ? 0 : Math.round((doneCount / total) * 100);
+  const nextId = nextLessonId(modules, progress);
+  const at = flat.findIndex((x) => x.lesson.id === nextId);
+  if (at === -1) {
+    return { lesson: null, moduleIndex: Math.max(0, modules.length - 1), lessonNumber: total, total, doneCount, pct };
+  }
+  return { lesson: flat[at].lesson, moduleIndex: flat[at].mi, lessonNumber: at + 1, total, doneCount, pct };
+}
+
+export type NextLessonState = 'start' | 'continue' | 'locked' | 'done';
+
+/** Состояние героя. `locked` приходит снаружи (premium.ts — единственный источник решения о доступе). */
+export function nextLessonState(s: NextLessonSummary, locked: boolean): NextLessonState {
+  if (!s.lesson) return 'done';
+  if (locked) return 'locked';
+  return s.doneCount === 0 ? 'start' : 'continue';
 }
 
 /** Прогресс модуля для шапки: pct — целые проценты, обычное округление. */
