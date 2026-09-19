@@ -508,18 +508,21 @@
   72-learning-home/final-fix-A-report.md` (код) и `-B-report.md` (доки). Цифры: тестов **1983 в 54
   сьютах**, `tsc` чист, persist остался **12** (схема стора не менялась), веб-регресс
   `check_72_web.js` **82/82** (мутации красные), витрина — 8 кадров × 4 языка × 2 магазина. Осталось:
-  iOS `preview`-сборка → лайв-проверка Артёма на iPhone (6в, сценарий в плане, задача 17 шаг 5), ПОСЛЕ
-  неё — новая запись экрана сборки 4 по пути из Review Notes для треда App Review → merge в `main` →
+  iOS `preview`-сборка → лайв-проверка Артёма на iPhone (6в, сценарий в плане, задача 17 шаг 5) →
+  на ТОЙ ЖЕ preview-сборке (код идентичен будущей production-сборке 4, пересобирать под запись не
+  нужно) — новая запись экрана по пути из Review Notes для треда App Review → merge в `main` →
   `production`-сборка (buildNumber 4) → заливка IPA Артёмом → витрина в ASC (сборка 4, 8 кадров ×
   4 языка, тексты из `store-listing.md`, категория Reference вторая, Review Notes с новой записью) →
-  Resubmit жмёт Артём, после его «ок» по чек-листу «Сабмит №3» (`docs/release-checklist.md`).
+  Resubmit жмёт Артём, прикладывая видео к треду App Review (Reply), после его «ок» по чек-листу
+  «Сабмит №3» (`docs/release-checklist.md`, ruling R15).
   Спека — `docs/specs/72-learning-home.md`, план — `docs/plans/72-learning-home.md`.
 - Подробности по каждой задаче — `docs/changelog.md` и `docs/specs/`; уроки — `docs/lessons.md`.
 
 ## Общие модули и компоненты (проверь ЗДЕСЬ, прежде чем писать новое)
 
 - **`src/components/`**: каркас и текст — `Txt`, `Block` (+`paragraphStyle`), `Rule`, `Pill`, `ScreenBg`,
-  `BlurSurface`, `GlassPanel`, `Skeleton`, `EmptyState`, `SettingsRow`, `Emblem`, `FadeUp`, `PressableScale`,
+  `ScreenHeader` (шапка верхнего экрана: оверлайн-дата + заголовок Display + разделитель, свела
+  дубль «Учёбы» и карты дня, задача 72), `BlurSurface`, `GlassPanel`, `Skeleton`, `EmptyState`, `SettingsRow`, `Emblem`, `FadeUp`, `PressableScale`,
   `Sparks`, `LinkTxt` (текст-ссылка на web через `expo-web-browser`); кнопки и диалоги — `CtaButton`, `ConfirmDialog`, `ModalPanel`, `OptionPicker`, `TimePicker`(.web),
   `DatePicker`(.web), `OptionButton` (вариант ответа — вынесен из урока задачей 72, второй потребитель
   игра «Угадай карту»); карты — `CardBack`, `CardBackSurface`, `CardCorners`, `CornerBadge`, `CardCell`,
@@ -528,7 +531,8 @@
   прогресс и итоги — `ProgressBar` (+`PROGRESS_EASE`, `PROGRESS_FILL_DELAY`/`PROGRESS_FILL_MS` — тайминг
   заполнения 400/1400, задача 72 свела третью копию из `LevelCard`/`cards.tsx`), `XpPill`, `StreakPill`,
   `LevelCard`, `StatBox`, `StatsPills` (ряд «серия + уровень», задача 72 — «Учёба» и карта дня),
-  `BirthArcanaCard`, `ResultPanel`, `LessonResult`, `ReviewResult`, `ReviewPanel`, `ReviewFlashcard`;
+  `PanelRow` (общая нажимаемая панель-строка эталона `.mhead`/`.revcard`, свела дубль `ReviewPanel`/
+  `FragmentPanel`, задача 72), `BirthArcanaCard`, `ResultPanel`, `LessonResult`, `ReviewResult`, `ReviewPanel`, `ReviewFlashcard`;
   учебный экран (задача 72) — `NextLessonCard` (герой следующего урока), `DailyCardRow` (компактная
   строка карты дня), `FragmentPanel` (вход в игру «Угадай карту»); курс — `CoursePath`, `PathNode`,
   `ModuleHeader`; расклады — `SpreadBoard/Card/Cells/Diagram/Fields/Meaning/Row/Screen`; `Reflection`,
@@ -542,14 +546,22 @@
   `cardTransition`, `premium` (гейты `moduleLocked`/`lessonLocked`/`spreadLocked`, лимит тренажёра),
   `purchases`/`purchases.web` (адаптер покупок — единственный файл с импортом `react-native-purchases`,
   веб-заглушка без SDK), `purchasesMap` (чистые преобразования ответов магазина в типы приложения),
-  `purchasesEnv` (ключ SDK по платформе, признак Expo Go, `STORE_NAME` — «App Store»/«Google Play» для
-  подстановки `{{store}}` в тексты пейвола), `fragmentGame` (чистая логика игры «Угадай карту», задача 72:
-  сборка сессии, геометрия кропа по `content/fragments.json`, счёт); хуки — `useAppActive`,
-  `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`, `usePushScheduler`, `useDeviceTilt`,
+  `purchasesEnv` (ключ SDK по платформе, признак Expo Go, `storeNameFor`/`STORE_NAME` — «App Store»/
+  «Google Play» для подстановки `{{store}}` в тексты пейвола И «О приложении»), `fragmentGame` (чистая
+  логика игры «Угадай карту», задача 72: сборка сессии, геометрия кропа по `content/fragments.json`,
+  счёт), `backTitle` (`backTitleKey` — общий выбор подписи кнопки «назад» по параметру маршрута
+  `from`, свела дубль card/[id]/paywall/daily/lesson/review/fragment, задача 72); хуки — `useAppActive`,
+  `useNow` (общее «сейчас»: фокус экрана И возврат из фона, свело четыре копии — «Учёба», «Практика»,
+  `useReviewSummary`, карта дня, задача 72), `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
+  `usePushScheduler`, `useDeviceTilt`,
   `useBackHaptic`, `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK),
   `useReviewSummary` (сводка «Повторения» для `ReviewPanel`, общая для табов «Курс» и «Учёба», задача 72).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
   (`transparentHeader`, `stackTopPad`/`STACK_HEADER_H` — единый отступ под прозрачную шапку 64px,
   задача 72 свела дубли по стек-экранам), `webInput.ts` (`noOutline`).
+- **`src/lib/loops.ts`**: `CSS_EASE` (кривая CSS ease-in-out для реанимации, общая с design-reference.html).
+- **`scripts/lib/seed72.js`**: общий сид/фикстуры веб-проверки и скриншотов задачи 72
+  (`PREMIUM_NONE`/`progress`/`M1`/`M12`/…/`ALL32`/`seed`/`themeHex`/`hexToRgb`/`themeRgb`/`XP_REVIEW`) —
+  проверь здесь, прежде чем заводить свою копию сида в новом `scripts/check_*_web.js`/`shoot_*.js`.
 
 Полный план этапов, фичи удержания, монетизация и метрики — в `docs/master-plan.md`.

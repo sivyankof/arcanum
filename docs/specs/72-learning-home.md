@@ -1,7 +1,7 @@
 # Спека 72 · Учебный главный экран (ответ на второй отказ Apple 4.3(b))
 
 Статус: согласована, реализована (19.09.2026, финальное ревью ветки закрыто) · Ветка: `feat/72-learning-home` · Persist: **не меняется (12)**
-· Детальный план: `docs/plans/72-learning-home.md` (пишется после согласования спеки)
+· Детальный план: `docs/plans/72-learning-home.md`
 · Контекст отказа: `docs/specs/69-apple-review-reply.md`, кадр ревьюера `docs/screenshots/69/apple-reviewer-0918.png`
 
 ## Цель
@@ -79,7 +79,7 @@
    |---|---|---|---|
    | `start` | пройдено 0 уроков | `home.ctaStart` «НАЧАТЬ УРОК» | `/lesson/<id>` |
    | `continue` | пройдено ≥1, следующий доступен | `home.ctaContinue` «ПРОДОЛЖИТЬ КУРС» | `/lesson/<id>` |
-   | `locked` | следующий урок закрыт Premium (`lessonLocked`) | `home.ctaPremium` «ОТКРЫТЬ PREMIUM» + `PremiumBadge` у overline | `/paywall?from=course` |
+   | `locked` | следующий урок закрыт Premium (`lessonLocked`) | `home.ctaPremium` «ОТКРЫТЬ PREMIUM» + `PremiumBadge` у overline | `/paywall?from=learn` |
    | `done` | все 32 пройдены | `home.ctaReview` «К ТРЕНАЖЁРУ»; название → `home.courseDone` «Курс пройден» | `/review` |
 
 4. **`ReviewPanel`** — существующий, с теми же данными, что на вкладке «Курс»
@@ -138,8 +138,11 @@ export function nextLessonSummary(modules: CourseModule[], progress: LessonProgr
 - нет `MoonRow`; ряд пилюль ОСТАЁТСЯ (салют серии `burst` — локальное состояние этого экрана,
   запускается из `onDraw`); ряд вынесен в общий `StatsPills` — второй потребитель — «Учёба»;
 - стек-экран: регистрация `<Stack.Screen name="daily" options={transparentHeader(t)} />` в `app/_layout.tsx`
-  **внутри `Stack.Protected guard={onboarded}`** (урок 09: незаявленный маршрут проходит мимо гарда),
-  `headerBackTitle: tr('tabs.learn')`;
+  **внутри `Stack.Protected guard={onboarded}`** (урок 09: незаявленный маршрут проходит мимо гарда).
+  Экран открывается и с «Учёбы» (строка карты дня), и с «Практики» (пункт «Карта дня» в ленте
+  раскладов) — подпись кнопки «назад» выбирается параметром маршрута `from` (`learn|practice`) общим
+  `backTitleKey` (`src/lib/backTitle.ts`): `headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'tabs.learn'))`,
+  неизвестный/пустой `from` (прямая ссылка) — «Учёба»;
 - отступ сверху `insets.top + 64 + spacing.l`. ⚠️ DRY: это выражение уже стоит в 4 экранах
   (`lesson`, `moon`, `paywall`, `review`; у `card/[id]` — без `spacing.l`). Пятое появление ⇒ выносим
   `STACK_HEADER_H = 64` и `stackTopPad(insets)` в `src/theme/navHeader.ts`, все пять переводим на них;
@@ -158,7 +161,8 @@ export function nextLessonSummary(modules: CourseModule[], progress: LessonProgr
 Права спека; правим код и макет.
 
 Ссылки на старое место карты дня:
-- `app/(tabs)/spreads/index.tsx:58` — пункт «Карта дня» в ленте раскладов: `router.navigate('/')` → `router.push('/daily')`;
+- `app/(tabs)/spreads/index.tsx:58` — пункт «Карта дня» в ленте раскладов: `router.navigate('/')` →
+  `router.push({ pathname: '/daily', params: { from: 'practice' } })` (подпись «назад» — см. выше);
 - `card.backToday` («Сегодня»/Today/Hoy/Hoje) → значение «Карта дня» / «Card of the Day» / экв. es/pt
   (кнопка «назад» со страницы карты при `from=today` теперь возвращает на `/daily`);
 - тап по пушу: обработчика в коде нет и не было — приложение открывается на первом табе, то есть на
@@ -350,9 +354,10 @@ Notes) называют игру «упражнением»/«exercise»/«ejerc
 брать детали без фигур), не выдаёт ответ надписью. Разметку делает сессия, **«ок» по листу — Артём и редактор**.
 
 **Экран `app/fragment.tsx`**: стек под гардом онбординга (`transparentHeader`, `stackTopPad`),
-параметр `from: 'learn' | 'practice'` → `headerBackTitle`; уход посреди сессии — без диалога (терять
-нечего, XP начисляется по ходу). Фрагмент — квадрат `min(W − 48, 300)`, радиус 16, рамка `line`,
-свечение `glowShadow` как у карты дня; варианты — четыре кнопки-строки во всю ширину — общий стиль с
+параметр `from: 'learn' | 'practice'` → `headerBackTitle` (общий `backTitleKey`). Уход посреди сессии — без диалога (терять
+нечего, XP начисляется по ходу). Фрагмент — квадрат `min(W − 48, 300)`, радиус `radius.l`, рамка
+токена `frame` (золочёная, как у карты дня и справочника, НЕ тёмная `line`), свечение снаружи —
+`glowShadow(t.glow, t.accent, 16, 0.35)` на обёртке; варианты — четыре кнопки-строки во всю ширину — общий стиль с
 вариантами викторины урока: **взять оттуда, не копировать** (если там стиль локальный — вынести в общий
 компонент `OptionButton` и перевести урок на него; значения — те, что уже стоят в уроке).
 

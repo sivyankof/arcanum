@@ -63,11 +63,27 @@
 | `game.question` | 72 | ¿Qué carta es? | Que carta é esta? |
 | `game.resultLine` | 72 (`{{right}}`/`{{total}}`) | {{right}} DE {{total}} CORRECTAS | {{right}} DE {{total}} CORRETAS |
 | `game.again` | 72 | Otra vez | De novo |
-| `review.toLearn` | 72 (пустое состояние тренажёра с «Учёбы», было только `toCourse`) | A APRENDER | IR PARA APRENDER |
+| `review.toLearn` | 72 (пустое состояние тренажёра с «Учёбы», было только `toCourse`; en-версия
+  «TO LEARN»/«A APRENDER»-подобная читалась как инфинитив — доводка финального ревью 19.09 уже
+  переписала es/pt на глагол-повелительное «вернуться», проверь только естественность) | VOLVER A LAS LECCIONES | VOLTAR ÀS AULAS |
+| `tabs.learn` / `tabs.practice` | 72 (переименование вкладок «Сегодня»→«Учёба», «Расклады»→«Практика»,
+  §1 спеки; упущено периметром волны 21.08 — доводка ревью 19.09) | Aprender / Práctica | Aprender / Prática |
+| `ob.howTitle` | 72 (второй шаг онбординга, заголовок панели — сосед `ob.how1-3` выше, тоже
+  задачи 72, но сам не попал в периметр) | Cómo funciona el curso | Como o curso funciona |
+| `card.backToday` | 72 (спека §3: подпись «назад» со страницы карты при `from=today` теперь
+  «Карта дня», а не «Сегодня») | Carta del día | Carta do dia |
+| `paywall.legal` | 72 (добавлен параметр `{{store}}` — риск 2.3.10, тот же, что у `about.dataText`/
+  `termsText` ниже; pt уже несёт ХОРОШИЙ паттерн «da loja ({{store}})» — сверь дальше, что то же
+  слово `de {{store}}` в `about.dataText`/`termsText` пишется так же, с артиклем, а не голым `de`) | La suscripción se renueva automáticamente hasta que la canceles en los ajustes de {{store}}, al menos 24 horas antes de que termine el periodo. | A assinatura é renovada automaticamente até que você a cancele nas configurações da loja ({{store}}), pelo menos 24 horas antes do fim do período. |
 
 ⚠️ `home.lessonOf`/`game.resultLine` — числа и плейсхолдеры `{{m}}`/`{{n}}`/`{{total}}`/`{{right}}`
 не трогать, форма «из 32» одна, без плюрализации (как в ru/en). `game.overline`/`ob.start`/CTA —
 капслок, как остальные оверлайны и кнопки этих языков.
+⚠️ **pt `about.dataText`/`about.termsText` — конкретная находка ревью 19.09**: подстановка
+`{{store}}` в двух местах (`i18n.ts:1420,1426`, «do recibo de App Store» / «conta de App Store»)
+даёт голый предлог `de` перед английским именем магазина без артикля — естественнее «da App
+Store» (родня — `paywall.legal` в этой же таблице и `site/*.html`, где то же место написано
+литералом с артиклем). Правь формулировку вокруг подстановки, саму `{{store}}` не трогай.
 
 ### Часть 2 — страницы `site/` (секции `<section data-lang="es">` и `data-lang="pt">`)
 
