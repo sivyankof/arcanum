@@ -52,14 +52,19 @@ Apple индексирует название и подзаголовок и т�
 
 ## Заметки для ревьюера (en, поле App Review Notes)
 
-Версия 18.09 (задача 72, ответ на ВТОРОЙ отказ 4.3(b) — сборка 4, учебный главный экран):
-структура целиком пересобрана вокруг новой навигации, а не вокруг возражения. Первым пунктом —
-что изменилось со сборки 3 (учебная панель первым экраном, карта дня и лунная строка убраны с
-первого экрана, нумерация лунных дней убрана вовсе, онбординг без даты рождения, новая вкладка
-«Учёба», игра-упражнение «Угадай карту»); вторым — путь ревьюера за 30 секунд; спорить по существу
-больше не с чем (показываем правки, а не аргументы), поэтому абзац про 4.3(b) сжат до двух
-предложений и стоит перед пронумерованными пунктами. Прежние восемь пунктов (SCREEN
-RECORDING…IN-APP PURCHASES) сохранены, но пронумерованы 3–10 и сжаты под новую навигацию
+Версия 19.09 (задача 72, финальное ревью ветки): структура целиком пересобрана вокруг новой
+навигации, а не вокруг возражения (заложено 18.09, поправлено 19.09 по двум находкам ревью).
+Первым пунктом — что изменилось со сборки 3 (учебная панель первым экраном, карта дня и лунная
+строка убраны с первого экрана, нумерация лунных дней убрана вовсе, онбординг без даты рождения,
+новая вкладка «Учёба», игра-упражнение «Угадай карту»); вторым — путь ревьюера за 30 секунд,
+**из которого убран шаг «Learn → Review»**: тренажёр (`ReviewPanel`) скрыт, пока колода флеш-карт
+пуста, а она наполняется только уроками с картами — первый такой урок пятый по счёту (Модуль 2,
+Урок 1), то есть на свежей установке за 30 секунд до тренажёра дойти нельзя. Путь оставлен полностью
+исполнимым «как есть», а появление тренажёра описано отдельным предложением со ссылкой на запись
+экрана; третьим — сама запись, теперь ОПИСАННАЯ ПРАВДИВО (пункт 3 ниже: новая, сборки 4, а не старая
+сборки 3). Спорить по существу больше не с чем (показываем правки, а не аргументы), поэтому абзац
+про 4.3(b) сжат до двух предложений и стоит перед пронумерованными пунктами. Прежние восемь пунктов
+(SCREEN RECORDING…IN-APP PURCHASES) сохранены, но пронумерованы 3–10 и сжаты под новую навигацию
 (ACCESS переписан, дата рождения — «optional, in Settings»). Длина — считать python-ом `len()`
 (лимит — по счётчику поля ASC, `storeListing.test.ts` этот блок не парсит). Меняя факты
 (устройства, цены, что свободно), править здесь, потом копировать в ASC. Версия 05.09 (ресабмит
@@ -72,9 +77,9 @@ ON GUIDELINE 4.3(b). Arcanum has no astrology, horoscope or fortune-telling feat
 
 1. WHAT CHANGED SINCE THE PREVIOUS REVIEW. Build 4 reworks the app around learning. The first screen is now a learning dashboard: next course lesson (with progress), the "Review" spaced-repetition trainer, and a new "Guess the Card" recognition exercise. The daily card moved to its own secondary screen. The moon-phase row is gone from the first screen and lunar-day numbering is removed from the app entirely; a plain new/full-moon calendar stays one tap away, on Practice. Tabs renamed: Learn, Course, Cards, Practice, Profile. Build 4, version 1.0.0.
 
-2. 30-SECOND REVIEWER PATH. Launch -> "Start learning" -> "To the first lesson" (2-step onboarding, no login) -> Learn tab, tap "Start lesson" -> theory -> a 5-question quiz with instant feedback. Course tab: 6 modules, 32 lessons, per-module progress (modules 1-2 free, 3-6 Premium). Learn -> "Review": SM-2 flashcard trainer, one free session a day. Learn or Practice -> "Guess the Card": a zoomed-in card detail, four name options, ten questions, free.
+2. 30-SECOND REVIEWER PATH. Launch -> "Start learning" -> "To the first lesson" (2-step onboarding, no login) -> Learn tab, tap "Start lesson" -> theory -> a 5-question quiz with instant feedback. Course tab: 6 modules, 32 lessons, per-module progress (modules 1-2 free, 3-6 Premium). Learn or Practice -> "Guess the Card": a zoomed-in detail, four options, ten questions, free. "Review" (SM-2 trainer, one free session/day) appears on Learn/Course after Module 2 Lesson 1, the 5th lesson — shown in the recording.
 
-3. SCREEN RECORDING. A full walkthrough from a physical iPhone, following the path above plus the paywall, a Sandbox purchase, unlocked content and Restore Purchases, is attached to the App Review thread. The only system prompt is the notification permission.
+3. SCREEN RECORDING. A walkthrough of build 4 from a physical iPhone, following the path above and on through the course to "Review", plus the paywall, a Sandbox purchase, unlocked content and Restore Purchases, is attached with this resubmission. The only system prompt is the notification permission.
 
 4. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max on iOS 26; ad hoc builds; Sandbox tester for purchases.
 
@@ -224,6 +229,13 @@ A 32-lesson course, all 78 cards with meanings and symbolism, a daily card with 
 
 # Español (вычитан носителем, задача 57н)
 
+⚠️ **Черновик задачи 72, носитель не читал** (19.09): короткое описание Google, ключевые слова iOS,
+промо-текст iOS и два абзаца полного описания («Adivina la Carta» — упражнение на распознавание
+символов; «Carta del día y calendario» — объединённый абзац карты дня и календаря вместо прежних
+двух) переписаны под учебный главный экран и игру «Угадай карту». Остальные абзацы (курс,
+справочник, расклады, тренажёр, дневник) — вычитка 57н, не тронуты. Волна 68 (`docs/prompts/
+68-native-tails.md`, часть 3) обязана прочитать именно эти блоки.
+
 ### es · название (30)
 Arcanum — Aprende Tarot
 
@@ -285,6 +297,13 @@ Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la
 ---
 
 # Português do Brasil (вычитан носителем, задача 57н)
+
+⚠️ **Черновик задачи 72, носитель не читал** (19.09): короткое описание Google, ключевые слова iOS,
+промо-текст iOS и два абзаца полного описания («Adivinhe a Carta» — упражнение на распознавание
+символов; «Carta do dia e calendário» — объединённый абзац карты дня и календаря вместо прежних
+двух) переписаны под учебный главный экран и игру «Угадай карту». Остальные абзацы (курс,
+справочник, расклады, тренажёр, дневник) — вычитка 57н, не тронуты. Волна 68 (`docs/prompts/
+68-native-tails.md`, часть 3) обязана прочитать именно эти блоки.
 
 ### pt · название (30)
 Arcanum — Aprenda a Ler Tarô
