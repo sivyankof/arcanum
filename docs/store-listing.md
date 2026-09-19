@@ -61,32 +61,34 @@ Apple индексирует название и подзаголовок и т�
 **из которого убран шаг «Learn → Review»**: тренажёр (`ReviewPanel`) скрыт, пока колода флеш-карт
 пуста, а она наполняется только уроками с картами — первый такой урок пятый по счёту (Модуль 2,
 Урок 1), то есть на свежей установке за 30 секунд до тренажёра дойти нельзя. Путь оставлен полностью
-исполнимым «как есть», а появление тренажёра описано отдельным предложением со ссылкой на запись
-экрана; третьим — сама запись, теперь ОПИСАННАЯ ПРАВДИВО (пункт 3 ниже: новая, сборки 4, а не старая
-сборки 3). Спорить по существу больше не с чем (показываем правки, а не аргументы), поэтому абзац
+исполнимым «как есть», а появление тренажёра описано отдельным предложением; третьим — записи
+экрана, ОПИСАННЫЕ ПРАВДИВО по кадрам: новая (19.09, код сборки 4 на ad hoc, 1:54 после обрезки —
+онбординг, урок 1 с тестом, игра, Course, Cards, Practice, карта дня, пейвол) и старая от 29.08 в
+треде — только для того, чего в новой нет (Sandbox-покупка и тренажёр «Review»). Пункт 6 сокращён:
+онбординг уже описан в пункте 2. Спорить по существу больше не с чем (показываем правки, а не аргументы), поэтому абзац
 про 4.3(b) сжат до двух предложений и стоит перед пронумерованными пунктами. Прежние восемь пунктов
 (SCREEN RECORDING…IN-APP PURCHASES) сохранены, но пронумерованы 3–10 и сжаты под новую навигацию
 (ACCESS переписан, дата рождения — «optional, in Settings»). Длина — считать python-ом `len()`
 (лимит — по счётчику поля ASC, `storeListing.test.ts` этот блок не парсит). Меняя факты
 (устройства, цены, что свободно), править здесь, потом копировать в ASC. Версия 05.09 (ресабмит
-после первого отказа, 3996 симв.) — в истории git.
+после первого отказа, 3996 симв.) — в истории git. Текущая — 3966 симв.
 
 ```
 Arcanum is an offline tarot LEARNING app: a course, a 78-card reference, spaced-repetition flashcards, a daily card with a journal, spreads and a moon calendar. No account or sign-up; progress, journal and settings stay on the device.
 
 ON GUIDELINE 4.3(b). Arcanum has no astrology, horoscope or fortune-telling features and predicts nothing; its category is Education. This build leads with the course, quizzes and spaced-repetition practice from the first screen, so we ask that it be assessed on that functionality rather than on the tarot subject matter alone.
 
-1. WHAT CHANGED SINCE THE PREVIOUS REVIEW. Build 4 reworks the app around learning. The first screen is now a learning dashboard: next course lesson (with progress), the "Review" spaced-repetition trainer, and a new "Guess the Card" recognition exercise. The daily card moved to its own secondary screen. The moon-phase row is gone from the first screen and lunar-day numbering is removed from the app entirely; a plain new/full-moon calendar stays one tap away, on Practice. Tabs renamed: Learn, Course, Cards, Practice, Profile. Build 4, version 1.0.0.
+1. WHAT CHANGED SINCE THE PREVIOUS REVIEW. Build 4 reworks the app around learning. The first screen is now a learning dashboard: next course lesson (with progress), the "Review" spaced-repetition trainer, and a new "Guess the Card" recognition exercise. The daily card moved to its own secondary screen. Lunar-day numbering is removed from the app; a plain new/full-moon calendar stays on Practice. Tabs renamed: Learn, Course, Cards, Practice, Profile.
 
-2. 30-SECOND REVIEWER PATH. Launch -> "Start learning" -> "To the first lesson" (2-step onboarding, no login) -> Learn tab, tap "Start lesson" -> theory -> a 5-question quiz with instant feedback. Course tab: 6 modules, 32 lessons, per-module progress (modules 1-2 free, 3-6 Premium). Learn or Practice -> "Guess the Card": a zoomed-in detail, four options, ten questions, free. "Review" (SM-2 trainer, one free session/day) appears on Learn/Course after Module 2 Lesson 1, the 5th lesson — shown in the recording.
+2. 30-SECOND REVIEWER PATH. Launch -> "Start learning" -> "To the first lesson" (2-step onboarding, no login) -> Learn tab, tap "Start lesson" -> theory -> a 5-question quiz with instant feedback. Course tab: 6 modules, 32 lessons, per-module progress (modules 1-2 free, 3-6 Premium). Learn or Practice -> "Guess the Card": a zoomed-in detail, four options, ten questions, free. "Review" (SM-2 trainer, one free session/day) appears on Learn/Course after Module 2 Lesson 1, the 5th lesson.
 
-3. SCREEN RECORDING. A walkthrough of build 4 from a physical iPhone, following the path above and on through the course to "Review", plus the paywall, a Sandbox purchase, unlocked content and Restore Purchases, is attached with this resubmission. The only system prompt is the notification permission.
+3. SCREEN RECORDINGS. New, attached with this resubmission: build 4 code on a physical iPhone (ad hoc build, 1:54, trimmed for length): first launch and onboarding, Lesson 1 theory and quiz, "Guess the Card", Course, Cards and a card page, Practice, the daily card, and the paywall with both plans, Terms/Privacy links and Restore Purchases. The Sandbox purchase flow and the "Review" trainer are in our Aug 29 recording in this thread; unchanged in build 4. The only system prompt, notification permission, comes after an in-app opt-in.
 
 4. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max on iOS 26; ad hoc builds; Sandbox tester for purchases.
 
 5. AUDIENCE. Adults and teens (13+) studying tarot symbolism as a hobby or self-reflection practice; disclaimer (no predictions, no medical, legal or financial advice) in onboarding and on About.
 
-6. ACCESS. No login. First launch: 2-step onboarding (intro with disclaimer -> how the course works, optional name) -> Learn tab. Tabs: Learn, Course (modules 1-2 free), Cards, Practice (spreads; moon row and calendar here), Profile (Settings, About; birth date optional, in Settings).
+6. ACCESS. No login or account. Tabs: Learn, Course, Cards, Practice (spreads, moon calendar), Profile (Settings, About; birth date optional, in Settings).
 
 7. EXTERNAL SERVICES. Purchases: StoreKit via the RevenueCat SDK (subscription status only; the app's only network service). Notifications are local. Privacy Policy, Terms of Use and support: static pages on GitHub Pages. No analytics, ads, authentication or AI.
 
