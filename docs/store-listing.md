@@ -71,7 +71,7 @@ Apple индексирует название и подзаголовок и т�
 (ACCESS переписан, дата рождения — «optional, in Settings»). Длина — считать python-ом `len()`
 (лимит — по счётчику поля ASC, `storeListing.test.ts` этот блок не парсит). Меняя факты
 (устройства, цены, что свободно), править здесь, потом копировать в ASC. Версия 05.09 (ресабмит
-после первого отказа, 3996 симв.) — в истории git. Текущая — 3966 симв.
+после первого отказа, 3996 симв.) — в истории git. Текущая — 3992 симв.
 
 ```
 Arcanum is an offline tarot LEARNING app: a course, a 78-card reference, spaced-repetition flashcards, a daily card with a journal, spreads and a moon calendar. No account or sign-up; progress, journal and settings stay on the device.
@@ -82,7 +82,7 @@ ON GUIDELINE 4.3(b). Arcanum has no astrology, horoscope or fortune-telling feat
 
 2. 30-SECOND REVIEWER PATH. Launch -> "Start learning" -> "To the first lesson" (2-step onboarding, no login) -> Learn tab, tap "Start lesson" -> theory -> a 5-question quiz with instant feedback. Course tab: 6 modules, 32 lessons, per-module progress (modules 1-2 free, 3-6 Premium). Learn or Practice -> "Guess the Card": a zoomed-in detail, four options, ten questions, free. "Review" (SM-2 trainer, one free session/day) appears on Learn/Course after Module 2 Lesson 1, the 5th lesson.
 
-3. SCREEN RECORDINGS. New, attached with this resubmission: build 4 code on a physical iPhone (ad hoc build, 1:54, trimmed for length): first launch and onboarding, Lesson 1 theory and quiz, "Guess the Card", Course, Cards and a card page, Practice, the daily card, and the paywall with both plans, Terms/Privacy links and Restore Purchases. The Sandbox purchase flow and the "Review" trainer are in our Aug 29 recording in this thread; unchanged in build 4. The only system prompt, notification permission, comes after an in-app opt-in.
+3. SCREEN RECORDINGS. New, attached with this resubmission: build 4 code on a physical iPhone (ad hoc build, 1:54, trimmed for length): first launch and onboarding, Lesson 1 theory and quiz, "Guess the Card", Course, Cards and a card page, Practice, the daily card, and the paywall with both plans, Terms/Privacy links and Restore Purchases. The Sandbox purchase flow and the "Review" trainer are in our Aug 29 recording in this thread; they work the same in build 4. The only system prompt, notification permission, comes after an in-app opt-in.
 
 4. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max on iOS 26; ad hoc builds; Sandbox tester for purchases.
 
@@ -96,7 +96,7 @@ ON GUIDELINE 4.3(b). Arcanum has no astrology, horoscope or fortune-telling feat
 
 9. THIRD-PARTY MATERIAL. Not a regulated industry. Card images: Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, Wikimedia Commons scans. Some symbolism draws on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain; all other text, including the card-meaning texts and quiz content, is original.
 
-10. IN-APP PURCHASES. One auto-renewable group "Arcanum Premium": Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no trial. Premium unlocks course modules 3-6, most spreads and unlimited flashcard sessions; free forever: the learning dashboard, modules 1-2, "Guess the Card", the daily card, the 78-card reference, the journal, the Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or any locked module or spread. The paywall lists both plans with store price, Terms of Use and Privacy Policy links and "Restore Purchases"; after purchase it shows the active plan and renewal date.
+10. IN-APP PURCHASES. One auto-renewable group "Arcanum Premium": Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no trial. Premium unlocks course modules 3-6, most spreads and unlimited flashcard sessions; free forever: the learning dashboard, modules 1-2, "Guess the Card", the daily card, the 78-card reference, the journal, the Card of the Day, Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or any locked module or spread. The paywall lists both plans with store price, Terms of Use and Privacy Policy links and "Restore Purchases"; after purchase it shows the active plan and renewal date.
 
 Contact: arcanum.tarot@icloud.com.
 ```
