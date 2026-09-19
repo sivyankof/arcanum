@@ -178,8 +178,10 @@ export default function LessonScreen() {
 
   // premium-модуль без права — на пейвол (прецедент гейта лунного окна в /spreads/[id]):
   // прямая ссылка не должна обходить замок пути. Ставится ПОСЛЕ всех хуков экрана — правило хуков.
+  // пейвол зовут ОТТУДА, откуда пришли на сам урок (спека 72, финальное ревью), а не всегда
+  // с курса: прямая ссылка без from — как раньше, «Курс» (paywall.tsx знает те же значения from)
   const gated = !!found && lessonLocked(found.lesson.id, course, premium);
-  if (gated) return <Redirect href="/paywall?from=course" />;
+  if (gated) return <Redirect href={`/paywall?from=${from ?? 'course'}`} />;
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>

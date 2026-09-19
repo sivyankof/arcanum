@@ -30,6 +30,8 @@ import { useTheme } from '../src/theme/useTheme';
 const VIEW = Math.min(Dimensions.get('window').width - 48, 300);
 const ZOOM_MS = 300;
 
+const BACK_TITLES: Record<string, string> = { practice: 'tabs.practice', learn: 'tabs.learn' };
+
 export default function FragmentScreen() {
   const t = useTheme();
   const { t: tr } = useTranslation();
@@ -71,7 +73,7 @@ export default function FragmentScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr(from === 'practice' ? 'tabs.practice' : 'tabs.learn') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'tabs.learn')) }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{ paddingTop: stackTopPad(insets), paddingBottom: insets.bottom + spacing.xl, paddingHorizontal: spacing.xl }}

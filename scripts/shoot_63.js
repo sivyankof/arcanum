@@ -61,9 +61,10 @@ const cards = require('../content/cards.json').cards;
 const spreads = require('../content/spreads.json').spreads;
 const modules = require('../content/course.json').modules;
 const I18N = fs.readFileSync(path.join(ROOT, 'src/lib/i18n.ts'), 'utf8');
-// themeHex/hexToRgb — общий scripts/lib/seed72.js (правка финального ревью, находка F12):
-// раньше эта пара жила только здесь копией, теперь ей пользуется и check_72_web.js
-const { themeHex, hexToRgb } = require('./lib/seed72');
+// themeHex/hexToRgb/PREMIUM_NONE/progress/M1/M12 — общий scripts/lib/seed72.js (правка финального
+// ревью, находки F12/T2): themeHex/hexToRgb раньше жили только здесь копией, теперь ей пользуется
+// и check_72_web.js; остальные четыре были продублированы здесь дословно (доводка ревью, задача 72)
+const { themeHex, hexToRgb, PREMIUM_NONE, progress, M1, M12 } = require('./lib/seed72');
 // фон градиента ScreenBg — цвет темы, а не хардкод (находка ревью 63/5: доказать нужно ИМЕННО
 // применение светлой темы, а не только видимость карты дня, которая видна в обеих темах)
 const LIGHT_BG_RGB = hexToRgb(themeHex('lightTheme', 'bg'));
@@ -77,16 +78,11 @@ const SPREAD_CARDS = ['empress', 'chariot', 'strength'];
 // Только семь карт без наготы, годных лечь на кадр витрины (порядок случаен, любая из семи
 // допустима). РЕАЛЬНАЯ колода тренажёра шире — см. REAL_DECK ниже (находка ревью 63/3).
 const DECK = ['fool', 'magician', 'high-priestess', 'empress', 'emperor', 'hierophant', 'chariot'];
-const M12 = ['m1l1', 'm1l2', 'm1l3', 'm1l4', 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2l5', 'm2l6'];
+// M12/M1 (он же MODULE1_IDS — «модуль 1 пройден целиком, модуль 2 нет» для героя «Учёбы») —
+// общий scripts/lib/seed72.js, читает id-ы уроков ИЗ ИСТОЧНИКА (course.json), не литералом
 const M12_SET = new Set(M12);
+const MODULE1_IDS = M1;
 const ALL_LANGS = ['ru', 'en', 'es', 'pt']; // канонический порядок языков — как в i18n.ts
-
-// id-ы уроков модуля 1 — из ИСТОЧНИКА (course.json), а не литералом рядом с M12: кадр «Учёба»
-// (спека 72) сеет «модуль 1 пройден целиком, модуль 2 нет» отдельно от «M12 пройден» (курс/тренажёр),
-// поэтому нужен собственный список, который не разъедется, если в модуле 1 изменится число уроков.
-const MODULE1_IDS = modules[0].lessons.map((l) => l.id);
-/** Карта id уроков → «пройден» для точечных сидов кадров (герой «Учёбы», викторина). */
-const doneMap = (ids) => Object.fromEntries(ids.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }]));
 
 /** Колода тренажёра строится ВО ВРЕМЯ ИСПОЛНЕНИЯ из карт пройденных уроков (learnedCardIds
  *  в src/lib/courseProgress.ts), а не из DECK — урок «Повторение» модуля 2 (m2l5) тащит карты
@@ -195,8 +191,8 @@ function seed(lang, extra = {}) {
       installSeed: 12345,
       lastDrawDate: TODAY,
       profile: { onboarded: true, name: 'Артём', birthDate: '1990-05-14', birthArcanaId: 'justice' },
-      premium: { active: false, source: 'none', until: null },
-      lessonsProgress: Object.fromEntries(M12.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }])),
+      premium: PREMIUM_NONE,
+      lessonsProgress: progress(M12),
       srs: SRS_SEED,
       reviewDay: { date: '', newCount: 0, doneCount: 0 },
       history: JOURNAL,
@@ -205,7 +201,9 @@ function seed(lang, extra = {}) {
       streak: 5,
       ...extra,
     },
-    version: 11,
+    // persist version 12 (спека 53б: `premium` несёт `plan`/`willRenew`, отсюда — PREMIUM_NONE
+    // из seed72.js, а не своя копия формы), задача 72 её не поднимает
+    version: 12,
   });
 }
 
@@ -215,7 +213,7 @@ function seed(lang, extra = {}) {
  *  ушли из набора вместе с ними самими с первого экрана (спека 72, задача 15) — новый первый
  *  экран учебный, поэтому первый кадр витрины теперь «Учёба». */
 const SCREENS = [
-  { id: 'home', route: '/', extra: { lessonsProgress: doneMap(MODULE1_IDS) },
+  { id: 'home', route: '/', extra: { lessonsProgress: progress(MODULE1_IDS) },
     // герой показывает СЛЕДУЮЩИЙ урок (модуль 1 пройден целиком ⇒ первый урок модуля 2) —
     // маркер не «есть текст „5"» (эту цифру дала бы и серия дней, seed streak:5), а точная строка
     // оверлайна героя, собранная из сырого шаблона home.lessonOf (находка при написании кадра)
@@ -256,7 +254,7 @@ const SCREENS = [
       if (!t.includes(`${COURSE_PCT}%`)) problems.push(`нет отметки прогресса модуля 1 (ожидали ${COURSE_PCT}%)`);
       return problems;
     } },
-  { id: 'quiz', route: '/lesson/m1l2', extra: { lessonsProgress: doneMap(['m1l1']) },
+  { id: 'quiz', route: '/lesson/m1l2', extra: { lessonsProgress: progress(['m1l1']) },
     // варианты перемешиваются Math.random'ом при каждой загрузке экрана (src/lib/lesson.ts,
     // shuffleOptions) — заранее известного индекса верного варианта нет, только его ТЕКСТ
     // (options[correct][lang], у вопроса m1l2/quiz[0] это «56»/«78»/«22» на всех языках).
@@ -341,7 +339,7 @@ const SCREENS = [
       if (!(await text(page)).includes(spreadName('three-card', lang))) missing.push('нет названия расклада');
       return missing;
     } },
-  { id: 'home-light', route: '/', extra: { lessonsProgress: doneMap(MODULE1_IDS), themeMode: 'light' },
+  { id: 'home-light', route: '/', extra: { lessonsProgress: progress(MODULE1_IDS), themeMode: 'light' },
     check: async (page, lang) => {
       const problems = [];
       if (!(await text(page)).includes(i18nText(lang, 'home', 'title'))) problems.push('нет заголовка «Учёба»');

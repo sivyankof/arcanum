@@ -207,7 +207,9 @@ export default function DailyScreen() {
     devForce: __DEV__ && devReflect,
   });
 
-  const todayISO = localDateISO();
+  // дата шапки — из ТОГО ЖЕ `now`, что и час рефлексии выше (находка F13): иначе в момент
+  // полуночи/возврата из фона они могли обновиться порознь и разъехаться на кадр
+  const todayISO = localDateISO(now);
   // анти-повтор карты дня: карты, выпадавшие за последние 7 дней (не считая сегодня)
   const recent = history
     .filter((h) => h.date >= daysAgoISO(7) && h.date !== todayISO)

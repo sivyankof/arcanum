@@ -129,8 +129,9 @@ function check(name, ok, detail) {
   check('заголовок «Учёба»', b.includes('Учёба'));
   check('CTA «НАЧАТЬ УРОК»', b.includes('НАЧАТЬ УРОК'));
   await tap('НАЧАТЬ УРОК');
-  // ?from=learn — подпись «назад» (находки F1/F2/F5/T1 финального ревью), путь проверяем startsWith
-  check('start: CTA ведёт на /lesson/m1l1', here().startsWith('/lesson/m1l1'), `фактически ${here()}`);
+  // ?from=learn — подпись «назад» (находки F1/F2/F5/T1 финального ревью); проверяем ТОЧНО, чтобы
+  // потеря параметра (регресс) роняла прогон, а не проезжала мимо ослабленного startsWith
+  check('start: CTA ведёт на /lesson/m1l1?from=learn', here() === '/lesson/m1l1?from=learn', `фактически ${here()}`);
 
   console.log('\n=== 3. Герой: состояние continue (пройден М1) ===');
   href = await open('/', seed({ lessonsProgress: progress(M1) }));
@@ -138,20 +139,28 @@ function check(name, ok, detail) {
   check('overline «УРОК 5 ИЗ 32»', b.includes('УРОК 5 ИЗ 32'), b.slice(0, 260));
   check('CTA «ПРОДОЛЖИТЬ КУРС»', b.includes('ПРОДОЛЖИТЬ КУРС'));
   await tap('ПРОДОЛЖИТЬ КУРС');
-  check('continue: CTA ведёт на /lesson/m2l1', here().startsWith('/lesson/m2l1'), `фактически ${here()}`);
+  check('continue: CTA ведёт на /lesson/m2l1?from=learn', here() === '/lesson/m2l1?from=learn', `фактически ${here()}`);
 
   console.log('\n=== 4. Герой: состояние locked (пройдены М1+М2, модуль 3 — premium) ===');
   href = await open('/', seed({ lessonsProgress: progress(M12) }));
   b = await body();
   check('locked: CTA «ОТКРЫТЬ PREMIUM»', b.includes('ОТКРЫТЬ PREMIUM'));
+  // отдельный вход — панель «Повторение» (карты М1+М2 уже пройдены, колода не пуста): свой тап,
+  // своя цель /review, свой from=learn (находка F2/F5 финального ревью). Состояние героя (locked)
+  // тут ни при чём — панель зависит только от колоды/срс, взята в этом же сиде за компанию
+  check('на «Учёбе» есть панель «Повторение»', b.includes('ПОВТОРЕНИЕ'));
+  await tap('ПОВТОРЕНИЕ');
+  check('ReviewPanel ведёт на /review?from=learn', here() === '/review?from=learn', `фактически ${here()}`);
+  await page.goBack();
+  await page.waitForTimeout(800);
   await tap('ОТКРЫТЬ PREMIUM');
-  check('locked без права → /paywall', here().startsWith('/paywall'), `фактически ${here()}`);
+  check('locked без права → /paywall?from=learn', here() === '/paywall?from=learn', `фактически ${here()}`);
 
   href = await open('/', seed({ lessonsProgress: progress(M12), premium: PREMIUM_DEV }));
   b = await body();
   check('locked с правом: CTA снова «ПРОДОЛЖИТЬ КУРС»', b.includes('ПРОДОЛЖИТЬ КУРС'));
   await tap('ПРОДОЛЖИТЬ КУРС');
-  check('locked с правом → /lesson/m3l1', here().startsWith('/lesson/m3l1'), `фактически ${here()}`);
+  check('locked с правом → /lesson/m3l1?from=learn', here() === '/lesson/m3l1?from=learn', `фактически ${here()}`);
 
   console.log('\n=== 5. Герой: состояние done (курс пройден) ===');
   href = await open('/', seed({ lessonsProgress: progress(ALL32) }));
@@ -159,14 +168,14 @@ function check(name, ok, detail) {
   check('done: «Курс пройден»', b.includes('Курс пройден'));
   check('done: CTA «К ТРЕНАЖЁРУ»', b.includes('К ТРЕНАЖЁРУ'));
   await tap('К ТРЕНАЖЁРУ');
-  check('done: CTA ведёт на /review', here().startsWith('/review'), `фактически ${here()}`);
+  check('done: CTA ведёт на /review?from=learn', here() === '/review?from=learn', `фактически ${here()}`);
 
   console.log('\n=== 6. Строка «Карта дня» → /daily → карта → назад → назад ===');
   href = await open('/', seed());
   b = await body();
   check('на «Учёбе» строка «Карта дня» есть', b.includes('Карта дня'));
   await tap('Карта дня');
-  check('строка ведёт на /daily', here().startsWith('/daily'), `фактически ${here()}`);
+  check('строка ведёт на /daily?from=learn', here() === '/daily?from=learn', `фактически ${here()}`);
   b = await body();
   check('на /daily нет «лун» (до открытия)', !/лун/i.test(b), b.slice(0, 200));
   // карта дня качается ±6px бесконечно (правило AGENTS.md) — тут force обязателен
@@ -234,7 +243,7 @@ function check(name, ok, detail) {
   href = await open('/', seed());
   check('с «Учёбы» есть вход в игру', (await body()).includes('Угадай карту'));
   await tap('Угадай карту');
-  check('вход с «Учёбы» → /fragment', here().startsWith('/fragment'), `фактически ${here()}`);
+  check('вход с «Учёбы» → /fragment?from=learn', here() === '/fragment?from=learn', `фактически ${here()}`);
 
   const xpBefore = await xpNow();
   let rightCount = 0;
