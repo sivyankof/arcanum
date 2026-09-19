@@ -31,6 +31,8 @@ function get(path) {
     `/v1/apps/${APP_ID}/appStoreVersions?limit=5&fields[appStoreVersions]=versionString,appStoreState,appVersionState,createdDate,releaseType`,
     `/v1/apps/${APP_ID}/reviewSubmissions?limit=5`,
     `/v1/apps/${APP_ID}/subscriptionGroups`,
+    // обработка залитых сборок: PROCESSING → VALID (только VALID выбирается в версии)
+    `/v1/builds?filter[app]=${APP_ID}&sort=-uploadedDate&limit=3&fields[builds]=version,processingState,uploadedDate`,
   ];
   for (const p of paths) {
     const r = await get(p);
