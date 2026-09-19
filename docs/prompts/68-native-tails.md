@@ -1,8 +1,10 @@
-# Промт задачи 68 · Вычитка носителем хвостов es/pt (строки задач 53/54/59/62/53б/67 и страницы `site/`)
+# Промт задачи 68 · Вычитка носителем хвостов es/pt (строки задач 53/54/59/62/53б/67/72 и страницы `site/`)
 
 Волна 28н (21.08) закрыла долг по строкам, которые сессии написали ДО неё. После 21.08 сессии
 написали ещё ~25 UI-строк и четыре страницы сайта на четырёх языках — **испанский и португальский
 в них не читал ни один носитель**. Эта задача закрывает новый долг одним заходом, как 28н.
+Периметр расширен 19.09 задачей 72 (учебный главный экран + игра «Угадай карту») — часть 1а и
+часть 3 ниже.
 
 Прочитай сначала: раздел глоссариев ES / PT-BR в `docs/content-guide.md` (норма языка, правило
 безличного рода), промт 28н (`docs/prompts/28n-native-review.md` — те же правила) и отчёт 57н
@@ -37,6 +39,51 @@
 шрифтом Cormorant, помещается ~22 знака.
 ⚠️ `about.dataText` и `about.termsText` — это те же тексты, что на `privacy.html` / `terms.html`
 (см. часть 2): правишь одно место — правь второе побайтово, иначе контракт `site.test.ts` красный.
+⚠️ Задача 72 (19.09) добавила в оба текста параметр `{{store}}` (три места на язык — риск 2.3.10):
+правь формулировку вокруг подстановки, саму `{{store}}` не трогай — её заполняет код (`STORE_NAME`).
+
+### Часть 1а — новые строки задачи 72 (`src/lib/i18n.ts`, секции `es`/`pt`)
+
+| Ключ | Откуда | es сейчас | pt сейчас |
+|---|---|---|---|
+| `ob.start` | 72 (первый шаг онбординга, было «НАЧАТЬ ПУТЬ») | EMPEZAR A APRENDER | COMEÇAR A APRENDER |
+| `ob.how1` | 72 (второй шаг «Как устроен курс») | 32 lecciones de cinco minutos: de la estructura de la baraja a las tiradas | 32 aulas de cinco minutos — da estrutura do baralho às tiragens |
+| `ob.how2` | 72 | Un breve cuestionario después de cada lección | Um quiz curto depois de cada aula |
+| `ob.how3` | 72 | El entrenador te recuerda qué cartas toca repasar | O treino lembra quais cartas está na hora de revisar |
+| `ob.toCourse` | 72 (CTA второго шага) | A LA PRIMERA LECCIÓN | PARA A PRIMEIRA AULA |
+| `today.tapToReveal` | 72 (было «TOCA PARA REVELAR»/«TOQUE PARA REVELAR») | TOCA PARA GIRAR | TOQUE PARA VIRAR |
+| `today.meaning` | 72 (было «SIGNIFICADO DEL DÍA»/«SIGNIFICADO DO DIA») | SIGNIFICADO DE LA CARTA | SIGNIFICADO DA CARTA |
+| `today.continue` | 72 (было «CONTINUAR TU CAMINO →»/аналог pt) | ESTUDIAR LA CARTA → | ESTUDAR A CARTA → |
+| `home.title` | 72 (заголовок «Учёбы») | Aprender | Aprender |
+| `home.lessonOf` | 72 (оверлайн героя) | MÓDULO {{m}} · LECCIÓN {{n}} DE {{total}} | MÓDULO {{m}} · AULA {{n}} DE {{total}} (⚠️ «aula», не «lição» — термин занят `course.lessons`/`startLesson`) |
+| `home.ctaStart`/`ctaContinue`/`ctaPremium`/`ctaReview` | 72 (CTA героя по состоянию) | EMPEZAR LA LECCIÓN / CONTINUAR EL CURSO / DESBLOQUEAR PREMIUM / IR AL ENTRENADOR | COMEÇAR A AULA / CONTINUAR O CURSO / DESBLOQUEAR PREMIUM / IR PARA O TREINO |
+| `home.courseDone` | 72 | Curso completado | Curso concluído |
+| `home.dailyHint`/`dailyDrawn`/`dailyReflect` | 72 (строка «Карта дня») | Una carta al día: así la baraja se aprende sola / Carta del día · abierta / Tu pregunta de la noche te espera | Uma carta por dia — assim o baralho se fixa sozinho / Carta do dia · aberta / Sua pergunta da noite está esperando |
+| `game.overline`/`title`/`sub` | 72 (панель входа в игру) | JUEGO / Adivina la carta / Reconoce el arcano por un detalle del dibujo | JOGO / Adivinhe a carta / Reconheça o arcano por um detalhe do desenho |
+| `game.question` | 72 | ¿Qué carta es? | Que carta é esta? |
+| `game.resultLine` | 72 (`{{right}}`/`{{total}}`) | {{right}} DE {{total}} CORRECTAS | {{right}} DE {{total}} CORRETAS |
+| `game.again` | 72 | Otra vez | De novo |
+| `review.toLearn` | 72 (пустое состояние тренажёра с «Учёбы», было только `toCourse`; en-версия
+  «TO LEARN»/«A APRENDER»-подобная читалась как инфинитив — доводка финального ревью 19.09 уже
+  переписала es/pt на глагол-повелительное «вернуться», проверь только естественность) | VOLVER A LAS LECCIONES | VOLTAR ÀS AULAS |
+| `tabs.learn` / `tabs.practice` | 72 (переименование вкладок «Сегодня»→«Учёба», «Расклады»→«Практика»,
+  §1 спеки; упущено периметром волны 21.08 — доводка ревью 19.09) | Aprender / Práctica | Aprender / Prática |
+| `ob.howTitle` | 72 (второй шаг онбординга, заголовок панели — сосед `ob.how1-3` выше, тоже
+  задачи 72, но сам не попал в периметр) | Cómo funciona el curso | Como o curso funciona |
+| `card.backToday` | 72 (спека §3: подпись «назад» со страницы карты при `from=today` теперь
+  «Карта дня», а не «Сегодня») | Carta del día | Carta do dia |
+| `paywall.legal` | 72 (добавлен параметр `{{store}}` — риск 2.3.10, тот же, что у `about.dataText`/
+  `termsText` ниже; pt уже несёт ХОРОШИЙ паттерн «da loja ({{store}})» — сверь дальше, что то же
+  слово `de {{store}}` в `about.dataText`/`termsText` пишется так же, с артиклем, а не голым `de`) | La suscripción se renueva automáticamente hasta que la canceles en los ajustes de {{store}}, al menos 24 horas antes de que termine el periodo. | A assinatura é renovada automaticamente até que você a cancele nas configurações da loja ({{store}}), pelo menos 24 horas antes do fim do período. |
+
+⚠️ `home.lessonOf`/`game.resultLine` — числа и плейсхолдеры `{{m}}`/`{{n}}`/`{{total}}`/`{{right}}`
+не трогать, форма «из 32» одна, без плюрализации (как в ru/en). `game.overline`/`ob.start`/CTA —
+капслок, как остальные оверлайны и кнопки этих языков.
+⚠️ **pt `about.dataText`/`about.termsText` — конкретная находка ревью 19.09**: подстановка
+`{{store}}` в двух местах (`i18n.ts:1420,1426`, «do recibo de App Store» / «conta de App Store»)
+даёт голый предлог `de` перед английским именем магазина без артикля — естественнее «da App
+Store» (родня — `paywall.legal` в этой же таблице и `site/*.html`, где то же место написано
+литералом с артиклем). Правь формулировку вокруг подстановки, саму `{{store}}` не трогай.
 
 ### Часть 2 — страницы `site/` (секции `<section data-lang="es">` и `data-lang="pt">`)
 
@@ -54,6 +101,25 @@
 §1–§7, «поддержка», 404) от приложения не зависит — правь свободно.
 
 **Русский и английский не трогать ни байтом.**
+
+### Часть 3 — витрина: подписи кадров и текст `docs/store-listing.md` (задача 72, 19.09)
+
+`docs/store/captions.json` — блок `"fragment"` (подпись кадра игры «Угадай карту») написан
+задачей 72 на всех четырёх языках; es/pt не читал носитель:
+
+| Поле | es сейчас | pt сейчас |
+|---|---|---|
+| `screens.fragment[0]` (заголовок, ≤25) | Adivina la carta | Adivinhe a carta |
+| `screens.fragment[1]` (подпись, ≤46) | Ejercicio para reconocer símbolos de la baraja | Exercício para reconhecer símbolos do baralho |
+
+В `docs/store-listing.md` задача 72 переписала часть es/pt-блоков под секциями `# Español` и
+`# Português do Brasil` (в файле они помечены отдельной пометкой «черновик задачи 72, носитель
+не читал» — искать по этой фразе): короткое описание Google, ключевые слова iOS, промо-текст iOS
+и два абзаца полного описания («Adivina la Carta»/«Adivinhe a Carta» — сам факт игры, и «Carta del
+día y calendario»/«Carta do dia e calendário» — объединённый абзац карты дня и календаря вместо
+двух прежних). Остальные абзацы этих описаний (курс, справочник, расклады, тренажёр, дневник) уже
+вычитаны носителем волной 57н — не трогать их формулировки, только сверить длины после правки
+соседних блоков (лимиты держит `storeListing.test.ts`).
 
 ## Правила (те же, что в 28н и 57н)
 
@@ -85,13 +151,15 @@
 
 ## Что сдать
 
-1. Правки в `src/lib/i18n.ts` (секции `es`/`pt`) и `site/*.html` (секции es/pt).
-2. `docs/specs/68-changed-addresses.md` — таблица «ключ или файл+§ · язык · было · стало · почему»
+1. Правки в `src/lib/i18n.ts` (секции `es`/`pt`, включая часть 1а) и `site/*.html` (секции es/pt).
+2. Правки `docs/store/captions.json` (блок `fragment`) и `docs/store-listing.md` (см. часть 3) —
+   после правки снять пометку «черновик задачи 72, носитель не читал» у тронутых блоков.
+3. `docs/specs/68-changed-addresses.md` — таблица «ключ или файл+§ · язык · было · стало · почему»
    (почему — одним словом: калька / норма / термин / род / длина).
-3. Зелёные `npm test` (в первую очередь `site.test.ts` 35/35 и `langSources.test.ts`) и
-   `npx tsc --noEmit`. Если правка абзаца `dataText` сделана в одном месте — тест это покажет,
-   вторая половина обязательна.
-4. Отдельным списком — вопросы, где нужно решение автора (термин, длина, факт).
+4. Зелёные `npm test` (в первую очередь `site.test.ts` 35/35, `storeListing.test.ts` 122/122
+   и `langSources.test.ts`) и `npx tsc --noEmit`. Если правка абзаца `dataText` сделана в одном
+   месте — тест это покажет, вторая половина обязательна.
+5. Отдельным списком — вопросы, где нужно решение автора (термин, длина, факт).
 
-Коммит: `content: вычитка носителем хвостов es/pt — строки 53/54/59/62/53б/67 и site/ (spec 68)`.
+Коммит: `content: вычитка носителем хвостов es/pt — строки 53/54/59/62/53б/67/72 и site/ (spec 68)`.
 Ветка `feat/68-native-tails`, патч через `git format-patch` — как в 28с/57н/60.

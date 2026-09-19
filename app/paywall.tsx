@@ -19,20 +19,24 @@ import { PressableScale } from '../src/components/PressableScale';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
 import { PRIVACY_URL, TERMS_URL } from '../src/lib/appInfo';
+import { backTitleKey } from '../src/lib/backTitle';
 import { formatFullDate } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
 import { useLang } from '../src/lib/i18n';
 import { getOffers, manageUrl, purchase, PURCHASES_AVAILABLE, restore, type Offer, type PlanId } from '../src/lib/purchases';
+import { STORE_NAME } from '../src/lib/purchasesEnv';
 import { useBackHaptic } from '../src/lib/useBackHaptic';
 import { useApp } from '../src/store/useApp';
+import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, radius, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
 /** Подпись «назад» по источнику перехода; неизвестный/пустой from — «Настройки». */
 const BACK_TITLES: Record<string, string> = {
   settings: 'settings.title',
+  learn: 'tabs.learn',
   course: 'tabs.course',
-  spreads: 'tabs.spreads',
+  spreads: 'tabs.practice',
   moon: 'moon.title',
   review: 'review.title',
 };
@@ -53,7 +57,7 @@ export default function PaywallScreen() {
   useBackHaptic();
   const premium = useApp((s) => s.premium);
   const setPremium = useApp((s) => s.setPremium);
-  // откуда пришли — подпись кнопки «назад» (приём card/[id]: BACK_TITLES по параметру from)
+  // откуда пришли — подпись кнопки «назад» (общий backTitleKey, приём card/[id]/fragment)
   const { from } = useLocalSearchParams<{ from?: string }>();
 
   // null — предложения ещё не запрошены (первый кадр), [] — их нет (без SDK покупок в 53а/62;
@@ -106,11 +110,11 @@ export default function PaywallScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr(BACK_TITLES[from ?? ''] ?? 'settings.title') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'settings.title')) }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: insets.bottom + spacing.xxl,
         }}
@@ -239,7 +243,7 @@ export default function PaywallScreen() {
             (спека 62, Д3); в макете `.pwlegal` отстоит от предыдущего блока на свои 14 */}
         <FadeUp index={3}>
           <Txt style={[st.legal, { color: t.muted }]}>
-            {tr('paywall.legal')}{' '}
+            {tr('paywall.legal', { store: STORE_NAME })}{' '}
             <LinkTxt href={TERMS_URL}>{tr('paywall.terms')}</LinkTxt>
             {' · '}
             <LinkTxt href={PRIVACY_URL}>{tr('paywall.privacy')}</LinkTxt>
@@ -250,7 +254,7 @@ export default function PaywallScreen() {
       <ConfirmDialog
         visible={dialogOpen}
         title={tr(DIALOG_TEXT[dialog].title)}
-        message={tr(DIALOG_TEXT[dialog].text)}
+        message={tr(DIALOG_TEXT[dialog].text, { store: STORE_NAME })}
         confirmLabel={tr('paywall.ok')}
         confirmTone="accent"
         onConfirm={() => setDialogOpen(false)}

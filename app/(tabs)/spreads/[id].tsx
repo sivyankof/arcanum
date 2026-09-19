@@ -14,7 +14,7 @@ export default function SpreadPlayRoute() {
   const spread = spreadById.get(id ?? '');
   const devNow = useDevMoonNow();
   const premium = useApp((s) => s.premium);
-  // «Карта дня» раскладом не играется (список ведёт на «Сегодня»), чужой id — назад в список
+  // «Карта дня» раскладом не играется (список ведёт на /daily), чужой id — назад в список
   if (!spread || spread.id === 'card-of-day') return <Redirect href="/spreads" />;
   // вне окна события лунный расклад не играется — прямая ссылка не должна обходить блокировку
   // списка (тот же приём, что у 'card-of-day' и чужого id)

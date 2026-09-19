@@ -19,7 +19,7 @@
  */
 import { Platform, type TextStyle, type ViewStyle } from 'react-native';
 
-/** Полоса блика: карта дня («Сегодня») и полноэкранный просмотр карты (CardLightbox) —
+/** Полоса блика: карта дня (app/daily.tsx) и полноэкранный просмотр карты (CardLightbox) —
  *  диагональ 112° (в координатах градиента 0..1), три стопа прозрачность/0.3/прозрачность.
  *  Тайминги (задержка, длительность, повтор) у мест разные — они остаются локальными. */
 export const GLARE_ANGLE = { start: { x: 0.04, y: 0.31 }, end: { x: 0.96, y: 0.69 } };
@@ -67,6 +67,6 @@ export function textGlow(color: string, cssBlur: number): TextStyle {
 }
 
 /** Тень граней крупной карты — `.face` эталона: 0 30px 66px glow + 0 6px 18px rgba(0,0,0,.4).
- *  Карта дня (app/(tabs)/index.tsx) и флеш-карта тренажёра (ReviewFlashcard, спека 45); задаётся
+ *  Карта дня (app/daily.tsx) и флеш-карта тренажёра (ReviewFlashcard, спека 45); задаётся
  *  инлайн через boxShadow, потому что зависит от темы. */
 export const faceShadow = (glow: string) => `0px 30px 66px ${glow}, 0px 6px 18px rgba(0,0,0,0.4)`;

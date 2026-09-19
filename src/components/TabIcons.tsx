@@ -1,10 +1,11 @@
 /** Иконки нижнего меню — контуры взяты из блока .nav эталона (viewBox 24, обводка 1.5,
  *  скруглённые концы, без заливки). Иконка «Профиль» в макете не нарисована: он там
- *  четырёхвкладочный, поэтому дорисована в том же стиле — круг головы и дуга плеч. */
+ *  четырёхвкладочный, поэтому дорисована в том же стиле — круг головы и дуга плеч.
+ *  Значки `learn` и `practice` дорисованы задачей 72 (в макет — те же контуры, задача 13). */
 import React from 'react';
 import Svg, { Circle, Path, Rect } from 'react-native-svg';
 
-export type TabIconName = 'today' | 'course' | 'cards' | 'spreads' | 'profile';
+export type TabIconName = 'learn' | 'course' | 'cards' | 'practice' | 'profile';
 
 const SIZE = 22;
 
@@ -27,11 +28,11 @@ function Frame({ color, size, children }: { color: string; size: number; childre
 
 export function TabIcon({ name, color, size = SIZE }: { name: TabIconName; color: string; size?: number }) {
   switch (name) {
-    case 'today': // солнце с лучами
+    case 'learn': // раскрытая книга
       return (
         <Frame color={color} size={size}>
-          <Circle cx={12} cy={12} r={4.2} />
-          <Path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19" />
+          <Path d="M12 6.6C10.2 5.2 7.6 4.6 3.6 4.8v13c4-.2 6.6.4 8.4 1.8 1.8-1.4 4.4-2 8.4-1.8v-13c-4-.2-6.6.4-8.4 1.8z" />
+          <Path d="M12 6.6v13" />
         </Frame>
       );
     case 'course': // конверт-«шапка» над стопкой
@@ -50,10 +51,12 @@ export function TabIcon({ name, color, size = SIZE }: { name: TabIconName; color
           <Rect x={10.4} y={4.2} width={10.4} height={15.6} rx={1.8} transform="rotate(7 15.6 12)" />
         </Frame>
       );
-    case 'spreads': // полумесяц
+    case 'practice': // три карты в ряд — схема расклада «Три карты»
       return (
         <Frame color={color} size={size}>
-          <Path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z" />
+          <Rect x={2.6} y={7} width={5.4} height={10} rx={1.2} />
+          <Rect x={9.3} y={5} width={5.4} height={10} rx={1.2} />
+          <Rect x={16} y={7} width={5.4} height={10} rx={1.2} />
         </Frame>
       );
     case 'profile':

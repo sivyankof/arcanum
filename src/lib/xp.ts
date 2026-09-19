@@ -51,7 +51,7 @@ export function nextLevelXp(level: number): number {
 /** Титул шестого уровня носят все уровни выше (logic-spec §4). */
 export const LAST_TITLE = 6;
 
-/** i18n-ключ титула уровня — общий для пилюли «Сегодня» и карточки уровня профиля. */
+/** i18n-ключ титула уровня — общий для пилюли XpPill (StatsPills) и карточки уровня профиля. */
 export function levelTitleKey(level: number): string {
   return `level.t${Math.min(level, LAST_TITLE)}`;
 }

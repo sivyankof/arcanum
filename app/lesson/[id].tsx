@@ -21,10 +21,11 @@ import { CtaButton } from '../../src/components/CtaButton';
 import { EmptyState } from '../../src/components/EmptyState';
 import { FadeUp } from '../../src/components/FadeUp';
 import { LessonResult } from '../../src/components/LessonResult';
-import { PressableScale } from '../../src/components/PressableScale';
+import { OptionButton, type OptionState } from '../../src/components/OptionButton';
 import { ProgressBar } from '../../src/components/ProgressBar';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
+import { backTitleKey } from '../../src/lib/backTitle';
 import { cardById, cardImages, course, type CourseLesson, type CourseModule } from '../../src/lib/content';
 import { moduleProgress } from '../../src/lib/courseProgress';
 import { hapticError, hapticTap } from '../../src/lib/haptics';
@@ -33,6 +34,7 @@ import { inLang, type Lang } from '../../src/lib/lang';
 import { lessonPlayable, lessonSteps, type LessonStep } from '../../src/lib/lesson';
 import { lessonLocked } from '../../src/lib/premium';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
+import { stackTopPad } from '../../src/theme/navHeader';
 import { fonts, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 import { useApp } from '../../src/store/useApp';
@@ -56,14 +58,19 @@ function findLesson(
   return null;
 }
 
-type OptState = 'idle' | 'ok' | 'no';
+/** Подпись «назад» по источнику перехода (спека 72, финальное ревью F2/F5): /lesson/[id] открывается
+ *  и с героя «Учёбы», и с тропы курса — неизвестный/пустой from (прямая ссылка) считаем «Курсом». */
+const BACK_TITLES: Record<string, string> = {
+  learn: 'tabs.learn',
+  course: 'tabs.course',
+};
 
 export default function LessonScreen() {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = useLang();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, from } = useLocalSearchParams<{ id: string; from?: string }>();
 
   // вибрация на уходе с экрана — общий хук (как card/[id])
   useBackHaptic();
@@ -162,7 +169,7 @@ export default function LessonScreen() {
     }
   };
 
-  const optState = (i: number): OptState => {
+  const optState = (i: number): OptionState => {
     if (!step || step.kind !== 'quiz' || picked === null) return 'idle';
     if (i === step.question.correct && (picked === step.question.correct || showCorrect)) return 'ok';
     if (i === picked && picked !== step.question.correct) return 'no';
@@ -171,18 +178,19 @@ export default function LessonScreen() {
 
   // premium-модуль без права — на пейвол (прецедент гейта лунного окна в /spreads/[id]):
   // прямая ссылка не должна обходить замок пути. Ставится ПОСЛЕ всех хуков экрана — правило хуков.
+  // пейвол зовут ОТТУДА, откуда пришли на сам урок (спека 72, финальное ревью), а не всегда
+  // с курса: прямая ссылка без from — как раньше, «Курс» (paywall.tsx знает те же значения from)
   const gated = !!found && lessonLocked(found.lesson.id, course, premium);
-  if (gated) return <Redirect href="/paywall?from=course" />;
+  if (gated) return <Redirect href={`/paywall?from=${from ?? 'course'}`} />;
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.course') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'tabs.course')) }} />
       <ScreenBg />
       <ScrollView
         ref={scrollRef}
         contentContainerStyle={{
-          // как card/[id]: insets.top + высота системной шапки, иначе контент уедет под неё
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}
@@ -248,24 +256,9 @@ export default function LessonScreen() {
                     </View>
                   )}
                   <Txt style={[st.q, { color: t.head }]}>{inLang(step.question.q, lang)}</Txt>
-                  {step.question.options.map((o, i) => {
-                    const state = optState(i);
-                    return (
-                      <PressableScale
-                        key={i}
-                        onPress={() => onPick(i)}
-                        style={[
-                          st.opt,
-                          { backgroundColor: t.panel, borderColor: t.line },
-                          // фон верного — success с альфой 0.12 (1F), как rgba(90,160,126,.12) эталона
-                          state === 'ok' && { borderColor: t.success, backgroundColor: `${t.success}1F` },
-                          state === 'no' && { borderColor: t.danger, opacity: 0.6 },
-                        ]}
-                      >
-                        <Txt style={[st.optTxt, { color: t.text }]}>{inLang(o, lang)}</Txt>
-                      </PressableScale>
-                    );
-                  })}
+                  {step.question.options.map((o, i) => (
+                    <OptionButton key={i} label={inLang(o, lang)} state={optState(i)} onPress={() => onPick(i)} />
+                  ))}
                   {answered && (
                     <Txt style={[st.explain, { color: t.text }]}>
                       <Txt
@@ -335,9 +328,6 @@ const st = StyleSheet.create({
     marginBottom: spacing.l,
   },
   qIm: { width: '100%', height: '100%' },
-  // вариант ответа (.opt): бордер 1.5, radius 14, паддинг 13×16, Body 14
-  opt: { borderWidth: 1.5, borderRadius: 14, paddingVertical: 13, paddingHorizontal: 16, marginTop: 9 },
-  optTxt: { fontSize: 14, lineHeight: 20 },
   explain: { fontFamily: fonts.display, fontSize: 15, lineHeight: 22, textAlign: 'center', marginTop: spacing.l },
   // шаг карты (.lcard)
   lcard: { flexDirection: 'row', alignItems: 'center', gap: 14, borderWidth: 1, borderRadius: radius.l, padding: 14, marginTop: spacing.m },

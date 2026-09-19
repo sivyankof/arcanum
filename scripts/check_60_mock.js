@@ -1,13 +1,15 @@
 /* Приёмка задачи 60 — дорисовки `docs/design-reference.html` по итогам аудита 56 (пункты 1–8)
- * и по задаче 59 (пункт 9 — две строки вместо одной).
+ * и по задаче 59 (пункт 9 — две строки вместо одной); задача 72 (пункты 10–12) — новая
+ * структура приложения: «Учёба» первой вкладкой, «Карта дня» и игра «Угадай карту» отдельными
+ * экранами-стеками, «Практика» вместо «Расклады» в таб-баре.
  *
  * Проверяет САМ макет, а не приложение: открывает файл в Chromium, ходит по всем вью и
- * сверяет то, что перечислено в `docs/prompts/56-mockup-tails.md`.
+ * сверяет то, что перечислено в `docs/prompts/56-mockup-tails.md` (60) и в спеке 72.
  *
  * Запуск (playwright в проекте не установлен, берётся из кэша npx — см. AGENTS.md):
  *   NODE_PATH=<путь к node_modules с playwright> node scripts/check_60_mock.js
- *   --mutate <1..9>  — испортить макет В ПАМЯТИ и убедиться, что проверка N краснеет
- *                      (правило проекта: зелёный с первого раза — искать ошибку в проверке).
+ *   --mutate <1..12>  — испортить макет В ПАМЯТИ и убедиться, что проверка N краснеет
+ *                       (правило проекта: зелёный с первого раза — искать ошибку в проверке).
  */
 const path = require('path');
 const { chromium } = require('playwright');
@@ -15,10 +17,10 @@ const { chromium } = require('playwright');
 const FILE = 'file://' + path.resolve(__dirname, '..', 'docs', 'design-reference.html');
 
 /** Вью вне группы (tabs) — таб-бара быть не должно. */
-const STACK = ['v-detail', 'v-lesson', 'v-trainer', 'v-moon', 'v-moonspread',
+const STACK = ['v-detail', 'v-lesson', 'v-trainer', 'v-moon', 'v-moonspread', 'v-daily', 'v-fragment',
                'v-settings', 'v-about', 'v-paywall', 'v-spread3', 'v-spread10'];
 /** Вью табов — таб-бар виден, подсвечен свой таб. */
-const TABS = ['v-today', 'v-course', 'v-cards', 'v-spreads', 'v-profile'];
+const TABS = ['v-home', 'v-course', 'v-cards', 'v-spreads', 'v-profile'];
 
 const mutation = process.argv.includes('--mutate')
   ? Number(process.argv[process.argv.indexOf('--mutate') + 1])
@@ -71,6 +73,27 @@ const check = (n, title, ok, detail = '') => results.push({ n, title, ok, detail
       if (m === 8) {
         [...document.querySelectorAll('#v-settings .pl')]
           .find((x) => x.textContent.trim() === 'Импорт из файла').closest('.prow').remove();
+      }
+      // задача 72: регрессия — таб-бар снова зовёт первую вкладку «Сегодня» (проверка 12)
+      if (m === 10) {
+        document.querySelector('#nav [data-v="v-home"] small').textContent = 'Сегодня';
+      }
+      // задача 72: регрессия — один из новых экранов пропал (проверка 10). Проверка 1 тоже
+      // ходит по v-fragment (он есть в STACK) РАНЬШЕ проверки 10 — прятать элемент сразу
+      // нельзя, иначе show('v-fragment') упадёт на null раньше, чем мы доберёмся до нужной
+      // проверки. Прячем только со ВТОРОГО обращения к id: первое — та самая навигация
+      // проверки 1, второе — собственный getElementById проверки 10.
+      if (m === 11) {
+        const orig = document.getElementById.bind(document);
+        let hits = 0;
+        document.getElementById = (id) => {
+          if (id === 'v-fragment') { hits += 1; if (hits > 1) return null; }
+          return orig(id);
+        };
+      }
+      // задача 72: регрессия — «лунный день» вернулся в текст макета (проверка 11)
+      if (m === 12) {
+        document.body.insertAdjacentHTML('beforeend', '<span style="display:none">лунный день</span>');
       }
     }, mutation);
   }
@@ -157,6 +180,21 @@ const check = (n, title, ok, detail = '') => results.push({ n, title, ok, detail
     idx('Имя') > -1 && idx('Дата рождения') === idx('Имя') + 1
       && !order.some((x) => x.includes('Имя и дата')),
     order.join(' · '));
+
+  // 10. новые экраны задачи 72 на месте (главный «Учёба», карта дня, игра «Угадай карту»)
+  const missing = await page.evaluate(() =>
+    ['v-home', 'v-daily', 'v-fragment'].filter((id) => !document.getElementById(id)));
+  check(10, 'экраны v-home/v-daily/v-fragment существуют', missing.length === 0,
+    `нет: ${missing.join(', ') || '—'}`);
+
+  // 11. лунный день считается (logic-spec §6), но задачей 72 снят с интерфейса целиком
+  const lunarDay = await page.evaluate(() => document.documentElement.innerHTML.includes('лунный день'));
+  check(11, 'в макете нигде нет «лунный день»', !lunarDay);
+
+  // 12. таб-бар: «Учёба»/«Практика» вместо «Сегодня»/«Расклады» (задача 72)
+  const navLabels = (await page.locator('#nav > div small').allInnerTexts()).map((s) => s.trim());
+  check(12, 'таб-бар: подписи «Учёба, Курс, Карты, Практика, Профиль»',
+    navLabels.join(', ') === 'Учёба, Курс, Карты, Практика, Профиль', navLabels.join(', '));
 
   await browser.close();
 

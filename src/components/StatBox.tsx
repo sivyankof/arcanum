@@ -3,8 +3,8 @@
  *  у «карт дня» подписи хватает. Третья коробка (заморозка, снежинка) добавлена задачей 10.
  *
  *  ⚠️ Огонёк — ИКОНКА `Ionicons`, а не эмодзи 🔥, хотя в макете подпись написана эмодзи:
- *  на «Сегодня» серия уже рисуется иконкой (`StreakPill`), и два разных огня в одном
- *  приложении читались бы как небрежность (правка по лайв-проверке 14.08). */
+ *  в StatsPills (на «Учёбе» и на карте дня) серия уже рисуется иконкой (`StreakPill`), и два
+ *  разных огня в одном приложении читались бы как небрежность (правка по лайв-проверке 14.08). */
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -22,7 +22,7 @@ export function StatBox({
 }: {
   value: number | string;
   label: string;
-  /** Иконка справа от подписи; цвет — accent, как у огонька серии на «Сегодня». */
+  /** Иконка справа от подписи; цвет — accent, как у огонька серии в StatsPills. */
   icon?: React.ComponentProps<typeof Ionicons>['name'];
 }) {
   const t = useTheme();

@@ -6,7 +6,7 @@
  *  ошибка), «не помню» возвращает карту в хвост (applyGrade), счётчик = длина очереди и при «не
  *  помню» не уменьшается. Результат — ReviewResult с «Ещё N» (новая порция на том же экране).
  *  Пустые состояния — EmptyState (design-system §7): колода пуста / очередь на сегодня пуста. */
-import { router, Stack } from 'expo-router';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -30,6 +30,7 @@ import { ReviewResult } from '../src/components/ReviewResult';
 import { Rule } from '../src/components/Rule';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
+import { backTitleKey } from '../src/lib/backTitle';
 import { cardById, course } from '../src/lib/content';
 import { localDateISO } from '../src/lib/dates';
 import { hapticTap } from '../src/lib/haptics';
@@ -50,6 +51,7 @@ import {
 import type { SrsGrade } from '../src/lib/srs';
 import { useBackHaptic } from '../src/lib/useBackHaptic';
 import { useApp } from '../src/store/useApp';
+import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -64,11 +66,24 @@ const GRADES: { grade: SrsGrade; key: string; tone: 'danger' | 'text' | 'success
   { grade: 3, key: 'review.gradeEasy', tone: 'success' },
 ];
 
+/** Подпись «назад» по источнику перехода (спека 72, финальное ревью F2/F5): /review открывается
+ *  и с «Курса», и с «Учёбы» — неизвестный/пустой from (прямая ссылка) считаем «Курсом», как было
+ *  до правки. Та же карта решает подпись пустого состояния «К КУРСУ»/«К УЧЁБЕ». */
+const BACK_TITLES: Record<string, string> = {
+  learn: 'tabs.learn',
+  course: 'tabs.course',
+};
+const EMPTY_CTA_KEY: Record<string, string> = {
+  learn: 'review.toLearn',
+  course: 'review.toCourse',
+};
+
 export default function ReviewScreen() {
   const t = useTheme();
   const { t: tr } = useTranslation();
   const insets = useSafeAreaInsets();
   const lang = useLang();
+  const { from } = useLocalSearchParams<{ from?: string }>();
   // вибрация на уходе с экрана — общий хук (как урок и страница карты)
   useBackHaptic();
 
@@ -191,13 +206,12 @@ export default function ReviewScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.course') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'tabs.course')) }} />
       <ScreenBg />
       <ScrollView
         ref={scrollRef}
         contentContainerStyle={{
-          // как урок и страница карты: insets.top + высота системной шапки, иначе контент уедет под неё
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}
@@ -219,7 +233,10 @@ export default function ReviewScreen() {
                   : tr('review.allDone', { n: sum.dueTomorrow })
               }
             />
-            <CtaButton label={tr('review.toCourse')} onPress={() => router.back()} />
+            <CtaButton
+              label={tr(backTitleKey(EMPTY_CTA_KEY, from, 'review.toCourse'))}
+              onPress={() => router.back()}
+            />
           </FadeUp>
         )}
 

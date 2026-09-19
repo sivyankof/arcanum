@@ -1,7 +1,7 @@
 /* Скриншоты и баннеры витрины (спека 63) — снимаются БЕЗ телефона.
    Запуск (dev-сервер поднят ЗАНОВО с --clear, рецепт AGENTS.md):
      NODE_PATH="C:/Users/Artem/AppData/Local/npm-cache/_npx/705bc6b22212b352/node_modules" \
-       node scripts/shoot_63.js [--store google|apple] [--lang ru,en,es,pt] [--only today,course]
+       node scripts/shoot_63.js [--store google|apple] [--lang ru,en,es,pt] [--only home,course]
 
    Как устроено: приложение снимается как есть (390×844 @3× = 1170×2532, PNG в памяти) и кладётся
    с подписью на холст магазина шаблоном docs/store/frame.html → JPEG q92 (у JPEG нет альфы, которую
@@ -61,37 +61,27 @@ const cards = require('../content/cards.json').cards;
 const spreads = require('../content/spreads.json').spreads;
 const modules = require('../content/course.json').modules;
 const I18N = fs.readFileSync(path.join(ROOT, 'src/lib/i18n.ts'), 'utf8');
-const THEME_TS = fs.readFileSync(path.join(ROOT, 'src/theme/theme.ts'), 'utf8');
-
-/** hex-цвет темы из первоисточника токенов (не хардкод): вырезает блок `export const <name>: Theme
- *  = {…}` до следующего `export const`/конца файла и ищет в нём `<key>: '#rrggbb'`. */
-function themeHex(name, key) {
-  const start = THEME_TS.search(new RegExp(`^export const ${name}: Theme = \\{`, 'm'));
-  if (start < 0) throw new Error(`нет темы ${name} в theme.ts`);
-  const rest = THEME_TS.slice(start + 1);
-  const nextRel = rest.search(/^export const /m);
-  const chunk = THEME_TS.slice(start, nextRel < 0 ? undefined : start + 1 + nextRel);
-  const m = chunk.match(new RegExp(`\\b${key}: '(#[0-9a-fA-F]{6})'`));
-  if (!m) throw new Error(`ключа ${key} нет в теме ${name} (theme.ts)`);
-  return m[1];
-}
-const hexToRgb = (hex) => {
-  const n = parseInt(hex.slice(1), 16);
-  return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
-};
+// themeHex/hexToRgb/PREMIUM_NONE/progress/M1/M12 — общий scripts/lib/seed72.js (правка финального
+// ревью, находки F12/T2): themeHex/hexToRgb раньше жили только здесь копией, теперь ей пользуется
+// и check_72_web.js; остальные четыре были продублированы здесь дословно (доводка ревью, задача 72)
+const { themeHex, hexToRgb, PREMIUM_NONE, progress, M1, M12 } = require('./lib/seed72');
 // фон градиента ScreenBg — цвет темы, а не хардкод (находка ревью 63/5: доказать нужно ИМЕННО
 // применение светлой темы, а не только видимость карты дня, которая видна в обеих темах)
 const LIGHT_BG_RGB = hexToRgb(themeHex('lightTheme', 'bg'));
 
 const NUDITY = ['star', 'sun', 'lovers', 'devil', 'judgement', 'world'];
 const DAY_CARD = 'magician';
-const DETAIL_CARD = 'moon';
+// «Луна» ушла из набора вместе с кадром лунного календаря (спека 72, задача 15) — карта детали
+// не должна нести лунную/«нагую» тематику; «Отшельник» ни то ни другое (страж наготы ниже остаётся)
+const DETAIL_CARD = 'hermit';
 const SPREAD_CARDS = ['empress', 'chariot', 'strength'];
 // Только семь карт без наготы, годных лечь на кадр витрины (порядок случаен, любая из семи
 // допустима). РЕАЛЬНАЯ колода тренажёра шире — см. REAL_DECK ниже (находка ревью 63/3).
 const DECK = ['fool', 'magician', 'high-priestess', 'empress', 'emperor', 'hierophant', 'chariot'];
-const M12 = ['m1l1', 'm1l2', 'm1l3', 'm1l4', 'm2l1', 'm2l2', 'm2l3', 'm2l4', 'm2l5', 'm2l6'];
+// M12/M1 (он же MODULE1_IDS — «модуль 1 пройден целиком, модуль 2 нет» для героя «Учёбы») —
+// общий scripts/lib/seed72.js, читает id-ы уроков ИЗ ИСТОЧНИКА (course.json), не литералом
 const M12_SET = new Set(M12);
+const MODULE1_IDS = M1;
 const ALL_LANGS = ['ru', 'en', 'es', 'pt']; // канонический порядок языков — как в i18n.ts
 
 /** Колода тренажёра строится ВО ВРЕМЯ ИСПОЛНЕНИЯ из карт пройденных уроков (learnedCardIds
@@ -132,12 +122,20 @@ for (const id of [DAY_CARD, DETAIL_CARD, ...SPREAD_CARDS, ...DECK, ...[...REAL_D
 // то же самое для раскладов и модуля курса, которых спрашивают маркеры check() ниже: переименуют
 // расклад или пересоберут курс — тут упадёт со внятной причиной, а не «Cannot read properties of
 // undefined» посреди прогона (находка ревью 63/4 — там не было списка, крах ронял весь скрипт)
-const SPREAD_IDS = ['three-card', 'full-moon'];
+const SPREAD_IDS = ['three-card'];
 for (const id of SPREAD_IDS) {
   if (!spreads.find((sp) => sp.id === id)) throw new Error(`расклада «${id}» нет в spreads.json`);
 }
 const COURSE_MODULE_INDEX = 0; // кадр «Курс» показывает модуль 1 (пройден целиком) — см. экран course
 if (!modules[COURSE_MODULE_INDEX]) throw new Error(`нет модуля с индексом ${COURSE_MODULE_INDEX} в course.json`);
+
+// кадр «Викторина» (спека 72, задача 15): первый вопрос урока m1l2 — та же проверка «есть ли
+// то, что спрашивают маркеры», что у SPREAD_IDS/модуля курса выше, а не молчаливое падение
+// на undefined посреди прогона
+const QUIZ_LESSON = modules[0].lessons.find((l) => l.id === 'm1l2');
+if (!QUIZ_LESSON) throw new Error('нет урока m1l2 в course.json (нужен кадру «Викторина»)');
+const QUIZ0 = QUIZ_LESSON.quiz && QUIZ_LESSON.quiz[0];
+if (!QUIZ0) throw new Error('в уроке m1l2 нет ни одного вопроса викторины');
 
 /** Строка i18n для языка: файл режется на языковые блоки по `  <lang>: {`, внутри блока —
  *  первый `key: "…"` после `      <section>: {`. Маркеры берутся из исходника, не из памяти. */
@@ -152,6 +150,11 @@ function i18nText(lang, section, key) {
   if (!m) throw new Error(`ключа ${section}.${key} нет в блоке ${lang}`);
   return m[1];
 }
+/** Подстановка `{{ключ}}` в шаблон i18n (`home.lessonOf` и родня) — сырой текст берётся
+ *  i18nText'ом, значения свои, без i18next: скрипту нужна ровно одна собранная строка на кадр. */
+function fillTemplate(tmpl, vars) {
+  return Object.entries(vars).reduce((s, [k, v]) => s.replace(new RegExp(`\\{\\{${k}\\}\\}`, 'g'), String(v)), tmpl);
+}
 const cardName = (id, lang) => cards.find((c) => c.id === id).name[lang];
 const spreadName = (id, lang) => spreads.find((s) => s.id === id).name[lang];
 // прогресс модуля курса для кадра «Курс» — та же формула, что moduleProgress() в
@@ -164,6 +167,11 @@ const modulePct = (mod, doneIds) => {
   return total === 0 ? 0 : Math.round((done / total) * 100);
 };
 const COURSE_PCT = modulePct(modules[COURSE_MODULE_INDEX], M12_SET);
+// сквозной номер урока по курсу для героя «Учёбы» (home.lessonOf): та же формула, что
+// nextLessonSummary() в src/lib/courseProgress.ts — модуль 1 (MODULE1_IDS.length уроков) пройден
+// целиком ⇒ следующий урок первый в модуле 2, его номер — сразу после последнего урока модуля 1
+const TOTAL_LESSONS = modules.reduce((n, m) => n + m.lessons.length, 0);
+const HOME_HERO = { m: 2, n: MODULE1_IDS.length + 1, total: TOTAL_LESSONS };
 
 /** Дневник: сегодня (по пришпиленным часам) — Маг, четыре прошлых дня — серия 5 (форма shoot_56). */
 const JOURNAL = ['magician', 'high-priestess', 'empress', 'high-priestess', 'chariot'].map((cardId, i) => ({
@@ -183,8 +191,8 @@ function seed(lang, extra = {}) {
       installSeed: 12345,
       lastDrawDate: TODAY,
       profile: { onboarded: true, name: 'Артём', birthDate: '1990-05-14', birthArcanaId: 'justice' },
-      premium: { active: false, source: 'none', until: null },
-      lessonsProgress: Object.fromEntries(M12.map((id) => [id, { done: true, errors: 0, ts: 1755000000000 }])),
+      premium: PREMIUM_NONE,
+      lessonsProgress: progress(M12),
       srs: SRS_SEED,
       reviewDay: { date: '', newCount: 0, doneCount: 0 },
       history: JOURNAL,
@@ -193,19 +201,30 @@ function seed(lang, extra = {}) {
       streak: 5,
       ...extra,
     },
-    version: 11,
+    // persist version 12 (спека 53б: `premium` несёт `plan`/`willRenew`, отсюда — PREMIUM_NONE
+    // из seed72.js, а не своя копия формы), задача 72 её не поднимает
+    version: 12,
   });
 }
 
-/** Кадры: route, extra сида, prepare (тапы до кадра), check (маркеры; возвращает список проблем). */
+/** Кадры: route, extra сида, prepare (тапы до кадра, получает lang), check (маркеры; возвращает
+ *  список проблем). Порядок — как в captions.json (проверяется ниже) и в спеке 72 §8: home, course,
+ *  quiz, fragment, trainer, detail, spread, home-light. Кадры «Карта дня» и «Лунный календарь»
+ *  ушли из набора вместе с ними самими с первого экрана (спека 72, задача 15) — новый первый
+ *  экран учебный, поэтому первый кадр витрины теперь «Учёба». */
 const SCREENS = [
-  { id: 'today', route: '/',
-    // имя карты на «Сегодня» рисуется капсом самим экраном (index.tsx: .toUpperCase()), а не CSS —
-    // сверяем без учёта регистра, как это уже сделано в shoot_56.js для той же самой капс-вёрстки
-    check: async (page, lang) => [
-      ...(await visible(page, `img[src*="/${DAY_CARD}"]`) ? [] : ['нет лица карты дня (рубашка?)']),
-      ...((await text(page)).toUpperCase().includes(cardName(DAY_CARD, lang).toUpperCase()) ? [] : [`нет имени «${cardName(DAY_CARD, lang)}»`]),
-    ] },
+  { id: 'home', route: '/', extra: { lessonsProgress: progress(MODULE1_IDS) },
+    // герой показывает СЛЕДУЮЩИЙ урок (модуль 1 пройден целиком ⇒ первый урок модуля 2) —
+    // маркер не «есть текст „5"» (эту цифру дала бы и серия дней, seed streak:5), а точная строка
+    // оверлайна героя, собранная из сырого шаблона home.lessonOf (находка при написании кадра)
+    check: async (page, lang) => {
+      const t = await text(page);
+      const problems = [];
+      if (!t.includes(i18nText(lang, 'home', 'title'))) problems.push('нет заголовка «Учёба»');
+      const hero = fillTemplate(i18nText(lang, 'home', 'lessonOf'), HOME_HERO);
+      if (!t.includes(hero)) problems.push(`нет оверлайна героя «${hero}» (модуль 1 пройден ⇒ урок ${HOME_HERO.n})`);
+      return problems;
+    } },
   { id: 'course', route: '/course',
     // экран сам автоскроллит к ТЕКУЩЕМУ уроку (первый непройденный — «дырка» lessonStates),
     // а в сиде это модуль 3: витрине такой кадр не годится (все узлы заперты, прогресса не
@@ -235,17 +254,50 @@ const SCREENS = [
       if (!t.includes(`${COURSE_PCT}%`)) problems.push(`нет отметки прогресса модуля 1 (ожидали ${COURSE_PCT}%)`);
       return problems;
     } },
-  { id: 'detail', route: `/card/${DETAIL_CARD}`,
-    check: async (page, lang) => [
-      ...(await visible(page, `img[src*="/${DETAIL_CARD}"]`) ? [] : ['нет скана карты']),
-      ...((await text(page)).includes(cardName(DETAIL_CARD, lang)) ? [] : [`нет имени «${cardName(DETAIL_CARD, lang)}»`]),
-    ] },
-  { id: 'spread', route: `/spread/${SAVED_SPREAD.ts}`,
+  { id: 'quiz', route: '/lesson/m1l2', extra: { lessonsProgress: progress(['m1l1']) },
+    // варианты перемешиваются Math.random'ом при каждой загрузке экрана (src/lib/lesson.ts,
+    // shuffleOptions) — заранее известного индекса верного варианта нет, только его ТЕКСТ
+    // (options[correct][lang], у вопроса m1l2/quiz[0] это «56»/«78»/«22» на всех языках).
+    // Доходим до вопроса тем же кликом, что и у остальных «далее»-шагов (без карточных шагов —
+    // у m1l2 cards: []), ищем текст ответа на экране, а не считаем страницы теории заранее.
+    prepare: async (page, lang) => {
+      const answerText = QUIZ0.options[QUIZ0.correct][lang];
+      const nextLabel = i18nText(lang, 'lesson', 'next');
+      let reached = false;
+      for (let i = 0; i < 8; i++) {
+        if (await page.getByText(answerText, { exact: true }).count()) { reached = true; break; }
+        await page.getByText(nextLabel, { exact: true }).first().click({ force: true });
+        await page.waitForTimeout(300);
+      }
+      if (!reached) throw new Error(`не дошли до вопроса викторины m1l2 за 8 тапов «${nextLabel}»`);
+      await page.getByText(answerText, { exact: true }).first().click({ force: true });
+      await page.waitForTimeout(500);
+    },
     check: async (page, lang) => {
-      const missing = [];
-      for (const id of SPREAD_CARDS) if (!(await visible(page, `img[src*="/${id}"]`))) missing.push(`карта ${id} не открыта`);
-      if (!(await text(page)).includes(spreadName('three-card', lang))) missing.push('нет названия расклада');
-      return missing;
+      const t = await text(page);
+      const problems = [];
+      if (!t.includes(QUIZ0.q[lang])) problems.push('нет текста вопроса викторины m1l2');
+      // «Верно.» рисуется ТОЛЬКО когда выбранный вариант совпал с correct (app/lesson/[id].tsx) —
+      // косвенное, но точное доказательство подсветки верного варианта на кадре
+      if (!t.includes(i18nText(lang, 'lesson', 'explainRight'))) problems.push('нет отметки «верно» — на кадре не выбран верный вариант');
+      return problems;
+    } },
+  { id: 'fragment', route: '/fragment',
+    // сессия и карта случайны (Math.random в buildFragmentSession) — форма кадра не зависит от
+    // того, какая карта выпала: фрагменты размечены «без фигур» (спека 72 §10), поэтому наготы
+    // тут не бывает ни при какой карте, и страж NUDITY выше по файлу сюда не нужен
+    check: async (page, lang) => {
+      const problems = [];
+      const lines = (await text(page)).split('\n').map((s) => s.trim()).filter(Boolean);
+      const qMarker = i18nText(lang, 'game', 'question');
+      const qIdx = lines.indexOf(qMarker);
+      const options = qIdx >= 0 ? lines.slice(qIdx + 1, qIdx + 5) : [];
+      if (options.length !== 4) problems.push(`вариантов ${options.length} вместо 4 (маркер «${qMarker}» ${qIdx >= 0 ? 'найден' : 'не найден'})`);
+      // :visible прямо в селекторе (не проверкой видимости ПЕРВОГО найденного) — на странице
+      // может быть скрытый нулевой по площади элемент раньше настоящего фрагмента в DOM-порядке
+      // (та же ловушка, что у тренажёра — правило AGENTS.md)
+      if (!(await visible(page, 'img[src*="cards/"]:visible'))) problems.push('нет фрагмента карты');
+      return problems;
     } },
   { id: 'trainer', route: '/review',
     prepare: async (page) => {
@@ -275,21 +327,25 @@ const SCREENS = [
       }
       return problems;
     } },
-  { id: 'moon', route: '/moon',
+  { id: 'detail', route: `/card/${DETAIL_CARD}`,
+    check: async (page, lang) => [
+      ...(await visible(page, `img[src*="/${DETAIL_CARD}"]`) ? [] : ['нет скана карты']),
+      ...((await text(page)).includes(cardName(DETAIL_CARD, lang)) ? [] : [`нет имени «${cardName(DETAIL_CARD, lang)}»`]),
+    ] },
+  { id: 'spread', route: `/spread/${SAVED_SPREAD.ts}`,
     check: async (page, lang) => {
-      const t = await text(page);
-      const problems = [];
-      if (!t.includes(i18nText(lang, 'moon', 'title'))) problems.push('нет заголовка календаря');
-      if (!t.includes(spreadName('full-moon', lang))) problems.push('нет панели расклада полнолуния');
-      return problems;
+      const missing = [];
+      for (const id of SPREAD_CARDS) if (!(await visible(page, `img[src*="/${id}"]`))) missing.push(`карта ${id} не открыта`);
+      if (!(await text(page)).includes(spreadName('three-card', lang))) missing.push('нет названия расклада');
+      return missing;
     } },
-  { id: 'today-light', route: '/', extra: { themeMode: 'light' },
-    check: async (page) => {
+  { id: 'home-light', route: '/', extra: { lessonsProgress: progress(MODULE1_IDS), themeMode: 'light' },
+    check: async (page, lang) => {
       const problems = [];
-      if (!(await visible(page, `img[src*="/${DAY_CARD}"]`))) problems.push('нет лица карты дня');
-      // маркер самой темы (находка ревью 63/5): карта дня видна в ОБЕИХ темах, поэтому её
-      // видимость не доказывает, что применилась именно светлая — смотрим цвет фона ScreenBg
-      // напрямую (градиент несёт lightTheme.bg из theme.ts третьей остановкой)
+      if (!(await text(page)).includes(i18nText(lang, 'home', 'title'))) problems.push('нет заголовка «Учёба»');
+      // маркер самой темы (находка ревью 63/5): содержимое экрана видно в ОБЕИХ темах, поэтому
+      // само наличие текста не доказывает, что применилась именно светлая — смотрим цвет фона
+      // ScreenBg напрямую (градиент несёт lightTheme.bg из theme.ts третьей остановкой)
       const hasLightBg = await page.evaluate((rgb) => {
         const W = window.innerWidth, H = window.innerHeight;
         return [...document.querySelectorAll('div')].some((el) => {
@@ -362,7 +418,7 @@ const fileUrl = (p) => 'file:///' + p.replace(/\\/g, '/');
 const TAB_BAR_INSET = 34; // типичный safe-area inset снизу на iPhone с Home Indicator
 const TAB_LABEL_LINE_HEIGHT = 1.35; // при этом реальная высота строки Manrope 10px ≈ 13.5px — измерено 26.08
 async function fixTabBarSafeArea(page, lang) {
-  const labels = ['today', 'course', 'cards', 'spreads', 'profile'].map((key) => i18nText(lang, 'tabs', key));
+  const labels = ['learn', 'course', 'cards', 'practice', 'profile'].map((key) => i18nText(lang, 'tabs', key));
   const r = await page.evaluate(({ inset, labels, lineHeight }) => {
     const W = window.innerWidth, H = window.innerHeight;
     const bar = [...document.querySelectorAll('*')].find((el) => {
@@ -447,7 +503,7 @@ async function fixTabBarSafeArea(page, lang) {
         stage = 'safe-area';
         await fixTabBarSafeArea(app, lang);
         stage = 'prepare';
-        if (s.prepare) await s.prepare(app);
+        if (s.prepare) await s.prepare(app, lang);
         stage = 'check';
         const problems = await s.check(app, lang);
         if (problems.length) {

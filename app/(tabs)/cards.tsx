@@ -8,7 +8,7 @@ import { CardCell, CardGridRow, GRID_COLS, GRID_GAP, REVEAL_MS, REVEAL_STAGGER }
 import { FadeUp } from '../../src/components/FadeUp';
 import { FilterChips } from '../../src/components/FilterChips';
 import { GlassPanel } from '../../src/components/GlassPanel';
-import { PROGRESS_EASE, ProgressBar } from '../../src/components/ProgressBar';
+import { PROGRESS_EASE, PROGRESS_FILL_DELAY, PROGRESS_FILL_MS, ProgressBar } from '../../src/components/ProgressBar';
 import { ScreenBg } from '../../src/components/ScreenBg';
 import { SearchField } from '../../src/components/SearchField';
 import { Txt } from '../../src/components/Txt';
@@ -35,10 +35,8 @@ const BODY_STEP = 3;
  *  при прокрутке, волну не переигрывают — reveal у них уже не задан. */
 const REVEAL_CLEAR_MS = REVEAL_MS + (REVEAL_CAP - 1) * REVEAL_STAGGER + 200;
 
-/** Заливка панели прогресса: при входе — от нуля с задержкой (тайминг LevelCard), при смене чипа —
- *  перетекание к новому значению без задержки. */
-const FILL_DELAY = 400;
-const FILL_MS = 1400;
+/** Заливка панели прогресса: при входе — от нуля с задержкой (эталон fill2, PROGRESS_FILL_*
+ *  из ProgressBar.tsx), при смене чипа — перетекание к новому значению без задержки. */
 const FILL_SWITCH_MS = 600;
 
 /** Размытие парящей панели в CSS-пикселях эталона (`.cardsbar`: backdrop-filter blur(20px)). */
@@ -123,8 +121,8 @@ export default function CardsScreen() {
     const first = firstFill.current;
     firstFill.current = false;
     fill.value = withDelay(
-      first ? FILL_DELAY : 0,
-      withTiming(ratio, { duration: first ? FILL_MS : FILL_SWITCH_MS, easing: PROGRESS_EASE, reduceMotion: ReduceMotion.System }),
+      first ? PROGRESS_FILL_DELAY : 0,
+      withTiming(ratio, { duration: first ? PROGRESS_FILL_MS : FILL_SWITCH_MS, easing: PROGRESS_EASE, reduceMotion: ReduceMotion.System }),
     );
   }, [fill, ratio]);
 

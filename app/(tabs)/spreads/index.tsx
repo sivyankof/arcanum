@@ -3,13 +3,15 @@
  *  ещё и PREMIUM, спека 53), а вне окна события карточка приглушена и не нажимается — причина
  *  написана на ней самой датой. Доступ к premium-раскладу решает `spreadLocked` (спека 53):
  *  без права — пейвол; лунный гейт окна проверяется ПЕРВЫМ.
- *  Тап — экран расклада во вложенном стеке этого таба (спека 36); «Карта дня» ведёт на «Сегодня». */
+ *  Тап — экран расклада во вложенном стеке этого таба (спека 36); «Карта дня» ведёт на /daily. */
 import { router } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FadeUp } from '../../../src/components/FadeUp';
+import { FragmentPanel } from '../../../src/components/FragmentPanel';
+import { MoonRow } from '../../../src/components/MoonRow';
 import { PremiumBadge } from '../../../src/components/PremiumBadge';
 import { PressableScale } from '../../../src/components/PressableScale';
 import { Rule } from '../../../src/components/Rule';
@@ -21,10 +23,11 @@ import { formatDayMonth, localDateISO } from '../../../src/lib/dates';
 import { hapticTap } from '../../../src/lib/haptics';
 import { useLang } from '../../../src/lib/i18n';
 import { inLang } from '../../../src/lib/lang';
+import { moonInfo } from '../../../src/lib/moon';
 import { moonSpreadState } from '../../../src/lib/moonSpread';
 import { spreadLocked } from '../../../src/lib/premium';
 import { useDevMoonNow } from '../../../src/lib/useDevMoonNow';
-import { useAppActive } from '../../../src/lib/useAppActive';
+import { useNow } from '../../../src/lib/useNow';
 import { useTabTopRef } from '../../../src/lib/useTabScrollToTop';
 import { useApp } from '../../../src/store/useApp';
 import { fonts, LOCKED_OPACITY, spacing } from '../../../src/theme/theme';
@@ -37,13 +40,12 @@ export default function SpreadsScreen() {
   const lang = useLang();
   const scrollRef = useTabTopRef<ScrollView>();
 
-  // «сейчас» — при монтировании и на возврате приложения из фона: таб остаётся смонтированным,
+  // «сейчас» — общий useNow (фокус таба и возврат из фона): таб остаётся смонтированным,
   // поэтому переход через полночь (и, значит, закрытие окна события) иначе не заметить.
-  // Тот же приём, что на экране луны и на «Сегодня» (правило 06а).
-  const [now, setNow] = React.useState(() => new Date());
+  // Тот же приём, что на экране луны и на карте дня (правило 06а).
+  const now = useNow();
   const devNow = useDevMoonNow();
   const premium = useApp((s) => s.premium);
-  useAppActive(() => setNow(new Date()));
 
   const open = (s: Spread, locked: boolean) => {
     if (locked) return; // вне окна карточка не нажимается: причина написана на ней датой
@@ -53,9 +55,9 @@ export default function SpreadsScreen() {
     // ⚠️ Лунный гейт ПЕРВЫЙ: вне окна расклад не играется независимо от подписки (спека 51).
     if (s.moon && !moonSpreadState(s.moon, devNow ?? new Date())?.open) return;
     hapticTap();
-    // «Карта дня» раскладом не играется — это ритуал главного экрана (product-spec §4)
+    // «Карта дня» раскладом не играется — у карты дня свой экран (спека 72)
     if (s.id === 'card-of-day') {
-      router.navigate('/');
+      router.push({ pathname: '/daily', params: { from: 'practice' } });
       return;
     }
     if (spreadLocked(s, premium)) {
@@ -76,9 +78,31 @@ export default function SpreadsScreen() {
         <FadeUp index={0}>
           <Txt style={[st.sub, { color: t.muted }]}>{tr('spreads.overline')}</Txt>
           <Txt style={[st.title, { color: t.head }]}>{tr('spreads.title')}</Txt>
-          {/* разделитель шапки, как на «Сегодня», «Курсе» и в «Профиле» (макет `v-spreads`,
+          {/* разделитель шапки, как на «Учёбе», «Курсе» и в «Профиле» (макет `v-spreads`,
               аудит 56): без него этот экран был единственным из четырёх, где шапка обрывалась */}
           <Rule />
+        </FadeUp>
+
+        {/* вход в лунный календарь (спека 72: строка переехала с главного экрана). `now` уже
+            обновляется по возврату из фона — им же считаем фазу; DEV-подмена «сейчас» уважается */}
+        <FadeUp index={1}>
+          <MoonRow
+            phase={moonInfo(devNow ?? now).phase}
+            onPress={() => {
+              hapticTap();
+              router.push('/moon');
+            }}
+          />
+        </FadeUp>
+
+        <FadeUp index={2}>
+          <FragmentPanel
+            style={{ marginTop: spacing.l }}
+            onPress={() => {
+              hapticTap();
+              router.push({ pathname: '/fragment', params: { from: 'practice' } });
+            }}
+          />
         </FadeUp>
 
         {spreads.map((s, si) => {
@@ -90,7 +114,7 @@ export default function SpreadsScreen() {
           // доступ решает spreadLocked внутри open(), а не флаг сам по себе (тот же приём, что в ModuleHeader)
           const paid = !s.free; // показ флага
           return (
-            <FadeUp key={s.id} index={Math.min(1 + si, 8)}>
+            <FadeUp key={s.id} index={Math.min(3 + si, 8)}>
               <PressableScale
                 onPress={() => open(s, locked)}
                 disabled={locked}

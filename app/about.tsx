@@ -16,6 +16,7 @@ import { LinkTxt } from '../src/components/LinkTxt';
 import { ScreenBg } from '../src/components/ScreenBg';
 import { Txt } from '../src/components/Txt';
 import { appVersion, PRIVACY_URL, SUPPORT_URL, TERMS_URL } from '../src/lib/appInfo';
+import { STORE_NAME } from '../src/lib/purchasesEnv';
 import { fonts, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -63,7 +64,11 @@ export default function AboutScreen() {
 
         <FadeUp index={3}>
           <Block title={tr('about.dataTitle')}>
-            <Txt style={[paragraphStyle, { color: t.text, marginTop: 7 }]}>{tr('about.dataText')}</Txt>
+            {/* {{store}} — Apple 2.3.10: iOS-сборка не должна называть Google Play (спека 72,
+                финальное ревью); STORE_NAME тот же источник, что у paywall.legal */}
+            <Txt style={[paragraphStyle, { color: t.text, marginTop: 7 }]}>
+              {tr('about.dataText', { store: STORE_NAME })}
+            </Txt>
             <LinkTxt href={PRIVACY_URL} style={[paragraphStyle, { marginTop: spacing.m }]}>
               {tr('about.openPrivacy')}
             </LinkTxt>
@@ -72,7 +77,9 @@ export default function AboutScreen() {
 
         <FadeUp index={4}>
           <Block title={tr('about.termsTitle')}>
-            <Txt style={[paragraphStyle, { color: t.text, marginTop: 7 }]}>{tr('about.termsText')}</Txt>
+            <Txt style={[paragraphStyle, { color: t.text, marginTop: 7 }]}>
+              {tr('about.termsText', { store: STORE_NAME })}
+            </Txt>
             <LinkTxt href={TERMS_URL} style={[paragraphStyle, { marginTop: spacing.m }]}>
               {tr('about.openTerms')}
             </LinkTxt>

@@ -40,8 +40,8 @@ const CARD_SHADOW = '0px 30px 80px rgba(0,0,0,0.65)';
 // закрытие делят panY и closing — оба ехали с одинаковым конфигом, дублировавшимся дважды (задача 6)
 const CLOSE_ANIM = { duration: CLOSE_MS, easing: Easing.in(Easing.cubic), reduceMotion: ReduceMotion.System };
 
-// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare из «Сегодня»;
-// геометрия GLARE_ANGLE/COLORS/LOCATIONS — общая с домашним экраном, theme/glow.ts)
+// блик по лицу карты после посадки — один проход (motion-spec §15, приём .glare карты дня,
+// `v-daily` эталона; геометрия GLARE_ANGLE/COLORS/LOCATIONS — общая с app/daily.tsx, theme/glow.ts)
 const GLARE_DELAY = OPEN_MS + 120;
 const GLARE_MS = 900;
 
@@ -406,7 +406,7 @@ const st = StyleSheet.create({
   // На устройстве (touch) этого механизма нет, это не дефект жестов, а веб-плоскости.
   // boxShadow — на этом контейнере, а не на лицевой грани (I3): у грани overflow:'hidden'
   // (обрезка изображения по borderRadius), и на iOS это срезает собственную тень вчистую —
-  // тот же паттерн, что st.face/st.faceClip в app/(tabs)/index.tsx.
+  // тот же паттерн, что st.face/st.faceClip в app/daily.tsx.
   card: { width: CARD_W, height: CARD_H, pointerEvents: 'none' as const, boxShadow: CARD_SHADOW },
   face: {
     ...StyleSheet.absoluteFillObject,

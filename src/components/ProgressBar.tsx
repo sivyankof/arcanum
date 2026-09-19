@@ -16,6 +16,12 @@ import { useTheme } from '../theme/useTheme';
  *  вызывающих полосу прогресса, чтобы не дублировать литерал по местам использования. */
 export const PROGRESS_EASE = Easing.bezier(0.25, 1.2, 0.4, 1);
 
+/** Тайминг заливки при первом появлении экрана — эталон fill2 (задержка .4s, ход 1.4s).
+ *  До задачи 72 жил двумя копиями (`LevelCard.tsx`, `app/(tabs)/cards.tsx`) — вынесен сюда
+ *  по правилу «2+ раза», третья копия понадобилась `NextLessonCard`. */
+export const PROGRESS_FILL_DELAY = 400;
+export const PROGRESS_FILL_MS = 1400;
+
 export function ProgressBar({
   progress,
   radius = 3,

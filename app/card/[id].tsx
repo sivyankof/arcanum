@@ -31,6 +31,7 @@ import { ScreenBg } from '../../src/components/ScreenBg';
 import { Txt } from '../../src/components/Txt';
 import { takeCardOrigin, type Rect } from '../../src/lib/cardTransition';
 import { cardImages } from '../../src/lib/cardImages';
+import { backTitleKey } from '../../src/lib/backTitle';
 import { blockText, cardById, cardNumeral, course } from '../../src/lib/content';
 import { learnedCardIds } from '../../src/lib/courseProgress';
 import { formatDayMonth } from '../../src/lib/dates';
@@ -41,6 +42,7 @@ import { inLang } from '../../src/lib/lang';
 import { masteryLevel } from '../../src/lib/mastery';
 import { useBackHaptic } from '../../src/lib/useBackHaptic';
 import { useApp } from '../../src/store/useApp';
+import { stackTopPad } from '../../src/theme/navHeader';
 import { fonts, gold, radius, spacing } from '../../src/theme/theme';
 import { useTheme } from '../../src/theme/useTheme';
 
@@ -298,15 +300,13 @@ export default function CardDetail() {
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
       {/* подпись нативной кнопки «назад» зависит от источника перехода (параметр from):
-          с «Сегодня» — «Сегодня», из дневника — «Профиль», иначе (сетка справочника
+          с карты дня (/daily) — «Карта дня», из дневника — «Профиль», иначе (сетка справочника
           или прямая ссылка) — «Карты» */}
-      <Stack.Screen options={{ headerBackTitle: tr(BACK_TITLES[from ?? ''] ?? 'card.backAll') }} />
+      <Stack.Screen options={{ headerBackTitle: tr(backTitleKey(BACK_TITLES, from, 'card.backAll')) }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          // insets.top + высота системной шапки (64) — со значением поменьше контент уедет под неё,
-          // такая ошибка уже была
-          paddingTop: insets.top + 64,
+          paddingTop: stackTopPad(insets, 0),
           paddingHorizontal: spacing.xl,
           paddingBottom: 60,
         }}

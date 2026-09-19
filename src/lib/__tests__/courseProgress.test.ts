@@ -1,4 +1,4 @@
-import type { CourseModule } from '../content';
+import type { CourseLesson, CourseModule } from '../content';
 import { course } from '../content';
 import {
   completeLessonProgress,
@@ -8,6 +8,8 @@ import {
   moduleProgress,
   newlyLearnedIds,
   nextLessonId,
+  nextLessonState,
+  nextLessonSummary,
   nodeXs,
   type LessonProgressMap,
 } from '../courseProgress';
@@ -243,5 +245,50 @@ describe('newlyLearnedIds — впервые изученные карты («м
     m.lessons[1].cards = ['fool', 'magician'];
     // a1 уже пройден (fool изучен) — a2 приносит только magician
     expect(newlyLearnedIds([m], done('a1'), done('a1', 'a2'))).toEqual(['magician']);
+  });
+});
+
+describe('nextLessonSummary (спека 72)', () => {
+  // курс 2 модуля: m1 — 3 урока (m11, m12, m13), m2 — 2 урока (m21, m22)
+  const mods = [fx('m1', 3), fx('m2', 2)];
+
+  it('пустой прогресс — первый урок, №1, 0 %', () => {
+    const s = nextLessonSummary(mods, {});
+    expect([s.lesson?.id, s.moduleIndex, s.lessonNumber, s.total, s.doneCount, s.pct]).toEqual(['m11', 0, 1, 5, 0, 0]);
+  });
+  it('пройден первый модуль — сквозной номер, а не номер внутри модуля', () => {
+    const s = nextLessonSummary(mods, done('m11', 'm12', 'm13'));
+    expect([s.lesson?.id, s.moduleIndex, s.lessonNumber, s.doneCount, s.pct]).toEqual(['m21', 1, 4, 3, 60]);
+  });
+  it('дырка в прогрессе — первый непройденный, doneCount считает всё пройденное', () => {
+    const s = nextLessonSummary(mods, done('m11', 'm13'));
+    expect([s.lesson?.id, s.lessonNumber, s.doneCount, s.pct]).toEqual(['m12', 2, 2, 40]);
+  });
+  it('округление обычное: 1 из 3 = 33, 2 из 3 = 67', () => {
+    const three = [mods[0]];
+    expect(nextLessonSummary(three, done('m11')).pct).toBe(33);
+    expect(nextLessonSummary(three, done('m11', 'm12')).pct).toBe(67);
+  });
+  it('курс пройден — lesson null, последний модуль, 100 %', () => {
+    const s = nextLessonSummary(mods, done('m11', 'm12', 'm13', 'm21', 'm22'));
+    expect([s.lesson, s.moduleIndex, s.lessonNumber, s.pct]).toEqual([null, 1, 5, 100]);
+  });
+  it('пустой курс — без деления на ноль', () => {
+    expect(nextLessonSummary([], {})).toEqual({ lesson: null, moduleIndex: 0, lessonNumber: 0, total: 0, doneCount: 0, pct: 0 });
+  });
+});
+
+describe('nextLessonState (спека 72)', () => {
+  const base = { moduleIndex: 0, lessonNumber: 1, total: 5, pct: 0 };
+  const lesson = { id: 'm11' } as unknown as CourseLesson;
+  it('курс пройден — done, даже если передан locked', () => {
+    expect(nextLessonState({ ...base, lesson: null, doneCount: 5 }, true)).toBe('done');
+  });
+  it('закрыт подпиской — locked раньше start/continue', () => {
+    expect(nextLessonState({ ...base, lesson, doneCount: 0 }, true)).toBe('locked');
+  });
+  it('ничего не пройдено — start; иначе continue', () => {
+    expect(nextLessonState({ ...base, lesson, doneCount: 0 }, false)).toBe('start');
+    expect(nextLessonState({ ...base, lesson, doneCount: 2 }, false)).toBe('continue');
   });
 });

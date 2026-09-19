@@ -42,45 +42,65 @@ Apple индексирует название и подзаголовок и т�
 
 ## Категории и рейтинг (одинаково для всех языков)
 
-- Категория: **Образование**; вторичная — Стиль жизни. Не «Развлечения»: обучение проходит ревью мягче.
-- Возрастной рейтинг: iOS **12+**, Google — аналогично (эзотерическая тематика).
+- Категория: **Образование**; вторичная — **Справочники (Reference)** — решение 18.09 (задача 72,
+  второй отказ 4.3(b)): «Стиль жизни» ассоциируется с эзотерикой сильнее, чем нейтральный
+  «справочник». Не «Развлечения»: обучение проходит ревью мягче.
+- Возрастной рейтинг: iOS **13+** (фактически выставлено в App Store Connect), Google — аналогично
+  (эзотерическая тематика).
 - Ответы на анкеты приватности: **данные не собираем**, аналитики в v1 нет. Наружу уходит только
   покупка подписки (чек и анонимный идентификатор установки в App Store / Google Play и RevenueCat) —
   декларировать как «Purchases / покупки, не связаны с личностью».
 
 ## Заметки для ревьюера (en, поле App Review Notes)
 
-Версия 05.09 (задача 69, ресабмит после отказа 4.3(b)): первым абзацем — возражение по
-4.3(b) из ответа в треде 01.09 (сжатое), дальше те же восемь пунктов запроса «Guideline 2.1 —
-Information Needed» короче. Залито в ASC (3996 символов при лимите 4000; лимит — по счётчику поля,
-`storeListing.test.ts` этот блок не парсит). Меняя факты (устройства, цены, что свободно), править
-здесь, потом копировать в ASC. Версия 29.08 (восемь пунктов без 4.3(b), 3944 симв.) — в истории git.
+Версия 19.09 (задача 72, финальное ревью ветки): структура целиком пересобрана вокруг новой
+навигации, а не вокруг возражения (заложено 18.09, поправлено 19.09 по двум находкам ревью).
+Первым пунктом — что изменилось со сборки 3 (учебная панель первым экраном, карта дня и лунная
+строка убраны с первого экрана, нумерация лунных дней убрана вовсе, онбординг без даты рождения,
+новая вкладка «Учёба», игра-упражнение «Угадай карту»); вторым — путь ревьюера за 30 секунд,
+**из которого убран шаг «Learn → Review»**: тренажёр (`ReviewPanel`) скрыт, пока колода флеш-карт
+пуста, а она наполняется только уроками с картами — первый такой урок пятый по счёту (Модуль 2,
+Урок 1), то есть на свежей установке за 30 секунд до тренажёра дойти нельзя. Путь оставлен полностью
+исполнимым «как есть», а появление тренажёра описано отдельным предложением со ссылкой на запись
+экрана; третьим — сама запись, теперь ОПИСАННАЯ ПРАВДИВО (пункт 3 ниже: новая, сборки 4, а не старая
+сборки 3). Спорить по существу больше не с чем (показываем правки, а не аргументы), поэтому абзац
+про 4.3(b) сжат до двух предложений и стоит перед пронумерованными пунктами. Прежние восемь пунктов
+(SCREEN RECORDING…IN-APP PURCHASES) сохранены, но пронумерованы 3–10 и сжаты под новую навигацию
+(ACCESS переписан, дата рождения — «optional, in Settings»). Длина — считать python-ом `len()`
+(лимит — по счётчику поля ASC, `storeListing.test.ts` этот блок не парсит). Меняя факты
+(устройства, цены, что свободно), править здесь, потом копировать в ASC. Версия 05.09 (ресабмит
+после первого отказа, 3996 симв.) — в истории git.
 
 ```
 Arcanum is an offline tarot LEARNING app: a course, a 78-card reference, spaced-repetition flashcards, a daily card with a journal, spreads and a moon calendar. No account or sign-up; progress, journal and settings stay on the device.
 
-ON GUIDELINE 4.3(b). The previous review cited 4.3(b) quoting "astrology, horoscopes, palm reading, fortune telling or zodiac reports". We ask you to reconsider: Arcanum has none of those features and does not tell fortunes - the description calls it "a course, not a fortune-telling machine", and our editorial rules forbid predictive claims: cards are explained as symbols and prompts for reflection, never as predictions. Its category is Education; its core is a course of 6 modules and 32 lessons with a quiz after each (160 questions), streaks and an SM-2 flashcard trainer for the 78 cards. Compared with existing tarot apps it is meaningfully different: (a) many of them repackage the public-domain text of A. E. Waite (1911) as their card meanings - Arcanum's roughly 950 texts are original, created for this app by its editor, a professional tarot practitioner; the 1911 source is used for symbolism reference only; (b) full content parity in English, Russian, Spanish and Portuguese, rare in a niche of English-only learning apps; (c) course, reference, flashcards, journal and spreads in one offline app with no account, ads, analytics or AI features, while the leading tarot-learning apps require an account and a connection.
+ON GUIDELINE 4.3(b). Arcanum has no astrology, horoscope or fortune-telling features and predicts nothing; its category is Education. This build leads with the course, quizzes and spaced-repetition practice from the first screen, so we ask that it be assessed on that functionality rather than on the tarot subject matter alone.
 
-1. SCREEN RECORDING. A full walkthrough from a physical iPhone (onboarding, lessons, paywall, Sandbox purchase, unlocked content, Restore Purchases, every section) is attached to the App Review thread. The only system prompt is the notification permission; the renewal date equals the purchase date because Sandbox compresses periods.
+1. WHAT CHANGED SINCE THE PREVIOUS REVIEW. Build 4 reworks the app around learning. The first screen is now a learning dashboard: next course lesson (with progress), the "Review" spaced-repetition trainer, and a new "Guess the Card" recognition exercise. The daily card moved to its own secondary screen. The moon-phase row is gone from the first screen and lunar-day numbering is removed from the app entirely; a plain new/full-moon calendar stays one tap away, on Practice. Tabs renamed: Learn, Course, Cards, Practice, Profile. Build 4, version 1.0.0.
 
-2. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max on iOS 26; ad hoc builds; purchases tested with a Sandbox tester.
+2. 30-SECOND REVIEWER PATH. Launch -> "Start learning" -> "To the first lesson" (2-step onboarding, no login) -> Learn tab, tap "Start lesson" -> theory -> a 5-question quiz with instant feedback. Course tab: 6 modules, 32 lessons, per-module progress (modules 1-2 free, 3-6 Premium). Learn or Practice -> "Guess the Card": a zoomed-in detail, four options, ten questions, free. "Review" (SM-2 trainer, one free session/day) appears on Learn/Course after Module 2 Lesson 1, the 5th lesson — shown in the recording.
 
-3. AUDIENCE. Adults and teens (13+) studying tarot symbolism as a hobby or self-reflection practice; disclaimer (no predictions, no medical, legal or financial advice) in onboarding and on About.
+3. SCREEN RECORDING. A walkthrough of build 4 from a physical iPhone, following the path above and on through the course to "Review", plus the paywall, a Sandbox purchase, unlocked content and Restore Purchases, is attached with this resubmission. The only system prompt is the notification permission.
 
-4. ACCESS. No login. First launch: 3-step onboarding (intro with disclaimer -> optional name and birth date -> first card) -> Today tab. Tabs: Today (daily card; its first reminder dialog requests the notification permission), Course (modules 1-2 free), Cards, Spreads, Profile (Settings, About). Moon calendar: the moon row on Today; flashcards: the "Review" card atop the Course tab.
+4. DEVICES TESTED. iPhone 14 Pro Max and iPhone 17 Pro Max on iOS 26; ad hoc builds; Sandbox tester for purchases.
 
-5. EXTERNAL SERVICES. Purchases: StoreKit via the RevenueCat SDK (subscription status only; the app's only network service). Notifications are local. Privacy Policy, Terms of Use and support: static pages on GitHub Pages. No analytics SDK, ads, authentication, AI or data providers.
+5. AUDIENCE. Adults and teens (13+) studying tarot symbolism as a hobby or self-reflection practice; disclaimer (no predictions, no medical, legal or financial advice) in onboarding and on About.
 
-6. REGIONAL DIFFERENCES. None. UI in English, Russian, Spanish and Portuguese; prices per storefront.
+6. ACCESS. No login. First launch: 2-step onboarding (intro with disclaimer -> how the course works, optional name) -> Learn tab. Tabs: Learn, Course (modules 1-2 free), Cards, Practice (spreads; moon row and calendar here), Profile (Settings, About; birth date optional, in Settings).
 
-7. THIRD-PARTY MATERIAL. Not a regulated industry. Card images: Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, Wikimedia Commons scans. Some symbolism passages draw on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain; all other text is original, written by the app's editor.
+7. EXTERNAL SERVICES. Purchases: StoreKit via the RevenueCat SDK (subscription status only; the app's only network service). Notifications are local. Privacy Policy, Terms of Use and support: static pages on GitHub Pages. No analytics, ads, authentication or AI.
 
-8. IN-APP PURCHASES. One auto-renewable group "Arcanum Premium": Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no trial or introductory offer. Premium unlocks modules 3-6, 8 of 10 spreads and unlimited flashcard sessions; free forever: daily card, 78-card reference, journal, modules 1-2, the Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or any locked module or spread. The paywall lists both plans (title, duration, store price), Terms of Use and Privacy Policy links and "Restore Purchases"; after purchase it shows the active plan and renewal date; "Manage subscription" opens the App Store sheet.
+8. REGIONAL DIFFERENCES. None. UI in English, Russian, Spanish and Portuguese; prices per storefront.
+
+9. THIRD-PARTY MATERIAL. Not a regulated industry. Card images: Rider-Waite-Smith deck (Pamela Colman Smith, 1909), public domain, Wikimedia Commons scans. Some symbolism draws on A. E. Waite, "The Pictorial Key to the Tarot" (1911), public domain; all other text, including the card-meaning texts and quiz content, is original.
+
+10. IN-APP PURCHASES. One auto-renewable group "Arcanum Premium": Premium - Yearly (premium.year, 1 year, USD 34.99) and Premium - Monthly (premium.month, 1 month, USD 5.99); no trial. Premium unlocks course modules 3-6, most spreads and unlimited flashcard sessions; free forever: the learning dashboard, modules 1-2, "Guess the Card", the daily card, the 78-card reference, the journal, the Three Cards and New Moon spreads, one flashcard session a day. Where to buy: Profile -> Settings -> "Arcanum Premium", or any locked module or spread. The paywall lists both plans with store price, Terms of Use and Privacy Policy links and "Restore Purchases"; after purchase it shows the active plan and renewal date.
 
 Contact: arcanum.tarot@icloud.com.
 ```
 
-Прежняя короткая версия (483 символа, до 29.08) — в истории git.
+Прежние версии (483 симв. до 29.08; восемь пунктов без 4.3(b), 3944 симв., 29.08; ресабмит
+после первого отказа 4.3(b), 3996 симв., 05.09) — в истории git.
 
 ---
 
@@ -93,13 +113,13 @@ Arcanum — обучение таро
 Курс, значения карт, расклады
 
 ### ru · короткое описание Google (80)
-Учитесь читать таро: курс из 32 уроков, 78 карт со значениями и карта дня
+Учитесь читать таро: курс из 32 уроков, 78 карт со значениями и тренажёр памяти
 
 ### ru · ключевые слова iOS (100)
-уроки,расклад,колода,арканы,старшие,символика,луна,таролог,карта дня,уэйт,новичкам,интуиция
+уроки,расклад,колода,арканы,старшие,символика,карта дня,уэйт,новичкам,викторина,тренажёр,символы
 
 ### ru · промо-текст iOS (170)
-Новое в 1.0: курс из 32 уроков, справочник 78 карт, десять раскладов, тренажёр памяти и лунный календарь. Всё работает офлайн, без регистрации.
+Новое в 1.0: курс из 32 уроков с викторинами, справочник 78 карт, десять раскладов, тренажёр памяти и упражнение «Угадай карту». Всё работает офлайн, без регистрации.
 
 ### ru · полное описание (4000)
 Arcanum учит читать таро с нуля — спокойно, по 5 минут в день.
@@ -112,15 +132,15 @@ Arcanum учит читать таро с нуля — спокойно, по 5 
 
 • Справочник всех 78 карт. У каждой — общее значение и перевёрнутое, разбор по сферам (любовь, работа, финансы, здоровье), символика рисунка и значение в роли карты дня. Поиск и фильтры по арканам и мастям.
 
-• Карта дня. Одна карта каждое утро с толкованием и вопросом для закрепления, вечером — короткая рефлексия «отозвалось или нет». Всё сохраняется в дневник с заметками.
-
 • Десять раскладов: три карты, кельтский крест, подкова, на отношения, на выбор, на месяц и другие. Позиции подписаны и объяснены — видно, что означает каждое место.
 
 • Тренажёр памяти. Флеш-карты по алгоритму интервального повторения: приложение само решает, какую карту показать сегодня, чтобы значения запоминались надолго.
 
-• Лунный календарь. Фазы, новолуния и полнолуния рассчитываются по астрономическому алгоритму, а не по приблизительной таблице. У новолуния и полнолуния — свои расклады.
+• Угадай карту. Короткое упражнение: по увеличенному фрагменту рисунка нужно узнать аркан среди четырёх вариантов — разминка для памяти на символику колоды.
 
 • Дневник. Все карты дня и расклады с заметками, статистика месяца, экспорт и восстановление данных файлом.
+
+• Карта дня и календарь. Каждое утро — новая карта с толкованием и вопросом для закрепления; отдельно — спокойный календарь новолуний и полнолуний.
 
 КАК УСТРОЕНО
 
@@ -155,13 +175,13 @@ Arcanum — Learn Tarot
 Course, card meanings, spreads
 
 ### en · короткое описание Google (80)
-Learn to read tarot: a 32-lesson course, all 78 cards explained, daily card
+Learn to read tarot: a 32-lesson course, all 78 cards explained, memory trainer
 
 ### en · ключевые слова iOS (100)
-lessons,quiz,deck,arcana,symbolism,moon,reading,daily,journal,flashcards,beginners,rider,waite
+lessons,quiz,deck,arcana,symbolism,study,reading,daily,journal,flashcards,beginners,rider,waite
 
 ### en · промо-текст iOS (170)
-New in 1.0: a 32-lesson course, all 78 cards explained, ten spreads, a memory trainer and a moon calendar. Everything works offline, no sign-up needed.
+New in 1.0: a 32-lesson course with quizzes, 78 cards explained, ten spreads, a memory trainer and a Guess the Card exercise. Everything works offline, no sign-up needed.
 
 ### en · полное описание (4000)
 Arcanum teaches you to read tarot from scratch — calmly, five minutes a day.
@@ -174,15 +194,15 @@ WHAT'S INSIDE
 
 • A reference of all 78 cards. Every card has its upright and reversed meaning, a breakdown by area of life (love, work, money, health), the symbolism of the drawing and what it means as a card of the day. Search and filters by arcana and suit.
 
-• Card of the day. One card each morning with its reading and a question to make it stick; in the evening, a short reflection on whether it resonated. Everything is saved to your journal with notes.
-
 • Ten spreads: three cards, Celtic cross, horseshoe, relationship, choice, month ahead and more. Every position is named and explained, so you can see what each place stands for.
 
 • Memory trainer. Flashcards with spaced repetition: the app decides which card to show today so the meanings stay with you.
 
-• Moon calendar. Phases, new moons and full moons are calculated with an astronomical algorithm rather than an approximate table. New and full moons come with their own spreads.
+• Guess the Card. A short exercise: identify the arcana from a zoomed-in detail of its artwork among four options — a quick warm-up for your memory of the deck's symbols.
 
 • Journal. Every daily card and spread with your notes, monthly statistics, export and restore from a file.
+
+• Card of the day and calendar. One card each morning with its reading and a question to make it stick; separately, a calm calendar of new moons and full moons.
 
 HOW IT WORKS
 
@@ -210,6 +230,13 @@ A 32-lesson course, all 78 cards with meanings and symbolism, a daily card with 
 
 # Español (вычитан носителем, задача 57н)
 
+⚠️ **Черновик задачи 72, носитель не читал** (19.09): короткое описание Google, ключевые слова iOS,
+промо-текст iOS и два абзаца полного описания («Adivina la Carta» — упражнение на распознавание
+символов; «Carta del día y calendario» — объединённый абзац карты дня и календаря вместо прежних
+двух) переписаны под учебный главный экран и игру «Угадай карту». Остальные абзацы (курс,
+справочник, расклады, тренажёр, дневник) — вычитка 57н, не тронуты. Волна 68 (`docs/prompts/
+68-native-tails.md`, часть 3) обязана прочитать именно эти блоки.
+
 ### es · название (30)
 Arcanum — Aprende Tarot
 
@@ -217,13 +244,13 @@ Arcanum — Aprende Tarot
 Curso, significados y tiradas
 
 ### es · короткое описание Google (80)
-Aprende a leer el tarot: curso de 32 lecciones, 78 cartas y tu carta del día
+Aprende a leer tarot: curso de 32 lecciones, 78 cartas y entrenador de memoria
 
 ### es · ключевые слова iOS (100)
-lecciones,simbolismo,cartas,lectura,mazo,baraja,arcanos,luna,principiantes,diario,dia,rider,waite
+lecciones,simbolismo,cartas,lectura,mazo,baraja,arcanos,estudio,principiantes,diario,dia,rider,waite
 
 ### es · промо-текст iOS (170)
-Arcanum 1.0 ya está aquí: curso de 32 lecciones, las 78 cartas explicadas, diez tiradas, entrenador de memoria y calendario lunar. Funciona sin conexión y sin cuenta.
+Arcanum 1.0: curso de 32 lecciones con cuestionarios, 78 cartas explicadas, diez tiradas, entrenador de memoria y el ejercicio Adivina la Carta. Sin conexión ni cuenta.
 
 ### es · полное описание (4000)
 Arcanum te enseña a leer el tarot desde cero: con calma, cinco minutos al día.
@@ -236,15 +263,15 @@ QUÉ INCLUYE
 
 • Una guía con las 78 cartas. De cada carta tienes su significado derecho e invertido, su lectura por áreas de la vida (amor, trabajo, dinero, salud), el simbolismo de la ilustración y lo que quiere decir como carta del día. Incluye búsqueda y filtros por arcanos y palos.
 
-• Carta del día. Una carta cada mañana, con su lectura y una pregunta para fijar lo aprendido; por la noche, una reflexión corta sobre si te resonó o no. Todo se guarda en tu Diario, junto con tus notas.
-
 • Diez tiradas: la de tres cartas, la cruz celta, la herradura, la de pareja, la de elección, la del mes y más. Cada posición lleva nombre y explicación, para que sepas qué significa cada lugar de la mesa.
 
 • Entrenador de memoria. Tarjetas con repetición espaciada: la app elige qué carta te toca hoy para que los significados se te queden.
 
-• Calendario lunar. Las fases, las lunas nuevas y las llenas se calculan con un algoritmo astronómico, no con una tabla aproximada. La luna nueva y la luna llena tienen sus propias tiradas.
+• Adivina la Carta. Un ejercicio breve: reconoce el arcano a partir de un detalle ampliado de su dibujo entre cuatro opciones — un buen calentamiento para recordar los símbolos de la baraja.
 
 • Diario. Guarda todas tus cartas del día y tus tiradas con notas, te muestra las estadísticas del mes y te deja exportar y restaurar todo desde un archivo.
+
+• Carta del día y calendario. Cada mañana, una carta con su lectura y una pregunta para fijar lo aprendido; aparte, un calendario tranquilo de lunas nuevas y llenas.
 
 CÓMO FUNCIONA
 
@@ -272,6 +299,13 @@ Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la
 
 # Português do Brasil (вычитан носителем, задача 57н)
 
+⚠️ **Черновик задачи 72, носитель не читал** (19.09): короткое описание Google, ключевые слова iOS,
+промо-текст iOS и два абзаца полного описания («Adivinhe a Carta» — упражнение на распознавание
+символов; «Carta do dia e calendário» — объединённый абзац карты дня и календаря вместо прежних
+двух) переписаны под учебный главный экран и игру «Угадай карту». Остальные абзацы (курс,
+справочник, расклады, тренажёр, дневник) — вычитка 57н, не тронуты. Волна 68 (`docs/prompts/
+68-native-tails.md`, часть 3) обязана прочитать именно эти блоки.
+
 ### pt · название (30)
 Arcanum — Aprenda a Ler Tarô
 
@@ -279,13 +313,13 @@ Arcanum — Aprenda a Ler Tarô
 Curso, significados e tiragens
 
 ### pt · короткое описание Google (80)
-Aprenda a ler tarô: curso de 32 lições, as 78 cartas e a carta do dia
+Aprenda a ler tarô: curso de 32 lições, as 78 cartas e treino de memória
 
 ### pt · ключевые слова iOS (100)
-taro,tarot,cartas,tiragem,leitura,baralho,arcanos,lua,licoes,iniciantes,diario,waite,rider
+taro,tarot,cartas,tiragem,leitura,baralho,arcanos,estudo,licoes,iniciantes,diario,waite,rider
 
 ### pt · промо-текст iOS (170)
-Novidades da versão 1.0: curso de 32 lições, as 78 cartas explicadas, dez tiragens, treinador de memória e calendário lunar. Funciona offline, sem cadastro.
+Novidades 1.0: curso de 32 lições com questionários, 78 cartas explicadas, dez tiragens, treino de memória e o exercício Adivinhe a Carta. Offline, sem cadastro.
 
 ### pt · полное описание (4000)
 O Arcanum ensina você a ler tarô do zero, com calma, cinco minutos por dia.
@@ -298,15 +332,15 @@ O QUE VOCÊ ENCONTRA NO APP
 
 • Um guia com as 78 cartas. Cada carta traz o significado normal e o invertido, a leitura por áreas da vida (amor, trabalho, dinheiro, saúde), o simbolismo da imagem e o sentido como carta do dia. Tem busca e filtros por arcanos e naipes.
 
-• Carta do dia. Uma carta toda manhã, com a interpretação e uma pergunta para fixar o que você aprendeu; à noite, uma reflexão rápida: fez sentido ou não? Tudo fica salvo no seu diário, com espaço para anotações.
-
 • Dez tiragens: Três Cartas, Cruz Celta, Ferradura, Relacionamento, Escolha, Mês e outras. Cada posição tem nome e explicação, assim você entende o que cada uma representa na leitura.
 
 • Treino de memória. Flashcards com repetição espaçada: o app escolhe qual carta mostrar hoje para os significados ficarem na memória de vez.
 
-• Calendário lunar. As fases, as luas novas e as luas cheias são calculadas com um algoritmo astronômico, e não com uma tabela aproximada. A lua nova e a lua cheia têm tiragens próprias.
+• Adivinhe a Carta. Um exercício curto: reconheça o arcano a partir de um detalhe ampliado do desenho entre quatro opções — um bom aquecimento para lembrar os símbolos do baralho.
 
 • Diário. Todas as cartas do dia e todas as tiragens com suas anotações, as estatísticas do mês e backup em arquivo, para exportar e restaurar quando quiser.
+
+• Carta do dia e calendário. Toda manhã, uma carta com sua interpretação e uma pergunta para fixar o que você aprendeu; à parte, um calendário tranquilo de luas novas e cheias.
 
 COMO FUNCIONA
 

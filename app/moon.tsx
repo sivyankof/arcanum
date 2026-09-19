@@ -1,9 +1,9 @@
 /** Лунный календарь (спека 47; product-spec §1а; logic-spec §6): текущий месяц одним экраном —
- *  шапка месяца, строка луны (та же, что на «Сегодня»), сетка 7 колонок с глифами событий,
+ *  шапка месяца, строка луны (та же, что на «Практике», спека 72), сетка 7 колонок с глифами событий,
  *  строки новолуния/полнолуния с местным временем. Всё выводится из времени — стора нет.
- *  «Сейчас» берётся при монтировании и на возврате из фона (useAppActive, правило 06а);
+ *  «Сейчас» — общий useNow (фокус экрана и возврат из фона, правило 06а, спека 72);
  *  переход через полночь при открытом экране таймером не ловим — обновится на следующем
- *  возврате из фона. Композиция — #v-moon эталона. */
+ *  фокусе/возврате из фона. Композиция — #v-moon эталона. */
 import { Stack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,8 @@ import { useLang } from '../src/lib/i18n';
 import { WEEK_START } from '../src/lib/lang';
 import { moonInfo, type MoonEventKind } from '../src/lib/moon';
 import { monthEvents, monthGrid } from '../src/lib/moonCalendar';
-import { useAppActive } from '../src/lib/useAppActive';
+import { useNow } from '../src/lib/useNow';
+import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, LOCKED_OPACITY, spacing } from '../src/theme/theme';
 import { useTheme } from '../src/theme/useTheme';
 
@@ -55,9 +56,8 @@ export default function MoonScreen() {
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
 
-  // «сейчас» — при монтировании и на возврате из фона
-  const [now, setNow] = React.useState(() => new Date());
-  useAppActive(() => setNow(new Date()));
+  // «сейчас» — общий useNow (фокус экрана и возврат из фона, правило 06а)
+  const now = useNow();
 
   const year = now.getFullYear();
   const month0 = now.getMonth();
@@ -80,12 +80,11 @@ export default function MoonScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>
-      <Stack.Screen options={{ headerBackTitle: tr('tabs.today') }} />
+      <Stack.Screen options={{ headerBackTitle: tr('tabs.practice') }} />
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          // как тренажёр и урок: insets.top + высота системной шапки, иначе контент уедет под неё
-          paddingTop: insets.top + 64 + spacing.l,
+          paddingTop: stackTopPad(insets),
           paddingHorizontal: spacing.xl,
           paddingBottom: 120,
         }}
@@ -99,7 +98,7 @@ export default function MoonScreen() {
         </FadeUp>
 
         <FadeUp index={1}>
-          <MoonRow phase={moon.phase} day={moon.day} />
+          <MoonRow phase={moon.phase} />
           <View style={st.grid}>
             {labels.map((l) => (
               <Txt key={l} style={[st.weekday, { width: cellSize, color: t.muted }]}>

@@ -21,10 +21,10 @@ import { useTheme } from '../../src/theme/useTheme';
 
 // порядок вкладок = порядок Tabs.Screen ниже; нужен, чтобы поставить подсветку под активную
 const ROUTES: { path: string; icon: TabIconName }[] = [
-  { path: '/', icon: 'today' },
+  { path: '/', icon: 'learn' },
   { path: '/course', icon: 'course' },
   { path: '/cards', icon: 'cards' },
-  { path: '/spreads', icon: 'spreads' },
+  { path: '/spreads', icon: 'practice' },
   { path: '/profile', icon: 'profile' },
 ];
 
@@ -127,10 +127,10 @@ export default function TabLayout() {
         tabBarLabelStyle: { fontSize: 10, fontFamily: fonts.sansBold, letterSpacing: 0.3 },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: tr('tabs.today'), tabBarIcon: icon('today', '/') }} />
+      <Tabs.Screen name="index" options={{ title: tr('tabs.learn'), tabBarIcon: icon('learn', '/') }} />
       <Tabs.Screen name="course" options={{ title: tr('tabs.course'), tabBarIcon: icon('course', '/course') }} />
       <Tabs.Screen name="cards" options={{ title: tr('tabs.cards'), tabBarIcon: icon('cards', '/cards') }} />
-      <Tabs.Screen name="spreads" options={{ title: tr('tabs.spreads'), tabBarIcon: icon('spreads', '/spreads') }} />
+      <Tabs.Screen name="spreads" options={{ title: tr('tabs.practice'), tabBarIcon: icon('practice', '/spreads') }} />
       <Tabs.Screen name="profile" options={{ title: tr('tabs.profile'), tabBarIcon: icon('profile', '/profile') }} />
     </Tabs>
   );

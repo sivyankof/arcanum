@@ -22,6 +22,7 @@ import { dealSpread, drawnCardLabel, normalizeQuestion, spreadMeaningText, type 
 import { isBoard } from '../lib/spreadLayout';
 import { useLeaveGuard } from '../lib/useLeaveGuard';
 import { useApp } from '../store/useApp';
+import { stackTopPad } from '../theme/navHeader';
 import { fonts, spacing } from '../theme/theme';
 import { useTheme } from '../theme/useTheme';
 import { ConfirmDialog } from './ConfirmDialog';
@@ -152,8 +153,7 @@ export function SpreadScreen({
       <ScreenBg />
       <ScrollView
         contentContainerStyle={{
-          // insets.top + высота прозрачной системной шапки (64), как на странице карты
-          paddingTop: insets.top + 64,
+          paddingTop: stackTopPad(insets, 0),
           paddingHorizontal: spacing.xl,
           paddingBottom: view ? 60 : 120, // в play под экраном таб-бар
         }}

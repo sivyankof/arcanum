@@ -1,9 +1,12 @@
 /** Тесты `apiKey()` (спека 53б, дополнение к задаче 4): ключ SDK по явной ветке платформы —
  *  android → EXPO_PUBLIC_RC_ANDROID_KEY, ios → EXPO_PUBLIC_RC_IOS_KEY, любая другая (в т.ч. веб) →
  *  undefined. Пустая строка и отсутствие переменной равнозначны — ключа нет.
- *  `isExpoGo()` не тестируется — одна строка чтения `expo-constants` (см. бриф задачи 4). */
+ *  `isExpoGo()` не тестируется — одна строка чтения `expo-constants` (см. бриф задачи 4).
+ *  `storeNameFor()` (спека 72, финальное ревью, находка F11): раньше решение о названии магазина
+ *  жило прямо в присвоении STORE_NAME и не тестировалось — подмена веток (например, ios отдаёт
+ *  «Google Play») проходила tsc и весь jest молча. Мутация ниже стережёт ровно это. */
 import { Platform } from 'react-native';
-import { apiKey } from '../purchasesEnv';
+import { apiKey, storeNameFor } from '../purchasesEnv';
 
 const ANDROID_VAR = 'EXPO_PUBLIC_RC_ANDROID_KEY';
 const IOS_VAR = 'EXPO_PUBLIC_RC_IOS_KEY';
@@ -58,5 +61,20 @@ describe('apiKey (спека 53б)', () => {
     withEnv('ios', {}, () => {
       expect(apiKey()).toBeUndefined();
     });
+  });
+});
+
+describe('storeNameFor (спека 72)', () => {
+  it('ios → «App Store» (без упоминания Google Play — риск Apple 2.3.10)', () => {
+    expect(storeNameFor('ios')).toBe('App Store');
+  });
+
+  it('android → «Google Play» (без упоминания App Store)', () => {
+    expect(storeNameFor('android')).toBe('Google Play');
+  });
+
+  it('веб (и любая другая платформа) → оба магазина через слэш', () => {
+    expect(storeNameFor('web')).toBe('App Store / Google Play');
+    expect(storeNameFor('windows')).toBe('App Store / Google Play');
   });
 });
