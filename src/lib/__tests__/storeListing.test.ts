@@ -43,38 +43,10 @@ interface ListingField {
   text: string;
 }
 
-/** Заголовок поля: `### ru · короткое описание Google (80)`. */
-const HEAD = /^###\s+(\S+)\s+·\s+(.+?)\s+\((\d+)\)\s*$/;
-
-/** Разбор документа. Тело поля кончается на любом заголовке `#` или горизонтальной линии `---`:
- *  так текст соседнего языка и служебные разделы файла не приклеиваются к последнему полю. */
-function parseListing(md: string): ListingField[] {
-  const out: ListingField[] = [];
-  let head: { lang: string; field: string; limit: number } | null = null;
-  let body: string[] = [];
-
-  const flush = (): void => {
-    if (head) out.push({ ...head, text: body.join('\n').trim() });
-    head = null;
-    body = [];
-  };
-
-  for (const line of md.split(/\r?\n/)) {
-    const m = HEAD.exec(line);
-    if (m) {
-      flush();
-      head = { lang: m[1], field: m[2], limit: Number(m[3]) };
-      continue;
-    }
-    if (head && (line.startsWith('#') || line.trim() === '---')) {
-      flush();
-      continue;
-    }
-    if (head) body.push(line);
-  }
-  flush();
-  return out;
-}
+/** Разбор документа — общий с заливкой витрины `scripts/asc_sync.js` (один парсер на оба места). */
+const { parseListing } = require('../../../scripts/lib/storeListing') as {
+  parseListing: (md: string) => ListingField[];
+};
 
 /** Длина в символах Unicode. `'\u{1F319}'.length` равна 2, а магазин считает такой символ одним —
  *  считать по строке значит занижать доступный лимит и резать текст без нужды. */

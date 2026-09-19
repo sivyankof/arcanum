@@ -559,5 +559,8 @@
 - **`scripts/lib/seed72.js`**: общий сид/фикстуры веб-проверки и скриншотов задачи 72
   (`PREMIUM_NONE`/`progress`/`M1`/`M12`/…/`ALL32`/`seed`/`themeHex`/`hexToRgb`/`themeRgb`/`XP_REVIEW`) —
   проверь здесь, прежде чем заводить свою копию сида в новом `scripts/check_*_web.js`/`shoot_*.js`.
+- **`scripts/lib/asc.js`** (клиент ASC API: JWT, `request`/`api`, `LOCALE`) и **`scripts/lib/storeListing.js`**
+  (`parseListing`/`reviewNotes` — один парсер `store-listing.md` на `storeListing.test.ts` и заливку):
+  на них `scripts/asc_status.js` (статус заявки) и `scripts/asc_sync.js` (витрина App Store без браузера).
 
 Полный план этапов, фичи удержания, монетизация и метрики — в `docs/master-plan.md`.
