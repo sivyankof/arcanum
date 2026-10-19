@@ -494,32 +494,28 @@ Board.** Ресабмит той же сборки запрещён (Extended Re
 Форма: `https://developer.apple.com/contact/app-store/?topic=appeal` → редирект на
 `developer.apple.com/contact/request/app-review/appeal/` (проверено живьём 19.10 под аккаунтом
 Артёма; та же ссылка «submit an appeal to the App Review Board» — в модалке Reply в треде).
-Полей всего четыре: имя и почта подставлены из аккаунта; **App Name** — `Arcanum — Learn Tarot`;
-**Select the topic that fits your appeal request** — `App Rejection`; **Reason for appeal** —
-текст ниже (Apple ID, сборка и Submission ID входят в первую строку текста — отдельных полей для
-них нет); кнопка **Submit** — жмёт Артём. Ответ Apple — письмом и/или в тред, обычно 1–2 недели.
+Полей пять: имя и почта подставлены из аккаунта; **App Name** — `Arcanum — Learn Tarot`;
+после выбора приложения появляется список причин — галочка **«4.3 - Spam»** (без неё форма пишет «There are no outstanding issues associated with this app»); **Select the topic that fits your appeal request** — `App Rejection`; **Reason for appeal** —
+текст ниже, **не больше 2000 знаков** (Apple ID, сборка и Submission ID входят в первую строку — отдельных полей нет;
+App Name — автодополнение, выбирать пункт «(iOS)» из списка, иначе поле сбрасывается вместе с остальными); кнопка **Submit** — жмёт Артём. Ответ Apple — письмом и/или в тред, обычно 1–2 недели.
 Пока апелляция рассматривается, в треде ничего не писать и заявку не трогать.
 
-### Текст апелляции (en, черновик 19.10; факты те же, что проверены 01.09 — новых не добавлять без проверки)
+### Текст апелляции (en, 19.10, отправленная версия; **лимит поля — 2000 знаков**, здесь 1948; факты перепроверены по коду и витрине: 6/32/160, 78 карт, 958 текстов, фраза описания, политика)
 
 ```
-Appeal of the 4.3(b) rejection of Arcanum — Learn Tarot (Apple ID 6805994267, bundle app.arcanum.tarot), version 1.0, build 4, submission 485992cd-e723-4985-a141-db6aeec7fad9.
+Arcanum — Learn Tarot, Apple ID 6805994267, version 1.0 build 4, submission 485992cd-e723-4985-a141-db6aeec7fad9, rejected under 4.3(b) on Oct 15.
 
-We are asking the App Review Board to review this decision because the app has now been rejected three times (Sep 1, Sep 18, Oct 15) with the same template message, and none of our three replies in the Resolution Center (Sep 1, Sep 5 in the review notes, Sep 19 with a full screen recording) has received a response that addresses the app itself.
+This is the third rejection with the same template (Sep 1, Sep 18, Oct 15). I replied each time, in the thread, in the review notes and on Sep 19 with a full screen recording, and none of the replies got an answer about the app itself.
 
-1. The app does not match the category named in the rejection. The template refers to apps that "primarily feature astrology, horoscopes, palm reading, fortune telling or zodiac reports". Arcanum contains none of these: there is no astrology, no horoscopes, no palm reading and no zodiac content anywhere in the app, and it does not tell fortunes. Our editorial rules forbid predictive claims; every card is explained as a symbol and a prompt for reflection, and the App Store description says directly that it is a course, not a fortune-telling tool. The app's primary category is Education.
+The template says the app "primarily features astrology, horoscopes, palm reading, fortune telling or zodiac reports". It doesn't. There is no astrology, no horoscopes, no palm reading and no zodiac anywhere in it, and it predicts nothing: cards are explained as symbols and questions to reflect on, never as predictions. The App Store description says it is "a course, not a fortune-telling machine". Category: Education.
 
-2. Arcanum is a structured learning app. Its core is a course of 6 modules and 32 lessons with a quiz after every lesson (160 questions), lesson-by-lesson progression and streaks; a spaced-repetition flashcard trainer (SM-2) for memorizing the 78 cards; a "guess the card from a fragment" recognition game; a complete reference of all 78 cards; a journal with evening reflection; and an astronomical moon calendar (new and full moon times computed on the device with the Meeus algorithm). The Sep 19 recording in the review thread shows the whole flow.
+What it is: a course on reading tarot, built like a language-learning app. 6 modules, 32 lessons, a quiz after each (160 questions), lessons unlock one by one; an SM-2 spaced-repetition flashcard trainer for the 78 cards; a game where you recognize a card from a fragment of its picture; a reference of all 78 cards; a journal; a moon calendar computed on the device.
 
-3. Guideline 4.3(b) allows apps in a saturated niche that provide a "meaningfully different or improved experience". Compared with the tarot apps on the App Store, Arcanum is different in substance, not in presentation:
-- Its roughly 950 editorial texts are original, written for this app by its editor, a professional tarot practitioner. Many tarot apps repackage the public-domain text of A. E. Waite (1911); we use that source only to verify symbolism.
-- It ships in four languages with full content parity (English, Russian, Spanish, Portuguese), while learning apps in this niche are typically English-only.
-- It combines in one offline app the course, the reference, spaced-repetition flashcards, the recognition game, a journal and spreads, with no account, no sign-up, no ads and no analytics; progress and the journal never leave the device.
-- It has no AI features: lessons and card meanings are not generated from templates or pulled from an API.
+On "duplicate content": 4.3(b) allows apps that offer a meaningfully different experience. The ~950 card texts are original, written by the app's editor, a professional tarot practitioner, while many tarot apps reuse Waite's public-domain text from 1911. Four languages with full content parity (EN, RU, ES, PT). Everything in one offline app: no account, no ads, no analytics, no AI.
 
-We respectfully ask the Board to evaluate the app on its actual content rather than the template, and to let us know specifically what, if anything, would need to change. We are ready to provide any additional material or a live demo.
+The last two rejections also carry an "Extended Review" notice about "safety, security, or quality concerns". No such concern was ever named; the only guideline cited is 4.3(b). I ask that it be reviewed together with the rejection.
 
-Thank you for your time.
+Please look at the app itself rather than the template, and if something needs to change, tell me what exactly.
 
 Artsiom Siviankou, Team ID 52QV87WW73
 ```
