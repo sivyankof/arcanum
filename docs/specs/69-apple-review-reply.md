@@ -519,3 +519,10 @@ Please look at the app itself rather than the template, and if something needs t
 
 Artsiom Siviankou, Team ID 52QV87WW73
 ```
+
+**Апелляция ОТПРАВЛЕНА 19.10 ~13:43 (Submit жал Артём)**: страница ответила «We've received your appeal
+request for the following app(s): Arcanum — Learn Tarot (iOS). The App Review Board will review the
+information you provided and contact you as soon as possible». Номера кейса форма не показала — ждать
+письмо на почту аккаунта и/или сообщение в треде. До ответа Board: в треде не писать, заявку не
+трогать, ресабмит не жать. Ответ Board положительный → версия уйдёт в ревью/Approved, релиз руками;
+отрицательный → сборка 1.0.1 с усиленным образовательным позиционированием (бэклог 69).
