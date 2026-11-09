@@ -434,8 +434,10 @@
   Review — 7 сообщений, последнее 15.10); **DSA Apple подана заново — «In Review»** (паспорт + новое
   ВНЖ одним PDF, адрес — справка Bank of Georgia; шаги — release-checklist п. 1); **обновлённое
   Apple Developer Program License Agreement ПРИНЯТО 09.11** (developer.apple.com/account → Review
-  agreement → Agree; Free Apps Agreement стало Active) — следом ASC показал «A new version of your
-  Paid Applications agreement is available» (View and Agree to Terms в Business, ждёт «да» Артёма);
+  agreement → Agree; Free Apps Agreement стало Active), следом **принята новая версия Paid Apps
+  Agreement** (Business → View and Agree to Terms, код 2FA вводил Артём) — оба Active с Nov 9;
+  **запрос статуса апелляции отправлен 09.11** (Other App Review questions, Case ID
+  `30000009822858`; ждать Board до ~23.11, дальше — 1.0.1 с изменениями по существу, спека 69);
   декларация продавца Google подтверждена 06.11; **программа 15 % Google — ЗАРЕГИСТРИРОВАНЫ 09.11**
   (обе комиссии теперь 15 %: Apple Small Business с 15.09, Google с 09.11). Замер Play Console:
   47 установок за 28 дн. (+147 %), всего 49, 1,73 тыс. показов, 1 оценка 5,00, покупок нет.
