@@ -2,6 +2,7 @@ import {
   FADE_IN_MS,
   FADE_OUT_MS,
   FADE_STEP_MS,
+  MUSIC_ENABLED,
   MUSIC_VOLUME,
   fadeVolume,
   nextInBackground,
@@ -16,6 +17,12 @@ describe('константы фоновой музыки', () => {
     expect(FADE_IN_MS).toBe(2500);
     expect(FADE_OUT_MS).toBe(400);
     expect(FADE_STEP_MS).toBe(50);
+  });
+});
+
+describe('выключатель музыки', () => {
+  it('в выпуске 1.0.1 музыка выключена (спека 74, дополнение 09.11)', () => {
+    expect(MUSIC_ENABLED).toBe(false);
   });
 });
 

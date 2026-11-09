@@ -168,7 +168,6 @@ Premium открывает модули 3–6 курса, остальные р�
 
 ### ru · что нового 1.0.1 (500)
 Что нового в 1.0.1:
-• Фоновая музыка — тихий эмбиент. Включается и выключается кнопкой на главном экране или в настройках.
 • Тема «Как в системе» — приложение следует тёмной или светлой теме телефона.
 • Кнопка «Оценить приложение» в настройках.
 
@@ -236,7 +235,6 @@ A 32-lesson course, all 78 cards with meanings and symbolism, a daily card with 
 
 ### en · что нового 1.0.1 (500)
 What's new in 1.0.1:
-• Background music — a quiet ambient track. Turn it on or off with the button on the home screen or in Settings.
 • "System" theme — the app follows your phone's dark or light mode.
 • "Rate the app" button in Settings.
 
@@ -311,7 +309,6 @@ Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la
 
 ### es · что нового 1.0.1 (500)
 Novedades de la versión 1.0.1:
-• Música de fondo: un ambiente suave. Se activa y desactiva con el botón de la pantalla principal o en Ajustes.
 • Tema «Como el sistema»: la app sigue el modo oscuro o claro del teléfono.
 • Botón «Valorar la app» en Ajustes.
 
@@ -386,7 +383,6 @@ Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do 
 
 ### pt · что нового 1.0.1 (500)
 Novidades da versão 1.0.1:
-• Música de fundo: um ambiente suave. Ligue ou desligue pelo botão na tela inicial ou em Configurações.
 • Tema "Como o sistema": o app segue o modo escuro ou claro do celular.
 • Botão "Avaliar o app" em Configurações.
 

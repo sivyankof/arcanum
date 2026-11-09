@@ -1,7 +1,14 @@
 // Фоновая музыка (спека 74): ЕДИНСТВЕННЫЙ файл проекта, который импортирует expo-audio
 // (страж — androidPermissions.test.ts). Веб-заглушка рядом — music.web.ts.
 // Один плеер на всё приложение, без заглушения по экранам (решение 8).
-import { FADE_IN_MS, FADE_OUT_MS, FADE_STEP_MS, MUSIC_VOLUME, fadeVolume } from './musicLogic';
+import {
+  FADE_IN_MS,
+  FADE_OUT_MS,
+  FADE_STEP_MS,
+  MUSIC_ENABLED,
+  MUSIC_VOLUME,
+  fadeVolume,
+} from './musicLogic';
 
 // Минимум того, что нужно от плеера, — не тянем типы пакета, чтобы модуль оставался ленивым.
 interface Player {
@@ -68,6 +75,8 @@ function fadeTo(p: Player, to: number, durationMs: number, done?: () => void): v
 
 /** Запускает музыку с плавным нарастанием. Позицию не сбрасывает. */
 export function startMusic(): void {
+  // единственные «ворота» выключателя: до них ничего не грузится и плеер не создаётся
+  if (!MUSIC_ENABLED) return;
   const p = ensurePlayer();
   if (!p) return;
   try {

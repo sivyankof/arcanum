@@ -9,6 +9,7 @@ import { DailyCardRow } from '../../src/components/DailyCardRow';
 import { FadeUp } from '../../src/components/FadeUp';
 import { FragmentPanel } from '../../src/components/FragmentPanel';
 import { MusicToggle } from '../../src/components/MusicToggle';
+import { MUSIC_ENABLED } from '../../src/lib/musicLogic';
 import { NextLessonCard } from '../../src/components/NextLessonCard';
 import { ReviewPanel } from '../../src/components/ReviewPanel';
 import { ScreenBg } from '../../src/components/ScreenBg';
@@ -69,7 +70,7 @@ export default function LearnScreen() {
         contentContainerStyle={{ paddingTop: insets.top + spacing.xl, paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
       >
-        <ScreenHeader overline={formatEntryDate(localDateISO(now), lang, 'long').toUpperCase()} title={tr('home.title')} right={<MusicToggle />} />
+        <ScreenHeader overline={formatEntryDate(localDateISO(now), lang, 'long').toUpperCase()} title={tr('home.title')} right={MUSIC_ENABLED ? <MusicToggle /> : undefined} />
         <StatsPills index={1} />
         <FadeUp index={2}>
           <NextLessonCard summary={summary} state={state} lang={lang} onPress={onHero} />

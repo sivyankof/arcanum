@@ -24,6 +24,8 @@ function load(): Loaded {
   const createAudioPlayer = jest.fn(() => player);
   jest.resetModules();
   jest.doMock('expo-audio', () => ({ createAudioPlayer, setAudioModeAsync }));
+  // флаг включён: проверяем сам плеер, а не выключатель (он — в отдельном тесте ниже)
+  jest.doMock('../musicLogic', () => ({ ...jest.requireActual('../musicLogic'), MUSIC_ENABLED: true }));
   const music: typeof import('../music') = require('../music');
   return { music, player, setAudioModeAsync, createAudioPlayer };
 }
@@ -35,6 +37,23 @@ beforeEach(() => {
 afterEach(() => {
   jest.useRealTimers();
   jest.dontMock('expo-audio');
+  jest.dontMock('../musicLogic');
+});
+
+describe('выключатель MUSIC_ENABLED', () => {
+  it('с настоящим флагом (false) startMusic не создаёт плеер, не трогает режим звука и не играет', () => {
+    const player: FakePlayer = { volume: 1, loop: false, play: jest.fn(), pause: jest.fn() };
+    const setAudioModeAsync = jest.fn(() => Promise.resolve());
+    const createAudioPlayer = jest.fn(() => player);
+    jest.resetModules();
+    jest.doMock('expo-audio', () => ({ createAudioPlayer, setAudioModeAsync }));
+    const music: typeof import('../music') = require('../music');
+    music.startMusic();
+    jest.advanceTimersByTime(5000);
+    expect(createAudioPlayer).not.toHaveBeenCalled();
+    expect(setAudioModeAsync).not.toHaveBeenCalled();
+    expect(player.play).not.toHaveBeenCalled();
+  });
 });
 
 describe('startMusic', () => {

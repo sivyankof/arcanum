@@ -29,6 +29,7 @@ import {
 import { pickBackupText, shareBackup } from '../src/lib/backupIo';
 import { NAME_MAX } from '../src/lib/birthArcana';
 import { course } from '../src/lib/content';
+import { MUSIC_ENABLED } from '../src/lib/musicLogic';
 import { learnedCardIds, nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
 import { deviceLocaleTags } from '../src/lib/deviceLang';
@@ -300,13 +301,15 @@ export default function SettingsScreen() {
             value={LANG_NAMES[lang]}
             onPress={() => setLangPicker(true)}
           />
-          <SettingsRow
-            testID="settings-music"
-            icon="musical-notes-outline"
-            label={tr('settings.music')}
-            value={musicOn ? tr('settings.on') : tr('settings.off')}
-            onPress={() => setMusicOn(!musicOn)}
-          />
+          {MUSIC_ENABLED && (
+            <SettingsRow
+              testID="settings-music"
+              icon="musical-notes-outline"
+              label={tr('settings.music')}
+              value={musicOn ? tr('settings.on') : tr('settings.off')}
+              onPress={() => setMusicOn(!musicOn)}
+            />
+          )}
         </FadeUp>
         <FadeUp index={2}>
           <SettingsRow

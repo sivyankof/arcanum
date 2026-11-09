@@ -1,13 +1,15 @@
-/* Веб-проверка выпуска 1.0.1 (спека 74, пункт 6а/6б): кнопка звука на «Учёбе», строка музыки
-   в настройках, тема «Как в системе», отсутствие строки «Оценить приложение» на вебе.
+/* Веб-проверка выпуска 1.0.1 (спека 74, пункт 6а/6б): кнопки звука на «Учёбе» и строки музыки
+   в настройках НЕТ (музыка выключена флагом MUSIC_ENABLED, дополнение 09.11), миграция 12 → 13,
+   тема «Как в системе», отсутствие строки «Оценить приложение» на вебе.
 
    Запуск (dev-сервер поднят ЗАНОВО с --clear, рецепт AGENTS.md):
      NODE_PATH="C:/Users/Artem/AppData/Local/npm-cache/_npx/705bc6b22212b352/node_modules" \
        node scripts/check_74_web.js
 
-   ⚠️ Красный прогон обязателен — четыре мутации по очереди, каждая на свежем dev-сервере:
-     1) убрать `right={<MusicToggle />}` из app/(tabs)/index.tsx → роняет проверки 1;
-     2) дефолт `musicOn: false` в src/store/useApp.ts → роняет проверки 2 (и следом 3–4);
+   ⚠️ Красный прогон обязателен — мутации по очереди, каждая на свежем dev-сервере:
+     1) `MUSIC_ENABLED = true` в src/lib/musicLogic.ts → роняет проверки 1 и 3 (кнопка и строка
+        появились);
+     2) дефолт `musicOn: false` в src/store/useApp.ts → роняет проверку 2;
      3) `resolveMode` в src/theme/resolveMode.ts игнорирует схему устройства → роняет проверки 5;
      4) `rateUrlFor` отдаёт адрес на вебе → роняет проверку 7.
    Сид — общий scripts/lib/seed72.js (version 12 без settings.musicOn: миграция 12 → 13
@@ -50,9 +52,6 @@ function check(name, ok, detail) {
     await page.waitForTimeout(1500);
   }
   const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem('arcanum-app')));
-  const toggle = () => page.locator('[data-testid="music-toggle"]:visible').first();
-  // нет кнопки — null, а не таймаут на 30 с: сценарий обязан дойти до итога на сломанном коде
-  const checked = () => toggle().getAttribute('aria-checked', { timeout: 2000 }).catch(() => null);
   const body = () => page.locator('body').innerText();
   /** Фон экрана: computed backgroundColor элементов шириной с экран и высотой от 700 px (под шапкой стека корень экрана 390×780; фон rgb(242,242,242) — постоянная подложка навигатора). */
   const screenBg = () =>
@@ -71,15 +70,9 @@ function check(name, ok, detail) {
     await page.waitForTimeout(1500);
   };
 
-  console.log('\n=== 1. Кнопка звука на «Учёбе» ===');
+  console.log('\n=== 1. Кнопки звука на «Учёбе» нет ===');
   await open('/', seed());
-  const tg = toggle();
-  const present = (await tg.count()) > 0;
-  check('на «Учёбе» есть music-toggle', present);
-  if (present) {
-    const box = await tg.boundingBox();
-    check('зона нажатия 44×44', Math.round(box.width) === 44 && Math.round(box.height) === 44, JSON.stringify(box));
-  }
+  check('на «Учёбе» нет music-toggle', (await page.locator('[data-testid="music-toggle"]').count()) === 0);
   const titleBox = await page.getByText('Учёба', { exact: true }).first().boundingBox();
   const titleCentre = titleBox ? titleBox.x + titleBox.width / 2 : -1;
   check('заголовок по центру экрана (±1 px)', Math.abs(titleCentre - 195) <= 1, `центр ${titleCentre}`);
@@ -90,30 +83,18 @@ function check(name, ok, detail) {
   check('settings.musicOn === true', st2.state.settings && st2.state.settings.musicOn === true, JSON.stringify(st2.state.settings));
   check('консоль чиста после загрузки', consoleErrors.length === 0, consoleErrors.join(' | ').slice(0, 300));
 
-  console.log('\n=== 3. Клик по кнопке ===');
-  if (present) {
-    await tg.click({ force: true });
-    await page.waitForTimeout(500);
-  }
-  const st3 = await stored();
-  check('musicOn === false после клика', st3.state.settings.musicOn === false);
-  check('aria-checked="false"', (await checked()) === 'false');
+  console.log('\n=== 3. Строки музыки в настройках нет ===');
+  await openSettings();
+  const b3 = await body();
+  check('настройки открыты (есть строка «Тема»)', b3.includes('Тема'));
+  check('нет settings-music', (await page.locator('[data-testid="settings-music"]').count()) === 0);
+  check('в тексте экрана нет «Фоновая музыка»', !b3.includes('Фоновая музыка'));
+
+  console.log('\n=== 4. Музыка не просыпается после перезагрузки ===');
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForTimeout(1500);
-  check('после reload aria-checked="false"', (await checked()) === 'false');
-  check('после reload musicOn === false', (await stored()).state.settings.musicOn === false);
-
-  console.log('\n=== 4. Строка музыки в настройках ===');
-  await openSettings();
-  const row = page.locator('[data-testid="settings-music"]');
-  check('строка музыки показывает «Выкл»', (await row.innerText()).includes('Выкл'), await row.innerText());
-  await row.click({ force: true });
-  await page.waitForTimeout(500);
-  check('после клика строка показывает «Вкл»', (await row.innerText()).includes('Вкл'), await row.innerText());
-  check('musicOn === true в сторе', (await stored()).state.settings.musicOn === true);
-  await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(1500);
-  check('на «Учёбе» aria-checked="true"', (await checked()) === 'true');
+  check('после reload строки музыки по-прежнему нет', (await page.locator('[data-testid="settings-music"]').count()) === 0);
+  check('musicOn не тронут (true)', (await stored()).state.settings.musicOn === true);
 
   console.log('\n=== 5. Тема «Как в системе» ===');
   await openSettings();
@@ -146,7 +127,7 @@ function check(name, ok, detail) {
   await openSettings();
   const b7 = await body();
   check('строки «Оценить приложение» на вебе нет', !b7.includes('Оценить приложение'));
-  check('настройки действительно открыты', b7.includes('Фоновая музыка'));
+  check('настройки действительно открыты', b7.includes('Тема'));
 
   console.log('\n=== 8. Консоль ===');
   check('консоль без ошибок на всём проходе', consoleErrors.length === 0, consoleErrors.join(' | ').slice(0, 400));
