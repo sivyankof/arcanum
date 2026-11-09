@@ -1,7 +1,7 @@
 # 74 · Выпуск 1.0.1 для Google Play: фоновая музыка, тема «как в системе», «Оценить приложение», сжатие кода
 
-Статус: **спека на согласовании** (09.11.2026). Детальный план — `docs/plans/74-release-1-0-1.md`
-после «ок» Артёма. Ветка — `feat/74-release-1-0-1`.
+Статус: **спека согласована Артёмом 09.11.2026** («окей»); детальный план —
+`docs/plans/74-release-1-0-1.md`. Ветка — `feat/74-release-1-0-1`. Реализация не начата.
 
 ## Зачем
 
@@ -121,7 +121,8 @@
   `stopMusic()` (обе с затуханием), больше ничего.
 - **`src/lib/music.web.ts`** — заглушка с теми же экспортами, без `expo-audio`.
 - **`src/lib/musicLogic.ts`** — чистые функции под тестами:
-  `shouldPlay({ hydrated, onboarded, musicOn, appActive }) → boolean` и
+  `shouldPlay({ hydrated, onboarded, musicOn, inBackground }) → boolean`,
+  `nextInBackground(prev, state) → boolean` (решение 10: `inactive` ничего не меняет) и
   `fadeVolume(from, to, elapsedMs, durationMs) → number` (линейно, с зажимом по краям);
   константы `MUSIC_VOLUME = 0.25` (стартовое значение, калибруется в 6в), `FADE_IN_MS = 2500`,
   `FADE_OUT_MS = 400`.
@@ -237,7 +238,7 @@
 
 **Автоматика**
 - [ ] `npx tsc --noEmit` чист; `npm test` зелёный; `SCHEMA_VERSION === 13`.
-- [ ] Тесты, краснеющие на сломанном коде (мутацией): `shouldPlay` (каждый из четырёх признаков),
+- [ ] Тесты, краснеющие на сломанном коде (мутацией): `shouldPlay` (каждый из четырёх признаков), `nextInBackground`,
       `fadeVolume` (края и середина), `resolveMode` (три режима × три значения системы),
       `rateUrlFor` (три платформы), `mergeSettings` доливает `musicOn: true` старому состоянию,
       `parseBackup` принимает `'system'` и бэкап v12 без `musicOn`, отвергает `musicOn: "да"`.
