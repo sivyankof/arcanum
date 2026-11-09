@@ -46,7 +46,7 @@ import {
   sendTestPush,
   type PermissionState,
 } from '../src/lib/pushes';
-import { appVersion } from '../src/lib/appInfo';
+import { appVersion, RATE_URL, RATE_WEB_URL } from '../src/lib/appInfo';
 import { THEME_ICON, THEME_LABEL_KEY } from '../src/theme/resolveMode';
 import { THEME_MODES } from '../src/theme/theme';
 import { timeLabel } from '../src/lib/settings';
@@ -447,6 +447,20 @@ export default function SettingsScreen() {
             onPress={() => router.push('/about')}
           />
         </FadeUp>
+        {/* «Оценить приложение» (задача 71): строки нет, где адреса оценки нет
+            (web, iOS до публикации); market:// не открылся — веб-страница Google Play */}
+        {RATE_URL !== null && (
+          <FadeUp index={7}>
+            <SettingsRow
+              icon="star-outline"
+              label={tr('settings.rate')}
+              value=""
+              onPress={() => {
+                Linking.openURL(RATE_URL ?? RATE_WEB_URL).catch(() => Linking.openURL(RATE_WEB_URL));
+              }}
+            />
+          </FadeUp>
+        )}
         {__DEV__ && (
           <>
             <FadeUp index={6}>

@@ -239,6 +239,7 @@ export const resources = {
         feedback: "Обратная связь и ошибки",
         feedbackValue: "Написать нам",
         about: "О приложении",
+        rate: "Оценить приложение",
       },
       // экран «О приложении» (спека 12): версия, дисклеймер, атрибуция колоды и источников.
       // Заголовки блоков заданы обычным регистром — капсом их рисует сам `Block` (title.toUpperCase())
@@ -599,6 +600,7 @@ export const resources = {
         feedback: "Feedback & issues",
         feedbackValue: "Write to us",
         about: "About",
+        rate: "Rate the app",
       },
       about: {
         title: "About",
@@ -998,6 +1000,7 @@ export const resources = {
         feedback: "Comentarios y errores",
         feedbackValue: "Escríbenos",
         about: "Acerca de la app",
+        rate: "Valorar la app",
       },
       about: {
         title: "Acerca de",
@@ -1409,6 +1412,7 @@ export const resources = {
         feedback: "Contato e problemas",
         feedbackValue: "Fale com a gente",
         about: "Sobre o app",
+        rate: "Avaliar o app",
       },
       about: {
         title: "Sobre o app",
