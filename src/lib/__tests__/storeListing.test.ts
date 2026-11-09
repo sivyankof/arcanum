@@ -279,6 +279,15 @@ describe('лимиты символов', () => {
   });
 });
 
+describe('что нового 1.0.1 (Google Play, 500)', () => {
+  it.each([...LANGS])('%s: блок есть, лимит 500, текст в лимите', (lang) => {
+    const f = field(lang, 'что нового 1.0.1');
+    expect(f?.limit).toBe(500);
+    expect(size(f?.text ?? '')).toBeGreaterThan(0);
+    expect(size(f?.text ?? '')).toBeLessThanOrEqual(500);
+  });
+});
+
 describe('запрещённые слова', () => {
   it.each(listing.map((f) => [`${f.lang} · ${f.field}`, f] as const))(
     '%s: без обещаний и гарантий',

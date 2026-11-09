@@ -166,6 +166,12 @@ Premium открывает модули 3–6 курса, остальные р�
 
 Курс из 32 уроков, справочник всех 78 карт со значениями и символикой, карта дня с дневником и вечерней рефлексией, десять раскладов, тренажёр памяти и лунный календарь. Всё работает офлайн, на четырёх языках.
 
+### ru · что нового 1.0.1 (500)
+Что нового в 1.0.1:
+• Фоновая музыка — тихий эмбиент. Включается и выключается кнопкой на главном экране или в настройках.
+• Тема «Как в системе» — приложение следует тёмной или светлой теме телефона.
+• Кнопка «Оценить приложение» в настройках.
+
 ---
 
 # English
@@ -227,6 +233,12 @@ Privacy Policy: https://sivyankof.github.io/arcanum/privacy.html
 The first release of Arcanum.
 
 A 32-lesson course, all 78 cards with meanings and symbolism, a daily card with journal and evening reflection, ten spreads, a memory trainer and a moon calendar. Everything works offline, in four languages.
+
+### en · что нового 1.0.1 (500)
+What's new in 1.0.1:
+• Background music — a quiet ambient track. Turn it on or off with the button on the home screen or in Settings.
+• "System" theme — the app follows your phone's dark or light mode.
+• "Rate the app" button in Settings.
 
 ---
 
@@ -297,6 +309,12 @@ Esta es la primera versión de Arcanum.
 
 Un curso de 32 lecciones, las 78 cartas con sus significados y su simbolismo, la carta del día con Diario y reflexión por la noche, diez tiradas, entrenador de memoria y calendario lunar. Funciona sin conexión y está disponible en cuatro idiomas.
 
+### es · что нового 1.0.1 (500)
+Novedades de la versión 1.0.1:
+• Música de fondo: un ambiente suave. Se activa y desactiva con el botón de la pantalla principal o en Ajustes.
+• Tema «Como el sistema»: la app sigue el modo oscuro o claro del teléfono.
+• Botón «Valorar la app» en Ajustes.
+
 ---
 
 # Português do Brasil (вычитан носителем, задача 57н)
@@ -365,6 +383,12 @@ Política de privacidade: https://sivyankof.github.io/arcanum/privacy.html
 Esta é a primeira versão do Arcanum.
 
 Um curso de 32 lições, as 78 cartas com significados e simbolismo, a carta do dia com diário e reflexão à noite, dez tiragens, treinador de memória e calendário lunar. Funciona tudo offline, em quatro idiomas.
+
+### pt · что нового 1.0.1 (500)
+Novidades da versão 1.0.1:
+• Música de fundo: um ambiente suave. Ligue ou desligue pelo botão na tela inicial ou em Configurações.
+• Tema "Como o sistema": o app segue o modo escuro ou claro do celular.
+• Botão "Avaliar o app" em Configurações.
 
 ---
 
