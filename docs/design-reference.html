@@ -610,6 +610,13 @@ backdrop-filter:blur(10px);margin-top:14px;display:flex;justify-content:space-be
 .revcard b.ok2{color:var(--done)}
 .revcard .ri{color:var(--muted)}
 .revcard .ri svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* кнопка звука в шапке «Учёбы» (спека 74): значок 22, зона 44×44, у правого края строки заголовка */
+.hrow{position:relative}
+.sndbtn{position:absolute;right:0;bottom:0;height:36px;width:22px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.sndbtn::after{content:"";position:absolute;inset:-11px -11px;}
+.sndbtn svg{width:22px;height:22px;fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sndbtn.off svg{stroke:var(--muted)}
+.sndbtn .w2{display:none}.sndbtn.off .w1{display:none}.sndbtn.off .w2{display:inline}
 /* «Учёба» и игра «Угадай карту» (спека 72) */
 .mhead .ri{color:var(--muted)}
 .mhead .ri svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -820,8 +827,11 @@ border:.5px solid rgba(226,189,114,.3)}
 
   <!-- ===== УЧЁБА ===== -->
   <div class="view on" id="v-home">
-    <div class="date fadeup d1">Воскресенье · 9 августа</div>
-    <div class="h2 fadeup d1">Учёба</div>
+    <div class="hrow fadeup d1">
+      <div class="date">Воскресенье · 9 августа</div>
+      <div class="h2">Учёба</div>
+      <div class="sndbtn" onclick="this.classList.toggle('off')"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><path class="w1" d="M15.5 9.2a4 4 0 0 1 0 5.6"/><path class="w2" d="M16 9.5l4.5 5M20.5 9.5l-4.5 5"/></svg></div>
+    </div>
     <div class="rule fadeup d2"><span>✦</span></div>
     <div class="pills fadeup d3">
       <div class="pill"><span class="ic">🔥</span><span class="tx"><b>12 дней</b><small>СЕРИЯ</small></span></div>
@@ -1109,6 +1119,8 @@ border:.5px solid rgba(226,189,114,.3)}
         <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
         <span class="pl" onclick="openLang()" style="cursor:pointer">Язык</span><span class="pv" onclick="openLang()" style="cursor:pointer">Русский ›</span></div>
+      <div class="prow"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+        <span class="pl">Фоновая музыка</span><span class="pv">Вкл</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3.5 2"/></svg>
         <span class="pl">Вечерняя рефлексия</span><span class="pv">Вкл</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>

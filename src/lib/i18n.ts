@@ -179,7 +179,7 @@ export const resources = {
       },
       settings: {
         title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая",
-        language: "Язык", resetToday: "Сбросить карту дня",
+        language: "Язык", music: "Фоновая музыка", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
         // Premium (спека 53): строка настроек и DEV-тумблер права до появления магазина в 53б
@@ -547,7 +547,7 @@ export const resources = {
       },
       settings: {
         title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
-        language: "Language", resetToday: "Reset daily card",
+        language: "Language", music: "Background music", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
         // Premium (спека 53): строка настроек и DEV-тумблер права до появления магазина в 53б
@@ -940,6 +940,7 @@ export const resources = {
         dark: "Oscuro",
         light: "Claro",
         language: "Idioma",
+        music: "Música de fondo",
         resetToday: "Reiniciar la carta del día",
         reflection: "Reflexión nocturna",
         on: "Activado",
@@ -1349,6 +1350,7 @@ export const resources = {
         dark: "Escuro",
         light: "Claro",
         language: "Idioma",
+        music: "Música de fundo",
         resetToday: "Redefinir carta do dia",
         reflection: "Reflexão da noite",
         on: "Ativado",

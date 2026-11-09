@@ -11,6 +11,7 @@ import { FragmentPanel } from '../../src/components/FragmentPanel';
 import { NextLessonCard } from '../../src/components/NextLessonCard';
 import { ReviewPanel } from '../../src/components/ReviewPanel';
 import { ScreenBg } from '../../src/components/ScreenBg';
+import { MusicToggle } from '../../src/components/MusicToggle';
 import { ScreenHeader } from '../../src/components/ScreenHeader';
 import { StatsPills } from '../../src/components/StatsPills';
 import { cardById, course } from '../../src/lib/content';
@@ -68,7 +69,7 @@ export default function LearnScreen() {
         contentContainerStyle={{ paddingTop: insets.top + spacing.xl, paddingBottom: 120, paddingHorizontal: spacing.xl }}
         showsVerticalScrollIndicator={false}
       >
-        <ScreenHeader overline={formatEntryDate(localDateISO(now), lang, 'long').toUpperCase()} title={tr('home.title')} />
+        <ScreenHeader overline={formatEntryDate(localDateISO(now), lang, 'long').toUpperCase()} title={tr('home.title')} right={<MusicToggle />} />
         <StatsPills index={1} />
         <FadeUp index={2}>
           <NextLessonCard summary={summary} state={state} lang={lang} onPress={onHero} />

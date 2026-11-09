@@ -72,6 +72,8 @@ export default function SettingsScreen() {
   const resetToday = useApp((s) => s.resetToday);
   const reflectionOn = useApp((s) => s.settings.reflectionOn);
   const setReflectionOn = useApp((s) => s.setReflectionOn);
+  const musicOn = useApp((s) => s.settings.musicOn);
+  const setMusicOn = useApp((s) => s.setMusicOn);
   const devReflect = useApp((s) => s.devReflect);
   const setDevReflect = useApp((s) => s.setDevReflect);
   const devMoonOpen = useApp((s) => s.devMoonOpen);
@@ -294,6 +296,13 @@ export default function SettingsScreen() {
             label={tr('settings.language')}
             value={LANG_NAMES[lang]}
             onPress={() => setLangPicker(true)}
+          />
+          <SettingsRow
+            testID="settings-music"
+            icon="musical-notes-outline"
+            label={tr('settings.music')}
+            value={musicOn ? tr('settings.on') : tr('settings.off')}
+            onPress={() => setMusicOn(!musicOn)}
           />
         </FadeUp>
         <FadeUp index={2}>

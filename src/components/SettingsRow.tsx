@@ -15,16 +15,19 @@ export function SettingsRow({
   label,
   value,
   onPress,
+  testID,
 }: {
   icon: React.ComponentProps<typeof Ionicons>['name'];
   label: string;
   value: string;
   onPress?: () => void;
+  testID?: string;
 }) {
   const t = useTheme();
 
   return (
     <PressableScale
+      testID={testID}
       onPress={
         onPress &&
         (() => {

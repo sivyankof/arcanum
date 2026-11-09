@@ -550,7 +550,7 @@
   списки и поиск — `SearchField`, `FilterChips`, `JournalRow`, `MonthNav`, `MonthCard`, `NotePlate`, `MoonRow`;
   прогресс и итоги — `ProgressBar` (+`PROGRESS_EASE`, `PROGRESS_FILL_DELAY`/`PROGRESS_FILL_MS` — тайминг
   заполнения 400/1400, задача 72 свела третью копию из `LevelCard`/`cards.tsx`), `XpPill`, `StreakPill`,
-  `LevelCard`, `StatBox`, `StatsPills` (ряд «серия + уровень», задача 72 — «Учёба» и карта дня),
+  `LevelCard`, `StatBox`, `StatsPills` (ряд «серия + уровень», задача 72 — «Учёба» и карта дня), `MusicToggle` (кнопка звука в шапке «Учёбы», задача 74),
   `PanelRow` (общая нажимаемая панель-строка эталона `.mhead`/`.revcard`, свела дубль `ReviewPanel`/
   `FragmentPanel`, задача 72), `BirthArcanaCard`, `ResultPanel`, `LessonResult`, `ReviewResult`, `ReviewPanel`, `ReviewFlashcard`;
   учебный экран (задача 72) — `NextLessonCard` (герой следующего урока), `DailyCardRow` (компактная
