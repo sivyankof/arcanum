@@ -178,7 +178,7 @@ export const resources = {
         xpOf: "{{xp}} / {{next}} XP",
       },
       settings: {
-        title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая",
+        title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая", system: "Как в системе",
         language: "Язык", music: "Фоновая музыка", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
@@ -546,7 +546,7 @@ export const resources = {
         xpOf: "{{xp}} / {{next}} XP",
       },
       settings: {
-        title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
+        title: "Settings", theme: "Theme", dark: "Dark", light: "Light", system: "System",
         language: "Language", music: "Background music", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
@@ -939,6 +939,7 @@ export const resources = {
         theme: "Tema",
         dark: "Oscuro",
         light: "Claro",
+        system: "Como el sistema",
         language: "Idioma",
         music: "Música de fondo",
         resetToday: "Reiniciar la carta del día",
@@ -1349,6 +1350,7 @@ export const resources = {
         theme: "Tema",
         dark: "Escuro",
         light: "Claro",
+        system: "Como o sistema",
         language: "Idioma",
         music: "Música de fundo",
         resetToday: "Redefinir carta do dia",

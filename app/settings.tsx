@@ -47,6 +47,8 @@ import {
   type PermissionState,
 } from '../src/lib/pushes';
 import { appVersion } from '../src/lib/appInfo';
+import { THEME_ICON, THEME_LABEL_KEY } from '../src/theme/resolveMode';
+import { THEME_MODES } from '../src/theme/theme';
 import { timeLabel } from '../src/lib/settings';
 import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
@@ -128,6 +130,7 @@ export default function SettingsScreen() {
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
   const [langPicker, setLangPicker] = React.useState(false);
+  const [themePicker, setThemePicker] = React.useState(false);
 
   const [planText, setPlanText] = React.useState<string | null>(null);
 
@@ -232,7 +235,7 @@ export default function SettingsScreen() {
       // на вебе Platform.Version — бессмысленное «0.0.0», одного имени платформы достаточно
       os: Platform.OS === 'web' ? 'web' : `${Platform.OS} ${Platform.Version}`,
       lang,
-      theme: themeMode === 'dark' ? tr('settings.dark') : tr('settings.light'),
+      theme: tr(THEME_LABEL_KEY[themeMode]),
       history: history.length,
     });
     Linking.openURL(buildMailto(SUPPORT_EMAIL, tr('feedback.subject'), body)).catch(() =>
@@ -284,10 +287,10 @@ export default function SettingsScreen() {
             onPress={() => router.push({ pathname: '/paywall', params: { from: 'settings' } })}
           />
           <SettingsRow
-            icon={themeMode === 'dark' ? 'moon' : 'sunny'}
+            icon={THEME_ICON[themeMode]}
             label={tr('settings.theme')}
-            value={themeMode === 'dark' ? tr('settings.dark') : tr('settings.light')}
-            onPress={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}
+            value={tr(THEME_LABEL_KEY[themeMode])}
+            onPress={() => setThemePicker(true)}
           />
         </FadeUp>
         <FadeUp index={1}>
@@ -609,6 +612,14 @@ export default function SettingsScreen() {
         />
         {/* выбор языка списком: четыре позиции по кругу не тапаются, макета пикера нет —
             дорисовка записана в задачу «Макет: правки дорисовок» (спека 27) */}
+        <OptionPicker
+          visible={themePicker}
+          title={tr('settings.theme')}
+          options={THEME_MODES.map((m) => ({ key: m, label: tr(THEME_LABEL_KEY[m]) }))}
+          value={themeMode}
+          onPick={setThemeMode}
+          onClose={() => setThemePicker(false)}
+        />
         <OptionPicker
           visible={langPicker}
           title={tr('settings.language')}

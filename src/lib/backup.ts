@@ -18,7 +18,7 @@ import { QUESTION_MAX, SPREADS_MAX, type SpreadDraw } from './spread';
 import { EASE_MAX, EASE_MIN, MAX_INTERVAL_DAYS } from './srs';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
-import type { ThemeMode } from '../theme/theme';
+import { THEME_MODES, type ThemeMode } from '../theme/theme';
 
 // потолки величин при импорте (волна фиксов финального ревью): без них абсурдное число
 // в битом/подделанном файле проходит структурную проверку типов и уезжает в персист —
@@ -225,7 +225,7 @@ const isProfile = (v: unknown): boolean =>
   orAbsent(v.birthArcanaId, (x) => isStr(x) && cardById.has(x));
 
 const validState = (s: BackupState): boolean =>
-  (s.themeMode === 'dark' || s.themeMode === 'light') &&
+  (THEME_MODES as readonly unknown[]).includes(s.themeMode) &&
   isLang(s.lang) &&
   isCount(s.installSeed) && isCount(s.streak) && s.streak <= MAX_BACKUP_STREAK &&
   orNull(s.lastDrawDate, isISODay) &&

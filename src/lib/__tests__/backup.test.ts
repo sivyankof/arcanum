@@ -97,6 +97,13 @@ describe('parseBackup — круговой (спека 11)', () => {
   });
 });
 
+describe('parseBackup — тема «Как в системе»', () => {
+  it('themeMode "system" принимается', () => {
+    const f = fileOf({ ...VALID, themeMode: 'system' });
+    expect(parseBackup(f, SCHEMA_VERSION)).toEqual({ ok: true, state: { ...VALID, themeMode: 'system' }, exportedAt: AT });
+  });
+});
+
 describe('parseBackup — отказы конверта', () => {
   it.each([
     ['не JSON', 'это не файл бэкапа'],
@@ -149,7 +156,7 @@ describe('parseBackup — битые данные → corrupt (всё или н�
       s.history = Array.from({ length: 366 }, () => ({ date: '2026-01-01', cardId: 'fool', reversed: false }));
     }],
     ['streak строкой', (s) => { s.streak = '5'; }],
-    ['тема вне пары', (s) => { s.themeMode = 'blue'; }],
+    ['тема вне списка', (s) => { s.themeMode = 'blue'; }],
     ['урок без done', (s) => { s.lessonsProgress = { m1l1: { errors: 0, ts: 1 } }; }],
     ['profile без onboarded', (s) => { s.profile = { name: 'Аня' }; }],
     ['настройки битых типов', (s) => { s.settings = { reflectionOn: 'да' }; }],

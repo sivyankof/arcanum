@@ -1115,8 +1115,8 @@ border:.5px solid rgba(226,189,114,.3)}
       <div class="prow" id="prowPrem" onclick="openPaywall('v-settings')" style="cursor:pointer">
         <svg viewBox="0 0 24 24"><path d="M12 3.5 14.4 9l5.9.6-4.4 3.9 1.3 5.8L12 16.2l-5.2 3.1 1.3-5.8L3.7 9.6 9.6 9z"/></svg>
         <span class="pl">Arcanum Premium</span><span class="pv" id="prowPremVal">Оформить ›</span></div>
-      <div class="prow"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
-        <span class="pl">Тема</span><span class="pv">Тёмная</span></div>
+      <div class="prow" onclick="document.getElementById('themepick').classList.add('on')" style="cursor:pointer"><svg viewBox="0 0 24 24"><path d="M20 14.2A8.3 8.3 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2z"/></svg>
+        <span class="pl">Тема</span><span class="pv">Тёмная ›</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17-2.6-2.4-2.6-14.6 0-17z"/></svg>
         <span class="pl" onclick="openLang()" style="cursor:pointer">Язык</span><span class="pv" onclick="openLang()" style="cursor:pointer">Русский ›</span></div>
       <div class="prow"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
@@ -1352,6 +1352,15 @@ border:.5px solid rgba(226,189,114,.3)}
       <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>English</span></div>
       <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Español</span></div>
       <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Português</span></div>
+    </div>
+  </div>
+  <!-- выбор темы списком (спека 74): три пункта, тот же оверлей, что у языка -->
+  <div class="langov" id="themepick" onclick="if(event.target===this)this.classList.remove('on')">
+    <div class="langpanel">
+      <h6>ТЕМА</h6>
+      <div class="langrow cur" onclick="this.closest('.langov').classList.remove('on')"><span>Тёмная</span><i>✓</i></div>
+      <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Светлая</span></div>
+      <div class="langrow" onclick="this.closest('.langov').classList.remove('on')"><span>Как в системе</span></div>
     </div>
   </div>
   <!-- 3б. ЭКРАН РАСКЛАДА ЛУННОГО ЦИКЛА. Позиции новолуния — Семя/Почва/Помеха/Первый шаг (приложение) -->
