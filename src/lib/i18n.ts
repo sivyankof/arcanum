@@ -178,8 +178,8 @@ export const resources = {
         xpOf: "{{xp}} / {{next}} XP",
       },
       settings: {
-        title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая",
-        language: "Язык", resetToday: "Сбросить карту дня",
+        title: "Настройки", theme: "Тема", dark: "Тёмная", light: "Светлая", system: "Как в системе",
+        language: "Язык", music: "Фоновая музыка", resetToday: "Сбросить карту дня",
         reflection: "Вечерняя рефлексия", on: "Вкл", off: "Выкл",
         reflectNow: "Рефлексия: показать сейчас",
         // Premium (спека 53): строка настроек и DEV-тумблер права до появления магазина в 53б
@@ -239,6 +239,7 @@ export const resources = {
         feedback: "Обратная связь и ошибки",
         feedbackValue: "Написать нам",
         about: "О приложении",
+        rate: "Оценить приложение",
       },
       // экран «О приложении» (спека 12): версия, дисклеймер, атрибуция колоды и источников.
       // Заголовки блоков заданы обычным регистром — капсом их рисует сам `Block` (title.toUpperCase())
@@ -546,8 +547,8 @@ export const resources = {
         xpOf: "{{xp}} / {{next}} XP",
       },
       settings: {
-        title: "Settings", theme: "Theme", dark: "Dark", light: "Light",
-        language: "Language", resetToday: "Reset daily card",
+        title: "Settings", theme: "Theme", dark: "Dark", light: "Light", system: "System",
+        language: "Language", music: "Background music", resetToday: "Reset daily card",
         reflection: "Evening reflection", on: "On", off: "Off",
         reflectNow: "Reflection: show now",
         // Premium (спека 53): строка настроек и DEV-тумблер права до появления магазина в 53б
@@ -599,6 +600,7 @@ export const resources = {
         feedback: "Feedback & issues",
         feedbackValue: "Write to us",
         about: "About",
+        rate: "Rate the app",
       },
       about: {
         title: "About",
@@ -939,7 +941,9 @@ export const resources = {
         theme: "Tema",
         dark: "Oscuro",
         light: "Claro",
+        system: "Como el sistema",
         language: "Idioma",
+        music: "Música de fondo",
         resetToday: "Reiniciar la carta del día",
         reflection: "Reflexión nocturna",
         on: "Activado",
@@ -996,6 +1000,7 @@ export const resources = {
         feedback: "Comentarios y errores",
         feedbackValue: "Escríbenos",
         about: "Acerca de la app",
+        rate: "Valorar la app",
       },
       about: {
         title: "Acerca de",
@@ -1348,7 +1353,9 @@ export const resources = {
         theme: "Tema",
         dark: "Escuro",
         light: "Claro",
+        system: "Como o sistema",
         language: "Idioma",
+        music: "Música de fundo",
         resetToday: "Redefinir carta do dia",
         reflection: "Reflexão da noite",
         on: "Ativado",
@@ -1405,6 +1412,7 @@ export const resources = {
         feedback: "Contato e problemas",
         feedbackValue: "Fale com a gente",
         about: "Sobre o app",
+        rate: "Avaliar o app",
       },
       about: {
         title: "Sobre o app",

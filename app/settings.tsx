@@ -29,6 +29,7 @@ import {
 import { pickBackupText, shareBackup } from '../src/lib/backupIo';
 import { NAME_MAX } from '../src/lib/birthArcana';
 import { course } from '../src/lib/content';
+import { MUSIC_ENABLED } from '../src/lib/musicLogic';
 import { learnedCardIds, nextLessonId } from '../src/lib/courseProgress';
 import { formatFullDate, localDateISO } from '../src/lib/dates';
 import { deviceLocaleTags } from '../src/lib/deviceLang';
@@ -46,7 +47,9 @@ import {
   sendTestPush,
   type PermissionState,
 } from '../src/lib/pushes';
-import { appVersion } from '../src/lib/appInfo';
+import { appVersion, RATE_URL, RATE_WEB_URL } from '../src/lib/appInfo';
+import { THEME_ICON, THEME_LABEL_KEY } from '../src/theme/resolveMode';
+import { THEME_MODES } from '../src/theme/theme';
 import { timeLabel } from '../src/lib/settings';
 import { useAppActive } from '../src/lib/useAppActive';
 import { useApp } from '../src/store/useApp';
@@ -72,6 +75,8 @@ export default function SettingsScreen() {
   const resetToday = useApp((s) => s.resetToday);
   const reflectionOn = useApp((s) => s.settings.reflectionOn);
   const setReflectionOn = useApp((s) => s.setReflectionOn);
+  const musicOn = useApp((s) => s.settings.musicOn);
+  const setMusicOn = useApp((s) => s.setMusicOn);
   const devReflect = useApp((s) => s.devReflect);
   const setDevReflect = useApp((s) => s.setDevReflect);
   const devMoonOpen = useApp((s) => s.devMoonOpen);
@@ -126,6 +131,7 @@ export default function SettingsScreen() {
   // какой пикер открыт (null — ни один)
   const [picker, setPicker] = React.useState<'morning' | 'evening' | null>(null);
   const [langPicker, setLangPicker] = React.useState(false);
+  const [themePicker, setThemePicker] = React.useState(false);
 
   const [planText, setPlanText] = React.useState<string | null>(null);
 
@@ -230,7 +236,7 @@ export default function SettingsScreen() {
       // на вебе Platform.Version — бессмысленное «0.0.0», одного имени платформы достаточно
       os: Platform.OS === 'web' ? 'web' : `${Platform.OS} ${Platform.Version}`,
       lang,
-      theme: themeMode === 'dark' ? tr('settings.dark') : tr('settings.light'),
+      theme: tr(THEME_LABEL_KEY[themeMode]),
       history: history.length,
     });
     Linking.openURL(buildMailto(SUPPORT_EMAIL, tr('feedback.subject'), body)).catch(() =>
@@ -282,10 +288,10 @@ export default function SettingsScreen() {
             onPress={() => router.push({ pathname: '/paywall', params: { from: 'settings' } })}
           />
           <SettingsRow
-            icon={themeMode === 'dark' ? 'moon' : 'sunny'}
+            icon={THEME_ICON[themeMode]}
             label={tr('settings.theme')}
-            value={themeMode === 'dark' ? tr('settings.dark') : tr('settings.light')}
-            onPress={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}
+            value={tr(THEME_LABEL_KEY[themeMode])}
+            onPress={() => setThemePicker(true)}
           />
         </FadeUp>
         <FadeUp index={1}>
@@ -295,6 +301,15 @@ export default function SettingsScreen() {
             value={LANG_NAMES[lang]}
             onPress={() => setLangPicker(true)}
           />
+          {MUSIC_ENABLED && (
+            <SettingsRow
+              testID="settings-music"
+              icon="musical-notes-outline"
+              label={tr('settings.music')}
+              value={musicOn ? tr('settings.on') : tr('settings.off')}
+              onPress={() => setMusicOn(!musicOn)}
+            />
+          )}
         </FadeUp>
         <FadeUp index={2}>
           <SettingsRow
@@ -435,6 +450,20 @@ export default function SettingsScreen() {
             onPress={() => router.push('/about')}
           />
         </FadeUp>
+        {/* «Оценить приложение» (задача 71): строки нет, где адреса оценки нет
+            (web, iOS до публикации); market:// не открылся — веб-страница Google Play */}
+        {RATE_URL !== null && (
+          <FadeUp index={8}>
+            <SettingsRow
+              icon="star-outline"
+              label={tr('settings.rate')}
+              value=""
+              onPress={() => {
+                Linking.openURL(RATE_URL ?? RATE_WEB_URL).catch(() => Linking.openURL(RATE_WEB_URL));
+              }}
+            />
+          </FadeUp>
+        )}
         {__DEV__ && (
           <>
             <FadeUp index={6}>
@@ -600,6 +629,14 @@ export default function SettingsScreen() {
         />
         {/* выбор языка списком: четыре позиции по кругу не тапаются, макета пикера нет —
             дорисовка записана в задачу «Макет: правки дорисовок» (спека 27) */}
+        <OptionPicker
+          visible={themePicker}
+          title={tr('settings.theme')}
+          options={THEME_MODES.map((m) => ({ key: m, label: tr(THEME_LABEL_KEY[m]) }))}
+          value={themeMode}
+          onPick={setThemeMode}
+          onClose={() => setThemePicker(false)}
+        />
         <OptionPicker
           visible={langPicker}
           title={tr('settings.language')}

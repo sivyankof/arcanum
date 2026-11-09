@@ -19,7 +19,7 @@ import { formatDayMonth, formatMonthTitle, formatTime, localDateISO, weekdayLabe
 import { useLang } from '../src/lib/i18n';
 import { WEEK_START } from '../src/lib/lang';
 import { moonInfo, type MoonEventKind } from '../src/lib/moon';
-import { monthEvents, monthGrid } from '../src/lib/moonCalendar';
+import { monthEvents, monthGrid, moonCellSize } from '../src/lib/moonCalendar';
 import { useNow } from '../src/lib/useNow';
 import { stackTopPad } from '../src/theme/navHeader';
 import { fonts, LOCKED_OPACITY, spacing } from '../src/theme/theme';
@@ -73,10 +73,10 @@ export default function MoonScreen() {
     ...Array.from({ length: grid.daysInMonth }, (_, i) => i + 1),
   ];
   // Ширина ячейки из ширины контента: 7 ячеек + 6 зазоров; квадрат — явной высотой.
-  // Деление обычное, БЕЗ Math.floor: у макета `repeat(7,1fr)` остатка нет в принципе, а округление
-  // вниз копило бы неразделённые 3–6px одним куском у правого края (у ряда без justifyContent
-  // дефолт flex-start). Тот же приём уже работает у сетки справочника — CELL_W в CardCell.tsx.
-  const cellSize = (width - spacing.xl * 2 - GAP * (COLS - 1)) / COLS;
+  // Округление вниз до 0.01 (moonCellSize): при точном делении ряд flexWrap на Android 411.43 dp
+  // упирался в ширину контейнера и терял колонку. Макет `repeat(7,1fr)` остатка не имеет, у нас он <0.07px.
+  // CardCell.CELL_W делит так же, но рисует фиксированные ряды без flexWrap — его это не касается.
+  const cellSize = moonCellSize(width, spacing.xl, GAP, COLS);
 
   return (
     <View style={{ flex: 1, backgroundColor: t.bg }}>

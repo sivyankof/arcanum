@@ -550,7 +550,7 @@
   списки и поиск — `SearchField`, `FilterChips`, `JournalRow`, `MonthNav`, `MonthCard`, `NotePlate`, `MoonRow`;
   прогресс и итоги — `ProgressBar` (+`PROGRESS_EASE`, `PROGRESS_FILL_DELAY`/`PROGRESS_FILL_MS` — тайминг
   заполнения 400/1400, задача 72 свела третью копию из `LevelCard`/`cards.tsx`), `XpPill`, `StreakPill`,
-  `LevelCard`, `StatBox`, `StatsPills` (ряд «серия + уровень», задача 72 — «Учёба» и карта дня),
+  `LevelCard`, `StatBox`, `StatsPills` (ряд «серия + уровень», задача 72 — «Учёба» и карта дня), `MusicToggle` (кнопка звука в шапке «Учёбы», задача 74),
   `PanelRow` (общая нажимаемая панель-строка эталона `.mhead`/`.revcard`, свела дубль `ReviewPanel`/
   `FragmentPanel`, задача 72), `BirthArcanaCard`, `ResultPanel`, `LessonResult`, `ReviewResult`, `ReviewPanel`, `ReviewFlashcard`;
   учебный экран (задача 72) — `NextLessonCard` (герой следующего урока), `DailyCardRow` (компактная
@@ -575,7 +575,9 @@
   `useReviewSummary`, карта дня, задача 72), `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
   `usePushScheduler`, `useDeviceTilt`,
   `useBackHaptic`, `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK),
-  `useReviewSummary` (сводка «Повторения» для `ReviewPanel`, общая для табов «Курс» и «Учёба», задача 72).
+  `useReviewSummary` (сводка «Повторения» для `ReviewPanel`, общая для табов «Курс» и «Учёба», задача 72),
+  `music`/`music.web` (фоновая музыка, спека 74: один плеер, единственный импорт `expo-audio`, веб-заглушка),
+  `musicLogic` (чистая логика: когда играть, затухание, громкость), `useBackgroundMusic` (хук корневого layout: стор + AppState → старт/стоп).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
   (`transparentHeader`, `stackTopPad`/`STACK_HEADER_H` — единый отступ под прозрачную шапку 64px,
   задача 72 свела дубли по стек-экранам), `webInput.ts` (`noOutline`).

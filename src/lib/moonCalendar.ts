@@ -37,3 +37,11 @@ export function monthGrid(year: number, month0: number, weekStart: 0 | 1): Month
     daysInMonth: daysInMonth(year, month0),
   };
 }
+
+/** Ширина ячейки сетки месяца (7 ячеек + 6 зазоров в ряду flexWrap). Округляем ВНИЗ до 0.01:
+ *  при точном делении (411.43 dp на Pixel 7) сумма ячеек и зазоров равна ширине контейнера
+ *  впритык, и float-погрешность выталкивает ряд на эпсилон — помещается 6 колонок вместо 7.
+ *  Сотая доля оставляет запас у правого края меньше 0.07 px, сетка визуально ровная. */
+export function moonCellSize(screenWidth: number, sidePadding: number, gap: number, cols: number): number {
+  return Math.floor(((screenWidth - sidePadding * 2 - gap * (cols - 1)) / cols) * 100) / 100;
+}

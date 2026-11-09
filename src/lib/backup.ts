@@ -18,7 +18,7 @@ import { QUESTION_MAX, SPREADS_MAX, type SpreadDraw } from './spread';
 import { EASE_MAX, EASE_MIN, MAX_INTERVAL_DAYS } from './srs';
 // FREEZE_MAX — runtime-импорт из чистого модуля streak.ts (без цикла со стором, как и с journal/content)
 import { FREEZE_MAX } from './streak';
-import type { ThemeMode } from '../theme/theme';
+import { THEME_MODES, type ThemeMode } from '../theme/theme';
 
 // потолки величин при импорте (волна фиксов финального ревью): без них абсурдное число
 // в битом/подделанном файле проходит структурную проверку типов и уезжает в персист —
@@ -34,8 +34,10 @@ const MAX_BACKUP_LESSONS = 1_000; // уроков в курсе на поряд�
  *  v10 → v11 (спека 53): doneCount ВНУТРИ reviewDay — слияние руками (mergeReviewDay) в migrate
  *  и тут; premium — ключ стора ВНЕ бэкапа.
  *  v11 → v12 (спека 53б): plan и willRenew ВНУТРИ premium — слияние руками (mergePremium) в migrate;
- *  parseBackup не трогается — premium в файл бэкапа не входит (решение 4 спеки 53). */
-export const SCHEMA_VERSION = 12;
+ *  parseBackup не трогается — premium в файл бэкапа не входит (решение 4 спеки 53).
+ *  v12 → v13 (спека 74): settings.musicOn ВНУТРИ settings — слияние руками (mergeSettings) в migrate
+ *  и тут; дефолт true. */
+export const SCHEMA_VERSION = 13;
 
 /** Персистуемое состояние стора — ровно то, что уходит в бэкап (белый список).
  *  Dev-поля (devReflect) сюда не входят; полноту следит тип-контроль в useApp.ts. */
@@ -215,7 +217,7 @@ const isReviewDay = (v: unknown): boolean =>
 // после mergeSettings все ключи на месте — проверяем типы значений (слияние типы не проверяет)
 const isSettings = (v: AppSettings): boolean =>
   isBool(v.reflectionOn) && isBool(v.pushesOn) &&
-  isHHMM(v.pushMorning) && isHHMM(v.pushEvening) && isBool(v.pushAsked);
+  isHHMM(v.pushMorning) && isHHMM(v.pushEvening) && isBool(v.pushAsked) && isBool(v.musicOn);
 
 const isProfile = (v: unknown): boolean =>
   isObj(v) && isBool(v.onboarded) && orAbsent(v.name, isStr) &&
@@ -223,7 +225,7 @@ const isProfile = (v: unknown): boolean =>
   orAbsent(v.birthArcanaId, (x) => isStr(x) && cardById.has(x));
 
 const validState = (s: BackupState): boolean =>
-  (s.themeMode === 'dark' || s.themeMode === 'light') &&
+  (THEME_MODES as readonly unknown[]).includes(s.themeMode) &&
   isLang(s.lang) &&
   isCount(s.installSeed) && isCount(s.streak) && s.streak <= MAX_BACKUP_STREAK &&
   orNull(s.lastDrawDate, isISODay) &&

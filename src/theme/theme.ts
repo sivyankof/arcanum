@@ -2,10 +2,14 @@
  * Дизайн-токены Arcanum — направление «Небесное золото».
  * Единственный источник правды для цветов/типографики: экраны берут тему отсюда.
  */
-export type ThemeMode = 'dark' | 'light';
+export const THEME_MODES = ['dark', 'light', 'system'] as const;
+/** выбор человека; 'system' = следовать теме устройства */
+export type ThemeMode = (typeof THEME_MODES)[number];
+/** то, что реально рисуется: компоненты видят только это */
+export type ResolvedMode = 'dark' | 'light';
 
 export interface Theme {
-  mode: ThemeMode;
+  mode: ResolvedMode;
   bg: string;
   bgTop: string;       // верх градиента фона
   bgBottom: string;    // низ градиента фона

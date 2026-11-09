@@ -109,6 +109,7 @@ export interface AppState {
   devSeedMastery: () => void;
   resetCourse: () => void;
   setReflectionOn: (on: boolean) => void;
+  setMusicOn: (on: boolean) => void;
   setPushesOn: (on: boolean) => void;
   setPushTime: (kind: 'morning' | 'evening', hhmm: string) => void;
   setPushAsked: () => void;
@@ -258,6 +259,7 @@ export const useApp = create<AppState>()(
       },
 
       setReflectionOn: (on) => set({ settings: { ...get().settings, reflectionOn: on } }),
+      setMusicOn: (on) => set({ settings: { ...get().settings, musicOn: on } }),
       setPushesOn: (on) => set({ settings: { ...get().settings, pushesOn: on } }),
       setPushTime: (kind, hhmm) =>
         set({
@@ -405,6 +407,7 @@ export const useApp = create<AppState>()(
       // v10 → v11: doneCount ВНУТРИ reviewDay (спека 53) — слияние руками; premium — ключ
       // верхнего уровня вне бэкапа, дефолт доливается сам.
       // v11 → v12: plan и willRenew ВНУТРИ premium (спека 53б) — слияние руками (mergePremium).
+      // v12 → v13: settings.musicOn (спека 74) — поле ВНУТРИ settings, слияние руками (mergeSettings).
       // Значение живёт в src/lib/backup.ts (SCHEMA_VERSION): им же parseBackup отсекает
       // файлы из более новых версий приложения. Поднимать — там.
       version: SCHEMA_VERSION,

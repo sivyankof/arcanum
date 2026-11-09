@@ -20,7 +20,12 @@ describe('mergeSettings', () => {
       pushMorning: '09:00',
       pushEvening: '21:00',
       pushAsked: false,
+      musicOn: true,
     });
+  });
+
+  it('выключенная музыка не затирается дефолтом', () => {
+    expect(mergeSettings({ musicOn: false }).musicOn).toBe(false);
   });
 
   it('не затирает сохранённые значения дефолтными', () => {
