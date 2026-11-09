@@ -575,7 +575,9 @@
   `useReviewSummary`, карта дня, задача 72), `useScrollAwareBar`, `useTabScrollToTop`, `useLeaveGuard`,
   `usePushScheduler`, `useDeviceTilt`,
   `useBackHaptic`, `usePremiumSync` (право Premium в синхроне с магазином: старт/возврат из фона/push SDK),
-  `useReviewSummary` (сводка «Повторения» для `ReviewPanel`, общая для табов «Курс» и «Учёба», задача 72).
+  `useReviewSummary` (сводка «Повторения» для `ReviewPanel`, общая для табов «Курс» и «Учёба», задача 72),
+  `music`/`music.web` (фоновая музыка, спека 74: один плеер, единственный импорт `expo-audio`, веб-заглушка),
+  `musicLogic` (чистая логика: когда играть, затухание, громкость), `useBackgroundMusic` (хук корневого layout: стор + AppState → старт/стоп).
 - **`src/theme/`**: `theme.ts` (токены), `glow.ts` (`glowShadow`, `textGlow`), `navHeader.ts`
   (`transparentHeader`, `stackTopPad`/`STACK_HEADER_H` — единый отступ под прозрачную шапку 64px,
   задача 72 свела дубли по стек-экранам), `webInput.ts` (`noOutline`).

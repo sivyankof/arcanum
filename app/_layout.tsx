@@ -19,6 +19,7 @@ import 'react-native-reanimated';
 import '../src/lib/i18n';
 import i18n from '../src/lib/i18n';
 import { useAppActive } from '../src/lib/useAppActive';
+import { useBackgroundMusic } from '../src/lib/useBackgroundMusic';
 import { usePremiumSync } from '../src/lib/usePremiumSync';
 import { usePushScheduler } from '../src/lib/usePushScheduler';
 import { useApp } from '../src/store/useApp';
@@ -60,6 +61,8 @@ export default function RootLayout() {
   usePushScheduler();
   // право Premium ↔ магазин (спека 53б): старт, возврат из фона, push SDK; без магазина — no-op
   usePremiumSync();
+  // фоновая музыка (спека 74): один плеер на приложение, пауза в фоне
+  useBackgroundMusic(hydrated);
   // смена месяца, пока приложение живёт в фоне: «1-е число» должно наступить и без перезапуска
   // (тот же класс, что час рефлексии в 06а — всё временнóе слушает ещё и AppState)
   useAppActive(() => useApp.getState().syncFreezeGrant());

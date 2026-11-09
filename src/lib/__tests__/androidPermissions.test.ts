@@ -43,4 +43,25 @@ describe('разрешения Android (задача 64)', () => {
     const users = files.filter((f) => /Pedometer/.test(fs.readFileSync(f, 'utf8')));
     expect(users).toEqual([]);
   });
+
+  it('app.json блокирует запись звука и фоновую службу expo-audio (спека 74)', () => {
+    const app = JSON.parse(fs.readFileSync(path.join(ROOT, 'app.json'), 'utf8'));
+    const blocked: string[] = app.expo.android.blockedPermissions;
+    expect(blocked).toEqual(
+      expect.arrayContaining([
+        BLOCKED,
+        'android.permission.RECORD_AUDIO',
+        'android.permission.FOREGROUND_SERVICE',
+        'android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK',
+      ]),
+    );
+  });
+
+  it('expo-audio в коде импортирует один файл — src/lib/music.ts', () => {
+    const files = [...sources(path.join(ROOT, 'src')), ...sources(path.join(ROOT, 'app'))];
+    const users = files
+      .filter((f) => /['"]expo-audio['"]/.test(fs.readFileSync(f, 'utf8')))
+      .map((f) => path.relative(ROOT, f).split(path.sep).join('/'));
+    expect(users).toEqual(['src/lib/music.ts']);
+  });
 });

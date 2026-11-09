@@ -19,4 +19,9 @@ describe('assets/audio/ambient.m4a', () => {
     const head = fs.readFileSync(FILE).subarray(4, 8).toString('latin1');
     expect(head).toBe('ftyp');
   });
+
+  it('плеер src/lib/music.ts подключает именно этот файл', () => {
+    const src = fs.readFileSync(path.join(__dirname, '..', 'music.ts'), 'utf8');
+    expect(src).toContain('assets/audio/ambient.m4a');
+  });
 });
