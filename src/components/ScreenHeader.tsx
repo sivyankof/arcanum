@@ -44,8 +44,8 @@ export function ScreenHeader({
 
 const st = StyleSheet.create({
   wrap: { position: 'relative' },
-  // строка заголовка: высота 36, прижата к низу обёртки
-  right: { position: 'absolute', right: 0, bottom: 0, height: 36, justifyContent: 'center' },
+  // зона 44 с центром на строке заголовка высотой 36: bottom -4
+  right: { position: 'absolute', right: 0, bottom: -4, height: 44, justifyContent: 'center' },
   date: { fontSize: 9.5, letterSpacing: 3.5, textAlign: 'center' },
   title: { fontFamily: fonts.display, fontSize: 30, textAlign: 'center', marginTop: 4 },
 });

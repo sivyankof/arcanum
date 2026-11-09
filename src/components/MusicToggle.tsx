@@ -23,7 +23,6 @@ export function MusicToggle() {
       // react-native-web 0.21 не переводит accessibilityState в DOM — отдельный aria-checked
       aria-checked={musicOn}
       accessibilityLabel={tr('settings.music')}
-      hitSlop={11}
       onPress={() => {
         hapticTap();
         setMusicOn(!musicOn);
@@ -40,6 +39,6 @@ export function MusicToggle() {
 }
 
 const st = StyleSheet.create({
-  // видимая область 22 px + hitSlop 11 с каждой стороны = зона 44×44
-  btn: { width: 22, height: 22, alignItems: 'center', justifyContent: 'center' },
+  // сама кнопка 44×44 (hitSlop на Android не выходит за границы родителя), значок 22 по центру
+  btn: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
 });
