@@ -23,5 +23,7 @@ export function useBackgroundMusic(hydrated: boolean): void {
   React.useEffect(() => {
     if (play) startMusic();
     else stopMusic();
-  }, [play]);
+    // inBackground в зависимостях: возврат из фона заново подтверждает stopMusic() — иначе плеер,
+    // который expo-audio сам возобновил с громкостью 0, остался бы играть без звука
+  }, [play, inBackground]);
 }

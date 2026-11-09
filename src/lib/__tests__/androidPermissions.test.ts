@@ -60,7 +60,7 @@ describe('разрешения Android (задача 64)', () => {
   it('expo-audio в коде импортирует один файл — src/lib/music.ts', () => {
     const files = [...sources(path.join(ROOT, 'src')), ...sources(path.join(ROOT, 'app'))];
     const users = files
-      .filter((f) => /['"]expo-audio['"]/.test(fs.readFileSync(f, 'utf8')))
+      .filter((f) => /['"]expo-audio(\/|['"])/.test(fs.readFileSync(f, 'utf8')))
       .map((f) => path.relative(ROOT, f).split(path.sep).join('/'));
     expect(users).toEqual(['src/lib/music.ts']);
   });

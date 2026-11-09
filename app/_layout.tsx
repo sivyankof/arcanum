@@ -62,7 +62,7 @@ export default function RootLayout() {
   // право Premium ↔ магазин (спека 53б): старт, возврат из фона, push SDK; без магазина — no-op
   usePremiumSync();
   // фоновая музыка (спека 74): один плеер на приложение, пауза в фоне
-  useBackgroundMusic(hydrated);
+  useBackgroundMusic(hydrated && fontsLoaded);
   // смена месяца, пока приложение живёт в фоне: «1-е число» должно наступить и без перезапуска
   // (тот же класс, что час рефлексии в 06а — всё временнóе слушает ещё и AppState)
   useAppActive(() => useApp.getState().syncFreezeGrant());

@@ -450,7 +450,7 @@ export default function SettingsScreen() {
         {/* «Оценить приложение» (задача 71): строки нет, где адреса оценки нет
             (web, iOS до публикации); market:// не открылся — веб-страница Google Play */}
         {RATE_URL !== null && (
-          <FadeUp index={7}>
+          <FadeUp index={8}>
             <SettingsRow
               icon="star-outline"
               label={tr('settings.rate')}
