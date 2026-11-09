@@ -1,7 +1,7 @@
 /** Сетка и события месяца лунного календаря (спека 47). Синтетические события собираются
  *  ЛОКАЛЬНЫМ конструктором Date — иначе тесты зависели бы от часового пояса машины. */
 import type { MoonEvent, MoonEventKind } from '../moon';
-import { monthEvents, monthGrid } from '../moonCalendar';
+import { monthEvents, monthGrid, moonCellSize } from '../moonCalendar';
 import type { EventSource } from '../moon';
 
 /** Источник, который уважает границы периода — как настоящий moonEvents. */
@@ -69,4 +69,18 @@ describe('monthEvents — локальные границы месяца', () =>
     expect(real[1].day).toBeGreaterThanOrEqual(27);
     expect(real[1].day).toBeLessThanOrEqual(29);
   });
+});
+
+describe('moonCellSize', () => {
+  // flexWrap: ряд из 7 ячеек и 6 зазоров обязан влезать СТРОГО (иначе на Android 411.43 dp — 6 колонок)
+  it.each([320, 360, 375, 390, 393, 411.42857142857144, 412, 414, 430, 480])(
+    'ширина %p: 7 ячеек + 6 зазоров строго меньше контейнера, остаток < 0.1',
+    (w) => {
+      const c = moonCellSize(w, 24, 4, 7);
+      const row = 7 * c + 6 * 4;
+      expect(row).toBeLessThan(w - 48);
+      expect(w - 48 - row).toBeLessThan(0.1);
+    },
+  );
+  it('Pixel 7 (411.43 dp): 48.48', () => expect(moonCellSize(411.42857142857144, 24, 4, 7)).toBe(48.48));
 });
