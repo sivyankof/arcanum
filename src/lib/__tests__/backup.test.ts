@@ -33,7 +33,7 @@ export const VALID: BackupState = {
   ],
   lessonsProgress: { m1l1: { done: true, errors: 1, ts: 1755000000000, repeatDate: '2026-08-13' } },
   xp: 42,
-  settings: { reflectionOn: false, pushesOn: true, pushMorning: '08:00', pushEvening: '22:00', pushAsked: true },
+  settings: { reflectionOn: false, pushesOn: true, pushMorning: '08:00', pushEvening: '22:00', pushAsked: true, musicOn: true },
   profile: { name: 'Аня', birthDate: '1993-03-09', birthArcanaId: 'high-priestess', onboarded: true },
   spreadsHistory: [
     {
@@ -129,6 +129,7 @@ describe('parseBackup — доливка старых бэкапов (та же 
     expect(r.state.freezes).toBe(1);
     expect(r.state.settings).toEqual({
       reflectionOn: false, pushesOn: true, pushMorning: '09:00', pushEvening: '21:00', pushAsked: false,
+      musicOn: true,
     });
   });
 });
@@ -306,9 +307,21 @@ describe('parseBackup — повторение (спека 45)', () => {
   });
 });
 
-describe('SCHEMA_VERSION 12: миграция doneCount, premium вне бэкапа (спеки 53, 53б)', () => {
-  it('SCHEMA_VERSION = 12', () => {
-    expect(SCHEMA_VERSION).toBe(12);
+describe('SCHEMA_VERSION 13: миграция doneCount, premium вне бэкапа, settings.musicOn (спеки 53, 53б, 74)', () => {
+  it('SCHEMA_VERSION = 13', () => {
+    expect(SCHEMA_VERSION).toBe(13);
+  });
+  it('файл версии 12 без musicOn принимается и получает musicOn: true', () => {
+    const raw = JSON.parse(JSON.stringify(buildBackup(VALID, 12, AT)));
+    delete raw.state.settings.musicOn;
+    const r = parseBackup(JSON.stringify(raw), SCHEMA_VERSION);
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.state.settings.musicOn).toBe(true);
+  });
+  it('settings.musicOn не булево → corrupt', () => {
+    const raw = JSON.parse(JSON.stringify(buildBackup(VALID, SCHEMA_VERSION, AT)));
+    raw.state.settings.musicOn = 'да';
+    expect(parseBackup(JSON.stringify(raw), SCHEMA_VERSION)).toEqual({ ok: false, error: 'corrupt' });
   });
   it('файл версии 10 с reviewDay без doneCount принимается и получает doneCount: 0', () => {
     const file = buildBackup(VALID, 10, AT);

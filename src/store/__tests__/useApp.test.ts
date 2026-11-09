@@ -41,8 +41,37 @@ describe('useApp — гидрация persist версии 12 (спека 53б)'
     expect(useApp.getState().premium).toEqual({ active: true, source: 'dev', until: null, plan: null, willRenew: false });
   });
 
-  it('версия схемы поднята до 12', () => {
-    expect(SCHEMA_VERSION).toBe(12);
+});
+
+describe('useApp — гидрация persist версии 13 (спека 74)', () => {
+  it('версия схемы поднята до 13', () => {
+    expect(SCHEMA_VERSION).toBe(13);
+  });
+
+  it('файл версии 12 с settings без musicOn получает musicOn: true, тему сохраняет', async () => {
+    await AsyncStorage.setItem(
+      'arcanum-app',
+      JSON.stringify({
+        state: {
+          themeMode: 'light',
+          settings: { reflectionOn: false, pushesOn: true, pushMorning: '08:00', pushEvening: '20:00', pushAsked: true },
+        },
+        version: 12,
+      }),
+    );
+    await useApp.persist.rehydrate();
+    const s = useApp.getState();
+    expect(s.settings.musicOn).toBe(true);
+    expect(s.settings.reflectionOn).toBe(false);
+    expect(s.themeMode).toBe('light');
+  });
+
+  it('setMusicOn(false) меняет только musicOn', () => {
+    const before = useApp.getState().settings;
+    useApp.getState().setMusicOn(false);
+    const after = useApp.getState().settings;
+    expect(after.musicOn).toBe(false);
+    expect({ ...after, musicOn: before.musicOn }).toEqual(before);
   });
 });
 

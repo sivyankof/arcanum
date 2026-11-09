@@ -17,6 +17,8 @@ export interface AppSettings {
   pushEvening: string;
   /** Прелюдия разрешения уже показана — второй раз не спрашиваем (product-spec §1). */
   pushAsked: boolean;
+  /** Фоновая музыка (спека 74): по умолчанию включена. */
+  musicOn: boolean;
 }
 
 export const DEFAULT_SETTINGS: AppSettings = {
@@ -25,6 +27,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   pushMorning: '09:00',
   pushEvening: '21:00',
   pushAsked: false,
+  musicOn: true,
 };
 
 /** Дописывает ключи, которых не было в сохранённой версии. */
