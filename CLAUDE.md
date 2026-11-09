@@ -432,10 +432,12 @@
   ресабмитить; отказ Board → сборка 1.0.1 с усиленным образовательным позиционированием.
 - **09.11 — проверка тикетов и замер**: Board на апелляцию 19.10 не ответил (21 день; тред App
   Review — 7 сообщений, последнее 15.10); **DSA Apple подана заново — «In Review»** (паспорт + новое
-  ВНЖ одним PDF, адрес — справка Bank of Georgia; шаги — release-checklist п. 1); ⚠️ **обновлённое
-  Apple Developer Program License Agreement не принято** — без него не отправить ни одну сборку
-  (принимает Артём на developer.apple.com/account); декларация продавца Google подтверждена 06.11;
-  программа 15 % Google — кнопка «Зарегистрироваться» всё ещё не нажата. Замер Play Console:
+  ВНЖ одним PDF, адрес — справка Bank of Georgia; шаги — release-checklist п. 1); **обновлённое
+  Apple Developer Program License Agreement ПРИНЯТО 09.11** (developer.apple.com/account → Review
+  agreement → Agree; Free Apps Agreement стало Active) — следом ASC показал «A new version of your
+  Paid Applications agreement is available» (View and Agree to Terms в Business, ждёт «да» Артёма);
+  декларация продавца Google подтверждена 06.11; **программа 15 % Google — ЗАРЕГИСТРИРОВАНЫ 09.11**
+  (обе комиссии теперь 15 %: Apple Small Business с 15.09, Google с 09.11). Замер Play Console:
   47 установок за 28 дн. (+147 %), всего 49, 1,73 тыс. показов, 1 оценка 5,00, покупок нет.
 - **ЧТО ДАЛЬШЕ (на 28.08.2026, поздно вечером, после сессии 67)** — промт следующей сессии:
   `docs/prompts/next-session-29-08-review.md` (промт `next-session-29-08-ios-submit.md` — история,
